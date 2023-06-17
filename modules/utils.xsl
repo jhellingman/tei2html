@@ -1,5 +1,10 @@
-<!DOCTYPE xsl:stylesheet>
+<!DOCTYPE xsl:stylesheet [
 
+    <!ENTITY mdash       "&#x2014;">
+    <!ENTITY ndash       "&#x2013;">
+    <!ENTITY hellip      "&#x2026;">    
+
+]>
 <xsl:stylesheet version="3.0"
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -108,7 +113,7 @@
 
     <xd:doc>
         <xd:short>Copy a node-tree while stripping al ids.</xd:short>
-        <xd:detail>Copy a node-tree while stripping al ids. This allows us to use content from the source document multiple times, 
+        <xd:detail>Copy a node-tree while stripping al ids. This allows us to use content from the source document multiple times,
         without having duplicate ids (which we normally copy from the source document, if present) in the output.</xd:detail>
     </xd:doc>
 
@@ -128,7 +133,7 @@
 
     <xd:doc>
         <xd:short>Copy a node-tree while prefixing all ids.</xd:short>
-        <xd:detail>Copy a node-tree while prefixing al ids with a given prefix. This allows us to use content from the source document multiple times, 
+        <xd:detail>Copy a node-tree while prefixing al ids with a given prefix. This allows us to use content from the source document multiple times,
         without having duplicate ids (which we normally copy from the source document, if present) in the output.</xd:detail>
     </xd:doc>
 
@@ -231,8 +236,8 @@
 
     <xsl:function name="f:get-current-lang" as="xs:string">
         <xsl:param name="node" as="node()"/>
-        <xsl:variable 
-            name="current-lang" 
+        <xsl:variable
+            name="current-lang"
             select="($node/ancestor-or-self::*/@lang | $node/ancestor-or-self::*/@xml:lang)[last()]"/>
         <xsl:value-of select="if ($current-lang) then $current-lang else f:get-document-lang()"/>
     </xsl:function>
@@ -250,7 +255,7 @@
     <xd:doc>
         <xd:short>Generate a lang attribute.</xd:short>
         <xd:detail>Generate a lang attribute. Depending on the output method (HTML or XML),
-        either the <code>lang</code> or the <code>xml:lang</code> attribute, or both, will 
+        either the <code>lang</code> or the <code>xml:lang</code> attribute, or both, will
         be set on the output element if a lang attribute is present in the source.</xd:detail>
     </xd:doc>
 
@@ -521,5 +526,105 @@
     <xsl:function name="f:is-html" as="xs:boolean">
         <xsl:sequence select="$outputFormat = ('html', 'html5', 'xhtml', 'xhtml5')"/>
     </xsl:function>
+
+
+    <xd:doc>
+        <xd:short>Classify the content of an element.</xd:short>
+        <xd:detail>
+            <p>Try to classify the content of an element, based on a regular expression. This will be used to set a class-attribute on the generated HTML element. The following types will be recognized:</p>
+
+            <table>
+                <tr><th>Type        </th><th>Code       </th><th>Description </th></tr>
+
+                <tr><td>Empty       </td><td>ccEmpty    </td><td>Empty or nearly empty (whitespace only)</td></tr>
+                <tr><td>Dash        </td><td>ccDash     </td><td>Dash, ellipsis or other marker that indicates no value is available</td></tr>
+                <tr><td>Numeric     </td><td>ccNum      </td><td>Numeric value</td></tr>
+                <tr><td>Percentage  </td><td>ccPct      </td><td>Percentage (i.e., followed by a percent sign)</td></tr>
+                <tr><td>Amount      </td><td>ccAmt      </td><td>Monetary amount (i.e., preceded or followed by a currency sign)</td></tr>
+                <tr><td>Text        </td><td>ccTxt      </td><td>Alpha-numeric content, not being one of the above.</td></tr>
+                <!--
+                <tr><td>Date        </td><td>ccDate     </td><td>A calendar date</td></tr>
+                <tr><td>Time        </td><td>ccTime     </td><td>A time</td></tr>
+                <tr><td>Date + Time </td><td>ccDttm     </td><td>A date and time</td></tr>
+                -->
+                <tr><td>Other       </td><td>ccOther    </td><td>Anything else.</td></tr>
+            </table>
+
+            <p>The content of (embedded) notes will ignored, and if the element already has a <code>@rend</code> attribute with a relevant type, and empty string will be returned.</p>
+        </xd:detail>
+    </xd:doc>
+
+    <xsl:function name="f:classify-content" as="xs:string">
+        <xsl:param name="node" as="element()"/>
+
+        <!-- flatten content and strip notes -->
+        <xsl:variable name="string">
+            <xsl:apply-templates select="$node" mode="no-notes"/>
+        </xsl:variable>
+        <xsl:variable name="string" select="string-join($string)"/>
+        <xsl:variable name="string" select="normalize-space($string)"/>
+
+        <xsl:sequence select="if (f:has-content-classification($node))  then ''
+            else if (not($string) or $string = '')                      then 'ccEmpty'
+            else if (f:is-dash-like($string))                           then 'ccDash'
+            else if (f:is-unicode-number($string))                      then 'ccNum'
+            else if (f:is-unicode-percentage($string))                  then 'ccPct'
+            else if (f:is-unicode-amount($string))                      then 'ccAmt'
+            else if (f:is-unicode-text($string))                        then 'ccTxt'
+            else 'ccOther'"/>
+    </xsl:function>
+
+    <xsl:function name="f:has-content-classification" as="xs:boolean">
+        <xsl:param name="node" as="element()"/>
+
+        <xsl:variable name="name" select="name($node)"/>
+
+        <xsl:sequence select="
+               f:has-class($node/@rend, 'alignDecimalIntegerPart', $name)
+            or f:has-class($node/@rend, 'alignDecimalFractionPart', $name)
+            or f:has-class($node/@rend, 'ccEmpty', $name)
+            or f:has-class($node/@rend, 'ccDash', $name)
+            or f:has-class($node/@rend, 'ccNum', $name)
+            or f:has-class($node/@rend, 'ccPct', $name)
+            or f:has-class($node/@rend, 'ccAmt', $name)
+            or f:has-class($node/@rend, 'ccTxt', $name)
+            or f:has-class($node/@rend, 'ccOther', $name)
+            "/>
+    </xsl:function>
+
+
+    <xsl:template match="note" mode="no-notes"/>
+
+    <xsl:variable name="unicode-number-pattern" select="'^\s?(((\p{Nd}+[.,])*\p{Nd}+)(([.,]\p{Nd}+)?(\p{No})?)|(\p{No})|([.,]\p{Nd}+))\s?$'"/>
+    <xsl:variable name="unicode-percentage-pattern" select="'^\s?(((\p{Nd}+[.,])*\p{Nd}+)(([.,]\p{Nd}+)?(\p{No})?)|(\p{No})|([.,]\p{Nd}+))\s*[%&#x2030;&#x2031;&#x066A;&#xFF05;&#xFE6A;]\s?$'"/>
+    <xsl:variable name="unicode-amount-pattern-1" select="'^\s*\p{Sc}\s*(((\p{Nd}+[.,])*\p{Nd}+)(([.,]\p{Nd}+)?(\p{No})?)|(\p{No})|([.,]\p{Nd}+))\s*$'"/>
+    <xsl:variable name="unicode-amount-pattern-2" select="'^\s*(((\p{Nd}+[.,])*\p{Nd}+)(([.,]\p{Nd}+)?(\p{No})?)|(\p{No})|([.,]\p{Nd}+))\s*\p{Sc}\s*$'"/>
+
+    <xsl:function name="f:is-unicode-number" as="xs:boolean">
+        <xsl:param name="string"/>
+        <xsl:sequence select="matches(string($string), $unicode-number-pattern, 'i')"/>
+    </xsl:function>
+
+    <xsl:function name="f:is-unicode-percentage" as="xs:boolean">
+        <xsl:param name="string"/>
+        <xsl:sequence select="matches(string($string), $unicode-percentage-pattern, 'i')"/>
+    </xsl:function>
+
+    <xsl:function name="f:is-unicode-amount" as="xs:boolean">
+        <xsl:param name="string"/>
+        <xsl:sequence select="matches(string($string), $unicode-amount-pattern-1, 'i') 
+                           or matches(string($string), $unicode-amount-pattern-2, 'i')"/>
+    </xsl:function>
+
+    <xsl:function name="f:is-unicode-text" as="xs:boolean">
+        <xsl:param name="string"/>
+        <xsl:sequence select="matches(string($string), '\p{L}+', 'i')"/>
+    </xsl:function>
+
+    <xsl:function name="f:is-dash-like" as="xs:boolean">
+        <xsl:param name="string"/>
+        <xsl:sequence select="matches(string($string), '^([&mdash;&ndash;&hellip;-]|(\.\.\.+))$', 'i')"/>
+    </xsl:function>
+
 
 </xsl:stylesheet>

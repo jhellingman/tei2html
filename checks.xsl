@@ -511,10 +511,12 @@
         <xsl:param name="first" as="xs:double"/>
         <xsl:param name="second" as="xs:double"/>
 
+        <xsl:variable name="table" select="$cell/ancestor::table[1]"/>
+
         <xsl:variable name="value"><xsl:apply-templates select="$cell" mode="remove-extra-content"/></xsl:variable>
         <!-- Take precision into account -->
         <xsl:if test="abs($first - $second) > 0.0000000000001">
-            <xsl:copy-of select="f:issue($cell, 'T2', 'Table', 'Warning',
+            <xsl:copy-of select="f:issue($table, 'T2', 'Table', 'Warning',
                 'Verify value &ldquo;' || normalize-space($value) || '&rdquo;: [' || $cell/@role || '] ' || $first || ' not equal to ' || $second || ' (difference: ' || $first - $second || ').')"/>
         </xsl:if>
     </xsl:function>

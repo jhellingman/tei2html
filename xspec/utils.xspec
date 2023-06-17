@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE x:description [
 
+    <!ENTITY frac12      "&#x00BD;">
+    <!ENTITY ndash       "&#x2013;">
+    <!ENTITY mdash       "&#x2014;">
+    <!ENTITY hellip      "&#x2026;">
+    <!ENTITY euro        "&#x20AC;">
+
+]>
 <x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
                xmlns:xs="http://www.w3.org/2001/XMLSchema"
                xmlns:f="urn:stylesheet-functions"
@@ -285,6 +293,171 @@
          </x:param>
       </x:call>
       <x:expect label="will return the document language specified on $root" select="'zxx'"/>
+   </x:scenario>
+
+
+    <!-- f:is-unicode-number -->
+
+   <x:scenario label="When determining whether an empty string is a number">
+      <x:call function="f:is-unicode-number">
+         <x:param select="''"/>
+      </x:call>
+      <x:expect label="will return false" select="false()"/>
+   </x:scenario>
+
+   <x:scenario label="When determining whether '1' is a number">
+      <x:call function="f:is-unicode-number">
+         <x:param select="'1'"/>
+      </x:call>
+      <x:expect label="will return true" select="true()"/>
+   </x:scenario>
+
+   <x:scenario label="When determining whether '1234.56' is a number">
+      <x:call function="f:is-unicode-number">
+         <x:param select="'1234.56'"/>
+      </x:call>
+      <x:expect label="will return true" select="true()"/>
+   </x:scenario>
+
+   <x:scenario label="When determining whether '1234,56' is a number">
+      <x:call function="f:is-unicode-number">
+         <x:param select="'1234,56'"/>
+      </x:call>
+      <x:expect label="will return true" select="true()"/>
+   </x:scenario>
+
+   <x:scenario label="When determining whether '123,456&frac12;' is a number">
+      <x:call function="f:is-unicode-number">
+         <x:param select="'123,456&frac12;'"/>
+      </x:call>
+      <x:expect label="will return true" select="true()"/>
+   </x:scenario>
+
+   <x:scenario label="When determining whether '&#2407;&#2415;' (19 in Devanagari) is a number">
+      <x:call function="f:is-unicode-number">
+         <x:param select="'&#2407;&#2415;'"/>
+      </x:call>
+      <x:expect label="will return true" select="true()"/>
+   </x:scenario>
+   
+
+    <!-- f:classify-content -->
+
+   <x:scenario label="When determining the content type of a cell with only spaces">
+      <x:call function="f:classify-content">
+         <x:param>
+            <cell></cell>
+         </x:param>
+      </x:call>
+      <x:expect label="will return the string 'ccEmpty' " select="'ccEmpty'"/>
+   </x:scenario>
+
+   <x:scenario label="When determining the content type of an empty cell">
+      <x:call function="f:classify-content">
+         <x:param>
+            <cell> </cell>
+         </x:param>
+      </x:call>
+      <x:expect label="will return the string 'ccEmpty' " select="'ccEmpty'"/>
+   </x:scenario>
+
+   <x:scenario label="When determining the content type of a cell that only contains a note">
+      <x:call function="f:classify-content">
+         <x:param>
+            <cell> <note>test</note></cell>
+         </x:param>
+      </x:call>
+      <x:expect label="will return the string 'ccEmpty' " select="'ccEmpty'"/>
+   </x:scenario>
+
+   <x:scenario label="When determining the content type of a cell that only contains an em-dash">
+      <x:call function="f:classify-content">
+         <x:param>
+            <cell> &mdash; </cell>
+         </x:param>
+      </x:call>
+      <x:expect label="will return the string 'ccDash' " select="'ccDash'"/>
+   </x:scenario>
+
+   <x:scenario label="When determining the content type of a cell that only contains a number">
+      <x:call function="f:classify-content">
+         <x:param>
+            <cell> 123,45 </cell>
+         </x:param>
+      </x:call>
+      <x:expect label="will return the string 'ccNum' " select="'ccNum'"/>
+   </x:scenario>
+
+   <x:scenario label="When determining the content type of a cell that contains a number followed by a percent sign">
+      <x:call function="f:classify-content">
+         <x:param>
+            <cell> 123,45% </cell>
+         </x:param>
+      </x:call>
+      <x:expect label="will return the string 'ccPct' " select="'ccPct'"/>
+   </x:scenario>
+
+   <x:scenario label="When determining the content type of a cell that contains a number preceded by a currency sign">
+      <x:call function="f:classify-content">
+         <x:param>
+            <cell> $123,45 </cell>
+         </x:param>
+      </x:call>
+      <x:expect label="will return the string 'ccAmt' " select="'ccAmt'"/>
+   </x:scenario>
+
+   <x:scenario label="When determining the content type of a cell that contains a number followed by a currency sign">
+      <x:call function="f:classify-content">
+         <x:param>
+            <cell> 123,45&euro; </cell>
+         </x:param>
+      </x:call>
+      <x:expect label="will return the string 'ccAmt' " select="'ccAmt'"/>
+   </x:scenario>
+
+   <x:scenario label="When determining the content type of a cell that contains some text">
+      <x:call function="f:classify-content">
+         <x:param>
+            <cell> text 123,45&euro; </cell>
+         </x:param>
+      </x:call>
+      <x:expect label="will return the string 'ccTxt' " select="'ccTxt'"/>
+   </x:scenario>
+
+   <x:scenario label="When determining the content type of a cell that contains non-alphanumeric symbols only">
+      <x:call function="f:classify-content">
+         <x:param>
+            <cell> / </cell>
+         </x:param>
+      </x:call>
+      <x:expect label="will return the string 'ccOther' " select="'ccOther'"/>
+   </x:scenario>
+
+   <x:scenario label="When determining the content type of a cell that contains a number followed by a currency sign inside a nested element">
+      <x:call function="f:classify-content">
+         <x:param>
+            <cell> <lb/><hi>123,45 &euro; </hi> </cell>
+         </x:param>
+      </x:call>
+      <x:expect label="will return the string 'ccAmt' " select="'ccAmt'"/>
+   </x:scenario>
+
+   <x:scenario label="When determining the content type of a cell that contains multiple elements with content">
+      <x:call function="f:classify-content">
+         <x:param>
+            <cell> <lb/><hi>123,45 &euro; </hi>, <hi>Test</hi> </cell>
+         </x:param>
+      </x:call>
+      <x:expect label="will return the string 'ccTxt' " select="'ccTxt'"/>
+   </x:scenario>
+
+   <x:scenario label="When determining the content type of a cell that already contains a content classification">
+      <x:call function="f:classify-content">
+         <x:param>
+            <cell rend="ccAmt"> 123,45 &euro; </cell>
+         </x:param>
+      </x:call>
+      <x:expect label="will return the empty string '' " select="''"/>
    </x:scenario>
 
 </x:description>

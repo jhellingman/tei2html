@@ -94,32 +94,32 @@
               <tbody>
                  <tr id="r3">
                     <td id="c1.1"
-                        class="num cellLeft">1</td>
+                        class="cellLeft">1</td>
                     <td id="c2.2">Apples</td>
                     <td id="c3.3"
-                        class="num c3 cellRight">12.4</td>
+                        class="c3 cellRight">12.4</td>
                  </tr>
                  <tr id="r4">
                     <td id="c4.1"
-                        class="num cellLeft">2</td>
+                        class="cellLeft">2</td>
                     <td id="c4.2">Bananas</td>
                     <td id="c4.3"
-                        class="num c3 cellRight">22.8</td>
+                        class="c3 cellRight">22.8</td>
                  </tr>
                  <tr id="r5">
                     <td id="c5.1"
-                        class="num cellLeft">3</td>
+                        class="cellLeft">3</td>
                     <td id="c5.2">Melon</td>
                     <td id="c5.3"
-                        class="num c3 cellRight">4.6</td>
+                        class="c3 cellRight">4.6</td>
                  </tr>
                  <tr id="r6">
                     <td id="c6.1"
-                        class="num cellLeft cellBottom">4</td>
+                        class="cellLeft cellBottom">4</td>
                     <td id="c6.2"
                         class="cellBottom">Grapes</td>
                     <td id="c6.3"
-                        class="num c3 cellRight cellBottom">9.2</td>
+                        class="c3 cellRight cellBottom">9.2</td>
                  </tr>
               </tbody>
            </table>
@@ -162,19 +162,19 @@
            <table class="verticalBorderInside"
                   summary="A straightforward table to demonstrate tables in TEI">
               <tr id="...">
-                 <td id="..." class="num cellLeft cellTop">2</td>
-                 <td id="..." class="num cellTop">7</td>
-                 <td id="..." class="num cellRight cellTop">6</td>
+                 <td id="..." class="cellLeft cellTop">2</td>
+                 <td id="..." class="cellTop">7</td>
+                 <td id="..." class="cellRight cellTop">6</td>
               </tr>
               <tr id="...">
-                 <td id="..." class="num cellLeft">9</td>
-                 <td id="..." class="num">5</td>
-                 <td id="..." class="num cellRight">1</td>
+                 <td id="..." class="cellLeft">9</td>
+                 <td id="...">5</td>
+                 <td id="..." class="cellRight">1</td>
               </tr>
               <tr id="...">
-                 <td id="..." class="num cellLeft cellBottom">4</td>
-                 <td id="..." class="num cellBottom">3</td>
-                 <td id="..." class="num cellRight cellBottom">8</td>
+                 <td id="..." class="cellLeft cellBottom">4</td>
+                 <td id="..." class="cellBottom">3</td>
+                 <td id="..." class="cellRight cellBottom">8</td>
               </tr>
            </table>
         </div>
@@ -217,19 +217,19 @@
            <h4 class="tableCaption" id="...">Table with head.</h4>
            <table summary="A table with a head">
               <tr id="...">
-                 <td id="..." class="num cellLeft cellTop">2</td>
-                 <td id="..." class="num cellTop">7</td>
-                 <td id="..." class="num cellRight cellTop">6</td>
+                 <td id="..." class="cellLeft cellTop">2</td>
+                 <td id="..." class="cellTop">7</td>
+                 <td id="..." class="cellRight cellTop">6</td>
               </tr>
               <tr id="...">
-                 <td id="..." class="num cellLeft">9</td>
-                 <td id="..." class="num">5</td>
-                 <td id="..." class="num cellRight">1</td>
+                 <td id="..." class="cellLeft">9</td>
+                 <td id="...">5</td>
+                 <td id="..." class="cellRight">1</td>
               </tr>
               <tr id="...">
-                 <td id="..." class="num cellLeft cellBottom">4</td>
-                 <td id="..." class="num cellBottom">3</td>
-                 <td id="..." class="num cellRight cellBottom">8</td>
+                 <td id="..." class="cellLeft cellBottom">4</td>
+                 <td id="..." class="cellBottom">3</td>
+                 <td id="..." class="cellRight cellBottom">8</td>
               </tr>
            </table>
         </div>
@@ -272,18 +272,18 @@
                   summary="A straightforward table to demonstrate tables in TEI">
               <tbody>
                  <tr>
-                    <td id="..." class="num cellLeft cellTop">2</td>
-                    <td id="..." class="num cellTop">7</td>
-                    <td id="..." class="num cellRight cellTop">6</td>
+                    <td id="..." class="cellLeft cellTop">2</td>
+                    <td id="..." class="cellTop">7</td>
+                    <td id="..." class="cellRight cellTop">6</td>
                     <td class="cellDoubleUp">&nbsp;</td>
-                    <td id="..." class="num cellLeft cellTop cellBottom">4</td>
-                    <td id="..." class="num cellTop cellBottom">3</td>
-                    <td id="..." class="num cellRight cellTop cellBottom">8</td>
+                    <td id="..." class="cellLeft cellTop cellBottom">4</td>
+                    <td id="..." class="cellTop cellBottom">3</td>
+                    <td id="..." class="cellRight cellTop cellBottom">8</td>
                  </tr>
                  <tr>
-                    <td id="..." class="num cellLeft cellBottom">9</td>
-                    <td id="..." class="num cellBottom">5</td>
-                    <td id="..." class="num cellRight cellBottom">1</td>
+                    <td id="..." class="cellLeft cellBottom">9</td>
+                    <td id="..." class="cellBottom">5</td>
+                    <td id="..." class="cellRight cellBottom">1</td>
                     <td class="cellDoubleUp">&nbsp;</td>
                     <td class="cellDummy"/>
                     <td class="cellDummy"/>
@@ -337,11 +337,11 @@
               </thead>
               <tbody>
                  <tr>
-                    <td id="..." class="num cellLeft cellBottom">1</td>
-                    <td id="..." class="num cellBottom">2</td>
+                    <td id="..." class="cellLeft cellBottom">1</td>
+                    <td id="..." class="cellBottom">2</td>
                     <td class="cellDoubleUp">&nbsp;</td>
-                    <td id="..." class="num cellLeft cellTop cellBottom">3</td>
-                    <td id="..." class="num cellTop cellBottom">4</td>
+                    <td id="..." class="cellLeft cellTop cellBottom">3</td>
+                    <td id="..." class="cellTop cellBottom">4</td>
                  </tr>
               </tbody>
            </table>
@@ -385,18 +385,18 @@
                   summary="A straightforward table to demonstrate tables in TEI">
               <tbody>
                  <tr>
-                    <td id="..." class="num cellLeft cellTop">2</td>
-                    <td id="..." class="num cellTop">7</td>
-                    <td id="..." class="num cellRight cellTop">6</td>
+                    <td id="..." class="cellLeft cellTop">2</td>
+                    <td id="..." class="cellTop">7</td>
+                    <td id="..." class="cellRight cellTop">6</td>
                     <td class="cellDoubleUp">&nbsp;</td>
-                    <td id="..." class="num cellLeft cellTop cellBottom">9</td>
-                    <td id="..." class="num cellTop cellBottom">5</td>
-                    <td id="..." class="num cellRight cellTop cellBottom">1</td>
+                    <td id="..." class="cellLeft cellTop cellBottom">9</td>
+                    <td id="..." class="cellTop cellBottom">5</td>
+                    <td id="..." class="cellRight cellTop cellBottom">1</td>
                  </tr>
                  <tr>
-                    <td id="..." class="num cellLeft cellBottom">4</td>
-                    <td id="..." class="num cellBottom">3</td>
-                    <td id="..." class="num cellRight cellBottom">8</td>
+                    <td id="..." class="cellLeft cellBottom">4</td>
+                    <td id="..." class="cellBottom">3</td>
+                    <td id="..." class="cellRight cellBottom">8</td>
                     <td class="cellDoubleUp">&nbsp;</td>
                     <td class="cellDummy"/>
                     <td class="cellDummy"/>
@@ -436,10 +436,10 @@
                  <td id="..." rowspan="2" class="rowspan leftbrace cellLeft cellTop cellBottom">
                     <img src="images/lbrace2.png" alt="..." width="12" height="40" />
                  </td>
-                 <td id="..." class="num cellRight cellTop">1</td>
+                 <td id="..." class="cellRight cellTop">1</td>
               </tr>
               <tr id="...">
-                 <td id="..." class="num cellRight cellBottom">2</td>
+                 <td id="..." class="cellRight cellBottom">2</td>
               </tr>
            </table>
         </div>
@@ -471,13 +471,13 @@
              id="simple_table_with_right_brace">
            <table summary="A table with a right brace">
               <tr id="...">
-                 <td id="..." class="num cellLeft cellTop">1</td>
+                 <td id="..." class="cellLeft cellTop">1</td>
                  <td id="..." rowspan="2" class="rowspan rightbrace cellRight cellTop cellBottom">
                     <img src="images/rbrace2.png" alt="..." width="12" height="40" />
                  </td>
               </tr>
               <tr id="...">
-                 <td id="..." class="num cellLeft cellBottom">2</td>
+                 <td id="..." class="cellLeft cellBottom">2</td>
               </tr>
            </table>
         </div>
@@ -509,11 +509,11 @@
              id="simple_table_with_column_span">
            <table summary="A table with a column span">
               <tr id="...">
-                 <td id="..." class="num cellLeft cellTop">1</td>
-                 <td id="..." class="num cellRight cellTop">2</td>
+                 <td id="..." class="cellLeft cellTop">1</td>
+                 <td id="..." class="cellRight cellTop">2</td>
               </tr>
               <tr id="...">
-                 <td id="..." colspan="2" class="colspan num cellLeft cellRight cellBottom">2</td>
+                 <td id="..." colspan="2" class="colspan cellLeft cellRight cellBottom">2</td>
               </tr>
            </table>
         </div>
@@ -550,18 +550,18 @@
              id="simple_table_with_sum">
            <table summary="A table with a sum">
               <tr id="...">
-                 <td id="..." class="num cellLeft cellTop">1</td>
-                 <td id="..." class="num cellRight cellTop">2</td>
+                 <td id="..." class="cellLeft cellTop">1</td>
+                 <td id="..." class="cellRight cellTop">2</td>
               </tr>
               <tr id="...">
-                 <td id="..." class="num cellLeft">3</td>
-                 <td id="..." class="num cellRight">4</td>
+                 <td id="..." class="cellLeft">3</td>
+                 <td id="..." class="cellRight">4</td>
               </tr>
               <tr id="...">
-                 <td id="..." class="num cellLeft cellBottom">
+                 <td id="..." class="cellLeft cellBottom">
                     <span class="sum">4</span>
                  </td>
-                 <td id="..." class="num cellRight cellBottom">
+                 <td id="..." class="cellRight cellBottom">
                     <span class="sum">6</span>
                  </td>
               </tr>
@@ -600,12 +600,12 @@
              id="simple_table_with_footnote">
            <table summary="A table with a footnote">
               <tr id="...">
-                 <td id="..." class="num cellLeft cellTop">1</td>
-                 <td id="..." class="num cellRight cellTop">2</td>
+                 <td id="..." class="cellLeft cellTop">1</td>
+                 <td id="..." class="cellRight cellTop">2</td>
               </tr>
               <tr id="...">
-                 <td id="..." class="num cellLeft cellBottom">3<a class="noteRef" id="n1src" href="#n1">1</a></td>
-                 <td id="..." class="num cellRight cellBottom">4</td>
+                 <td id="..." class="cellLeft cellBottom">3<a class="noteRef" id="n1src" href="#n1">1</a></td>
+                 <td id="..." class="cellRight cellBottom">4</td>
               </tr>
            </table>
               <div class="footnotes">

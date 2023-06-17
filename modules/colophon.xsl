@@ -1016,6 +1016,7 @@
                 <th><xsl:value-of select="f:message('msgFragment')"/></th>
             </tr>
             <xsl:for-each-group select="$fragments" group-by=".">
+                <xsl:sort select="."/>
                 <tr>
                     <td>
                         <xsl:for-each select="current-group()">

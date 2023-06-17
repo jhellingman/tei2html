@@ -1,58 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE x:description [
-
-    <!ENTITY frac12 "&#x00BD;">
-
-]>
+<!DOCTYPE x:description>
 <x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
                xmlns:f="urn:stylesheet-functions"
                stylesheet="test-tei2html.xsl"
                version="3.0">
 
-    <!-- f:is-unicode-number -->
-
-   <x:scenario label="When determining whether an empty string is a number">
-      <x:call function="f:is-unicode-number">
-         <x:param select="''"/>
-      </x:call>
-      <x:expect label="will return false" select="false()"/>
-   </x:scenario>
-
-   <x:scenario label="When determining whether '1' is a number">
-      <x:call function="f:is-unicode-number">
-         <x:param select="'1'"/>
-      </x:call>
-      <x:expect label="will return true" select="true()"/>
-   </x:scenario>
-
-   <x:scenario label="When determining whether '1234.56' is a number">
-      <x:call function="f:is-unicode-number">
-         <x:param select="'1234.56'"/>
-      </x:call>
-      <x:expect label="will return true" select="true()"/>
-   </x:scenario>
-
-   <x:scenario label="When determining whether '1234,56' is a number">
-      <x:call function="f:is-unicode-number">
-         <x:param select="'1234,56'"/>
-      </x:call>
-      <x:expect label="will return true" select="true()"/>
-   </x:scenario>
-
-   <x:scenario label="When determining whether '123,456&frac12;' is a number">
-      <x:call function="f:is-unicode-number">
-         <x:param select="'123,456&frac12;'"/>
-      </x:call>
-      <x:expect label="will return true" select="true()"/>
-   </x:scenario>
-
-   <x:scenario label="When determining whether '&#2407;&#2415;' (19 in Devanagari) is a number">
-      <x:call function="f:is-unicode-number">
-         <x:param select="'&#2407;&#2415;'"/>
-      </x:call>
-      <x:expect label="will return true" select="true()"/>
-   </x:scenario>
-   
 
     <!-- f:from-roman -->
 

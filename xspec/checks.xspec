@@ -465,7 +465,7 @@
                     category="Table"
                     target="..."
                     level="Warning"
-                    element="cell"
+                    element="table"
                     page="">Verify value &ldquo;5&rdquo;: [sum] 5 not equal to 4 (difference: 1).</i:issue>
             <i:issue
                     pos=""
@@ -473,7 +473,7 @@
                     category="Table"
                     target="..."
                     level="Warning"
-                    element="cell"
+                    element="table"
                     page="">Verify value &ldquo;8&rdquo;: [sum] 8 not equal to 6 (difference: 2).</i:issue>
         </x:expect>
     </x:scenario>
@@ -586,7 +586,7 @@
                 category="Table"
                 target="..."
                 level="Warning"
-                element="cell"
+                element="table"
                 page="">Verify value “4”: [sumDecimal] 4.8 not equal to 5.8 (difference: -1).</i:issue>
         </x:expect>
     </x:scenario>

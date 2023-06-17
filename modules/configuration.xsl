@@ -117,6 +117,8 @@
             <text.useEllipses>true</text.useEllipses>                       <!-- Replace three consecutive periods with an ellipsis character. -->
             <text.abbr>i.e.; I.e.; e.g.; E.g.; A.D.; B.C.; P.M.; A.M.</text.abbr> <!-- Common abbreviations, list separated by semi-colons. -->
 
+            <table.classifyContent>false</table.classifyContent>            <!-- Attempt to determine the content-type of cells in a table; add relevant classes in the HTML output. -->
+
             <q.insertQuotes>false</q.insertQuotes>                          <!-- Insert quotation marks around <q> markup based on first two pairs in setting <text.quotes> -->
             <q.asDiv>true</q.asDiv>                                         <!-- Render the <q> element with a div if true, as a span otherwise. -->
 

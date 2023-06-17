@@ -1,5 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xsl:stylesheet [
+
     <!ENTITY nbsp       "&#160;">
+
 ]>
 <xsl:stylesheet version="3.0"
                 xmlns="http://www.w3.org/1999/xhtml"
@@ -307,8 +310,7 @@
             <xsl:if test="@cols > 1">colspan </xsl:if>
             <xsl:if test="@rows &gt; 1 and normalize-space(.) = '{'">leftbrace </xsl:if>
             <xsl:if test="@rows &gt; 1 and normalize-space(.) = '}'">rightbrace </xsl:if>
-            <xsl:if test="not(f:is-fraction-part(.)) and f:is-unicode-number(normalize-space(text()[normalize-space(.) != ''][1]))">num </xsl:if>
-            <xsl:if test="f:is-dash-like(normalize-space(text()[normalize-space(.) != ''][1]))">dash </xsl:if>
+            <xsl:value-of select="if(f:is-set('table.classifyContent')) then f:classify-content(.) else ''"/><xsl:text> </xsl:text>
             <xsl:call-template name="cell-rend-row"/><xsl:text> </xsl:text>
             <xsl:call-template name="cell-rend-col"/><xsl:text> </xsl:text>
             <xsl:call-template name="cell-pos-class"/>
