@@ -660,6 +660,19 @@
     </xsl:function>
 
 
+    <xsl:function name="f:removed-duplicate-classes" as="xs:string">
+        <xsl:param name="class" as="xs:string"/>
+
+        <xsl:variable name="classes">
+            <xsl:for-each-group select="tokenize(normalize-space($class), ' ')" group-by=".">
+                <xsl:sequence select="."/>
+            </xsl:for-each-group>
+        </xsl:variable>
+
+        <xsl:sequence select="string-join($classes, ' ')"/>
+    </xsl:function>
+
+
     <xd:doc>
         <xd:short>Top level rule to generate CSS from <code>@rend</code> attributes.</xd:short>
         <xd:detail>The top level rule starts generating CSS rules for column-level rendering first,

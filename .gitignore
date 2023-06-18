@@ -179,3 +179,13 @@ documentation/TEI-Guidelines.jeebies
 documentation/TEI-Guidelines.txt
 Wiki/AuxiliaryTools.html
 Wiki/Index.html
+samples/Cole - Philippine Folk Tales/PhilippineFolkTales.html
+samples/Cole - Philippine Folk Tales/README.adoc
+test/testMath/README.adoc
+test/testMath/testMath-utf8.txt
+test/testTable/Processed/testTable.xml
+test/testTable/testTable-utf8.txt
+tools/patc/transcriptions/indic/numeric_entities_to_utf8.py
+xml2kwic.py
+xml2kwic.sh
+locale/Spanish--chatGPT.txt

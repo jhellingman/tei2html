@@ -48,6 +48,20 @@ li {
     border: 1px dotted #159B0E;
 }
 
+/* Color cells based on content-category (if enabled via setting 'table.classifyContent') */
+
+td.label, tr.label td { background-color: #bbf9cb; }
+td.unit, tr.unit td { background-color: #bbf9ea; }
+
+.ccEmpty { background-color: #f9fcc2; }
+.ccDash { background-color: #eefcc2; }
+.ccNum { background-color: #e2fcc2; }
+.ccPct { background-color: #d7fcc2; }
+.ccAmt { background-color: #cafcc2; }
+.ccTxt { background-color: #c2fcf8; }
+.ccOther { background-color: #ccc2fc; }
+
+
 /* Show borders on divisions */
 
 

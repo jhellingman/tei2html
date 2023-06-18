@@ -291,7 +291,7 @@
                 <li>the column-level <code>@rend</code> attribute,</li>
                 <li>the row-level <code>@rend</code> attribute,</li>
                 <li>the cell-level <code>@rend</code> attribute,</li>
-                <li>whether the cell content looks numeric,</li>
+                <li>the content category (empty, numeric, text, etc.) of the cell,</li>
                 <li>whether the cell contains a dash, ellipsis, or similar character,</li>
                 <li>the presence of a left or right brace as the content of a multi-row cell.</li>
                 <li>the position of the cell in the table; the following classes can appear:
@@ -315,6 +315,9 @@
             <xsl:call-template name="cell-rend-col"/><xsl:text> </xsl:text>
             <xsl:call-template name="cell-pos-class"/>
         </xsl:variable>
+
+        <xsl:variable name="class" select="f:removed-duplicate-classes($class)"/>
+
         <xsl:copy-of select="f:set-class-attribute-with(., $class)"/>
 
         <xsl:if test="f:has-rend-value(@rend, 'image')">
