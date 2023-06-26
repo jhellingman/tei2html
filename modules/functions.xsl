@@ -56,7 +56,7 @@
 
     <xsl:function name="f:is-valid" as="xs:boolean">
         <xsl:param name="value" as="xs:string?"/>
-        <xsl:sequence select="$value and not($value = '' or $value = '#####')"/>
+        <xsl:sequence select="$value and not($value = ('', '#####', 'https://viaf.org/viaf/#####/'))"/>
     </xsl:function>
 
 

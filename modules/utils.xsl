@@ -559,7 +559,7 @@
 
         <!-- flatten content and strip notes -->
         <xsl:variable name="string">
-            <xsl:apply-templates select="$node" mode="no-notes"/>
+            <xsl:apply-templates select="$node" mode="flatten-textual-content"/>
         </xsl:variable>
         <xsl:variable name="string" select="string-join($string)"/>
         <xsl:variable name="string" select="normalize-space($string)"/>
@@ -593,7 +593,16 @@
     </xsl:function>
 
 
-    <xsl:template match="note" mode="no-notes"/>
+    <xsl:template match="note" mode="flatten-textual-content"/>
+
+    <xsl:template match="choice[corr]" mode="flatten-textual-content">
+        <xsl:apply-templates select="corr" mode="flatten-textual-content"/>
+    </xsl:template>
+
+    <xsl:template match="seg[@copyOf]" mode="flatten-textual-content">
+        <xsl:apply-templates select="//*[@id = current()/@copyOf]" mode="flatten-textual-content"/>
+    </xsl:template>
+
 
     <xsl:variable name="unicode-number-pattern" select="'^\s?(((\p{Nd}+[.,])*\p{Nd}+)(([.,]\p{Nd}+)?(\p{No})?)|(\p{No})|([.,]\p{Nd}+))\s?$'"/>
     <xsl:variable name="unicode-percentage-pattern" select="'^\s?(((\p{Nd}+[.,])*\p{Nd}+)(([.,]\p{Nd}+)?(\p{No})?)|(\p{No})|([.,]\p{Nd}+))\s*[%&#x2030;&#x2031;&#x066A;&#xFF05;&#xFE6A;]\s?$'"/>
