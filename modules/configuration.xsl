@@ -58,6 +58,8 @@
             <language>en-US</language>                                      <!-- Main language of text (if not specified explicitly) -->
             <defaultLanguage>en-US</defaultLanguage>                        <!-- Default language for localization -->
 
+            <drama.inline.speaker>false</drama.inline.speaker>              <!-- Inline the speaker (default the speaker is a separate paragraph) -->
+
             <lb.preserve>true</lb.preserve>                                 <!-- Preserve linebreaks indicate with the lb element. -->
             <lb.hyphen.remove>false</lb.hyphen.remove>                      <!-- Remove hyphens before line-breaks. -->
             <lb.removable.hyphen>&not;</lb.removable.hyphen>                <!-- Character used for removable hyphen before line-break (DTA convention). -->

@@ -434,6 +434,27 @@
         </xsl:element>
     </xsl:template>
 
+    <!-- When a speaker immediately followed by a paragraph (and the setting 'drama.inline.speaker' is true), join them together. -->
+    <xsl:template match="speaker[f:is-set('drama.inline.speaker') and f:followed-by-paragraph(.)]">
+        <xsl:element name="{$p.element}">
+            <xsl:copy-of select="f:set-class-attribute-with(., 'speaker-with-paragraph')"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <span>
+                <xsl:copy-of select="f:set-class-attribute-with(., 'speaker')"/>
+                <xsl:apply-templates/>
+            </span>
+            <xsl:text> </xsl:text>
+            <xsl:apply-templates select="./following-sibling::node()[1][self::p]" mode="inline-paragraph"/>
+        </xsl:element>
+    </xsl:template>
+
+    <xsl:template match="p[parent::sp and f:is-set('drama.inline.speaker') and f:preceded-by-speaker(.)]"/>
+
+    <xsl:template match="p" mode="inline-paragraph">
+        <xsl:apply-templates/>
+    </xsl:template>
+
+
     <!-- Stage directions -->
     <xsl:template match="stage">
         <xsl:if test="parent::l or parent::p">
@@ -474,6 +495,11 @@
     <xsl:function name="f:followed-by-inline-stage" as="xs:boolean">
         <xsl:param name="node" as="element()"/>
         <xsl:sequence select="boolean($node/following-sibling::node()[1][self::stage[f:is-inline(.)]])"/>
+    </xsl:function>
+
+    <xsl:function name="f:followed-by-paragraph" as="xs:boolean">
+        <xsl:param name="node" as="element()"/>
+        <xsl:sequence select="boolean($node/following-sibling::node()[1][self::p])"/>
     </xsl:function>
 
     <xsl:function name="f:preceded-by-speaker" as="xs:boolean">
