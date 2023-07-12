@@ -1250,6 +1250,12 @@
         <xsl:copy-of select="f:should-not-contain(., $segment, 'O[.,][0-9]',                        'Warning', 'P19', 'Capital Oh for zero')"/>
         <xsl:copy-of select="f:should-not-contain(., $segment, 'l[.,][0-9]',                        'Warning', 'P19', 'Lower-case el for one')"/>
 
+        <xsl:copy-of select="f:should-not-contain(., $segment, '\p{L}&#x00A3;',                     'Warning', 'P24', 'Pound-sign after letter')"/>
+        <xsl:copy-of select="f:should-not-contain(., $segment, '&#x00A3;\p{L}',                     'Warning', 'P25', 'Pound-sign before letter')"/>
+        <xsl:copy-of select="f:should-not-contain(., $segment, '\p{L}&#x0192;',                     'Warning', 'P26', 'Guilder-sign after letter')"/>
+        <xsl:copy-of select="f:should-not-contain(., $segment, '&#x0192;\p{L}',                     'Warning', 'P27', 'Guilder-sign before letter')"/>
+        <xsl:copy-of select="f:should-not-contain(., $segment, '[&#x00A9;&#x00AE;&#x2122;&#x2120;]', 'Warning', 'P28', 'Copyright or trademark sign')"/>
+
         <xsl:variable name="nfd-segment" select="normalize-unicode($segment, 'NFD')" as="xs:string"/>
 
         <!-- Greek script checks -->

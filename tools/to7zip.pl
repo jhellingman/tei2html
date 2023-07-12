@@ -78,14 +78,14 @@ sub handle_file($) {
         my $base = basename($file, '.' . $extension);
         my $outputArchive = "$outputPath/$path.7z";
 
-		if (-e "$outputArchive") {
+        if (-e "$outputArchive") {
             my $inputTimestamp = stat($file)->mtime;
             my $outputTimestamp =  stat($outputArchive)->mtime;
             if ($inputTimestamp > $outputTimestamp) {
                 logMessage("Deleting outdated converted archive: $outputArchive");
                 unlink $outputArchive;
-            }			
-		}
+            }
+        }
 
         if (-e "$outputArchive") {
             logMessage("Skipping $file: output \"$outputArchive\" exists.");
@@ -135,11 +135,11 @@ sub handle_file($) {
                 if ($returnCode != 0) {
                     logError("7z returned $returnCode while creating $outputArchive.");
                 }
-                
+
                 # Set the creation time to the new archive equal to that of the source archive.
                 my $modificationTimestamp = stat($file)->mtime;
                 my $accessTimestamp = stat($file)->atime;
-                utime ($accessTimestamp, $modificationTimestamp, $outputArchive); 
+                utime ($accessTimestamp, $modificationTimestamp, $outputArchive);
             }
         }
 
