@@ -19,6 +19,8 @@
     <!ENTITY frac14     "&#x00BC;">
     <!ENTITY frac12     "&#x00BD;">
     <!ENTITY frac34     "&#x00BE;">
+    <!ENTITY ijlig      "&#x0133;">
+    <!ENTITY IJlig      "&#x0132;">
 
     <!ENTITY boKa       "&#x0F40;">
     <!ENTITY boRra      "&#x0F6C;">
@@ -45,30 +47,50 @@
     <!-- Plain Text -->
 
     <xsl:template match="text()">
-        <xsl:variable name="text" select="if (f:is-set('lb.hyphen.remove')) 
-                                        then f:remove-eol-hyphens(.) 
+        <xsl:variable name="text" select="if (f:is-set('lb.hyphen.remove'))
+                                        then f:remove-eol-hyphens(.)
                                         else ."/>
 
         <xsl:variable name="lang" select="f:get-current-lang(.)"/>
-        <xsl:variable name="text" select="f:process-text($text, $lang)"/>
+        <xsl:variable name="text" select="f:process-text($text, $lang, f:is-letter-spaced(.))"/>
 
         <xsl:copy-of select="if ($lang = 'bo') then f:tweak-tibetan-line-breaks-wbr($text) else $text"/>
     </xsl:template>
 
 
+    <xsl:function name="f:is-letter-spaced" as="xs:boolean">
+        <xsl:param name="node"/>
+
+        <xsl:variable name="ex" select="($node/ancestor-or-self::hi[@rend='ex'] | $node/ancestor-or-self::ex)[1]"/>
+        <!-- Ignore hi[@rend='ex'] elements if we are in a note, when it is outside the note -->
+        <xsl:sequence select="$ex and not($ex/descendant::note)"/>
+    </xsl:function>
+
+
+    <!-- Old version to keep other usages simple -->
     <xsl:function name="f:process-text" as="xs:string">
         <xsl:param name="text" as="xs:string"/>
         <xsl:param name="lang" as="xs:string"/>
 
-        <xsl:variable name="text" select="if (f:is-set('beta.convert') and $lang = 'grc')
-                                            then f:beta-to-unicode($text, f:is-set('beta.caseSensitive')) 
+        <xsl:value-of select="f:process-text($text, $lang, false())"/>
+    </xsl:function>
+
+
+    <xsl:function name="f:process-text" as="xs:string">
+        <xsl:param name="text" as="xs:string"/>
+        <xsl:param name="lang" as="xs:string"/>
+        <xsl:param name="is-letter-spaced" as="xs:boolean"/>
+
+        <xsl:variable name="text" select="if ($lang = 'grc' and f:is-set('beta.convert'))
+                                            then f:beta-to-unicode($text, f:is-set('beta.caseSensitive'))
                                             else $text"/>
-        <!-- <xsl:variable name="text" select="if ($lang = 'bo') 
-                                            then f:tweak-tibetan-line-breaks-zwsp($text) 
+        <!-- <xsl:variable name="text" select="if ($lang = 'bo')
+                                            then f:tweak-tibetan-line-breaks-zwsp($text)
                                             else $text"/> -->
         <xsl:variable name="text" select="if ($lang != 'xx' and f:is-set('text.curlyApos')) then f:curly-apos($text) else $text"/>
-        <xsl:variable name="text" select="if (f:is-set('text.spaceQuotes')) then f:handle-quotes($text) else $text"/>
-        <xsl:variable name="text" select="if (f:is-set('text.useEllipses')) then f:handle-ellipses($text) else $text"/>
+        <xsl:variable name="text" select="if ($lang != 'xx' and f:is-set('text.spaceQuotes')) then f:handle-quotes($text) else $text"/>
+        <xsl:variable name="text" select="if ($lang != 'xx' and f:is-set('text.useEllipses')) then f:handle-ellipses($text) else $text"/>
+        <xsl:variable name="text" select="if ($lang = ('nl', 'nl-1900') and $is-letter-spaced and f:is-set('text.useIJLigature')) then f:use-ij-ligature($text) else $text"/>
 
         <xsl:variable name="text" select="f:no-break-initials($text)"/>
 
@@ -78,9 +100,9 @@
 
     <xd:doc>
         <xd:short>Tweak Tibetan line-breaks (ZWSP).</xd:short>
-        <xd:detail><p>Since most browsers do not handle Tibetan line-breaking correctly, we need to help them a 
-            little to avoid unacceptable results. To do so, we 1. Insert a zero-width space after tshegs in Tibetan. 
-            2. Convert spaces to non-breaking spaces. (High-quality line-breaking will require a dedicated algorithm, 
+        <xd:detail><p>Since most browsers do not handle Tibetan line-breaking correctly, we need to help them a
+            little to avoid unacceptable results. To do so, we 1. Insert a zero-width space after tshegs in Tibetan.
+            2. Convert spaces to non-breaking spaces. (High-quality line-breaking will require a dedicated algorithm,
             this is the best we can do in generic HTML for current browsers.)</p>
         </xd:detail>
     </xd:doc>
@@ -97,9 +119,9 @@
 
     <xd:doc>
         <xd:short>Tweak Tibetan line-breaks (WBR).</xd:short>
-        <xd:detail><p>Since most browsers do not handle Tibetan line-breaking correctly, we need to help them a 
-            little to avoid unacceptable results. To do so, we 1. Insert a &lt;wbr&gt; after tshegs in Tibetan. 
-            2. Convert spaces to non-breaking spaces. (High-quality line-breaking will require a dedicated algorithm, 
+        <xd:detail><p>Since most browsers do not handle Tibetan line-breaking correctly, we need to help them a
+            little to avoid unacceptable results. To do so, we 1. Insert a &lt;wbr&gt; after tshegs in Tibetan.
+            2. Convert spaces to non-breaking spaces. (High-quality line-breaking will require a dedicated algorithm,
             this is the best we can do in generic HTML for current browsers.)</p>
         </xd:detail>
     </xd:doc>
@@ -226,6 +248,16 @@
         <xsl:param name="text" as="xs:string"/>
 
         <xsl:variable name="text" as="xs:string" select="replace($text, '''', '&rsquo;')"/>
+
+        <xsl:value-of select="$text"/>
+    </xsl:function>
+
+
+    <xsl:function name="f:use-ij-ligature" as="xs:string">
+        <xsl:param name="text" as="xs:string"/>
+
+        <xsl:variable name="text" as="xs:string" select="replace($text, 'ij', '&ijlig;')"/>
+        <xsl:variable name="text" as="xs:string" select="replace($text, 'IJ', '&IJlig;')"/>
 
         <xsl:value-of select="$text"/>
     </xsl:function>
@@ -473,8 +505,8 @@
         <span>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:variable name="script" select="f:map-language-to-script(@lang)"/>
-            <xsl:copy-of select="if ($script) 
-                                 then f:set-class-attribute-with(., $script) 
+            <xsl:copy-of select="if ($script)
+                                 then f:set-class-attribute-with(., $script)
                                  else f:set-class-attribute(.)"/>
             <xsl:apply-templates mode="#current"/>
         </span>
