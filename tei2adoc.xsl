@@ -6,6 +6,7 @@
 
 ]>
 <xsl:stylesheet version="3.0"
+                xmlns:xs="http://www.w3.org/2001/XMLSchema"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:f="urn:stylesheet-functions"
                 exclude-result-prefixes="f"
@@ -65,11 +66,15 @@
     </xsl:template>
 
     <xsl:template match="title" expand-text="yes">
-        <xsl:text>|Title |{normalize-space(.)}&lf;</xsl:text>
+        <xsl:text>|Title |{normalize-space(f:plain-text(.))}&lf;</xsl:text>
     </xsl:template>
 
     <xsl:template match="title[@type='short']" expand-text="yes">
-        <xsl:text>|Short title |{normalize-space(.)}&lf;</xsl:text>
+        <xsl:text>|Short title |{normalize-space(f:plain-text(.))}&lf;</xsl:text>
+    </xsl:template>
+
+    <xsl:template match="title[@type='original']" expand-text="yes">
+        <xsl:text>|Original title |{normalize-space(f:plain-text(.))}&lf;</xsl:text>
     </xsl:template>
 
     <xsl:template match="author" expand-text="yes">
@@ -130,5 +135,6 @@
     <xsl:template match="text()">
         <xsl:value-of select="."/>
     </xsl:template>
+
 
 </xsl:stylesheet>

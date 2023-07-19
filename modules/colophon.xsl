@@ -126,7 +126,7 @@
             <xsl:variable name="titleStatement" select="/*[self::TEI.2 or self::TEI]/teiHeader/fileDesc/titleStmt"/>
             <xsl:variable name="originalTitle" select="$titleStatement/title[@type='original'][1]"/>
             <xsl:if test="$originalTitle">
-                <xsl:copy-of select="f:metadata-line-from-node(f:message('msgOriginalTitle'), $originalTitle)"/>
+                <xsl:copy-of select="f:metadata-line(f:message('msgOriginalTitle'), $originalTitle)"/>
             </xsl:if>
 
             <xsl:call-template name="contributors"/>
@@ -180,9 +180,11 @@
 
     <xsl:function name="f:metadata-line-with-url">
         <xsl:param name="key" as="xs:string"/>
-        <xsl:param name="value" as="xs:string"/>
+        <xsl:param name="node"/>
         <xsl:param name="url" as="xs:string?"/>
         <xsl:param name="urlText" as="xs:string"/>
+
+        <xsl:variable name="value" select="f:plain-text($node)"/>
 
         <tr>
             <td><b><xsl:value-of select="if ($key = '') then '' else $key || ':'"/></b></td>
@@ -206,8 +208,10 @@
 
     <xsl:function name="f:metadata-line-as-url">
         <xsl:param name="key" as="xs:string"/>
-        <xsl:param name="value" as="xs:string"/>
+        <xsl:param name="node"/>
         <xsl:param name="url" as="xs:string?"/>
+
+        <xsl:variable name="value" select="f:plain-text($node)"/>
 
         <tr>
             <td><b><xsl:value-of select="if ($key = '') then '' else $key || ':'"/></b></td>
@@ -231,22 +235,13 @@
 
     <xsl:function name="f:metadata-line">
         <xsl:param name="key" as="xs:string"/>
-        <xsl:param name="value" as="xs:string"/>
+        <xsl:param name="node"/>
+
+        <xsl:variable name="value" select="f:plain-text($node)"/>
 
         <tr>
             <td><b><xsl:value-of select="if ($key = '') then '' else $key || ':'"/></b></td>
             <td><xsl:value-of select="$value"/></td>
-            <td/>
-        </tr>
-    </xsl:function>
-
-    <xsl:function name="f:metadata-line-from-node">
-        <xsl:param name="key" as="xs:string"/>
-        <xsl:param name="value" as="node()"/>
-
-        <tr>
-            <td><b><xsl:value-of select="if ($key = '') then '' else $key || ':'"/></b></td>
-            <td><xsl:apply-templates select="$value"/></td>
             <td/>
         </tr>
     </xsl:function>

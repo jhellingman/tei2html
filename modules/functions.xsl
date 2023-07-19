@@ -45,7 +45,6 @@
     </xsl:function>
 
 
-
     <xd:doc>
         <xd:short>Determine a string has a valid value.</xd:short>
         <xd:detail>
@@ -71,5 +70,32 @@
         <xsl:param name="default"/>
         <xsl:sequence select="if (not($value)) then $default else $value"/>
     </xsl:function>
+
+
+    <xd:doc>
+        <xd:short>Convert a node tree to plain text. Only one branch of choice elements will be included.</xd:short>
+        <xd:param name="node" type="node()">The node to be converted to plain text.</xd:param>
+    </xd:doc>
+
+    <xsl:function name="f:plain-text" as="xs:string">
+        <xsl:param name="node"/>
+        <xsl:variable name="text">
+            <xsl:apply-templates mode="plain-text" select="$node"/>
+        </xsl:variable>
+        <xsl:sequence select="$text"/>
+    </xsl:function>
+
+    <xsl:template match="choice[orig]" mode="plain-text">
+        <xsl:apply-templates select="orig" mode="plain-text"/>
+    </xsl:template>
+
+    <xsl:template match="choice[corr]" mode="plain-text">
+        <xsl:apply-templates select="corr" mode="plain-text"/>
+    </xsl:template>
+
+    <xsl:template match="choice[abbr]" mode="plain-text">
+        <xsl:apply-templates select="abbr" mode="plain-text"/>
+    </xsl:template>
+
 
 </xsl:stylesheet>
