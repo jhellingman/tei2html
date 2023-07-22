@@ -550,7 +550,7 @@ sub reportLanguagePairs($) {
     my @pairList = keys %{$pairHash{$language}};
     @pairList = sort @pairList;
 
-    my $report = "\n\n\n<h3>Most common word pairs in " . getLanguage(lc($language)) . "</h3>\n";
+    my $report = "\n\n\n<h3>Most common word pairs in " . getLanguage($language) . "</h3>\n";
 
     my $max = 0;
     foreach my $pair (sort { $pairHash{$language}{$b} <=> $pairHash{$language}{$a} } @pairList) {
@@ -581,7 +581,7 @@ sub reportPairsAndSingleWords() {
     my @pairList = keys %{$pairHash{$language}};
     @pairList = sort @pairList;
 
-    my $report = "\n\n\n<h3>Single words and matching word pairs in " . getLanguage(lc($language)) . "</h3>\n";
+    my $report = "\n\n\n<h3>Single words and matching word pairs in " . getLanguage($language) . "</h3>\n";
     $report .= "\n<table>\n";
     $report .= "\n<tr><th>Single Word</th> <th>Word Pair</th></tr>";
 
@@ -700,7 +700,7 @@ sub reportWords($) {
     $unknownTotalWords = 0;
     $unknownUniqWords = 0;
 
-    print "\n\n\n<h2>Word frequencies in " . getLanguage(lc($language)) . "</h2>\n";
+    print "\n\n\n<h2>Word frequencies in " . getLanguage($language) . "</h2>\n";
     loadDictionary($language);
 
     foreach my $item (@wordList) {
@@ -745,7 +745,9 @@ sub reportSQL() {
 sub reportWordsSQL() {
     my @languageList = keys %wordHash;
     foreach my $language (@languageList) {
-        reportLanguageWordsSQL($language);
+        if ($language ne 'xx') {
+            reportLanguageWordsSQL($language);
+        }
     }
 }
 
@@ -1230,9 +1232,9 @@ sub getLang() {
 # loadScannoFile
 #
 sub loadScannoFile($) {
-    my $lang = shift;
+    my $language = shift;
 
-    if (open(SCANNOFILE, "\\eLibrary\\Tools\\tei2html\\tools\\dictionaries\\$lang.scannos")) {
+    if (open(SCANNOFILE, "\\eLibrary\\Tools\\tei2html\\tools\\dictionaries\\$language.scannos")) {
         my $count = 0;
         while (<SCANNOFILE>) {
             my $scanno =  $_;
@@ -1245,11 +1247,11 @@ sub loadScannoFile($) {
             $scannoHash{"$prev:$word:$next"} = $frequency;
             $count++;
         }
-        $verbose && print STDERR "NOTICE:  Loaded scanno list for " . getLanguage($lang) . " with $count entries\n";
+        $verbose && print STDERR "NOTICE:  Loaded scanno list for " . getLanguage($language) . " with $count entries\n";
 
         close(SCANNOFILE);
     } else {
-        $verbose && print STDERR "WARNING: Unable to open: \"dictionaries\\$lang.scannos\"\n";
+        $verbose && print STDERR "WARNING: Unable to open: \"dictionaries\\$language.scannos\"\n";
     }
 }
 

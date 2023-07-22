@@ -89,9 +89,13 @@
     <xsl:template name="output-embedded-css">
         <xsl:param name="css" as="xs:string"/>
 
-        <style type="text/css"><xsl:text disable-output-escaping="yes"> /* &lt;![CDATA[ */&lf;</xsl:text>
-        <xsl:value-of select="$css" disable-output-escaping="yes"/>
-        <xsl:text disable-output-escaping="yes">&lf;/* ]]&gt; */ </xsl:text></style>
+        <style>
+            <xsl:if test="not(f:is-html5())">
+                <xsl:attribute name="type">text/css</xsl:attribute>
+            </xsl:if>
+            <xsl:text disable-output-escaping="yes"> /* &lt;![CDATA[ */&lf;</xsl:text>
+            <xsl:value-of select="$css" disable-output-escaping="yes"/>
+            <xsl:text disable-output-escaping="yes">&lf;/* ]]&gt; */ </xsl:text></style>
     </xsl:template>
 
 

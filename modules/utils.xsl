@@ -296,6 +296,14 @@
             <xsl:when test="matches($lang, '^[a-z]{2}-\d{4}')">
                 <xsl:value-of select="substring($lang, 1, 2)"/>
             </xsl:when>
+            <!-- Fix case of language + country code (e.g. nl-BE) -->
+            <xsl:when test="matches($lang, '^[a-z]{2}-[A-Za-z]{2}$')">
+                <xsl:value-of select="substring($lang, 1, 3) || upper-case(substring($lang, 4, 2))"/>
+            </xsl:when>
+            <!-- Fix case of language + script code (e.g. zh-Latn)-->
+            <xsl:when test="matches($lang, '^[a-z]{2}-[A-Za-z]{4}$')">
+                <xsl:value-of select="substring($lang, 1, 3) || upper-case(substring($lang, 4, 1)) || lower-case(substring($lang, 5, 3))"/>
+            </xsl:when>
             <xsl:otherwise>
                 <xsl:value-of select="$lang"/>
             </xsl:otherwise>
@@ -527,6 +535,9 @@
         <xsl:sequence select="$outputFormat = ('html', 'html5', 'xhtml', 'xhtml5')"/>
     </xsl:function>
 
+    <xsl:function name="f:is-html5" as="xs:boolean">
+        <xsl:sequence select="$outputFormat = ('html5', 'xhtml5')"/>
+    </xsl:function>
 
     <xd:doc>
         <xd:short>Classify the content of an element.</xd:short>

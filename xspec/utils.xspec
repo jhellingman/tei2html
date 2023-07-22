@@ -20,6 +20,37 @@
         <TEI.2 lang="zxx"/>
     </x:param>
 
+
+    <!-- f:generate-stable-id -->
+
+   <x:scenario label="When fixing the language code uk-gb">
+      <x:call function="f:fix-lang">
+         <x:param select="'uk-gb'"/>
+      </x:call>
+      <x:expect label="will return the language code 'uk-GB'" select="'uk-GB'"/>
+   </x:scenario>
+
+   <x:scenario label="When fixing the language code zh-latn">
+      <x:call function="f:fix-lang">
+         <x:param select="'zh-latn'"/>
+      </x:call>
+      <x:expect label="will return the language code 'zh-Latn'" select="'zh-Latn'"/>
+   </x:scenario>
+
+   <x:scenario label="When fixing the language code nl-1900">
+      <x:call function="f:fix-lang">
+         <x:param select="'nl-1900'"/>
+      </x:call>
+      <x:expect label="will return the language code 'nl'" select="'nl'"/>
+   </x:scenario>
+
+    <x:scenario label="When fixing the language code la-x-bio">
+      <x:call function="f:fix-lang">
+         <x:param select="'la-x-bio'"/>
+      </x:call>
+      <x:expect label="will return the language code 'la'" select="'la'"/>
+   </x:scenario>
+
     <!-- f:generate-stable-id -->
 
    <x:scenario label="When determining a stable id for a nested element">

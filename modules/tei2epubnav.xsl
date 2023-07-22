@@ -33,7 +33,6 @@
                 </xsl:attribute>
                 <head>
                     <title><xsl:value-of select="f:message('msgTableOfContents')"/></title>
-                    <!-- <meta http-equiv="content-type" content="text/html; charset=utf-8"/> -->
                     <meta charset="utf-8"/>
                 </head>
                 <body>

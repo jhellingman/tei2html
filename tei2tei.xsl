@@ -33,8 +33,11 @@ The above copyright notice and this permission notice shall be included
 in all copies or substantial portions of the Software.
 -->
 
-<xsl:stylesheet version="1.0"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:stylesheet version="3.0"
+    xmlns:f="urn:stylesheet-functions"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    exclude-result-prefixes="f xs">
 
 <xsl:output
     cdata-section-elements="eg"
@@ -1209,10 +1212,34 @@ in all copies or substantial portions of the Software.
 </xsl:template>
 
 <xsl:template match="@lang">
-    <xsl:attribute name="lang"><xsl:value-of select="."/></xsl:attribute>
-    <xsl:attribute name="xml:lang"><xsl:value-of select="."/></xsl:attribute>
+    <xsl:variable name="lang" select="f:fix-language-code(.)"/>
+    <xsl:attribute name="lang"><xsl:value-of select="$lang"/></xsl:attribute>
+    <xsl:attribute name="xml:lang"><xsl:value-of select="$lang"/></xsl:attribute>
 </xsl:template>
 
+<xsl:template match="language">
+    <language id="{f:fix-language-code(@id)}">
+        <xsl:apply-templates/>
+    </language>
+</xsl:template>
+
+<xsl:function name="f:fix-language-code" as="xs:string">
+    <xsl:param name="lang" as="xs:string"/>
+
+    <xsl:choose>
+        <!-- Fix case of language + country code (e.g. nl-BE) -->
+        <xsl:when test="matches($lang, '^[a-z]{2}-[A-Za-z]{2}$')">
+            <xsl:value-of select="substring($lang, 1, 3) || upper-case(substring($lang, 4, 2))"/>
+        </xsl:when>
+        <!-- Fix case of language + script code (e.g. zh-Latn)-->
+        <xsl:when test="matches($lang, '^[a-z]{2}-[A-Za-z]{4}$')">
+            <xsl:value-of select="substring($lang, 1, 3) || upper-case(substring($lang, 4, 1)) || lower-case(substring($lang, 5, 3))"/>
+        </xsl:when>
+        <xsl:otherwise>
+            <xsl:value-of select="$lang"/>
+        </xsl:otherwise>
+    </xsl:choose>
+</xsl:function>
 
 <!-- Remove some more default values -->
 

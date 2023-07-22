@@ -189,3 +189,4 @@ tools/patc/transcriptions/indic/numeric_entities_to_utf8.py
 xml2kwic.py
 xml2kwic.sh
 locale/Spanish--chatGPT.txt
+test/testTable/README.adoc

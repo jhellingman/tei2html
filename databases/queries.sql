@@ -7,10 +7,20 @@ where title like '%Tagalog%'
 order by title;
 
 
+-- Books with certain keywords
+select *
+ from book
+where idbook in (
+	select distinct idbook
+	 from keyword
+	where keyword like '%Philippines%'
+);
+
+
 -- Authors (1)
 select *
   from book
- where author like 'William%'
+ where author like '%Kalm%'
 order by author;
 
 

@@ -313,7 +313,7 @@
         <xsl:variable name="maxLevel" select="min((f:find-toc-max-depth($text), $maxLevel))"/>
 
         <table>
-            <xsl:if test="f:is-html()">
+            <xsl:if test="f:is-html() and not(f:is-html5())">
                 <xsl:attribute name="summary" select="f:message('msgTableOfContents')"/>
             </xsl:if>
             <xsl:apply-templates mode="gentoc-table" select="$text/front/div1 | $text/front/div">

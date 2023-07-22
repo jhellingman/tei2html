@@ -81,11 +81,11 @@
     <xsl:template name="generate-metadata">
 
         <xsl:choose>
-            <xsl:when test="f:is-epub()">
+            <xsl:when test="f:is-epub() or f:is-html5()">
                 <meta charset="{$encoding}"/>
             </xsl:when>
             <xsl:otherwise>
-                <meta http-equiv="content-type" content="{$mimeType}; charset={$encoding}"/>
+                <meta http-equiv="Content-Type" content="{$mimeType}; charset={$encoding}"/>
             </xsl:otherwise>
         </xsl:choose>
 

@@ -39,8 +39,8 @@ Generate metadata for insertion into a database from a TEI file
 
     <xsl:variable name="root" select="/"/>
     <xsl:variable name="TEI" select="TEI.2 | TEI"/>
-    <xsl:variable name="pgNum" select="$TEI/teiHeader/fileDesc/publicationStmt/idno[@type='PGnum']"/>
-
+    <xsl:variable name="pgNum0" select="$TEI/teiHeader/fileDesc/publicationStmt/idno[@type='PGnum']"/>
+    <xsl:variable name="pgNum" select="if (f:is-valid($pgNum0)) then $pgNum0 else '0'"/>
 
     <xsl:template match="/">
         <xsl:text expand-text="yes">DELETE FROM Title WHERE idbook = {$pgNum};</xsl:text>
@@ -51,29 +51,30 @@ Generate metadata for insertion into a database from a TEI file
 
     <xsl:template match="teiHeader/fileDesc/titleStmt/title">
         <xsl:text>&lf;&lf;INSERT INTO Title (idbook, language, type, nfc, title)</xsl:text>
-        <xsl:text expand-text="yes">&lf;  VALUES ({$pgNum}, '{f:get-current-lang(.)}', '{if (@type) then @type else 'main'}', {if (@nfc) then @nfc else 0}, '{.}');</xsl:text>
+        <xsl:text expand-text="yes">&lf;  VALUES ({$pgNum}, '{f:get-current-lang(.)}', '{if (@type) then @type else 'main'}', {if (@nfc) then @nfc else 0}, '{f:plain-text(.)}');</xsl:text>
     </xsl:template>
 
     <xsl:template match="teiHeader/fileDesc/titleStmt/author">
         <xsl:text>&lf;&lf;INSERT INTO Person (idbook, `key`, name, viaf, dates, role)</xsl:text>
-        <xsl:text expand-text="yes">&lf;  VALUES ({$pgNum}, '{if (@key) then @key else ''}', '{.}', '{if (@ref) then @ref else ''}', '', 'Author');</xsl:text>
+        <xsl:text expand-text="yes">&lf;  VALUES ({$pgNum}, '{if (@key) then @key else ''}', '{f:plain-text(.)}', '{if (f:is-valid(@ref)) then @ref else ''}', '', 'Author');</xsl:text>
     </xsl:template>
 
     <xsl:template match="teiHeader/fileDesc/titleStmt/editor">
         <xsl:text>&lf;&lf;INSERT INTO Person (idbook, `key`, name, viaf, dates, role)</xsl:text>
-        <xsl:text expand-text="yes">&lf;  VALUES ({$pgNum}, '{if (@key) then @key else ''}', '{.}', '{if (@ref) then @ref else ''}', '', 'Editor');</xsl:text>
+        <xsl:text expand-text="yes">&lf;  VALUES ({$pgNum}, '{if (@key) then @key else ''}', '{f:plain-text(.)}', '{if (@ref) then @ref else ''}', '', 'Editor');</xsl:text>
     </xsl:template>
 
     <xsl:template match="teiHeader/fileDesc/titleStmt/respStmt">
         <xsl:text>&lf;&lf;INSERT INTO Person (idbook, `key`, name, viaf, dates, role)</xsl:text>
-        <xsl:text expand-text="yes">&lf;  VALUES ({$pgNum}, '{if (name/@key) then name/@key else ''}', '{name}', '{if (name/@ref) then name/@ref else ''}', '', '{resp}');</xsl:text>
+        <xsl:text expand-text="yes">&lf;  VALUES ({$pgNum}, '{if (name/@key) then name/@key else ''}', '{f:plain-text(name)}', '{if (name/@ref) then name/@ref else ''}', '', '{resp}');</xsl:text>
     </xsl:template>
 
     <xsl:template match="teiHeader/profileDesc/textClass/keywords/list/item">
-        <xsl:text>&lf;&lf;INSERT INTO Keyword (idbook, keyword)</xsl:text>
-        <xsl:text expand-text="yes">&lf;  VALUES ({$pgNum}, '{.}');</xsl:text>
+        <xsl:if test="f:is-valid(.)">
+            <xsl:text>&lf;&lf;INSERT INTO Keyword (idbook, keyword)</xsl:text>
+            <xsl:text expand-text="yes">&lf;  VALUES ({$pgNum}, '{.}');</xsl:text>
+        </xsl:if>
     </xsl:template>
-
 
     <xsl:template match="text()"/>
 

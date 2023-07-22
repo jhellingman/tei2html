@@ -156,7 +156,7 @@
         <xsl:param name="rend" as="xs:string?"/>
 
         <!-- ePub3 doesn't like summaries on tables -->
-        <xsl:sequence select="f:has-rend-value($rend, 'summary') and not(f:is-epub())"/>
+        <xsl:sequence select="f:has-rend-value($rend, 'summary') and not(f:is-epub()) and not(f:is-html5())"/>
     </xsl:function>
 
 
