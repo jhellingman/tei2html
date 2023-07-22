@@ -52,12 +52,12 @@ BEGIN {
     $langNameHash{"en-1600"}   = "English (17th century)";
     $langNameHash{"en-1700"}   = "English (18th century)";
     $langNameHash{"en-1800"}   = "English (19th century)";
-    $langNameHash{"en-uk"}     = "English (United Kingdom)";
-    $langNameHash{"en-us"}     = "English (United States)";
+    $langNameHash{"en-UK"}     = "English (United Kingdom)";
+    $langNameHash{"en-US"}     = "English (United States)";
     $langNameHash{"eo"}        = "Esperanto";
     $langNameHash{"es"}        = "Spanish";
-    $langNameHash{"es-es"}     = "Spanish (Spain)";
-    $langNameHash{"es-mx"}     = "Spanish (Mexico)";
+    $langNameHash{"es-ES"}     = "Spanish (Spain)";
+    $langNameHash{"es-MX"}     = "Spanish (Mexico)";
     $langNameHash{"et"}        = "Estonian";
     $langNameHash{"eu"}        = "Basque";
     $langNameHash{"fa"}        = "Farsi";
@@ -141,13 +141,13 @@ BEGIN {
     $langNameHash{"nl-1700"}   = "Dutch (18th century)";
     $langNameHash{"nl-1800"}   = "Dutch (19th century)";
     $langNameHash{"nl-1900"}   = "Dutch (spelling De Vries-Te Winkel)";
-    $langNameHash{"nl-za-1920"} = "Dutch (Simplified spelling; South Africa)";
+    $langNameHash{"nl-ZA-1920"} = "Dutch (Simplified spelling; South Africa)";
     $langNameHash{"nl-ach"}    = "Dutch (Achterhoek)";
-    $langNameHash{"nl-be"}     = "Dutch (Belgium)";
+    $langNameHash{"nl-BE"}     = "Dutch (Belgium)";
     $langNameHash{"nl-dia"}    = "Dutch (unspecified dialect)";
     $langNameHash{"nl-gro"}    = "Dutch (Groningen)";
     $langNameHash{"nl-lim"}    = "Dutch (Limburg)";
-    $langNameHash{"nl-nl"}     = "Dutch (Netherlands)";
+    $langNameHash{"nl-NL"}     = "Dutch (Netherlands)";
     $langNameHash{"nl-obr"}    = "Dutch (Oost-Brabant)";
     $langNameHash{"nl-ovl"}    = "Dutch (Oost-Vlaanderen)";
     $langNameHash{"nl-wbr"}    = "Dutch (West-Brabant)";
@@ -163,7 +163,7 @@ BEGIN {
     $langNameHash{"pl"}        = "Polish";
     $langNameHash{"ps"}        = "Pashto (Pushto)";
     $langNameHash{"pt"}        = "Portuguese";
-    $langNameHash{"pt-br"}     = "Portuguese (Brazil)";
+    $langNameHash{"pt-BR"}     = "Portuguese (Brazil)";
     $langNameHash{"qu"}        = "Quechua";
     $langNameHash{"rm"}        = "Rhaeto-Romance";
     $langNameHash{"rn"}        = "Kirundi (Rundi)";
@@ -225,8 +225,8 @@ BEGIN {
     $langNameHash{"yi"}        = "Yiddish";
     $langNameHash{"yo"}        = "Yoruba";
     $langNameHash{"zh"}        = "Chinese";
-    $langNameHash{"zh-cn"}     = "Chinese (Simplified)";
-    $langNameHash{"zh-tw"}     = "Chinese (Traditional)";
+    $langNameHash{"zh-CN"}     = "Chinese (Simplified)";
+    $langNameHash{"zh-TW"}     = "Chinese (Traditional)";
     $langNameHash{"zh-Latn"}   = "Chinese (Latin transcription)";
     $langNameHash{"zu"}        = "Zulu";
 
