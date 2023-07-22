@@ -304,6 +304,10 @@
             <xsl:when test="matches($lang, '^[a-z]{2}-[A-Za-z]{4}$')">
                 <xsl:value-of select="substring($lang, 1, 3) || upper-case(substring($lang, 4, 1)) || lower-case(substring($lang, 5, 3))"/>
             </xsl:when>
+            <!-- Fix case of language + script code (e.g. grc-Latn)-->
+            <xsl:when test="matches($lang, '^[a-z]{3}-[A-Za-z]{4}$')">
+                <xsl:value-of select="substring($lang, 1, 4) || upper-case(substring($lang, 5, 1)) || lower-case(substring($lang, 6, 3))"/>
+            </xsl:when>
             <xsl:otherwise>
                 <xsl:value-of select="$lang"/>
             </xsl:otherwise>
