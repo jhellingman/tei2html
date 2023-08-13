@@ -29,6 +29,8 @@ my $download = 0;       # Download posted files from Project Gutenberg.
 my $showHelp = 0;
 my $onlyPosted = 0;     # Only report on posted files (version >= 1.0)
 my $makeReports = 0;
+my $makeSql = 0;
+
 
 GetOptions(
     'f' => \$force,
@@ -40,6 +42,7 @@ GetOptions(
     'd' => \$download,
     'q' => \$showHelp,
     'p' => \$onlyPosted,
+    'sql' => \$makeSql,
     'help' => \$showHelp);
 
 if ($showHelp == 1) {
@@ -55,6 +58,9 @@ if ($showHelp == 1) {
     print "    d         download related .zip files from Project Gutenberg (based on PGNum id in TEI file).\n";
     print "    p         only report on posted files (version >= 1.0).\n";
     print "    q         print this help and exit.\n";
+    print "\n";
+    print "    sql       generate SQL files.\n";
+    print "    help      print this help and exit.\n";
 
     exit(0);
 }
@@ -72,7 +78,7 @@ my $totalBytes = 0;
 
 my %tagCounters = (
     'p' => 0,           # paragraphs
-    'div' => 0,         # divisions (at any level)
+    'div' => 0,         # divisions (unspecified level)
     'div0' => 0,        # divisions (level 0)
     'div1' => 0,        # divisions (level 1)
     'div2' => 0,        # divisions (level 2)
@@ -295,7 +301,8 @@ sub handleTeiFile {
                 my $epubFlag   = $needEpub    == 0 ? '' : ' -e ';
                 my $reportFlag = $needReports == 0 ? '' : ' -r ';
                 my $checksFlag = $needChecks  == 0 ? '' : ' -v ';
-                system ("perl -S tei2html.pl -x -l=1 $checksFlag $reportFlag $htmlFlag $epubFlag $forceFlag $fileName$suffix");
+                my $sqlFlag    = $makeSql     == 0 ? '' : ' --sql ';
+                system ("perl -S tei2html.pl -x -l=1 $sqlFlag $checksFlag $reportFlag $htmlFlag $epubFlag $forceFlag $fileName$suffix");
             }
             chdir ($cwd);
         }
@@ -539,7 +546,7 @@ sub handleTeiFile {
             };
         }
 
-        # words-file
+        # Words file
         my $wordsFileName = $filePath . "$baseName-words.html";
         if (-e $wordsFileName) {
             if (open(WORDSFILE, "<:encoding(iso-8859-1)", $wordsFileName)) {

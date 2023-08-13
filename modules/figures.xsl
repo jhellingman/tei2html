@@ -76,7 +76,14 @@
         <xsl:param name="node" as="element()"/>
         <xsl:param name="default" as="xs:string"/>
 
-        <xsl:sequence select="if ($node/figDesc) then $node/figDesc[1] else (if ($node/head) then $node/head[1] else $default)"/>
+        <xsl:sequence select="
+            if (f:has-rend-value($node/@rend, 'image-alt'))
+            then f:rend-value($node/@rend, 'image-alt')
+            else if ($node/figDesc)
+                 then $node/figDesc[1]
+                 else if ($node/head)
+                      then $node/head[1]
+                      else $default"/>
     </xsl:function>
 
 
@@ -688,7 +695,7 @@ width:{$width};
     <xsl:template match="graphic">
         <!-- handle both P3 @url and P5 @target convention -->
         <xsl:variable name="url" select="if (@url) then @url else @target"/>
-        
+
         <xsl:if test="f:is-image-included($url)">
             <xsl:copy-of select="f:output-image($url, if (../figDesc) then ../figDesc else '')"/>
         </xsl:if>

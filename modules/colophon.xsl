@@ -507,7 +507,6 @@
         </xsl:if>
     </xsl:template>
 
-
     <xd:doc>
         <xd:short>Generate the contents of the list of corrections.</xd:short>
         <xd:detail>
@@ -520,6 +519,10 @@
 
     <xsl:template name="correctionTable">
         <p><xsl:value-of select="f:message('msgCorrectionsAppliedToText')"/></p>
+
+        <xsl:variable name="corrections">
+            <xsl:apply-templates select="//corr[not(parent::choice) and not(ancestor::seg[@copyOf])] | //choice[corr]" mode="collect-corrections"/>
+        </xsl:variable>
 
         <table class="correctionTable">
             <xsl:if test="not(f:is-epub()) and not(f:is-html5())">
@@ -534,32 +537,59 @@
                 </xsl:if>
             </tr>
 
-            <xsl:variable name="corrections">
-                <xsl:apply-templates select="//corr[not(parent::choice) and not(ancestor::seg[@copyOf])] | //choice[corr]" mode="collect-corrections"/>
+            <xsl:copy-of select="f:correctionTableRows($corrections)"/>
+        </table>
+
+        <xsl:if test="f:is-set('colophon.showSuggestedCorrections')">
+            <p><xsl:value-of select="f:message('msgCorrectionsNotAppliedToText')"/></p>
+
+            <xsl:variable name="sics">
+                <xsl:apply-templates select="//sic[not(parent::choice) and not(ancestor::seg[@copyOf])] | //choice[sic]" mode="collect-corrections"/>
             </xsl:variable>
 
-            <xsl:for-each-group select="$corrections/tmp:choice" group-by="tmp:sic || '@@@' || tmp:corr">
-                <xsl:if test="f:is-set('colophon.showMinorCorrections') or not(f:correction-is-minor(.))">
-                    <tr>
-                        <td class="width20">
-                            <xsl:call-template name="correctionTablePageReferences"/>
-                        </td>
-                        <td class="width40 bottom" lang="{f:fix-lang(@lang)}">
-                            <xsl:call-template name="correctionTableSourceText"/>
-                        </td>
-                        <td class="width40 bottom" lang="{f:fix-lang(@lang)}">
-                            <xsl:call-template name="correctionTableCorrectedText"/>
-                        </td>
-                        <xsl:if test="f:is-set('colophon.showEditDistance')">
-                            <td class="bottom">
-                                <xsl:value-of select="f:correction-table-edit-distance(.)"/>
-                            </td>
-                        </xsl:if>
-                    </tr>
+            <table class="correctionTable">
+                <xsl:if test="not(f:is-epub()) and not(f:is-html5())">
+                    <xsl:attribute name="summary"><xsl:value-of select="f:message('msgQuestionablesOverview')"/></xsl:attribute>
                 </xsl:if>
-            </xsl:for-each-group>
-        </table>
+                <tr>
+                    <th><xsl:value-of select="f:message('msgPage')"/></th>
+                    <th><xsl:value-of select="f:message('msgSource')"/></th>
+                    <th><xsl:value-of select="f:message('msgSuggestedCorrection')"/></th>
+                    <xsl:if test="f:is-set('colophon.showEditDistance')">
+                        <th><xsl:value-of select="f:message('msgEditDistance')"/></th>
+                    </xsl:if>
+                </tr>
+
+                <xsl:copy-of select="f:correctionTableRows($sics)"/>
+            </table>
+        </xsl:if>
     </xsl:template>
+
+
+    <xsl:function name="f:correctionTableRows">
+        <xsl:param name="corrections"/>
+
+        <xsl:for-each-group select="$corrections/tmp:choice" group-by="tmp:sic || '@@@' || tmp:corr">
+            <xsl:if test="f:is-set('colophon.showMinorCorrections') or not(f:correction-is-minor(.))">
+                <tr>
+                    <td class="width20">
+                        <xsl:call-template name="correctionTablePageReferences"/>
+                    </td>
+                    <td class="width40 bottom" lang="{f:fix-lang(@lang)}">
+                        <xsl:call-template name="correctionTableSourceText"/>
+                    </td>
+                    <td class="width40 bottom" lang="{f:fix-lang(@lang)}">
+                        <xsl:call-template name="correctionTableCorrectedText"/>
+                    </td>
+                    <xsl:if test="f:is-set('colophon.showEditDistance')">
+                        <td class="bottom">
+                            <xsl:value-of select="f:correction-table-edit-distance(.)"/>
+                        </td>
+                    </xsl:if>
+                </tr>
+            </xsl:if>
+        </xsl:for-each-group>
+    </xsl:function>
 
 
     <xsl:template name="correctionTablePageReferences">
@@ -667,6 +697,25 @@
             <tmp:sic>
                 <xsl:value-of select="@sic"/>
             </tmp:sic>
+        </tmp:choice>
+    </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Convert a traditional <code>sic</code> element to a <code>tmp:choice</code> element.</xd:short>
+    </xd:doc>
+
+    <xsl:template match="sic[not(f:in-transliteration(.))]" mode="collect-corrections">
+        <tmp:choice>
+            <xsl:attribute name="lang" select="f:get-current-lang(.)"/>
+            <xsl:attribute name="page" select="f:find-page-number(.)"/>
+            <xsl:call-template name="corr-href-attribute"/>
+            <tmp:sic>
+                <xsl:copy-of select="* | text() | @*"/>
+            </tmp:sic>
+            <tmp:corr>
+                <xsl:value-of select="@corr"/>
+            </tmp:corr>
         </tmp:choice>
     </xsl:template>
 

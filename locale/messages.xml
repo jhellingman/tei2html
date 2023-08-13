@@ -39,6 +39,10 @@
 
         -->
 
+        <msg:message name="msgCorrectionsNotAppliedToText">The following potential corrections have not been applied.</msg:message>
+        <msg:message name="msgQuestionablesOverview">Overview of potential corrections.</msg:message>
+        <msg:message name="msgSuggestedCorrection">Suggested correction</msg:message>
+        
         <msg:message name="msgGenerationDate">File generation date</msg:message>
         <msg:message name="msgGutenbergNoExternalReferences">Project Gutenberg does not use active external links in its ebooks.</msg:message>
         <msg:message name="msgGutenbergExternalReferencesExplanation">The following URLs are shown purely for information. If so desired, you can copy and paste them into the address-bar of your browser.</msg:message>
@@ -1223,6 +1227,10 @@
     <!-- Dutch translation -->
 
     <msg:messages xml:lang="nl" name="Dutch">
+
+        <msg:message name="msgCorrectionsNotAppliedToText">De volgende mogelijke verbeteringen zijn niet toegepast.</msg:message>
+        <msg:message name="msgQuestionablesOverview">Overzicht van mogelijke verbeteringen.</msg:message>
+        <msg:message name="msgSuggestedCorrection">Voorgestelde verbetering</msg:message>
 
         <msg:message name="msgGenerationDate">Aanmaakdatum bestand</msg:message>
         <msg:message name="msgGutenbergNoExternalReferences">Project Gutenberg plaatst geen actieve externe links in haar eboeken.</msg:message>

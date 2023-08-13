@@ -141,6 +141,7 @@
 
             <colophon.showEditDistance>true</colophon.showEditDistance>     <!-- Show the Levenshtein edit distance in the list of corrections made in the colophon. -->
             <colophon.showCorrections>true</colophon.showCorrections>       <!-- Show a list of corrections in the colophon. -->
+            <colophon.showSuggestedCorrections>false</colophon.showSuggestedCorrections> <!-- Show a list of suggested (but not applied) corrections in the colophon. -->
             <colophon.showMinorCorrections>true</colophon.showMinorCorrections> <!-- Include minor corrections in the colophon. -->
             <colophon.showAbbreviations>true</colophon.showAbbreviations>   <!-- Show a list of abbreviations in the colophon. -->
             <colophon.showExternalReferences>true</colophon.showExternalReferences>   <!-- Show a section on external references in the colophon. -->

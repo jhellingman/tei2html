@@ -630,10 +630,10 @@
     </xd:doc>
 
     <xsl:template match="sic" mode="#default titlePage">
-        <span class="sic">
+        <span class="sic" id="{f:generate-id(.)}">
             <xsl:if test="@corr">
                 <xsl:attribute name="title">
-                    <xsl:value-of select="f:message('msgCorrection')"/><xsl:text>: </xsl:text><xsl:value-of select="@corr"/>
+                    <xsl:value-of select="f:message('msgSuggestedCorrection')"/><xsl:text>: </xsl:text><xsl:value-of select="@corr"/>
                 </xsl:attribute>
             </xsl:if>
             <xsl:apply-templates/>

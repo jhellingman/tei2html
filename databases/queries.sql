@@ -6,6 +6,8 @@ select *
 where title like '%Tagalog%'
 order by title;
 
+select * from book order by changeDate desc;
+
 
 -- Books with certain keywords
 select *
@@ -20,7 +22,7 @@ where idbook in (
 -- Authors (1)
 select *
   from book
- where author like '%Kalm%'
+ where author like '%Bonger%'
 order by author;
 
 
@@ -58,7 +60,7 @@ select idbook, author, title,
  (select count(distinct(language)) from word where word.idbook = book.idbook) as distinct_languages
  from book
  -- where title like 'lord%'
- order by idbook
+ order by idbook desc 
 
 
 -- Words per language
