@@ -19,11 +19,18 @@
 
 .titlePage .docTitle .mainTitle {
     font-size: 1.8em;
+    font-weight: inherit;
+    font-variant: inherit;
+    line-height: inherit;
 }
 
-.titlePage .docTitle .subTitle, .titlePage .docTitle .seriesTitle,
-    .titlePage .docTitle .volumeTitle {
+.titlePage .docTitle .subTitle, 
+.titlePage .docTitle .seriesTitle,
+.titlePage .docTitle .volumeTitle {
     font-size: 1.44em;
+    font-weight: inherit;
+    font-variant: inherit;
+    line-height: inherit;
 }
 
 .titlePage .byline {

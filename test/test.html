@@ -1,6 +1,6 @@
 <!DOCTYPE html
   PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<!-- This HTML file has been automatically generated from an XML source on 2022-11-20T13:32:49Z using  SAXON   HE 9.9.0.1 . --> 
+<!-- This HTML file has been automatically generated from an XML source on 2023-08-16T20:44:46Z using  SAXON   HE 9.9.0.1 . --> 
 <html xmlns="http://www.w3.org/1999/xhtml" id="xd31e1" lang="en-US">
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
@@ -10,6 +10,7 @@
       <meta name="author" content="A. U. Thor"></meta>
       <meta name="author" content="W. Riter"></meta>
       <link rel="coverpage" href="images/cover500.jpg"></link>
+      <link rel="icon" href="images/cover500.jpg" type="image/x-cover"></link>
       <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"></link>
       <meta name="DC.Title" content="Main Title of Work Goes Here"></meta>
       <meta name="DC.Creator" content="Author of Work (Birth-year—Death-year)"></meta>
@@ -706,11 +707,18 @@ ul {
 
 .titlePage .docTitle .mainTitle {
  font-size: 1.8em;
+ font-weight: inherit;
+ font-variant: inherit;
+ line-height: inherit;
 }
 
-.titlePage .docTitle .subTitle, .titlePage .docTitle .seriesTitle,
- .titlePage .docTitle .volumeTitle {
+.titlePage .docTitle .subTitle, 
+.titlePage .docTitle .seriesTitle,
+.titlePage .docTitle .volumeTitle {
  font-size: 1.44em;
+ font-weight: inherit;
+ font-variant: inherit;
+ line-height: inherit;
 }
 
 .titlePage .byline {
@@ -1703,6 +1711,10 @@ font-style:italic;
 .fj-en {
 display:none;
 }
+
+.alignSecond {
+display:none;
+}
 /* Extracted style from SVG file "formulas/inline-f1.svg" */
 .f1frml {
 vertical-align:-.338ex;
@@ -1758,8 +1770,8 @@ color:red
          </div>
          <div id="xd31e103" class="titlePage">
             <div id="xd31e104" class="docTitle">
-               <div id="xd31e105" class="mainTitle">Creating documents in TEI</div>
-               <div id="xd31e107" class="subTitle xd31e107">A Tei2Html Test Document</div>
+               <h1 id="xd31e105" class="mainTitle">Creating documents in TEI</h1>
+               <h1 id="xd31e107" class="subTitle xd31e107">A Tei2Html Test Document</h1>
             </div>
             <div id="xd31e109" class="byline">by <br></br><span id="xd31e112" class="docAuthor">Jeroen Hellingman</span></div>
             <div id="xd31e113" class="docImprint">Project Gutenberg
@@ -2033,7 +2045,7 @@ color:red
                         mollit anim id est laborum.” ’</p>
                   </blockquote>
                   <p id="xd31e293">Here we have a reference to  page 2 . We also have a reference to a <a href="#figTest2" id="xd31e298">figure</a>.</p>
-                  <p id="xd31e301"><span class="sc" id="xd31e302">In this section</span> we will see a <span class="corr" id="xd31e305" title="Source: mistake">correction</span>, an <span class="corr" id="xd31e308" title="Not in source">insertion</span> and a deletion<span id="xd31e311"></span>, an abbreviation: <abbr id="xd31e313" title="United States of America">USA</abbr>, a currency amount: <span class="measure" id="xd31e316" title="USD 3.90">$3.90</span>, and a measurement: <span class="measure" id="xd31e320" title="25 cm">10 in</span>. Also included a gap: <span class="gap" title="Missing text, for the following reason: Gap demonstration.">💬</span> and a gap that is about 10 words long: <span class="gap" title="Missing 10 words, for the following reason: Gap demonstration.">💬</span>.</p>
+                  <p id="xd31e301"><span class="sc" id="xd31e302">In this section</span> we will see a <span class="corr" id="xd31e305" title="Source: mistake">correction</span>, an <span class="corr" id="xd31e308" title="Not in source">insertion</span> and a deletion<span id="xd31e311"></span>, an abbreviation: <abbr id="xd31e313" title="United States of America">USA</abbr>, a currency amount: <span class="measure" id="xd31e316" title="USD 3.90">$3.90</span>, and a measurement: <span class="measure" id="xd31e320" title="25 cm">10 in</span>. Also included a gap: <span class="gap" title="Missing text, for the following reason: Gap demonstration.">[<i>missing text</i>]</span> and a gap that is about 10 words long: <span class="gap" title="Missing 10 words, for the following reason: Gap demonstration.">[<i>missing text</i>]</span>.</p>
                   <p id="xd31e327">Test of the choice element as used for transcription: <span class="trans" id="xd31e329" title="Transcription">Original</span>.</p>
                   <p id="xd31e334">Books created with these stylesheet include: <a id="xd31e336" lang="nl" class="pglink xd31e38" title="Link to Project Gutenberg ebook" href="https://www.gutenberg.org/ebooks/19585">De Wereld voor de schepping van den mensch</a> by Camille Flammarion, and <i id="xd31e339"><a id="xd31e340" lang="nl" class="pglink xd31e38" title="Link to Project Gutenberg ebook" href="https://www.gutenberg.org/files/37578/37578-h/37578-h.htm#ch19">The Later Life</a></i> by Louis  Couperus (note how this last links points to chapter XIX of the book).
                      Books will be posted at <a id="xd31e343"></a><a id="xd31e344" class="seclink xd31e38" title="External link" href="https://www.gutenberg.org/">Project Gutenberg</a>. Text can include references to WorldCat or OpenLibrary catalog entries, for example:
@@ -3567,7 +3579,7 @@ color:red
                   <tr>
                      <td class="first" lang="en-US"></td>
                      <td class="second">
-                        <h2 id="xd290e5" class="main">Nogmaals een test</h2>
+                        <h2 id="xd3793e5" class="main">Nogmaals een test</h2>
                      </td>
                   </tr>
                   <tr>
@@ -3576,8 +3588,8 @@ color:red
                            is pulled-in from another source.</p>
                      </td>
                      <td class="second">
-                        <p id="xd290e7" class="first">Dit is een test van het naast elkaar afdrukken van vertaalde alinea’s</p>
-                        <p id="xd290e10">Deze alinea staat in een externe bron.</p>
+                        <p id="xd3793e7" class="first">Dit is een test van het naast elkaar afdrukken van vertaalde alinea’s</p>
+                        <p id="xd3793e10">Deze alinea staat in een externe bron.</p>
                      </td>
                   </tr>
                   <tr>
@@ -3585,7 +3597,7 @@ color:red
                         <p id="xd31e1799">The paragraphs will be numbered using the <i id="xd31e1801">n</i> attribute.</p>
                      </td>
                      <td class="second">
-                        <p id="xd290e12">De alinea’s worden genummerd met het <i id="xd290e14">n</i> attribuut.</p>
+                        <p id="xd3793e12">De alinea’s worden genummerd met het <i id="xd3793e14">n</i> attribuut.</p>
                      </td>
                   </tr>
                   <tr>
@@ -3593,8 +3605,8 @@ color:red
                         <p id="xd31e1803">That way, the style sheet knows which paragraphs belong together.</p>
                      </td>
                      <td class="second">
-                        <p id="xd290e17">Op die manier weet de stylesheet welke alinea’s bij elkaar horen.</p>
-                        <p id="xd290e21">Als er af en toe een extra alinea tussendoor komt, maakt dat niet uit.</p>
+                        <p id="xd3793e17">Op die manier weet de stylesheet welke alinea’s bij elkaar horen.</p>
+                        <p id="xd3793e21">Als er af en toe een extra alinea tussendoor komt, maakt dat niet uit.</p>
                      </td>
                   </tr>
                   <tr>
@@ -3602,7 +3614,7 @@ color:red
                         <p id="xd31e1805">This makes it easy to verify translations.</p>
                      </td>
                      <td class="second">
-                        <p id="xd290e23">Dit maakt het eenvoudig vertalingen te controleren.</p>
+                        <p id="xd3793e23">Dit maakt het eenvoudig vertalingen te controleren.</p>
                      </td>
                   </tr>
                   <tr>
@@ -3611,7 +3623,7 @@ color:red
                         <p id="xd31e1809">And yet another paragraph.</p>
                      </td>
                      <td class="second">
-                        <p id="xd290e26">Een extra alinea, met de vertaling ernaast.</p>
+                        <p id="xd3793e26">Een extra alinea, met de vertaling ernaast.</p>
                      </td>
                   </tr>
                   <tr>
@@ -3619,7 +3631,7 @@ color:red
                         <p id="xd31e1811">And the final paragraph.</p>
                      </td>
                      <td class="second">
-                        <p id="xd290e29">En de laatste alinea.</p>
+                        <p id="xd3793e29">En de laatste alinea.</p>
                      </td>
                   </tr>
                   <tr>
@@ -3680,32 +3692,32 @@ color:red
                <table id="xd31e1885" lang="nl" class="tocList">
                   <tr>
                      <td class="tocDivNum"></td>
-                     <td class="tocDivTitle" colspan="7">      Introductie   </td>
+                     <td class="tocDivTitle">      Introductie   </td>
                      <td class="tocPageNum">vii</td>
                   </tr>
                   <tr>
                      <td class="tocDivNum">I</td>
-                     <td class="tocDivTitle" colspan="7">      Eerste Hoofdstuk   </td>
+                     <td class="tocDivTitle">      Eerste Hoofdstuk   </td>
                      <td class="tocPageNum">1</td>
                   </tr>
                   <tr>
                      <td class="tocDivNum">II</td>
-                     <td class="tocDivTitle" colspan="7">      Tweede Hoofdstuk   </td>
+                     <td class="tocDivTitle">      Tweede Hoofdstuk   </td>
                      <td class="tocPageNum">22</td>
                   </tr>
                   <tr>
                      <td class="tocDivNum">III</td>
-                     <td class="tocDivTitle" colspan="7">      <span class="corr" id="xd31e1906" title="Source: Vierde">Derde</span> Hoofdstuk   </td>
+                     <td class="tocDivTitle">      <span class="corr" id="xd31e1906" title="Source: Vierde">Derde</span> Hoofdstuk   </td>
                      <td class="tocPageNum">35</td>
                   </tr>
                   <tr>
                      <td class="tocDivNum">DCCCXLIV</td>
-                     <td class="tocDivTitle" colspan="7">      Achthonderdenvierenveertigste Hoofdstuk   </td>
+                     <td class="tocDivTitle">      Achthonderdenvierenveertigste Hoofdstuk   </td>
                      <td class="tocPageNum">57</td>
                   </tr>
                   <tr>
                      <td class="tocDivNum"></td>
-                     <td class="tocDivTitle" colspan="7">      Slot   </td>
+                     <td class="tocDivTitle">      Slot   </td>
                      <td class="tocPageNum">77</td>
                   </tr>
                </table>
@@ -4150,7 +4162,7 @@ color:red
                </tr>
                <tr>
                   <td><b>File generation date:</b></td>
-                  <td>2022-11-20 13:32:49 UTC</td>
+                  <td>2023-08-16 20:44:46 UTC</td>
                   <td></td>
                </tr>
                <tr>
@@ -4329,6 +4341,11 @@ color:red
                   <th>Fragment</th>
                </tr>
                <tr>
+                  <td><a class="pageref" href="#fj-en">5</a></td>
+                  <td>lg</td>
+                  <td lang="fr"></td>
+               </tr>
+               <tr>
                   <td><a class="pageref" href="#xd31e401">2<i>a</i></a></td>
                   <td>cit</td>
                   <td lang="fr"><span class="cit" lang="fr"><span class="epigraph">
@@ -4337,11 +4354,6 @@ color:red
                               <p class="line">Ils fendent dans les airs les nuages mouvans,</p>
                               <p class="line">Et de leurs piés ailés ils devancent les vents.”</p>
                            </div></span><span class="bibl">(<i>Metamorphoses d’Ovide</i>).</span></span></td>
-               </tr>
-               <tr>
-                  <td><a class="pageref" href="#fj-en">5</a></td>
-                  <td>lg</td>
-                  <td lang="fr"></td>
                </tr>
             </table>
             <h3 class="main">Dutch</h3>
@@ -4352,19 +4364,64 @@ color:red
                   <th>Fragment</th>
                </tr>
                <tr>
+                  <td><a class="pageref" href="#xd31e1885">5</a></td>
+                  <td>list</td>
+                  <td lang="nl">
+                     <table lang="nl" class="tocList">
+                        <tr>
+                           <td class="tocDivNum"></td>
+                           <td class="tocDivTitle">      Introductie   </td>
+                           <td class="tocPageNum">vii</td>
+                        </tr>
+                        <tr>
+                           <td class="tocDivNum">I</td>
+                           <td class="tocDivTitle">      Eerste Hoofdstuk   </td>
+                           <td class="tocPageNum">1</td>
+                        </tr>
+                        <tr>
+                           <td class="tocDivNum">II</td>
+                           <td class="tocDivTitle">      Tweede Hoofdstuk   </td>
+                           <td class="tocPageNum">22</td>
+                        </tr>
+                        <tr>
+                           <td class="tocDivNum">III</td>
+                           <td class="tocDivTitle">      <span class="corr" title="Source: Vierde">Derde</span> Hoofdstuk   </td>
+                           <td class="tocPageNum">35</td>
+                        </tr>
+                        <tr>
+                           <td class="tocDivNum">DCCCXLIV</td>
+                           <td class="tocDivTitle">      Achthonderdenvierenveertigste Hoofdstuk   </td>
+                           <td class="tocPageNum">57</td>
+                        </tr>
+                        <tr>
+                           <td class="tocDivNum"></td>
+                           <td class="tocDivTitle">      Slot   </td>
+                           <td class="tocPageNum">77</td>
+                        </tr>
+                     </table>
+                  </td>
+               </tr>
+               <tr>
                   <td><a class="pageref" href="#xd31e336">2<i>a</i></a></td>
                   <td>xref</td>
                   <td lang="nl"><a lang="nl" class="pglink xd31e38" title="Link to Project Gutenberg ebook" href="https://www.gutenberg.org/ebooks/19585">De Wereld voor de schepping van den mensch</a></td>
                </tr>
                <tr>
-                  <td><a class="pageref" href="#xd31e340">2<i>a</i></a></td>
-                  <td>xref</td>
-                  <td lang="nl"><a lang="nl" class="pglink xd31e38" title="Link to Project Gutenberg ebook" href="https://www.gutenberg.org/files/37578/37578-h/37578-h.htm#ch19">The Later Life</a></td>
-               </tr>
-               <tr>
                   <td><a class="pageref" href="#xd31e357">2<i>a</i></a></td>
                   <td>xref</td>
                   <td lang="nl"><a lang="nl" class="wplink xd31e38" title="Link to related Wikipedia article" href="https://en.wikipedia.org/wiki/Nederlands">Dutch</a></td>
+               </tr>
+               <tr>
+                  <td><a class="pageref" href="#xd31e1521">3</a></td>
+                  <td>list</td>
+                  <td lang="nl">
+                     <ol lang="nl" class="xd31e1521">
+                        <li>Een</li>
+                        <li>Twee</li>
+                        <li value="48">Achtenveertig</li>
+                        <li>Negenenveertig</li>
+                     </ol>
+                  </td>
                </tr>
                <tr>
                   <td><a class="pageref" href="#xd31e1507">3</a>, <a class="pageref" href="#xd31e1528">3</a></td>
@@ -4389,81 +4446,9 @@ color:red
                   </td>
                </tr>
                <tr>
-                  <td><a class="pageref" href="#xd31e1512">3</a></td>
-                  <td>list</td>
-                  <td lang="nl">
-                     <table class="splitListTable" lang="nl">
-                        <tr>
-                           <td>
-                              <ol class="xd31e1512">
-                                 <li value="5">Vijf</li>
-                                 <li>Zes</li>
-                              </ol>
-                           </td>
-                           <td>
-                              <ol class="xd31e1512">
-                                 <li value="7">Zeven</li>
-                                 <li>Acht</li>
-                              </ol>
-                           </td>
-                        </tr>
-                     </table>
-                  </td>
-               </tr>
-               <tr>
-                  <td><a class="pageref" href="#xd31e1521">3</a></td>
-                  <td>list</td>
-                  <td lang="nl">
-                     <ol lang="nl" class="xd31e1521">
-                        <li>Een</li>
-                        <li>Twee</li>
-                        <li value="48">Achtenveertig</li>
-                        <li>Negenenveertig</li>
-                     </ol>
-                  </td>
-               </tr>
-               <tr>
                   <td><a class="pageref" href="#alignSecond">5</a></td>
                   <td>div1</td>
                   <td lang="nl"></td>
-               </tr>
-               <tr>
-                  <td><a class="pageref" href="#xd31e1885">5</a></td>
-                  <td>list</td>
-                  <td lang="nl">
-                     <table lang="nl" class="tocList">
-                        <tr>
-                           <td class="tocDivNum"></td>
-                           <td class="tocDivTitle" colspan="7">      Introductie   </td>
-                           <td class="tocPageNum">vii</td>
-                        </tr>
-                        <tr>
-                           <td class="tocDivNum">I</td>
-                           <td class="tocDivTitle" colspan="7">      Eerste Hoofdstuk   </td>
-                           <td class="tocPageNum">1</td>
-                        </tr>
-                        <tr>
-                           <td class="tocDivNum">II</td>
-                           <td class="tocDivTitle" colspan="7">      Tweede Hoofdstuk   </td>
-                           <td class="tocPageNum">22</td>
-                        </tr>
-                        <tr>
-                           <td class="tocDivNum">III</td>
-                           <td class="tocDivTitle" colspan="7">      <span class="corr" title="Source: Vierde">Derde</span> Hoofdstuk   </td>
-                           <td class="tocPageNum">35</td>
-                        </tr>
-                        <tr>
-                           <td class="tocDivNum">DCCCXLIV</td>
-                           <td class="tocDivTitle" colspan="7">      Achthonderdenvierenveertigste Hoofdstuk   </td>
-                           <td class="tocPageNum">57</td>
-                        </tr>
-                        <tr>
-                           <td class="tocDivNum"></td>
-                           <td class="tocDivTitle" colspan="7">      Slot   </td>
-                           <td class="tocPageNum">77</td>
-                        </tr>
-                     </table>
-                  </td>
                </tr>
                <tr>
                   <td><a class="pageref" href="#index">5</a></td>
@@ -4505,6 +4490,33 @@ color:red
                            </div>
                         </div>
                      </div>
+                  </td>
+               </tr>
+               <tr>
+                  <td><a class="pageref" href="#xd31e340">2<i>a</i></a></td>
+                  <td>xref</td>
+                  <td lang="nl"><a lang="nl" class="pglink xd31e38" title="Link to Project Gutenberg ebook" href="https://www.gutenberg.org/files/37578/37578-h/37578-h.htm#ch19">The Later Life</a></td>
+               </tr>
+               <tr>
+                  <td><a class="pageref" href="#xd31e1512">3</a></td>
+                  <td>list</td>
+                  <td lang="nl">
+                     <table class="splitListTable" lang="nl">
+                        <tr>
+                           <td>
+                              <ol class="xd31e1512">
+                                 <li value="5">Vijf</li>
+                                 <li>Zes</li>
+                              </ol>
+                           </td>
+                           <td>
+                              <ol class="xd31e1512">
+                                 <li value="7">Zeven</li>
+                                 <li>Acht</li>
+                              </ol>
+                           </td>
+                        </tr>
+                     </table>
                   </td>
                </tr>
             </table>

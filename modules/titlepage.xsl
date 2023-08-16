@@ -39,35 +39,35 @@
     </xsl:template>
 
     <xsl:template match="titlePart" mode="titlePage">
-        <div>
+        <h1>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'mainTitle')"/>
             <xsl:apply-templates mode="titlePage"/>
-        </div>
+        </h1>
     </xsl:template>
 
     <xsl:template match="titlePart[@type='sub']" mode="titlePage">
-        <div>
+        <h1>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'subTitle')"/>
             <xsl:apply-templates mode="titlePage"/>
-        </div>
+        </h1>
     </xsl:template>
 
     <xsl:template match="titlePart[@type=('series', 'Series')]" mode="titlePage">
-        <div>
+        <h1>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'seriesTitle')"/>
             <xsl:apply-templates mode="titlePage"/>
-        </div>
+        </h1>
     </xsl:template>
 
     <xsl:template match="titlePart[@type=('volume', 'Volume')]" mode="titlePage">
-        <div>
+        <h1>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'volumeTitle')"/>
             <xsl:apply-templates mode="titlePage"/>
-        </div>
+        </h1>
     </xsl:template>
 
     <xsl:template match="byline" mode="titlePage">
