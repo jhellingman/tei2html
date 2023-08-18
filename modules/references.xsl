@@ -9,7 +9,7 @@
 
     <xd:doc type="stylesheet">
         <xd:short>Templates to handle cross-references.</xd:short>
-        <xd:detail>This stylesheet contains a number of templates to handle cross-references.</xd:detail>
+        <xd:detail>This stylesheet contains templates to handle cross-references.</xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
         <xd:copyright>2011, Jeroen Hellingman</xd:copyright>
     </xd:doc>
@@ -111,7 +111,7 @@
         <xd:short>Is a node a footnote or inside a footnote?</xd:short>
         <xd:detail>
             <p>This function determines whether a node is a footnote or inside a footnote. This is important,
-            as footnotes may be placed in quite different locations than the text they are referred to.</p>
+            as footnotes may be placed in a different location than the text they are referred to.</p>
         </xd:detail>
     </xd:doc>
 

@@ -1,5 +1,4 @@
 
-
 -- Books
 select *
  from book
@@ -60,7 +59,7 @@ select idbook, author, title,
  (select count(distinct(language)) from word where word.idbook = book.idbook) as distinct_languages
  from book
  -- where title like 'lord%'
- order by idbook desc 
+ order by idbook desc;
 
 
 -- Words per language
@@ -85,7 +84,7 @@ select word, sum(count), sum(1) from word
  where language = 'nl-1900'
 group by word collate utf8mb4_bin
 having sum(count) > 50 and sum(1) > 10
-order by sum(count) desc
+order by sum(count) desc;
 
 
 -- Find words in old-orthography Dutch that do not occur in the spelling list (the book with id 22722).

@@ -9,7 +9,7 @@
 
     <xd:doc type="stylesheet">
         <xd:short>Stylesheet to support merging two or more TEI documents.</xd:short>
-        <xd:detail>This stylesheet contains a number of support functions and templates to make merging of multiple TEI files easy.</xd:detail>
+        <xd:detail>This stylesheet contains support functions and templates to make merging of multiple TEI files easy.</xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
         <xd:copyright>2012-2022, Jeroen Hellingman</xd:copyright>
     </xd:doc>

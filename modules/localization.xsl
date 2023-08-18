@@ -27,7 +27,7 @@
 
     <xd:doc>
         <xd:short>Localization language.</xd:short>
-        <xd:detail>The language and specific locale to use, e.g. 'en-US'.</xd:detail>
+        <xd:detail>The language and specific locale to use, e.g., 'en-US'.</xd:detail>
     </xd:doc>
 
     <xsl:variable name="language" select="if (/TEI.2/@lang | /*:TEI/@xml:lang) then /TEI.2/@lang | /*:TEI/@xml:lang else f:get-setting('language')" as="xs:string"/>
@@ -35,7 +35,7 @@
 
     <xd:doc>
         <xd:short>Localization base-language.</xd:short>
-        <xd:detail>The language without the locale, e.g. 'de'.</xd:detail>
+        <xd:detail>The language without the locale, e.g., 'de'.</xd:detail>
     </xd:doc>
 
     <xsl:variable name="baseLanguage" select="if (contains($language, '-')) then substring-before($language, '-') else $language" as="xs:string"/>

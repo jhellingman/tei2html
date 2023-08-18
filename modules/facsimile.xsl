@@ -10,8 +10,8 @@
 
     <xd:doc type="stylesheet">
         <xd:short>TEI stylesheet to create digital facsimile versions of TEI documents.</xd:short>
-        <xd:detail><p>This stylesheet can be used to generate a digital facsimile edition of a TEI document,
-        provided that page-images are available, and encoded in the <code>@facs</code> attribute of
+        <xd:detail><p>This stylesheet can be used to generate a digital facsimile edition of a TEI document
+        if page-images are available, and links to them are encoded in the <code>@facs</code> attribute of
         <code>pb</code>-elements.</p>
 
         <p>The stylesheet generates page-image wrapper pages and will take into account the
@@ -307,13 +307,13 @@
 
 
 <xd:doc>
-    <xd:short>Find out in whether a pd-element is at the end of a division.</xd:short>
-    <xd:detail>Find out in whether a pd-element is at the end of a division, which means no content is following it.
+    <xd:short>Find out in whether a pb-element is at the end of a division.</xd:short>
+    <xd:detail>Find out in whether a pb-element is at the end of a division, which means no content is following it.
     This is done using the following steps:
 
     <ol>
         <li>Select all relevant (div-element) ancestors.</li>
-        <li>Select all content following the pb that is a descendent of the same ancestor.</li>
+        <li>Select all content following the pb-element that is a descendent of the same ancestor.</li>
         <li>Determine the length of text of that content.</li>
         <li>Include the div-element in the result, if that length is zero.</li>
     </ol>

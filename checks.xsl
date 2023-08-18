@@ -68,7 +68,7 @@
         <xsl:value-of select="replace(., '\.', '&fwperiod;')"/>
     </xsl:template>
 
-    <!-- Add some space around end-note references to avoid some false positive "no space after punctuation" issues -->
+    <!-- Add some space around end-note references to avoid some false positive "no space after punctuation" issues. -->
     <xsl:template match="ref[@type='endNoteRef']" mode="segments">
         <xsl:text> {</xsl:text>
         <xsl:apply-templates mode="#current"/>
@@ -595,7 +595,7 @@
         <xsl:next-match/>
     </xsl:template>
 
-    <!-- We allow a pb directly after a titlePage, due to the level this has in the TEI DTD -->
+    <!-- We allow a pb directly after a titlePage, due to the level this has in the TEI DTD. -->
     <xsl:template mode="checks" match="front/pb[not(preceding::titlePage)] | body/pb | back/pb">
         <xsl:copy-of select="f:issue(., 'T14', 'Pagebreaks', 'Error', 'pb element directly under front, body, or back.')"/>
         <xsl:next-match/>

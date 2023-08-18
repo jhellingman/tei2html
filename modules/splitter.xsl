@@ -369,7 +369,7 @@
 
     <xsl:template name="spine.div">
         <xsl:context-item as="element()" use="required"/>
-        <!-- filter out the cover, as we have placed it first already -->
+        <!-- filter out the cover, as we have placed it first already. -->
         <xsl:if test="@id != 'cover'">
             <itemref xmlns="http://www.idpf.org/2007/opf" linear="yes" idref="{f:generate-id(.)}"/>
         </xsl:if>

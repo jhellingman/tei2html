@@ -730,7 +730,7 @@
             </pre>
 
             <p>This will result in an HTML table, in which the item numbers are placed in cells on the left, the items themselves in
-            spanned cells in the middle (made to span fewer columns as they are part of deeply nested items) and the page numbers
+            spanned cells in the middle (made to span fewer columns as they are part of deeply nested items), and the page numbers
             in a cell on the right.</p>
         </xd:detail>
     </xd:doc>

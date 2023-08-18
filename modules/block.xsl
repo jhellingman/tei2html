@@ -62,7 +62,7 @@
             <xsl:when test="parent::front | parent::body | parent::back | parent::div1 | parent::div2 | parent::div3 | parent::div4 | parent::div5">
                 <p><xsl:call-template name="pb"/></p>
             </xsl:when>
-            <!-- In some odd cases, you can have a parent::front, and also an ancestor::p, this is why those tests are separate. -->
+            <!-- In some odd cases, you can have a parent::front and an ancestor::p, this is why those tests are separate. -->
             <xsl:when test="ancestor::p | ancestor::list | ancestor::table | ancestor::head | ancestor::l | ancestor::tmp:span | ancestor::stage | ancestor::castList">
                 <xsl:call-template name="pb"/>
             </xsl:when>
@@ -851,7 +851,7 @@
         <xd:detail>Remove the first letter of a paragraph. Mind, this means we want to remove the first letter
         of this text node only if it is the first text node in a paragraph. To verify this, it is not enough
         to just look at the <code>position()</code> (as it may be nested several levels deep), But actually will
-        have to determine what text is part of the current paragraph and also before the current node.</xd:detail>
+        have to determine what text is part of the current paragraph and before the current node.</xd:detail>
     </xd:doc>
 
     <xsl:template match="text()" mode="remove-initial">
@@ -922,7 +922,7 @@
 
     <xsl:template match="p[f:has-rend-value(@rend, 'dropcap')]" mode="css">
 
-        <!-- Only generate the CSS-class once if multiple paragraphs have the same @rend value -->
+        <!-- Only generate the CSS-class once if multiple paragraphs have the same @rend value. -->
         <xsl:if test="not(preceding::p[@rend = current()/@rend])">
             <xsl:variable name="css-properties" select="f:translate-rend-ladder(@rend, name())"/>
             <xsl:variable name="ccs-selector" select="f:generate-css-class-selector(.)"/>

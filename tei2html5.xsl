@@ -44,18 +44,6 @@
     <xsl:include href="modules/facsimile.xsl"/>
     <xsl:include href="modules/stripns.xsl"/>
 
-    <!-- <xsl:output
-        doctype-public="-//W3C//DTD HTML 4.01 Transitional//EN"
-        doctype-system="http://www.w3.org/TR/html4/loose.dtd"
-        method="html"
-        encoding="utf-8"/> --> <!-- iso-8859-1; utf-8 -->
-
-    <!-- <xsl:output
-        doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
-        doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
-        method="xml"
-        encoding="utf-8"/> -->
-
     <xsl:output
         method="html"
         version="5"
