@@ -24,27 +24,27 @@
 
     <xsl:template match="tei:TEI">
         <xsl:variable name="document">
-            <xsl:apply-templates select="/" mode="stripns"/>
+            <xsl:apply-templates select="/" mode="stripNamespace"/>
         </xsl:variable>
         <xsl:apply-templates select="$document"/>
     </xsl:template>
 
 
-    <xsl:template match="*" mode="stripns">
+    <xsl:template match="*" mode="stripNamespace">
         <xsl:element name="{local-name()}">
-            <xsl:apply-templates select="@* | node()" mode="stripns"/>
+            <xsl:apply-templates select="@* | node()" mode="stripNamespace"/>
         </xsl:element>
     </xsl:template>
 
 
-    <xsl:template match="@*" mode="stripns">
+    <xsl:template match="@*" mode="stripNamespace">
         <xsl:attribute name="{local-name()}">
             <xsl:value-of select="."/>
         </xsl:attribute>
     </xsl:template>
 
 
-    <xsl:template match="comment() | text() | processing-instruction()" mode="stripns">
+    <xsl:template match="comment() | text() | processing-instruction()" mode="stripNamespace">
         <xsl:copy/>
     </xsl:template>
 

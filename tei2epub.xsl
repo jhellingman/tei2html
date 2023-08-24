@@ -45,6 +45,7 @@
     <xsl:include href="modules/gutenberg.xsl"/>
     <xsl:include href="modules/facsimile.xsl"/>
     <xsl:include href="modules/stripns.xsl"/>
+    <xsl:include href="modules/variables.xsl"/>
 
     <xsl:include href="modules/tei2opf.xsl"/>
     <xsl:include href="modules/tei2ncx.xsl"/>
@@ -86,17 +87,10 @@
 
     <!--====================================================================-->
 
-    <xsl:variable name="root" select="/"/>
-
     <xsl:variable name="mimeType" select="'application/xhtml+xml'"/>
     <xsl:variable name="encoding" select="document('')/xsl:stylesheet/xsl:output[not(@name)]/@encoding"/>
     <xsl:variable name="outputMethod" select="document('')/xsl:stylesheet/xsl:output/@method"/>
     <xsl:variable name="outputFormat" select="'epub'"/>
-
-    <xsl:variable name="title" select="/*[self::TEI.2 or self::TEI]/teiHeader/fileDesc/titleStmt/title[not(@type) or @type='main']" />
-    <xsl:variable name="author" select="/*[self::TEI.2 or self::TEI]/teiHeader/fileDesc/titleStmt/author" />
-    <xsl:variable name="publisher" select="/*[self::TEI.2 or self::TEI]/teiHeader/fileDesc/publicationStmt/publisher" />
-    <xsl:variable name="pubdate" select="/*[self::TEI.2 or self::TEI]/teiHeader/fileDesc/publicationStmt/date" />
 
     <xsl:variable name="p.element" select="'p'"/>
 

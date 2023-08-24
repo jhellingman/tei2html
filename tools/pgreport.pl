@@ -546,6 +546,29 @@ sub handleTeiFile {
             };
         }
 
+
+        my $metadataFile = $filePath . "metadata.xml";
+        if (-e $metadataFile) {
+            # Use eval, so we can recover from fatal parse errors in XML:XPath.
+            eval {
+                my $xpath = XML::XPath->new(filename => $metadataFile);
+
+                $xpath->set_namespace('rdf' => 'http://www.w3.org/1999/02/22-rdf-syntax-ns#');
+                $xpath->set_namespace('dc' => 'http://purl.org/dc/elements/1.1/');
+
+                my $rights = $xpath->find('/rdf:RDF/rdf:Description/dc:rights');
+                print XMLFILE "    <rights>" . escapeXml($rights->string_value()) . "</rights>\n";
+
+                $xpath->cleanup();
+
+                1;
+            } or do {
+                logMessage("Note:       Problem parsing $metadataFile.");
+                logError("Problem parsing $metadataFile");
+            };
+        }
+
+
         # Words file
         my $wordsFileName = $filePath . "$baseName-words.html";
         if (-e $wordsFileName) {

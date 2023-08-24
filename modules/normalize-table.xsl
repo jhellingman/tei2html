@@ -560,7 +560,7 @@
         <xsl:param name="cell" as="element(cell)"/>
 
         <xsl:variable name="rend" select="($cell/ancestor-or-self::*/@rend[f:has-rend-value(., 'decimal-separator')])[last()]"/>
-        <xsl:variable name="rend-text"  select="$root//text[1]/@rend"/>
+        <xsl:variable name="rend-text" select="$root//text[1]/@rend"/>
 
         <xsl:value-of select="if (f:has-rend-value($rend, 'decimal-separator'))
             then f:rend-value($rend, 'decimal-separator')

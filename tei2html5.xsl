@@ -43,6 +43,7 @@
     <xsl:include href="modules/gutenberg.xsl"/>
     <xsl:include href="modules/facsimile.xsl"/>
     <xsl:include href="modules/stripns.xsl"/>
+    <xsl:include href="modules/variables.xsl"/>
 
     <xsl:output
         method="html"
@@ -63,17 +64,10 @@
 
     <!--====================================================================-->
 
-    <xsl:variable name="root" select="/"/>
-
     <xsl:variable name="mimeType" select="'text/html'"/>   <!-- 'text/html' or 'application/xhtml+xml'. -->
     <xsl:variable name="encoding" select="document('')/xsl:stylesheet/xsl:output/@encoding"/>
     <xsl:variable name="outputMethod" select="document('')/xsl:stylesheet/xsl:output/@method"/>
     <xsl:variable name="outputFormat" select="'html5'"/>
-
-    <xsl:variable name="title" select="/*[self::TEI.2 or self::*:TEI]/*:teiHeader/*:fileDesc/*:titleStmt/*:title[not(@type) or @type='main']"/>
-    <xsl:variable name="author" select="/*[self::TEI.2 or self::*:TEI]/*:teiHeader/*:fileDesc/*:titleStmt/*:author"/>
-    <xsl:variable name="publisher" select="/*[self::TEI.2 or self::*:TEI]/*:teiHeader/*:fileDesc/*:publicationStmt/*:publisher"/>
-    <xsl:variable name="pubdate" select="/*[self::TEI.2 or self::*:TEI]/*:teiHeader/*:fileDesc/*:publicationStmt/*:date"/>
 
     <xsl:variable name="p.element" select="if ($optionPrinceMarkup = 'Yes') then 'div' else 'p'"/>
 
