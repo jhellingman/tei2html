@@ -56,7 +56,7 @@ The following keys and values are supported: (Note that this list is not exhaust
 |===
 |*Element* |*Key* |*Value* |*Example* 
 
-|`text` |`stylesheet` |name of CSS stylesheet |`style/classic.css` 
+|`text` |`stylesheet` |name of CSS stylesheet, multiple stylesheets can be specified, separated by a comma |`style/classic.css` 
 |_Any_ |`font` |`italic`, `bold`, `fsc` (full caps and smallcaps), `smallcaps`, `underlined`, `gothic` (note the difference from fall-through CSS) |`&lt;hi rend=&quot;font(bold)&quot;&gt;` 
 |`p`, `q` |`align` |`right`, `left`, `center`, `block` (that is, justified) |`&lt;p rend=&quot;align(block)&quot;&gt;` 
 |`p`, `l` |`indent` |The number characters to indent. The size of a character is not fixed, but is roughly the size of the letter m. |`&lt;l rend=&quot;indent(2)&quot;&gt;` 
