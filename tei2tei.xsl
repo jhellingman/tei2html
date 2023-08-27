@@ -1280,6 +1280,13 @@ in all copies or substantial portions of the Software.
     </columnGroup>
 </xsl:template>
 
+<xsl:template match="figuregroup">
+    <figureGroup>
+        <xsl:apply-templates select="@*"/>
+        <xsl:apply-templates/>
+    </figureGroup>
+</xsl:template>
+
 <!-- Additional attributes -->
 
 <xsl:template match="@matchpattern">

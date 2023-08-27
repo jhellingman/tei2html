@@ -463,6 +463,7 @@
                 <!-- Figure related special handling. -->
                 <xsl:when test="$element = 'figure' and $property = 'float'"/>
                 <xsl:when test="$element = 'figure' and $property = 'hover-overlay'"/>      <!-- an image that will be swapped with the image when the mouse hovers over it. -->
+                <xsl:when test="$element = 'figureGroup' and $property = 'direction'"/>
 
                 <!-- Note related special handling. -->
                 <xsl:when test="$element = ('note', 'tmp:span') and $property = ('note-marker', 'return-marker')"/>   <!-- the marker to be used for a foot-note or apparatus-note -->

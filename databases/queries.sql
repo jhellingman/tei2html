@@ -1,9 +1,17 @@
 
+
+-- "c:\Program Files\MariaDB 10.10\bin\mariadb.exe" words
+
+-- INTO OUTFILE 'D:\\Users\\Jeroen\\Documents\\eLibrary\\sql-output-books.csv'
+-- FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
+-- LINES TERMINATED BY '\n';
+
 -- Books
 select *
  from book
 where title like '%Tagalog%'
-order by title;
+order by title
+
 
 select * from book order by changeDate desc;
 
@@ -74,7 +82,7 @@ order by distinct_words desc;
 -- Consolidate persons based on viaf ID
 select min(`key`), min(name), regexp_substr(viaf, '[0-9]+') as viafId, count(*) as occurances, group_concat(distinct role)
   from person
- where `key` is not null and `key` <> ''
+ where `key` is not null and `key` <> '' and regexp_substr(viaf, '[0-9]+') <> ''
 group by viaf
 order by `key`;
 
@@ -94,7 +102,39 @@ where
     language = 'nl-1900'
     and word not in (select w2.word from word w2 where w2.idbook = 22722 and language = 'nl-1900')
 group by word collate utf8mb4_bin
-  having sum(count) > 50 and sum(1) > 10;
+  having sum(count) > 50 and sum(1) > 10
+  
+   limit 1000000
+
+INTO OUTFILE 'D:\\Users\\Jeroen\\Documents\\eLibrary\\nl-1900-not-dictionary.csv'
+FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
+LINES TERMINATED BY '\n';
+
+
+-- Find words in old-orthography Dutch that do not occur in the spelling list (the book with id 22722).
+select w1.word, sum(count), sum(1)
+from word w1
+where
+    language = 'nl-1900'
+    and right(w1.word, 1) = 'e'
+    and exists (
+    	select w2.word
+    	from word w2 
+    	where w2.idbook = 22722 
+    		and language = 'nl-1900' 
+    		and w2.word = left(w1.word, length(w1.word) - 1)
+    	)
+group by w1.word collate utf8mb4_bin
+  having sum(count) > 5 and sum(1) > 2
+  
+   limit 10
+
+INTO OUTFILE 'D:\\Users\\Jeroen\\Documents\\eLibrary\\nl-1900-not-dictionary.csv'
+FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
+LINES TERMINATED BY '\n';
+
+
+select word, left(word, length(word) - 1) from word where right(word, 1) = 'e';
 
 
 

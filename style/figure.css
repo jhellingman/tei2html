@@ -4,11 +4,16 @@
     Copyright 2006-2015, Jeroen Hellingman (available under GPL 3.0 or later).
 */
 
-div.figure {
+div.figure, div.figureGroup {
     text-align: center;
 }
 
-.figure {
+table.figureGroupTable {
+    width: 80%;
+    border-collapse: collapse;
+}
+
+.figure, .figureGroup {
     margin-left: auto;
     margin-right: auto;
 }
@@ -42,7 +47,7 @@ p.figureHead, .par.figureHead {
     float: right;
 }
 
-.figure p, .figure .par {
+.figure p, .figure .par, .figureGroup p, .figureGroup .par {
     font-size: 80%;
     margin-top: 0;
     text-align: center;

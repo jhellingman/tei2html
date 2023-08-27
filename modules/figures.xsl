@@ -89,6 +89,7 @@
 
     <xd:doc>
         <xd:short>Determine whether an image should be included in the output.</xd:short>
+        <xd:param name="url" type="string">The URL of the image-file to verify.</xd:param>
     </xd:doc>
 
     <xsl:function name="f:is-image-included" as="xs:boolean">
@@ -653,18 +654,38 @@ width:{$width};
     </xd:doc>
 
 
-    <xsl:template match="figure[figure]">
+    <xsl:template match="figureGroup"> <!-- For now, we use a self-invented element: figureGroup. This should become match="figure[figure]" -->
         <div>
-            <xsl:copy-of select="f:set-class-attribute-with(., 'compositeFigure')"/>
+            <xsl:copy-of select="f:set-class-attribute-with(., 'figureGroup')"/>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
-            <xsl:apply-templates/>
+            <xsl:choose>
+                <xsl:when test="f:rend-value(@rend, 'direction') = 'horizontal'">
+                    <table class="figureGroupTable">
+                        <tr>
+                            <xsl:for-each select="figure | figureGroup">
+                                <td>
+                                    <xsl:apply-templates select="."/>
+                                </td>
+                            </xsl:for-each>
+                        </tr>
+                    </table>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:apply-templates select="figure | figureGroup"/>
+                </xsl:otherwise>
+            </xsl:choose>
+            <xsl:apply-templates select="node()[not(self::figure)][not(self::figureGroup)]"/>
         </div>
     </xsl:template>
 
 
+    <xsl:template match="figureGroup/head">
+        <p class="figureHead"><xsl:apply-templates/></p>
+    </xsl:template>
+
     <xsl:template match="figure[graphic]">
         <div>
-            <xsl:copy-of select="f:set-class-attribute-with(., 'compositeFigure')"/>
+            <xsl:copy-of select="f:set-class-attribute-with(., 'figureGroup')"/>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:variable name="class">
                 <xsl:text>figure </xsl:text>
