@@ -151,6 +151,35 @@ width:12px;
         </x:expect>
     </x:scenario>
 
+
+    <x:scenario label="When rendering a graphic element">
+        <x:context>
+            <graphic id="fig_01" target="images/fig_01.jpg"/>
+        </x:context>
+        <x:expect label="will result in an HTML img tag">
+            <img xmlns="http://www.w3.org/1999/xhtml"
+                src="images/fig_01.jpg"
+                alt=""
+                width="12"
+                height="40"/>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering a graphic element (CSS mode)">
+        <x:context mode="css">
+            <graphic id="fig_01" target="images/fig_01.jpg"/>
+        </x:context>
+        <x:expect label="will result in an CSS snippet">
+<x:text>
+.fig_01width {
+width:12px;
+}
+</x:text>
+        </x:expect>
+    </x:scenario>
+
+
+
     <x:scenario label="When rendering a figureGroup with two nested figures">
         <x:context>
             <figureGroup id="fig_wrapper">

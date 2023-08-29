@@ -45,18 +45,21 @@
     <xsl:function name="f:determine-image-filename" as="xs:string">
         <xsl:param name="node" as="element()"/>
         <xsl:param name="format" as="xs:string"/>
-        <xsl:choose>
-            <xsl:when test="f:has-rend-value($node/@rend, 'image')">
-                <xsl:value-of select="f:rend-value($node/@rend, 'image')"/>
-            </xsl:when>
-            <xsl:when test="$node/@url">
-                <xsl:value-of select="$node/@url"/>
-                <xsl:copy-of select="f:log-warning('Using non-standard attribute url {1} on {2}.', ($node/@url, local-name($node)))"/>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:value-of select="'images/' || $node/@id || $format"/>
-            </xsl:otherwise>
-        </xsl:choose>
+
+        <xsl:if test="$node/@url">
+            <xsl:copy-of select="f:log-warning('Using non-standard attribute url {1} on {2}.', ($node/@url, local-name($node)))"/>
+        </xsl:if>
+
+        <xsl:sequence select="
+            if (f:has-rend-value($node/@rend, 'image'))
+            then f:rend-value($node/@rend, 'image')
+            else if ($node/@url)
+                 then $node/@url
+                 else if ($node/@target)
+                      then $node/@target
+                      else if ($node/@id)
+                           then 'images/' || $node/@id || $format
+                           else ''"/>
     </xsl:function>
 
 
@@ -654,6 +657,27 @@ width:{$width};
     </xd:doc>
 
 
+    <xsl:template match="graphic">
+        <!-- handle both P3 @url and P5 @target convention -->
+        <xsl:variable name="url" select="if (@url) then @url else @target"/>
+
+        <xsl:if test="f:is-image-included($url)">
+            <xsl:copy-of select="f:output-image($url, if (../figDesc) then ../figDesc else '')"/>
+        </xsl:if>
+    </xsl:template>
+
+    <xsl:template match="graphic" mode="css">
+        <xsl:variable name="url" select="if (@url) then @url else @target"/>
+        <xsl:if test="f:is-image-included($url)">
+            <xsl:copy-of select="f:output-image-width-css(., $url)"/>
+        </xsl:if>
+    </xsl:template>
+
+
+
+
+
+
     <xsl:template match="figureGroup"> <!-- For now, we use a self-invented element: figureGroup. This should become match="figure[figure]" -->
         <div>
             <xsl:copy-of select="f:set-class-attribute-with(., 'figureGroup')"/>
@@ -677,7 +701,6 @@ width:{$width};
             <xsl:apply-templates select="node()[not(self::figure)][not(self::figureGroup)]"/>
         </div>
     </xsl:template>
-
 
     <xsl:template match="figureGroup/head">
         <p class="figureHead"><xsl:apply-templates/></p>
@@ -713,14 +736,7 @@ width:{$width};
      </xsl:function>
 
 
-    <xsl:template match="graphic">
-        <!-- handle both P3 @url and P5 @target convention -->
-        <xsl:variable name="url" select="if (@url) then @url else @target"/>
 
-        <xsl:if test="f:is-image-included($url)">
-            <xsl:copy-of select="f:output-image($url, if (../figDesc) then ../figDesc else '')"/>
-        </xsl:if>
-    </xsl:template>
 
 
     <xsl:template match="figure[figure]" mode="css">
@@ -732,12 +748,7 @@ width:{$width};
     </xsl:template>
 
 
-    <xsl:template match="graphic" mode="css">
-        <xsl:variable name="url" select="if (@url) then @url else @target"/>
-        <xsl:if test="f:is-image-included($url)">
-            <xsl:copy-of select="f:output-image-width-css(., $url)"/>
-        </xsl:if>
-    </xsl:template>
+
 
 
     <xsl:function name="f:count-graphics" as="xs:integer">
