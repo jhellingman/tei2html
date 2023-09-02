@@ -105,4 +105,51 @@
         </x:expect>
     </x:scenario>
 
+    <x:param name="teiDocument">
+        <TEI lang="en" version="3.3.0" xmlns="http://www.tei-c.org/ns/1.0">
+            <teiHeader>
+                <fileDesc>
+                    <titleStmt>
+                        <title>Minimal TEI Document</title>
+                    </titleStmt>
+                    <publicationStmt>
+                        <p>Sample Publication</p>
+                    </publicationStmt>
+                    <sourceDesc>
+                        <p>No source.</p>
+                    </sourceDesc>
+                </fileDesc>
+            </teiHeader>
+            <text>
+                <body>
+                    <p>A very short TEI document.</p>
+                </body>
+            </text>
+        </TEI>
+    </x:param>
+
+    <x:scenario label="When rendering a minimal TEI document">
+        <x:context select="$teiDocument"/>
+        <x:expect label="will result in a correct HTML document" test="/xhtml:html">
+            <html xmlns="http://www.w3.org/1999/xhtml" id="..." lang="en">
+                <head>
+                    <title>Minimal TEI Document</title>
+                    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+                    <meta name="generator" content="tei2html.xsl, see https://github.com/jhellingman/tei2html"/>
+                    <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"/>
+                    <meta name="DC.Title" content="Minimal TEI Document"/>
+                    <meta name="DC.Language" content="en"/>
+                    <meta name="DC.Format" content="text/html"/>
+                    <style type="text/css">...</style>
+                </head>
+                <body>
+                    <x:text> &#x0A;            </x:text>
+                    <div class="body" id="...">
+                        <p id="..." class="first">A very short TEI document.</p>
+                    </div>
+                </body>
+            </html>
+        </x:expect>
+    </x:scenario>
+
 </x:description>

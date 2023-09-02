@@ -197,9 +197,12 @@
             <xsl:value-of select="f:css-stylesheet('../style/aural.css')"/>
         </xsl:if>
 
-        <!-- Supplement CSS stylesheets as specified in the rend-attribute on the main text element. -->
+        <!-- Supplement CSS stylesheets as specified in the rend-attribute on the TEI or main text element. -->
         <xsl:variable name="stylesheet" as="xs:string">
             <xsl:choose>
+                <xsl:when test="f:has-rend-value(/*[self::TEI.2 or self::TEI]/@rend, 'stylesheet')">
+                    <xsl:value-of select="f:rend-value(/*[self::TEI.2 or self::TEI]/@rend, 'stylesheet')"/>
+                </xsl:when>
                 <xsl:when test="f:has-rend-value(/*[self::TEI.2 or self::TEI]/text/@rend, 'stylesheet')">
                     <xsl:value-of select="f:rend-value(/*[self::TEI.2 or self::TEI]/text/@rend, 'stylesheet')"/>
                 </xsl:when>

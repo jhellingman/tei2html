@@ -30,7 +30,8 @@
 
     <xsl:function name="f:is-footnote" as="xs:boolean">
         <xsl:param name="note" as="element(note)"/>
-        <xsl:sequence select="$note/@place = ('foot', 'unspecified') or (not($note/@place) and not($note/@type = 'margin'))"/>
+        <xsl:sequence select="($note/@place = ('foot', 'unspecified') or (not($note/@place) and not($note/@type = 'margin')))
+            and not($note/ancestor::teiHeader)"/>
     </xsl:function>
 
     <xsl:function name="f:is-margin-note" as="xs:boolean">
@@ -62,14 +63,14 @@
         <xd:detail>Marginal notes should go to the margin. CSS handles the actual placement.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[f:is-margin-note(.)]">
+    <xsl:template match="note[f:is-margin-note(.)]">
         <span class="{if (@place = 'right') then 'right-marginnote' else 'marginnote'}">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
         </span>
     </xsl:template>
 
-    <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[f:is-cut-in-note(.)]">
+    <xsl:template match="note[f:is-cut-in-note(.)]">
         <span class="{@place}-note">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
@@ -94,7 +95,7 @@
         to avoid this in <code>div1</code> elements embedded in quoted texts).</xd:detail>
     </xd:doc>
 
-    <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[f:is-footnote(.)]">
+    <xsl:template match="note[f:is-footnote(.)]">
         <xsl:call-template name="insert-note-ref"/>
     </xsl:template>
 
@@ -115,7 +116,7 @@
         only.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="/*[self::TEI.2 or self::TEI]/text//note[@sameAs]" priority="1">
+    <xsl:template match="note[@sameAs]" priority="1">
         <xsl:variable name="targetNote" select="key('id', replace(@sameAs, '#', ''))[1]"/>
         <xsl:apply-templates select="$targetNote" mode="noterefnumber">
             <xsl:with-param name="sourceNote" select="."/>
@@ -131,6 +132,7 @@
     </xsl:template>
 
 
+<!--
     <xd:doc>
         <xd:short>Handle footnotes inside collected apparatus material.</xd:short>
         <xd:detail>When footnotes appear nested inside apparatus nodes, and we collect the apparatus
@@ -145,10 +147,10 @@
     <xsl:template match="tmp:span//note[@sameAs]" priority="1">
         <xsl:call-template name="insert-note-same-as-ref"/>
     </xsl:template>
-
+-->
 
     <xsl:template match="note">
-        <xsl:copy-of select="f:log-warning('unclassified note not handled (n={1}).', (@n))"/>
+        <xsl:copy-of select="f:log-warning('unclassified note not handled (n={1}; id={2}).', (@n, f:generate-id(.)))"/>
         <xsl:apply-templates/>
     </xsl:template>
 

@@ -69,7 +69,9 @@
             </p>
         </x:context>
         <x:expect label="will result a HTML anchor only">
-            <p xmlns="http://www.w3.org/1999/xhtml" id="..." class="first">In a <a id="pb3"/> marginal note.</p>
+            <p xmlns="http://www.w3.org/1999/xhtml" id="..." class="first">
+                <span class="marginnote" id="...">In a <a id="pb3"/> marginal note.</span>
+            </p>
         </x:expect>
     </x:scenario>
 
