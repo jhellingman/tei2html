@@ -381,8 +381,8 @@
     <!--====================================================================-->
     <!-- division numbers integrated in heads -->
 
-    <xsl:template match="ab[@type='headDivNum']">
-        <span class="headDivNum">
+    <xsl:template match="ab[@type='divNum']">
+        <span class="divNum">
             <xsl:apply-templates/>
         </span>
     </xsl:template>

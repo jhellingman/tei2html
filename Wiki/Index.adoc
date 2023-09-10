@@ -41,22 +41,21 @@ include::MediaOverlaysInEPub3.adoc[leveloffset=1]
 
 include::CodingConventions.adoc[leveloffset=1]
 
-= Tools
+== Tools
 
 include::AuxiliaryTools.adoc[leveloffset=1]
 
-include::MergingText.adoc[leveloffset=1]
+include::MergingTexts.adoc[leveloffset=1]
 
 include::Checks.adoc[leveloffset=1]
 
 include::KwicIndex.adoc[leveloffset=1]
 
-= Future Ideas
+== Future Ideas
 
 include::RedesignCss.adoc[leveloffset=1]
 
 include::ParsingCss.adoc[leveloffset=1]
-
 
 
 

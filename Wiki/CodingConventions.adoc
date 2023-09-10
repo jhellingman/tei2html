@@ -19,15 +19,13 @@ handled in a special way when processing the TEI file.
 
 *TODO* use lower camel case convention for these names.
 
-*TODO* merge divNum and headDivNum (adjust files and stylesheets).
-
 [cols="<,<,<"]
 |===
 |*TEI element* |*`@type` value* |*Notes* 
 
 |`ab` |`divNum` |Indicates a division number (typically within a `head` element). 
 |`ab` |`flushright` |Indicates the `ab` should be set flush right. 
-|`ab` |`headDivNum` |Indicates a division number (typically within a `head` element). 
+|`ab` |`itemNum` |Indicates an item number (typically within a `item` element). 
 |`ab` |`lineNum` |Indicates a line number (typically within a `p` or `l` element). 
 |`ab` |`lineNumRef` |Indicates a reference to a line number. 
 |`ab` |`tocDivNum` |Indicates a division number within a toc. 
