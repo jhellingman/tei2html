@@ -6,10 +6,15 @@
 
 /* ditto symbols are simulated by overlaying two spans: the text in one is hidden, while the other contains the ditto marks. */
 
+span.seg {
+    text-indent: 0;
+}
+
 span.ditto {
     display: inline-block;
     vertical-align: middle;
     text-align: center;
+    text-indent: 0;
 }
 
 span.ditto span.s {

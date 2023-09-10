@@ -71,9 +71,20 @@
         <xsl:call-template name="epubPGHeader"/>
         <xsl:apply-templates select="front" mode="splitter"/>
         <xsl:apply-templates select="body" mode="splitter"/>
+        <xsl:apply-templates select="group" mode="splitter"/>
         <xsl:apply-templates select="back" mode="splitter"/>
         <xsl:call-template name="epubPGFooter"/>
 
+    </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Split <code>group</code> element.</xd:short>
+        <xd:detail>Split the <code>group</code> element of a TEI file on <code>text</code> elements.</xd:detail>
+    </xd:doc>
+
+    <xsl:template match="group" mode="splitter">
+        <xsl:apply-templates select="text" mode="splitter"/>
     </xsl:template>
 
 

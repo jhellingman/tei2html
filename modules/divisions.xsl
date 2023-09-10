@@ -33,6 +33,13 @@
         </div>
     </xsl:template>
 
+    <xsl:template match="group">
+        <div class="group">
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:apply-templates/>
+        </div>
+    </xsl:template>
+
     <xsl:template match="body">
         <div class="body">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>

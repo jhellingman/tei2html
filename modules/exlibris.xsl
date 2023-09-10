@@ -27,7 +27,7 @@
     </xsl:variable>
 
     <xsl:variable name="default-ex-libris">
-        <exlibris>           
+        <exlibris>
             <owner>
                 <name>Jeroen Hellingman</name>
                 <contact type="email">jeroen@gutenberg.ph</contact>

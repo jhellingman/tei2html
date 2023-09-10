@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
+
+    stylesheet="test-tei2epub.xsl"
+    version="3.0">
+
+    <!-- Redefine global variables used in localization.xsl -->
+    <x:param name="language" as="xs:string" select="'en'"/>
+
+    <x:param name="root" select="self::document-node()">
+        <TEI lang="xx"/>
+    </x:param>
+
+    <x:param name="teiDocument">
+        <TEI lang="en" version="3.3.0">
+            <teiHeader>
+                <fileDesc>
+                    <titleStmt>
+                        <title>Minimal TEI Document</title>
+                    </titleStmt>
+                    <publicationStmt>
+                        <p>Sample Publication</p>
+                    </publicationStmt>
+                    <sourceDesc>
+                        <p>No source.</p>
+                    </sourceDesc>
+                </fileDesc>
+            </teiHeader>
+            <text>
+                <body>
+                    <div1 id="d1">
+                        <head>Division 1</head>
+                        <p>Paragraph 1.1</p>
+                        <p>Paragraph 1.2</p>
+                    </div1>
+                    <div1 id="d2">
+                        <head>Division 2</head>
+                        <p>Paragraph 2.1</p>
+                        <p>Paragraph 2.2</p>
+                    </div1>
+                </body>
+            </text>
+        </TEI>
+    </x:param>
+
+    <x:scenario label="When rendering a minimal TEI document">
+        <x:context select="$teiDocument"/>
+        <x:call template="ePubNav"/>
+        <x:expect label="will result in a correct ePub navigation document">
+        <html xmlns="http://www.w3.org/1999/xhtml"
+              xmlns:epub="http://www.idpf.org/2007/ops"
+              xml:lang="en">
+           <head>
+              <title>Table of Contents</title>
+              <meta charset="utf-8" />
+           </head>
+           <body>
+              <nav epub:type="toc"
+                   id="toc">
+                 <h1>Table of Contents</h1>
+                 <ol>
+                    <li id="...">
+                       <a href="book-d1.xhtml#d1">Division 1</a>
+                    </li>
+                    <li id="...">
+                       <a href="book-d2.xhtml#d2">Division 2</a>
+                    </li>
+                 </ol>
+              </nav>
+              <nav epub:type="landmarks"
+                   id="guide">
+                 <h2>Guide</h2>
+                 <ol>
+                    <li>
+                       <a epub:type="bodymatter"
+                          href="book-d1.xhtml#d1">Body Matter</a>
+                    </li>
+                 </ol>
+              </nav>
+              <nav epub:type="page-list"
+                   id="page-list">
+                 <ol />
+              </nav>
+           </body>
+        </html>
+        </x:expect>
+    </x:scenario>
+
+</x:description>

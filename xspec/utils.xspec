@@ -21,7 +21,7 @@
     </x:param>
 
 
-    <!-- f:generate-stable-id -->
+    <!-- f:fix-lang -->
 
    <x:scenario label="When fixing the language code uk-gb">
       <x:call function="f:fix-lang">

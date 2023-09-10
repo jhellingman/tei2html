@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE x:description>
 <x:description
-        xmlns:xhtml="http://www.w3.org/1999/xhtml"
-        xmlns:x="http://www.jenitennison.com/xslt/xspec"
-               stylesheet="test-tei2html.xsl"
-               version="3.0">
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
+    xmlns:x="http://www.jenitennison.com/xslt/xspec"
+    stylesheet="test-tei2html.xsl"
+    version="3.0">
 
     <x:param name="root" select="self::document-node()">
         <TEI lang="xx"/>
