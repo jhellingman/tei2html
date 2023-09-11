@@ -25,7 +25,7 @@
         </x:context>
         <x:expect label="a ditto-span with the original word and a span with the ditto-mark will be created.">
             <span xmlns="http://www.w3.org/1999/xhtml" class="seg" id="...">
-                <span class="ditto"><span class="s">single</span><span class="d"><span class="i">,,</span></span></span><x:text> </x:text>
+                <span class="ditto"><span class="r"><span class="s">single</span></span><span class="r"><span class="d">,,</span></span></span><x:text> </x:text>
             </span>
         </x:expect>
     </x:scenario>
@@ -36,11 +36,11 @@
         </x:context>
         <x:expect label="a ditto-span for each word with the original word and a span with the ditto-mark will be created.">
             <span xmlns="http://www.w3.org/1999/xhtml" class="seg" id="...">
-                <span class="ditto"><span class="s">multiple</span><span class="d"><span class="i">,,</span></span></span><x:text> </x:text>
-                <span class="ditto"><span class="s">words</span><span class="d"><span class="i">,,</span></span></span><x:text> </x:text>
-                <span class="ditto"><span class="s">in</span><span class="d"><span class="i">,,</span></span></span><x:text> </x:text>
-                <span class="ditto"><span class="s">a</span><span class="d"><span class="i">,,</span></span></span><x:text> </x:text>
-                <span class="ditto"><span class="s">sentence</span><span class="d"><span class="i">,,</span></span></span><x:text> </x:text>
+                <span class="ditto"><span class="r"><span class="s">multiple</span></span><span class="r"><span class="d">,,</span></span></span><x:text> </x:text>
+                <span class="ditto"><span class="r"><span class="s">words</span></span><span class="r"><span class="d">,,</span></span></span><x:text> </x:text>
+                <span class="ditto"><span class="r"><span class="s">in</span></span><span class="r"><span class="d">,,</span></span></span><x:text> </x:text>
+                <span class="ditto"><span class="r"><span class="s">a</span></span><span class="r"><span class="d">,,</span></span></span><x:text> </x:text>
+                <span class="ditto"><span class="r"><span class="s">sentence</span></span><span class="r"><span class="d">,,</span></span></span><x:text> </x:text>
             </span>
         </x:expect>
     </x:scenario>
@@ -51,11 +51,11 @@
         </x:context>
         <x:expect label="a ditto-span with the original word and a span with the ditto-mark will be created, but punctuation gets no ditto mark.">
             <span xmlns="http://www.w3.org/1999/xhtml" class="seg" id="...">
-                <span class="ditto"><span class="s">With:</span><span class="d"><span class="i">,,</span></span></span><x:text> </x:text>
-                <span class="ditto"><span class="s">punctuation.</span><span class="d"><span class="i">,,</span></span></span><x:text> </x:text>
-                <span class="ditto"><span class="s">such,</span><span class="d"><span class="i">,,</span></span></span><x:text> </x:text>
-                <span class="ditto"><span class="s">as;</span><span class="d"><span class="i">,,</span></span></span><x:text> </x:text>
-                <span class="ditto"><span class="s">these!</span><span class="d"><span class="i">,,</span></span></span><x:text> </x:text>
+                <span class="ditto"><span class="r"><span class="s">With:</span></span><span class="r"><span class="d">,,</span></span></span><x:text> </x:text>
+                <span class="ditto"><span class="r"><span class="s">punctuation.</span></span><span class="r"><span class="d">,,</span></span></span><x:text> </x:text>
+                <span class="ditto"><span class="r"><span class="s">such,</span></span><span class="r"><span class="d">,,</span></span></span><x:text> </x:text>
+                <span class="ditto"><span class="r"><span class="s">as;</span></span><span class="r"><span class="d">,,</span></span></span><x:text> </x:text>
+                <span class="ditto"><span class="r"><span class="s">these!</span></span><span class="r"><span class="d">,,</span></span></span><x:text> </x:text>
             </span>
         </x:expect>
     </x:scenario>
@@ -66,7 +66,7 @@
         </x:context>
         <x:expect label="a ditto-span with the original word and a span with the em-dash ditto-mark will be created.">
             <span xmlns="http://www.w3.org/1999/xhtml" class="seg" id="...">
-                <span class="ditto"><span class="s">single</span><span class="d"><span class="i">&mdash;</span></span></span><x:text> </x:text>
+                <span class="ditto"><span class="r"><span class="s">single</span></span><span class="r"><span class="d">&mdash;</span></span></span><x:text> </x:text>
             </span>
         </x:expect>
     </x:scenario>
@@ -77,7 +77,7 @@
         </x:context>
         <x:expect label="a ditto-span for the entire phrase and a span with the ditto-mark will be created.">
             <span xmlns="http://www.w3.org/1999/xhtml" class="seg" id="...">
-                <span class="ditto"><span class="s">multiple words in a sentence</span><span class="d"><span class="i">&mdash;</span></span></span>
+                <span class="ditto"><span class="r"><span class="s">multiple words in a sentence</span></span><span class="r"><span class="d">&mdash;</span></span></span>
             </span>
         </x:expect>
     </x:scenario>
@@ -88,11 +88,11 @@
         </x:context>
         <x:expect label="a ditto-span with the original word and a span with the ditto-mark will be created, but punctuation gets no ditto mark.">
             <span xmlns="http://www.w3.org/1999/xhtml" class="seg" id="...">
-                <span class="ditto"><span class="s">With</span><span class="d"><span class="i">,,</span></span></span><x:text> </x:text>
-                <span class="ditto"><span class="s"><i>formatting</i></span><span class="d"><span class="i">,,</span></span></span><x:text> </x:text>
-                <span class="ditto"><span class="s">such</span><span class="d"><span class="i">,,</span></span></span><x:text> </x:text>
-                <span class="ditto"><span class="s"><b>as</b></span><span class="d"><span class="i">,,</span></span></span><x:text> </x:text>
-                <span class="ditto"><span class="s">this!</span><span class="d"><span class="i">,,</span></span></span><x:text> </x:text>
+                <span class="ditto"><span class="r"><span class="s">With</span></span><span class="r"><span class="d">,,</span></span></span><x:text> </x:text>
+                <span class="ditto"><span class="r"><span class="s"><i>formatting</i></span></span><span class="r"><span class="d">,,</span></span></span><x:text> </x:text>
+                <span class="ditto"><span class="r"><span class="s">such</span></span><span class="r"><span class="d">,,</span></span></span><x:text> </x:text>
+                <span class="ditto"><span class="r"><span class="s"><b>as</b></span></span><span class="r"><span class="d">,,</span></span></span><x:text> </x:text>
+                <span class="ditto"><span class="r"><span class="s">this!</span></span><span class="r"><span class="d">,,</span></span></span><x:text> </x:text>
             </span>
         </x:expect>
     </x:scenario>

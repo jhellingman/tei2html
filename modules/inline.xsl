@@ -1032,11 +1032,13 @@
                 </xsl:when>
                 <xsl:when test="f:is-set('ditto.enable') and f:determine-ditto-repeat(.) = 'segment'">
                     <span class="ditto">
-                        <span class="s">
-                            <xsl:apply-templates select="$source/*|$source/text()"/>
+                        <span class="r">
+                            <span class="s">
+                                <xsl:apply-templates select="$source/*|$source/text()"/>
+                            </span>
                         </span>
-                        <span class="d">
-                            <span class="i">
+                        <span class="r">
+                            <span class="d">
                                 <xsl:copy-of select="f:convert-markdown(f:determine-ditto-mark(.))"/>
                             </span>
                         </span>
@@ -1075,11 +1077,13 @@
         <xsl:choose>
             <xsl:when test="f:is-set('ditto.enable') and f:determine-ditto-repeat(.) = 'segment'">
                 <span class="ditto">
-                    <span class="s">
-                        <xsl:apply-templates/>
+                    <span class="r">
+                        <span class="s">
+                            <xsl:apply-templates/>
+                        </span>
                     </span>
-                    <span class="d">
-                        <span class="i">
+                    <span class="r">
+                        <span class="d">
                             <xsl:copy-of select="f:convert-markdown(f:determine-ditto-mark(.))"/>
                         </span>
                     </span>
@@ -1122,41 +1126,43 @@
                 </xsl:when>
                 <xsl:otherwise>
                     <span class="ditto">
-                        <span class="s">
-                            <!-- Handle most common in-line style elements. -->
-                            <!-- TODO: replace with straightforward processing of the respective elements in the ditto-mode. -->
-                            <xsl:choose>
-                                <xsl:when test="$node/parent::hi[@rend='b' or @rend='bold']">
-                                    <b><xsl:value-of select="."/></b>
-                                </xsl:when>
-                                <xsl:when test="$node/parent::hi[@rend='sup']">
-                                    <sup><xsl:value-of select="."/></sup>
-                                </xsl:when>
-                                <xsl:when test="$node/parent::hi[@rend='sub']">
-                                    <sub><xsl:value-of select="."/></sub>
-                                </xsl:when>
-                                <xsl:when test="$node/parent::hi[@rend='sc']">
-                                    <span class="sc"><xsl:value-of select="."/></span>
-                                </xsl:when>
-                                <xsl:when test="$node/parent::hi[@rend='ex']">
-                                    <span class="ex"><xsl:value-of select="."/></span>
-                                </xsl:when>
-                                <xsl:when test="$node/parent::hi[@rend='bi']">
-                                    <b><i><xsl:value-of select="."/></i></b>
-                                </xsl:when>
-                                <xsl:when test="$node/parent::hi">
-                                    <i><xsl:value-of select="."/></i>
-                                </xsl:when>
-                                <xsl:otherwise>
-                                    <xsl:value-of select="."/>
-                                </xsl:otherwise>
-                            </xsl:choose>
+                        <span class="r">
+                            <span class="s">
+                                <!-- Handle most common in-line style elements. -->
+                                <!-- TODO: replace with straightforward processing of the respective elements in the ditto-mode. -->
+                                <xsl:choose>
+                                    <xsl:when test="$node/parent::hi[@rend='b' or @rend='bold']">
+                                        <b><xsl:value-of select="."/></b>
+                                    </xsl:when>
+                                    <xsl:when test="$node/parent::hi[@rend='sup']">
+                                        <sup><xsl:value-of select="."/></sup>
+                                    </xsl:when>
+                                    <xsl:when test="$node/parent::hi[@rend='sub']">
+                                        <sub><xsl:value-of select="."/></sub>
+                                    </xsl:when>
+                                    <xsl:when test="$node/parent::hi[@rend='sc']">
+                                        <span class="sc"><xsl:value-of select="."/></span>
+                                    </xsl:when>
+                                    <xsl:when test="$node/parent::hi[@rend='ex']">
+                                        <span class="ex"><xsl:value-of select="."/></span>
+                                    </xsl:when>
+                                    <xsl:when test="$node/parent::hi[@rend='bi']">
+                                        <b><i><xsl:value-of select="."/></i></b>
+                                    </xsl:when>
+                                    <xsl:when test="$node/parent::hi">
+                                        <i><xsl:value-of select="."/></i>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="."/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </span>
                         </span>
                         <!-- No ditto marks for parts that are superscripted or subscripted -->
                         <xsl:if test="not($node/parent::hi[@rend='sub' or @rend='sup'])">
                             <!-- Nest two levels of span to enable CSS to get alignment right -->
-                            <span class="d">
-                                <span class="i">
+                            <span class="r">
+                                <span class="d">
                                     <xsl:copy-of select="f:convert-markdown(f:determine-ditto-mark($context))"/>
                                 </span>
                             </span>
