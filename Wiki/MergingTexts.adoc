@@ -29,7 +29,7 @@ _Change Ids_ To prevent id-clashes, the ids in both source TEI files need to be 
 
 However, not all ids should be treated as such, as that would break inter-volume cross-references. To prevent this, such inter-volume cross-references should already have the prefix when they are referred to in other volumes, and the software should be smart enough not to add the prefix once more.
 
-Further more, a number of ids have special value to the rendering process, and should be kept verbatim as well. The ids should be preserved (at most once) as-is in one of the source volumes.
+Furthermore, a number of ids have special value to the rendering process, and should be kept verbatim as well. The ids should be preserved (at most once) as-is in one of the source volumes.
 
 Finally, some elements might no longer be needed in the combined volume (such as textual references to another volume, or labels giving the volume number.) They should be filtered out.
 

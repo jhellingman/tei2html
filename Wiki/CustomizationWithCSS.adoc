@@ -75,7 +75,7 @@ Second, `tei2html` generates class attributes on its output that correspondent t
 
 Tables pose some peculiar problems for rendering. By default, tables are rendered without any borders or special spacing, but due to their nature, you often want to manipulate the rendering of tables or cells, and thus use `@rend` attributes.
 
-When a TEI table is converted to HTML, it is surrounded by a `&lt;div&gt;` element, and the `&lt;head&gt;`, if present, is lifted from the table, as support for the HTML caption element in browsers is limited. The table proper is converted to a HTML table.
+When a TEI table is converted to HTML, it is surrounded by a `&lt;div&gt;` element, and the `&lt;head&gt;`, if present, is lifted from the table, as support for the HTML caption element in browsers is limited. The table proper is converted to an HTML table.
 
 Rendering attributes on tables can be applied in four ways: on the table as a whole, and on column, row, or cell level.
 

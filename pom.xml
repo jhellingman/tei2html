@@ -10,6 +10,7 @@
 
     <name>tei2html</name>
     <url>https://github.com/jhellingman/tei2html</url>
+    <description>tei2html is a collection of XSLT 3.0 style sheets to transform a document encoded in TEI to HTML.</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -69,6 +70,32 @@
                         <goals>
                             <goal>run-xspec</goal>
                         </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.asciidoctor</groupId>
+                <artifactId>asciidoctor-maven-plugin</artifactId>
+                <version>2.2.4</version>
+                <executions>
+                    <execution>
+                        <id>convert-to-html</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>process-asciidoc</goal>
+                        </goals>
+                        <configuration>
+                            <sourceDirectory>${project.basedir}/Wiki</sourceDirectory>
+                            <sourceDocumentName>Index.adoc</sourceDocumentName>
+                            <outputDirectory>${project.build.directory}/html</outputDirectory>
+                            <attributes>
+                                <source-highlighter>coderay</source-highlighter>
+                                <imagesdir>./images</imagesdir>
+                                <toc>left</toc>
+                                <icons>font</icons>
+                            </attributes>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>

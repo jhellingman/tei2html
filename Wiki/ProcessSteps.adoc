@@ -2,7 +2,7 @@
 
 For my internal processing, I follow a number of steps to go from my master TEI file to HTML or ePub output. These are described here.
 
-=== Step 1: Convert from SGML to XML
+=== Step 1: Convert from SGML to XML (_Optional_)
 
 Most of my TEI files are in (old-school) SGML format with the '.tei' extension. This needs to be converted to XML, before XSLT wants to do anything with it.
 
@@ -18,7 +18,7 @@ The actual SGML to XML conversion is achieved by running the James Clark's SX to
 
 Use Sebastian Rahtz' `tei2tei.xsl` stylesheet to use the proper casing for TEI elements. After this step, the TEI should be valid TEI (according to TEI P4) in XML form. The `tei2html` stylesheets should be able to deal with the text now.
 
-==== Step 1.5: Convert to TEI P5. (Optional)
+==== Step 1.5: Convert to TEI P5. (_Optional_)
 
 Use Sebastian Rahtz' `p4top5.xsl` stylesheet to convert the TEI P4 to TEI P5. The `tei2html` stylesheets should still be able to deal with the text, although I've not extensively tested this. The main distinction is that `div0` elements will have been changed to `div1` elements, and all underlying numbered `divX` elements have been 'elevated,' which impacts the appearance and breaking up into chunks when generating ePubs.
 

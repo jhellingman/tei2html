@@ -1307,7 +1307,7 @@
             </tmp:abbrs>
         </xsl:variable>
 
-        <!-- Sort by length, longest first, then alphabetical, case-insensitive, then capitals first. -->
+        <!-- Sort by length, the longest first, then alphabetical, case-insensitive, then capitals first. -->
         <tmp:abbrs>
             <xsl:for-each select="$abbrs//tmp:abbr">
                 <xsl:sort select="string-length(.)" data-type="number" order="descending"/>

@@ -1,10 +1,10 @@
 == Introduction
 
-The TEI format is the standard format for transcribing scholarly texts in humanities. Unlike common word-processing formats, TEI focuses on the semantics of text elements instead of the look-and-feel. This is great for research purposes, as it enables software to answer questions like "give me all citations in Shakespeare where Hamlet uses the past tense," (provided of course somebody has encoded that data) but makes it harder to produce nicely formatted output from the same source. This is where the tei2html stylesheets kick-in.
+The TEI format is the standard format for transcribing scholarly texts in humanities. Unlike common word-processing formats, TEI focuses on the semantics of text elements instead of the look-and-feel. This is great for research purposes, as it enables software to answer questions like "give me all citations in Shakespeare where Hamlet uses the past tense," (provided of course somebody has encoded that data) but makes it harder to produce nicely formatted output from the same source. This is where the `tei2html` stylesheets kick-in.
 
 `tei2html` is a collection of XSLT stylesheets that transform a duly marked up TEI file to an attractive HTML, ePub or PDF document. It is intended to work out-of-the-box with unadorned TEI files, but will be able to perform better if certain conventions are followed.
 
-These guidelines describe the conventions for preparing TEI files such that they can successfully be converted by tei2html. They assume a working knowledge of the http://www.tei-c.org/Lite/teiu5_en.html[TEI Lite documentation]. They are inspired by, and often follow the http://uwdcc.library.wisc.edu/resources/etext/TEIGuidelines.shtml[Wisconsin University Guidelines for Markup of Electronic Texts], which provides excellent examples of numerous issues. For real starters, a http://www.tei-c.org/Support/Learn/mueller-index.htm[very gentle introduction to the TEI markup language] is available.
+These guidelines describe the conventions for preparing TEI files such that they can successfully be converted by `tei2html`. They assume a working knowledge of the http://www.tei-c.org/Lite/teiu5_en.html[TEI Lite documentation]. They are inspired by, and often follow the http://uwdcc.library.wisc.edu/resources/etext/TEIGuidelines.shtml[Wisconsin University Guidelines for Markup of Electronic Texts], which provides excellent examples of numerous issues. For real starters, a http://www.tei-c.org/Support/Learn/mueller-index.htm[very gentle introduction to the TEI markup language] is available.
 
 Whether TEI is useful for you depends on your needs. If you are occasionally producing a text, and need to have it formatted, TEI and `tei2html` is probably not the way to go. If you have a large collection of texts, and need to maintain them for a long time, and would like to add numerous types of scholarly annotations to them, TEI certainly warrants serious consideration.
 
@@ -27,7 +27,7 @@ The design decisions are:
 * CSS can be imported from an external source, and attached to IDs or classes in the generated output. To make this workable, IDs in the source are passed to the output unchanged (when reasonable), and the generated classes are documented. In addition, a class to be output can be specified in the `@rend` attribute.
 * Similarly, the value of `@style` attributes is copied verbatim to the CSS output; as are the content of `&lt;rendition&gt;` elements. Note that currently no translation of the `@selector` attribute of the `&lt;rendition&gt;` element takes place.
 
-As a result of these design decisions, a document can be neatly formatted with CSS with minimal rendering information 'polluting' the TEI master file. Note that to meet ePub restrictions on CSS, no inline CSS is generated.
+As a result of these design decisions, a document can be neatly formatted with CSS with minimal rendering information 'polluting' the TEI master file. Note that to meet ePub restrictions on CSS, no inline (that is, in an attribute on a HTML element) CSS is generated.
 
 === SGML versus XML
 
@@ -50,14 +50,14 @@ For many uses, a TEI file is not the most desirable format. For reading, it is f
 
 * HTML for viewing in a browser on a PC.
 * ePub for reading on dedicated eBook readers.
-* Plain text for reading on simple devices (supported using Perl).
+* Plain text for reading on simple devices (supported using Perl, but only in a fairly limited way that requires some manual cleanup).
 * PDF for printing on paper (supported using Prince-XML, using specially adjusted HTML output).
 
-These output formats place some restrictions on the structure of the TEI file, and the usage conventions adopted not enforced by the DTD. The most important of these are given below.
+These output formats place some restrictions on the structure of the TEI file, described in the following usage conventions. These usage conventions are not enforced by the DTD.
 
 _References to page numbers._ In printed media, the page numbers produced in the output will differ from the source. To correctly replace page numbers in the source, each page number should be tagged as a reference (`ref` element) with `@type=pageref`. The tag should only enclose the page number itself, not any of the surrounding material. The transformation will replace the content of this tag with the actual number of the page the material referred to appears on. Almost always, the reference is not to the page itself, but to some element appearing on this page. For this reason, it is better not to link to the `pb` element, but to the element actually referred to. (In HTML output, the original page numbers will be shown in the margin and used in the text.)
 
-_Nesting of cross-references and anchors._ In HTML, it is impossible to nest anchors and cross-references. As a results, certain elements in the TEI source should not be nested, as these result in nested anchors in HTML. For example, the `ref` element should not contain `corr` elements (as the later generates an anchor for the automatically generated errata list). The proper way to resolve this is to place the `ref` element in the `corr` element.
+_Nesting of cross-references and anchors._ In HTML, it is impossible to nest anchors and cross-references. As a results, certain elements in the TEI source should not be nested, as these will result in invalid nested anchors in HTML. For example, the `ref` element should not contain `corr` elements (as the latter generates an anchor for the automatically generated errata list). The proper way to resolve this is to place the `ref` element inside the `corr` element.
 
 _Nesting of paragraphs._ In HTML, it is impossible to nest paragraphs. Usually, the transformation software will take this in account, and close (and re-open) open paragraphs in HTML when needed.
 
