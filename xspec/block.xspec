@@ -24,7 +24,7 @@
         <x:context>
             <pb id="pb0"/>
         </x:context>
-        <x:expect label="will result a HTML anchor, embedded in a paragraph">
+        <x:expect label="will result an HTML anchor, embedded in a paragraph">
             <p xmlns="http://www.w3.org/1999/xhtml">
                 <a id="pb0"/>
             </p>
@@ -35,7 +35,7 @@
         <x:context>
             <pb n="1" id="pb1"/>
         </x:context>
-        <x:expect label="will result a HTML span of class pageNum, embedded in a paragraph">
+        <x:expect label="will result an HTML span of class pageNum, embedded in a paragraph">
             <p xmlns="http://www.w3.org/1999/xhtml">
                 <span class="pageNum" id="pb1">[<a href="#pb1">1</a>]</span>
             </p>
@@ -46,7 +46,7 @@
         <x:context>
             <pb n="1_b_" id="pb1b"/>
         </x:context>
-        <x:expect label="will result a HTML span of class pageNum, embedded in a paragraph">
+        <x:expect label="will result an HTML span of class pageNum, embedded in a paragraph">
             <p xmlns="http://www.w3.org/1999/xhtml">
                 <span class="pageNum" id="pb1b">[<a href="#pb1b">1<i>b</i></a>]</span>
             </p>
@@ -57,7 +57,7 @@
         <x:context>
             <p>In a <pb n="2" id="pb2"/> paragraph.</p>
         </x:context>
-        <x:expect label="will result a HTML span of class pageNum without a wrapping paragraph">
+        <x:expect label="will result an HTML span of class pageNum without a wrapping paragraph">
             <p xmlns="http://www.w3.org/1999/xhtml" id="..." class="first">In a <span class="pageNum" id="pb2">[<a href="#pb2">2</a>]</span> paragraph.</p>
         </x:expect>
     </x:scenario>
@@ -68,7 +68,7 @@
                 <note place="margin">In a <pb n="3" id="pb3"/> marginal note.</note>
             </p>
         </x:context>
-        <x:expect label="will result a HTML anchor only">
+        <x:expect label="will result an HTML anchor only">
             <p xmlns="http://www.w3.org/1999/xhtml" id="..." class="first">
                 <span class="marginnote" id="...">In a <a id="pb3"/> marginal note.</span>
             </p>
@@ -81,7 +81,7 @@
         <x:context>
             <pb n="4" id="pb4" facs="image/p004.jpg"/>
         </x:context>
-        <x:expect label="will result a HTML span of class pageNum, embedded in a paragraph">
+        <x:expect label="will result an HTML span of class pageNum, embedded in a paragraph">
             <p xmlns="http://www.w3.org/1999/xhtml">
                 <span class="pageNum" id="pb4">[<a href="#pb4">4</a>]</span>
             </p>
@@ -150,7 +150,7 @@
         <x:context>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         </x:context>
-        <x:expect label="will result in a HTML paragraph">
+        <x:expect label="will result in an HTML paragraph">
             <p xmlns="http://www.w3.org/1999/xhtml"
                id="..."
                class="first">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
@@ -175,7 +175,7 @@
         <x:context>
             <p id="test_p_rend" rend="indent(2)">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         </x:context>
-        <x:expect label="will result in a HTML paragraph with an additional class">
+        <x:expect label="will result in an HTML paragraph with an additional class">
             <p xmlns="http://www.w3.org/1999/xhtml"
                id="test_p_rend"
                class="first test_p_rend">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>        
@@ -197,7 +197,7 @@ text-indent:2em;
         <x:context>
             <p id="test_p_initial" rend="initial-offset(45px) initial-width(90px) initial-height(95px) initial-image(images/initial-A.png)">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         </x:context>
-        <x:expect label="will result in a HTML parapgraph with an additional class and the first letter enclosed in a span">
+        <x:expect label="will result in an HTML parapgraph with an additional class and the first letter enclosed in a span">
             <p xmlns="http://www.w3.org/1999/xhtml"
                id="test_p_initial"
                class="test_p_initial">
@@ -209,7 +209,7 @@ text-indent:2em;
         <x:context mode="css">
             <p id="test_p_initial_css" rend="initial-offset(45px) initial-width(90px) initial-height(95px) initial-image(images/initial-A.png)">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         </x:context>
-        <x:expect label="will result in a HTML paragraph with an additional class and the first letter enclosed in a span">
+        <x:expect label="will result in an HTML paragraph with an additional class and the first letter enclosed in a span">
 .test_p_initial_css {
 background: url(images/initial-A.png) no-repeat top left;
 padding-top: 45px;

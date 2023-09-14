@@ -27,7 +27,7 @@ The design decisions are:
 * CSS can be imported from an external source, and attached to IDs or classes in the generated output. To make this workable, IDs in the source are passed to the output unchanged (when reasonable), and the generated classes are documented. In addition, a class to be output can be specified in the `@rend` attribute.
 * Similarly, the value of `@style` attributes is copied verbatim to the CSS output; as are the content of `&lt;rendition&gt;` elements. Note that currently no translation of the `@selector` attribute of the `&lt;rendition&gt;` element takes place.
 
-As a result of these design decisions, a document can be neatly formatted with CSS with minimal rendering information 'polluting' the TEI master file. Note that to meet ePub restrictions on CSS, no inline (that is, in an attribute on a HTML element) CSS is generated.
+As a result of these design decisions, a document can be neatly formatted with CSS with minimal rendering information 'polluting' the TEI master file. Note that to meet ePub restrictions on CSS, no inline (that is, in an attribute on an HTML element) CSS is generated.
 
 === SGML versus XML
 

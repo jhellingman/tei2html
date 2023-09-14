@@ -49,7 +49,7 @@
         <xd:short>Render a table in HTML (1).</xd:short>
         <xd:detail>
             <p>At the top-level, the code differentiates between an inline table, and one
-            at the block level; the former get wrapped in a HTML <code>span</code> element, the latter in
+            at the block level; the former get wrapped in an HTML <code>span</code> element, the latter in
             a <code>div</code> element.</p>
         </xd:detail>
     </xd:doc>

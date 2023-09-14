@@ -34,7 +34,7 @@
             </list>
         </TEI.2>
       </x:context>
-      <x:expect label="will return a HTML link">
+      <x:expect label="will return an HTML link">
         <ul xmlns="http://www.w3.org/1999/xhtml" id="...">
            <li id="..."><a id="..." href="#localtarget">Local link.</a></li>
            <li id="...">Missing link.</li>
@@ -54,7 +54,7 @@
             </list>
         </TEI>
       </x:context>
-      <x:expect label="will return a HTML link">
+      <x:expect label="will return an HTML link">
         <ul xmlns="http://www.w3.org/1999/xhtml" id="...">
            <li id="..."><a id="..." href="#localtarget">Local link.</a></li>
            <li id="...">Missing link.</li>
@@ -74,7 +74,7 @@
         </list>
       </x:context>
       <!-- Note how the class contains link.http in each case; this is an artifact of the class determination, based on a key() on @rend -->
-      <x:expect label="will return a HTML link to that target">
+      <x:expect label="will return an HTML link to that target">
         <ul xmlns="http://www.w3.org/1999/xhtml" id="...">
            <li id="..."><a id="link.http" class="exlink link.http" title="External link" href="http://www.example.com/">External HTTP link.</a></li>
            <li id="..."><a id="link.https" class="seclink link.http" title="External link" href="https://www.example.com/">External HTTPS link.</a></li>

@@ -143,7 +143,7 @@ text-indent:2em;
                 <l id="l2">Second.</l>
             </lg>
         </x:context>
-        <x:expect label="will result in a HTML div with two paragraphs">
+        <x:expect label="will result in an HTML div with two paragraphs">
             <div xmlns="http://www.w3.org/1999/xhtml" id="lg" class="lgouter">
                <p id="l1" class="line">First,</p>
                <p id="l2" class="line">Second.</p>
@@ -159,7 +159,7 @@ text-indent:2em;
                 <l id="l2">Second.</l>
             </lg>
         </x:context>
-        <x:expect label="will result in a HTML div with two paragraphs">
+        <x:expect label="will result in an HTML div with two paragraphs">
             <div xmlns="http://www.w3.org/1999/xhtml" id="lg" class="lgouter">
                <h4>The Title.</h4>
                <p id="l1" class="line">First,</p>
@@ -203,7 +203,7 @@ text-indent:2em;
                 <l id="l2">Second.</l>
             </lg>
         </x:context>
-        <x:expect label="will result in a HTML table with each line in a row, a brace in the second column, and the head in the third">
+        <x:expect label="will result in an HTML table with each line in a row, a brace in the second column, and the head in the third">
             <table xmlns="http://www.w3.org/1999/xhtml" class="lineGroupTable" id="lg">
                <tr>
                   <td>

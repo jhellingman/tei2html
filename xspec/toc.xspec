@@ -749,7 +749,7 @@
 
     <x:scenario label="When rendering a body element with numbered divs">
         <x:context select="$sample6//body/div1[1]"/>
-        <x:expect label="will result a HTML document with those divisions, and links back to the toc">
+        <x:expect label="will result an HTML document with those divisions, and links back to the toc">
             <div xmlns="http://www.w3.org/1999/xhtml" id="ch1" class="div1 last-child chapter">
                <span class="pageNum">[<a href="#ch1.toc">Contents</a>]</span>
                <div class="divHead">
@@ -806,7 +806,7 @@
 
     <x:scenario label="When rendering a body element with unnumbered divs">
         <x:context select="$sample7//body/div[1]"/>
-        <x:expect label="will result a HTML document with those divisions, and links back to the toc (exactly the same as above)">
+        <x:expect label="will result an HTML document with those divisions, and links back to the toc (exactly the same as above)">
             <div xmlns="http://www.w3.org/1999/xhtml" id="ch1" class="div1 last-child chapter">
                <span class="pageNum">[<a href="#ch1.toc">Contents</a>]</span>
                <div class="divHead">

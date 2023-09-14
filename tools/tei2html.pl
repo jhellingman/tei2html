@@ -21,6 +21,7 @@ use SgmlSupport qw/utf2numericEntities translateEntity/;
 my $home = $ENV{'TEI2HTML_HOME'};
 my $saxonHome = $ENV{'SAXON_HOME'};
 my $princeHome = $ENV{'PRINCE_HOME'};
+my $mariadbHome = $ENV{'MARIADB_HOME'};
 
 my $javaOptions = '-Xms2048m -Xmx4096m -Xss1024k ';
 

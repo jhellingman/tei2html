@@ -1,4 +1,4 @@
-# pageMap.pl -- Prepare a HTML heatmap of changes during rounds on PGDP.
+# pageMap.pl -- Prepare an HTML heatmap of changes during rounds on PGDP.
 
 # Usage: perl pageMap.pl projectId
 
