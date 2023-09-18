@@ -75,6 +75,7 @@
 
     <xsl:template match="*" mode="ePubNav"/>
 
+
     <xd:doc>
         <xd:short>Create the ePub3 navigation document page list.</xd:short>
         <xd:detail>Create the ePub3 navigation document page list. Only include numbered pages and avoid adding page-breaks

@@ -145,7 +145,12 @@
     <!--== navMap ==========================================================-->
 
     <xsl:template match="text" mode="navMap">
-        <xsl:apply-templates select="front | body | back" mode="navMap"/>
+        <xsl:apply-templates select="front | group | body | back" mode="navMap"/>
+    </xsl:template>
+
+
+    <xsl:template match="group" mode="navMap">
+        <xsl:apply-templates select="text" mode="navMap"/>
     </xsl:template>
 
 

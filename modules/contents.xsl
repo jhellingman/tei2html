@@ -83,23 +83,26 @@
 
     <xsl:template name="toc-body">
         <xsl:param name="list-element" select="'ul'" as="xs:string"/>
-        <xsl:variable name="text" select="/*[self::TEI.2 or self::TEI]/text"/>
+
+        <xsl:variable name="start" select="if (ancestor::group)
+            then ancestor-or-self::text[./parent::group]
+            else ancestor-or-self::text[last()]"/>
         <xsl:variable name="maxLevel" select="f:generated-toc-max-level(.)" as="xs:integer"/>
 
         <xsl:element name="{$list-element}">
-            <xsl:apply-templates mode="gentoc" select="$text/front/div1 | $text/front/div">
+            <xsl:apply-templates mode="gentoc" select="$start/front/div1 | $start/front/div">
                 <xsl:with-param name="maxLevel" select="$maxLevel"/>
                 <xsl:with-param name="divGenId" select="f:generate-id(.)"/>
                 <xsl:with-param name="list-element" select="$list-element"/>
             </xsl:apply-templates>
 
-            <xsl:apply-templates mode="gentoc" select="$text/body/div0 | $text/body/div1 | $text/body/div">
+            <xsl:apply-templates mode="gentoc" select="$start/group | $start/body/div0 | $start/body/div1 | $start/body/div">
                 <xsl:with-param name="maxLevel" select="$maxLevel"/>
                 <xsl:with-param name="divGenId" select="f:generate-id(.)"/>
                 <xsl:with-param name="list-element" select="$list-element"/>
             </xsl:apply-templates>
 
-            <xsl:apply-templates mode="gentoc" select="($text/back/div1 | $text/back/div)[not(@type = $toc-excluded)]">
+            <xsl:apply-templates mode="gentoc" select="($start/back/div1 | $start/back/div)[not(@type = $toc-excluded)]">
                 <xsl:with-param name="maxLevel" select="$maxLevel"/>
                 <xsl:with-param name="divGenId" select="f:generate-id(.)"/>
                 <xsl:with-param name="list-element" select="$list-element"/>
@@ -107,6 +110,7 @@
         </xsl:element>
     </xsl:template>
 
+    <xsl:template match="titlePage" mode="gentoc"/>
 
     <xd:doc>
         <xd:short>Generate an entry in the table of contents (as an HTML list, OBSOLETE).</xd:short>
@@ -268,6 +272,27 @@
     </xsl:template>
 
 
+
+    <xsl:template name="generate-text-head">
+        <xsl:choose>
+
+            <!-- Do we want to fully override the head for the toc using the toc-head() rendering? -->
+            <xsl:when test="f:has-rend-value(@rend, 'toc-head')">
+                <xsl:value-of select="f:rend-value(@rend, 'toc-head')"/>
+            </xsl:when>
+
+            <!-- Try to get the title from the titlePage -->
+            <xsl:when test="front/titlePage/docTitle/titlePart[@type='main' or not(@type)]">
+                <xsl:value-of select="front/titlePage/docTitle/titlePart[@type='main' or not(@type)][1]"/>
+                <xsl:if test="front/titlePage/docTitle/titlePart[@type='volume']">
+                    <xsl:text> </xsl:text>
+                    <xsl:value-of select="front/titlePage/docTitle/titlePart[@type='volume'][1]"/>
+                </xsl:if>
+            </xsl:when>
+        </xsl:choose>
+    </xsl:template>
+
+
     <xd:doc>
         <xd:short>Generating a span containing the page number the current node appears on, and a link to the current node.</xd:short>
     </xd:doc>
@@ -309,24 +334,27 @@
 
     <xsl:template name="toc-body-table">
         <xsl:variable name="maxLevel" select="f:generated-toc-max-level(.)" as="xs:integer"/>
-        <xsl:variable name="text" select="/*[self::TEI.2 or self::TEI]/text"/>
-        <xsl:variable name="maxLevel" select="min((f:find-toc-max-depth($text), $maxLevel))"/>
+
+        <xsl:variable name="start" select="if (ancestor::group)
+            then ancestor-or-self::text[./parent::group]
+            else ancestor::text[last()]"/>
+        <xsl:variable name="maxLevel" select="min((f:find-toc-max-depth($start), $maxLevel))"/>
 
         <table>
             <xsl:if test="f:is-html() and not(f:is-html5())">
                 <xsl:attribute name="summary" select="f:message('msgTableOfContents')"/>
             </xsl:if>
-            <xsl:apply-templates mode="gentoc-table" select="$text/front/div1 | $text/front/div">
+            <xsl:apply-templates mode="gentoc-table" select="$start/front/div1 | $start/front/div">
                 <xsl:with-param name="maxLevel" select="$maxLevel"/>
                 <xsl:with-param name="divGenId" select="f:generate-id(.)"/>
             </xsl:apply-templates>
 
-            <xsl:apply-templates mode="gentoc-table" select="$text/body/div0 | $text/body/div1 | $text/body/div">
+            <xsl:apply-templates mode="gentoc-table" select="$start/group | $start/body/div0 | $start/body/div1 | $start/body/div">
                 <xsl:with-param name="maxLevel" select="$maxLevel"/>
                 <xsl:with-param name="divGenId" select="f:generate-id(.)"/>
             </xsl:apply-templates>
 
-            <xsl:apply-templates mode="gentoc-table" select="($text/back/div1 | $text/back/div)[not(@type = $toc-excluded)]">
+            <xsl:apply-templates mode="gentoc-table" select="($start/back/div1 | $start/back/div)[not(@type = $toc-excluded)]">
                 <xsl:with-param name="maxLevel" select="$maxLevel"/>
                 <xsl:with-param name="divGenId" select="f:generate-id(.)"/>
             </xsl:apply-templates>
@@ -341,6 +369,35 @@
             then xs:integer(f:rend-value($divGen/@rend, 'tocMaxLevel'))
             else 7"/>
     </xsl:function>
+
+
+    <xsl:template match="group/text" mode="gentoc-table">
+        <xsl:param name="maxLevel" as="xs:integer" select="7"/>
+        <xsl:param name="curLevel" as="xs:integer" select="0"/>
+        <xsl:param name="divGenId" as="xs:string"/>
+
+        <tr id="{f:generate-id(.) || '.' || $divGenId}">
+            <td class="tocText">
+                <xsl:attribute name="colspan" select="$maxLevel + 2"/>
+                <xsl:call-template name="generate-text-head"/>
+            </td>
+        </tr>
+
+        <xsl:apply-templates mode="gentoc-table" select="./front/div1 | ./front/div">
+            <xsl:with-param name="maxLevel" select="$maxLevel"/>
+            <xsl:with-param name="divGenId" select="$divGenId"/>
+        </xsl:apply-templates>
+
+        <xsl:apply-templates mode="gentoc-table" select="./body/group | ./body/div0 | ./body/div1 | ./body/div">
+            <xsl:with-param name="maxLevel" select="$maxLevel"/>
+            <xsl:with-param name="divGenId" select="$divGenId"/>
+        </xsl:apply-templates>
+
+        <xsl:apply-templates mode="gentoc-table" select="(./back/div1 | ./back/div)[not(@type = $toc-excluded)]">
+            <xsl:with-param name="maxLevel" select="$maxLevel"/>
+            <xsl:with-param name="divGenId" select="$divGenId"/>
+        </xsl:apply-templates>
+    </xsl:template>
 
 
     <xsl:template match="div | div0 | div1 | div2 | div3 | div4 | div5 | div6" mode="gentoc-table">
@@ -521,15 +578,17 @@
     </xd:doc>
 
     <xsl:template match="divGen[@type='toca']">
-        <xsl:variable name="text" select="/*[self::TEI.2 or self::TEI]/text"/>
+        <xsl:variable name="start" select="if (ancestor::group)
+            then ancestor-or-self::text[./parent::group]
+            else ancestor::text[last()]"/>
 
         <div class="div1">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <h2 class="main"><xsl:value-of select="f:message('msgTableOfContents')"/></h2>
 
-            <xsl:apply-templates mode="gentoca" select="$text/front/div1"/>
-            <xsl:apply-templates mode="gentoca" select="if ($text/body/div0) then $text/body/div0 else $text/body/div1"/>
-            <xsl:apply-templates mode="gentoca" select="$text/back/div1[not(@type = $toc-excluded)]"/>
+            <xsl:apply-templates mode="gentoca" select="$start/front/div1"/>
+            <xsl:apply-templates mode="gentoca" select="if ($start/body/div0) then $start/body/div0 else $start/body/div1"/>
+            <xsl:apply-templates mode="gentoca" select="$start/back/div1[not(@type = $toc-excluded)]"/>
         </div>
     </xsl:template>
 

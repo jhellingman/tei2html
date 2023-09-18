@@ -21,7 +21,7 @@
     <xsl:template match="text">
         <xsl:apply-templates/>
 
-        <xsl:if test="f:is-set('facsimile.enable') and f:is-set('facsimile.wrapper.enable')">
+        <xsl:if test="not(ancestor::group) and f:is-set('facsimile.enable') and f:is-set('facsimile.wrapper.enable')">
             <xsl:apply-templates select="//pb[@facs]" mode="facsimile"/>
         </xsl:if>
     </xsl:template>
@@ -509,9 +509,10 @@
                     <xsl:text>[</xsl:text>
                     <a>
                         <!-- Link to entry for current division if available to make navigation back easier. -->
+                        <!-- TODO: improve for working with multiple groups: use convention of name of toc: "toc.<@id of group>" -->
                         <xsl:variable name="id" select="@id"/>
-                        <xsl:variable name="tocEntry" select="(//*[@id='toc']//ref[@target=$id])[1]"/>
-                        <xsl:variable name="divGen" select="(//divGen[@id='toc'][@type='toc'])[1]"/>
+                        <xsl:variable name="tocEntry" select="(//*[starts-with(@id, 'toc')]//ref[@target = $id])[1]"/>
+                        <xsl:variable name="divGen" select="(//divGen[@id = 'toc'][@type = 'toc'])[1]"/>
                         <xsl:variable name="maxLevel" select="f:generated-toc-max-level($divGen)"/>
 
                         <xsl:attribute name="href" select="

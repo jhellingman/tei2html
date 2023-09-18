@@ -45,6 +45,13 @@ table {
     margin-right: auto;
 }
 
+td.tocText {
+    text-align: center;
+    font-variant: small-caps;
+    font-size: 1.2em;
+    line-height: 1.5;
+}
+
 .tableCaption {
     text-align: center;
 }

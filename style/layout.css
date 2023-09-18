@@ -421,6 +421,11 @@ table.tocList {
     border-collapse: collapse;
 }
 
+td.tocText {
+    padding-top: 2em;
+    padding-bottom: 1em;
+}
+
 td.tocPageNum, td.tocDivNum {
     text-align: right;
     min-width: 10%;
