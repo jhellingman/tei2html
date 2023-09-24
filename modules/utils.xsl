@@ -376,9 +376,16 @@
                         <xsl:value-of select="count($div/ancestor::div) + 1"/>
                     </xsl:otherwise>
                 </xsl:choose>
-            </xsl:when>
+            </xsl:when>            
             <xsl:when test="local-name($div) = ('div0', 'div1', 'div2', 'div3', 'div4', 'div5', 'div6')">
-                <xsl:value-of select="substring(local-name($div), 4)"/>
+                <xsl:choose>
+                    <xsl:when test="$div/ancestor::q">
+                        <xsl:value-of select="count($div/ancestor::*[self::div0 or self::div1 or self::div2 or self::div3 or self::div4 or self::div5 or self::div6][ancestor::q])"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="count($div/ancestor::*[self::div0 or self::div1 or self::div2 or self::div3 or self::div4 or self::div5 or self::div6]) + 1"/>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:copy-of select="f:log-error('Node {1} is not a division.', (local-name($div)))"/>

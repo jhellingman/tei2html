@@ -365,8 +365,8 @@
     <xsl:function name="f:generated-toc-max-level" as="xs:integer">
         <xsl:param name="divGen"/>
 
-        <xsl:sequence select="if (f:has-rend-value($divGen/@rend, 'tocMaxLevel'))
-            then xs:integer(f:rend-value($divGen/@rend, 'tocMaxLevel'))
+        <xsl:sequence select="if (f:has-rend-value($divGen/@rend, 'toc-max-level'))
+            then xs:integer(f:rend-value($divGen/@rend, 'toc-max-level'))
             else 7"/>
     </xsl:function>
 
@@ -456,8 +456,8 @@
             </xsl:if>
         </td>
         <td class="tocDivTitle">
-            <xsl:if test="($maxLevel) - $curLevel > 1">
-                <xsl:attribute name="colspan" select="($maxLevel) - $curLevel"/>
+            <xsl:if test="$maxLevel - $curLevel > 1">
+                <xsl:attribute name="colspan" select="$maxLevel - $curLevel"/>
             </xsl:if>
             <a href="{f:generate-href(.)}">
                 <xsl:call-template name="generate-single-head"/>
