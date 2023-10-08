@@ -9,6 +9,9 @@ my $toolsdir    = $Bin . "/..";
 my $xsldir      = $toolsdir;
 my $libdir      = $toolsdir . "/tools/lib";
 my $saxon       = "java -jar " . $libdir . "/saxon9he.jar ";
+# my $saxon       = "java -jar C:\\Bin\\Calabash\\lib\\Saxon-HE-12.3.jar ";
+# my $saxon       = "java -jar C:\\Bin\\SaxonHE12-3J\\saxon-he-12.3.jar ";
+
 my $epubcheck   = "java -jar " . $libdir . "/epubcheck-3.0.1.jar ";
 my $prince      = "\"C:\\Program Files (x86)\\Prince\\Engine\\bin\\prince.exe\"";
 
