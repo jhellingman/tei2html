@@ -228,8 +228,8 @@
 "&Ugragr;"  p "Ὺ"    % "`U"
 "&uacugr;"  p "ύ"    % "'u"
 "&Uacugr;"  p "Ύ"    % "'U"
-"&ucirgr;"  p "ῡ"    % "=u"
-"&Ucirgr;"  p "Ῡ"    % "=U"
+"&ucirgr;"  p "ῦ"    % "=u"
+"&Ucirgr;"  p "Υ͂"    % "=U"
 "&uragr;"   p "ὕ"    % "<'u"
 "&Uragr;"   p "Ὕ"    % "<'U"
 "&usagr;"   p "ὔ"    % ">'u"
@@ -315,4 +315,9 @@
 "&Amacgr;"  p "Ᾱ"  % "\=A"
 "&abregr;"  p "ᾰ"  % ")a"
 "&Abregr;"  p "Ᾰ"  % ")A"
+
+"&umacgr;"  p "ῡ"  % "\=u"
+"&Umacgr;"  p "Ῡ"  % "\=U"
+
+
 

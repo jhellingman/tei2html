@@ -1,4 +1,4 @@
-% Classical Greek in TEI entities to Unicode UTF8
+% Classical Greek in UTF-8 encoding to transliteration
 
 @patterns 0
 
@@ -220,6 +220,9 @@
 "ῥ"          p "<r"             % &rrougr;
 "Ῥ"          p "<R"             % &Rrougr;
 
+"ῤ"          p ">r"             % &rsmogr;
+"Ρ̓"          p ">R"             % &Rsmogr;
+
 "σ"          p "s"             % &sgr;
 "Σ"          p "S"             % &Sgr;
 "ς"          p "c"             % &sfgr;
@@ -237,8 +240,8 @@
 "Ὺ"          p "`U"             % &Ugragr;
 "ύ"          p "'u"             % &uacugr;
 "Ύ"          p "'U"             % &Uacugr;
-"ῡ"          p "=u"             % &ucirgr;
-"Ῡ"          p "=U"             % &Ucirgr;
+"ῦ"         p "=u"              % &ucirgr;
+"Υ͂"         p "=U"             % &Ucirgr;
 "ὕ"          p "<'u"             % &uragr;
 "Ὕ"          p "<'U"             % &Uragr;
 "ὔ"          p ">'u"             % &usagr;
@@ -342,5 +345,8 @@
 "Ᾱ"          p "\\=A"              % &Amacgr;
 "ᾰ"          p ")a"                % &abregr;
 "Ᾰ"          p ")A"                % &Abregr;
+
+"ῡ"          p "\\=u"             % &umacgr;
+"Ῡ"          P "\\=U"             % &Umacgr;
 
 @end
