@@ -42,10 +42,10 @@
         <msg:message name="msgCorrectionsNotAppliedToText">The following potential corrections have not been applied.</msg:message>
         <msg:message name="msgQuestionablesOverview">Overview of potential corrections.</msg:message>
         <msg:message name="msgSuggestedCorrection">Suggested correction</msg:message>
-        
+
         <msg:message name="msgGenerationDate">File generation date</msg:message>
         <msg:message name="msgGutenbergNoExternalReferences">Project Gutenberg does not use active external links in its ebooks.</msg:message>
-        <msg:message name="msgGutenbergExternalReferencesExplanation">The following URLs are shown purely for information. If so desired, you can copy and paste them into the address-bar of your browser.</msg:message>
+        <msg:message name="msgGutenbergExternalReferencesExplanation">The following URLs are shown purely for information. If so desired, you can copy them into the address-bar of your browser.</msg:message>
 
         <msg:message name="msgDramatisPersonae">Dramatis personae.</msg:message>
         <msg:message name="msgUnidentifiedSpeaker">Unidentified speaker.</msg:message>
@@ -406,7 +406,7 @@
         <msg:message name="af">Afrikaans</msg:message>
         <msg:message name="am">Amharic</msg:message>
         <msg:message name="ar">Arabic</msg:message>
-        <msg:message name="ar-latn">Arabic (Latin transcription)</msg:message>
+        <msg:message name="ar-Latn">Arabic (Latin transcription)</msg:message>
         <msg:message name="as">Assamese</msg:message>
         <msg:message name="ay">Aymara</msg:message>
         <msg:message name="az">Azerbaijani</msg:message>
@@ -426,7 +426,7 @@
         <msg:message name="de">German</msg:message>
         <msg:message name="dz">Bhutani</msg:message>
         <msg:message name="el">Greek</msg:message>
-        <msg:message name="el-latn">Greek (Latin transcription)</msg:message>
+        <msg:message name="el-Latn">Greek (Latin transcription)</msg:message>
         <msg:message name="en">English</msg:message>
         <msg:message name="en-uk">English (U.K.)</msg:message>
         <msg:message name="en-us">English (U.S.)</msg:message>
@@ -448,7 +448,7 @@
         <msg:message name="gu">Gujarati</msg:message>
         <msg:message name="ha">Hausa</msg:message>
         <msg:message name="he">Hebrew</msg:message>
-        <msg:message name="he-latn">Hebrew (Latin transcription)</msg:message>
+        <msg:message name="he-Latn">Hebrew (Latin transcription)</msg:message>
         <msg:message name="hi">Hindi</msg:message>
         <msg:message name="hr">Croatian</msg:message>
         <msg:message name="hu">Hungarian</msg:message>
@@ -510,15 +510,15 @@
         <msg:message name="ro">Romanian</msg:message>
         <msg:message name="ru">Russian</msg:message>
         <msg:message name="ru-1900">Russian (Pre-1918 orthography)</msg:message>
-        <msg:message name="ru-latn">Russian (Latin transcription)</msg:message>
+        <msg:message name="ru-Latn">Russian (Latin transcription)</msg:message>
         <msg:message name="rw">Kinyarwanda</msg:message>
         <msg:message name="sa">Sanskrit</msg:message>
-        <msg:message name="sa-latn">Sanskrit (Latin transcription)</msg:message>
+        <msg:message name="sa-Latn">Sanskrit (Latin transcription)</msg:message>
         <msg:message name="sd">Sindhi</msg:message>
         <msg:message name="sg">Sango</msg:message>
         <msg:message name="sh">Serbo-Croatian</msg:message>
         <msg:message name="si">Singhalese</msg:message>
-        <msg:message name="si-latn">Singhalese (Latin transcription)</msg:message>
+        <msg:message name="si-Latn">Singhalese (Latin transcription)</msg:message>
         <msg:message name="sk">Slovak</msg:message>
         <msg:message name="sl">Slovenian</msg:message>
         <msg:message name="sm">Samoan</msg:message>
@@ -532,7 +532,7 @@
         <msg:message name="sv">Swedish</msg:message>
         <msg:message name="sw">Swahili</msg:message>
         <msg:message name="ta">Tamil</msg:message>
-        <msg:message name="ta-latn">Tamil (Latin transcription)</msg:message>
+        <msg:message name="ta-Latn">Tamil (Latin transcription)</msg:message>
         <msg:message name="te">Telugu</msg:message>
         <msg:message name="tg">Tajik</msg:message>
         <msg:message name="th">Thai</msg:message>
@@ -562,7 +562,7 @@
         <msg:message name="ceb">Cebuano</msg:message>
         <msg:message name="crb">Chavacano</msg:message>
         <msg:message name="grc">Greek (Classical)</msg:message>
-        <msg:message name="grc-latn">Greek (Classical; Latin transcription)</msg:message>
+        <msg:message name="grc-Latn">Greek (Classical; Latin transcription)</msg:message>
         <msg:message name="grt">Garo</msg:message>
         <msg:message name="hil">Hiligaynon</msg:message>
         <msg:message name="ilo">Ilokano</msg:message>
@@ -896,9 +896,14 @@
 
     <msg:messages xml:lang="de" name="German">
 
+        <msg:message name="msgGutenbergNoExternalReferences">Project Gutenberg verwendet keine aktiven externen Links in seinen E-Books.</msg:message>
+        <msg:message name="msgGutenbergExternalReferencesExplanation">Die folgenden URLs dienen rein zur Information. Bei Bedarf können Sie sie in die Adressleiste Ihres Browsers kopieren.</msg:message>
+        <msg:message name="msgIllustrator">Illustrator</msg:message>
+        <msg:message name="msgGitHubRepository">GitHub-Repository für dieses E-Book.</msg:message>
+
         <msg:message name="msgGenerationDate">Erstellungsdatum der Datei</msg:message>
         <msg:message name="msgDesigner">Designer</msg:message>
-		<msg:message name="msgPageImage">Seitenbild</msg:message>
+        <msg:message name="msgPageImage">Seitenbild</msg:message>
 
         <msg:message name="msgQrCode">QR-Code</msg:message>
         <msg:message name="msgQrCodePgUrl">QR-Code der URL von Project Gutenberg</msg:message>
@@ -1088,9 +1093,6 @@
         <msg:message name="msgLinkToQuranChapterVerse">Verweis auf den Koran: Kapitel <msg:param name="chapter"/>, Vers <msg:param name="verse"/></msg:message>
         <msg:message name="msgLinkToQuranChapterVerseToVerse">Verweis auf den Koran: Kapitel <msg:param name="chapter"/>, Vers <msg:param name="verse"/> bis <msg:param name="toVerse"/></msg:message>
 
-
-
-
         <msg:message name="msgLocation">Position</msg:message>
         <msg:message name="msgLocations">Positionen</msg:message>
         <msg:message name="msgName">Name</msg:message>
@@ -1172,11 +1174,11 @@
         <msg:message name="msgSaturday">Samstag</msg:message>
 
         <msg:message name="ar">Arabisch</msg:message>
-        <msg:message name="ar-latn">Arabisch (lateinische Transkription)</msg:message>
+        <msg:message name="ar-Latn">Arabisch (lateinische Transkription)</msg:message>
         <msg:message name="ceb">Cebuano</msg:message>
         <msg:message name="de">Deutsch</msg:message>
         <msg:message name="el">Griechisch</msg:message>
-        <msg:message name="el-latn">Griechisch (lateinische Transkription)</msg:message>
+        <msg:message name="el-Latn">Griechisch (lateinische Transkription)</msg:message>
         <msg:message name="en">Englisch</msg:message>
         <msg:message name="en-uk">Englisch (Großbritannien)</msg:message>
         <msg:message name="en-us">Englisch (die Vereinigten Staaten)</msg:message>
@@ -1184,9 +1186,9 @@
         <msg:message name="fi">Finnisch</msg:message>
         <msg:message name="fr">Französisch</msg:message>
         <msg:message name="grc">Griechisch (klassisch)</msg:message>
-        <msg:message name="grc-latn">Griechisch (klassisch, lateinische Transkription)</msg:message>
+        <msg:message name="grc-Latn">Griechisch (klassisch, lateinische Transkription)</msg:message>
         <msg:message name="he">Hebräisch</msg:message>
-        <msg:message name="he-latn">Hebräisch (lateinische Transkription)</msg:message>
+        <msg:message name="he-Latn">Hebräisch (lateinische Transkription)</msg:message>
         <msg:message name="ilo">Ilokano</msg:message>
         <msg:message name="it">Italienisch</msg:message>
         <msg:message name="ja">Japanisch</msg:message>
@@ -1200,13 +1202,13 @@
         <msg:message name="pt-pt">Portugiesisch (Portugal)</msg:message>
         <msg:message name="ru">Russisch</msg:message>
         <msg:message name="ru-1900">Russisch (Orthographie vor 1918)</msg:message>
-        <msg:message name="ru-latn">Russisch (lateinische Transkription)</msg:message>
+        <msg:message name="ru-Latn">Russisch (lateinische Transkription)</msg:message>
         <msg:message name="sa">Sanskrit</msg:message>
-        <msg:message name="sa-latn">Sanskrit (lateinische Transkription)</msg:message>
+        <msg:message name="sa-Latn">Sanskrit (lateinische Transkription)</msg:message>
         <msg:message name="si">Singhalesisch</msg:message>
-        <msg:message name="si-latn">Singhalesisch (lateinische Transkription)</msg:message>
+        <msg:message name="si-Latn">Singhalesisch (lateinische Transkription)</msg:message>
         <msg:message name="ta">Tamil</msg:message>
-        <msg:message name="ta-latn">Tamil (lateinische Transkription)</msg:message>
+        <msg:message name="ta-Latn">Tamil (lateinische Transkription)</msg:message>
         <msg:message name="tl">Tagalog</msg:message>
         <msg:message name="zh">Chinesisch</msg:message>
 
@@ -1228,13 +1230,23 @@
 
     <msg:messages xml:lang="nl" name="Dutch">
 
+        <msg:message name="msgFtpLink">Link naar FTP-server</msg:message>
+        <msg:message name="msgLinkToLibraryOfCongress">Link naar Library of Congress-record</msg:message>
+        <msg:message name="msgPrologue">Proloog</msg:message>
+        <msg:message name="msgEpilogue">Epiloog</msg:message>
+        <msg:message name="msgForeword">Voorwoord</msg:message>
+        <msg:message name="msgIntroduction">Inleiding</msg:message>
+        <msg:message name="msgAfterword">Nawoord</msg:message>
+        <msg:message name="msgPostscript">Naschrift</msg:message>
+        <msg:message name="msgUnknownBibleBook">Onbekend Bijbelboek</msg:message>
+
         <msg:message name="msgCorrectionsNotAppliedToText">De volgende mogelijke verbeteringen zijn niet toegepast.</msg:message>
         <msg:message name="msgQuestionablesOverview">Overzicht van mogelijke verbeteringen.</msg:message>
         <msg:message name="msgSuggestedCorrection">Voorgestelde verbetering</msg:message>
 
         <msg:message name="msgGenerationDate">Aanmaakdatum bestand</msg:message>
         <msg:message name="msgGutenbergNoExternalReferences">Project Gutenberg plaatst geen actieve externe links in haar eboeken.</msg:message>
-        <msg:message name="msgGutenbergExternalReferencesExplanation">De volgende URL&apos;s worden puur ter informatie getoond. U kunt ze desgewenst kopiëren en in de adresbalk van uw browser plakken.</msg:message>
+        <msg:message name="msgGutenbergExternalReferencesExplanation">De volgende URL&apos;s worden puur ter informatie getoond. U kunt ze desgewenst naar de adresbalk van uw browser kopiëren.</msg:message>
 
         <msg:message name="msgDramatisPersonae">Dramatis personae.</msg:message>
         <msg:message name="msgUnidentifiedSpeaker">Niet geïndentificeerde spreker.</msg:message>
@@ -1263,8 +1275,6 @@
         <msg:message name="msgViaf">Virtual International Authority File</msg:message>
         <msg:message name="msgOclcWorldCat">OCLC/WorldCat</msg:message>
         <msg:message name="msgGitHub">GitHub</msg:message>
-
-
 
         <msg:message name="msgAuthorAddition">Toevoeging door auteur</msg:message>
         <msg:message name="msgCopyrightPage">Auteursrechtpagina</msg:message>
@@ -1579,7 +1589,7 @@
         <msg:message name="af">Afrikaans</msg:message>
         <msg:message name="am">Amhaars</msg:message>
         <msg:message name="ar">Arabisch</msg:message>
-        <msg:message name="ar-latn">Arabisch (Latijnse transcriptie)</msg:message>
+        <msg:message name="ar-Latn">Arabisch (Latijnse transcriptie)</msg:message>
         <msg:message name="ceb">Cebuano</msg:message>
         <msg:message name="as">Assamees</msg:message>
         <msg:message name="ay">Aymara</msg:message>
@@ -1604,7 +1614,7 @@
         <msg:message name="fa">Perzisch</msg:message>
         <msg:message name="de">Duits</msg:message>
         <msg:message name="el">Grieks</msg:message>
-        <msg:message name="el-latn">Grieks (Latijnse transcriptie)</msg:message>
+        <msg:message name="el-Latn">Grieks (Latijnse transcriptie)</msg:message>
         <msg:message name="en">Engels</msg:message>
         <msg:message name="en-uk">Engels (V.K.)</msg:message>
         <msg:message name="en-us">Engels (V.S.)</msg:message>
@@ -1643,9 +1653,9 @@
         <msg:message name="ku">Koerdisch</msg:message>
         <msg:message name="ky">Kirgizisch</msg:message>
         <msg:message name="grc">Grieks (Klassiek)</msg:message>
-        <msg:message name="grc-latn">Grieks (Klassiek; Latijnse transcriptie)</msg:message>
+        <msg:message name="grc-Latn">Grieks (Klassiek; Latijnse transcriptie)</msg:message>
         <msg:message name="he">Hebreeuws</msg:message>
-        <msg:message name="he-latn">Hebreeuws (Latijnse transcriptie)</msg:message>
+        <msg:message name="he-Latn">Hebreeuws (Latijnse transcriptie)</msg:message>
         <msg:message name="it">Italiaans</msg:message>
         <msg:message name="ja">Japans</msg:message>
         <msg:message name="la">Latijn</msg:message>
@@ -1689,15 +1699,15 @@
         <msg:message name="ro">Roemeens</msg:message>
         <msg:message name="ru">Russisch</msg:message>
         <msg:message name="ru-1900">Russisch (Oude Spelling)</msg:message>
-        <msg:message name="ru-latn">Russisch (Latijnse transcriptie)</msg:message>
+        <msg:message name="ru-Latn">Russisch (Latijnse transcriptie)</msg:message>
         <msg:message name="rw">Kinyarwanda</msg:message>
         <msg:message name="sa">Sanskriet</msg:message>
-        <msg:message name="sa-latn">Sanskriet (Latijnse transcriptie)</msg:message>
+        <msg:message name="sa-Latn">Sanskriet (Latijnse transcriptie)</msg:message>
         <msg:message name="sd">Sindhi</msg:message>
         <msg:message name="sg">Sango</msg:message>
         <msg:message name="sh">Servo-Kroatisch</msg:message>
         <msg:message name="si">Singalees</msg:message>
-        <msg:message name="si-latn">Singalees (Latijnse transcriptie)</msg:message>
+        <msg:message name="si-Latn">Singalees (Latijnse transcriptie)</msg:message>
         <msg:message name="sk">Slowaaks</msg:message>
         <msg:message xml:lang="nl-be" name="sk">Slovaaks</msg:message>
         <msg:message name="sl">Sloveens</msg:message>
@@ -1712,7 +1722,7 @@
         <msg:message name="sv">Zweeds</msg:message>
         <msg:message name="sw">Swahili</msg:message>
         <msg:message name="ta">Tamil</msg:message>
-        <msg:message name="ta-latn">Tamil (Latijnse transcriptie)</msg:message>
+        <msg:message name="ta-Latn">Tamil (Latijnse transcriptie)</msg:message>
         <msg:message name="te">Telugu</msg:message>
         <msg:message name="tg">Tadzjieks</msg:message>
         <msg:message name="th">Thai</msg:message>
@@ -1744,6 +1754,8 @@
         <msg:message name="pam">Pampanga</msg:message>
         <msg:message name="war">Waray-Waray</msg:message>
         <msg:message name="zxx">Niet van toepassing</msg:message>
+
+        <msg:message name="xx">Niet-linguïstische inhoud</msg:message>
 
         <!-- Creating a list of items -->
         <msg:message name="msgAnd">en</msg:message>
@@ -1779,13 +1791,12 @@
             <p class="smallprint">https://www.gutenberg.org/<msg:param name="pgpath"/></p>
             <p class="smallprint">Geproduceerd door <msg:param name="transcriber"/>.</p>
 
-            <p class="smallprint">Aangepaste versies zullen de vorige versie vervangen&mdash;de oude versie zal een andere naam krijgen.</p>
+            <p class="smallprint">Bijgewerkte versies zullen de vorige versie vervangen&mdash;de oude versie zal een andere naam krijgen.</p>
 
             <p class="smallprint">Omdat we deze werken reproduceren van gedrukte edities waarop geen Amerikaans auteursrecht rust, heeft niemand in de Verenigde Staten een auteursrecht op deze werken. De Stichting (en jij!) mogen deze werken dus zonder toestemming, en zonder het betalen van vergoedingen, kopiëren en verspreiden in de Verenigde Staten. Bijzondere regels, uiteengezet in de Algemene Voorwaarden voor Gebruik van deze licentie zijn van toepassing op het kopiëren en verspreiden van Project Gutenberg&tm; elektronische werken om het PROJECT GUTENBERG&tm; concept en handelsmerk te beschermen. Project Gutenberg is een geregistreerd handelsmerk en mag alleen worden gebruikt als je hiervoor specifiek toestemming heeft gekregen. Als je niets rekent voor kopiëren van dit eBoek, dan is het zeer eenvoudig je aan deze regels te houden. Je mag dit eBoek gebruiken voor bijna elke doel, zoals het maken van afgeleide werken, rapporten, voorstellingen en onderzoek. Ze mogen worden aangepast, gedrukt en weggegeven.&#x2014;Je mag vrijwel ALLES doen met eBoeken in het publiek domein. Verspreiding, en in het bijzonder commerciële verspreiding, is onderworpen aan de licentie op het handelsmerk.</p>
 
             <p class="smallprint">De volledige licentie is om juridische redenen niet vertaald en volgt hieronder in het Engels.</p>
         </msg:message>
-
     </msg:messages>
 
 
