@@ -13,13 +13,18 @@ my $useItalics = 0;
 my $pageWidth = 72;
 my $centerTables = 1;
 
-GetOptions(
+my $borderStyle = 0;
+
+GetOptions (
     'u' => \$useUnicode,
-    'w=i' => \$pageWidth);
+    'w=i' => \$pageWidth,
+    'useitalics' => \$useItalics,
+    'centertables=i' => \$centerTables,
+    'borderstyle=i' => \$borderStyle
+    );
 
 if ($useUnicode == 1) {
     binmode(STDOUT, ":encoding(UTF-8)");
-    # use open ':utf8';
     use open ':encoding(UTF-8)'
 }
 
@@ -34,36 +39,37 @@ if ($useItalics == 1) {
     $italicEnd = '';
 }
 
-#    0.                   1.              2.              3.            4.              5.
+#    0.                   1.           2.           3.           4.           5.           6.
 #
-#    No borders, just     +===+===+       =========       /=======\     =========       =========
-#    three spaces         |   |   |       |   |   |       |   |   |                         |
-#    between columns      +---+---+       |---+---|       |---+---|                     ----+----
-#    (6: one space)       |   |   |       |   |   |       |   |   |     =========           |
-#                         +===+===+       =========       \=======/                     =========
+#    No borders, just     +===+===+    =========    /=======\    =========    =========    =========
+#    three spaces         |   |   |    |   |   |    |   |   |                     |            |
+#    between columns      +---+---+    |---+---|    |---+---|                 ----+----        |
+#    (7: one space)       |   |   |    |   |   |    |   |   |    =========        |        =========
+#                         +===+===+    =========    \=======/                 =========
 #
+#
+#                          0       1       2       3       4       5       6       7       
 
-my $borderStyle = 0;
+my @borderTopLeft       = ('',     '+=',   '==',   '/=',   '',     '',     '',     '');
+my @borderTopLine       = ('',     '=',    '=',    '=',    '=',    '=',    '=',    '');
+my @borderTopCross      = ('',     '=+=',  '===',  '===',  '===',  '===',  '===',  '');
+my @borderTopRight      = ('',     '=+',   '==',   '=\\',  '',     '',     '',     '');
 
-my @borderTopLeft       = ('',      '+=',   '==',   '/=',   '',     '',     '');
-my @borderTopLine       = ('',      '=',    '=',    '=',    '=',    '=',    '');
-my @borderTopCross      = ('',      '=+=',  '===',  '===',  '===',  '===',  '');
-my @borderTopRight      = ('',      '=+',   '==',   '=\\',  '',     '',     '');
+my @borderLeft          = ('',     '| ',   '| ',   '| ',   '',     '',     '',     '');
+my @borderLeftCross     = ('',     '+-',   '|-',   '|-',   '',     '',     '',     '');
+my @borderRight         = ('',     ' |',   ' |',   ' |',   '',     '',     '',     '');
+my @borderRightCross    = ('',     '-+',   '-|',   '-|',   '',     '',     '',     '');
 
-my @borderLeft          = ('',      '| ',   '| ',   '| ',   '',     '',     '');
-my @borderLeftCross     = ('',      '+-',   '|-',   '|-',   '',     '',     '');
-my @borderRight         = ('',      ' |',   ' |',   ' |',   '',     '',     '');
-my @borderRightCross    = ('',      '-+',   '-|',   '-|',   '',     '',     '');
+my @innerVertical       = ('   ',  ' | ',  ' | ',  ' | ',  '   ',  ' | ',  ' | ',  ' ');
+my @innerCross          = ('   ',  '-+-',  '-+-',  '-+-',  '   ',  '-+-',  '',     ' ');
+my @innerHorizontal     = ('',     '-',    '-',    '-',    '',     '-',    '',     '');
 
-my @innerVertical       = ('   ',   ' | ',  ' | ',  ' | ',  '   ',  ' | ',  ' ');
-my @innerCross          = ('   ',   '-+-',  '-+-',  '-+-',  '   ',  '-+-',  ' ');
-my @innerHorizontal     = ('',      '-',    '-',    '-',    '',     '-',    '');
+my @borderBottomLeft    = ('',     '+=',   '==',   '\\=',  '',     '',     '',     '');
+my @borderBottomLine    = ('',     '=',    '=',    '=',    '=',    '=',    '=',    '');
+my @borderBottomCross   = ('',     '=+=',  '===',  '===',  '===',  '===',  '===',  '');
+my @borderBottomRight   = ('',     '=+',   '==',   '=/',   '',     '',     '',     '');
 
-my @borderBottomLeft    = ('',      '+=',   '==',   '\\=',  '',     '',     '');
-my @borderBottomLine    = ('',      '=',    '=',    '=',    '=',    '=',    '');
-my @borderBottomCross   = ('',      '=+=',  '===',  '===',  '===',  '===',  '');
-my @borderBottomRight   = ('',      '=+',   '==',   '=/',   '',     '',     '');
-
+# my @predefinedColumnWidths = (3, 5, 5, 10, 32);
 my @predefinedColumnWidths = ();
 
 #
@@ -319,7 +325,7 @@ sub handleSegments($) {
         my $attrs = $1;
         my $content = $2;
         $remainder = $';
-        
+
         $result .= $before;
 
         my $id = getAttrVal('id', $attrs);
@@ -596,7 +602,7 @@ sub sizeTableColumns($$@) {
     # Allow calculated widths to be overriden by widths specified in a processing instruction
     if ($#predefinedColumnWidths > 0) {
         if ($#predefinedColumnWidths != $#finalColumnWidths) {
-            print STDERR "WARNING: Number of predefinedColumnWidths (" 
+            print STDERR "WARNING: Number of predefinedColumnWidths ("
                 . ($#predefinedColumnWidths + 1)
                 . ") differs from actual number of columns ("
                 . ($#finalColumnWidths + 1)
@@ -665,7 +671,7 @@ sub printTable(@) {
     # Allow calculated widths to be overriden by widths specified in a processing instruction
     if ($#predefinedColumnWidths > 0) {
         if ($#predefinedColumnWidths != $#columnWidths) {
-            print STDERR "WARNING: Number of predefinedColumnWidths (" 
+            print STDERR "WARNING: Number of predefinedColumnWidths ("
                 . ($#predefinedColumnWidths + 1)
                 . ") differs from actual number of columns ("
                 . ($#columnWidths + 1)
@@ -864,7 +870,7 @@ sub handleIntra() {
 
         # Lines look like this:  "normal text [top text|bottom text] normal text."
         my $normalTexts = $line;
-        $normalTexts =~ s/\[\|([^|]+?)\]/<BREAK>/g;         # only bottom text: [|...] 
+        $normalTexts =~ s/\[\|([^|]+?)\]/<BREAK>/g;         # only bottom text: [|...]
         $normalTexts =~ s/\[([^|]+?)\|\]/<BREAK>/g;         # only top text: [...|]
         $normalTexts =~ s/\[([^|]+?)\|([^|]+?)\]/<BREAK>/g; # top and bottom text: [...|...]
 
@@ -1304,7 +1310,7 @@ sub entities2iso88591($) {
     $string =~ s/\&supV;/V/g;        #  superscript V
     $string =~ s/\&supVI;/VI/g;      #  superscript VI
 
-    # Phantom characters (used for easy alignment in tables) 
+    # Phantom characters (used for easy alignment in tables)
     $string =~ s/\&ph\.deg;/ /g;     #  Phantom degree sign
     $string =~ s/\&ph\.pr;/ /g;      #  Phantom prime
     $string =~ s/\&ph\.Pr;/ /g;      #  Phantom double prime
