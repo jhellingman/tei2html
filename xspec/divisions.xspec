@@ -70,7 +70,7 @@
                             <p>Paragraph 1.1</p>
                             <p>Paragraph 1.2</p>
                         </div1>
-                        <div1 id="d1">
+                        <div1 id="d2">
                             <head>Division 1</head>
                             <p>Paragraph 2.1<note id="n.1" n="1" place="foot">Footnote 1.</note></p>
                             <p>Paragraph 2.2</p>
@@ -90,7 +90,7 @@
                         <p id="...">Paragraph 1.2</p>
                     </div>
                 </div>
-                <div id="d1" class="div1 last-child">
+                <div id="d2" class="div1 last-child">
                     <div class="divHead">
                         <h2 id="..." class="main">Division 1</h2>
                     </div>
@@ -114,5 +114,340 @@
             </div>
         </x:expect>
     </x:scenario>
+
+
+
+    <x:scenario label="When rendering a text with a body and two div1 elements, which should be aligned side-by-side">
+        <x:context select="//text">
+            <TEI>
+                <text>
+                    <body>
+                        <div1 id="d1" rend="align-with(d2)">
+                            <head>Division 1</head>
+                            <p n="1">Paragraph 1.1</p>
+                            <p n="2">Paragraph 1.2</p>
+                        </div1>
+                        <div1 id="d2" rend="display(none)">
+                            <head>Division 2</head>
+                            <p n="1">Paragraph 2.1</p>
+                            <p n="2">Paragraph 2.2</p>
+                        </div1>
+                    </body>
+                </text>
+            </TEI>
+        </x:context>
+        <x:expect label="will result in an HTML table with the aligned content side-by-side">
+            <div xmlns="http://www.w3.org/1999/xhtml" class="body" id="...">
+                <div id="d1" class="div1">
+                  <table class="alignedText">
+                     <tr>
+                        <td class="first">
+                           <h2 id="..." class="main">Division 1</h2>
+                        </td>
+                        <td class="second">
+                           <h2 id="..." class="main">Division 2</h2>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="first">
+                           <p id="..." class="first">Paragraph 1.1</p>
+                        </td>
+                        <td class="second">
+                           <p id="..." class="first">Paragraph 2.1</p>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="first">
+                           <p id="...">Paragraph 1.2</p>
+                        </td>
+                        <td class="second">
+                           <p id="...">Paragraph 2.2</p>
+                        </td>
+                     </tr>
+                  </table>
+               </div>
+            </div>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering a text with a body and two div1 elements, with some initial unnumbered paragraphs, which should be aligned side-by-side">
+        <x:context select="//text">
+            <TEI>
+                <text>
+                    <body>
+                        <div1 id="d1" rend="align-with(d2)">
+                            <head>Division 1</head>
+                            <p>Paragraph 1.0</p>
+                            <p n="1">Paragraph 1.1</p>
+                            <p n="2">Paragraph 1.2</p>
+                        </div1>
+                        <div1 id="d2" rend="display(none)">
+                            <head>Division 2</head>
+                            <p n="1">Paragraph 2.1</p>
+                            <p n="2">Paragraph 2.2</p>
+                        </div1>
+                    </body>
+                </text>
+            </TEI>
+        </x:context>
+        <x:expect label="will result in an HTML table with the aligned content side-by-side">
+            <div xmlns="http://www.w3.org/1999/xhtml" class="body" id="...">
+                <div id="d1" class="div1">
+                  <table class="alignedText">
+                     <tr>
+                        <td class="first">
+                           <h2 id="..." class="main">Division 1</h2>
+                            <p id="..." class="first">Paragraph 1.0</p>
+                        </td>
+                        <td class="second">
+                           <h2 id="..." class="main">Division 2</h2>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="first">
+                           <p id="...">Paragraph 1.1</p>
+                        </td>
+                        <td class="second">
+                           <p id="..." class="first">Paragraph 2.1</p>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="first">
+                           <p id="...">Paragraph 1.2</p>
+                        </td>
+                        <td class="second">
+                           <p id="...">Paragraph 2.2</p>
+                        </td>
+                     </tr>
+                  </table>
+               </div>
+            </div>
+        </x:expect>
+    </x:scenario>
+
+
+    <x:scenario label="When rendering a text with a body and two div1 elements of different lengths, which should be aligned side-by-side">
+        <x:context select="//text">
+            <TEI>
+                <text>
+                    <body>
+                        <div1 id="d1" rend="align-with(d2)">
+                            <head>Division 1</head>
+                            <p n="1">Paragraph 1.1</p>
+                            <p n="2">Paragraph 1.2</p>
+                        </div1>
+                        <div1 id="d2" rend="display(none)">
+                            <head>Division 2</head>
+                            <p n="1">Paragraph 2.1</p>
+                            <p n="2">Paragraph 2.2</p>
+                            <p n="3">Paragraph 2.3</p>
+                        </div1>
+                    </body>
+                </text>
+            </TEI>
+        </x:context>
+        <x:expect label="will result in an HTML table with the aligned content side-by-side">
+            <div xmlns="http://www.w3.org/1999/xhtml" class="body" id="...">
+                <div id="d1" class="div1">
+                  <table class="alignedText">
+                     <tr>
+                        <td class="first">
+                           <h2 id="..." class="main">Division 1</h2>
+                        </td>
+                        <td class="second">
+                           <h2 id="..." class="main">Division 2</h2>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="first">
+                           <p id="..." class="first">Paragraph 1.1</p>
+                        </td>
+                        <td class="second">
+                           <p id="..." class="first">Paragraph 2.1</p>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="first">
+                           <p id="...">Paragraph 1.2</p>
+                        </td>
+                        <td class="second">
+                           <p id="...">Paragraph 2.2</p>
+                           <p id="...">Paragraph 2.3</p>
+                        </td>
+                     </tr>
+                  </table>
+               </div>
+            </div>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering a text with a body and two div1 elements, and a footnote, which should be aligned side-by-side">
+        <x:context select="//text">
+            <TEI>
+                <text>
+                    <body>
+                        <div1 id="d1" rend="align-with(d2)">
+                            <head>Division 1</head>
+                            <p n="1">Paragraph 1.1<note id="n.1" n="1" place="foot">Footnote 1.</note></p>
+                            <p n="2">Paragraph 1.2</p>
+                        </div1>
+                        <div1 id="d2" rend="display(none)">
+                            <head>Division 2</head>
+                            <p n="1">Paragraph 2.1</p>
+                            <p n="2">Paragraph 2.2<note id="n.2" n="2" place="foot">Footnote 2.</note></p>
+                        </div1>
+                    </body>
+                </text>
+            </TEI>
+        </x:context>
+        <x:expect label="will result in an HTML table with the aligned content side-by-side">
+            <div xmlns="http://www.w3.org/1999/xhtml" class="body" id="...">
+                <div id="d1" class="div1">
+                  <table class="alignedText">
+                     <tr>
+                        <td class="first">
+                           <h2 id="..." class="main">Division 1</h2>
+                        </td>
+                        <td class="second">
+                           <h2 id="..." class="main">Division 2</h2>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="first">
+                           <p id="..." class="first">Paragraph 1.1<a class="noteRef" id="n.1src" href="#n.1">1</a></p>
+                        </td>
+                        <td class="second">
+                           <p id="..." class="first">Paragraph 2.1</p>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="first">
+                           <p id="...">Paragraph 1.2</p>
+                        </td>
+                        <td class="second">
+                           <p id="...">Paragraph 2.2<a class="noteRef" id="n.2src" href="#n.2">1</a></p>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="first">
+                           <div class="footnotes">
+                              <hr class="fnsep" />
+                              <div class="footnote-body">
+                                 <div class="fndiv"
+                                      id="n.1">
+                                    <p class="footnote">
+                                       <span class="fnlabel">
+                                          <a class="noteRef" href="#n.1src">1</a>
+                                       </span> Footnote 1.&nbsp;<a class="fnarrow" href="#n.1src" title="Return to note 1 in text.">&uparrow;</a>
+                                    </p>
+                                 </div>
+                              </div>
+                           </div>
+                        </td>
+                        <td class="second">
+                           <div class="footnotes">
+                              <hr class="fnsep" />
+                              <div class="footnote-body">
+                                 <div class="fndiv"
+                                      id="n.2">
+                                    <p class="footnote">
+                                       <span class="fnlabel">
+                                          <a class="noteRef" href="#n.2src">1</a>
+                                       </span> Footnote 2.&nbsp;<a class="fnarrow" href="#n.2src" title="Return to note 1 in text.">&uparrow;</a>
+                                    </p>
+                                 </div>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                  </table>
+               </div>
+            </div>
+        </x:expect>
+    </x:scenario>
+
+
+    <x:scenario label="When rendering a text with a body and two div1 elements and nested div2 elements, which should be aligned side-by-side">
+        <x:context select="//text">
+            <TEI>
+                <text>
+                    <body>
+                        <div1 id="d1" rend="align-with(d2)">
+                            <head>Division 1</head>
+                            <p n="1">Paragraph 1.1</p>
+                            <div2 id="d1.A" n="A">
+                                <head>Subdivision 1.A</head>
+                                <p n="1">Paragraph 1.A.1</p>
+                                <p n="2">Paragraph 1.A.2</p>
+                            </div2>
+                        </div1>
+                        <div1 id="d2" rend="display(none)">
+                            <head>Division 2</head>
+                            <p n="1">Paragraph 2.1</p>
+                            <div2 id="d2.A" n="A">
+                                <head>Subdivision 2.A</head>
+                                <p n="1">Paragraph 2.A.1</p>
+                                <p>Paragraph following 2.A.1</p>
+                                <p n="2">Paragraph 2.A.3</p>
+                            </div2>
+                        </div1>
+                    </body>
+                </text>
+            </TEI>
+        </x:context>
+        <x:expect label="will result in an HTML table with the aligned content side-by-side">
+            <div xmlns="http://www.w3.org/1999/xhtml" class="body" id="...">
+                <div id="d1" class="div1">
+                  <table class="alignedText">
+                     <tr>
+                        <td class="first">
+                           <h2 id="..." class="main">Division 1</h2>
+                        </td>
+                        <td class="second">
+                           <h2 id="..." class="main">Division 2</h2>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="first">
+                           <p id="..." class="first">Paragraph 1.1</p>
+                        </td>
+                        <td class="second">
+                           <p id="..." class="first">Paragraph 2.1</p>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td colspan="2" class="alignedDiv2"/>
+                     </tr>
+                     <tr>
+                        <td class="first">
+                           <h3 id="..." class="main">Subdivision 1.A</h3>
+                        </td>
+                        <td class="second">
+                           <h3 id="..." class="main">Subdivision 2.A</h3>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="first">
+                           <p id="..." class="first">Paragraph 1.A.1</p>
+                        </td>
+                        <td class="second">
+                           <p id="..." class="first">Paragraph 2.A.1</p>
+                           <p id="...">Paragraph following 2.A.1</p>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="first">
+                           <p id="...">Paragraph 1.A.2</p>
+                        </td>
+                        <td class="second">
+                           <p id="...">Paragraph 2.A.3</p>
+                        </td>
+                     </tr>
+                  </table>
+               </div>
+            </div>
+        </x:expect>
+    </x:scenario>
+
 
 </x:description>

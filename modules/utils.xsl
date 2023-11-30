@@ -2,7 +2,7 @@
 
     <!ENTITY mdash       "&#x2014;">
     <!ENTITY ndash       "&#x2013;">
-    <!ENTITY hellip      "&#x2026;">    
+    <!ENTITY hellip      "&#x2026;">
 
 ]>
 <xsl:stylesheet version="3.0"
@@ -330,6 +330,17 @@
     </xsl:function>
 
 
+
+    <xd:doc>
+        <xd:short>Determine a node is a division.</xd:short>
+    </xd:doc>
+
+    <xsl:function name="f:is-division" as="xs:boolean">
+        <xsl:param name="node"/>
+        <xsl:sequence select="local-name($node) = ('div', 'div0', 'div1', 'div2', 'div3', 'div4', 'div5', 'div6')"/>
+    </xsl:function>
+
+
     <!--====================================================================-->
     <!-- Generate labels for heads in the correct language -->
 
@@ -376,7 +387,7 @@
                         <xsl:value-of select="count($div/ancestor::div) + 1"/>
                     </xsl:otherwise>
                 </xsl:choose>
-            </xsl:when>            
+            </xsl:when>
             <xsl:when test="local-name($div) = ('div0', 'div1', 'div2', 'div3', 'div4', 'div5', 'div6')">
                 <xsl:choose>
                     <xsl:when test="$div/ancestor::q">
@@ -643,7 +654,7 @@
 
     <xsl:function name="f:is-unicode-amount" as="xs:boolean">
         <xsl:param name="string"/>
-        <xsl:sequence select="matches(string($string), $unicode-amount-pattern-1, 'i') 
+        <xsl:sequence select="matches(string($string), $unicode-amount-pattern-1, 'i')
                            or matches(string($string), $unicode-amount-pattern-2, 'i')"/>
     </xsl:function>
 
