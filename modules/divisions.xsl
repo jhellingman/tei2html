@@ -130,7 +130,7 @@
             <xsl:call-template name="insert-div0-fragment-footnotes"/>
         </xsl:if>
 
-        <xsl:if test="f:rend-value(@rend, 'display') != 'none'">
+        <xsl:if test="f:should-display-division(.)">
             <div>
                 <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                 <xsl:call-template name="generate-div-class"/>
@@ -171,7 +171,7 @@
 
     <xsl:template match="div2">
         <xsl:copy-of select="f:show-debug-tags(.)"/>
-        <xsl:if test="f:rend-value(@rend, 'display') != 'none'">
+        <xsl:if test="f:should-display-division(.)">
             <div>
                 <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                 <xsl:call-template name="generate-div-class"/>
@@ -193,7 +193,7 @@
 
     <xsl:template match="div3 | div4 | div5 | div6">
         <xsl:copy-of select="f:show-debug-tags(.)"/>
-        <xsl:if test="f:rend-value(@rend, 'display') != 'none'">
+        <xsl:if test="f:should-display-division(.)">
             <div class="{name()}">
                 <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                 <xsl:call-template name="generate-div-class"/>
@@ -353,6 +353,22 @@
                               or $node/self::div6
                               or $node/self::divGen"/>
     </xsl:function>
+
+
+    <xsl:function name="f:should-display-division" as="xs:boolean">
+        <xsl:param name="node"/>
+
+        <xsl:sequence select="f:rend-value($node/@rend, 'display') != 'none' and not(f:is-aligned-with-other($node))"/>
+    </xsl:function>
+
+
+    <xsl:function name="f:is-aligned-with-other" as="xs:boolean">
+        <xsl:param name="node"/>
+        <xsl:variable name="id" select="$node/@id"/>
+
+        <xsl:sequence select="boolean(($root//div | $root//div0 | $root//div1 | $root//div2 | $root//div3 | $root//div4 | $root//div5 | $root//div6)[f:rend-value(@rend, 'align-with') = $id])"/>
+    </xsl:function>
+
 
 
     <!--====================================================================-->
@@ -618,6 +634,8 @@
         <xsl:param name="a" as="node()"/>
         <xsl:param name="b" as="node()"/>
 
+        <!-- Make sure we have an id for the second column -->
+        <a id="{f:generate-id($b)}"/>
         <table class="alignedText">
             <xsl:call-template name="align-nested-divisions">
                 <xsl:with-param name="a" select="$a"/>
@@ -660,14 +678,18 @@
                     <xsl:copy-of select="f:log-info('Align nested division {1} with division {2}.', ($first/@id, $second/@id))"/>
                     <!-- add a spacer row to separate the divisions -->
                     <tr>
-                        <td colspan="2" class="alignedDiv{f:div-level($first)}"></td>
+                        <td id="{f:generate-id($first)}" class="first alignedDiv{f:div-level($first)}">
+                            <xsl:copy-of select="f:generate-lang-attribute($firstLang)"/>
+                        </td>
+                        <td id="{f:generate-id($second)}" class="second alignedDiv{f:div-level($first)}">
+                            <xsl:copy-of select="f:generate-lang-attribute($secondLang)"/>
+                        </td>
                     </tr>
                     <xsl:call-template name="align-nested-divisions">
                         <xsl:with-param name="a" select="$first"/>
                         <xsl:with-param name="b" select="$second"/>
                     </xsl:call-template>
-                    <!-- TODO: Deal with unmatched content following these divisions -->
-                    <!--
+                    <!-- Deal with unmatched content following these divisions -->
                     <xsl:call-template name="output-initial-paragraphs">
                         <xsl:with-param name="first" select="$first/following-sibling::*[1]"/>
                         <xsl:with-param name="second" select="$second/following-sibling::*[1]"/>
@@ -675,7 +697,6 @@
                         <xsl:with-param name="secondLang" select="$secondLang"/>
                         <xsl:with-param name="anchors" select="$anchors"/>
                     </xsl:call-template>
-                    -->
                 </xsl:when>
 
                 <xsl:otherwise>
@@ -701,14 +722,18 @@
                     <xsl:copy-of select="f:log-info('Align nested division {1} with division {2}.', ($first/@id, $second/@id))"/>
                     <!-- add a spacer row to separate the divisions -->
                     <tr>
-                        <td colspan="2" class="alignedDiv{f:div-level($first)}"></td>
+                        <td id="{f:generate-id($first)}" class="first alignedDiv{f:div-level($first)}">
+                            <xsl:copy-of select="f:generate-lang-attribute($firstLang)"/>
+                        </td>
+                        <td id="{f:generate-id($second)}" class="second alignedDiv{f:div-level($first)}">
+                            <xsl:copy-of select="f:generate-lang-attribute($secondLang)"/>
+                        </td>
                     </tr>
                     <xsl:call-template name="align-nested-divisions">
                         <xsl:with-param name="a" select="$first"/>
                         <xsl:with-param name="b" select="$second"/>
                     </xsl:call-template>
-                    <!-- TODO: Deal with unmatched content following these divisions -->
-                    <!--
+                    <!-- Deal with unmatched content following these divisions -->
                     <xsl:call-template name="output-initial-paragraphs">
                         <xsl:with-param name="first" select="$first/following-sibling::*[1]"/>
                         <xsl:with-param name="second" select="$second/following-sibling::*[1]"/>
@@ -716,7 +741,6 @@
                         <xsl:with-param name="secondLang" select="$secondLang"/>
                         <xsl:with-param name="anchors" select="$anchors"/>
                     </xsl:call-template>
-                    -->
                 </xsl:when>
 
                 <xsl:otherwise>
@@ -752,18 +776,18 @@
 
 
     <xsl:template name="output-initial-paragraphs">
-        <xsl:param name="first" as="node()"/>
-        <xsl:param name="second" as="node()"/>
+        <xsl:param name="first" as="node()?"/>
+        <xsl:param name="second" as="node()?"/>
         <xsl:param name="firstLang" as="xs:string?"/>
         <xsl:param name="secondLang" as="xs:string?"/>
         <xsl:param name="anchors" as="xs:string*"/>
 
-        <xsl:if test="not($first/@n = $anchors) or not($second/@n = $anchors)">
+        <xsl:if test="($first or $second) and (not($first/@n = $anchors) or not($second/@n = $anchors))">
             <tr>
                 <td class="first">
                     <xsl:copy-of select="f:generate-lang-attribute($firstLang)"/>
 
-                    <xsl:if test="not($first/@n = $anchors)">
+                    <xsl:if test="$first and not($first/@n = $anchors)">
                         <xsl:apply-templates select="$first"/>
                         <xsl:call-template name="output-inserted-paragraphs">
                             <xsl:with-param name="start" select="$first"/>
@@ -775,7 +799,7 @@
                 <td class="second">
                     <xsl:copy-of select="f:generate-lang-attribute($secondLang)"/>
 
-                    <xsl:if test="not($second/@n = $anchors)">
+                    <xsl:if test="$second and not($second/@n = $anchors)">
                         <xsl:apply-templates select="$second"/>
                         <xsl:call-template name="output-inserted-paragraphs">
                             <xsl:with-param name="start" select="$second"/>

@@ -139,6 +139,7 @@
         <x:expect label="will result in an HTML table with the aligned content side-by-side">
             <div xmlns="http://www.w3.org/1999/xhtml" class="body" id="...">
                 <div id="d1" class="div1">
+                  <a id="d2"/>
                   <table class="alignedText">
                      <tr>
                         <td class="first">
@@ -193,6 +194,7 @@
         <x:expect label="will result in an HTML table with the aligned content side-by-side">
             <div xmlns="http://www.w3.org/1999/xhtml" class="body" id="...">
                 <div id="d1" class="div1">
+                  <a id="d2"/>
                   <table class="alignedText">
                      <tr>
                         <td class="first">
@@ -249,6 +251,7 @@
         <x:expect label="will result in an HTML table with the aligned content side-by-side">
             <div xmlns="http://www.w3.org/1999/xhtml" class="body" id="...">
                 <div id="d1" class="div1">
+                  <a id="d2"/>
                   <table class="alignedText">
                      <tr>
                         <td class="first">
@@ -303,6 +306,7 @@
         <x:expect label="will result in an HTML table with the aligned content side-by-side">
             <div xmlns="http://www.w3.org/1999/xhtml" class="body" id="...">
                 <div id="d1" class="div1">
+                  <a id="d2"/>
                   <table class="alignedText">
                      <tr>
                         <td class="first">
@@ -398,6 +402,7 @@
         <x:expect label="will result in an HTML table with the aligned content side-by-side">
             <div xmlns="http://www.w3.org/1999/xhtml" class="body" id="...">
                 <div id="d1" class="div1">
+                  <a id="d2"/>
                   <table class="alignedText">
                      <tr>
                         <td class="first">
@@ -416,7 +421,8 @@
                         </td>
                      </tr>
                      <tr>
-                        <td colspan="2" class="alignedDiv2"/>
+                        <td id="d1.A" class="first alignedDiv2"/>
+                        <td id="d2.A" class="second alignedDiv2"/>
                      </tr>
                      <tr>
                         <td class="first">
@@ -442,6 +448,205 @@
                         <td class="second">
                            <p id="...">Paragraph 2.A.3</p>
                         </td>
+                     </tr>
+                  </table>
+               </div>
+            </div>
+        </x:expect>
+    </x:scenario>
+
+
+    <x:scenario label="When rendering a text with a body and two div1 elements and nested div2 elements, and a paragraph after them, which should be aligned side-by-side">
+        <x:context select="//text">
+            <TEI>
+                <text>
+                    <body>
+                        <div1 id="d1" rend="align-with(d2)">
+                            <head>Division 1</head>
+                            <p n="1">Paragraph 1.1</p>
+                            <div2 id="d1.A" n="A">
+                                <head>Subdivision 1.A</head>
+                                <p n="1">Paragraph 1.A.1</p>
+                                <p n="2">Paragraph 1.A.2</p>
+                            </div2>
+                            <p>Additional Paragraph in 1</p>
+                        </div1>
+                        <div1 id="d2" rend="display(none)">
+                            <head>Division 2</head>
+                            <p n="1">Paragraph 2.1</p>
+                            <div2 id="d2.A" n="A">
+                                <head>Subdivision 2.A</head>
+                                <p n="1">Paragraph 2.A.1</p>
+                                <p>Paragraph following 2.A.1</p>
+                                <p n="2">Paragraph 2.A.3</p>
+                            </div2>
+                            <p>Additional Paragraph in 2</p>
+                        </div1>
+                    </body>
+                </text>
+            </TEI>
+        </x:context>
+        <x:expect label="will result in an HTML table with the aligned content side-by-side">
+            <div xmlns="http://www.w3.org/1999/xhtml" class="body" id="...">
+                <div id="d1" class="div1">
+                  <a id="d2"/>
+                  <table class="alignedText">
+                     <tr>
+                        <td class="first">
+                           <h2 id="..." class="main">Division 1</h2>
+                        </td>
+                        <td class="second">
+                           <h2 id="..." class="main">Division 2</h2>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="first">
+                           <p id="..." class="first">Paragraph 1.1</p>
+                        </td>
+                        <td class="second">
+                           <p id="..." class="first">Paragraph 2.1</p>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td id="d1.A" class="first alignedDiv2"/>
+                        <td id="d2.A" class="second alignedDiv2"/>
+                     </tr>
+                     <tr>
+                        <td class="first">
+                           <h3 id="..." class="main">Subdivision 1.A</h3>
+                        </td>
+                        <td class="second">
+                           <h3 id="..." class="main">Subdivision 2.A</h3>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="first">
+                           <p id="..." class="first">Paragraph 1.A.1</p>
+                        </td>
+                        <td class="second">
+                           <p id="..." class="first">Paragraph 2.A.1</p>
+                           <p id="...">Paragraph following 2.A.1</p>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="first">
+                           <p id="...">Paragraph 1.A.2</p>
+                        </td>
+                        <td class="second">
+                           <p id="...">Paragraph 2.A.3</p>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="first">
+                           <p id="...">Additional Paragraph in 1</p>
+                        </td>
+                        <td class="second">
+                           <p id="...">Additional Paragraph in 2</p>
+                        </td>
+                     </tr>
+                  </table>
+               </div>
+            </div>
+        </x:expect>
+    </x:scenario>
+
+
+    <x:scenario label="When rendering a text with a body and two div1 elements and nested div2 elements, and a division after them, which should be aligned side-by-side">
+        <x:context select="//text">
+            <TEI>
+                <text>
+                    <body>
+                        <div1 id="d1" rend="align-with(d2)">
+                            <head>Division 1</head>
+                            <p n="1">Paragraph 1.1</p>
+                            <div2 id="d1.A" n="A">
+                                <head>Subdivision 1.A</head>
+                                <p n="1">Paragraph 1.A.1</p>
+                                <p n="2">Paragraph 1.A.2</p>
+                            </div2>
+                            <div2 id="d1.B" n="B">
+                                <head>Subdivision 1.B</head>
+                                <p n="1">Paragraph 1.B.1</p>
+                                <p n="2">Paragraph 1.B.2</p>
+                            </div2>
+                        </div1>
+                        <div1 id="d2" rend="display(none)">
+                            <head>Division 2</head>
+                            <p n="1">Paragraph 2.1</p>
+                            <div2 id="d2.A" n="A">
+                                <head>Subdivision 2.A</head>
+                                <p n="1">Paragraph 2.A.1</p>
+                                <p>Paragraph following 2.A.1</p>
+                                <p n="2">Paragraph 2.A.3</p>
+                            </div2>
+                        </div1>
+                    </body>
+                </text>
+            </TEI>
+        </x:context>
+        <x:expect label="will result in an HTML table with the aligned content side-by-side">
+            <div xmlns="http://www.w3.org/1999/xhtml" class="body" id="...">
+                <div id="d1" class="div1">
+                  <a id="d2"/>
+                  <table class="alignedText">
+                     <tr>
+                        <td class="first">
+                           <h2 id="..." class="main">Division 1</h2>
+                        </td>
+                        <td class="second">
+                           <h2 id="..." class="main">Division 2</h2>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="first">
+                           <p id="..." class="first">Paragraph 1.1</p>
+                        </td>
+                        <td class="second">
+                           <p id="..." class="first">Paragraph 2.1</p>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td id="d1.A" class="first alignedDiv2"/>
+                        <td id="d2.A" class="second alignedDiv2"/>
+                     </tr>
+                     <tr>
+                        <td class="first">
+                           <h3 id="..." class="main">Subdivision 1.A</h3>
+                        </td>
+                        <td class="second">
+                           <h3 id="..." class="main">Subdivision 2.A</h3>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="first">
+                           <p id="..." class="first">Paragraph 1.A.1</p>
+                        </td>
+                        <td class="second">
+                           <p id="..." class="first">Paragraph 2.A.1</p>
+                           <p id="...">Paragraph following 2.A.1</p>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="first">
+                           <p id="...">Paragraph 1.A.2</p>
+                        </td>
+                        <td class="second">
+                           <p id="...">Paragraph 2.A.3</p>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="first">
+                           <div id="d1.B" class="div2 last-child">
+                              <div class="divHead">
+                                 <h3 id="..." class="main">Subdivision 1.B</h3>
+                              </div>
+                              <div class="divBody">
+                                 <p id="..." class="first">Paragraph 1.B.1</p>
+                                 <p id="...">Paragraph 1.B.2</p>
+                              </div>
+                           </div>
+                        </td>
+                        <td class="second"/>
                      </tr>
                   </table>
                </div>

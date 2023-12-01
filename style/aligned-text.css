@@ -8,7 +8,7 @@ table.alignedText, table.alignedVerse {
     border-collapse: collapse;
 }
 
-table.alignedText td {
+table.alignedText td.first, table.alignedText td.second {
     vertical-align: top;
     width: 50%;
 }
@@ -34,6 +34,26 @@ table.alignedVerse td.first, table.alignedVerse td.second {
 
 table.alignedVerse td.lineNumbers {
     width: 10%;
+}
+
+td.alignedDiv1 {
+    padding-top: 5.6em;
+}
+
+td.alignedDiv2 {
+    padding-top: 4.8em;
+}
+
+td.alignedDiv3 {
+    padding-top: 3.6em;
+}
+
+td.alignedDiv4 {
+    padding-top: 2.4em;
+}
+
+td.alignedDiv5, td.alignedDiv6, td.alignedDiv7 {
+    padding-top: 1.44em;
 }
 
 /* End of aligned-text.css */
