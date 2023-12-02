@@ -1,0 +1,18 @@
+== Aligned Bilingual Text
+
+When you have a bilingual text, it is nice to show them side-by-side, such that the translations are aligned. Books sometimes places such bilingual texts on facing pages, but in an unpaged medium, that is not an option.
+
+To present bilingual text side-by-side with the `tei2html`, you can do the following:
+
+1. Encode the two texts, each should be in a separate divisions (`div1`, `div2`, etc.).
+2. Give each of the divisions an `@id` attribute.
+3. On one of the divisions, at the following `@rend` attribute:
+
+    rend="align-with(id-of-div-to-align)"
+
+4. give each element in the first division with a unique `@n` attribute value. These can be numbers. The order is not really relevant, but it is easy to just number them sequentially.
+5. give the matching elements in the second division the same `@n` attribute value as its counterpart in the first division. If an element has no counterpart, no `@n` attribute is needed.
+
+When running `tei2html`, it will generate a table, with the text of the first division on the left, and the text of the second division on the right. Table cells will be used to make sure matching elements are aligned. The code understands sub-divisions, and will recurse into them, still using a single table.
+
+

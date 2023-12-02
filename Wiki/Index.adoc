@@ -33,6 +33,8 @@ include::Formulas.adoc[leveloffset=1]
 
 include::UsingTheRendAttribute.adoc[leveloffset=1]
 
+include::AlignedTexts.adoc[leveloffset=1]
+
 include::FacsimileSupport.adoc[leveloffset=1]
 
 include::ePub3Support.adoc[leveloffset=1]
