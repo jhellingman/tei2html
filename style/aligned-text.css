@@ -56,4 +56,10 @@ td.alignedDiv5, td.alignedDiv6, td.alignedDiv7 {
     padding-top: 1.44em;
 }
 
+
+/* Collapsing of margins doesn't work for table cells */
+table.alignedText p:not(.first) {
+    margin-top: 0;
+}
+
 /* End of aligned-text.css */

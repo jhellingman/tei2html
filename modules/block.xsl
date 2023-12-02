@@ -559,13 +559,14 @@
         <xsl:param name="node" as="element(p)"/>
 
         <xsl:variable name="preceding">
-            <xsl:value-of select="name($node/preceding-sibling::*[1])"/>
+            <xsl:value-of select="name($node/preceding-sibling::*[not(self::pb)][1])"/>
         </xsl:variable>
 
-        <xsl:value-of select="count($node/preceding-sibling::*) = 0
+        <xsl:value-of select="count($node/preceding-sibling::*[not(self::pb)]) = 0
             or $preceding = 'head'
             or $preceding = 'byline'
             or $preceding = 'lg'
+            or $preceding = 'sp'
             or $preceding = 'tb'
             or $preceding = 'epigraph'
             or $preceding = 'argument'
