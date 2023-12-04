@@ -13,6 +13,14 @@ To present bilingual text side-by-side with the `tei2html`, you can do the follo
 4. give each element in the first division with a unique `@n` attribute value. These can be numbers. The order is not really relevant, but it is easy to just number them sequentially.
 5. give the matching elements in the second division the same `@n` attribute value as its counterpart in the first division. If an element has no counterpart, no `@n` attribute is needed.
 
-When running `tei2html`, it will generate a table, with the text of the first division on the left, and the text of the second division on the right. Table cells will be used to make sure matching elements are aligned. The code understands sub-divisions, and will recurse into them, still using a single table.
+When running `tei2html`, it will generate a table, with the text of the first division on the left, and the text of the second division on the right. Table cells will be used to make sure matching elements are aligned. The code understands sub-divisions and will recurse into them, still using a single table.
 
+
+=== Aligned text from a separate file
+
+It is also possible to align texts kept in separate files. To do so, use the following `@rend` attribute:
+
+    rend="align-with-document(filename.xml#id-of-div-to-align)"
+
+When using the perl scripts that come with `tei2html`, the to-be-aligned sections will be included in an intermediate document in a pre-processing step (in `include.xsl`), which replaces `align-with-document` with `align-with` and places the to-be aligned section directly after the section it will be aligned with. By doing so, generated tables of contents, lists of issues in the colophon, and footnotes will be processed correctly. The `tei2html` xslt stylesheeets can also do this directly, but with limited support for those additional items.
 

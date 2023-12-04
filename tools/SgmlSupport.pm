@@ -2080,6 +2080,11 @@ BEGIN {
     $ent{'Oacuumlb'}    = 'O' . chr(0x0301) . chr(0x0324);  # O with acute and umlaut below (JASCHKE)
     $ent{'Uacuumlb'}    = 'U' . chr(0x0301) . chr(0x0324);  # U with acute and umlaut below (JASCHKE)
 
+    $ent{'otiumb'}      = 'o' . chr(0x0303) . chr(0x0324);  # o with tilde and umlaut below (JASCHKE; probably error)
+    $ent{'obrumb'}      = 'o' . chr(0x0306) . chr(0x0324);  # o with breve and umlaut below (JASCHKE; error ?)
+    $ent{'ebrumb'}      = 'e' . chr(0x0306) . chr(0x0324);  # o with breve and umlaut below (JASCHKE; error ?)
+    $ent{'oacbrumb'}    = 'o' . chr(0x0301) . chr(0x0306) . chr(0x0324);  # o with acute, breve and umlaut below (JASCHKE; error ?)
+
     $ent{'abreac'}      = 'a' . chr(0x0306) . chr(0x0301);  # a with breve and acute
     $ent{'Abreac'}      = 'A' . chr(0x0306) . chr(0x0301);  # A with breve and acute
     $ent{'ebreac'}      = 'e' . chr(0x0306) . chr(0x0301);  # e with breve and acute (JASCHKE)
@@ -2089,8 +2094,13 @@ BEGIN {
     $ent{'obreac'}      = 'o' . chr(0x0306) . chr(0x0301);  # o with breve and acute
     $ent{'Obreac'}      = 'O' . chr(0x0306) . chr(0x0301);  # O with breve and acute
 
+    $ent{'chiacu'}      = chr(0x03C7) . chr(0x0301);  # Greek Small Letter Chi with acute accent (U+03C7 U+0301) (JASCHKE)
+
     $ent{'lowarrow'}    = chr(0x02F1);  # Modifier Letter Low Left Arrowhead (JASCHKE)
     $ent{'lowring'}     = chr(0x02F3);  # Modifier Letter Low Ring (JASCHKE)
+
+    $ent{'mllla'}       = chr(0x02F1);  # Modifier Letter Low Left Arrowhead (JASCHKE)
+    $ent{'mllr'}        = chr(0x02F3);  # Modifier Letter Low Ring (JASCHKE)
 
     $ent{'Voline'}      = 'V' . chr(0x0305); # V with overline
     $ent{'Xoline'}      = 'X' . chr(0x0305); # V with overline
@@ -2827,6 +2837,13 @@ sub pgdp2sgml {
 
     # Multiple accents above and below:
     $string =~ s/\[=([a-zA-Z]):\]/\&$1maumb;/g;         # macron and umlaut below
+    $string =~ s/\[\)([a-zA-Z]):\]/\&$1brumb;/g;        # breve and umlaut below
+    $string =~ s/\[\'([a-zA-Z]):\]/\&$1acumb;/g;        # acute and umlaut below
+    $string =~ s/\[`([a-zA-Z]):\]/\&$1grumb;/g;         # grave and umlaut below
+    $string =~ s/\[~([a-zA-Z]):\]/\&$1tiumb;/g;         # tilde and umlaut below
+
+    $string =~ s/\[\'\)([a-zA-Z]):\]/\&$1acbrumb;/g;    # acute, breve and umlaut below
+
     $string =~ s/\[`([a-zA-Z])\.\]/\&$1gradb;/g;        # grave and dot below
     $string =~ s/\[,([a-zA-Z])\.\]/\&$1sadb;/g;         # spiritus asper and dot below
 
