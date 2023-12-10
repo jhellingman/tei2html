@@ -822,7 +822,7 @@
     <xsl:function name="f:strip-diacritics-and-marks" as="xs:string">
         <xsl:param name="string" as="xs:string"/>
 
-        <xsl:variable name="string" select="fn:replace($string, '[&#x0640;&#x02BE;&#x02BC;&#x02BF;&#x02b9;&tcomma;&prime;-]', '')" as="xs:string"/>
+        <xsl:variable name="string" select="fn:replace($string, '[&#x0640;&#x02BE;&#x02BC;&#x02BD;&#x02BF;&#x02b9;&tcomma;&prime;-]', '')" as="xs:string"/>
         <xsl:variable name="string" select="f:mask-indic-vowel-signs($string)" as="xs:string"/>
         <xsl:variable name="string" select="fn:replace(fn:normalize-unicode($string, 'NFD'), '\p{M}', '')" as="xs:string"/>
         <xsl:variable name="string" select="f:restore-indic-vowel-signs($string)" as="xs:string"/>

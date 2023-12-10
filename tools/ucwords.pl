@@ -1795,8 +1795,9 @@ sub StripPoints($) {
 #
 sub Normalize($) {
     my $string = shift;
-    $string =~ s/-//g;
-    $string =~ s/\*//g;
+    $string =~ s/-//g;                          # hyphenated words should stay together.
+    $string =~ s/\*//g;                         # star-notation used in PGDP for hyphenated words
+    $string =~ s/\x{0701}//g;                   # modifier letter reversed comma
     $string = lc(StripDiacritics($string));
     return $string;
 }
