@@ -285,7 +285,7 @@
 
     <xsl:template name="handle-div">
         <xsl:choose>
-            <xsl:when test="f:has-rend-value(@rend, 'align-with')">
+            <xsl:when test="f:is-set('includeAlignedDivisions') and f:has-rend-value(@rend, 'align-with')">
                 <xsl:variable name="otherId" select="f:rend-value(@rend, 'align-with')"/>
                 <xsl:choose>
                     <xsl:when test="//*[@id = $otherId]">
@@ -366,7 +366,7 @@
         <xsl:param name="node"/>
         <xsl:variable name="id" select="$node/@id"/>
 
-        <xsl:sequence select="boolean(($root//div | $root//div0 | $root//div1 | $root//div2 | $root//div3 | $root//div4 | $root//div5 | $root//div6)[f:rend-value(@rend, 'align-with') = $id])"/>
+        <xsl:sequence select="f:is-set('includeAlignedDivisions') and boolean(($root//div | $root//div0 | $root//div1 | $root//div2 | $root//div3 | $root//div4 | $root//div5 | $root//div6)[f:rend-value(@rend, 'align-with') = $id])"/>
     </xsl:function>
 
 

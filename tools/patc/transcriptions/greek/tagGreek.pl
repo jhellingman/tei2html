@@ -8,9 +8,12 @@ my $after = "</foreign>";
 # Pattern: Greek (Neutral Greek)+
 
 my $file = $ARGV[0];
+my $outputFile = $ARGV[1];
+
+print STDOUT "Tagging Greek as foreign language in '$file', writing to '$outputFile'\n";
 
 open(INPUTFILE, '<:encoding(UTF-8)', $file) || die("Could not open input file $file");
-open(OUTPUTFILE, "> tmp-1.txt") || die("Could not open tmp-1.txt for writing.");
+open(OUTPUTFILE, "> $outputFile") || die("Could not open $outputFile for writing.");
 binmode(OUTPUTFILE, ":utf8");
 
 my $regex = "[\p{Greek}]+([ ,.;?:]+[\p{Greek}]+)*";

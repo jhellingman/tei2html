@@ -2202,18 +2202,38 @@ BEGIN {
 
 
     # Meteorological symbols (used in Scott's South Pole)
-    $ent{'snow'}        = '[snow]';             # symbol for snow
-    $ent{'storm'}       = '[storm]';            # symbol for storm
-    $ent{'mist'}        = '[mist]';             # symbol for mist
-    $ent{'aurora'}      = '[aurora]';           # symbol for aurora
-    $ent{'ringsun'}     = '[ringsun]';          # symbol for ring around the sun
-    $ent{'ringmoon'}    = '[ringmoon]';         # symbol for ring around the moon
+    $ent{'snow'}        = '[snow]';         # symbol for snow
+    $ent{'storm'}       = '[storm]';        # symbol for storm
+    $ent{'mist'}        = '[mist]';         # symbol for mist
+    $ent{'aurora'}      = '[aurora]';       # symbol for aurora
+    $ent{'ringsun'}     = '[ringsun]';      # symbol for ring around the sun
+    $ent{'ringmoon'}    = '[ringmoon]';     # symbol for ring around the moon
 
-    $ent{'handptr'}     = chr(0x261E);          # White right pointing index
-    $ent{'diamond'}     = chr(0x25C6);          # Black diamond
+    $ent{'handptr'}     = chr(0x261E);      # White right pointing index
+    $ent{'diamond'}     = chr(0x25C6);      # Black diamond
 
-    $ent{'Sun'}         = chr(0x2609);          # Symbol for Sun.
+    $ent{'Sun'}         = chr(0x2609);      # Symbol for Sun.
 
+    # Chess pieces and variants in as used in Falkener: Games ancient and oriental.
+
+    $ent{'cpKing'}      = chr(0x25CB);                  # King (or sun)
+    $ent{'cpQueen'}     = chr(0x263E);                  # Queen (or moon)
+    $ent{'cpBishop'}    = '+';                          # Bishop (or cross)
+    $ent{'cpKnight'}    = chr(0x1D7E4);                 # Knight (or horse's head) (Mathematical sans-serif digit two)
+    $ent{'cpCastle'}    = chr(0x25FB);                  # Castle (or tower or rukh)
+    $ent{'cpPawn'}      = chr(0x22A5);                  # Pawn (a single man standing on a base)
+    $ent{'cpCheck'}     = chr(0x2713);                  # Check
+    $ent{'cpMCastle'}   = chr(0x229F);                  # Castle of middle power
+    $ent{'cpLCastle'}   = chr(0x229E);                  # Castle of least power
+    $ent{'cpPCastle'}   = chr(0x25FB) . chr(0x0332);    # Promoted castle (Shogi)
+    $ent{'cpLBishop'}   = chr(0x22A4);                  # Lame bishop
+    $ent{'cpPBishop'}   = '+' . chr(0x0332);            # Promoted bishop (Shogi)
+    $ent{'cpChevalier'} = chr(0x2733);                  # Chevalier
+    $ent{'cpCavalier'}  = chr(0x2205);                  # Cavalier
+    $ent{'cpCannon'}    = chr(0x2297);                  # Cannon
+    $ent{'cpGuard'}     = chr(0x1D5A6);                 # Guards (Mathematical sans-serif capital G)
+    $ent{'cpKin'}       = chr(0x1D5AA);                 # Kin (or gold general) (Mathematical sans-serif capital K)
+    $ent{'cpYari'}      = chr(0x1D5B8);                 # Yari (or spear) (Mathematical sans-serif capital Y)
 
     # Greek additions
     $ent{'amacgr'}      =  chr(0x1FB1);     # Greek alpha with macron
