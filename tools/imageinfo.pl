@@ -56,6 +56,9 @@ sub listRecursively {
             if ($file =~ /\.jpe?g$|\.png|\.gif/i) {
                 handleImage("$directory/$file");
             }
+            if ($file =~ /\.mp3|\.mxl/i) {
+                handleMP3("$directory/$file");
+            }
         }
         elsif (-d "$directory/$file") {
             listRecursively("$directory/$file");
@@ -70,28 +73,65 @@ sub listRecursively {
 sub handleImage($) {
     my $imageFile = shift;
 
-    my ($dev, $ino, $mode, $nlink, $uid, $gid, $rdev, $statFileSize, $atime, $mtime, $ctime, $blksize, $blocks) = stat($imageFile);
-    my ($sec, $min, $hour, $mday, $mon, $year, $wday, $yday, $isdst) = gmtime($mtime);
-    my $fileDate = sprintf "%4d-%02d-%02d %02d:%02d:%02d", $year + 1900, $mon + 1, $mday, $hour, $min , $sec;
-
-    my $imagePath = $imageFile;
-    if ($stripPath == 1) {
-        my ($name, $path, $suffix) = fileparse($imageFile, "");
-        $imagePath = "images/$name";
-    } else {
-        $imagePath = dropPath($imagePath, $dropPath);
-    }
-
+    my $imagePath = handlePath($imageFile, "images");
     if ($seenImageHash{$imagePath}) {
         print STDERR "Ignoring second instance of $imagePath\n";
         return;
     }
     $seenImageHash{$imagePath} = 1;
 
+    my $fileDate = getFileDate($imageFile);
     my ($width, $height) = imgsize($imageFile);
     my $fileSize = -s $imageFile;
 
     print "\n<image path=\"$imagePath\" filesize=\"$fileSize\" filedate=\"$fileDate\" width=\"${width}px\" height=\"${height}px\"/>";
+}
+
+
+#
+# handleMP3 -- find some information of an MP3 file.
+#
+sub handleMP3($) {
+    my $mp3File = shift;
+
+    my $mp3Path = handlePath($mp3File, "music");
+    if ($seenImageHash{$mp3Path}) {
+        print STDERR "Ignoring second instance of $mp3Path\n";
+        return;
+    }
+    $seenImageHash{$mp3Path} = 1;
+
+    my $fileDate = getFileDate($mp3File);
+    my $fileSize = -s $mp3File;
+
+    print "\n<music path=\"$mp3Path\" filesize=\"$fileSize\" filedate=\"$fileDate\"/>";
+}
+
+
+sub handlePath($) {
+    my $imageFile = shift;
+    my $defaultPath = shift;
+    my $imagePath;
+
+    if ($stripPath == 1) {
+        my ($name, $path, $suffix) = fileparse($imageFile, "");
+        $imagePath = "$defaultPath/$name";
+    } else {
+        $imagePath = dropPath($imageFile, $dropPath);
+    }
+
+    return $imagePath;
+}
+
+
+sub getFileDate($) {
+    my $file = shift;
+
+    my ($dev, $ino, $mode, $nlink, $uid, $gid, $rdev, $statFileSize, $atime, $mtime, $ctime, $blksize, $blocks) = stat($file);
+    my ($sec, $min, $hour, $mday, $mon, $year, $wday, $yday, $isdst) = gmtime($mtime);
+    my $fileDate = sprintf "%4d-%02d-%02d %02d:%02d:%02d", $year + 1900, $mon + 1, $mday, $hour, $min , $sec;
+
+    return $fileDate;
 }
 
 

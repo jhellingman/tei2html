@@ -173,6 +173,7 @@
                 <xref.table>true</xref.table>
 
                 <pageNumbers.show>false</pageNumbers.show>
+                <includeAlignedDivisions>false</includeAlignedDivisions>
 
                 <math.mathJax.format>MML</math.mathJax.format>
             </output>

@@ -9,6 +9,9 @@
         <xs:sequence>
             <xs:element minOccurs="0" maxOccurs="unbounded" name="image" type="Image"/>
         </xs:sequence>
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="music" type="Music"/>
+        </xs:sequence>
         <xs:attribute name="version" type="xs:decimal"/>
     </xs:complexType>
 
@@ -22,6 +25,12 @@
         <xs:attribute name="filedate" type="DateTime"/>
         <xs:attribute name="width" type="Dimension" use="required"/>
         <xs:attribute name="height" type="Dimension" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="Music">
+        <xs:attribute name="path" type="xs:string" use="required"/>
+        <xs:attribute name="filesize" type="xs:integer"/>
+        <xs:attribute name="filedate" type="DateTime"/>
     </xs:complexType>
 
     <xs:complexType name="Boundary">

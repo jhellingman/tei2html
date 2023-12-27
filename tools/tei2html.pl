@@ -310,7 +310,7 @@ sub processFile($) {
     $makeHtml5    && makeHtml5($basename,    $preprocessedXmlFilename);
     $makeEpub     && makeEpub($basename,     $preprocessedXmlFilename);
     $makePdf      && makePdf($basename,      $preprocessedXmlFilename);
-    $makeKwic     && makeKwic($basename,     $preprocessedXmlFilename);
+    !$runChecks && $makeKwic && makeKwic($basename, $preprocessedXmlFilename);
     $makeText     && makeText($basename,     $filename);
     $makeP5       && makeP5($basename,       $preprocessedXmlFilename);
     $makeSQL      && makeSql($preprocessedXmlFilename);
@@ -1087,6 +1087,9 @@ sub runChecks($) {
     system ("$saxon \"$positionInfoFilename\" $xsldir/preprocess.xsl > $xmlFilename");
 
     system ("$saxon \"$xmlFilename\" $xsldir/checks.xsl " . determineSaxonParameters() . " > \"$checkFilename\"");
+
+    $makeKwic && makeKwic($basename, $xmlFilename);
+
     if ($filename ne $intraFile) {
         removeFile($intraFile);
     }
@@ -1134,6 +1137,14 @@ sub collectImageInfo() {
     } elsif (-d 'Processed/images') {
         trace("Collect image dimensions from 'Processed/images'...");
         system ("perl $toolsdir/imageinfo.pl -d=1 Processed/images > imageinfo.xml");
+    }
+
+    if (-d 'music') {
+        trace("Collect information from 'music'...");
+        system ("perl $toolsdir/imageinfo.pl music > musicinfo.xml");
+    } elsif (-d 'Processed/music') {
+        trace("Collect information from 'Processed/music'...");
+        system ("perl $toolsdir/imageinfo.pl -d=1 Processed/music > musicinfo.xml");
     }
 }
 

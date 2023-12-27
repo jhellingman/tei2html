@@ -2200,7 +2200,6 @@ BEGIN {
     $ent{'qprime'}      = chr(0x2057);          # quadruple prime
     $ent{'pprime'}      = chr(0x2033) . chr(0x2034); # Quintuple (pentuple) prime = 2 + 3 primes.
 
-
     # Meteorological symbols (used in Scott's South Pole)
     $ent{'snow'}        = '[snow]';         # symbol for snow
     $ent{'storm'}       = '[storm]';        # symbol for storm
@@ -2215,19 +2214,19 @@ BEGIN {
     $ent{'Sun'}         = chr(0x2609);      # Symbol for Sun.
 
     # Chess pieces and variants in as used in Falkener: Games ancient and oriental.
-
-    $ent{'cpKing'}      = chr(0x25CB);                  # King (or sun)
+    $ent{'cpKing'}      = chr(0x25EF);                  # King (or sun)
+    $ent{'cpBKing'}     = chr(0x2B24);                  # Black king
     $ent{'cpQueen'}     = chr(0x263E);                  # Queen (or moon)
     $ent{'cpBishop'}    = '+';                          # Bishop (or cross)
     $ent{'cpKnight'}    = chr(0x1D7E4);                 # Knight (or horse's head) (Mathematical sans-serif digit two)
-    $ent{'cpCastle'}    = chr(0x25FB);                  # Castle (or tower or rukh)
+    $ent{'cpCastle'}    = chr(0x25A1);                  # Castle (or tower or rukh)
     $ent{'cpPawn'}      = chr(0x22A5);                  # Pawn (a single man standing on a base)
     $ent{'cpCheck'}     = chr(0x2713);                  # Check
     $ent{'cpMCastle'}   = chr(0x229F);                  # Castle of middle power
     $ent{'cpLCastle'}   = chr(0x229E);                  # Castle of least power
-    $ent{'cpPCastle'}   = chr(0x25FB) . chr(0x0332);    # Promoted castle (Shogi)
+    $ent{'cpPCastle'}   = chr(0x25A1) . chr(0x0332);    # Promoted castle (Shogi)
     $ent{'cpLBishop'}   = chr(0x22A4);                  # Lame bishop
-    $ent{'cpPBishop'}   = '+' . chr(0x0332);            # Promoted bishop (Shogi)
+    $ent{'cpPBishop'}   = '±';                          # Promoted bishop (Shogi)
     $ent{'cpChevalier'} = chr(0x2733);                  # Chevalier
     $ent{'cpCavalier'}  = chr(0x2205);                  # Cavalier
     $ent{'cpCannon'}    = chr(0x2297);                  # Cannon
