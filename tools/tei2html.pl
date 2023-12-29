@@ -1295,11 +1295,14 @@ sub tei2xml($$) {
     my $transcribedFile = transcribe($intraFile, $noTranscriptionPopups);
 
     trace("Check SGML...");
-    my $nsgmlresult = system ("$nsgmls -c \"$catalog\" -wall -E100000 -g -f $sgmlFile.err $transcribedFile > $sgmlFile.nsgml");
+    my $nsgmlresult = system ("$nsgmls -c \"$catalog\" -wall -E100000 -g -f $sgmlFile.raw.err $transcribedFile > $sgmlFile.nsgml");
     if ($nsgmlresult != 0) {
         warning("NSGML found validation errors in $sgmlFile.");
     }
     removeFile("$sgmlFile.nsgml");
+    system ("perl $toolsdir/filter-nsgmls-errors.pl $sgmlFile.raw.err > $sgmlFile.err");
+    system ("cat $sgmlFile.err");
+    removeFile("$sgmlFile.raw.err");
 
     my $tmpFile1 = temporaryFile('hide-entities', '.tei');
     my $tmpFile2 = temporaryFile('sx', '.xml');
@@ -1310,7 +1313,8 @@ sub tei2xml($$) {
 
     # hide entities for parser
     system ("sed \"s/\\&/|xxxx|/g\" < $transcribedFile > $tmpFile1");
-    system ("$sx -c \"$catalog\" -E100000 -xlower -xcomment -xempty -xndata  $tmpFile1 > $tmpFile2");
+    system ("$sx -c \"$catalog\" -E100000 -xlower -xcomment -xempty -xndata -f $tmpFile1.sx.err $tmpFile1 > $tmpFile2");
+    removeFile("$tmpFile1.sx.err");
 
     # apply proper case to tags.
     system ("$saxon -versionmsg:off $tmpFile2 $xsldir/tei2tei.xsl > $tmpFile3");

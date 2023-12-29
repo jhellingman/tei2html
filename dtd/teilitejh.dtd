@@ -529,6 +529,7 @@ note | figure | stage | table | text)*)>
 <!ATTLIST rendition
      ana IDREFS #IMPLIED
      corresp IDREFS #IMPLIED
+     selector CDATA #IMPLIED
      next IDREF #IMPLIED
      prev IDREF #IMPLIED
      id ID #IMPLIED
@@ -620,7 +621,7 @@ formula))*)>
 
 <!--  5.4:  The profile description                            -->
 
-<!ELEMENT profileDesc - - ((creation)?, (langUsage)*, (textClass)*)>
+<!ELEMENT profileDesc - - ((creation)?, (langUsage)*, (textClass)*, (listPrefixDef)*)>
 
 <!ATTLIST profileDesc
      ana IDREFS #IMPLIED
@@ -703,6 +704,16 @@ formula))*)>
      rend CDATA #IMPLIED
      default (YES | NO) "NO"
      TEIform CDATA "textClass" >
+
+<!ELEMENT listPrefixDef - - ((prefixDef)*)>
+
+<!ELEMENT prefixDef - O EMPTY>
+
+<!ATTLIST prefixDef
+     ident CDATA #IMPLIED
+     matchPattern CDATA #IMPLIED
+     replacementPattern CDATA #IMPLIED
+     TEIform CDATA "prefixDef" >
 
 <!ELEMENT keywords - O ((term)+ | list)>
 
@@ -1621,6 +1632,7 @@ table | text)*)))>
      id ID #IMPLIED
      pos CDATA #IMPLIED
      lang IDREF #IMPLIED
+     sameAs IDREF #IMPLIED
      rend CDATA #IMPLIED
      n CDATA #IMPLIED
      type CDATA #IMPLIED
