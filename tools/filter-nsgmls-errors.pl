@@ -29,7 +29,7 @@ foreach my $line (@lines) {
         my $message = $';
 
         # Not interested in the following: "X0102" is not a function name
-        if ($line =~ /\"X([0-9A-Z]+)\" is not a function name/) {
+        if ($line =~ /\"X?([0-9A-Z]+)\" is not a function name/) {
             next;
         }
 

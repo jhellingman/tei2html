@@ -710,6 +710,7 @@ sub makeEpub($$) {
     copyImages('epub/images');
     # copyFormulas('epub/formulas'); # Not including formulas in ePub, as they are embedded as MathML (TODO: this is default, handle non-default situations)
     copyAudio('epub/audio');
+    copyMusic('epub/music');
     copyFonts('epub/fonts');
 
     system ("$saxon $xmlFile $xsldir/tei2epub.xsl $saxonParameters basename=\"$basename\" epubversion=\"$epubVersion\" > $tmpFile");
@@ -1256,6 +1257,16 @@ sub copyAudio($) {
     }
 }
 
+sub copyMusic($) {
+    my $destination = shift;
+
+    if (-d 'music') {
+        system ('cp -r -u music ' . $destination);
+    } elsif (-d 'Processed/music') {
+        system ('cp -r -u Processed/music ' . $destination);
+    }
+}
+
 
 #
 # copyFonts -- copy fonts files for use in ePub.
@@ -1380,6 +1391,7 @@ sub transcribe($$) {
         $currentFile = transcribeNotation($currentFile, '<TA>',  'Tamil',                 "$patcdir/indic/ta2ucs.pat");
         $currentFile = transcribeNotation($currentFile, '<SY>',  'Syriac',                "$patcdir/syriac/sy2sgml.pat");
         $currentFile = transcribeNotation($currentFile, '<CO>',  'Coptic',                "$patcdir/coptic/co2sgml.pat");
+        $currentFile = transcribeNotation($currentFile, '<HG>',  'Hieroglyphs',           "$patcdir/hieroglyphs/hg2sgml.pat");
 
         my $containsTibetan = system ("grep -q -e \"<BO>\" $currentFile");
         if ($containsTibetan == 0) {

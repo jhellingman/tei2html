@@ -365,7 +365,7 @@ gi | formula))*)>
 
 <!--  5.2.5:  The series statement                             -->
 
-<!ELEMENT seriesStmt - O ((title, (idno | respStmt)*) | (p)+)>
+<!ELEMENT seriesStmt - O ((title, (idno | respStmt | biblScope)*) | (p)+)>
 
 <!ATTLIST seriesStmt
      ana IDREFS #IMPLIED
@@ -378,6 +378,16 @@ gi | formula))*)>
      lang IDREF #IMPLIED
      rend CDATA #IMPLIED
      TEIform CDATA "seriesStmt" >
+
+<!ELEMENT biblScope - - (#PCDATA)>
+
+<!ATTLIST biblScope
+     id ID #IMPLIED
+     type CDATA #IMPLIED
+     n CDATA #IMPLIED
+     lang IDREF #IMPLIED
+     rend CDATA #IMPLIED
+     TEIform CDATA "biblScope" >
 
 <!--  5.2.6:  The notes statement                              -->
 
@@ -1261,6 +1271,7 @@ formula))*)>
      id ID #IMPLIED
      pos CDATA #IMPLIED
      n CDATA #IMPLIED
+     type CDATA #IMPLIED
      lang IDREF #IMPLIED
      rend CDATA #IMPLIED
      orig CDATA #IMPLIED

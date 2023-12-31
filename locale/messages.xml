@@ -436,6 +436,7 @@
         <msg:message name="et">Estonian</msg:message>
         <msg:message name="eu">Basque</msg:message>
         <msg:message name="fa">Persian</msg:message>
+        <msg:message name="fa-Latn">Persian (Latin transcription)</msg:message>
         <msg:message name="fi">Finnish</msg:message>
         <msg:message name="fj">Fiji</msg:message>
         <msg:message name="fo">Faeroese</msg:message>
@@ -561,6 +562,7 @@
         <msg:message name="bik">Bicolano</msg:message>
         <msg:message name="ceb">Cebuano</msg:message>
         <msg:message name="crb">Chavacano</msg:message>
+        <msg:message name="egy">Egyptian (ancient)</msg:message>
         <msg:message name="grc">Greek (Classical)</msg:message>
         <msg:message name="grc-Latn">Greek (Classical; Latin transcription)</msg:message>
         <msg:message name="grt">Garo</msg:message>

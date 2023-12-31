@@ -54,6 +54,7 @@ BEGIN {
     $langNameHash{"en-1800"}   = "English (19th century)";
     $langNameHash{"en-UK"}     = "English (United Kingdom)";
     $langNameHash{"en-US"}     = "English (United States)";
+    $langNameHash{"en-Phon"}   = "English (Phonetic notation)";
     $langNameHash{"eo"}        = "Esperanto";
     $langNameHash{"es"}        = "Spanish";
     $langNameHash{"es-ES"}     = "Spanish (Spain)";
@@ -230,11 +231,7 @@ BEGIN {
     $langNameHash{"zh-Latn"}   = "Chinese (Latin transcription)";
     $langNameHash{"zu"}        = "Zulu";
 
-    $langNameHash{"xx"}        = "unknown language";
-
-
     # Three letter codes
-
     $langNameHash{"akk"}            = "Akkadian";
     $langNameHash{"akk-Latn"}       = "Akkadian (Latin transcription)";
     $langNameHash{"alq"}            = "Algonquian";
@@ -248,6 +245,7 @@ BEGIN {
     $langNameHash{"com"}            = "Comanche";
     $langNameHash{"crb"}            = "Chavacano, Chabacano or Zamboangue&ntilde;o";
     $langNameHash{"dak"}            = "Dakota";
+    $langNameHash{"egy"}            = "Egyptian (ancient)";
     $langNameHash{"esx"}            = "Eskimo-Aleut languages";
     $langNameHash{"gad"}            = "Gaddang";
     $langNameHash{"grc"}            = "Greek (classical)";
@@ -284,16 +282,18 @@ BEGIN {
     $langNameHash{"sit"}            = "Sino-Tibetan (Other)";
     $langNameHash{"tcz"}            = "Thadou";
     $langNameHash{"tsg"}            = "Tausug";
-    $langNameHash{"und"}            = "undetermined language";
     $langNameHash{"war"}            = "W&aacute;ray-W&aacute;ray";
     $langNameHash{"win"}            = "Winnebago";
     $langNameHash{"xac"}            = "Kachari";
     $langNameHash{"yua"}            = "Yucatec Maya";
 
-    $langNameHash{"zxx"}            = "No linguistic content / Not applicable";
+    # Special codes
+    $langNameHash{"mis"}            = "uncoded languages";
+    $langNameHash{"mul"}            = "multiple languages";
+    $langNameHash{"und"}            = "undetermined";
+    $langNameHash{"zxx"}            = "no linguistic content / not applicable";
 
-
-    # Non standard extensions
+    # Non-standard extensions
     $langNameHash{"mni-old"}        = "Old Meitei or Old Manipuri";
     $langNameHash{"sit-angami"}     = "Angami Naga"; # -> njm
     $langNameHash{"sit-ao"}         = "Ao Naga, unspecified dialect"; # -> njo

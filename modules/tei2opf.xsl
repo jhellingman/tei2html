@@ -398,6 +398,9 @@
                 <xsl:apply-templates select="//*[f:has-rend-value(@rend, 'link')]" mode="manifest-links"/>
                 <xsl:apply-templates select="//*[f:has-rend-value(@rend, 'hover-overlay')]" mode="manifest-hover-overlay"/>
 
+                <!-- Linked audio files -->
+                <xsl:apply-templates select="//xref[f:is-local-audio-file(@url)]" mode="manifest-local-audio-file"/>
+
                 <!-- Formulas -->
                 <xsl:apply-templates select="//formula[@notation = 'TeX']" mode="manifest"/>
 
@@ -454,7 +457,7 @@
                 </xsl:choose>
             </xsl:variable>
 
-            <xsl:call-template name="manifest-image-item">
+            <xsl:call-template name="manifest-media-item">
                 <xsl:with-param name="filename" select="$filename"/>
             </xsl:call-template>
         </xsl:if>
@@ -498,7 +501,7 @@
                 <xsl:value-of select="f:rend-value(@rend, 'image')"/>
             </xsl:variable>
 
-            <xsl:call-template name="manifest-image-item">
+            <xsl:call-template name="manifest-media-item">
                 <xsl:with-param name="filename" select="$filename"/>
             </xsl:call-template>
         </xsl:if>
@@ -663,7 +666,7 @@
 
             <!-- Only for local images: add the image to the manifest -->
             <xsl:if test="matches($target, '^[^:]+\.(jpg|png|gif|svg)$')">
-                <xsl:call-template name="manifest-image-item">
+                <xsl:call-template name="manifest-media-item">
                     <xsl:with-param name="filename" select="$target"/>
                     <xsl:with-param name="how" select="'link'"/>
                 </xsl:call-template>
@@ -674,6 +677,21 @@
                 </item>
             </xsl:if>
         </xsl:if>
+    </xsl:template>
+
+
+    <xsl:function name="f:is-local-audio-file" as="xs:boolean">
+        <xsl:param name="url" as="xs:string"/>
+
+        <xsl:sequence select="matches($url, '^[^:]+\.(mp3|mid|midi|mxl)$')"/>
+    </xsl:function>
+
+
+    <xsl:template match="xref" mode="manifest-local-audio-file">
+        <xsl:call-template name="manifest-media-item">
+            <xsl:with-param name="filename" select="@url"/>
+            <xsl:with-param name="how" select="'link'"/>
+        </xsl:call-template>
     </xsl:template>
 
 
@@ -688,7 +706,7 @@
             </xsl:variable>
 
             <xsl:if test="matches($target, '^[^:]+\.(jpg|png|gif|svg)$')">
-                <xsl:call-template name="manifest-image-item">
+                <xsl:call-template name="manifest-media-item">
                     <xsl:with-param name="filename" select="$target"/>
                     <xsl:with-param name="how" select="'hover-overlay'"/>
                 </xsl:call-template>
@@ -702,7 +720,7 @@
     </xd:doc>
 
     <xsl:template match="cell[@rows &gt; 1 and normalize-space(.) = '{']" mode="manifest-braces">
-        <xsl:call-template name="manifest-image-item">
+        <xsl:call-template name="manifest-media-item">
             <xsl:with-param name="filename" select="'images/lbrace' || @rows || '.png'"/>
             <xsl:with-param name="how" select="'brace'"/>
         </xsl:call-template>
@@ -710,7 +728,7 @@
 
 
     <xsl:template match="cell[@rows &gt; 1 and normalize-space(.) = '}']" mode="manifest-braces">
-        <xsl:call-template name="manifest-image-item">
+        <xsl:call-template name="manifest-media-item">
             <xsl:with-param name="filename" select="'images/rbrace' || @rows || '.png'"/>
             <xsl:with-param name="how" select="'brace'"/>
         </xsl:call-template>
@@ -721,7 +739,7 @@
 
 
     <xsl:template match="castGroup[f:rend-value(@rend, 'display') = 'castGroupTable'][count(./castItem) &gt; 1]" mode="manifest-braces">
-        <xsl:call-template name="manifest-image-item">
+        <xsl:call-template name="manifest-media-item">
             <xsl:with-param name="filename" select="'images/rbrace' || count(./castItem) || '.png'"/>
             <xsl:with-param name="how" select="'brace'"/>
         </xsl:call-template>
@@ -731,7 +749,7 @@
     <xsl:template match="castGroup" mode="manifest-braces"/>
 
 
-    <xsl:template name="manifest-image-item">
+    <xsl:template name="manifest-media-item">
         <xsl:param name="filename" as="xs:string"/>
         <xsl:param name="how" select="''" as="xs:string"/>
 
@@ -741,6 +759,10 @@
                 <xsl:when test="contains($filename, '.png')">image/png</xsl:when>
                 <xsl:when test="contains($filename, '.gif')">image/gif</xsl:when>
                 <xsl:when test="contains($filename, '.svg')">image/svg+xml</xsl:when>
+
+                <xsl:when test="contains($filename, '.mp3')">audio/mpeg</xsl:when>
+                <xsl:when test="contains($filename, '.mid') or contains($filename, '.midi')">audio/midi</xsl:when>
+                <xsl:when test="contains($filename, '.mxl')">application/vnd.recordare.musicxml</xsl:when>
             </xsl:choose>
         </xsl:variable>
 

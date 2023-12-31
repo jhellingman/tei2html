@@ -18,7 +18,7 @@ sub main {
 
     print "\n\n<!-- DO NOT EDIT: DERIVED FILE!!! -->\n\n\n";
 
-    my @langs = ( 'xx', 'en' );
+    my @langs = ( 'und', 'en' );
     my $mode = 0;
 
     while (<INPUTFILE>) {
