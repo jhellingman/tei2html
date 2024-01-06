@@ -177,10 +177,10 @@
 
     <!-- gap -->
 
-    <x:scenario label="When rendering a gap element">
+    <x:scenario label="When rendering a gap element with a quantity and unit">
         <x:context>
             <gap id="a" reason="just testing"/>
-            <gap id="b" extent="6" unit="char" reason="just testing"/>
+            <gap id="b" quantity="6" unit="char" reason="just testing"/>
         </x:context>
         <x:expect label="will result in an HTML span with a pop-up title">
             <span xmlns="http://www.w3.org/1999/xhtml"
@@ -189,6 +189,21 @@
             <span xmlns="http://www.w3.org/1999/xhtml"
                   class="gap"
                   title="Missing 6 char, for the following reason: just testing.">[<i>missing text</i>]</span>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering a gap element with an extent">
+        <x:context>
+            <gap id="a" reason="just testing"/>
+            <gap id="b" extent="several characters" reason="just testing"/>
+        </x:context>
+        <x:expect label="will result in an HTML span with a pop-up title">
+            <span xmlns="http://www.w3.org/1999/xhtml"
+                  class="gap"
+                  title="Missing text, for the following reason: just testing.">[<i>missing text</i>]</span>
+            <span xmlns="http://www.w3.org/1999/xhtml"
+                  class="gap"
+                  title="Missing several characters, for the following reason: just testing.">[<i>missing text</i>]</span>
         </x:expect>
     </x:scenario>
 
