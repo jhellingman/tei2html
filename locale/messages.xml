@@ -311,7 +311,8 @@
         <msg:message name="msgName">Name</msg:message>
         <msg:message name="msgRole">Role</msg:message>
         <msg:message name="msgMissingText">missing text</msg:message>
-        <msg:message name="msgMissingTextWithExtentReason">Missing <msg:param name="extent"/> <msg:param name="unit"/>, for the following reason: <msg:param name="reason"/>.</msg:message>
+        <msg:message name="msgMissingTextWithQuantityReason">Missing <msg:param name="quantity"/> <msg:param name="unit"/>, for the following reason: <msg:param name="reason"/>.</msg:message>
+        <msg:message name="msgMissingTextWithExtentReason">Missing <msg:param name="extent"/>, for the following reason: <msg:param name="reason"/>.</msg:message>
         <msg:message name="msgMissingTextWithReason">Missing text, for the following reason: <msg:param name="reason"/>.</msg:message>
         <msg:message name="msgNext">Next</msg:message>
         <msg:message name="msgNotApplicable">N.A.</msg:message>

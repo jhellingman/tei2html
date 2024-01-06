@@ -1034,7 +1034,6 @@
             <xsl:variable name="mainlang" select="/*[self::TEI.2 or self::TEI]/@lang"/>
             <xsl:for-each-group select="//*[@lang != $mainlang]" group-by="@lang">
                 <xsl:sort select="@lang"/>
-
                 <xsl:variable name="lang" select="@lang"/>
                 <h3 class="main"><xsl:value-of select="f:message($lang)"/></h3>
                 <xsl:call-template name="language-fragments">
@@ -1077,7 +1076,7 @@
                 <th><xsl:value-of select="f:message('msgFragment')"/></th>
             </tr>
             <xsl:for-each-group select="$fragments" group-by=".">
-                <xsl:sort select="."/>
+                <xsl:sort select="." lang="{f:baseLanguage($lang)}"/>
                 <tr>
                     <td>
                         <xsl:for-each select="current-group()">

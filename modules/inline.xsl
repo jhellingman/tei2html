@@ -681,12 +681,14 @@
     </xd:doc>
 
     <xsl:template match="gap">
-        <xsl:variable name="params" select="map{'extent': @extent, 'unit': @unit, 'reason': @reason}"/>
+        <xsl:variable name="params" select="map{'extent': @extent, 'quantity': @quantity, 'unit': @unit, 'reason': @reason}"/>
         <span class="gap">
             <xsl:if test="f:is-set('useMouseOverPopups')">
                 <xsl:attribute name="title" select="if (@extent)
                                                     then f:format-message('msgMissingTextWithExtentReason', $params)
-                                                    else f:format-message('msgMissingTextWithReason', $params)"/>
+                                                        else if (@quantity) 
+                                                        then f:format-message('msgMissingTextWithQuantityReason', $params)
+                                                        else f:format-message('msgMissingTextWithReason', $params)"/>
             </xsl:if>
             <xsl:text>[</xsl:text><i><xsl:value-of select="f:message('msgMissingText')"/></i><xsl:text>]</xsl:text>
         </span>

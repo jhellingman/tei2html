@@ -1318,6 +1318,8 @@ formula))*)>
      hand IDREF #IMPLIED
      agent CDATA #IMPLIED
      extent CDATA #IMPLIED
+     quantity CDATA #IMPLIED
+     unit CDATA #IMPLIED
      TEIform CDATA "gap" >
 
 <!ELEMENT add - - ((((l | lg | p | sp), (((eg | bibl | biblFull | l |
