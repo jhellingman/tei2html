@@ -18,7 +18,18 @@ while (<INPUTFILE>) {
 close (INPUTFILE);
 
 
+my %undefinedElements = {};
+
 foreach my $line (@lines) {
+
+    if ($line =~ /^nsgmls\:([a-zA-Z0-9.-]+)\:([0-9]+)\:([0-9]+)\: (start tag was here)/) {
+        my $fileName = $1;
+        my $lineNumber = $2;
+        my $position = $3;
+        my $message = $4;
+
+        print "  $fileName:$lineNumber:$position: $message\n";
+    }
 
     # Only interested in errors, warnings and cross-reference issues:
     if ($line =~ /^nsgmls\:([a-zA-Z0-9.-]+)\:([0-9]+)\:([0-9]+)\:[EWX]\: /) {
@@ -27,6 +38,15 @@ foreach my $line (@lines) {
         my $lineNumber = $2;
         my $position = $3;
         my $message = $';
+
+        # Not interested in undefined elements, except for the first time
+        if ($message =~ /element \"([a-zA-Z0-9]+)\" undefined/) {
+            my $element = $1;
+            if ($undefinedElements{$element}) {
+                next;
+            }
+            $undefinedElements{$element} = 1;
+        }
 
         # Not interested in the following: "X0102" is not a function name
         if ($line =~ /\"X?([0-9A-Z]+)\" is not a function name/) {
