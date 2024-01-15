@@ -33,7 +33,7 @@ If you need modifications, extensions of these scripts, or need to have other TE
 == Directories
 
 * `Wiki`: wiki-pages that give some instructions and background documentation.
-* `samples`: a few sample TEI files (of books posted to Project Gutenberg; I am currently adding my TEI master files to GitHub: see https://github.com/GutenbergSource[GutenbergSource] for many more examples).
+* `samples`: a few sample TEI files of books posted to Project Gutenberg. I am currently adding my TEI source files to GitHub: see https://github.com/GutenbergSource[GutenbergSource] for many more examples.
 * `sandbox`: experimental code, better ignored if you don't want to play around.
 * `schemas`: schema definitions for some supplementary XML formats.
 * `style`: CSS stylesheets, used by the generated HTML and ePub results.
