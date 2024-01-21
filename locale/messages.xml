@@ -1507,7 +1507,8 @@
         <msg:message name="msgName">Naam</msg:message>
         <msg:message name="msgRole">Rol</msg:message>
         <msg:message name="msgMissingText">ontbrekende tekst</msg:message>
-        <msg:message name="msgMissingTextWithExtentReason">Ontbrekende tekst: <msg:param name="extent"/> <msg:param name="unit"/>, om de volgende reden: <msg:param name="reason"/>.</msg:message>
+        <msg:message name="msgMissingTextWithQuantityReason">Ontbrekende tekst: <msg:param name="quantity"/> <msg:param name="unit"/>, om de volgende reden: <msg:param name="reason"/>.</msg:message>
+        <msg:message name="msgMissingTextWithExtentReason">Ontbrekende tekst: <msg:param name="extent"/>, om de volgende reden: <msg:param name="reason"/>.</msg:message>
         <msg:message name="msgMissingTextWithReason">Ontbrekende tekst, om de volgende reden: <msg:param name="reason"/>.</msg:message>
         <msg:message name="msgNext">Volgende</msg:message>
         <msg:message name="msgNotApplicable">n.v.t.</msg:message>

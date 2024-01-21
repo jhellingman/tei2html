@@ -17,8 +17,8 @@ while (<INPUTFILE>) {
 }
 close (INPUTFILE);
 
-
-my %undefinedElements = {};
+my %undefinedElements;
+my %nonExistentIDs;
 
 foreach my $line (@lines) {
 
@@ -46,6 +46,15 @@ foreach my $line (@lines) {
                 next;
             }
             $undefinedElements{$element} = 1;
+        }
+
+        # Not interested in references to non-existing IDs
+        if ($message =~ /reference to non-existent ID \"([a-zA-Z0-9.-]+)\"/) {
+            my $id = $1;
+            if ($nonExistentIDs{$id}) {
+                next;
+            }
+            $nonExistentIDs{$id} = 1;
         }
 
         # Not interested in the following: "X0102" is not a function name
