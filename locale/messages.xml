@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="iso-8859-1" ?>
+<?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE msg:repository [
 
     <!ENTITY apos     "&#x2019;">
@@ -18,8 +18,6 @@
         version="1.0">
 
     <msg:messages xml:lang="en" name="English">
-
-        <!-- Localized Messages for Project Gutenberg Ebooks in XML -->
 
         <!-- Note about IDs:
 
@@ -370,7 +368,7 @@
         <!-- Dealing with sub-languages (this section is just an example of how to add sub-languages) -->
 
         <msg:message name="msgColor">Color</msg:message>
-        <msg:message xml:lang="en-uk" name="msgColor">Colour</msg:message>
+        <msg:message xml:lang="en-UK" name="msgColor">Colour</msg:message>
 
 
         <!-- Days and Months -->
@@ -429,11 +427,11 @@
         <msg:message name="el">Greek</msg:message>
         <msg:message name="el-Latn">Greek (Latin transcription)</msg:message>
         <msg:message name="en">English</msg:message>
-        <msg:message name="en-uk">English (U.K.)</msg:message>
-        <msg:message name="en-us">English (U.S.)</msg:message>
+        <msg:message name="en-UK">English (U.K.)</msg:message>
+        <msg:message name="en-US">English (U.S.)</msg:message>
         <msg:message name="eo">Esperanto</msg:message>
         <msg:message name="es">Spanish</msg:message>
-        <msg:message name="es-es">Spanish (Spain)</msg:message>
+        <msg:message name="es-ES">Spanish (Spain)</msg:message>
         <msg:message name="et">Estonian</msg:message>
         <msg:message name="eu">Basque</msg:message>
         <msg:message name="fa">Persian</msg:message>
@@ -495,7 +493,7 @@
         <msg:message name="nl">Dutch</msg:message>
         <msg:message name="nl-1800">Dutch (Spelling Siegenbeek)</msg:message>
         <msg:message name="nl-1900">Dutch (Spelling De Vries-Te Winkel)</msg:message>
-        <msg:message name="nl-za-1920">Dutch (Simplified spelling; South Africa)</msg:message>
+        <msg:message name="nl-ZA-1920">Dutch (Simplified spelling; South Africa)</msg:message>
         <msg:message name="no">Norwegian</msg:message>
         <msg:message name="oc">Occitan</msg:message>
         <msg:message name="om">Oromo</msg:message>
@@ -504,8 +502,8 @@
         <msg:message name="pl">Polish</msg:message>
         <msg:message name="ps">Pashtu</msg:message>
         <msg:message name="pt">Portuguese</msg:message>
-        <msg:message name="pt-br">Portuguese (Brazil)</msg:message>
-        <msg:message name="pt-pt">Portuguese (Portugal)</msg:message>
+        <msg:message name="pt-BR">Portuguese (Brazil)</msg:message>
+        <msg:message name="pt-PT">Portuguese (Portugal)</msg:message>
         <msg:message name="qu">Quechua</msg:message>
         <msg:message name="rm">Rhaeto-Romance</msg:message>
         <msg:message name="rn">Kirundi</msg:message>
@@ -843,8 +841,8 @@
         <msg:message name="de">Allemand</msg:message>
         <msg:message name="el">Grec</msg:message>
         <msg:message name="en">Anglais</msg:message>
-        <msg:message name="en-uk">Anglais (Royaume Uni)</msg:message>
-        <msg:message name="en-us">Anglais (États-Unis)</msg:message>
+        <msg:message name="en-UK">Anglais (Royaume Uni)</msg:message>
+        <msg:message name="en-US">Anglais (États-Unis)</msg:message>
         <msg:message name="es">Espagnol</msg:message>
         <msg:message name="fi">Finlandais</msg:message>
         <msg:message name="fr">Français</msg:message>
@@ -853,8 +851,8 @@
         <msg:message name="la">Latin</msg:message>
         <msg:message name="nl">Néerlandais</msg:message>
         <msg:message name="pt">Portugais</msg:message>
-        <msg:message name="pt-br">Portugais (Brésil)</msg:message>
-        <msg:message name="pt-pt">Portugais (Portugal)</msg:message>
+        <msg:message name="pt-BR">Portugais (Brésil)</msg:message>
+        <msg:message name="pt-PT">Portugais (Portugal)</msg:message>
         <msg:message name="tl">Tagalog</msg:message>
         <msg:message name="zh">Chinois</msg:message>
 
@@ -1183,8 +1181,8 @@
         <msg:message name="el">Griechisch</msg:message>
         <msg:message name="el-Latn">Griechisch (lateinische Transkription)</msg:message>
         <msg:message name="en">Englisch</msg:message>
-        <msg:message name="en-uk">Englisch (Großbritannien)</msg:message>
-        <msg:message name="en-us">Englisch (die Vereinigten Staaten)</msg:message>
+        <msg:message name="en-UK">Englisch (Großbritannien)</msg:message>
+        <msg:message name="en-US">Englisch (die Vereinigten Staaten)</msg:message>
         <msg:message name="es">Spanisch</msg:message>
         <msg:message name="fi">Finnisch</msg:message>
         <msg:message name="fr">Französisch</msg:message>
@@ -1201,8 +1199,8 @@
         <msg:message name="nl">Niederländisch</msg:message>
         <msg:message name="nl-1900">Niederländisch (alte Rechtschreibung)</msg:message>
         <msg:message name="pt">Portugiesisch</msg:message>
-        <msg:message name="pt-br">Portugiesisch (Brasilien)</msg:message>
-        <msg:message name="pt-pt">Portugiesisch (Portugal)</msg:message>
+        <msg:message name="pt-BR">Portugiesisch (Brasilien)</msg:message>
+        <msg:message name="pt-PT">Portugiesisch (Portugal)</msg:message>
         <msg:message name="ru">Russisch</msg:message>
         <msg:message name="ru-1900">Russisch (Orthographie vor 1918)</msg:message>
         <msg:message name="ru-Latn">Russisch (lateinische Transkription)</msg:message>
@@ -1620,10 +1618,10 @@
         <msg:message name="el">Grieks</msg:message>
         <msg:message name="el-Latn">Grieks (Latijnse transcriptie)</msg:message>
         <msg:message name="en">Engels</msg:message>
-        <msg:message name="en-uk">Engels (V.K.)</msg:message>
-        <msg:message name="en-us">Engels (V.S.)</msg:message>
+        <msg:message name="en-UK">Engels (V.K.)</msg:message>
+        <msg:message name="en-US">Engels (V.S.)</msg:message>
         <msg:message name="es">Spaans</msg:message>
-        <msg:message name="es-es">Spaans (Spanje)</msg:message>
+        <msg:message name="es-ES">Spaans (Spanje)</msg:message>
         <msg:message name="fi">Fins</msg:message>
         <msg:message name="fj">Fiji</msg:message>
         <msg:message name="fo">Faeröers</msg:message>
@@ -1686,7 +1684,7 @@
         <msg:message name="nl-1700">Nederlands (18de-eeuws)</msg:message>
         <msg:message name="nl-1800">Nederlands (Spelling Siegenbeek)</msg:message>
         <msg:message name="nl-1900">Nederlands (Spelling De Vries-Te Winkel)</msg:message>
-        <msg:message name="nl-za-1920">Nederlands (Vereenvoudigde spelling; Zuid-Afrika)</msg:message>
+        <msg:message name="nl-ZA-1920">Nederlands (Vereenvoudigde spelling; Zuid-Afrika)</msg:message>
         <msg:message name="no">Noors</msg:message>
         <msg:message name="oc">Occitaans</msg:message>
         <msg:message name="om">Oromo</msg:message>
@@ -1695,8 +1693,8 @@
         <msg:message name="pl">Pools</msg:message>
         <msg:message name="ps">Pasjtoe</msg:message>
         <msg:message name="pt">Portugees</msg:message>
-        <msg:message name="pt-br">Portugees (Brazilië)</msg:message>
-        <msg:message name="pt-pt">Portugees (Portugal)</msg:message>
+        <msg:message name="pt-BR">Portugees (Brazilië)</msg:message>
+        <msg:message name="pt-PT">Portugees (Portugal)</msg:message>
         <msg:message name="qu">Quechua</msg:message>
         <msg:message name="rm">Reto-Romaans</msg:message>
         <msg:message name="rn">Kirundi</msg:message>
@@ -1713,7 +1711,7 @@
         <msg:message name="si">Singalees</msg:message>
         <msg:message name="si-Latn">Singalees (Latijnse transcriptie)</msg:message>
         <msg:message name="sk">Slowaaks</msg:message>
-        <msg:message xml:lang="nl-be" name="sk">Slovaaks</msg:message>
+        <msg:message xml:lang="nl-BE" name="sk">Slovaaks</msg:message>
         <msg:message name="sl">Sloveens</msg:message>
         <msg:message name="sm">Samoaans</msg:message>
         <msg:message name="sn">Shona</msg:message>
@@ -2183,10 +2181,10 @@
         <msg:message name="de">Alemán</msg:message>
         <msg:message name="el">Griego</msg:message>
         <msg:message name="en">Inglés</msg:message>
-        <msg:message name="en-uk">Inglés (R. U.)</msg:message>
-        <msg:message name="en-us">Inglés (EE. UU.)</msg:message>
+        <msg:message name="en-UK">Inglés (R. U.)</msg:message>
+        <msg:message name="en-US">Inglés (EE. UU.)</msg:message>
         <msg:message name="es">Español</msg:message>
-        <msg:message name="es-es">Español (España)</msg:message>
+        <msg:message name="es-ES">Español (España)</msg:message>
         <msg:message name="fi">Finés</msg:message>
         <msg:message name="fr">Francés</msg:message>
         <msg:message name="grc">Griego (clásico)</msg:message>
@@ -2196,8 +2194,8 @@
         <msg:message name="nl">Neerlandés</msg:message>
         <msg:message name="nl-1900">Neerlandés (ortografía antigua)</msg:message>
         <msg:message name="pt">Portugués</msg:message>
-        <msg:message name="pt-br">Portugués (Brasil)</msg:message>
-        <msg:message name="pt-pt">Portugués (Portugal)</msg:message>
+        <msg:message name="pt-BR">Portugués (Brasil)</msg:message>
+        <msg:message name="pt-PT">Portugués (Portugal)</msg:message>
         <msg:message name="tl">Tagalo</msg:message>
         <msg:message name="zh">Chino</msg:message>
 
