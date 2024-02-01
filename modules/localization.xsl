@@ -86,17 +86,17 @@
                 <xsl:copy-of select="f:log-debug('{1}: {2} = {3}', ($baseLanguage, $name, $msg[lang($baseLanguage)][1]))"/>
             </xsl:when>
             <xsl:when test="$msg[lang($fallbackLanguage)][1]">
-                <xsl:copy-of select="f:log-warning('Message {1} not available in locale {2}, using {3} instead.', ($name, $language, $fallbackLanguage))"/>
+                <xsl:copy-of select="f:log-warning('Message {1} not available in locale {2}, using fall-back {3} instead.', ($name, $language, $fallbackLanguage))"/>
                 <xsl:apply-templates select="$msg[lang($fallbackLanguage)][1]" mode="formatMessage"/>
                 <xsl:copy-of select="f:log-debug('{1}: {2} = {3}', ($fallbackLanguage, $name, $msg[lang($fallbackLanguage)][1]))"/>
             </xsl:when>
             <xsl:when test="$msg[lang($defaultLanguage)][1]">
-                <xsl:copy-of select="f:log-warning('Message {1} not available in locale {2}, using {3} instead.', ($name, $language, $defaultLanguage))"/>
+                <xsl:copy-of select="f:log-warning('Message {1} not available in locale {2}, using default {3} instead.', ($name, $language, $defaultLanguage))"/>
                 <xsl:apply-templates select="$msg[lang($defaultLanguage)][1]" mode="formatMessage"/>
                 <xsl:copy-of select="f:log-debug('{1}: {2} = {3}', ($defaultLanguage, $name, $msg[lang($defaultLanguage)][1]))"/>
             </xsl:when>
             <xsl:when test="$msg[lang($defaultBaseLanguage)][1]">
-                <xsl:copy-of select="f:log-warning('Message {1} not available in locale {2}, using {3} instead.', ($name, $language, $defaultBaseLanguage))"/>
+                <xsl:copy-of select="f:log-warning('Message {1} not available in locale {2}, using default {3} instead.', ($name, $language, $defaultBaseLanguage))"/>
                 <xsl:apply-templates select="$msg[lang($defaultBaseLanguage)][1]" mode="formatMessage"/>
                 <xsl:copy-of select="f:log-debug('{1}: {2} = {3}', ($defaultBaseLanguage, $name, $msg[lang($defaultBaseLanguage)][1]))"/>
             </xsl:when>
@@ -110,53 +110,83 @@
 
     <xd:doc>
         <xd:short>Format a localized message.</xd:short>
-        <xd:detail>Function to find and format a localized message in the <code>messages.xml</code> file. This function will first try to find the message
-        in the exact locale, then in the base-language, and, if this also fails, in the default locale. After finding it, it will apply the given
-        parameters to it.</xd:detail>
+        <xd:detail>Function to find and format a localized message in the <code>messages.xml</code> file.
+            This function will first try to find the message in the exact locale, then in the base-language,
+            and, if this also fails, in the default locale. After that, it will try to find the proper
+            plural form, based on the 'count' parameter. Finally, it will apply the given parameters to it.</xd:detail>
     </xd:doc>
 
     <xsl:function name="f:format-message">
         <xsl:param name="name" as="xs:string"/>
         <xsl:param name="params" as="map(xs:string, item()*)"/>
 
+        <!-- Find candidate messages with the given name -->
         <xsl:variable name="msg" select="$messages/msg:messages/msg:message[@name=$name]"/>
-        <xsl:variable name="fallbackLanguage" select="($messages/msg:messages[lang($baseLanguage)])[1]/@fallback" as="xs:string?"/>
 
+        <xsl:variable name="fallbackLanguage" select="($messages/msg:messages[lang($baseLanguage)])[1]/@fallback" as="xs:string?"/>
         <xsl:variable name="fallbackLanguage" select="if ($fallbackLanguage) then $fallbackLanguage else $defaultLanguage"/>
 
+        <!-- Find candidate messages in the appropriate language -->
+        <xsl:variable name="message" select="
+            if ($msg[lang($language)])
+            then $msg[lang($language)]
+            else if ($msg[lang($baseLanguage)])
+                 then $msg[lang($baseLanguage)]
+                 else if ($msg[lang($fallbackLanguage)])
+                      then $msg[lang($fallbackLanguage)]
+                      else $msg[lang($defaultLanguage)]">
+        </xsl:variable>
+
+        <xsl:variable name="lang" select="$message/ancestor-or-self::*[@xml:lang][1]"/>
+        <xsl:variable name="count" select="$params('count')"/>
+        <xsl:variable name="plural" select="f:determine-plural-form($lang, $count)"/>
+
+        <!-- Find the message with the appropriate plural form -->
+        <xsl:variable name="message" select="
+            if ($message[@plural = $plural])
+            then $message[@plural = $plural]
+            else if ($message[@plural = 'other'])
+                 then $message[@plural = 'other']
+                 else if ($message[not(@plural)])
+                      then $message[not(@plural)]
+                      else $message[1]"/>
+
+        <xsl:if test="$message">
+            <xsl:apply-templates select="$message[1]" mode="formatMessage">
+                <xsl:with-param name="params" select="$params" tunnel="yes"/>
+            </xsl:apply-templates>
+        </xsl:if>
+
         <xsl:choose>
-            <xsl:when test="$msg[lang($language)][1]">
-                <xsl:apply-templates select="$msg[lang($language)][1]" mode="formatMessage">
-                    <xsl:with-param name="params" select="$params" tunnel="yes"/>
-                </xsl:apply-templates>
-            </xsl:when>
-            <xsl:when test="$msg[lang($baseLanguage)][1]">
-                <xsl:apply-templates select="$msg[lang($baseLanguage)][1]" mode="formatMessage">
-                    <xsl:with-param name="params" select="$params" tunnel="yes"/>
-                </xsl:apply-templates>
-            </xsl:when>
+            <xsl:when test="$msg[lang($language)][1]"/>
+            <xsl:when test="$msg[lang($baseLanguage)][1]"/>
             <xsl:when test="$msg[lang($fallbackLanguage)][1]">
-                <xsl:apply-templates select="$msg[lang($fallbackLanguage)][1]" mode="formatMessage">
-                    <xsl:with-param name="params" select="$params" tunnel="yes"/>
-                </xsl:apply-templates>
+                <xsl:copy-of select="f:log-warning('Message {1} not available in locale {2}, using fall-back {3} instead.', ($name, $language, $defaultLanguage))"/>
             </xsl:when>
             <xsl:when test="$msg[lang($defaultLanguage)][1]">
-                <xsl:copy-of select="f:log-warning('Message {1} not available in locale {2}, using {3} instead.', ($name, $language, $defaultLanguage))"/>
-                <xsl:apply-templates select="$msg[lang($defaultLanguage)][1]" mode="formatMessage">
-                    <xsl:with-param name="params" select="$params" tunnel="yes"/>
-                </xsl:apply-templates>
+                <xsl:copy-of select="f:log-warning('Message {1} not available in locale {2}, using default {3} instead.', ($name, $language, $defaultLanguage))"/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:copy-of select="f:log-error('Unknown message {1}.', ($name))"/>
                 <xsl:text expand-text="yes">[### {$name} ###]</xsl:text>
             </xsl:otherwise>
         </xsl:choose>
+
+    </xsl:function>
+
+
+    <xsl:function name="f:determine-plural-form" as="xs:string">
+        <xsl:param name="lang"/>
+        <xsl:param name="count"/>
+
+        <!-- TODO: appropriate rules for other supported languages -->
+        <xsl:sequence select="if ($count = 0) then 'zero' else if ($count = 1) then 'one' else 'other'"/>
     </xsl:function>
 
 
     <xd:doc>
         <xd:short>Handle a localized message.</xd:short>
-        <xd:detail>Apply the parameters to the selected message. Make sure that we drop namespaces inherited from the
+        <xd:detail>Apply the parameters to the selected message. Make sure we drop namespaces inherited from the
         <code>messages.xml</code> file from the message loaded.</xd:detail>
     </xd:doc>
 
@@ -205,7 +235,7 @@
         <xd:short>Output a space in the localized message.</xd:short>
     </xd:doc>
 
-    <xsl:template match="space" mode="formatMessage">
+    <xsl:template match="msg:space" mode="formatMessage">
         <xsl:text> </xsl:text>
     </xsl:template>
 

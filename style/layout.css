@@ -51,7 +51,7 @@ div.back {
 }
 
 /* make sure footnotes appear directly under the text of the last div(n) */
-.div0:last-child, .div1:last-child, .div2:last-child, .div3:last-child, 
+.div0:last-child, .div1:last-child, .div2:last-child, .div3:last-child,
 .div4:last-child, .div5:last-child, .div6:last-child, .div7:last-child {
     margin-bottom: 0;
 }
@@ -63,7 +63,7 @@ blockquote div.front, blockquote div.body, blockquote div.back {
 }
 
 /* make sure the margin-top on div(n)s do not appear when a div(n) is directly nested under a div(n+1) */
-.divBody .div1:first-child, .divBody .div2:first-child, .divBody .div3:first-child, .divBody .div4:first-child, 
+.divBody .div1:first-child, .divBody .div2:first-child, .divBody .div3:first-child, .divBody .div4:first-child,
 .divBody .div5:first-child, .divBody .div6:first-child, .divBody .div7:first-child {
     margin-top: 0;
 }
@@ -163,7 +163,7 @@ span.abbr, abbr {
 
 /* paragraph numbers */
 
-span.parnum {
+span.parNum {
     font-weight: bold;
 }
 

@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema
-        xmlns="http://www.gutenberg.ph/2006/schemas/messages"
-        xmlns:xml="http://www.w3.org/XML/1998/namespace"
-        xmlns:xs="http://www.w3.org/2001/XMLSchema"
-        elementFormDefault="qualified"
-        targetNamespace="http://www.gutenberg.ph/2006/schemas/messages">
+    xmlns="http://www.gutenberg.ph/2006/schemas/messages"
+    xmlns:xml="http://www.w3.org/XML/1998/namespace"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    elementFormDefault="qualified"
+    targetNamespace="http://www.gutenberg.ph/2006/schemas/messages">
+
+    <xs:annotation>
+        <xs:documentation xml:lang="en">
+            Schema for messages file, as used for the localization of tei2html.
+        </xs:documentation>
+    </xs:annotation>
 
     <xs:element name="repository" type="Repository"/>
 
     <xs:complexType name="Repository">
+        <xs:annotation>
+            <xs:documentation>A repository of localized messages. One file can contain multiple languages.</xs:documentation>
+        </xs:annotation>
         <xs:sequence>
             <xs:element minOccurs="0" maxOccurs="unbounded" name="messages" type="Messages"/>
         </xs:sequence>
@@ -16,16 +25,91 @@
     </xs:complexType>
 
     <xs:complexType name="Messages">
+        <xs:annotation>
+            <xs:documentation>A set of localized messages in a certain language.</xs:documentation>
+        </xs:annotation>
         <xs:sequence>
-            <xs:element minOccurs="0" maxOccurs="unbounded" name="message" type="xs:anyType"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="message" type="Message"/>
         </xs:sequence>
-        <xs:attribute name="name" type="xs:string"/>
-        <xs:attribute name="fallback" type="xs:string"/>
-        <xs:attribute ref="xml:lang"/>
+        <xs:attribute name="name" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>The name of this set of messages.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="fallback" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>The fallback language for this language when a message is missing.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute ref="xml:lang">
+            <xs:annotation>
+                <xs:documentation>The language of the messages in this set.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="Message" mixed="true">
+        <xs:annotation>
+            <xs:documentation>A single localized message. Can contain place-holders for parameters or any HTML element.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="param" type="Param"/>
+            <xs:element name="space" type="xs:string" fixed=""/>
+            <xs:any namespace="http://www.w3.org/1999/xhtml" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="name" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>The name of this message; the code uses this to look up this message.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="help" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>Used to disambiguate the meaning of a (to-be-translated) string.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute ref="xml:lang">
+            <xs:annotation>
+                <xs:documentation>The language of this message; typically used to provide a variant, for example, an 'en-UK' spelling.</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="plural" type="Plural" default="other"/>
+        <xs:attribute name="gender" type="Gender" default="other"/>
     </xs:complexType>
 
     <xs:complexType name="Param">
+        <xs:annotation>
+            <xs:documentation>A place-holder for parameters.</xs:documentation>
+        </xs:annotation>
         <xs:attribute name="name" type="xs:string"/>
+        <xs:attribute name="format" type="Format" default="string"/>
     </xs:complexType>
+
+    <xs:simpleType name="Plural">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="zero"/>
+            <xs:enumeration value="one"/>
+            <xs:enumeration value="two"/>
+            <xs:enumeration value="few"/>
+            <xs:enumeration value="many"/>
+            <xs:enumeration value="other"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="Gender">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="male"/>
+            <xs:enumeration value="female"/>
+            <xs:enumeration value="other"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="Format">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="string"/>
+            <xs:enumeration value="number"/>
+            <xs:enumeration value="date"/>
+            <xs:enumeration value="time"/>
+        </xs:restriction>
+    </xs:simpleType>
 
 </xs:schema>

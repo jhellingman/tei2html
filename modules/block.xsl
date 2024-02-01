@@ -540,7 +540,7 @@
                 <xsl:copy-of select="f:set-class-attribute-with(., $class)"/>
 
                 <xsl:if test="@n and f:is-set('showParagraphNumbers')">
-                    <span class="parnum"><xsl:value-of select="@n"/>.<xsl:text> </xsl:text></span>
+                    <span class="parNum"><xsl:value-of select="@n"/>.<xsl:text> </xsl:text></span>
                 </xsl:if>
                 <xsl:apply-templates/>
             </xsl:element>

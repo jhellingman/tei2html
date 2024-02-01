@@ -21,7 +21,7 @@
     </xd:doc>
 
     <xsl:param name="srclang" select="'en'"/>
-    <xsl:param name="destlang" select="'de'"/>
+    <xsl:param name="destlang" select="'nl'"/>
 
     <xsl:strip-space elements="*"/>
 
@@ -64,13 +64,14 @@
     </xsl:template>
 
 
-    <xsl:template match="msg:message" mode="missing">
+    <xsl:template match="msg:message[@plural]" mode="missing">
         <xsl:if test="lang($srclang)">
             <xsl:variable name="name" select="@name"/>
+            <xsl:variable name="plural" select="@plural"/>
             <xsl:variable name="value" select="."/>
-            <xsl:if test="not(//msg:message[@name=$name and lang($destlang)])">
+            <xsl:if test="not(//msg:message[@name=$name and lang($destlang) and @plural=$plural])">
                 <tr>
-                    <td class="messageId"><xsl:value-of select="@name"/></td>
+                    <td class="messageId"><xsl:value-of select="@name"/> [<xsl:value-of select="@plural"/>]</td>
                         <xsl:choose>
                         <xsl:when test="string-length($value) &lt; 2000">
                             <td><xsl:apply-templates select="$value" mode="cp"/></td>
@@ -85,12 +86,59 @@
         </xsl:if>
     </xsl:template>
 
-
-    <xsl:template match="msg:message" mode="review">
+    <xsl:template match="msg:message[not(@plural)]" mode="missing">
         <xsl:if test="lang($srclang)">
             <xsl:variable name="name" select="@name"/>
             <xsl:variable name="value" select="."/>
-            <xsl:variable name="translation" select="//msg:message[@name=$name and lang($destlang)]"/>
+            <xsl:if test="not(//msg:message[@name=$name and lang($destlang) and not(@plural)])">
+                <tr>
+                    <td class="messageId"><xsl:value-of select="@name"/></td>
+                    <xsl:choose>
+                        <xsl:when test="string-length($value) &lt; 2000">
+                            <td><xsl:apply-templates select="$value" mode="cp"/></td>
+                            <td><xsl:value-of select="@help"/></td>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <td colspan="2"><i class="missing">long message omitted</i></td>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </tr>
+            </xsl:if>
+        </xsl:if>
+    </xsl:template>
+
+    <xsl:template match="msg:message[@plural]" mode="review">
+        <xsl:if test="lang($srclang)">
+            <xsl:variable name="name" select="@name"/>
+            <xsl:variable name="plural" select="@plural"/>
+            <xsl:variable name="value" select="."/>
+            <xsl:variable name="translation" select="//msg:message[@name=$name and lang($destlang) and @plural=$plural]"/>
+            <tr>
+                <td>
+                    <xsl:value-of select="@name"/> [<xsl:value-of select="@plural"/>]
+                </td>
+                <td>
+                    <xsl:apply-templates select="$value" mode="cp"/>
+                </td>
+                <td>
+                    <xsl:choose>
+                        <xsl:when test="$translation">
+                            <xsl:apply-templates select="$translation" mode="cp"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <i class="missing">no translation available</i>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </td>
+            </tr>
+        </xsl:if>
+    </xsl:template>
+
+    <xsl:template match="msg:message[not(@plural)]" mode="review">
+        <xsl:if test="lang($srclang)">
+            <xsl:variable name="name" select="@name"/>
+            <xsl:variable name="value" select="."/>
+            <xsl:variable name="translation" select="//msg:message[@name=$name and lang($destlang) and not(@plural)]"/>
             <tr>
                 <td>
                     <xsl:value-of select="@name"/>
@@ -112,7 +160,6 @@
         </xsl:if>
     </xsl:template>
 
-
     <xsl:template match="*" mode="cp">
         <xsl:copy>
             <xsl:apply-templates mode="cp"/>
@@ -121,7 +168,7 @@
 
 
     <xsl:template match="msg:param" mode="cp">
-        <span class="param">{<xsl:value-of select="@name"/>}</span>
+        <span class="param">{<xsl:value-of select="@name"/><xsl:if test="@format">:<xsl:value-of select="@format"/></xsl:if>}</span>
     </xsl:template>
 
 

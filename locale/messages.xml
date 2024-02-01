@@ -19,23 +19,9 @@
 
     <msg:messages xml:lang="en" name="English">
 
-        <!-- Note about IDs:
-
-             Use "msg" + the English singular for of the word or phrase.
-             Use (language dependent) post-fixes to the id to create the
-             message ids for plurals, etc.
-
-                 .n - plural
-                 .2 - dual
-                 .f - feminine form
-                 .m - masculine form
-
-            If homonyms are used, please disambiguate them with a post-fix as follows:
-
-                msgOrange.fruit
-                msgOrange.color
-
-        -->
+        <msg:message name="msgCountCorrectionsAppliedToText" plural="zero">No corrections have been applied to the text.</msg:message>
+        <msg:message name="msgCountCorrectionsAppliedToText" plural="one">The following correction has been applied to the text:</msg:message>
+        <msg:message name="msgCountCorrectionsAppliedToText">The following <msg:param name="count" format="number"/> corrections have been applied to the text:</msg:message>
 
         <msg:message name="msgCorrectionsNotAppliedToText">The following potential corrections have not been applied.</msg:message>
         <msg:message name="msgQuestionablesOverview">Overview of potential corrections.</msg:message>
@@ -70,7 +56,7 @@
         <msg:message name="msgPostscript" help="A part of a book after the main text to provide some further information about the preceding work.">Postscript</msg:message>
 
         <msg:message name="msgPassim" help="Used in references to indicate a word or phrase occurs many times in the work referenced.">Passim</msg:message>
-        <msg:message name="msgCountOccurrences"><msg:param name="count"/> occurrences</msg:message>
+        <msg:message name="msgCountOccurrences"><msg:param name="count" format="number"/> occurrences</msg:message>
         <msg:message name="msgEditDistance">Edit distance</msg:message>
         <msg:message name="msgAbbreviationOverview">Overview of abbreviations used.</msg:message>
         <msg:message name="msgExpansion" help="An expansion is the fully written form of an abbreviation.">Expansion</msg:message>
@@ -166,7 +152,6 @@
         <msg:message name="msgCorrection">Correction</msg:message>
         <msg:message name="msgCorrections">Corrections</msg:message>
         <msg:message name="msgCorrectionsAppliedToText">The following corrections have been applied to the text:</msg:message>
-        <msg:message name="msgCountCorrectionsAppliedToText">The following <msg:param name="count"/> corrections have been applied to the text:</msg:message>
         <msg:message name="msgCorrectionsOverview">Overview of corrections applied to the text.</msg:message>
         <msg:message name="msgCover">Cover</msg:message>
         <msg:message name="msgCoverImage">Cover Image</msg:message>
@@ -1309,7 +1294,7 @@
         <msg:message name="msgAnnotator">Annotator</msg:message>
         <msg:message name="msgBibliographicAntecedent">Bibliografisch antecedent</msg:message>
         <msg:message name="msgAuthorInQuotations">Auteur in citaten</msg:message>
-        <msg:message name="msgAuthorInTextExtracts">Auteur in textfragmenten</msg:message>
+        <msg:message name="msgAuthorInTextExtracts">Auteur in tekstfragmenten</msg:message>
         <msg:message name="msgArranger">Arrangeur</msg:message>
         <msg:message name="msgArtist">Artiest</msg:message>
         <msg:message name="msgAssociatedName">Gerelateerde naam</msg:message>
@@ -1363,7 +1348,9 @@
         <msg:message name="msgCorrection">Verbetering</msg:message>
         <msg:message name="msgCorrections">Verbeteringen</msg:message>
         <msg:message name="msgCorrectionsAppliedToText">De volgende verbeteringen zijn aangebracht in de tekst:</msg:message>
-        <msg:message name="msgCountCorrectionsAppliedToText">De volgende <msg:param name="count"/> verbeteringen zijn aangebracht in de tekst:</msg:message>
+        <msg:message name="msgCountCorrectionsAppliedToText" plural="zero">Er zijn geen verbeteringen aangebracht in de tekst.</msg:message>
+        <msg:message name="msgCountCorrectionsAppliedToText" plural="one">De volgende verbetering is aangebracht in de tekst:</msg:message>
+        <msg:message name="msgCountCorrectionsAppliedToText">De volgende <msg:param name="count" format="number"/> verbeteringen zijn aangebracht in de tekst:</msg:message>
         <msg:message name="msgCorrectionsOverview">Overzicht van verbeteringen aangebracht in de tekst.</msg:message>
         <msg:message name="msgCover">Omslag</msg:message>
         <msg:message name="msgCoverImage">Kaftafbeelding</msg:message>
@@ -1614,6 +1601,7 @@
         <msg:message name="et">Estisch</msg:message>
         <msg:message name="eu">Baskisch</msg:message>
         <msg:message name="fa">Perzisch</msg:message>
+        <msg:message name="fa-Latn">Perzisch (Latijnse transcriptie)</msg:message>
         <msg:message name="de">Duits</msg:message>
         <msg:message name="el">Grieks</msg:message>
         <msg:message name="el-Latn">Grieks (Latijnse transcriptie)</msg:message>
@@ -1755,6 +1743,9 @@
         <msg:message name="pag">Pangasinan</msg:message>
         <msg:message name="pam">Pampanga</msg:message>
         <msg:message name="war">Waray-Waray</msg:message>
+        <msg:message name="egy">Oud-Egyptisch</msg:message>
+        <msg:message name="war">Waray-Waray</msg:message>
+
         <msg:message name="zxx">Niet van toepassing</msg:message>
 
         <msg:message name="xx">Niet-linguïstische inhoud</msg:message>
@@ -1949,7 +1940,7 @@
     </msg:messages>
 
     <!-- Tagalog (accented, as used in the 1920s) translation -->
-    <msg:messages xml:lang="tl-1920" name="Tagalog (old orthography)">
+    <msg:messages xml:lang="tl-1920" fallback="tl" name="Tagalog (old orthography)">
         <msg:message name="msgContents">Nilálamán</msg:message>
         <msg:message name="msgToc">Nilálamán</msg:message>
         <msg:message name="msgTableOfContents">Talaán n&gtilde; Nilálamán</msg:message>

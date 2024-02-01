@@ -83,4 +83,37 @@
         test="xs:string(.) = 'Monday, 19 [### month ###] 2021'"/>
    </x:scenario>
 
+   <x:scenario label="When formatting a missing message">
+      <x:call function="f:format-message">
+         <x:param select="'fmtThisMessageIsNotPresent'"/>
+         <x:param select="map{'day':'Monday','date':'19','year':'2021'}"/>
+      </x:call>
+      <x:expect label="will return the name of the missing message surrounded with hash-marks"
+                test="xs:string(.) = '[### fmtThisMessageIsNotPresent ###]'"/>
+   </x:scenario>
+
+   <x:scenario label="When formatting a message with a count parameter set to 0">
+      <x:call function="f:format-message">
+         <x:param select="'msgCountCorrectionsAppliedToText'"/>
+         <x:param select="map{'count': 0}"/>
+      </x:call>
+      <x:expect label="will return the localized message" test="xs:string(.) = 'No corrections have been applied to the text.'"/>
+   </x:scenario>
+
+   <x:scenario label="When formatting a message with a count parameter set to 1">
+      <x:call function="f:format-message">
+         <x:param select="'msgCountCorrectionsAppliedToText'"/>
+         <x:param select="map{'count': 1}"/>
+      </x:call>
+      <x:expect label="will return the localized message" test="xs:string(.) = 'The following correction has been applied to the text:'"/>
+   </x:scenario>
+
+   <x:scenario label="When formatting a message with a count parameter set to 25">
+      <x:call function="f:format-message">
+         <x:param select="'msgCountCorrectionsAppliedToText'"/>
+         <x:param select="map{'count': 25}"/>
+      </x:call>
+      <x:expect label="will return the localized message" test="xs:string(.) = 'The following 25 corrections have been applied to the text:'"/>
+   </x:scenario>
+
 </x:description>
