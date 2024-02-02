@@ -518,11 +518,11 @@
     </xd:doc>
 
     <xsl:template name="correctionTable">
-        <p><xsl:value-of select="f:message('msgCorrectionsAppliedToText')"/></p>
-
         <xsl:variable name="corrections">
             <xsl:apply-templates select="//corr[not(parent::choice) and not(ancestor::seg[@copyOf])] | //choice[corr]" mode="collect-corrections"/>
         </xsl:variable>
+
+        <p><xsl:value-of select="f:format-message('msgCountCorrectionsAppliedToText', map{'count': count($corrections/tmp:choice)})"/></p>
 
         <table class="correctionTable">
             <xsl:if test="not(f:is-epub()) and not(f:is-html5())">

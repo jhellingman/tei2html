@@ -83,12 +83,14 @@
             <xsl:when test="starts-with($url, 'mailto:')">{f:message('msgEmailLink')}</xsl:when>
             <xsl:when test="starts-with($url, 'ftp:')">{f:message('msgFtpLink')}</xsl:when>
 
-            <xsl:when test="starts-with($url, 'audio/')">
+            <xsl:when test="starts-with($url, 'audio/') or starts-with($url, 'music/')">
                 <xsl:choose>
                     <xsl:when test="ends-with($url, '.mid') or ends-with($url, '.midi')">{f:message('msgLinkToMidiFile')}</xsl:when>
                     <xsl:when test="ends-with($url, '.mp3')">{f:message('msgLinkToMp3File')}</xsl:when>
                     <xsl:when test="ends-with($url, '.ly')">{f:message('msgLinkToLilypondFile')}</xsl:when>
                     <xsl:when test="ends-with($url, '.mscz')">{f:message('msgLinkToMuseScoreFile')}</xsl:when>
+                    <xsl:when test="ends-with($url, '.mxl')">{f:message('msgLinkToMusicXmlFile')}</xsl:when>
+                    <xsl:when test="ends-with($url, '.mxl')">{f:message('msgLinkToOggFile')}</xsl:when>
                     <xsl:otherwise>{f:message('msgAudioLink')}</xsl:otherwise>
                 </xsl:choose>
             </xsl:when>
@@ -96,6 +98,12 @@
         </xsl:choose>
     </xsl:function>
 
+    <xsl:function name="f:is-local-audio-xref" as="xs:boolean">
+        <xsl:param name="url" as="xs:string"/>
+
+        <xsl:sequence select="(starts-with($url, 'audio/') or starts-with($url, 'music/')) and
+            (ends-with($url, '.mid') or ends-with($url, '.midi') or ends-with($url, '.ogg') or ends-with($url, '.mp3'))"/>
+    </xsl:function>
 
     <xsl:variable name="prefixDefs" select="//listPrefixDef/prefixDef" as="element(prefixDef)*"/>
 

@@ -559,5 +559,10 @@ span.musictime span.bottom {
     display: block;
 }
 
+audio {
+    height: 20px;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
 
 /***** End of layout.css *****/

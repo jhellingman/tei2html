@@ -112,6 +112,8 @@
             <images.maxWidth>720</images.maxWidth>                          <!-- Warn if image is wider than this number of pixels (after applying images.scale). -->
             <images.maxHeight>720</images.maxHeight>                        <!-- Warn if image is taller than this number of pixels (after applying images.scale). -->
 
+            <audio.useControls>false</audio.useControls>                    <!-- Use controls for links to local audio (MP3, Midi, Ogg) formats (HTML5 only). -->
+
             <text.parentheses>()[]{}</text.parentheses>                     <!-- Pairs of parentheses, first opening, then closing. -->
             <text.quotes>&ldquo;&rdquo;&lsquo;&rsquo;&laquo;&raquo;&bdquo;&rdquo;</text.quotes> <!-- Pairs of quotation marks, first opening, then closing. -->
             <text.curlyApos>true</text.curlyApos>                           <!-- Replace a plain apostrophe (') with a right single quote. -->

@@ -56,6 +56,8 @@
         <msg:message name="msgPostscript" help="A part of a book after the main text to provide some further information about the preceding work.">Postscript</msg:message>
 
         <msg:message name="msgPassim" help="Used in references to indicate a word or phrase occurs many times in the work referenced.">Passim</msg:message>
+        <msg:message name="msgCountOccurrences" plural="zero">no occurrences</msg:message>
+        <msg:message name="msgCountOccurrences" plural="one">one occurrence</msg:message>
         <msg:message name="msgCountOccurrences"><msg:param name="count" format="number"/> occurrences</msg:message>
         <msg:message name="msgEditDistance">Edit distance</msg:message>
         <msg:message name="msgAbbreviationOverview">Overview of abbreviations used.</msg:message>
@@ -282,6 +284,8 @@
         <msg:message name="msgLinkToMap">Link to location on map</msg:message>
         <msg:message name="msgLinkToMidiFile">Download MIDI file</msg:message>
         <msg:message name="msgLinkToMp3File">Download MP3 file</msg:message>
+        <msg:message name="msgLinkToOggFile">Download Ogg file</msg:message>
+        <msg:message name="msgLinkToMusicXmlFile">Download MusicXML file</msg:message>
         <msg:message name="msgLinkToMuseScoreFile">Download MuseScore file</msg:message>
         <msg:message name="msgLinkToOpenLibrary">Link to OpenLibrary catalog page</msg:message>
         <msg:message name="msgLinkToPg">Link to Project Gutenberg ebook</msg:message>
@@ -684,9 +688,9 @@
 
             <h3 id="pglicence.s3">Section 3. Information about the Project Gutenberg Literary Archive Foundation</h3>
 
-            <p class="smallprint">The Project Gutenberg Literary Archive Foundation is a non profit 501(c)(3) educational corporation organized under the laws of the state of Mississippi and granted tax exempt status by the Internal Revenue Service. The Foundation&apos;s EIN or federal tax identification number is 64-6221541. Contributions to the Project Gutenberg Literary Archive Foundation are tax deductible to the full extent permitted by U.S. federal laws and your state&apos;s laws.</p>
+            <p class="smallprint">The Project Gutenberg Literary Archive Foundation is a non-profit 501(c)(3) educational corporation organized under the laws of the state of Mississippi and granted tax-exempt status by the Internal Revenue Service. The Foundation&apos;s EIN or federal tax identification number is 64-6221541. Contributions to the Project Gutenberg Literary Archive Foundation are tax-deductible to the full extent permitted by U.S. federal laws and your state&apos;s laws.</p>
 
-            <p class="smallprint">The Foundation&apos;s principal office is in Fairbanks, Alaska, with the mailing address: PO Box 750175, Fairbanks, AK 99775, but its volunteers and employees are scattered throughout numerous locations. Its business office is located at 809 North 1500 West, Salt Lake City, UT 84116, (801) 596-1887. Email contact links and up to date contact information can be found at the Foundation&apos;s web site and official page at <a href="https://www.gutenberg.org/contact">www.gutenberg.org/contact</a>.</p>
+            <p class="smallprint">The Foundation&apos;s principal office is in Fairbanks, Alaska, with the mailing address: PO Box 750175, Fairbanks, AK 99775, but its volunteers and employees are scattered throughout numerous locations. Its business office is located at 809 North 1500 West, Salt Lake City, UT 84116, (801) 596-1887. Email contact links and up-to-date contact information can be found at the Foundation&apos;s website and official page at <a href="https://www.gutenberg.org/contact">www.gutenberg.org/contact</a>.</p>
 
             <p class="smallprint">For additional contact information:</p>
 
@@ -699,7 +703,7 @@
 
             <h3 id="pglicence.s4">Section 4. Information about Donations to the Project Gutenberg Literary Archive Foundation</h3>
 
-            <p class="smallprint">Project Gutenberg&tm; depends upon and cannot survive without wide spread public support and donations to carry out its mission of increasing the number of public domain and licensed works that can be freely distributed in machine readable form accessible by the widest array of equipment including outdated equipment. Many small donations ($1 to $5,000) are particularly important to maintaining tax exempt status with the IRS.</p>
+            <p class="smallprint">Project Gutenberg&tm; depends upon and cannot survive without widespread public support and donations to carry out its mission of increasing the number of public domain and licensed works that can be freely distributed in machine-readable form accessible by the widest array of equipment including outdated equipment. Many small donations ($1 to $5,000) are particularly important to maintaining tax-exempt status with the IRS.</p>
 
             <p class="smallprint">The Foundation is committed to complying with the laws regulating charities and charitable donations in all 50 states of the United States. Compliance requirements are not uniform and it takes a considerable effort, much paperwork and many fees to meet and keep up with these requirements. We do not solicit donations in locations where we have not received written confirmation of compliance. To SEND DONATIONS or determine the status of compliance for any particular state visit <a href="https://www.gutenberg.org/donate">www.gutenberg.org/donate</a>.</p>
 
@@ -716,9 +720,9 @@
 
             <p class="smallprint">Project Gutenberg&tm; eBooks are often created from several printed editions, all of which are confirmed as not protected by copyright in the U.S. unless a copyright notice is included. Thus, we do not necessarily keep eBooks in compliance with any particular paper edition.</p>
 
-            <p class="smallprint">Most people start at our Web site which has the main PG search facility: <a href="https://www.gutenberg.org/">www.gutenberg.org</a></p>
+            <p class="smallprint">Most people start at our Website which has the main PG search facility: <a href="https://www.gutenberg.org/">www.gutenberg.org</a></p>
 
-            <p class="smallprint">This Web site includes information about Project Gutenberg&tm;, including how to make donations to the Project Gutenberg Literary Archive Foundation, how to help produce our new eBooks, and how to subscribe to our email newsletter to hear about new eBooks.</p>
+            <p class="smallprint">This Website includes information about Project Gutenberg&tm;, including how to make donations to the Project Gutenberg Literary Archive Foundation, how to help produce our new eBooks, and how to subscribe to our email newsletter to hear about new eBooks.</p>
         </msg:message>
 
     </msg:messages>
@@ -1235,7 +1239,7 @@
         <msg:message name="msgGutenbergExternalReferencesExplanation">De volgende URL&apos;s worden puur ter informatie getoond. U kunt ze desgewenst naar de adresbalk van uw browser kopiëren.</msg:message>
 
         <msg:message name="msgDramatisPersonae">Dramatis personae.</msg:message>
-        <msg:message name="msgUnidentifiedSpeaker">Niet geïndentificeerde spreker.</msg:message>
+        <msg:message name="msgUnidentifiedSpeaker">Niet geïdentificeerde spreker.</msg:message>
         <msg:message name="msgId">ID</msg:message>
 
         <msg:message name="msgQrCode">QR-code</msg:message>
@@ -1249,7 +1253,9 @@
         <msg:message name="msgReturnToNoteMarkInText">Ga terug naar noot <msg:param name="mark"/> in tekst.</msg:message>
 
         <msg:message name="msgPassim">Passim</msg:message>
-        <msg:message name="msgCountOccurrences"><msg:param name="count"/> gevallen</msg:message>
+        <msg:message name="msgCountOccurrences" plural="zero">geen gevallen</msg:message>
+        <msg:message name="msgCountOccurrences" plural="one">één geval</msg:message>
+        <msg:message name="msgCountOccurrences"><msg:param name="count" format="number"/> gevallen</msg:message>
         <msg:message name="msgOpenLibraryBook">Open Library (Boek)</msg:message>
         <msg:message name="msgOpenLibraryWork">Open Library (Werk)</msg:message>
 
@@ -1263,7 +1269,7 @@
         <msg:message name="msgGitHub">GitHub</msg:message>
 
         <msg:message name="msgAuthorAddition">Toevoeging door auteur</msg:message>
-        <msg:message name="msgCopyrightPage">Auteursrechtpagina</msg:message>
+        <msg:message name="msgCopyrightPage">Auteursrecht-pagina</msg:message>
 
         <msg:message name="msgEditDistance">Bewerkingsafstand</msg:message>
         <msg:message name="msgAbbreviationOverview">Overzicht van gebruikte afkortingen.</msg:message>
@@ -1479,7 +1485,9 @@
         <msg:message name="msgLinkToLilypondFile">Download Lilypond-bestand</msg:message>
         <msg:message name="msgLinkToMap">Link naar locatie op kaart</msg:message>
         <msg:message name="msgLinkToMidiFile">Download MIDI-bestand</msg:message>
-        <msg:message name="msgLinkToMp3File">Download MP3bestand</msg:message>
+        <msg:message name="msgLinkToMp3File">Download MP3-bestand</msg:message>
+        <msg:message name="msgLinkToOggFile">Download Ogg-bestand</msg:message>
+        <msg:message name="msgLinkToMusicXmlFile">Download MusicXML-bestand</msg:message>
         <msg:message name="msgLinkToMuseScoreFile">Download MuseScore-bestand</msg:message>
         <msg:message name="msgLinkToOpenLibrary">Link naar OpenLibrary cataloguspagina</msg:message>
         <msg:message name="msgLinkToPg">Link naar Project Gutenberg eboek</msg:message>

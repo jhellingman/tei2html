@@ -218,32 +218,43 @@
         <xd:detail>
             <p>In this template, the <code>class</code>, <code>title</code>, and <code>href</code> attributes in the output HTML are determined.</p>
 
-            <p>The main document language is used to apply language-dependent translations. TODO: This should be changed to use the language of the local context.</p>
+            <p>The main document language is used to apply language-dependent translations.</p>
         </xd:detail>
     </xd:doc>
 
     <xsl:template name="handle-xref">
         <xsl:param name="url" as="xs:string"/>
 
-        <a>
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
-            <xsl:attribute name="class">
-                <xsl:value-of select="f:translate-xref-class($url)"/>
-                <xsl:text> </xsl:text>
-                <xsl:value-of select="f:generate-class-name(.)"/>
-            </xsl:attribute>
-            <xsl:attribute name="title">
-                <xsl:value-of select="f:translate-xref-title($url)"/>
-            </xsl:attribute>
-            <xsl:attribute name="href">
-                <xsl:value-of select="f:translate-xref-url($url, substring(f:get-document-lang(), 1, 2))"/>
-            </xsl:attribute>
-            <xsl:if test="@rel">
-                <xsl:attribute name="rel"><xsl:value-of select="@rel"/></xsl:attribute>
-            </xsl:if>
+        <xsl:choose>
+            <xsl:when test="f:is-local-audio-xref($url) and f:is-html5() and f:is-set('audio.useControls')">
+                <audio>
+                    <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+                    <xsl:attribute name="controls">controls</xsl:attribute>
+                    <xsl:attribute name="src" select="$url"/>
+                </audio>
+            </xsl:when>
+            <xsl:otherwise>
+                <a>
+                    <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+                    <xsl:attribute name="class">
+                        <xsl:value-of select="f:translate-xref-class($url)"/>
+                        <xsl:text> </xsl:text>
+                        <xsl:value-of select="f:generate-class-name(.)"/>
+                    </xsl:attribute>
+                    <xsl:attribute name="title">
+                        <xsl:value-of select="f:translate-xref-title($url)"/>
+                    </xsl:attribute>
+                    <xsl:attribute name="href">
+                        <xsl:value-of select="f:translate-xref-url($url, substring(f:get-document-lang(), 1, 2))"/>
+                    </xsl:attribute>
+                    <xsl:if test="@rel">
+                        <xsl:attribute name="rel"><xsl:value-of select="@rel"/></xsl:attribute>
+                    </xsl:if>
 
-            <xsl:apply-templates/>
-        </a>
+                    <xsl:apply-templates/>
+                </a>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
 </xsl:stylesheet>
