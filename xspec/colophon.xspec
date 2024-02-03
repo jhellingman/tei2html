@@ -41,7 +41,7 @@
         <x:expect label="will result in an HTML table with the corrections" test="//xhtml:div[@class='back']">
             <div xmlns="http://www.w3.org/1999/xhtml" class="back" id="...">
                 <h2 class="main">Corrections</h2>
-                <p>The following corrections have been applied to the text:</p>
+                <p>The following 8 corrections have been applied to the text:</p>
                 <table class="correctionTable" summary="Overview of corrections applied to the text.">
                     <tr>
                         <th>Page</th>
