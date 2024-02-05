@@ -21,7 +21,7 @@
 
         <msg:message name="msgCountCorrectionsAppliedToText" plural="zero">No corrections have been applied to the text.</msg:message>
         <msg:message name="msgCountCorrectionsAppliedToText" plural="one">The following correction has been applied to the text:</msg:message>
-        <msg:message name="msgCountCorrectionsAppliedToText">The following <msg:param name="count" format="number"/> corrections have been applied to the text:</msg:message>
+        <msg:message name="msgCountCorrectionsAppliedToText">The following <msg:param name="count" type="integer"/> corrections have been applied to the text:</msg:message>
 
         <msg:message name="msgCorrectionsNotAppliedToText">The following potential corrections have not been applied.</msg:message>
         <msg:message name="msgQuestionablesOverview">Overview of potential corrections.</msg:message>
@@ -58,7 +58,7 @@
         <msg:message name="msgPassim" help="Used in references to indicate a word or phrase occurs many times in the work referenced.">Passim</msg:message>
         <msg:message name="msgCountOccurrences" plural="zero">no occurrences</msg:message>
         <msg:message name="msgCountOccurrences" plural="one">one occurrence</msg:message>
-        <msg:message name="msgCountOccurrences"><msg:param name="count" format="number"/> occurrences</msg:message>
+        <msg:message name="msgCountOccurrences"><msg:param name="count" type="integer"/> occurrences</msg:message>
         <msg:message name="msgEditDistance">Edit distance</msg:message>
         <msg:message name="msgAbbreviationOverview">Overview of abbreviations used.</msg:message>
         <msg:message name="msgExpansion" help="An expansion is the fully written form of an abbreviation.">Expansion</msg:message>
@@ -1255,7 +1255,7 @@
         <msg:message name="msgPassim">Passim</msg:message>
         <msg:message name="msgCountOccurrences" plural="zero">geen gevallen</msg:message>
         <msg:message name="msgCountOccurrences" plural="one">één geval</msg:message>
-        <msg:message name="msgCountOccurrences"><msg:param name="count" format="number"/> gevallen</msg:message>
+        <msg:message name="msgCountOccurrences"><msg:param name="count" type="integer"/> gevallen</msg:message>
         <msg:message name="msgOpenLibraryBook">Open Library (Boek)</msg:message>
         <msg:message name="msgOpenLibraryWork">Open Library (Werk)</msg:message>
 
@@ -1356,7 +1356,7 @@
         <msg:message name="msgCorrectionsAppliedToText">De volgende verbeteringen zijn aangebracht in de tekst:</msg:message>
         <msg:message name="msgCountCorrectionsAppliedToText" plural="zero">Er zijn geen verbeteringen aangebracht in de tekst.</msg:message>
         <msg:message name="msgCountCorrectionsAppliedToText" plural="one">De volgende verbetering is aangebracht in de tekst:</msg:message>
-        <msg:message name="msgCountCorrectionsAppliedToText">De volgende <msg:param name="count" format="number"/> verbeteringen zijn aangebracht in de tekst:</msg:message>
+        <msg:message name="msgCountCorrectionsAppliedToText">De volgende <msg:param name="count" type="integer"/> verbeteringen zijn aangebracht in de tekst:</msg:message>
         <msg:message name="msgCorrectionsOverview">Overzicht van verbeteringen aangebracht in de tekst.</msg:message>
         <msg:message name="msgCover">Omslag</msg:message>
         <msg:message name="msgCoverImage">Kaftafbeelding</msg:message>

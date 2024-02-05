@@ -167,7 +167,7 @@
     </xsl:template>
 
     <xsl:template match="msg:param" mode="cp">
-        <span class="param">{<xsl:value-of select="@name"/><xsl:if test="@format">:<xsl:value-of select="@format"/></xsl:if>}</span>
+        <span class="param">{<xsl:value-of select="@name"/><xsl:if test="@type">:<xsl:value-of select="@type"/></xsl:if>}</span>
     </xsl:template>
 
 </xsl:stylesheet>

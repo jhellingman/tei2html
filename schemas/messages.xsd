@@ -81,7 +81,8 @@
             <xs:documentation>A place-holder for parameters.</xs:documentation>
         </xs:annotation>
         <xs:attribute name="name" type="xs:string"/>
-        <xs:attribute name="format" type="Format" default="string"/>
+        <xs:attribute name="type" type="Type" default="string"/>
+        <xs:attribute name="format" type="xs:string"/>
     </xs:complexType>
 
     <xs:simpleType name="Plural">
@@ -103,10 +104,11 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="Format">
+    <xs:simpleType name="Type">
         <xs:restriction base="xs:string">
             <xs:enumeration value="string"/>
             <xs:enumeration value="number"/>
+            <xs:enumeration value="integer"/>
             <xs:enumeration value="date"/>
             <xs:enumeration value="time"/>
         </xs:restriction>
