@@ -471,7 +471,13 @@
                 <xsl:variable name="alt">
                     <xsl:choose>
                         <xsl:when test="f:has-rend-value(@rend, 'image-alt')"><xsl:value-of select="f:rend-value(@rend, 'image-alt')"/></xsl:when>
-                        <xsl:when test=". != ''"><xsl:value-of select="."/></xsl:when>
+                        <xsl:when test=". != ''">
+                            <!-- Use the head as alt-text; to make sure nested notes, etc. are not copied into the string. -->
+                            <xsl:variable name="head">
+                                <xsl:apply-templates select="." mode="toc-head"/>
+                            </xsl:variable>
+                            <xsl:value-of select="$head"/>
+                        </xsl:when>
                         <xsl:otherwise><xsl:value-of select="f:message('msgOrnament')"/></xsl:otherwise>
                     </xsl:choose>
                 </xsl:variable>

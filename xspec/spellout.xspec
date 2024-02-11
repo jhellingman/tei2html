@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+               xmlns:f="urn:stylesheet-functions"
+               stylesheet="../modules/spellout.xsl"
+               version="3.0">
+
+  <x:scenario label="When spelling-out a number">
+    <x:call function="f:spell-out"><x:param select="'en'"/><x:param select="0"/></x:call>
+    <x:expect label="will return zero" select="'zero'"/>
+  </x:scenario>
+
+  <!-- English -->
+
+  <x:scenario label="When spelling-out 1 in English">
+    <x:call function="f:en-spell-out"><x:param select="1"/></x:call>
+    <x:expect label="will return 'one'" select="'one'"/>
+  </x:scenario>
+
+  <x:scenario label="When spelling-out 69 in English">
+    <x:call function="f:en-spell-out"><x:param select="69"/></x:call>
+    <x:expect label="will return 'sixty-nine'" select="'sixty-nine'"/>
+  </x:scenario>
+
+  <x:scenario label="When spelling-out 100 in English">
+    <x:call function="f:en-spell-out"><x:param select="100"/></x:call>
+    <x:expect label="will return 'one hundred'" select="'one hundred'"/>
+  </x:scenario>
+
+  <x:scenario label="When spelling-out 101 in English">
+    <x:call function="f:en-spell-out"><x:param select="101"/></x:call>
+    <x:expect label="will return 'one hundred one'" select="'one hundred one'"/>
+  </x:scenario>
+
+  <x:scenario label="When spelling-out 999 in English">
+    <x:call function="f:en-spell-out"><x:param select="999"/></x:call>
+    <x:expect label="will return 'nine hundred ninety-nine'" select="'nine hundred ninety-nine'"/>
+  </x:scenario>
+
+  <x:scenario label="When spelling-out 1000 in English">
+    <x:call function="f:en-spell-out"><x:param select="1000"/></x:call>
+    <x:expect label="will return 'one thousand'" select="'one thousand'"/>
+  </x:scenario>
+
+  <x:scenario label="When spelling-out 1234 in English">
+    <x:call function="f:en-spell-out"><x:param select="1234"/></x:call>
+    <x:expect label="will return 'one thousand two hundred thirty-four'" select="'one thousand two hundred thirty-four'"/>
+  </x:scenario>
+
+  <x:scenario label="When spelling-out 987654321 in English">
+    <x:call function="f:en-spell-out"><x:param select="987654321"/></x:call>
+    <x:expect
+        label="will return 'nine hundred eighty-seven million six hundred fifty-four thousand three hundred twenty-one'"
+        select="'nine hundred eighty-seven million six hundred fifty-four thousand three hundred twenty-one'"/>
+  </x:scenario>
+
+  <x:scenario label="When spelling-out 123456789123456789 in English">
+    <x:call function="f:en-spell-out"><x:param select="123456789123456789"/></x:call>
+    <x:expect
+        label="will return 'one hundred twenty-three quadrillion four hundred fifty-six trillion seven hundred eighty-nine billion one hundred twenty-three million four hundred fifty-six thousand seven hundred eighty-nine'"
+        select="'one hundred twenty-three quadrillion four hundred fifty-six trillion seven hundred eighty-nine billion one hundred twenty-three million four hundred fifty-six thousand seven hundred eighty-nine'"/>
+  </x:scenario>
+
+  <!-- Dutch -->
+
+  <x:scenario label="When spelling-out 1 in Dutch">
+    <x:call function="f:nl-spell-out"><x:param select="1"/></x:call>
+    <x:expect label="will return 'één'" select="'één'"/>
+  </x:scenario>
+
+  <x:scenario label="When spelling-out 69 in Dutch">
+    <x:call function="f:nl-spell-out"><x:param select="69"/></x:call>
+    <x:expect label="will return 'negenenzestig'" select="'negenenzestig'"/>
+  </x:scenario>
+
+  <x:scenario label="When spelling-out 100 in Dutch">
+    <x:call function="f:nl-spell-out"><x:param select="100"/></x:call>
+    <x:expect label="will return 'honderd'" select="'honderd'"/>
+  </x:scenario>
+
+  <x:scenario label="When spelling-out 101 in Dutch">
+    <x:call function="f:nl-spell-out"><x:param select="101"/></x:call>
+    <x:expect label="will return 'honderdéén'" select="'honderdéén'"/>
+  </x:scenario>
+
+  <x:scenario label="When spelling-out 999 in Dutch">
+    <x:call function="f:nl-spell-out"><x:param select="999"/></x:call>
+    <x:expect label="will return 'negenhonderdnegenennegentig'" select="'negenhonderdnegenennegentig'"/>
+  </x:scenario>
+
+  <x:scenario label="When spelling-out 1000 in Dutch">
+    <x:call function="f:nl-spell-out"><x:param select="1000"/></x:call>
+    <x:expect label="will return 'duizend'" select="'duizend'"/>
+  </x:scenario>
+
+  <x:scenario label="When spelling-out 1234 in Dutch">
+    <x:call function="f:nl-spell-out"><x:param select="1234"/></x:call>
+    <x:expect label="will return 'duizend tweehonderdvierendertig'" select="'duizend tweehonderdvierendertig'"/>
+  </x:scenario>
+
+  <x:scenario label="When spelling-out 987654321 in Dutch">
+    <x:call function="f:nl-spell-out"><x:param select="987654321"/></x:call>
+    <x:expect
+        label="will return 'negenhonderdzevenentachtig miljoen zeshonderdvierenvijftigduizend driehonderdeenentwintig'"
+        select="'negenhonderdzevenentachtig miljoen zeshonderdvierenvijftigduizend driehonderdeenentwintig'"/>
+  </x:scenario>
+
+  <x:scenario label="When spelling-out 123456789123456789 in Dutch">
+    <x:call function="f:nl-spell-out"><x:param select="123456789123456789"/></x:call>
+    <x:expect
+        label="will return 'honderddrieëntwintig biljard vierhonderdzesenvijftig biljoen zevenhonderdnegenentachtig miljard honderddrieëntwintig miljoen vierhonderdzesenvijftigduizend zevenhonderdnegenentachtig'"
+        select="'honderddrieëntwintig biljard vierhonderdzesenvijftig biljoen zevenhonderdnegenentachtig miljard honderddrieëntwintig miljoen vierhonderdzesenvijftigduizend zevenhonderdnegenentachtig'"/>
+  </x:scenario>
+  
+</x:description>
