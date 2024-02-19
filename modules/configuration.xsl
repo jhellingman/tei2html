@@ -70,6 +70,7 @@
 
             <pg.includeHeaders>false</pg.includeHeaders>                    <!-- Include Project Gutenberg headers and footers. -->
             <pg.includeComments>false</pg.includeComments>                  <!-- Include references to Project Gutenberg in comments. -->
+            <pg.compliant>false</pg.compliant>                              <!-- Only use HTML and CSS constructs that are compliant with to Project Gutenberg guidelines -->
 
             <showParagraphNumbers>false</showParagraphNumbers>              <!-- Output paragraph numbers, using the value of the @n attribute. -->
             <includeAlignedDivisions>true</includeAlignedDivisions>         <!-- Include divisions indicated by "align-with-document()" -->

@@ -199,7 +199,7 @@
                 </xsl:choose>
             </xsl:when>
 
-            <xsl:when test="f:get-setting('xref.show') = 'always'
+            <xsl:when test="f:get-setting('xref.show') = 'always' and not(f:is-set('pg.compliant'))
                             or (f:get-setting('xref.show') = 'colophon' and ancestor::teiHeader)">
                 <xsl:call-template name="handle-xref">
                     <xsl:with-param name="url" select="$url"/>

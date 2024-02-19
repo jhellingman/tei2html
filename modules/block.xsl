@@ -693,7 +693,7 @@
     <xsl:template name="handle-initial-image">
         <xsl:context-item as="element()" use="required"/>
         <xsl:choose>
-            <xsl:when test="$optionPrinceMarkup = 'Yes' or f:is-epub()">
+            <xsl:when test="$optionPrinceMarkup = 'Yes' or f:is-epub() or f:is-set('pg.compliant')">
                 <xsl:call-template name="initial-image-with-float"/>
             </xsl:when>
             <xsl:otherwise>

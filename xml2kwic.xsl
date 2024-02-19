@@ -988,6 +988,11 @@
     </xsl:template>
 
 
+    <xsl:template mode="segments" match="lb" priority="2">
+        <k:nw style="green"><xsl:text> &#x21b5; </xsl:text></k:nw>
+    </xsl:template>
+
+
     <xd:doc>
         <xd:short>Put transliteration between brackets.</xd:short>
         <xd:detail>Introduce brackets around transliterations, normally represented in <code>choice</code> elements;
