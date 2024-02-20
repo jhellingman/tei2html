@@ -187,6 +187,10 @@
             <xsl:value-of select="f:css-stylesheet('../style/layout-html.css')"/>
         </xsl:if>
 
+        <xsl:if test="not(f:is-set('pg.compliant'))">
+            <xsl:value-of select="f:css-stylesheet('../style/refine30.css')"/>
+        </xsl:if>
+
         <!-- Debugging CSS stylesheet. -->
         <xsl:if test="f:is-set('debug')">
             <xsl:value-of select="f:css-stylesheet('../style/debug.css')"/>

@@ -763,13 +763,14 @@
     </xd:doc>
 
     <xsl:template match="p[f:has-rend-value(@rend, 'initial-image')]" mode="css">
-        <xsl:call-template name="handle-initial-image-css"/>
+        <xsl:if test="not(f:is-set('pg.compliant'))">
+            <xsl:call-template name="handle-initial-image-css"/>
+        </xsl:if>
     </xsl:template>
 
     <xsl:template name="handle-initial-image-css">
         <xsl:context-item as="element()" use="required"/>
         <xsl:if test="generate-id() = generate-id(key('rend', name() || ':' || @rend)[1])">
-
             <xsl:variable name="css-properties" select="f:translate-rend-ladder(@rend, name())"/>
             <xsl:variable name="scale-factor" select="xs:decimal(f:get-setting('images.scale'))" as="xs:decimal"/>
 
@@ -802,7 +803,6 @@
             <xsl:text>color: white;&lf;</xsl:text>
             <xsl:text>font-size: 1px;&lf;</xsl:text>
             <xsl:text>}&lf;</xsl:text>
-
         </xsl:if>
         <xsl:apply-templates mode="css"/>
     </xsl:template>

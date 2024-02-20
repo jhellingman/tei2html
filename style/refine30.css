@@ -1,0 +1,6 @@
+/* refine30.css - Some CSS 3.0 constructs to refine the presentation, so the main stylesheets can remain CSS 2.1 */
+
+abbr[title] {
+    border-bottom: none;
+    text-decoration: underline dotted;
+}
