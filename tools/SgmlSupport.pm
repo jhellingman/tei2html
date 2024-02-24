@@ -1493,6 +1493,10 @@ BEGIN {
 
     $ent{'Crev'}        = chr(0x2183);  # Reversed C (as used in Roman numerals)
 
+    $ent{'Cbar'}        = chr(0xA792);  # C with bar
+    $ent{'cbar'}        = chr(0xA793);  # c with bar
+
+
     $ent{'okina'}       = chr(0x02BB);  # modifier letter turned comma
     $ent{'tcomma'}      = chr(0x02BB);  # modifier letter turned comma
 
@@ -1931,9 +1935,18 @@ BEGIN {
     $ent{'Obreveb'}     = 'O' . chr(0x032E);    # O with breve below
     $ent{'tbreveb'}     = 't' . chr(0x032E);    # t with breve below
     $ent{'ubreveb'}     = 'u' . chr(0x032E);    # u with breve below
+    $ent{'Ubreveb'}     = 'U' . chr(0x032E);    # U with breve below
 
+    $ent{'aibrevb'}     = 'a' . chr(0x032F);    # a with inverted breve below
+    $ent{'Aibrevb'}     = 'A' . chr(0x032F);    # A with inverted breve below
+    $ent{'eibrevb'}     = 'e' . chr(0x032F);    # e with inverted breve below
+    $ent{'Eibrevb'}     = 'E' . chr(0x032F);    # E with inverted breve below
     $ent{'iibrevb'}     = 'i' . chr(0x032F);    # i with inverted breve below
-
+    $ent{'Iibrevb'}     = 'I' . chr(0x032F);    # I with inverted breve below
+    $ent{'oibrevb'}     = 'o' . chr(0x032F);    # o with inverted breve below
+    $ent{'Oibrevb'}     = 'O' . chr(0x032F);    # O with inverted breve below
+    $ent{'uibrevb'}     = 'u' . chr(0x032F);    # u with inverted breve below
+    $ent{'Uibrevb'}     = 'U' . chr(0x032F);    # U with inverted breve below
 
     $ent{'ubowb'}       = 'u' . chr(0x032F);    # u with bow below (inverted breve)
     $ent{'ebowb'}       = 'e' . chr(0x032F);    # e with bow below (inverted breve)
@@ -1988,6 +2001,8 @@ BEGIN {
     $ent{'Usupe'}       = 'U' . chr(0x0364);    # U with small e above
 
     $ent{'bstrok'}      = chr(0x0180);          # b with stroke through stem
+
+    $ent{'stackb'}      = 's' . chr(0x031e);    # s with down tack below
 
     $ent{'abbbb'}       = 'a' . chr(0x0331) . chr(0x0331); # a with two macrons below
     $ent{'Abbbb'}       = 'A' . chr(0x0331) . chr(0x0331); # A with two macrons below

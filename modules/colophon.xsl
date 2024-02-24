@@ -207,7 +207,7 @@
 
 
     <xsl:function name="f:show-xref" as="xs:boolean">
-        <xsl:param name="url" as="xs:string"/>
+        <xsl:param name="url" as="xs:string?"/>
 
         <xsl:sequence select="f:is-valid($url) and ((f:get-setting('xref.show') != 'never' and not(f:is-set('pg.compliant'))) or f:is-allowed-url($url))"/>
     </xsl:function>
