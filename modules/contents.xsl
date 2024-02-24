@@ -1085,7 +1085,7 @@
     </xsl:template>
 
     <xsl:template match="xi:include" mode="#default css style css-column css-row style-column style-row">
-        <!-- Material to be included should be rendered here; material is given on an href parameter. -->
+        <!-- Material to be included should be rendered here; material is given on using the @href attribute. -->
         <xsl:if test="@href">
             <xsl:copy-of select="f:log-info('Including {1}.', (@href))"/>
             <xsl:variable name="document" select="substring-before(@href, '#')"/>

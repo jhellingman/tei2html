@@ -50,7 +50,7 @@
 
     <xsl:variable name="default-configuration">
         <tei2html.config>
-            <debug>false</debug>                                            <!-- Use debug mode. -->
+            <debug>false</debug>                                            <!-- Use debug mode (uses CSS to color various elements in output HTML). -->
             <logLevel>INFO WARNING ERROR DEBUG</logLevel>                   <!-- Log levels: DEBUG, INFO, WARNING, ERROR -->
 
             <debug.facsimile>false</debug.facsimile>
@@ -121,7 +121,7 @@
             <text.spaceQuotes>true</text.spaceQuotes>                       <!-- Insert a hair space between consecutive quotation marks. -->
             <text.useEllipses>true</text.useEllipses>                       <!-- Replace three consecutive periods with an ellipsis character. -->
             <text.useIJLigature>false</text.useIJLigature>                  <!-- Replace ij with the ij-ligature (Dutch and letter-spaced text only). -->
-            <text.abbr>i.e.; I.e.; e.g.; E.g.; A.D.; B.C.; P.M.; A.M.</text.abbr> <!-- Common abbreviations, list separated by semi-colons. -->
+            <text.abbr>i.e.; I.e.; e.g.; E.g.; A.D.; B.C.; P.M.; A.M.</text.abbr> <!-- Common abbreviations, list separated by semicolons. -->
 
             <table.classifyContent>false</table.classifyContent>            <!-- Attempt to determine the content-type of cells in a table; add relevant classes in the HTML output. -->
 
@@ -129,7 +129,7 @@
             <q.asDiv>true</q.asDiv>                                         <!-- Render the <q> element with a div if true, as a span otherwise. -->
 
             <beta.convert>false</beta.convert>                              <!-- Interpret beta-codes if the language is classical Greek (i.e., @xml:lang="grc"). -->
-            <beta.caseSensitive>false</beta.caseSensitive>                  <!-- Beta-code is case sensitive (i.e., not using the * notation for capital letters) -->
+            <beta.caseSensitive>false</beta.caseSensitive>                  <!-- Beta-code is case-sensitive (i.e., not using the * notation for capital letters) -->
 
             <css.stylesheet>style/arctic.css</css.stylesheet>               <!-- Default CSS stylesheet(s) to include; these are distributed with tei2html in the style directory. -->
             <css.useCommon>true</css.useCommon>                             <!-- Use the build-in stylesheets (for screen) -->

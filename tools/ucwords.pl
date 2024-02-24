@@ -1854,6 +1854,7 @@ sub SimilarityNormalize($) {
     $string =~ s/ll/l/g;
     $string =~ s/ise/ize/g;
 
+    # Commonly confused by OCR
     $string =~ s/ri/m/g;
     $string =~ s/rn/m/g;
     $string =~ s/[lI]/l/g;

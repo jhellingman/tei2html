@@ -651,7 +651,7 @@
         <xsl:apply-templates select="//*[@id]" mode="doubleIds"/>
 
         <!-- Do we have a front, body, and back element? -->
-        <xsl:if test="not(front) and not(ancestor::q)">
+        <xsl:if test="not(front) and not(ancestor::q) and not(ancestor::group)">
             <xsl:copy-of select="f:issue(., 'E04', 'Structure', 'Error', 'No front element!')"/>
         </xsl:if>
 
@@ -659,7 +659,7 @@
             <xsl:copy-of select="f:issue(., 'E05', 'Structure', 'Error', 'No body element!')"/>
         </xsl:if>
 
-        <xsl:if test="not(back) and not(ancestor::q)">
+        <xsl:if test="not(back) and not(ancestor::q) and not(ancestor::group)">
             <xsl:copy-of select="f:issue(., 'E06', 'Structure', 'Error', 'No back element!')"/>
         </xsl:if>
 

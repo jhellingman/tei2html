@@ -17,7 +17,7 @@
 
 
     <xd:doc>
-        <xd:short>Generate an href attribute safely.</xd:short>
+        <xd:short>Generate an @href attribute safely.</xd:short>
         <xd:detail>
             <p>This function generates a href to the appropriate file, depending on where in the
             source file the element referenced appears.</p>
@@ -36,7 +36,7 @@
 
 
     <xd:doc>
-        <xd:short>Generate an href attribute.</xd:short>
+        <xd:short>Generate an @href attribute.</xd:short>
         <xd:detail>
             <p>href attributes need to point to the correct file and element, depending on
             whether we generate a monolithic or multiple files using the splitter.
@@ -52,7 +52,7 @@
 
 
     <xd:doc>
-        <xd:short>Generate an href attribute for a footnote.</xd:short>
+        <xd:short>Generate an @href attribute for a footnote.</xd:short>
         <xd:detail>
             <p>Footnotes generate two items: a marker in the text, and the actual footnote
             content at the end of the chapter. These two need to be linked together.
@@ -95,7 +95,7 @@
 
 
     <xd:doc>
-        <xd:short>Generate an href attribute for an apparatus note.</xd:short>
+        <xd:short>Generate an @href attribute for an apparatus note.</xd:short>
         <xd:detail>
             <p>Apparatus notes are created from a <code>divGen</code> element with type Apparatus. The instance of the <code>divGen</code> element that
             generates the note content is the first one following the node.</p>

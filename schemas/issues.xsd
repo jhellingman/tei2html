@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns="http://gutenberg.ph/issues"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified"
+           targetNamespace="http://gutenberg.ph/issues">
+  <xs:element name="issues" type="Issues"/>
+
+  <xs:annotation>
+    <xs:documentation xml:lang="en">
+      Schema for issues, as reported by checks.xsl.
+    </xs:documentation>
+  </xs:annotation>
+
+  <xs:complexType name="Issues">
+    <xs:annotation>
+      <xs:documentation>A list of issues.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="issue" type="Issue"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Issue">
+    <xs:annotation>
+      <xs:documentation>A single issue with details.</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="pos" type="xs:string"/>
+    <xs:attribute name="code" type="xs:string"/>
+    <xs:attribute name="category" type="xs:string"/>
+    <xs:attribute name="target" type="xs:string"/>
+    <xs:attribute name="level" type="xs:string"/>
+    <xs:attribute name="element" type="xs:string"/>
+    <xs:attribute name="page" type="xs:string"/>
+  </xs:complexType>
+
+</xs:schema>

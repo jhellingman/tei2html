@@ -1,0 +1,9 @@
+<abbreviations>
+
+    <!-- Common abbreviations that need not be reported as suspect by checks.xsl. List separated by semicolons -->
+
+    <abbr lang="en">i.e.; I.e.; e.g.; E.g.; A.D.; B.C.; P.M.; A.M.</abbr>
+
+    <abbr lang="nl">d.i.; b.v.; o.a.; d.w.z.</abbr>
+
+</abbreviations>

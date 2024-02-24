@@ -19,7 +19,7 @@
     </xd:doc>
 
     <xd:doc>
-        <xd:short>Format the Title-Page.</xd:short>
+        <xd:short>Format the title page.</xd:short>
     </xd:doc>
 
     <xsl:template match="titlePage">

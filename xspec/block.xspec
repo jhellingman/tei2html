@@ -3,6 +3,7 @@
 
         <!ENTITY nbsp       "&#160;">
         <!ENTITY zwsp       "&#x200B;">
+        <!ENTITY ldquo      "&#x201C;">
         <!ENTITY asterism   "&#x2042;">
 
 ]>
@@ -204,6 +205,18 @@ text-indent:2em;
                <span class="test_p_initialinit">L</span>orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>       
         </x:expect>
     </x:scenario>
+
+  <x:scenario label="When rendering a TEI paragraph with a decorative initial preceeded by an open quotation mark">
+    <x:context>
+      <p id="test_p_initial" rend="initial-offset(45px) initial-width(90px) initial-height(95px) initial-image(images/initial-A.png)">&ldquo;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    </x:context>
+    <x:expect label="will result in an HTML parapgraph with an additional class and the first letter enclosed in a span">
+      <p xmlns="http://www.w3.org/1999/xhtml"
+         id="test_p_initial"
+         class="test_p_initial">
+        <span class="test_p_initialinit">&ldquo;L</span>orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    </x:expect>
+  </x:scenario>
 
     <x:scenario label="When rendering a TEI paragraph with a decorative initial (CSS mode)">
         <x:context mode="css">

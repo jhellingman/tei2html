@@ -6,12 +6,11 @@ use warnings;
 use File::stat;
 use File::Temp qw(mktemp);
 
-my $toolsdir        = "D:\\Users\\Jeroen\\Documents\\eLibrary\\Tools\\tei2html\\tools";   # location of tools
-my $patcdir         = $toolsdir . "\\patc\\transcriptions"; # location of patc transcription files.
-
+my $home = $ENV{'TEI2HTML_HOME'};
+my $toolsdir  = $home . "/tools";                    	# location of tools
+my $patcdir   = $toolsdir . "/patc/transcriptions";  	# location of patc transcription files.
 
 main();
-
 
 sub main() {
 
