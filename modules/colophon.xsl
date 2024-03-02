@@ -135,7 +135,7 @@
 
             <xsl:call-template name="generationDate"/>
 
-            <xsl:copy-of select="f:metadata-line(f:message('msgLanguage'), f:message(lower-case($language)))"/>
+            <xsl:copy-of select="f:metadata-line(f:message('msgLanguage'), f:message($language))"/>
 
             <xsl:apply-templates select="//sourceDesc" mode="colophonSourceDesc"/>
 

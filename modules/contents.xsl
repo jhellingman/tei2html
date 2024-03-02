@@ -548,11 +548,10 @@
 
     <xsl:function name="f:find-toc-list-max-depth" as="xs:integer">
         <xsl:param name="start" as="element(list)"/>
-        <xsl:variable name="parent" select="$start/.."/>
 
         <xsl:variable name="toc-max-depth">
             <!-- Find all toc-lists that do not have further sub-toc-lists in them. -->
-            <xsl:for-each select="$parent//list[@type='tocList'][not(descendant::list[@type='tocList'])]">
+            <xsl:for-each select="$start/descendant-or-self::list[@type='tocList'][not(descendant::list[@type='tocList'])]">
                 <!-- Sort by the number of toc-lists they have as ancestor -->
                 <xsl:sort select="count(ancestor::list[@type='tocList'])" data-type="number" order="descending"/>
                 <!-- Get the number of ancestors for the first one -->

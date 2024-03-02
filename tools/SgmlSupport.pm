@@ -1880,6 +1880,7 @@ BEGIN {
     $ent{'eumlb'}       = 'e' . chr(0x0324); # e with diaresis below
     $ent{'humlb'}       = 'h' . chr(0x0324); # h with diaresis below
     $ent{'iumlb'}       = 'i' . chr(0x0324); # i with diaresis below
+    $ent{'Iumlb'}       = 'I' . chr(0x0324); # I with diaresis below
     $ent{'lumlb'}       = 'l' . chr(0x0324); # l with diaresis below
     $ent{'Lumlb'}       = 'L' . chr(0x0324); # L with diaresis below
     $ent{'oumlb'}       = 'o' . chr(0x0324); # o with diaresis below
