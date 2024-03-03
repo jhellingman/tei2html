@@ -94,7 +94,7 @@
 
         <xsl:variable name="text" select="f:no-break-initials($text)"/>
 
-        <xsl:value-of select="$text"/>
+        <xsl:value-of select="if (f:is-set('text.normalizeUnicode')) then normalize-unicode($text) else $text"/>
     </xsl:function>
 
 

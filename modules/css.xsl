@@ -497,9 +497,11 @@
                 <xsl:when test="$property='valign'">vertical-align:<xsl:value-of select="$value"/>; </xsl:when>
                 <xsl:when test="$property='indent'">text-indent:<xsl:value-of select="f:indent-value($value)"/>; </xsl:when>
 
+                <!-- CSS properties not acceptable to ePub, so handled otherwise -->
+                <xsl:when test="$property='direction'"/>
+
                 <!-- Filter out CSS3 stuff (for Project Gutenberg submissions) -->
-                <xsl:when test="f:get-setting('css.support') = '2' and
-                    $property = ('writing-mode')">
+                <xsl:when test="f:get-setting('css.support') = '2' and $property = ('writing-mode')">
                     <xsl:copy-of select="f:log-info('Ignoring CCS3 property ''{1}''', $property)"/>
                 </xsl:when>
 
@@ -641,13 +643,15 @@
         <xd:param name="node">The node for which a class attribute is to be generated.</xd:param>
     </xd:doc>
 
-    <xsl:function name="f:set-class-attribute" as="attribute()?">
+    <xsl:function name="f:set-class-attribute" as="attribute()*">
         <xsl:param name="node" as="element()"/>
 
         <xsl:variable name="class" select="f:generate-class($node)"/>
         <xsl:if test="$class != ''">
             <xsl:attribute name="class" select="$class"/>
         </xsl:if>
+
+        <xsl:copy-of select="f:set-dir-attribute($node)"/>
     </xsl:function>
 
 
@@ -661,13 +665,44 @@
         <xd:param name="class">Classes to add to the generated class.</xd:param>
     </xd:doc>
 
-    <xsl:function name="f:set-class-attribute-with" as="attribute()?">
+    <xsl:function name="f:set-class-attribute-with" as="attribute()*">
         <xsl:param name="node" as="element()?"/>
         <xsl:param name="class" as="xs:string"/>
 
         <xsl:variable name="class" select="normalize-space($class || (if ($node) then ' ' || f:generate-class($node) else ''))"/>
         <xsl:if test="$class != ''">
             <xsl:attribute name="class" select="$class"/>
+        </xsl:if>
+
+        <xsl:if test="$node">
+            <xsl:copy-of select="f:set-dir-attribute($node)"/>
+        </xsl:if>
+    </xsl:function>
+
+
+    <xd:doc>
+        <xd:short>Generate an optional dir attribute for an element.</xd:short>
+        <xd:detail>Generate an optional dir attribute for an element. Since ePub doesn't accept
+        CSS to control directionality, but uses the HTML <code>dir</code> attribute instead. This attribute
+        is set if either a class <code>rtl</code> or <code>ltr</code> is present, or the rendering
+        ladder value <code>direction(...)</code> is set.</xd:detail>
+        <xd:param name="node">The node for which a dir attribute is to be generated.</xd:param>
+    </xd:doc>
+
+    <xsl:function name="f:set-dir-attribute" as="attribute()?">
+        <xsl:param name="node" as="element()"/>
+
+        <xsl:variable name="dir" select="f:rend-value($node/@rend, 'direction')"/>
+        <xsl:variable name="dir" select="
+            if ($dir)
+            then $dir
+            else if (f:has-class($node/@rend, 'rtl', name($node)))
+                 then 'rtl'
+                 else if (f:has-class($node/@rend, 'ltr', name($node)))
+                      then 'ltr'
+                      else ''"/>
+        <xsl:if test="$dir != ''">
+            <xsl:attribute name="dir" select="$dir"/>
         </xsl:if>
     </xsl:function>
 

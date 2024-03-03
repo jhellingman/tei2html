@@ -121,6 +121,7 @@
             <text.spaceQuotes>true</text.spaceQuotes>                       <!-- Insert a hair space between consecutive quotation marks. -->
             <text.useEllipses>true</text.useEllipses>                       <!-- Replace three consecutive periods with an ellipsis character. -->
             <text.useIJLigature>false</text.useIJLigature>                  <!-- Replace ij with the ij-ligature (Dutch and letter-spaced text only). -->
+            <text.normalizeUnicode>true</text.normalizeUnicode>             <!-- Normalize Unicode to NFC (may break Hebrew or Tibetan text in some rare cases) -->
             <text.abbr>i.e.; I.e.; e.g.; E.g.; A.D.; B.C.; P.M.; A.M.</text.abbr> <!-- Common abbreviations, list separated by semicolons. -->
 
             <table.classifyContent>false</table.classifyContent>            <!-- Attempt to determine the content-type of cells in a table; add relevant classes in the HTML output. -->
