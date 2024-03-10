@@ -10,14 +10,15 @@ Simple rendering attribute values provide single keywords to provide a rendering
 
 [cols="<,<"]
 |===
-|*Element* |*Recognized `@rend` values* 
+|*Element* |*Recognized `@rend` values*
 
-|`hi` |`italic` (_default_) `bold` `bi` `sc` `asc` `sup` `sub` `ex` 
-|`figure` |`center` (_default_) `left` `right` `inline` 
-|`p` |`block` `center` `left` (_default_) `right` `indent` `noindent` 
-|`q` |`block` 
-|`list` |`number` `bullet` `none` (_default_) 
-|_Any_ |_Any_ (_these will be added to the class attribute of the output element in HTML_) 
+|`hi` |`italic` (_default_) `bold` `bi` `sc` `asc` `sup` `sub` `ex`
+|`figure` |`center` (_default_) `left` `right` `inline`
+|`p` |`block` `center` `left` (_default_) `right` `indent` `noindent`
+|`q` |`block`
+|`list` |`number` `bullet` `none` (_default_)
+|_Any_ |`rtl` `ltr` (_see section below on directionality_)
+|_Any_ |_Any_ (_these will be added to the class attribute of the output element in HTML_)
 |===
 
 === Rendition Ladders
@@ -54,24 +55,31 @@ The following keys and values are supported: (Note that this list is not exhaust
 
 [cols="<,<,<,<"]
 |===
-|*Element* |*Key* |*Value* |*Example* 
+|*Element* |*Key* |*Value* |*Example*
 
-|`text` |`stylesheet` |name of CSS stylesheet, multiple stylesheets can be specified, separated by a comma |`style/classic.css` 
-|_Any_ |`font` |`italic`, `bold`, `fsc` (full caps and smallcaps), `smallcaps`, `underlined`, `gothic` (note the difference from fall-through CSS) |`&lt;hi rend=&quot;font(bold)&quot;&gt;` 
-|`p`, `q` |`align` |`right`, `left`, `center`, `block` (that is, justified) |`&lt;p rend=&quot;align(block)&quot;&gt;` 
-|`p`, `l` |`indent` |The number characters to indent. The size of a character is not fixed, but is roughly the size of the letter m. |`&lt;l rend=&quot;indent(2)&quot;&gt;` 
-|_Any_ |`link` |any url, rendered as link to the indicated url. |`&lt;figure rend=&quot;link(images/a.jpg)&quot;&gt;` 
-|`figure`, `head`, `cell` |`image` |any url, rendered as in-line image, obtained from the indicated url. When used on a `head` element, the image appears above the head, when used on a `cell` element, the image appears in the table-cell (typically used to pull in large braces spanning cells). |`&lt;figure rend=&quot;image(images/a.jpg)&quot;&gt;` 
-|`figure` |`float` |The place to float in image, table, etc. Possible values: left, right. |`&lt;figure rend=&quot;float(left)&quot;&gt;` 
-|`figure` |`hover-overlay` |In HTML output, when the mouse hovers over the image, the alternative image is shown (using CSS only). |`&lt;figure rend=&quot;hover-overlay(images/overlay.jpg)&quot;&gt;` 
-|`table`, `list` |`columns` |Set the element in multiple columns. May be applied to tables and lists. |`&lt;list rend=&quot;columns(2)&quot;&gt;...&lt;/list&gt;` 
-|_Any_ |`class` |Sets a class attribute in the corresponding HTML output. This can be used in combination with custom CSS stylesheets to achieve special effects. |`&lt;p rend=&quot;class(myClass)&quot;&gt;` 
-|`l` |`hemistich` |Indents the current line with a certain space. When the value starts with a `^` followed by a number _n_, the content of the line _n_ lines before is used, when the value starts with a `#` followed by an id, the content of the element with the id is used, otherwise, the literal content is used. |`&lt;l rend=&quot;hemistich(^1)&quot;&gt;`, `&lt;l rend=&quot;hemistich(#vs21)&quot;&gt;`, `&lt;l rend=&quot;hemistich(Content)&quot;&gt;` 
+|`text` |`stylesheet` |name of CSS stylesheet, multiple stylesheets can be specified, separated by a comma |`style/classic.css`
+|_Any_ |`font` |`italic`, `bold`, `fsc` (full caps and smallcaps), `smallcaps`, `underlined`, `gothic` (note the difference from fall-through CSS) |`&lt;hi rend=&quot;font(bold)&quot;&gt;`
+|`p`, `q` |`align` |`right`, `left`, `center`, `block` (that is, justified) |`&lt;p rend=&quot;align(block)&quot;&gt;`
+|`p`, `l` |`indent` |The number characters to indent. The size of a character is not fixed, but is roughly the size of the letter m. |`&lt;l rend=&quot;indent(2)&quot;&gt;`
+|_Any_ |`link` |any url, rendered as link to the indicated url. |`&lt;figure rend=&quot;link(images/a.jpg)&quot;&gt;`
+|`figure`, `head`, `cell` |`image` |any url, rendered as in-line image, obtained from the indicated url. When used on a `head` element, the image appears above the head, when used on a `cell` element, the image appears in the table-cell (typically used to pull in large braces spanning cells). |`&lt;figure rend=&quot;image(images/a.jpg)&quot;&gt;`
+|`figure` |`float` |The place to float in image, table, etc. Possible values: left, right. |`&lt;figure rend=&quot;float(left)&quot;&gt;`
+|`figure` |`hover-overlay` |In HTML output, when the mouse hovers over the image, the alternative image is shown (using CSS only). |`&lt;figure rend=&quot;hover-overlay(images/overlay.jpg)&quot;&gt;`
+|`table`, `list` |`columns` |Set the element in multiple columns. May be applied to tables and lists. |`&lt;list rend=&quot;columns(2)&quot;&gt;...&lt;/list&gt;`
+|_Any_ |`class` |Sets a class attribute in the corresponding HTML output. This can be used in combination with custom CSS stylesheets to achieve special effects. |`&lt;p rend=&quot;class(myClass)&quot;&gt;`
+|`l` |`hemistich` |Indents the current line with a certain space. When the value starts with a `^` followed by a number _n_, the content of the line _n_ lines before is used, when the value starts with a `#` followed by an id, the content of the element with the id is used, otherwise, the literal content is used. |`&lt;l rend=&quot;hemistich(^1)&quot;&gt;`, `&lt;l rend=&quot;hemistich(#vs21)&quot;&gt;`, `&lt;l rend=&quot;hemistich(Content)&quot;&gt;`
 |===
 
 ==== Using `@style` and `@rendition`
 
 As an alternative to the `@rend` attribute, the current TEI guidelines also provide `@style` and `@rendition` to define presentation in a formally defined language. `tei2html` assumes that is CSS. See the http://www.tei-c.org/release/doc/tei-p5-doc/en/html/ref-att.global.rendition.html[TEI guidelines on rendition attributes]. Unlike the values of `@rend`, the specified CSS values are not interpreted at all, but passed to the output CSS directly.
+
+==== Directionality
+
+Since ePub does not allows CSS to be used for directionality, but requires that the HTML `@dir` attribute is used, the following `@rend` values are translated to a `@dir` attribute in HTML.
+
+. `direction(...)`
+. `class(rtl)` and `class(ltr)` and the bare equivalents.
 
 ==== Implementation notes:
 

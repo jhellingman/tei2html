@@ -114,6 +114,10 @@
         <xsl:apply-templates select="."/>
     </xsl:template>
 
+    <xsl:template match="choice" mode="titlePage">
+        <xsl:apply-templates select="."/>
+    </xsl:template>
+
     <xsl:template match="lb" mode="titlePage">
         <br/>
     </xsl:template>

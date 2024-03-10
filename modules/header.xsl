@@ -102,6 +102,10 @@
             <link rel="icon" href="{$cover-file}" type="image/x-cover"/>
         </xsl:if>
 
+        <xsl:if test="f:is-image-present('images/favicon.jpg')">
+            <link rel="icon" href="images/favicon.jpg" type="image/x-icon"/>
+        </xsl:if>
+
         <!-- Insert Dublin Core metadata -->
         <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"/>
 
