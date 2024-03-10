@@ -27,3 +27,9 @@ See also: http://blog.threepress.org/2009/11/20/best-practices-in-epub-cover-ima
 === Cover Thumbnail [TODO]
 
 Sometimes it makes sense to also have a cover thumbnail which isn't just a reduction of the (original) cover page. To do this, just specify (as a hack) `cover-thumbnail(imagefile)` in the rend attribute of the text element. Similarly, `cover-image(imagefile)` can be used to specify a cover image that is not part of the original book, for those who like to have both.
+
+
+=== favicon
+
+Simply drop an image file named `favicon.jpg` in the images directory, and `tei2html` will generate the metadata in the HTML to use it. Use a square image, upto 192 x 192 pixels.
+

@@ -52,7 +52,7 @@ You might notice that the TEI header contains the title and author information t
 
 In the publication statement, you can give some information on the publisher and the availability of the book. For typical Project Gutenberg publications, the information in the template is fine.
 
-The following specific values can be used in the `&gt;publicationStmt&lt;` element to register the various ways the text is known at Project Gutenberg and elsewhere.
+The following specific values can be used in the `&lt;publicationStmt&gt;` element to register the various ways the text is known at Project Gutenberg and elsewhere.
 
 [cols="<,<"]
 |===
@@ -64,7 +64,7 @@ The following specific values can be used in the `&gt;publicationStmt&lt;` eleme
 |`&lt;idno type=OCLC&gt;&lt;/idno&gt;` |OCLC catalog number (worldcat). 
 |`&lt;idno type=OLN&gt;&lt;/idno&gt;` |Open Library catalog number. 
 |`&lt;idno type=LCCN&gt;&lt;/idno&gt;` |Library of Congress Call Number. 
-|`&lt;idno type=ISBN&gt;&lt;/idno&gt;` |The ISBN. Since ISBNs refer to specific manifestations of a work, this number typically refers to the ISBN of the source digitized. ISBNs have been in use since 1972, so it is unlikely many Project Gutenberg books have such a number. 
+|`&lt;idno type=ISBN&gt;&lt;/idno&gt;` |The ISBN. Since ISBNs refer to specific manifestations of a work, this number typically refers to the ISBN of the source digitized. ISBNs have been in use since 1972, so it is unlikely many Project Gutenberg books have such a number. (you are not supposed to use the ISBN of the source here!)
 |===
 
 The `&lt;availability&gt;` element should include a short reference to the copyright status of the work. For most texts in Project Gutenberg, the following phrase will be appropriate: _Not copyrighted in the United States. If you live elsewhere please check the laws of your country before downloading this ebook._
