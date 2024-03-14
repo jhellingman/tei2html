@@ -50,7 +50,7 @@
         <xsl:variable name="protocol" select="if (contains($url, ':')) then substring-before($url, ':') else ''"/>
         <xsl:choose>
             <xsl:when test="$linkClasses($protocol)"><xsl:value-of select="$linkClasses($protocol)"/></xsl:when>
-            <xsl:when test="starts-with($url, 'audio/')">audiolink</xsl:when>
+            <xsl:when test="starts-with($url, 'audio/') or starts-with($url, 'music/')">audiolink</xsl:when>
             <xsl:otherwise>exlink</xsl:otherwise>
         </xsl:choose>
     </xsl:function>

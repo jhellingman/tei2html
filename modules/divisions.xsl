@@ -19,7 +19,17 @@
     <!-- Main subdivisions of work -->
 
     <xsl:template match="text">
-        <xsl:apply-templates/>
+        <xsl:choose>
+            <xsl:when test="parent::group">
+                <div>
+                    <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+                    <xsl:apply-templates/>
+                </div>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates/>
+            </xsl:otherwise>
+        </xsl:choose>
 
         <xsl:if test="not(ancestor::group) and f:is-set('facsimile.enable') and f:is-set('facsimile.wrapper.enable')">
             <xsl:apply-templates select="//pb[@facs]" mode="facsimile"/>

@@ -241,20 +241,25 @@
                         <xsl:text> </xsl:text>
                         <xsl:value-of select="f:generate-class-name(.)"/>
                     </xsl:attribute>
-                    <xsl:attribute name="title">
-                        <xsl:value-of select="f:translate-xref-title($url)"/>
-                    </xsl:attribute>
-                    <xsl:attribute name="href">
-                        <xsl:value-of select="f:translate-xref-url($url, substring(f:get-document-lang(), 1, 2))"/>
-                    </xsl:attribute>
-                    <xsl:if test="@rel">
-                        <xsl:attribute name="rel"><xsl:value-of select="@rel"/></xsl:attribute>
-                    </xsl:if>
-
+                    <xsl:copy-of select="f:create-attribute-if-present('title', f:translate-xref-title($url))"/>
+                    <xsl:copy-of select="f:create-attribute-if-present('href', f:translate-xref-url($url, substring(f:get-document-lang(), 1, 2)))"/>
+                    <xsl:copy-of select="f:create-attribute-if-present('rel', @rel)"/>
                     <xsl:apply-templates/>
                 </a>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+
+
+    <xsl:function name="f:create-attribute-if-present">
+        <xsl:param name="name" as="xs:string"/>
+        <xsl:param name="value" as="xs:string?"/>
+
+        <xsl:if test="$value != ''">
+            <xsl:attribute name="{$name}">
+                <xsl:value-of select="$value"/>
+            </xsl:attribute>
+        </xsl:if>
+    </xsl:function>
 
 </xsl:stylesheet>
