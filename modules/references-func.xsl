@@ -143,7 +143,7 @@
         <xsl:param name="url" as="xs:string"/>
         <xsl:param name="lang" as="xs:string"/>
 
-        <xsl:choose>
+        <xsl:choose expand-text="true">
 
             <!-- Link to Project Gutenberg book -->
             <xsl:when test="starts-with($url, 'pg:') or starts-with($url, 'pgi:')">
@@ -152,32 +152,32 @@
 
             <!-- Link to OCLC (worldcat) catalog entry -->
             <xsl:when test="starts-with($url, 'oclc:')">
-                <xsl:text>https://www.worldcat.org/oclc/</xsl:text><xsl:value-of select="substring-after($url, ':')"/>
+                <xsl:text>https://www.worldcat.org/oclc/{substring-after($url, ':')}</xsl:text>
             </xsl:when>
 
             <!-- Link to Open Library catalog entry (item level) -->
             <xsl:when test="starts-with($url, 'oln:')">
-                <xsl:text>https://openlibrary.org/books/</xsl:text><xsl:value-of select="substring-after($url, ':')"/>
+                <xsl:text>https://openlibrary.org/books/{substring-after($url, ':')}</xsl:text>
             </xsl:when>
 
             <!-- Link to Open Library catalog entry (abstract work level) -->
             <xsl:when test="starts-with($url, 'olw:')">
-                <xsl:text>https://openlibrary.org/work/</xsl:text><xsl:value-of select="substring-after($url, ':')"/>
+                <xsl:text>https://openlibrary.org/work/{substring-after($url, ':')}</xsl:text>
             </xsl:when>
 
             <!-- Link to Library of Congress catalog entry -->
             <xsl:when test="starts-with($url, 'lccn:')">
-                <xsl:text>https://lccn.loc.gov/</xsl:text><xsl:value-of select="substring-after($url, ':')"/>
+                <xsl:text>https://lccn.loc.gov/{substring-after($url, ':')}</xsl:text>
             </xsl:when>
 
             <!-- Link to Wikipedia article -->
             <xsl:when test="starts-with($url, 'wp:')">
-                <xsl:text>https://</xsl:text><xsl:value-of select="substring($lang, 1, 2)"/><xsl:text>.wikipedia.org/wiki/</xsl:text><xsl:value-of select="substring-after($url, ':')"/>
+                <xsl:text>https://{substring($lang, 1, 2)}.wikipedia.org/wiki/{substring-after($url, ':')}</xsl:text>
             </xsl:when>
 
             <!-- Link to The Internet Archive -->
             <xsl:when test="starts-with($url, 'tia:')">
-                <xsl:text>https://archive.org/details/</xsl:text><xsl:value-of select="substring-after($url, ':')"/>
+                <xsl:text>https://archive.org/details/{substring-after($url, ':')}</xsl:text>
             </xsl:when>
 
             <!-- Link to location on map, using coordinates -->
@@ -185,7 +185,7 @@
                 <xsl:variable name="coordinates" select="substring-after($url, ':')"/>
                 <xsl:variable name="latitude" select="substring-before($coordinates, ',')"/>
                 <xsl:variable name="altitude" select="substring-after($coordinates, ',')"/>
-                <xsl:text>https://maps.google.com/maps?q=</xsl:text><xsl:value-of select="$latitude"/>,<xsl:value-of select="$altitude"/>
+                <xsl:text>https://maps.google.com/maps?q={$latitude},{$altitude}</xsl:text>
             </xsl:when>
 
             <!-- Link to Bible citation -->
