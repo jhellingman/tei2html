@@ -84,7 +84,7 @@
         <xsl:text>|Editor |{normalize-space(.)}&lf;</xsl:text>
     </xsl:template>
 
-    <xsl:template match="respStmt[resp = 'Translator']" expand-text="yes">
+    <xsl:template match="respStmt[resp = ('Translator', 'Translation')]" expand-text="yes">
         <xsl:text>|Translator |{normalize-space(name)}&lf;</xsl:text>
     </xsl:template>
 
