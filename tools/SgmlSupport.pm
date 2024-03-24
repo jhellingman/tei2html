@@ -952,10 +952,10 @@ BEGIN {
 
     # African clicks
 
-    $ent{'dclick'}       = chr(0x01C0);  #  LATIN LETTER DENTAL CLICK
-    $ent{'lclick'}       = chr(0x01C1);  #  LATIN LETTER LATERAL CLICK
-    $ent{'aclick'}       = chr(0x01C2);  #  LATIN LETTER ALVEOLAR CLICK
-    $ent{'rclick'}       = chr(0x01C3);  #  LATIN LETTER RETROFLEX CLICK
+    $ent{'dclick'}       = chr(0x01C0);  #  LATIN LETTER DENTAL CLICK           (looks like |)
+    $ent{'lclick'}       = chr(0x01C1);  #  LATIN LETTER LATERAL CLICK          (looks like ||)
+    $ent{'aclick'}       = chr(0x01C2);  #  LATIN LETTER ALVEOLAR CLICK         (looks like # with a single vertical bar)
+    $ent{'rclick'}       = chr(0x01C3);  #  LATIN LETTER RETROFLEX CLICK        (looks like !)
 
 
     ###############################################################################
@@ -1482,6 +1482,13 @@ BEGIN {
 
     $ent{'Oogon'}       = chr(0x01EA);  # O ogonek
     $ent{'oogon'}       = chr(0x01EB);  # o ogonek
+
+    $ent{'Oogmac'}      = chr(0x01EA) . chr(0x0304);  # O ogonek with macron
+    $ent{'oogmac'}      = chr(0x01EB) . chr(0x0304);  # o ogonek with macron
+
+    $ent{'Oummac'}      = chr(0x00D6) . chr(0x0304);  # O umlaut with macron
+    $ent{'oummac'}      = chr(0x00F6) . chr(0x0304);  # o umlaut with macron
+
 
     $ent{'Esmall'}      = chr(0x1D07);  # small letter E
 
@@ -2595,6 +2602,9 @@ BEGIN {
     $ent{'b.gammad'}    = chr(0x03DC);  # GREEK LETTER DIGAMMA
     $ent{'b.kappav'}    = chr(0x03F0);  # GREEK KAPPA SYMBOL
     $ent{'b.rhov'}      = chr(0x03F1);  # GREEK RHO SYMBOL
+
+    $ent{'caesura'}      = chr(0x00A0) . chr(0x00A0) . "|" . chr(0x00A0) . chr(0x00A0);  # Caesura
+
 
     # Normalize codes to the NFC form.
     foreach my $key (keys %ent) {
