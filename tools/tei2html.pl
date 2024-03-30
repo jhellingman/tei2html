@@ -25,19 +25,19 @@ my $mariadbHome = $ENV{'MARIADB_HOME'};
 
 my $javaOptions = '-Xms2048m -Xmx4096m -Xss1024k ';
 
-my $xsldir    = abs_path($home);         							# location of xsl stylesheets
-my $toolsdir  = $home . "/tools";                    	# location of tools
-my $patcdir   = $toolsdir . "/patc/transcriptions";  	# location of patc transcription files.
-my $catalog   = $home . "/dtd/CATALOG";              	# location of SGML catalog (required for nsgmls and sx)
+my $xsldir    = abs_path($home);                                            # location of xsl stylesheets
+my $toolsdir  = $home . "/tools";                                           # location of tools
+my $patcdir   = $toolsdir . "/patc/transcriptions";                         # location of patc transcription files.
+my $catalog   = $home . "/dtd/CATALOG";                                     # location of SGML catalog (required for nsgmls and sx)
 
 my $java      = "java $javaOptions";
-my $prince    = $princeHome . "/Engine/bin/prince.exe";                   # see https://www.princexml.com/
-my $saxon     = "$java -jar " . $saxonHome . "/saxon9he.jar ";            # see http://saxon.sourceforge.net/
-my $epubcheck = "$java -jar " . $toolsdir . "/lib/epubcheck-4.0.2.jar ";  # see https://github.com/IDPF/epubcheck
-my $jeebies   = "C:\\Bin\\jeebies";                                       # see http://gutcheck.sourceforge.net/
+my $prince    = $princeHome . "/Engine/bin/prince.exe";                     # see https://www.princexml.com/
+my $saxon     = "$java -jar " . $saxonHome . "/saxon9he.jar ";              # see http://saxon.sourceforge.net/
+my $epubcheck = "$java -jar " . $toolsdir . "/lib/epubcheck-4.0.2.jar ";    # see https://github.com/IDPF/epubcheck
+my $jeebies   = "C:\\Bin\\jeebies";                                         # see http://gutcheck.sourceforge.net/
 my $gutcheck  = "gutcheck";
-my $nsgmls    = "nsgmls";                                                 # see http://www.jclark.com/sp/ or http://openjade.sourceforge.net/doc/index.htm
-my $sx        = "sx";                                                     # in the latter case, use onsgmls and osx instead of nsgmls and sx.
+my $nsgmls    = "nsgmls";                                                   # see http://www.jclark.com/sp/ or http://openjade.sourceforge.net/doc/index.htm
+my $sx        = "sx";                                                       # in the latter case, use onsgmls and osx instead of nsgmls and sx.
 my $mariadb   = "\"C:\\Program Files\\MariaDB 10.10\\bin\\mariadb.exe\"";
 
 my $LOG_LEVEL_ERROR = 1;
@@ -420,7 +420,7 @@ sub includeXml($$) {
     my $xmlFilename = shift;
     my $includedXmlFilename = shift;
 
-    if ($force == 0 && isNewer($includedXmlFilename, $xmlFilename)) {
+    if ($force == 0 && isNewer($includedXmlFilename, $xmlFilename) && isNewer($includedXmlFilename, 'tei2html.config')) {
         trace("Skip conversion to included XML ($includedXmlFilename newer than $xmlFilename).");
         return;
     }
@@ -1108,6 +1108,11 @@ sub runChecks($) {
 sub isNewer($$) {
     my $derivedFile = shift;
     my $sourceFile = shift;
+
+    # Don't care if source file does not exist (e.g. for a tei2html.config file).
+    if (!-e $sourceFile || -s $sourceFile == 0) {
+        return 1;
+    }
 
     if (!-e $derivedFile || -s $derivedFile == 0) {
         return 0;
