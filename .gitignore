@@ -192,3 +192,4 @@ locale/Spanish--chatGPT.txt
 test/testTable/README.adoc
 .settings/org.eclipse.core.resources.prefs
 locale/messages.xlf
+test/pipe.xpl

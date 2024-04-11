@@ -3,6 +3,7 @@
 use strict;
 use warnings;
 
+use DateTime;
 use File::Copy;
 use File::stat;
 use File::Temp qw(mktemp);
@@ -410,6 +411,17 @@ sub fatal($) {
 
 sub removeFile($) {
     my $fileToRemove = shift;
+
+    if (!-e $fileToRemove) {
+        print "WARNING: attempt to remove non-existing file: $fileToRemove.\n";
+        return;
+    }
+
+    my $fileAge = -M $fileToRemove;
+    if ($fileAge > 0.0) {
+        print "WARNING: attempt to remove file that pre-dates start time of script: $fileToRemove.\n";
+        return;
+    }
 
     !$debug || print "DEBUG: Removing file: $fileToRemove.\n";
     $debug || unlink($fileToRemove);

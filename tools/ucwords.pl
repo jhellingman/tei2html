@@ -281,11 +281,11 @@ sub handleFragment($) {
     my $prevWord = '';
 
     # NOTE: we don't use \w and \W here, since it gives some unexpected results.
-    # Character codes: 2032 = prime; 00AD = soft hyphen.
-    my @words = split(/([^\x{2032}\x{00AD}`\pL\pN\pM*-]+)/, $fragment);
+    # Character codes: 2032 = prime; 2033 = double prime; 00AD = soft hyphen.
+    my @words = split(/([^\x{2032}\x{2033}\x{00AD}`\pL\pN\pM*-]+)/, $fragment);
     foreach my $word (@words) {
         if ($word ne '') {
-            if ($word =~ /^[^\x{2032}\x{00AD}`\pL\pN\pM*-]+$/) {
+            if ($word =~ /^[^\x{2032}\x{2033}\x{00AD}`\pL\pN\pM*-]+$/) {
                 countNonWord($word);
                 # reset previous word if not separated by more than just some space.
                 if ($word !~ /^[\pZ]+$/) {
@@ -767,7 +767,7 @@ sub reportLanguageWordsSQL($) {
         if ($i < $size) {
             print SQLFILE ",\n";
         }
-        
+
     }
     print SQLFILE ";\n";
 }
@@ -1678,6 +1678,7 @@ sub StripDiacritics($) {
 
         s/\x{00AD}//g;      ## soft-hyphen
         s/\x{2032}//g;      ## prime
+        s/\x{2033}//g;      ## double prime
         s/`//g;             ## back-tick
         s/\x{02b9}//g;      ## Modifier letter prime
         s/\x{02bb}//g;      ## 'Okina (Hawaiian glottal stop)
@@ -1698,11 +1699,11 @@ sub StripDiacritics($) {
 
 #
 # MaskIndicVowelSigns -- When stripping all diacritics, exclude the Indic vowel signs, by
-# temporarily hiding them as {U+HHHH} codes. The generated word-lists make more sense that 
+# temporarily hiding them as {U+HHHH} codes. The generated word-lists make more sense that
 # way.
 #
 sub MaskIndicVowelSigns($) {
-    my $string = shift;    
+    my $string = shift;
 
     # Devanagari vowel signs
     $string =~ s/([\x{093a}\x{093b}\x{093e}-\x{094c}])/ToUPlus($1)/ge;
@@ -1713,7 +1714,7 @@ sub MaskIndicVowelSigns($) {
 }
 
 sub RestoreIndicVowelSigns($) {
-    my $string = shift;    
+    my $string = shift;
     $string =~ s/\{U+([0-9A-F]+)\}]/FromUPlus($1)/ge;
     return $string;
 }

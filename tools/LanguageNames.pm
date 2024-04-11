@@ -270,6 +270,7 @@ BEGIN {
     $langNameHash{"njm"}            = "Angami";
     $langNameHash{"njn"}            = "Liangmai";
     $langNameHash{"njo"}            = "Ao";
+    $langNameHash{"non"}            = "Old Norse";
     $langNameHash{"nsa"}            = "Sangtam";
     $langNameHash{"nsm"}            = "Sema";
     $langNameHash{"nzm"}            = "Zeme";
