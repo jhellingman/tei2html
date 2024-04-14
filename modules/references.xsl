@@ -71,15 +71,15 @@
         <xsl:choose>
             <xsl:when test="not($targetNode)">
                 <xsl:copy-of select="f:log-warning('Target &quot;{1}&quot; of cross reference not found.', ($target))"/>
-                <xsl:apply-templates/>
+                <a><xsl:copy-of select="f:set-lang-id-attributes(.)"/><xsl:apply-templates/></a>
             </xsl:when>
             <xsl:when test="f:is-not-displayed($targetNode)">
                 <xsl:copy-of select="f:log-warning('Target &quot;{1}&quot; of cross reference is not displayed in output.', ($target))"/>
-                <xsl:apply-templates/>
+                <a><xsl:copy-of select="f:set-lang-id-attributes(.)"/><xsl:apply-templates/></a>
             </xsl:when>
             <xsl:when test="f:is-in-excluded-image($targetNode)">
                 <xsl:copy-of select="f:log-warning('Target &quot;{1}&quot; of cross reference is (part of) an unknown image.', ($target))"/>
-                <xsl:apply-templates/>
+                <a><xsl:copy-of select="f:set-lang-id-attributes(.)"/><xsl:apply-templates/></a>
             </xsl:when>
             <xsl:when test="@type='noteNumber'">
                 <xsl:apply-templates select="$targetNode" mode="unstyled-note-number"/>

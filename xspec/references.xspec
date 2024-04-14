@@ -37,9 +37,21 @@
       <x:expect label="will return an HTML link">
         <ul xmlns="http://www.w3.org/1999/xhtml" id="...">
            <li id="..."><a id="..." href="#localtarget">Local link.</a></li>
-           <li id="...">Missing link.</li>
+           <li id="..."><a id="...">Missing link.</a></li>
            <li id="localtarget">Local target.</li>
         </ul>
+      </x:expect>
+   </x:scenario>
+
+
+   <x:scenario label="When creating a reference to a local target (P3 TEI without fragment identifiers) in running text">
+      <x:context select="/TEI.2/p">
+        <TEI.2>
+            <p>Some text <ref target="localtarget">Local link</ref>, <ref target="missingtarget">Missing link</ref>, and the <hi id="localtarget">Local target</hi>.</p>
+        </TEI.2>
+      </x:context>
+      <x:expect label="will return an HTML link">
+        <p xmlns="http://www.w3.org/1999/xhtml" id="xd60e2" class="first">Some text <a href="#localtarget" id="...">Local link</a>, <a id="...">Missing link</a>, and the <i id="localtarget">Local target</i>.</p>
       </x:expect>
    </x:scenario>
 
@@ -57,7 +69,7 @@
       <x:expect label="will return an HTML link">
         <ul xmlns="http://www.w3.org/1999/xhtml" id="...">
            <li id="..."><a id="..." href="#localtarget">Local link.</a></li>
-           <li id="...">Missing link.</li>
+           <li id="..."><a id="...">Missing link.</a></li>
            <li id="localtarget">Local target.</li>
         </ul>
       </x:expect>
