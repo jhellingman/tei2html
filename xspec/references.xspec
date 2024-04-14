@@ -51,7 +51,7 @@
         </TEI.2>
       </x:context>
       <x:expect label="will return an HTML link">
-        <p xmlns="http://www.w3.org/1999/xhtml" id="xd60e2" class="first">Some text <a href="#localtarget" id="...">Local link</a>, <a id="...">Missing link</a>, and the <i id="localtarget">Local target</i>.</p>
+        <p xmlns="http://www.w3.org/1999/xhtml" id="..." class="first">Some text <a href="#localtarget" id="...">Local link</a>, <a id="...">Missing link</a>, and the <i id="localtarget">Local target</i>.</p>
       </x:expect>
    </x:scenario>
 
