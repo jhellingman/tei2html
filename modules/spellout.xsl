@@ -4,8 +4,7 @@
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:f="urn:stylesheet-functions"
-    exclude-result-prefixes="f xs xsl"
->
+    exclude-result-prefixes="f xs xsl">
 
   <xsl:function name="f:spell-out" as="xs:string">
     <xsl:param name="lang" as="xs:string"/>
@@ -14,7 +13,7 @@
     <xsl:sequence select="if ($lang = 'nl') then f:nl-spell-out($number) else f:en-spell-out($number)"/>
   </xsl:function>
 
-  <!-- power and log functions not in saxon-HE, so make do with poor-man's versions. -->
+  <!-- power and log functions not in saxon-HE, so make do with poor-man’s versions. -->
   <xsl:function name="f:power1000" as="xs:integer">
     <xsl:param name="group" as="xs:integer"/>
     <xsl:value-of select="if ($group = 0) then 1 else f:power1000($group - 1) * 1000"/>

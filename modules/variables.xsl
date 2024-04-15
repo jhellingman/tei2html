@@ -17,7 +17,7 @@
 
     <xsl:variable name="root" select="/"/>
 
-    <!-- The complex Xpath is needed at this point, as the document may be in the TEI namespace -->
+    <!-- The complex Xpath is needed at this point, as the document may or may not be in the TEI namespace. -->
     <xsl:variable name="fileDesc" select="/*[self::TEI.2 or self::*:TEI]/*:teiHeader/*:fileDesc"/>
     <xsl:variable name="title" select="$fileDesc/*:titleStmt/*:title[not(@type) or @type='main']"/>
     <xsl:variable name="author" select="$fileDesc/*:titleStmt/*:author[1]"/>

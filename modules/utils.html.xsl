@@ -1,12 +1,4 @@
 <!DOCTYPE xsl:stylesheet>
-<!--
-
-    Stylesheet with various utility templates, to be imported in tei2html.xsl.
-
-    Requires: 
-        localization.xsl: templates for localizing strings.
-
--->
 
 <xsl:stylesheet version="3.0"
     xmlns="http://www.w3.org/1999/xhtml"

@@ -63,8 +63,11 @@
 
     <xsl:param name="min-variant-count" select="1" as="xs:integer"/>
 
+    <xd:doc>
+        <xd:short>Indicate how the lists should be sorted.</xd:short>
+        <xd:detail>Indicate the sort-order of a KWIC-list. Possible values: 'following' or 'preceding'.</xd:detail>
+    </xd:doc>
 
-    <!-- Values: 'following' or 'preceding' -->
     <xsl:param name="sort-context" select="'following'"/>
 
 
@@ -94,6 +97,12 @@
     </xd:doc>
 
     <xsl:param name="stopword-file" select="'locale/stopwords.xml'" as="xs:string"/>
+
+
+    <xd:doc>
+        <xd:short>A map that maps a language code to a sequence of stopwords in that language.</xd:short>
+        <xd:detail>The map is read from the file indicated in the parameter <code>stopword-file</code>.</xd:detail>
+    </xd:doc>
 
     <xsl:variable name="stopwords" as="map(xs:string, xs:string*)">
         <xsl:map>
