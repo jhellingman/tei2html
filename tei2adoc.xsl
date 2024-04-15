@@ -1,15 +1,19 @@
 <!DOCTYPE xsl:stylesheet [
-
     <!ENTITY lf         "&#x0A;">
     <!ENTITY cr         "&#x0D;">
     <!ENTITY crlf       "&#x0D;&#x0A;">
-
 ]>
 <xsl:stylesheet version="3.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:f="urn:stylesheet-functions"
-                exclude-result-prefixes="f"
->
+                xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+                exclude-result-prefixes="f xd">
+
+    <xd:doc type="stylesheet">
+        <xd:short>Generate metadata from a TEI file in ASCIIdoc format.</xd:short>
+        <xd:author>Jeroen Hellingman</xd:author>
+        <xd:copyright>2024, Jeroen Hellingman</xd:copyright>
+    </xd:doc>
 
     <xsl:variable name="outputFormat" select="markdown"/>
 

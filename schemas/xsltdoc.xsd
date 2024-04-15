@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns="http://www.pnp-software.com/XSLTdoc"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified"
+           targetNamespace="http://www.pnp-software.com/XSLTdoc">
+
+  <xs:annotation>
+    <xs:documentation xml:lang="en">
+      Schema for XSLTdoc elements, used to document XSLT transformations.
+    </xs:documentation>
+  </xs:annotation>
+
+  <xs:element name="doc" type="Doc"/>
+
+  <xs:complexType name="Doc" mixed="true">
+    <xs:annotation>
+      <xs:documentation>Documentation of an XSLT template, function, mode or variable.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="short" type="HtmlText"/>
+      <xs:element name="detail" type="HtmlText"/>
+      <xs:element name="author" type="xs:string"/>
+      <xs:element name="cvsId" type="xs:string"/>
+      <xs:element name="copyright" type="xs:string"/>
+      <xs:element name="param" type="Param" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="type" type="DocType"/>
+    <xs:attribute name="mode" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:simpleType name="DocType">
+    <xs:annotation>
+      <xs:documentation>Type of element being documented.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="stylesheet"/>
+      <xs:enumeration value="mode"/>
+      <xs:enumeration value="string"/>
+      <xs:enumeration value="mode"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="HtmlText" mixed="true">
+    <xs:sequence>
+      <xs:any namespace="http://www.w3.org/1999/xhtml" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Param" mixed="true">
+    <xs:any namespace="http://www.w3.org/1999/xhtml" minOccurs="0" maxOccurs="unbounded"/>
+    <xs:attribute name="name" type="xs:string"/>
+    <xs:attribute name="type" type="ParamType"/>
+  </xs:complexType>
+
+  <xs:simpleType name="ParamType">
+    <xs:annotation>
+      <xs:documentation>Type of parameter being documented.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="string"/>
+      <xs:enumeration value="boolean"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema>

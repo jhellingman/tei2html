@@ -69,13 +69,13 @@ _Optional, only needed when you use mathematical formulas in TeX notation._
 To convert mathematical formulas in TeX format to a format that can be included in static HTML pages, you will need to install the following:
 
 * Node.js (see the https://nodejs.org/en/[node.js website]).
-* mathjax-node-cli (https://github.com/mathjax/mathjax-node-cli[source at GitHub], most conveniently installed by using `npm` after installing Node.js.
+* mathjax-node-cli (https://github.com/mathjax/mathjax-node-cli[source at GitHub]), most conveniently installed by using `npm` after installing Node.js.
 
 === Patc
 
 _Optional, only needed when you use the transcription schemes for non-Latin scripts I use in SGML._
 
-Patc (pattern changer) is a small utility written in C to do multiple find-and-replace actions at once. You will need a C compiler to get it to work. It enables you to execute multiple find-replace actions in an efficient way. Mostly used to change the transliteration of non-Roman scripts I've used. If you don't use that, you'll not need it. (I've successfully compiled this on a variety of platforms, including Unix, and Windows; a solution file for Visual Studio 7.0 is included; contact me if you need a Windows binary. A make file for use with linux is also included.)
+Patc (pattern changer) is a small utility written in C to do multiple find-and-replace actions at once. You will need a C compiler to get it to work. It enables you to execute multiple find-replace actions in an efficient way. Mostly used to change the transliteration of non-Roman scripts I've used. If you don't use that, you’ll not need it. (I’ve successfully compiled this on a variety of platforms, including Unix, and Windows; a solution file for Visual Studio 7.0 is included; contact me if you need a Windows binary. A make file for use with linux is also included.)
 
 === epubcheck
 
@@ -91,11 +91,17 @@ _Optional, only needed if you want generated PDF output._
 
 Note that Prince is a commercial product; a free version can be used for strictly private purposes, and downloaded from: https://www.princexml.com/. The free version does include a small icon on the first page to promote Prince. Shouldn't be a big nuisance.
 
+=== XSLTdoc
+
+_Optional, only needed if you want to browse through the documentation of the code._
+
+You can clone XSLTdoc (at time of writing version 1.3.3) from https://github.com/XSLTdoc/XSLTdoc[GitHub], where you can also find the https://xsltdoc.github.io[documentation].
+
 == Configuration
 
 === Environment variables
 
-To run `tei2html` from the command line, it will be practical to configure a number of environment variables, that is:
+To run `tei2html` from the command line, it will be practical to configure several environment variables, that is:
 
 * set `TEI2HTML_HOME` to the location of the checked-out `tei2html` directory.
 * set `SAXON_HOME` to the location where Saxon is installed.

@@ -419,7 +419,7 @@
 
 
     <xd:doc>
-        <xd:short>Handle an quote in a citation.</xd:short>
+        <xd:short>Handle a quote in a citation.</xd:short>
         <xd:detail>Quotes inside a <code>cit</code> element should not be output as a <code>div</code> element in HTML.</xd:detail>
     </xd:doc>
 

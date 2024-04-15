@@ -8,10 +8,10 @@
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 exclude-result-prefixes="f xd xs">
 
-    <xd:doc>
+    <xd:doc type="stylesheet">
         <xd:short>Calculate the Levenshtein distance between two strings.</xd:short>
         <xd:detail>This stylesheet is based on the algorithm given by Jeni Tennison, see
-            http://www.jenitennison.com/2007/05/06/levenshtein-distance-on-the-diagonal.html.</xd:detail>
+            https://www.jenitennison.com/2007/05/06/levenshtein-distance-on-the-diagonal.html.</xd:detail>
     </xd:doc>
 
     <xsl:function name="f:levenshtein" as="xs:integer">

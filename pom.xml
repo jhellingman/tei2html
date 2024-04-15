@@ -179,6 +179,18 @@
                     <transformationSets>
                         <transformationSet>
                             <dir>samples</dir>
+                            <stylesheet>preprocess.xsl</stylesheet>
+                            <includes>
+                                <include>*/*/PhilippineFolkTales.xml</include>
+                                <include>*/FilipinoPopularTales.xml</include>
+                                <include>*/AntingAnting.xml</include>
+                                <include>*/ArmeniaArmenians.xml</include>
+                                <include>*/WS-03-EdelliedenVerona.xml</include>
+                            </includes>
+                            <outputDir>${project.build.directory}/samples/preprocessed</outputDir>
+                        </transformationSet>
+                        <transformationSet>
+                            <dir>${project.build.directory}/samples/preprocessed</dir>
                             <stylesheet>tei2html.xsl</stylesheet>
                             <includes>
                                 <include>*/*/PhilippineFolkTales.xml</include>

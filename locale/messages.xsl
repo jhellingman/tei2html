@@ -14,8 +14,7 @@
         encoding="UTF-8"/>
 
     <xd:doc type="stylesheet">
-        <xd:short>TEI stylesheet to review translations in our localization xml-files.</xd:short>
-        <xd:detail> </xd:detail>
+        <xd:short>TEI stylesheet to review translations in localization xml-files.</xd:short>
         <xd:author>Jeroen Hellingman</xd:author>
         <xd:copyright>2011, Jeroen Hellingman</xd:copyright>
     </xd:doc>

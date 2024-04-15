@@ -1,21 +1,22 @@
 <!DOCTYPE xsl:stylesheet [
-
     <!ENTITY ndash      "&#x2013;">
-
 ]>
-
-<!-- Generate RDF/Dublin Core metadata from a TEI file
-
-     This is still a very basic implementation.
-     For further ideas on refinements see: http://dublincore.org/documents/dcq-rdf-xml/.
--->
 
 <xsl:stylesheet version="3.0"
                 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:dc="http://purl.org/dc/elements/1.1/"
+                xmlns:xd="http://www.pnp-software.com/XSLTdoc"
                 xmlns:f="urn:stylesheet-functions"
-                exclude-result-prefixes="f">
+                exclude-result-prefixes="f xd">
+
+    <xd:doc type="stylesheet">
+        <xd:short>Generate RDF/Dublin Core metadata from a TEI file.</xd:short>
+        <xd:detail>Generate RDF/Dublin Core metadata from a TEI file.
+            For further ideas on refinements see: https://dublincore.org/documents/dcq-rdf-xml/.</xd:detail>
+        <xd:author>Jeroen Hellingman</xd:author>
+        <xd:copyright>2024, Jeroen Hellingman</xd:copyright>
+    </xd:doc>
 
     <xsl:output
         method="xml"
@@ -142,6 +143,5 @@
     </xsl:template>
 
     <xsl:template match="*"/>
-
 
 </xsl:stylesheet>

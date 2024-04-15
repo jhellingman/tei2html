@@ -4,11 +4,15 @@
                 xmlns:f="urn:stylesheet-functions"
                 xmlns:xd="http://www.pnp-software.com/XSLTdoc"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                exclude-result-prefixes="f xd xs">
+                xmlns:ex="http://www.gutenberg.ph/2024/schemas/exlibris"
+                exclude-result-prefixes="f xd xs" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:schemaLocation="http://www.pnp-software.com/XSLTdoc ../schemas/xsltdoc.xsd">
 
     <xd:doc type="stylesheet">
         <xd:short>Stylesheet to create an ex-libris</xd:short>
-        <xd:detail>This stylesheet creates an ex-libris page in a document, based on information provided in the file <code>exlibris.xml</code>.</xd:detail>
+        <xd:detail>This stylesheet creates an ex-libris page in a document, based on information provided in the
+            file <code>exlibris.xml</code>.
+        </xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
         <xd:copyright>2021, Jeroen Hellingman</xd:copyright>
     </xd:doc>
@@ -23,11 +27,11 @@
                                            else $empty-ex-libris"/>
 
     <xsl:variable name="empty-ex-libris">
-        <exlibris/>
+        <ex:exlibris/>
     </xsl:variable>
 
     <xsl:variable name="default-ex-libris">
-        <exlibris>
+        <exlibris xmlns="http://www.gutenberg.ph/2024/schemas/exlibris">
             <owner>
                 <name>Jeroen Hellingman</name>
                 <contact type="email">jeroen@gutenberg.ph</contact>
@@ -51,7 +55,7 @@
                         <currency>EUR</currency>
                         <amount>12.95</amount>
                     </price>
-                    <method>
+                    <method type="cc">
                         <cc>378282246310005</cc>
                     </method>
                 </payment>
@@ -62,7 +66,7 @@
 
     <xsl:template match="divGen[@type='exlibris']">
         <div class="exlibris">
-            <p>This book belongs to: <xsl:value-of select="$ex-libris/owner/name"/>.
+            <p>This book belongs to: <xsl:value-of select="$ex-libris/owner/name"/>.</p>
         </div>
     </xsl:template>
 

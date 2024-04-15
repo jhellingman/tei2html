@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns="http://gutenberg.ph/2024/schemas/exlibris"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified"
+           targetNamespace="http://gutenberg.ph/2024/schemas/exlibris">
+
+  <xs:annotation>
+    <xs:documentation xml:lang="en">
+      Schema for an ex-libris file, used to personalize generated HTML and ePub files.
+    </xs:documentation>
+  </xs:annotation>
+
+  <xs:element name="exlibris" type="ExLibris"/>
+
+  <xs:complexType name="ExLibris">
+    <xs:annotation>
+      <xs:documentation>The top-level ex-libris element.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="owner" type="Owner"/>
+      <xs:element name="accession" type="Accession"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Owner">
+    <xs:annotation>
+      <xs:documentation>The owner of this instance of the book.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="name" type="xs:string"/>
+      <xs:element name="contact" minOccurs="0" maxOccurs="unbounded" type="Contact"/>
+      <xs:element name="address" minOccurs="0" type="Address"/>
+      <xs:element name="location" minOccurs="0" type="Location"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Contact">
+    <xs:annotation>
+      <xs:documentation>The contact details of the owner.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent/>
+    <xs:attribute name="type" type="ContactType"/>
+  </xs:complexType>
+
+  <xs:simpleType name="ContactType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="email"/>
+      <xs:enumeration value="phone"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="Address">
+    <xs:annotation>
+      <xs:documentation>The address details of the owner.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="houseNumber" type="xs:string"/>
+      <xs:element name="street" type="xs:string"/>
+      <xs:element name="town" type="xs:string"/>
+      <xs:element name="postalCode" type="xs:string"/>
+      <xs:element name="province" type="xs:string"/>
+      <xs:element name="country" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Location">
+    <xs:annotation>
+      <xs:documentation>The geographical location of the owner.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="latitude" type="xs:string"/>
+      <xs:element name="longitude" type="xs:string"/>
+    </xs:sequence>
+    <xs:attribute name="olc" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="Accession">
+    <xs:annotation>
+      <xs:documentation>Details about how the book was obtained.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="date" type="xs:date"/>
+      <xs:element name="orderNumber" minOccurs="0" type="xs:string"/>
+      <xs:element name="payment" minOccurs="0" type="Payment"/>
+      <xs:element name="note" minOccurs="0" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Payment">
+    <xs:annotation>
+      <xs:documentation>Details about the payment.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="price" type="Price"/>
+      <xs:element name="method" type="Method"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Price">
+    <xs:annotation>
+      <xs:documentation>Details about the payment.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="currency" type="xs:string"/>
+      <xs:element name="amount" type="xs:decimal"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="Method">
+    <xs:annotation>
+      <xs:documentation>Details about the payment-method.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="cc" minOccurs="0" type="xs:string"/>
+      <xs:element name="bankTransfer" minOccurs="0" type="xs:decimal"/>
+    </xs:sequence>
+    <xs:attribute name="type" type="MethodType"/>
+  </xs:simpleType>
+
+  <xs:simpleType name="MethodType">
+    <xs:annotation>
+      <xs:documentation>Details about the payment-method.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="cash"/>
+      <xs:enumeration value="cc"/>
+      <xs:enumeration value="transfer"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema>

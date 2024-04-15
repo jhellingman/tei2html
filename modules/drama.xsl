@@ -121,10 +121,10 @@
 
 
     <xd:doc>
-        <xd:short>Format a normal lg element.</xd:short>
-        <xd:detail>Format an lg element. Top-level lg elements get class=lgouter, nested lg elements get class=lg.
-        This we use (using CSS) to center the entire poem on the screen, and still keep the left side
-        of all stanzas aligned.</xd:detail>
+        <xd:short>Format a normal <code>lg</code> element.</xd:short>
+        <xd:detail>Format a <code>lg</code> element. Top-level <code>lg</code> elements get <code>class=lgouter</code>,
+            nested <code>lg</code> elements get <code>class=lg</code>. This we use (using CSS) to center the entire poem
+            on the screen, and still keep the left side of all stanzas aligned.</xd:detail>
     </xd:doc>
 
     <xsl:template name="handleLg">
