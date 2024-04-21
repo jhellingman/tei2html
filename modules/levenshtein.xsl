@@ -9,9 +9,19 @@
                 exclude-result-prefixes="f xd xs">
 
     <xd:doc type="stylesheet">
+        <xd:short>Functions to calculate the Levenshtein distance between two strings.</xd:short>
+        <xd:detail>
+            <p>This stylesheet is based on the algorithm given by Jeni Tennison, see his article
+                <a href="https://www.jenitennison.com/2007/05/06/levenshtein-distance-on-the-diagonal.html"><i>Levenshtein distance on the diagonal</i></a>.
+            </p>
+        </xd:detail>
+    </xd:doc>
+
+    <xd:doc>
         <xd:short>Calculate the Levenshtein distance between two strings.</xd:short>
-        <xd:detail>This stylesheet is based on the algorithm given by Jeni Tennison, see
-            https://www.jenitennison.com/2007/05/06/levenshtein-distance-on-the-diagonal.html.</xd:detail>
+        <xd:detail><p>This is the top-level function, intended to be called by external stylesheets.</p></xd:detail>
+        <xd:param name="a">The first string.</xd:param>
+        <xd:param name="b">The second string.</xd:param>
     </xd:doc>
 
     <xsl:function name="f:levenshtein" as="xs:integer">
@@ -27,6 +37,11 @@
                 string-length($b),
                 (1, 0, 1), 2)"/>
     </xsl:function>
+
+    <xd:doc>
+        <xd:short>Calculate the Levenshtein distance between two strings.</xd:short>
+        <xd:detail><p>This function should not be called by external stylesheets.</p></xd:detail>
+    </xd:doc>
 
     <xsl:function name="f:calculate-levenshtein-distance" as="xs:integer">
         <xsl:param name="chars1" as="xs:integer*"/>

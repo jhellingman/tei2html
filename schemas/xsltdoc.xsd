@@ -20,8 +20,10 @@
       <xs:element name="short" type="HtmlText"/>
       <xs:element name="detail" type="HtmlText"/>
       <xs:element name="author" type="xs:string"/>
+      <xs:element name="since" type="xs:string"/>
       <xs:element name="cvsId" type="xs:string"/>
       <xs:element name="copyright" type="xs:string"/>
+      <xs:element name="private" type="xs:boolean"/>
       <xs:element name="param" type="Param" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="type" type="DocType"/>
@@ -37,6 +39,7 @@
       <xs:enumeration value="mode"/>
       <xs:enumeration value="string"/>
       <xs:enumeration value="mode"/>
+      <xs:enumeration value="void"/>
     </xs:restriction>
   </xs:simpleType>
 
@@ -47,7 +50,9 @@
   </xs:complexType>
 
   <xs:complexType name="Param" mixed="true">
-    <xs:any namespace="http://www.w3.org/1999/xhtml" minOccurs="0" maxOccurs="unbounded"/>
+    <xs:sequence>
+      <xs:any namespace="http://www.w3.org/1999/xhtml" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
     <xs:attribute name="name" type="xs:string"/>
     <xs:attribute name="type" type="ParamType"/>
   </xs:complexType>
@@ -59,7 +64,16 @@
     <xs:restriction base="xs:string">
       <xs:enumeration value="string"/>
       <xs:enumeration value="boolean"/>
+      <xs:enumeration value="int"/>
+      <xs:enumeration value="node-set"/>
     </xs:restriction>
   </xs:simpleType>
+
+  <!-- The tag mode is only used as a temporary object in the XSLT code! -->
+  <xs:element name="mode" type="Mode"/>
+
+  <xs:complexType name="Mode">
+    <xs:attribute name="name" type="xs:string"/>
+  </xs:complexType>
 
 </xs:schema>

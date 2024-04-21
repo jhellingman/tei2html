@@ -68,7 +68,7 @@
         </xsl:call-template>
 
         <!-- Pull in CSS sheet for print (when using Prince). -->
-        <xsl:if test="f:is-set('css.useCommonPrint') and $optionPrinceMarkup = 'Yes'">
+        <xsl:if test="f:is-set('css.useCommonPrint') and f:is-pdf()">
             <style type="text/css" media="print">
                 <xsl:value-of select="f:css-stylesheet('../style/print.css')"/>
             </style>

@@ -68,7 +68,7 @@
     <xsl:variable name="outputMethod" select="document('')/xsl:stylesheet/xsl:output/@method"/>
     <xsl:variable name="outputFormat" select="'html5'"/>
 
-    <xsl:variable name="p.element" select="if ($optionPrinceMarkup = 'Yes') then 'div' else 'p'"/>
+    <xsl:variable name="p.element" select="if (f:is-pdf()) then 'div' else 'p'"/>
 
     <!--====================================================================-->
 

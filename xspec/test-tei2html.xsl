@@ -3,6 +3,7 @@
 
 <xsl:stylesheet version="3.0"
     xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="urn:stylesheet-functions"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
     <xsl:include href="../modules/functions.xsl"/>
@@ -50,7 +51,7 @@
     <xsl:variable name="outputMethod" select="document('')/xsl:stylesheet/xsl:output/@method"/>
     <xsl:variable name="outputFormat" select="'html'"/>
 
-    <xsl:variable name="p.element" select="if ($optionPrinceMarkup = 'Yes') then 'div' else 'p'"/>
+    <xsl:variable name="p.element" select="if (f:is-pdf()) then 'div' else 'p'"/>
 
     <xsl:template match="/">
         <xsl:apply-templates/>

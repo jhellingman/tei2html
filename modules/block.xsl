@@ -161,6 +161,12 @@
     </xsl:function>
 
 
+    <xd:doc>
+        <xd:short>Generate a link to a facsimile image.</xd:short>
+        <xd:detail>Generate a direct HTML link to a facsimile image.</xd:detail>
+        <xd:param name="url">The URL of the facsimile image.</xd:param>
+    </xd:doc>
+
     <xsl:function name="f:facsimile-direct-link">
         <xsl:param name="url" as="xs:string"/>
         <xsl:variable name="url" select="f:translate-xref-url($url, substring(f:get-document-lang(), 1, 2))"/>
@@ -176,7 +182,6 @@
 
     <xd:doc>
         <xd:short>Generate anchor for a <code>pb</code>-element.</xd:short>
-        <xd:detail>Generate an anchor for a <code>pb</code>-element.</xd:detail>
     </xd:doc>
 
     <xsl:template name="pb-anchor">
@@ -223,12 +228,10 @@
     <!--=== Thematic Breaks ================================================-->
 
     <xd:doc>
-        <xd:short>Handle a milestone (thematic break).</xd:short>
-        <xd:detail>Handle a document milestone. This is mostly used to encode thematic breaks. Generates
-        slightly different outputs, depending on the <code>@type</code> and <code>@rend</code>-attributes.</xd:detail>
+        <xd:short>A map with various types of milestone markers.</xd:short>
     </xd:doc>
 
-    <xsl:variable name="milestone-markers" select="
+    <xsl:variable name="milestone-markers" as="map(xs:string, xs:string)" select="
         map {
             'dots'     : '. . . . . . . . . . . . . . . . . . . . .',
             'dashes'   : '- - - - - - - - - - - - - - - - - - - - -',
@@ -239,6 +242,12 @@
             'space'    : ''
         }">
     </xsl:variable>
+
+    <xd:doc>
+        <xd:short>Handle a milestone (thematic break).</xd:short>
+        <xd:detail>Handle a document milestone. This is mostly used to encode thematic breaks. Generates
+            slightly different outputs, depending on the <code>@type</code> and <code>@rend</code>-attributes.</xd:detail>
+    </xd:doc>
 
     <xsl:template match="milestone[@unit='theme' or @unit='tb']">
         <xsl:call-template name="closepar"/>
@@ -289,7 +298,7 @@
     </xsl:template>
 
 
-    <xsl:function name="f:repeat">
+    <xsl:function name="f:repeat" as="xs:string">
         <xsl:param name="input" as="xs:string"/>
         <xsl:param name="separator" as="xs:string"/>
         <xsl:param name="count" as="xs:integer"/>
@@ -398,10 +407,10 @@
     <xd:doc>
         <xd:short>Determine the nesting level of a quotation in a paragraph.</xd:short>
         <xd:detail>Count from the most direct ancestor that is a block element, for now consider p, note, cell, item, and q[f:is-block(.)];
-             count the number of q ancestors between that and self.</xd:detail>
+             count the number of <code>q</code> ancestors between that and self.</xd:detail>
     </xd:doc>
 
-    <xsl:function name="f:quote-nesting-level">
+    <xsl:function name="f:quote-nesting-level" as="xs:integer">
         <xsl:param name="q" as="element(q)"/>
         <xsl:sequence select="count($q/ancestor::q[ancestor::*[name() = ('p', 'note', 'cell', 'item') or f:is-block(.)]]) + 1"/>
     </xsl:function>
@@ -693,7 +702,7 @@
     <xsl:template name="handle-initial-image">
         <xsl:context-item as="element()" use="required"/>
         <xsl:choose>
-            <xsl:when test="f:useInitialImageWithFloat()">
+            <xsl:when test="f:use-initial-image-with-float()">
                 <xsl:call-template name="initial-image-with-float"/>
             </xsl:when>
             <xsl:otherwise>
@@ -703,8 +712,8 @@
     </xsl:template>
 
 
-    <xsl:function name="f:useInitialImageWithFloat" as="xs:boolean">
-        <xsl:sequence select="$optionPrinceMarkup = 'Yes' or f:is-epub() or f:is-set('pg.compliant')"/>
+    <xsl:function name="f:use-initial-image-with-float" as="xs:boolean">
+        <xsl:sequence select="f:is-pdf() or f:is-epub() or f:is-set('pg.compliant')"/>
     </xsl:function>
 
 
@@ -727,7 +736,9 @@
     </xsl:template>
 
 
-    <xsl:variable name="open-quotation-mark" select="('&ldquo;', '&lsquo;', '&rsquo;', '&bdquo;', '&laquo;', '&raquo;')"/>
+    <xd:doc>A list of open quotation marks, used when handling decorative initials.</xd:doc>
+
+    <xsl:variable name="open-quotation-mark" select="('&ldquo;', '&lsquo;', '&rsquo;', '&bdquo;', '&laquo;', '&raquo;')" as="xs:string*"/>
 
     <xsl:function name="f:replaced-initial" as="xs:string">
         <xsl:param name="text" as="xs:string"/>
@@ -775,7 +786,7 @@
 
     <xsl:template name="handle-initial-image-css">
         <xsl:context-item as="element()" use="required"/>
-        <xsl:if test="not(f:useInitialImageWithFloat())">
+        <xsl:if test="not(f:use-initial-image-with-float())">
             <xsl:if test="generate-id() = generate-id(key('rend', name() || ':' || @rend)[1])">
                 <xsl:variable name="css-properties" select="f:translate-rend-ladder(@rend, name())"/>
                 <xsl:variable name="scale-factor" select="xs:decimal(f:get-setting('images.scale'))" as="xs:decimal"/>

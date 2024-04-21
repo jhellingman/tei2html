@@ -11,7 +11,7 @@
 
     <xd:doc type="stylesheet">
         <xd:short>Utility functions, used by tei2html</xd:short>
-        <xd:detail>This stylesheet contains several utility functions, used by tei2html and tei2epub.</xd:detail>
+        <xd:detail><p>This stylesheet contains several utility functions, used by <code>tei2html</code> and <code>tei2epub</code>.</p></xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
         <xd:copyright>2021, Jeroen Hellingman</xd:copyright>
     </xd:doc>
@@ -61,8 +61,8 @@
 
     <xd:doc>
         <xd:short>Provide a default value when a value is null.</xd:short>
-        <xd:param name="value" type="string">The value to be tested.</xd:param>
-        <xd:param name="default" type="string">The default value.</xd:param>
+        <xd:param name="value">The value to be tested.</xd:param>
+        <xd:param name="default">The default value.</xd:param>
     </xd:doc>
 
     <xsl:function name="f:if-null">
@@ -71,6 +71,11 @@
         <xsl:sequence select="if (not($value)) then $default else $value"/>
     </xsl:function>
 
+    <xd:doc mode="plain-text">
+        <xd:short>Mode to convert nodes tree to plain text. Only one branch of choice elements will be included.</xd:short>
+    </xd:doc>
+
+    <xsl:mode name="plain-text"/>
 
     <xd:doc>
         <xd:short>Convert a node tree to plain text. Only one branch of choice elements will be included.</xd:short>

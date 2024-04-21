@@ -549,6 +549,10 @@
         <xsl:sequence select="exists($root//*[f:rend-value(./@rend, 'align-with') = $node/@id])"/>
     </xsl:function>
 
+    <xsl:function name="f:is-pdf" as="xs:boolean">
+        <xsl:sequence select="$optionPrinceMarkup = 'Yes'"/>
+    </xsl:function>
+
     <xsl:function name="f:is-epub" as="xs:boolean">
         <xsl:sequence select="$outputFormat = 'epub'"/>
     </xsl:function>

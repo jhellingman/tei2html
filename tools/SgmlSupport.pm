@@ -1515,6 +1515,8 @@ BEGIN {
 
     $ent{'Peso'}        = chr(0x20B1);  # Peso sign
     $ent{'Euro'}        = chr(0x20AC);  # Euro sign
+    $ent{'Rupee'}       = "Re.";        # Rupee sign (singular; also seen as R with strike-through, not in Unicode).
+    $ent{'Rupees'}      = "Rs.";        # Rupees sign (plural; could also use U+20A8. Do not use the modern Indian rupee U+20B9 sign here!)
 
     $ent{'triangle'}    = chr(0x25B3);  # White triangle
 

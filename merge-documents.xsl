@@ -90,8 +90,13 @@
     </xsl:function>
 
 
+    <xd:doc mode="prefix-id">
+        <xd:short>Mode used to prefix ids with a given prefix.</xd:short>
+    </xd:doc>
+
+
     <xd:doc>
-        <xd:short>Do not mess with language IDs.</xd:short>
+        <xd:short>Do not change language IDs.</xd:short>
     </xd:doc>
 
     <xsl:template match="language/@id" mode="prefix-id">
@@ -100,7 +105,7 @@
 
 
     <xd:doc>
-        <xd:short>Translate IDs in <code>@id</code> attribute.</xd:short>
+        <xd:short>Translate IDs in <code>@id</code> attributes.</xd:short>
     </xd:doc>
 
     <xsl:template match="@id" mode="prefix-id">
