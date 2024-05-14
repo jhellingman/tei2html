@@ -69,6 +69,10 @@
                     <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                     <xsl:apply-templates mode="table-caption" select="head"/>
                     <xsl:call-template name="inner-table"/>
+                    <xsl:if test="f:is-set('pg.compliant')">
+                        <!-- Work around a bug in PG ebookmaker, to prevent breaking a table. -->
+                        <div class="pgKludge"/>
+                    </xsl:if>
                 </div>
                 <xsl:call-template name="reopenpar"/>
             </xsl:otherwise>

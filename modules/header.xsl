@@ -188,19 +188,33 @@
 
     <xsl:template name="generate-html-body">
         <body>
-            <xsl:text> <!-- insert extra new-line for PG -->
-            </xsl:text>
-
-            <xsl:if test="f:is-set('pg.includeHeaders')">
-                <xsl:call-template name="PGHeader"/>
-            </xsl:if>
-
-            <xsl:apply-templates/>
-
-            <xsl:if test="f:is-set('pg.includeHeaders')">
-                <xsl:call-template name="PGFooter"/>
-            </xsl:if>
+            <xsl:choose>
+                <xsl:when test="f:is-set('pg.compliant')">
+                    <!-- extra div to work around bug in ebookmaker -->
+                    <div class="pgWrapper">
+                        <xsl:call-template name="generate-html-inner-body"/>
+                    </div>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:call-template name="generate-html-inner-body"/>
+                </xsl:otherwise>
+            </xsl:choose>
         </body>
+    </xsl:template>
+
+    <xsl:template name="generate-html-inner-body">
+        <xsl:text> <!-- insert extra new-line for PG -->
+        </xsl:text>
+
+        <xsl:if test="f:is-set('pg.includeHeaders')">
+            <xsl:call-template name="PGHeader"/>
+        </xsl:if>
+
+        <xsl:apply-templates/>
+
+        <xsl:if test="f:is-set('pg.includeHeaders')">
+            <xsl:call-template name="PGFooter"/>
+        </xsl:if>
     </xsl:template>
 
 

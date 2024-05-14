@@ -170,8 +170,8 @@
 
 
     <xsl:function name="f:is-allowed-url" as="xs:boolean">
-        <xsl:param name="url" as="xs:string"/>
-        <xsl:sequence select="exists($allowed-urls[starts-with($url, .)])"/>
+        <xsl:param name="url" as="xs:string?"/>
+        <xsl:sequence select="$url and exists($allowed-urls[starts-with($url, .)])"/>
     </xsl:function>
 
 
