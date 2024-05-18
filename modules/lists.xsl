@@ -15,7 +15,6 @@
         <xd:copyright>2016, Jeroen Hellingman</xd:copyright>
     </xd:doc>
 
-
     <xd:doc>
         <xd:short>Format a list.</xd:short>
         <xd:detail>Format a standard list. Take care to open any possible <code>p</code>-elements first (and reopen them if needed).</xd:detail>
@@ -202,6 +201,14 @@
 
 
     <xd:doc>
+        <xd:short>Ignore labels directly under a list.</xd:short>
+        <xd:detail>Ignore labels directly under a list: they will be handled later in handle-item.</xd:detail>
+    </xd:doc>
+
+    <xsl:template match="list/label"/>
+
+
+    <xd:doc>
         <xd:short>Format a group of items.</xd:short>
         <xd:detail>Format a group of list items. Sometimes, lists are encountered with braces that group items. The (non-standard)
         element <code>itemGroup</code> provides an easy shortcut to encode them and achieve the graphic result. Note that this
@@ -213,7 +220,7 @@
     <xsl:template match="itemGroup">
         <li>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
-            <xsl:variable name="numberedItemClass" select="if (item/ab[@type='itemNum']) then ' numberedItem' else ''" as="xs:string"/>
+            <xsl:variable name="numberedItemClass" select="if (f:has-numbered-item(.)) then ' numberedItem' else ''" as="xs:string"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'itemGroup' || $numberedItemClass)"/>
 
             <xsl:variable name="this" select="."/>
@@ -255,11 +262,25 @@
         </li>
     </xsl:template>
 
+
+    <xsl:function name="f:has-numbered-item" as="xs:boolean">
+        <xsl:param name="node" as="element()"/>
+
+        <xsl:sequence select="$node/item/@n or $node/item/ab[@type='itemNum'] or ($node/label)"/>
+    </xsl:function>
+
+    <xsl:function name="f:is-numbered-item" as="xs:boolean">
+        <xsl:param name="item" as="element(item)"/>
+
+        <xsl:sequence select="$item/@n or $item/ab[@type='itemNum'] or ($item/preceding-sibling::*[1][name() = 'label'])"/>
+    </xsl:function>
+
+
     <!-- TEI conforming variant of the above -->
     <xsl:template match="list[@type='itemGroup']">
         <li>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
-            <xsl:variable name="numberedItemClass" select="if (item/ab[@type='itemNum']) then ' numberedItem' else ''" as="xs:string"/>
+            <xsl:variable name="numberedItemClass" select="if (f:has-numbered-item(.)) then ' numberedItem' else ''" as="xs:string"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'itemGroup' || $numberedItemClass)"/>
 
             <xsl:variable name="this" select="."/>
@@ -310,8 +331,10 @@
     </xd:doc>
 
     <xsl:template name="handle-item">
+        <xsl:context-item as="element(item)" use="required"/>
+
         <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
-        <xsl:copy-of select="f:set-class-attribute-with(., if (not(..[@type = 'ordered']) and (@n or ./ab[@type='itemNum'][position() = 1])) then 'numberedItem' else '')"/>
+        <xsl:copy-of select="f:set-class-attribute-with(., if (not(..[@type = 'ordered']) and (f:is-numbered-item(.))) then 'numberedItem' else '')"/>
 
         <xsl:choose>
             <!-- For ordered lists, the numbers are supplied by the browser -->
@@ -327,6 +350,12 @@
             <xsl:when test="./ab[@type='itemNum'][position() = 1]">
                 <span class="itemNumber"><xsl:apply-templates select="./ab[@type='itemNum'][position() = 1]/node()"/></span>
             </xsl:when>
+            <!-- Labels directly before the item are picked up here -->
+            <xsl:when test="./preceding-sibling::*[1][name() = 'label']">
+                <span class="itemNumber"><xsl:apply-templates select="./preceding-sibling::*[1]/node()"/></span>
+                <xsl:text> </xsl:text>
+            </xsl:when>
+            <!-- The n-attribute is last -->
             <xsl:when test="@n">
                 <span class="itemNumber"><xsl:copy-of select="f:convert-markdown(@n)"/></span><xsl:text> </xsl:text>
             </xsl:when>

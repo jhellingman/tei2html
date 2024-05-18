@@ -9,8 +9,15 @@
 
 ]>
 <x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+               xmlns:xs="http://www.w3.org/2001/XMLSchema"
                stylesheet="test-tei2html.xsl"
                version="3.0">
+
+    <!-- Define variable used in localization.xsl -->
+    <x:param name="language" as="xs:string" select="'en'"/>
+    <x:param name="root" select="self::document-node()">
+        <TEI/>
+    </x:param>
 
     <x:param name="imageInfo">
         <imageInfo>
@@ -88,6 +95,23 @@
         <list>
             <item><ab type="itemNum">1.</ab> First item.</item>
             <item><ab type="itemNum">2.</ab> Second item.</item>
+        </list>
+      </x:context>
+      <x:expect label="will result in an HTML unordered list with the item numbers in a span">
+        <ul xmlns="http://www.w3.org/1999/xhtml" id="...">
+           <li id="..." class="numberedItem">
+              <span class="itemNumber">1.</span> First item.</li>
+           <li id="..." class="numberedItem">
+              <span class="itemNumber">2.</span> Second item.</li>
+        </ul>
+      </x:expect>
+   </x:scenario>
+
+   <x:scenario label="When rendering a list with items and labels">
+      <x:context>
+        <list>
+            <label>1.</label> <item>First item.</item>
+            <label>2.</label> <item>Second item.</item>
         </list>
       </x:context>
       <x:expect label="will result in an HTML unordered list with the item numbers in a span">
