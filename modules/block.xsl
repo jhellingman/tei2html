@@ -664,18 +664,18 @@
             to use several tricks in CSS.</p>
 
             <ol>
-                <li>We set the initial as background picture on the paragraph.</li>
-                <li>We create a small div, which we float to the left, to give the initial
+                <li>Set the initial as background picture on the paragraph.</li>
+                <li>Create a small div, which we float to the left, to give the initial
                 the space it needs.</li>
-                <li>We set the padding-top to a value such that the initial actually appears
+                <li>Set the padding-top to a value such that the initial actually appears
                 to stick over the paragraph.</li>
-                <li>We set the initial as background picture to the float, such that if the
+                <li>Set the initial as background picture to the float, such that if the
                 paragraph is too small to contain the entire initial, the float will. We
                 need to take care to adjust the background position to match the
                 padding-top, such that the two background images will align exactly.</li>
-                <li>We need to remove the initial letter from the paragraph, and render it in
+                <li>Remove the initial letter from the paragraph, and render it in
                 the float in white, such that it re-appears when no CSS is available.</li>
-                <li>We need to remove opening quotation marks when they appear before
+                <li>Remove opening quotation marks when they appear before
                 the initial letter.</li>
             </ol>
 
@@ -728,11 +728,38 @@
             </xsl:attribute>
             <span>
                 <xsl:attribute name="class"><xsl:value-of select="f:generate-class-name(.)"/>init</xsl:attribute>
-                <xsl:value-of select="f:replaced-initial(.)"/>
+                <xsl:value-of select="f:replaced-initial(f:text-without-notes(.))"/>
             </span>
-            <xsl:apply-templates select="node()[1]" mode="remove-initial"/>
-            <xsl:apply-templates select="node()[position() > 1]"/>
+            <xsl:call-template name="initial-image-paragraph-remainder"/>
         </xsl:element>
+    </xsl:template>
+
+    
+    <xsl:function name="f:text-without-notes" as="xs:string">
+        <xsl:param name="node"/>
+        <xsl:variable name="text">
+            <xsl:apply-templates select="$node" mode="strip-notes"/>
+        </xsl:variable>
+        <xsl:sequence select="$text"/>
+    </xsl:function>
+
+    <xsl:template mode="strip-notes" match="note"/>
+
+
+    <xsl:template name="initial-image-paragraph-remainder">
+        <xsl:context-item as="element()" use="required"/>
+        <xsl:choose>
+            <xsl:when test="node()[1][self::note]">
+                <!-- Deal with a marginal note right at the start of a paragraph -->
+                <xsl:apply-templates select="node()[1]"/>
+                <xsl:apply-templates select="node()[2]" mode="remove-initial"/>
+                <xsl:apply-templates select="node()[position() > 2]"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates select="node()[1]" mode="remove-initial"/>
+                <xsl:apply-templates select="node()[position() > 1]"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
 
@@ -742,12 +769,14 @@
 
     <xsl:function name="f:replaced-initial" as="xs:string">
         <xsl:param name="text" as="xs:string"/>
+        <xsl:variable name="text" select="replace($text, '^\s+', '')"/>
 
         <xsl:value-of select="if (substring($text, 1, 1) = $open-quotation-mark) then substring($text, 1, 2) else substring($text, 1, 1)"/>
     </xsl:function>
 
     <xsl:function name="f:remove-initial" as="xs:string">
         <xsl:param name="text" as="xs:string"/>
+        <xsl:variable name="text" select="replace($text, '^\s+', '')"/>
 
         <xsl:value-of select="if (substring($text, 1, 1) = $open-quotation-mark) then substring($text, 3) else substring($text, 2)"/>
     </xsl:function>
@@ -758,7 +787,7 @@
 
         <div class="figure floatLeft">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
-            <xsl:copy-of select="f:output-image(f:rend-value(@rend, 'initial-image'), f:replaced-initial(.))"/>
+            <xsl:copy-of select="f:output-image(f:rend-value(@rend, 'initial-image'), f:replaced-initial(f:text-without-notes(.)))"/>
         </div>
         <xsl:element name="{$p.element}">
             <xsl:attribute name="class">
@@ -766,8 +795,7 @@
                 <xsl:if test="self::l"><xsl:text>line </xsl:text></xsl:if>
                 <xsl:text>first</xsl:text>
             </xsl:attribute>
-            <xsl:apply-templates select="node()[1]" mode="remove-initial"/>
-            <xsl:apply-templates select="node()[position() > 1]"/>
+            <xsl:call-template name="initial-image-paragraph-remainder"/>
         </xsl:element>
     </xsl:template>
 
@@ -867,15 +895,15 @@
 
     <xd:doc>
         <xd:short>Remove the first letter of a paragraph.</xd:short>
-        <xd:detail>Remove the first letter of a paragraph. Mind, this means we want to remove the first letter
+        <xd:detail>Remove the first letter of a paragraph. This means we want to remove the first letter
         of this text node only if it is the first text node in a paragraph. To verify this, it is not enough
         to just look at the <code>position()</code> (as it may be nested several levels deep), But actually will
         have to determine what text is part of the current paragraph and before the current node.</xd:detail>
     </xd:doc>
 
     <xsl:template match="text()" mode="remove-initial">
-        <!-- Get text of the current paragraph before the current node: we only want to remove the initial if this is empty. -->
-        <xsl:variable name="paragraph-so-far" select="(./preceding::node()[./ancestor::p[1] is current()/ancestor::p[1]])[1]"/>
+        <!-- Get text of the current paragraph before the current node: we only want to remove the initial if this is empty (ignoring any notes that are lifted out of the text-flow). -->
+        <xsl:variable name="paragraph-so-far" select="(./preceding::node()[not(ancestor-or-self::note)][./ancestor::p[1] is current()/ancestor::p[1]])[1]"/>
         <xsl:copy-of select="f:log-debug('paragraph so-far: {1}', ($paragraph-so-far))"/>
 
         <xsl:choose>
@@ -921,12 +949,11 @@
             </xsl:attribute>
             <span>
                 <xsl:attribute name="class"><xsl:value-of select="f:generate-class-name(.)"/>dc initdropcap</xsl:attribute>
-                <xsl:value-of select="f:replaced-initial(.)"/>
+                <xsl:value-of select="f:replaced-initial(f:text-without-notes(.))"/>
             </span>
             <span>
                 <xsl:attribute name="class"><xsl:value-of select="f:generate-class-name(.)"/>adc afterdropcap</xsl:attribute>
-                <xsl:apply-templates select="node()[1]" mode="remove-initial"/>
-                <xsl:apply-templates select="node()[position() > 1]"/>
+                <xsl:call-template name="initial-image-paragraph-remainder"/>
             </span>
         </xsl:element>
     </xsl:template>

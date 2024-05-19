@@ -272,7 +272,7 @@
     <xsl:function name="f:is-numbered-item" as="xs:boolean">
         <xsl:param name="item" as="element(item)"/>
 
-        <xsl:sequence select="$item/@n or $item/ab[@type='itemNum'] or ($item/preceding-sibling::*[1][name() = 'label'])"/>
+        <xsl:sequence select="$item/@n or $item/ab[@type='itemNum'] or ($item/preceding-sibling::*[1][self::label])"/>
     </xsl:function>
 
 
