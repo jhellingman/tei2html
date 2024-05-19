@@ -193,3 +193,6 @@ test/testTable/README.adoc
 .settings/org.eclipse.core.resources.prefs
 locale/messages.xlf
 test/pipe.xpl
+tei-table.xml
+tei2ods.xsl
+test/out.html

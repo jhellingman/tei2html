@@ -191,6 +191,29 @@
         </x:expect>
     </x:scenario>
 
+
+    <x:scenario label="When rendering two marginal notes in a paragraph">
+        <x:context select="//div1">
+            <TEI>
+                <text>
+                    <div1>
+                        <p>Surrounding text<note place="margin" id="n.1">Text of marginal note 1.</note> and more text. Surrounding text<note place="margin" id="n.2">Text of marginal note 2.</note> and more text.</p>
+                    </div1>
+                </text>
+            </TEI>
+        </x:context>
+        <x:expect label="will result in two marginal notes.">
+            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1 last-child">
+               <div class="divBody">
+                  <p id="..." class="first">Surrounding text<span class="marginnote"
+                           id="n.1">Text of marginal note 1.</span> and more text. Surrounding text<span class="marginnote"
+                           id="n.2">Text of marginal note 2.</span> and more text.</p>
+               </div>
+            </div>
+        </x:expect>
+    </x:scenario>
+
+
     <x:scenario label="When rendering a footnote referenced twice in a div1">
         <x:context select="//div1">
             <TEI>

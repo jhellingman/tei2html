@@ -60,10 +60,19 @@
 
     <xd:doc>
         <xd:short>Handle marginal notes.</xd:short>
-        <xd:detail>Marginal notes should go to the margin. CSS handles the actual placement.</xd:detail>
+        <xd:detail>Marginal notes should go to the margin. CSS handles the actual placement.
+        Since we generate the content of the note in a <code>span</code> element, it should not
+        contain <code>p</code> (or other block level) elements, as in that case the HTML renderer
+        will automatically end the generated <code>span</code>, and break the layout. Placing the
+        content of the note in a <code>div</code> is also not a solution, as in that case, the
+        HTML renderer will break the paragraph that contains the note. If needed, use two 
+        <code>lb</code> elements as a work-around.</xd:detail>
     </xd:doc>
 
     <xsl:template match="note[f:is-margin-note(.)]">
+        <xsl:if test="p">
+            <xsl:copy-of select="f:log-error('Do not put paragraphs in a marginal note (n={0}; place={1}; content={2}...).', (@n, @place, substring(string(.), 1, 20)))"/>
+        </xsl:if>
         <span class="{if (@place = 'right') then 'right-marginnote' else 'marginnote'}">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
@@ -150,7 +159,7 @@
 -->
 
     <xsl:template match="note">
-        <xsl:copy-of select="f:log-warning('unclassified note not handled (n={1}; id={2}).', (@n, f:generate-id(.)))"/>
+        <xsl:copy-of select="f:log-warning('unclassified note not handled (n={0}; id={1}).', (@n, f:generate-id(.)))"/>
         <xsl:apply-templates/>
     </xsl:template>
 

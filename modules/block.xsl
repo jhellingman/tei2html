@@ -55,7 +55,7 @@
     <xsl:template match="pb">
         <xsl:choose>
             <!-- Don't show page breaks when they appear in a marginal note. -->
-            <xsl:when test="ancestor::note[@place = ('margin', 'left', 'right')]">
+            <xsl:when test="ancestor::note[f:is-margin-note(.)]">
                 <xsl:call-template name="pb-anchor"/>
             </xsl:when>
             <!-- HTML does not allow a span element at the top-level, so wrap it in a paragraph. -->
@@ -743,7 +743,9 @@
         <xsl:sequence select="$text"/>
     </xsl:function>
 
-    <xsl:template mode="strip-notes" match="note"/>
+    <xsl:template mode="strip-notes" match="note">
+        <xsl:copy-of select="f:log-debug('stripping note (n={0}; place={1}; content={2}).', (@n, @place, string(.)))"/>
+    </xsl:template>
 
 
     <xsl:template name="initial-image-paragraph-remainder">

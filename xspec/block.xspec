@@ -218,15 +218,15 @@ text-indent:2em;
         </x:expect>
     </x:scenario>
 
-    <x:scenario label="When rendering a TEI paragraph with a decorative initial and a marginal note at the start">
+    <x:scenario label="When rendering a TEI paragraph with a decorative initial and a marginal note at the start (and somewhere in the middle)">
         <x:context>
-            <p id="test_p_initial" rend="initial-offset(45px) initial-width(90px) initial-height(95px) initial-image(images/initial-A.png)"><note place="margin">Test</note> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <p id="test_p_initial" rend="initial-offset(45px) initial-width(90px) initial-height(95px) initial-image(images/initial-A.png)"><note place="margin">Test 1</note> Lorem ipsum dolor sit amet, <note place="margin">Test 2</note>consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         </x:context>
         <x:expect label="will result in an HTML parapgraph with an additional class and the first letter enclosed in a span">
             <p xmlns="http://www.w3.org/1999/xhtml"
                id="test_p_initial"
                class="test_p_initial">
-               <span class="test_p_initialinit">L</span><span class="marginnote" id="...">Test</span>orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>       
+               <span class="test_p_initialinit">L</span><span class="marginnote" id="...">Test 1</span>orem ipsum dolor sit amet, <span class="marginnote" id="...">Test 2</span>consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>       
         </x:expect>
     </x:scenario>
 
