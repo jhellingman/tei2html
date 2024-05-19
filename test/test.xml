@@ -188,7 +188,7 @@
 
 <p>Here we have a reference to <ref target="pb002">page 2</ref>. We also have a reference to a <ref target="figTest2">figure</ref>.</p>
 
-<p><hi rend="sc">In this section</hi> we will see a <corr sic="mistake">correction</corr>, an <corr sic="">insertion</corr> and a deletion<corr sic="here"></corr>, an abbreviation: <abbr expan="United States of America">USA</abbr>, a currency amount: <amount unit="USD" amount="3.90">$3.90</amount>, and a measurement: <measure reg="25 cm">10 in</measure>. Also included a gap: <gap reason="Gap demonstration"/> and a gap that is about 10 words long: <gap extent="10" unit="words" reason="Gap demonstration"/>.</p>
+<p><hi rend="sc">In this section</hi> we will see a <corr sic="mistake">correction</corr>, an <corr sic="">insertion</corr> and a deletion<corr sic="here"></corr>, an abbreviation: <abbr expan="United States of America">USA</abbr>, a currency amount: <amount unit="USD" amount="3.90">$3.90</amount>, and a measurement: <measure reg="25 cm">10 in</measure>. Also included a gap: <gap reason="Gap demonstration"/> and a gap that is about 10 words long: <gap quantity="10" unit="words" reason="Gap demonstration"/>.</p>
 
 <p>Test of the choice element as used for transcription: <choice><orig>Original</orig><reg type="trans">Transcription</reg></choice>.</p>
 

@@ -1,6 +1,6 @@
 <!DOCTYPE html
   PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<!-- This HTML file has been automatically generated from an XML source on 2023-10-08T20:42:54Z using  SAXON   HE 9.9.0.1 . --> 
+<!-- This HTML file has been automatically generated from an XML source on 2024-05-19T08:08:09Z using  SAXON   HE 9.9.0.1 . --> 
 <html xmlns="http://www.w3.org/1999/xhtml" id="xd32e1" lang="en-US">
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
@@ -63,7 +63,7 @@ a {
 
 abbr[title] {
  border-bottom: none;
- text-decoration: underline dotted;
+ text-decoration: underline;
 }
 
 b, strong {
@@ -146,7 +146,7 @@ div.back {
 }
 
  
-.div0:last-child, .div1:last-child, .div2:last-child, .div3:last-child, 
+.div0:last-child, .div1:last-child, .div2:last-child, .div3:last-child,
 .div4:last-child, .div5:last-child, .div6:last-child, .div7:last-child {
  margin-bottom: 0;
 }
@@ -158,7 +158,7 @@ blockquote div.front, blockquote div.body, blockquote div.back {
 }
 
  
-.divBody .div1:first-child, .divBody .div2:first-child, .divBody .div3:first-child, .divBody .div4:first-child, 
+.divBody .div1:first-child, .divBody .div2:first-child, .divBody .div3:first-child, .divBody .div4:first-child,
 .divBody .div5:first-child, .divBody .div6:first-child, .divBody .div7:first-child {
  margin-top: 0;
 }
@@ -258,7 +258,7 @@ span.abbr, abbr {
 
  
 
-span.parnum {
+span.parNum {
  font-weight: bold;
 }
 
@@ -654,6 +654,11 @@ span.musictime span.bottom {
  display: block;
 }
 
+audio {
+ height: 20px;
+ margin-left: 0.5em;
+ margin-right: 0.5em;
+}
 
  
 ul {
@@ -1219,7 +1224,7 @@ table.alignedText, table.alignedVerse {
  border-collapse: collapse;
 }
 
-table.alignedText td {
+table.alignedText td.first, table.alignedText td.second {
  vertical-align: top;
  width: 50%;
 }
@@ -1245,6 +1250,32 @@ table.alignedVerse td.first, table.alignedVerse td.second {
 
 table.alignedVerse td.lineNumbers {
  width: 10%;
+}
+
+td.alignedDiv1 {
+ padding-top: 5.6em;
+}
+
+td.alignedDiv2 {
+ padding-top: 4.8em;
+}
+
+td.alignedDiv3 {
+ padding-top: 3.6em;
+}
+
+td.alignedDiv4 {
+ padding-top: 2.4em;
+}
+
+td.alignedDiv5, td.alignedDiv6, td.alignedDiv7 {
+ padding-top: 1.44em;
+}
+
+
+ 
+table.alignedText p:not(.first) {
+ margin-top: 0;
 }
 
   
@@ -1350,7 +1381,13 @@ span.tocPageNum, span.flushright {
 
 .exlink:hover, .wplink:hover, .biblink:hover, .qurlink:hover, .seclin:hover {
  background-color: #FFDCDC;
+} 
+
+abbr[title] {
+ border-bottom: none;
+ text-decoration: underline dotted;
 }
+
 body {
  background: #FFFFFF;
  font-family: serif;
@@ -2063,7 +2100,7 @@ color:red
                         Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
                         mollit anim id est laborum.” ’</p>
                   </blockquote>
-                  <p id="xd32e293">Here we have a reference to  page 2 . We also have a reference to a <a href="#figTest2" id="xd32e298">figure</a>.</p>
+                  <p id="xd32e293">Here we have a reference to <a id="xd32e295">page 2</a>. We also have a reference to a <a href="#figTest2" id="xd32e298">figure</a>.</p>
                   <p id="xd32e301"><span class="sc" id="xd32e302">In this section</span> we will see a <span class="corr" id="xd32e305" title="Source: mistake">correction</span>, an <span class="corr" id="xd32e308" title="Not in source">insertion</span> and a deletion<span id="xd32e311"></span>, an abbreviation: <abbr id="xd32e313" title="United States of America">USA</abbr>, a currency amount: <span class="measure" id="xd32e316" title="USD 3.90">$3.90</span>, and a measurement: <span class="measure" id="xd32e320" title="25 cm">10 in</span>. Also included a gap: <span class="gap" title="Missing text, for the following reason: Gap demonstration.">[<i>missing text</i>]</span> and a gap that is about 10 words long: <span class="gap" title="Missing 10 words, for the following reason: Gap demonstration.">[<i>missing text</i>]</span>.</p>
                   <p id="xd32e327">Test of the choice element as used for transcription: <span class="trans" id="xd32e329" title="Transcription">Original</span>.</p>
                   <p id="xd32e334">Books created with these stylesheet include: <a id="xd32e336" lang="nl" class="pglink xd32e38" title="Link to Project Gutenberg ebook" href="https://www.gutenberg.org/ebooks/19585">De Wereld voor de schepping van den mensch</a> by Camille Flammarion, and <i id="xd32e339"><a id="xd32e340" lang="nl" class="pglink xd32e38" title="Link to Project Gutenberg ebook" href="https://www.gutenberg.org/files/37578/37578-h/37578-h.htm#ch19">The Later Life</a></i> by Louis  Couperus (note how this last links points to chapter XIX of the book).
@@ -2093,9 +2130,9 @@ color:red
                         <p id="xd32e386" class="first">The following paragraph should include some Russian.</p>
                         <p id="russian" class="first">First included paragraph (some Russian: русский язык).</p>
                         <p id="xd32e388">The following paragraph should include some Greek.</p>
-                        <div class="div3 last-child" id="xd60e1">
+                        <div class="div3 last-child" id="xd61e1">
                            <div class="divHead">
-                              <h4 id="xd60e3" class="main">Languages written in a different script.</h4>
+                              <h4 id="xd61e3" class="main">Languages written in a different script.</h4>
                            </div>
                            <div class="divBody">
                               <p id="russian" class="first">First included paragraph (some Russian: русский язык).</p>
@@ -2106,9 +2143,9 @@ color:red
                         <p id="xd32e390">The following paragraph should include some Sanskrit.</p>
                         <p id="sanskrit">Third included paragraph (some Sanskrit: संस्कृतम्).</p>
                         <p id="xd32e392">The following includes the entire file.</p>
-                        <div class="div3 last-child" id="xd60e1">
+                        <div class="div3 last-child" id="xd61e1">
                            <div class="divHead">
-                              <h4 id="xd60e3" class="main">Languages written in a different script.</h4>
+                              <h4 id="xd61e3" class="main">Languages written in a different script.</h4>
                            </div>
                            <div class="divBody">
                               <p id="russian" class="first">First included paragraph (some Russian: русский язык).</p>
@@ -3524,7 +3561,7 @@ color:red
                   </div>
                </div>
             </div>
-            <div id="alignFirst" class="div1"><span class="pageNum">[<a href="#alignFirst.toc">Contents</a>]</span><table class="alignedText">
+            <div id="alignFirst" class="div1"><span class="pageNum">[<a href="#alignFirst.toc">Contents</a>]</span><a id="alignSecond"></a><table class="alignedText">
                   <tr>
                      <td class="first" lang="en-US">
                         <h2 id="xd32e1754" class="label">Chapter IX</h2>
@@ -3588,17 +3625,13 @@ color:red
                         <p id="xd32e1794">En de laatste alinea.</p>
                      </td>
                   </tr>
-                  <tr>
-                     <td class="first"></td>
-                     <td class="second"></td>
-                  </tr>
                </table>
             </div>
-            <div id="alignThird" class="div1"><span class="pageNum">[<a href="#toc">Contents</a>]</span><table class="alignedText">
+            <div id="alignThird" class="div1"><span class="pageNum">[<a href="#toc">Contents</a>]</span><a id="test"></a><table class="alignedText">
                   <tr>
                      <td class="first" lang="en-US"></td>
                      <td class="second">
-                        <h2 id="xd3794e5" class="main">Nogmaals een test</h2>
+                        <h2 id="xd3802e5" class="main">Nogmaals een test</h2>
                      </td>
                   </tr>
                   <tr>
@@ -3607,8 +3640,8 @@ color:red
                            is pulled-in from another source.</p>
                      </td>
                      <td class="second">
-                        <p id="xd3794e7" class="first">Dit is een test van het naast elkaar afdrukken van vertaalde alinea’s</p>
-                        <p id="xd3794e10">Deze alinea staat in een externe bron.</p>
+                        <p id="xd3802e7" class="first">Dit is een test van het naast elkaar afdrukken van vertaalde alinea’s</p>
+                        <p id="xd3802e10">Deze alinea staat in een externe bron.</p>
                      </td>
                   </tr>
                   <tr>
@@ -3616,7 +3649,7 @@ color:red
                         <p id="xd32e1799">The paragraphs will be numbered using the <i id="xd32e1801">n</i> attribute.</p>
                      </td>
                      <td class="second">
-                        <p id="xd3794e12">De alinea’s worden genummerd met het <i id="xd3794e14">n</i> attribuut.</p>
+                        <p id="xd3802e12">De alinea’s worden genummerd met het <i id="xd3802e14">n</i> attribuut.</p>
                      </td>
                   </tr>
                   <tr>
@@ -3624,8 +3657,8 @@ color:red
                         <p id="xd32e1803">That way, the style sheet knows which paragraphs belong together.</p>
                      </td>
                      <td class="second">
-                        <p id="xd3794e17">Op die manier weet de stylesheet welke alinea’s bij elkaar horen.</p>
-                        <p id="xd3794e21">Als er af en toe een extra alinea tussendoor komt, maakt dat niet uit.</p>
+                        <p id="xd3802e17">Op die manier weet de stylesheet welke alinea’s bij elkaar horen.</p>
+                        <p id="xd3802e21">Als er af en toe een extra alinea tussendoor komt, maakt dat niet uit.</p>
                      </td>
                   </tr>
                   <tr>
@@ -3633,7 +3666,7 @@ color:red
                         <p id="xd32e1805">This makes it easy to verify translations.</p>
                      </td>
                      <td class="second">
-                        <p id="xd3794e23">Dit maakt het eenvoudig vertalingen te controleren.</p>
+                        <p id="xd3802e23">Dit maakt het eenvoudig vertalingen te controleren.</p>
                      </td>
                   </tr>
                   <tr>
@@ -3642,7 +3675,7 @@ color:red
                         <p id="xd32e1809">And yet another paragraph.</p>
                      </td>
                      <td class="second">
-                        <p id="xd3794e26">Een extra alinea, met de vertaling ernaast.</p>
+                        <p id="xd3802e26">Een extra alinea, met de vertaling ernaast.</p>
                      </td>
                   </tr>
                   <tr>
@@ -3650,12 +3683,8 @@ color:red
                         <p id="xd32e1811">And the final paragraph.</p>
                      </td>
                      <td class="second">
-                        <p id="xd3794e29">En de laatste alinea.</p>
+                        <p id="xd3802e29">En de laatste alinea.</p>
                      </td>
-                  </tr>
-                  <tr>
-                     <td class="first"></td>
-                     <td class="second"></td>
                   </tr>
                </table>
             </div>
@@ -4217,7 +4246,7 @@ color:red
                </tr>
                <tr>
                   <td><b>File generation date:</b></td>
-                  <td>2023-10-08 20:42:54 UTC</td>
+                  <td>2024-05-19 08:08:09 UTC</td>
                   <td></td>
                </tr>
                <tr>
@@ -4290,7 +4319,7 @@ color:red
                
                </p>
             <h3 class="main">Corrections</h3>
-            <p>The following corrections have been applied to the text:</p>
+            <p>The following 7 corrections have been applied to the text:</p>
             <table class="correctionTable">
                <tr>
                   <th>Page</th>
@@ -4419,44 +4448,6 @@ color:red
                   <th>Fragment</th>
                </tr>
                <tr>
-                  <td><a class="pageref" href="#xd32e1885">5</a></td>
-                  <td>list</td>
-                  <td lang="nl">
-                     <table lang="nl" class="tocList">
-                        <tr>
-                           <td class="tocDivNum"></td>
-                           <td class="tocDivTitle">      Introductie   </td>
-                           <td class="tocPageNum">vii</td>
-                        </tr>
-                        <tr>
-                           <td class="tocDivNum">I</td>
-                           <td class="tocDivTitle">      Eerste Hoofdstuk   </td>
-                           <td class="tocPageNum">1</td>
-                        </tr>
-                        <tr>
-                           <td class="tocDivNum">II</td>
-                           <td class="tocDivTitle">      Tweede Hoofdstuk   </td>
-                           <td class="tocPageNum">22</td>
-                        </tr>
-                        <tr>
-                           <td class="tocDivNum">III</td>
-                           <td class="tocDivTitle">      <span class="corr" title="Source: Vierde">Derde</span> Hoofdstuk   </td>
-                           <td class="tocPageNum">35</td>
-                        </tr>
-                        <tr>
-                           <td class="tocDivNum">DCCCXLIV</td>
-                           <td class="tocDivTitle">      Achthonderdenvierenveertigste Hoofdstuk   </td>
-                           <td class="tocPageNum">57</td>
-                        </tr>
-                        <tr>
-                           <td class="tocDivNum"></td>
-                           <td class="tocDivTitle">      Slot   </td>
-                           <td class="tocPageNum">77</td>
-                        </tr>
-                     </table>
-                  </td>
-               </tr>
-               <tr>
                   <td><a class="pageref" href="#xd32e336">2<i>a</i></a></td>
                   <td>xref</td>
                   <td lang="nl"><a lang="nl" class="pglink xd32e38" title="Link to Project Gutenberg ebook" href="https://www.gutenberg.org/ebooks/19585">De Wereld voor de schepping van den mensch</a></td>
@@ -4545,6 +4536,44 @@ color:red
                            </div>
                         </div>
                      </div>
+                  </td>
+               </tr>
+               <tr>
+                  <td><a class="pageref" href="#xd32e1885">5</a></td>
+                  <td>list</td>
+                  <td lang="nl">
+                     <table lang="nl" class="tocList">
+                        <tr>
+                           <td class="tocDivNum"></td>
+                           <td class="tocDivTitle">      Introductie   </td>
+                           <td class="tocPageNum">vii</td>
+                        </tr>
+                        <tr>
+                           <td class="tocDivNum">I</td>
+                           <td class="tocDivTitle">      Eerste Hoofdstuk   </td>
+                           <td class="tocPageNum">1</td>
+                        </tr>
+                        <tr>
+                           <td class="tocDivNum">II</td>
+                           <td class="tocDivTitle">      Tweede Hoofdstuk   </td>
+                           <td class="tocPageNum">22</td>
+                        </tr>
+                        <tr>
+                           <td class="tocDivNum">III</td>
+                           <td class="tocDivTitle">      <span class="corr" title="Source: Vierde">Derde</span> Hoofdstuk   </td>
+                           <td class="tocPageNum">35</td>
+                        </tr>
+                        <tr>
+                           <td class="tocDivNum">DCCCXLIV</td>
+                           <td class="tocDivTitle">      Achthonderdenvierenveertigste Hoofdstuk   </td>
+                           <td class="tocPageNum">57</td>
+                        </tr>
+                        <tr>
+                           <td class="tocDivNum"></td>
+                           <td class="tocDivTitle">      Slot   </td>
+                           <td class="tocPageNum">77</td>
+                        </tr>
+                     </table>
                   </td>
                </tr>
                <tr>
@@ -5208,7 +5237,7 @@ color:red
                <tr>
                   <td>gap</td>
                   <td>2</td>
-                  <td><b>@extent</b></td>
+                  <td><b>@quantity</b></td>
                   <td>1</td>
                   <td><span class="tagUsageValue">10</span> </td>
                </tr>
@@ -6029,7 +6058,7 @@ color:red
             </tr>
             <tr>
                <td><a class="pageref" id="xd32e295ext" href="#xd32e295">2<i>a</i></a></td>
-               <td>page 2</td>
+               <td><a id="xd32e295">page 2</a></td>
                <td><span class="missingTarget">pb002</span></td>
             </tr>
          </table>
@@ -6350,19 +6379,19 @@ color:red
             <h3 id="pglicence.s3">Section 3. Information about the Project Gutenberg Literary Archive Foundation</h3>
             
             
-            <p class="smallprint">The Project Gutenberg Literary Archive Foundation is a non profit 501(c)(3) educational
-               corporation organized under the laws of the state of Mississippi and granted tax exempt
+            <p class="smallprint">The Project Gutenberg Literary Archive Foundation is a non-profit 501(c)(3) educational
+               corporation organized under the laws of the state of Mississippi and granted tax-exempt
                status by the Internal Revenue Service. The Foundation's EIN or federal tax identification
                number is 64-6221541. Contributions to the Project Gutenberg Literary Archive Foundation
-               are tax deductible to the full extent permitted by U.S. federal laws and your state's
+               are tax-deductible to the full extent permitted by U.S. federal laws and your state's
                laws.</p>
             
             
             <p class="smallprint">The Foundation's principal office is in Fairbanks, Alaska, with the mailing address:
                PO Box 750175, Fairbanks, AK 99775, but its volunteers and employees are scattered
                throughout numerous locations. Its business office is located at 809 North 1500 West,
-               Salt Lake City, UT 84116, (801) 596-1887. Email contact links and up to date contact
-               information can be found at the Foundation's web site and official page at <a href="https://www.gutenberg.org/contact">www.gutenberg.org/contact</a>.</p>
+               Salt Lake City, UT 84116, (801) 596-1887. Email contact links and up-to-date contact
+               information can be found at the Foundation's website and official page at <a href="https://www.gutenberg.org/contact">www.gutenberg.org/contact</a>.</p>
             
             
             <p class="smallprint">For additional contact information:</p>
@@ -6380,11 +6409,11 @@ color:red
             <h3 id="pglicence.s4">Section 4. Information about Donations to the Project Gutenberg Literary Archive Foundation</h3>
             
             
-            <p class="smallprint">Project Gutenberg™ depends upon and cannot survive without wide spread public support
+            <p class="smallprint">Project Gutenberg™ depends upon and cannot survive without widespread public support
                and donations to carry out its mission of increasing the number of public domain and
-               licensed works that can be freely distributed in machine readable form accessible
+               licensed works that can be freely distributed in machine-readable form accessible
                by the widest array of equipment including outdated equipment. Many small donations
-               ($1 to $5,000) are particularly important to maintaining tax exempt status with the
+               ($1 to $5,000) are particularly important to maintaining tax-exempt status with the
                IRS.</p>
             
             
@@ -6427,10 +6456,10 @@ color:red
                paper edition.</p>
             
             
-            <p class="smallprint">Most people start at our Web site which has the main PG search facility: <a href="https://www.gutenberg.org/">www.gutenberg.org</a></p>
+            <p class="smallprint">Most people start at our Website which has the main PG search facility: <a href="https://www.gutenberg.org/">www.gutenberg.org</a></p>
             
             
-            <p class="smallprint">This Web site includes information about Project Gutenberg™, including how to make
+            <p class="smallprint">This Website includes information about Project Gutenberg™, including how to make
                donations to the Project Gutenberg Literary Archive Foundation, how to help produce
                our new eBooks, and how to subscribe to our email newsletter to hear about new eBooks.</p>
             </div>

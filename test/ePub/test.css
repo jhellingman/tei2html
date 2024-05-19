@@ -33,7 +33,7 @@ a {
 
 abbr[title] {
  border-bottom: none;
- text-decoration: underline dotted;
+ text-decoration: underline;
 }
 
 b, strong {
@@ -116,7 +116,7 @@ div.back {
 }
 
  
-.div0:last-child, .div1:last-child, .div2:last-child, .div3:last-child, 
+.div0:last-child, .div1:last-child, .div2:last-child, .div3:last-child,
 .div4:last-child, .div5:last-child, .div6:last-child, .div7:last-child {
  margin-bottom: 0;
 }
@@ -128,7 +128,7 @@ blockquote div.front, blockquote div.body, blockquote div.back {
 }
 
  
-.divBody .div1:first-child, .divBody .div2:first-child, .divBody .div3:first-child, .divBody .div4:first-child, 
+.divBody .div1:first-child, .divBody .div2:first-child, .divBody .div3:first-child, .divBody .div4:first-child,
 .divBody .div5:first-child, .divBody .div6:first-child, .divBody .div7:first-child {
  margin-top: 0;
 }
@@ -228,7 +228,7 @@ span.abbr, abbr {
 
  
 
-span.parnum {
+span.parNum {
  font-weight: bold;
 }
 
@@ -624,6 +624,11 @@ span.musictime span.bottom {
  display: block;
 }
 
+audio {
+ height: 20px;
+ margin-left: 0.5em;
+ margin-right: 0.5em;
+}
 
  
 ul {
@@ -1189,7 +1194,7 @@ table.alignedText, table.alignedVerse {
  border-collapse: collapse;
 }
 
-table.alignedText td {
+table.alignedText td.first, table.alignedText td.second {
  vertical-align: top;
  width: 50%;
 }
@@ -1217,6 +1222,32 @@ table.alignedVerse td.lineNumbers {
  width: 10%;
 }
 
+td.alignedDiv1 {
+ padding-top: 5.6em;
+}
+
+td.alignedDiv2 {
+ padding-top: 4.8em;
+}
+
+td.alignedDiv3 {
+ padding-top: 3.6em;
+}
+
+td.alignedDiv4 {
+ padding-top: 2.4em;
+}
+
+td.alignedDiv5, td.alignedDiv6, td.alignedDiv7 {
+ padding-top: 1.44em;
+}
+
+
+ 
+table.alignedText p:not(.first) {
+ margin-top: 0;
+}
+
   
 
 .epub-media-overlay-active {
@@ -1225,6 +1256,12 @@ table.alignedVerse td.lineNumbers {
 
 span.measure {
  border-bottom: none;
+}
+ 
+
+abbr[title] {
+ border-bottom: none;
+ text-decoration: underline dotted;
 }
 
 body {
@@ -1413,22 +1450,6 @@ text-align:right;
 
 .xd36e458 {
 text-align:center;
-}
-
-.xd36e461 {
-background: url(images/initial-A.png) no-repeat top left;
-padding-top: 45px;
-}
-
-.xd36e461init {
-float: left;
-width: 90px;
-height: 95px;
-background: url(images/initial-A.png) no-repeat;
-background-position: 0 -45px;
-text-align: right;
-color: white;
-font-size: 1px;
 }
 
 .xd36e469 {
