@@ -188,17 +188,7 @@
 
     <xsl:template name="generate-html-body">
         <body>
-            <xsl:choose>
-                <xsl:when test="f:is-set('pg.compliant')">
-                    <!-- extra div to work around bug in ebookmaker -->
-                    <div class="pgWrapper">
-                        <xsl:call-template name="generate-html-inner-body"/>
-                    </div>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:call-template name="generate-html-inner-body"/>
-                </xsl:otherwise>
-            </xsl:choose>
+            <xsl:call-template name="generate-html-inner-body"/>
         </body>
     </xsl:template>
 

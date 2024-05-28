@@ -27,7 +27,7 @@
         column, and can be overridden by the <code>@rend</code> attribute on the cell itself.
         Both <code>@rend</code> attributes are converted to classes, where care needs to be
         taken that the column related classes are always defined before
-        the cell classes, as to make this work out correctly with the
+        the cell classes, to make this work out correctly with the
         CSS precedence rules. Note that all identical <code>@rend</code> attributes are
         mapped to the same class, and that those might occur in preceding
         tables, we thus have to generate all column-related classes before
@@ -69,10 +69,6 @@
                     <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                     <xsl:apply-templates mode="table-caption" select="head"/>
                     <xsl:call-template name="inner-table"/>
-                    <xsl:if test="f:is-set('pg.compliant')">
-                        <!-- Work around a bug in PG ebookmaker, to prevent breaking a table. -->
-                        <div class="pgKludge"/>
-                    </xsl:if>
                 </div>
                 <xsl:call-template name="reopenpar"/>
             </xsl:otherwise>
@@ -105,7 +101,7 @@
         <xsl:if test="not(f:is-nested-table(.)) and .//note[f:is-table-note(.)][not(@sameAs)]">
             <div class="footnotes">
                 <xsl:apply-templates select=".//note[f:is-table-note(.)][not(@sameAs)]" mode="footnotes">
-                    <!-- Retain the order of markers, irrespective of the order of encoding the table -->
+                    <!-- Retain the order of markers, irrespective of the order of encoding in the table. -->
                     <xsl:sort select="@n"/>
                 </xsl:apply-templates>
             </div>
@@ -139,7 +135,7 @@
             </xsl:if>
 
             <xsl:choose>
-                <!-- If a table starts with label or unit roles, use the thead and tbody elements in HTML -->
+                <!-- If a table starts with label or unit roles, use the thead and tbody elements in HTML. -->
                 <xsl:when test="row[1][f:is-header-row(.)]">
                     <thead>
                         <xsl:apply-templates select="*[not(preceding-sibling::row[not(f:is-header-row(.))] or self::row[not(f:is-header-row(.))])]"/>
@@ -255,7 +251,7 @@
         <xsl:param name="cell" as="element(cell)"/>
         <xsl:variable name="row" as="element(row)" select="$cell/parent::row"/>
         <xsl:if test="not($cell/following-sibling::cell) and not($row/following-sibling::row)">
-            <!-- We are a table in a footnote, the table is the last element of the footnote, and this is the last cell of the table -->
+            <!-- We are a table in a footnote, the table is the last element of the footnote, and this is the last cell of the table. -->
             <xsl:if test="f:inside-footnote($cell)">
                 <xsl:variable name="note" select="$cell/ancestor::note[f:is-footnote(.)][1]"/>
                 <xsl:if test="f:last-child-is-block-element($note)">
@@ -370,10 +366,10 @@
             <xsl:copy-of select="f:log-warning('Malformed table inside element {1} with id {2}: cell not in row.', (name(ancestor::*[@id][1]), (ancestor::*[@id][1])/@id))"/>
         </xsl:if>
 
-        <!-- A cell is considered part of the table head if it has a @role of label or unit -->
+        <!-- A cell is considered part of the table head if it has a @role of label or unit. -->
         <xsl:variable name="prefix" select="if (f:is-header-row(..)) then 'cellHead' else 'cell'"/>
 
-        <!-- Some stuff to determine this cell is at the bottom of a column in an N-up table -->
+        <!-- Some stuff to determine this cell is at the bottom of a column in an N-up table. -->
         <xsl:variable name="parentTable" select="ancestor::table[1]"/>
         <xsl:variable name="column-count" as="xs:integer" select="xs:integer(f:if-null(f:rend-value($parentTable/@rend, 'columns'), 1))"/>
         <xsl:variable name="item-order" as="xs:string" select="f:rend-value($parentTable/@rend, 'item-order')"/>
@@ -391,7 +387,7 @@
 
         <xsl:variable name="cols" select="if (@cols) then @cols else 1"/>
         <xsl:choose>
-            <!-- Do we have the @col attribute on the table, then we can use those attributes -->
+            <!-- If we have the @col attribute on the table we can use that attributes. -->
             <xsl:when test="@col">
                 <xsl:if test="@col = 1"><xsl:value-of select="$prefix"/><xsl:text>Left </xsl:text></xsl:if>
                 <xsl:if test="@col + $cols - 1 = ../../@cols"><xsl:value-of select="$prefix"/><xsl:text>Right </xsl:text></xsl:if>
@@ -420,12 +416,12 @@
     </xsl:template>
 
 
-    <!-- Find the column number of the current cell -->
+    <!-- Find the column-number of the current cell -->
     <xsl:template name="find-column-number">
         <xsl:context-item as="element(cell)" use="required"/>
 
-        <!-- The column corresponding to this cell, taking into account preceding @cols attributes -->
-        <!-- If we have the @col attribute, we will use this value -->
+        <!-- The column corresponding to this cell, taking into account preceding @cols attributes. -->
+        <!-- If we have the @col attribute, we will use this value. -->
         <!-- The alternative simple calculation will fail in cases where @rows attributes in preceding rows cause cells to be skipped. -->
         <xsl:value-of select="if (@col) then @col else sum(preceding-sibling::cell[@cols]/@cols) + count(preceding-sibling::cell[not(@cols)]) + 1"/>
     </xsl:template>
@@ -528,7 +524,7 @@
                                     <xsl:if test="$i &gt; 1 and position() = 1">
                                         <td class="cellDoubleUp">&nbsp;</td>
                                     </xsl:if>
-                                    <!-- Prevent duplication of ids by stripping them for all but the first repeat -->
+                                    <!-- Prevent duplication of ids by stripping them from all but the first repeated instance. -->
                                     <xsl:variable name="cellHtml">
                                         <xsl:apply-templates select="."/>
                                     </xsl:variable>

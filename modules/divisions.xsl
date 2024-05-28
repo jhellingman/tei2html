@@ -552,7 +552,7 @@
                             then f:generate-href($tocEntry)
                             else if ($divGen and f:included-in-toc(., $maxLevel))
                                     then f:determine-filename($divGen) || '#' || $id || '.toc'
-                                    else f:generate-href(//*[@id='toc'][1])"/>
+                                    else f:generate-href((//*[@id='toc'])[1])"/>
                         <xsl:value-of select="f:message('msgToc')"/>
                      </a>
                      <xsl:text>]</xsl:text>
