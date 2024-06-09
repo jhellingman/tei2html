@@ -66,9 +66,14 @@
             <xsl:apply-templates select="$table-without-rowspans" mode="normalize-table-final"/>
         </xsl:variable>
 
+        <!-- Step 3': apply language attributes to cells in column -->
+        <xsl:variable name="language-tagged-table">
+            <xsl:apply-templates select="$clean-table" mode="language-tag-table"/>
+        </xsl:variable>
+
         <!-- Step 4: split columns for decimal alignment -->
         <xsl:variable name="split-table">
-            <xsl:apply-templates select="$clean-table" mode="split-decimal-columns"/>
+            <xsl:apply-templates select="$language-tagged-table" mode="split-decimal-columns"/>
         </xsl:variable>
 
         <!-- Step 5: recurse for nested tables (but make sure not to start with the top-level table) -->
@@ -581,5 +586,35 @@
             then $number-pattern-comma
             else $number-pattern-period"/>
     </xsl:function>
+
+
+    <!-- Language tagging: bring language tag from the column definition to each individual cell -->
+
+    <xsl:template match="table" mode="language-tag-table">
+        <xsl:copy>
+            <xsl:copy-of select="@*"/>
+            <xsl:copy-of select="*[not(self::row)]"/>
+            <xsl:apply-templates select="row" mode="language-tag-table"/>
+        </xsl:copy>
+    </xsl:template>
+
+    <xsl:template match="row" mode="language-tag-table">
+        <xsl:copy>
+            <xsl:copy-of select="@*"/>
+            <xsl:apply-templates select="cell" mode="language-tag-table"/>
+        </xsl:copy>
+    </xsl:template>
+
+    <xsl:template match="cell" mode="language-tag-table">
+        <xsl:variable name="columnNumber" select="@col"/>
+        <xsl:copy>
+            <xsl:copy-of select="@*"/>
+            <xsl:if test="not(@lang) and ../../column[position() = $columnNumber]/@lang">
+                <xsl:attribute name="lang" select="../../column[position() = $columnNumber]/@lang"/>
+            </xsl:if>
+            <xsl:copy-of select="node()"/>
+        </xsl:copy>
+    </xsl:template>
+
 
 </xsl:stylesheet>

@@ -272,11 +272,15 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-"&#x1EA1;" p "&adotb;"
-"&#x1EBD;" p "&etilde;"
-
-"&#xA793;" p "&cbar;"
-
-
+"&#x1E0D;"  p "&ddotb;"
+"&#x1E25;"  p "&hdotb;"
+"&#x1E45;"  p "&ndota;"
+"&#x1E47;"  p "&ndotb;"
+"&#x1E5B;"  p "&rdotb;"
+"&#x1E6C;"  p "&Tdotb;"
+"&#x1E6D;"  p "&tdotb;"
+"&#x1EA1;"  p "&adotb;"
+"&#x1EBD;"  p "&etilde;"
+"&#xA793;"  p "&cbar;"
 
 @end

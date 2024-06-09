@@ -453,4 +453,65 @@
     </x:scenario>
 
 
+   <x:scenario label="When normalizing a table with language tags on the columns">
+      <x:context mode="normalize-table">
+        <table id="simple_table"
+               rend="summary(A straightforward table to demonstrate tables in TEI) class(verticalBorderInside)">
+            <column/>
+            <column lang="de"/>
+            <column lang="en"/>
+            <head>Counting in English and German</head>
+            <row>
+                <cell>1</cell>
+                <cell>eins</cell>
+                <cell>one</cell>
+            </row>
+            <row>
+                <cell>2</cell>
+                <cell>zwei</cell>
+                <cell>two</cell>
+            </row>
+            <row>
+                <cell>3</cell>
+                <cell>drei</cell>
+                <cell lang="en"><hi>three</hi></cell>
+            </row>
+            <row>
+                <cell cols="3">und so weiter...</cell>
+            </row>
+        </table>
+      </x:context>
+      <x:expect label="will return in a table with additional row and cell attributes, indicating the position of the cells">
+        <table id="simple_table"
+               rend="summary(A straightforward table to demonstrate tables in TEI) class(verticalBorderInside)"
+               rows="4"
+               headrows="0"
+               cols="3">
+           <column/>
+           <column lang="de"/>
+           <column lang="en"/>
+           <head>Counting in English and German</head>
+           <row>
+              <cell row="1" col="1">1</cell>
+              <cell row="1" col="2" lang="de">eins</cell>
+              <cell row="1" col="3" lang="en">one</cell>
+           </row>
+           <row>
+              <cell row="2" col="1">2</cell>
+              <cell row="2" col="2" lang="de">zwei</cell>
+              <cell row="2" col="3" lang="en">two</cell>
+           </row>
+           <row>
+              <cell row="3" col="1">3</cell>
+              <cell row="3" col="2" lang="de">drei</cell>
+              <cell row="3" col="3" lang="en"><hi>three</hi></cell>
+           </row>
+           <row>
+              <cell row="4" col="1" cols="3">und so weiter...</cell>
+           </row>
+        </table>
+      </x:expect>
+   </x:scenario>
+
+
 </x:description>
