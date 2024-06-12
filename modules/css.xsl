@@ -428,29 +428,29 @@
                 <xsl:when test="normalize-space($value)=''"/>
 
                 <!-- Non-CSS properties handled otherwise -->
-                <xsl:when test="$property='align-with'"/>           <!-- indicates to align one division with another in a table -->
-                <xsl:when test="$property='align-with-document'"/>  <!-- indicates to align one division with another in a table -->
-                <xsl:when test="$property='class'"/>                <!-- pass-through CSS class -->
+                <xsl:when test="$property='align-with'"/>           <!-- align one division with another in a table -->
+                <xsl:when test="$property='align-with-document'"/>  <!-- align one division (in an external document) with another in a table -->
+                <xsl:when test="$property='class'"/>                <!-- pass-through CSS class. -->
                 <xsl:when test="$property='columns'"/>              <!-- number of columns to use on list, table, etc. -->
-                <xsl:when test="$property='cover-image'"/>          <!-- cover-image for ePub versions -->
-                <xsl:when test="$property='decimal-separator'"/>    <!-- for aligning columns of numbers -->
-                <xsl:when test="$property='display' and $value='castGroupTable'"/>  <!-- special rendering of castGroup -->
-                <xsl:when test="$property='display' and $value='image-only'"/>  <!-- show image instead of head -->
+                <xsl:when test="$property='cover-image'"/>          <!-- cover-image for ePub versions. -->
+                <xsl:when test="$property='decimal-separator'"/>    <!-- for aligning columns of numbers. -->
+                <xsl:when test="$property='display' and $value='castGroupTable'"/>  <!-- special rendering of castGroup. -->
+                <xsl:when test="$property='display' and $value='image-only'"/>  <!-- show image instead of head. -->
                 <xsl:when test="$property='ditto-mark'"/>           <!-- Ditto mark to be used in tables, default: ,, -->
-                <xsl:when test="$property='ditto-repeat'"/>         <!-- How often ditto mark will be repeated in tables: word (default) or segment -->
+                <xsl:when test="$property='ditto-repeat'"/>         <!-- How often ditto mark will be repeated in tables: word (default) or segment. -->
                 <xsl:when test="$property='image'"/>                <!-- in-line image -->
                 <xsl:when test="$property='image-alt'"/>            <!-- alt text for image -->
-                <xsl:when test="$property='item-order'"/>           <!-- way to split a list or table into multiple columns: row-mayor (default) or column-mayor -->
+                <xsl:when test="$property='item-order'"/>           <!-- way to split a list or table into multiple columns: row-mayor (default) or column-mayor. -->
                 <xsl:when test="$property='label'"/>                <!-- label (for head, etc.) -->
-                <xsl:when test="$property='link'"/>                 <!-- external link (for example on image) -->
-                <xsl:when test="$property='media-overlay'"/>        <!-- media overlay for ePub versions -->
-                <xsl:when test="$property='position'"/>             <!-- position in text -->
-                <xsl:when test="$property='stylesheet'"/>           <!-- stylesheet to load (only on top-level text element) -->
+                <xsl:when test="$property='link'"/>                 <!-- external link (for example on image). -->
+                <xsl:when test="$property='media-overlay'"/>        <!-- media overlay for ePub versions. -->
+                <xsl:when test="$property='position'"/>             <!-- position in text. -->
+                <xsl:when test="$property='stylesheet'"/>           <!-- stylesheet to load (only on top-level text element). -->
                 <xsl:when test="$property='summary'"/>              <!-- summary text for table, etc. -->
                 <xsl:when test="$property='title'"/>                <!-- title text for links, etc. -->
-                <xsl:when test="$property='toc'"/>                  <!-- indicates how to include a head in the toc -->
-                <xsl:when test="$property='toc-head'"/>             <!-- head to be used in table of contents -->
-                <xsl:when test="$property='toc-max-level'"/>        <!-- the maximum level (depth) of a generated table of contents -->
+                <xsl:when test="$property='toc'"/>                  <!-- indicates how to include a head in the toc. -->
+                <xsl:when test="$property='toc-head'"/>             <!-- head to be used in table of contents. -->
+                <xsl:when test="$property='toc-max-level'"/>        <!-- the maximum level (depth) of a generated table of contents. -->
 
                 <!-- Non-CSS properties used to render verse -->
                 <xsl:when test="$property='hemistich'"/>            <!-- render text given in value invisible (i.e., white) to indent with width of previous line. -->
@@ -473,7 +473,7 @@
                 <xsl:when test="$element = 'figureGroup' and $property = 'direction'"/>
 
                 <!-- Note related special handling. -->
-                <xsl:when test="$element = ('note', 'tmp:span') and $property = ('note-marker', 'return-marker')"/>   <!-- the marker to be used for a foot-note or apparatus-note -->
+                <xsl:when test="$element = ('note', 'tmp:span') and $property = ('note-marker', 'return-marker')"/>   <!-- the marker to be used for a foot-note or apparatus-note. -->
 
                 <!-- Table related special handling. With the rule
                      margin: 0px auto, the table is centered, while
@@ -497,15 +497,15 @@
                 <xsl:when test="$property='valign'">vertical-align:<xsl:value-of select="$value"/>; </xsl:when>
                 <xsl:when test="$property='indent'">text-indent:<xsl:value-of select="f:indent-value($value)"/>; </xsl:when>
 
-                <!-- CSS properties not acceptable to ePub, so handled otherwise -->
+                <!-- CSS properties not acceptable to ePub, so handled otherwise. -->
                 <xsl:when test="$property='direction'"/>
 
-                <!-- Filter out CSS3 stuff (for Project Gutenberg submissions) -->
+                <!-- Filter out CSS3 stuff (for Project Gutenberg submissions). -->
                 <xsl:when test="f:get-setting('css.support') = '2' and $property = ('writing-mode')">
                     <xsl:copy-of select="f:log-info('Ignoring CCS3 property ''{1}''', $property)"/>
                 </xsl:when>
 
-                <!-- Assume the rest can straightforwardly be translated to CSS -->
+                <!-- Assume the rest can straightforwardly be translated to CSS. -->
                 <xsl:otherwise>
                     <xsl:if test="not($property = $css2properties)">
                         <xsl:copy-of select="f:log-warning('''{1}'' is not a CSS2.1 property', $property)"/>

@@ -467,7 +467,7 @@
             <p>There are two ways to indicate such images. 1. Use the <code>@rend</code> attribute on the
             head with a rendition element <code>image(image.jpg)</code> and 2. Place a <code>@rend</code>
             attribute on a figure in the division, with a rendition element <code>position(abovehead)</code>.
-            The first method is appropriate for decorative images without accompanying text, the second can
+            The first method is appropriate for decorative images without text, the second can
             be used if a title and legend needs to appear with the image.</p>
         </xd:detail>
     </xd:doc>

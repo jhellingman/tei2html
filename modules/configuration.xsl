@@ -53,16 +53,16 @@
             <debug>false</debug>                                            <!-- Use debug mode (uses CSS to color various elements in output HTML). -->
             <logLevel>INFO WARNING ERROR DEBUG</logLevel>                   <!-- Log levels: DEBUG, INFO, WARNING, ERROR -->
 
-            <debug.facsimile>false</debug.facsimile>
+            <debug.facsimile>false</debug.facsimile>                        <!-- Insert links to the PGDP proofing images in the right margin -->
 
-            <language>en-US</language>                                      <!-- Main language of text (if not specified explicitly) -->
-            <defaultLanguage>en-US</defaultLanguage>                        <!-- Default language for localization -->
+            <language>en-US</language>                                      <!-- Main language of text (if not specified explicitly with the @lang attribute on the text element). -->
+            <defaultLanguage>en-US</defaultLanguage>                        <!-- Default language for localization. -->
 
             <drama.inline.speaker>false</drama.inline.speaker>              <!-- Inline the speaker (default the speaker is a separate paragraph) -->
 
             <lb.preserve>true</lb.preserve>                                 <!-- Preserve linebreaks indicate with the lb element. -->
             <lb.hyphen.remove>false</lb.hyphen.remove>                      <!-- Remove hyphens before line-breaks. -->
-            <lb.removable.hyphen>&not;</lb.removable.hyphen>                <!-- Character used for removable hyphen before line-break (DTA convention). -->
+            <lb.removable.hyphen>&not;</lb.removable.hyphen>                <!-- Character used for removable hyphen before a line-break (DTA convention). -->
             <lb.hyphen>-</lb.hyphen>                                        <!-- Character used for non-removable hyphen before line-break. -->
 
             <toc.numberEntries>true</toc.numberEntries>                     <!-- Provide numbers with generated TOC entries. -->
@@ -70,21 +70,21 @@
 
             <pg.includeHeaders>false</pg.includeHeaders>                    <!-- Include Project Gutenberg headers and footers. -->
             <pg.includeComments>false</pg.includeComments>                  <!-- Include references to Project Gutenberg in comments. -->
-            <pg.compliant>false</pg.compliant>                              <!-- Only use HTML and CSS constructs that are compliant with to Project Gutenberg guidelines -->
+            <pg.compliant>false</pg.compliant>                              <!-- Only use HTML and CSS constructs that are compliant with to Project Gutenberg guidelines. -->
 
             <showParagraphNumbers>false</showParagraphNumbers>              <!-- Output paragraph numbers, using the value of the @n attribute. -->
             <includeAlignedDivisions>true</includeAlignedDivisions>         <!-- Include divisions indicated by "align-with-document()" -->
             <useRegularizedUnits>false</useRegularizedUnits>                <!-- Use the regularized units specified in the measure-tag. (false: both are shown, the original in the text, the regularized units in a
                                                                                  pop-up; true: regularized in text, original in pop-up) -->
-            <xref.show>always</xref.show>                                   <!-- Generate external links, possible values: 
+            <xref.show>always</xref.show>                                   <!-- Method used to generate external links, possible values:
                                                                                  - always:   external links are active at the location in the text.
                                                                                  - never:    external links are not shown (only the anchor text is).
-                                                                                 - colophon: external links are active in the colophon (including in the external links table, if generated).
+                                                                                 - colophon: external links are active in the colophon (including in the external-links table, if generated).
                                                                               -->
             <xref.table>false</xref.table>                                  <!-- Collect all external links in a separate table in the colophon. -->
             <xref.exceptions>https://www.pgdp.net/; https://www.gutenberg.org/; pg:; music/; images/</xref.exceptions>  <!-- Semicolon-separated list of external URLs than can be always be used. -->
 
-            <punctuation.hanging>false</punctuation.hanging>                <!-- Use hanging punctuation (by generating the relevant CSS classes). -->
+            <punctuation.hanging>false</punctuation.hanging>                <!-- Use hanging punctuation (by generating the relevant CSS classes. This requires tweaking, depending on the font used). -->
 
             <ditto.enable>true</ditto.enable>                               <!-- Use ditto marks in ditto (deprecated) or seg[@copyOf] elements. -->
             <ditto.mark>,,</ditto.mark>                                     <!-- The symbol to use as a ditto mark. May also be overridden by rend attribute ditto-mark() -->
@@ -100,12 +100,12 @@
             <facsimile.target></facsimile.target>                           <!-- Value of the target attribute of generated links in HTML (leave empty for default; _blank, _top, _parent, _self). -->
 
             <notes.foot.returnArrow>true</notes.foot.returnArrow>           <!-- Place a small up-arrow at the end of a footnote to return to the source location in the text. -->
-            <notes.foot.counter>chapter</notes.foot.counter>                <!-- At what level to count footnotes, possible values: chapter or text -->
+            <notes.foot.counter>chapter</notes.foot.counter>                <!-- At what level to count footnotes, possible values: chapter or text. -->
             <notes.apparatus.noteMarker>&deg;</notes.apparatus.noteMarker>  <!-- Note marker used with text-critical notes (coded with place=apparatus) used at location in text. -->
             <notes.apparatus.returnMarker>&deg;</notes.apparatus.returnMarker> <!-- Note marker used with text-critical notes (coded with place=apparatus) used before note, to return to text. -->
-            <notes.apparatus.format>block</notes.apparatus.format>          <!-- How to format text-critical notes: as separate paragraphs or as a single block. Possible values: paragraphs | block -->
+            <notes.apparatus.format>block</notes.apparatus.format>          <!-- How to format text-critical notes: as separate paragraphs or as a single block. Possible values: paragraphs | block. -->
 
-            <images.path></images.path>                                     <!-- Prefix of path to images, relative to HTML file -->
+            <images.path></images.path>                                     <!-- Prefix of path to images, relative to the HTML file -->
             <images.include>true</images.include>                           <!-- Include images in the generated output. -->
             <images.requireInfo>true</images.requireInfo>                   <!-- Require image-info to be present for an image (otherwise they won't be included in output) [TODO]. -->
             <images.scale>1.0</images.scale>                                <!-- Image scale factor: 1.0 is normal size; 0.5 is half size; 2.0 is double size. -->
@@ -126,7 +126,7 @@
 
             <table.classifyContent>false</table.classifyContent>            <!-- Attempt to determine the content-type of cells in a table; add relevant classes in the HTML output. -->
 
-            <q.insertQuotes>false</q.insertQuotes>                          <!-- Insert quotation marks around <q> markup based on first two pairs in setting <text.quotes> -->
+            <q.insertQuotes>false</q.insertQuotes>                          <!-- Insert quotation marks around <q> markup based on first two pairs in setting <text.quotes>. -->
             <q.asDiv>true</q.asDiv>                                         <!-- Render the <q> element with a div if true, as a span otherwise. -->
 
             <beta.convert>false</beta.convert>                              <!-- Interpret beta-codes if the language is classical Greek (i.e., @xml:lang="grc"). -->
@@ -137,7 +137,7 @@
             <css.useCommonPrint>true</css.useCommonPrint>                   <!-- Use the build-in stylesheets (for print media) -->
             <css.useCommonAural>false</css.useCommonAural>                  <!-- Use the build-in stylesheets (for aural support) -->
             <css.inline>true</css.inline>                                   <!-- use an inline (embedded in HTML) stylesheet; ignored for ePub. -->
-            <css.support>2</css.support>                                    <!-- Level of support for CSS: used to filter out newer features. Possible values: 2 | 3 -->
+            <css.support>2</css.support>                                    <!-- Level of support for CSS: used to filter out newer features. Possible values: 2 | 3. -->
             <css.frakturFont>Walbaum-Fraktur</css.frakturFont>              <!-- The font to use when font(fraktur) is specified. -->
             <css.blackletterFont>UnifrakturMaguntia</css.blackletterFont>   <!-- The font to use when font(blackletter) is specified. -->
 
@@ -158,8 +158,8 @@
             <math.label.before>(</math.label.before>
             <math.label.after>)</math.label.after>
             <math.keepTexInComment>true</math.keepTexInComment>
-            <math.filePath>formulas</math.filePath>                         <!-- Path where tei2html will write tex files and read SVG files -->
-            <math.htmlPath>formulas</math.htmlPath>                         <!-- Path the generated HTML (and ePub) will use as location for included SVG or PNG files -->
+            <math.filePath>formulas</math.filePath>                         <!-- Path where tei2html will write tex files and read SVG files. -->
+            <math.htmlPath>formulas</math.htmlPath>                         <!-- Path the generated HTML (and ePub) will use as location for included SVG or PNG files. -->
 
             <math.mathJax.format>SVG+IMG</math.mathJax.format>                      <!-- Options: MathJax; MML; SVG; SVG+IMG -->
             <math.mathJax.configuration>TeX-MML-AM_SVG</math.mathJax.configuration> <!-- Options for MathJax format, e.g.: TeX-MML-AM_SVG TeX-MML-AM_CHTML, see https://docs.mathjax.org/en/latest/config-files.html#common-configurations -->

@@ -420,8 +420,7 @@ width:{$width};
     <xd:doc>
         <xd:short>Handle a figure element.</xd:short>
         <xd:detail>
-            <p>This template handles the figure element. It takes care of positioning figure annotations (title, legend, etc.)
-            and in-line loading of the image in HTML.</p>
+            <p>This template handles the figure element. It takes care of positioning figure annotations (title, legend, etc.) and in-line loading of the image in HTML.</p>
         </xd:detail>
     </xd:doc>
 

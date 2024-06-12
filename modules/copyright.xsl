@@ -18,7 +18,7 @@
     <xd:doc type="stylesheet">
         <xd:short>Functions to determine copyright status</xd:short>
         <xd:detail>This stylesheet contains several functions to
-            determine copyright status of a TEI file, based on data in
+            determine the copyright status of a TEI file, based on data in
             the header. This is a rough approximation, intended to
             quickly filter out works that are potentially under
             copyright in a certain jurisdiction, and should not be
