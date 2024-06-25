@@ -958,6 +958,11 @@ BEGIN {
     $ent{'rclick'}       = chr(0x01C3);  #  LATIN LETTER RETROFLEX CLICK        (looks like !)
 
 
+    # Musical symbols
+
+    $ent{'mslrep'}       = chr(0x1D106);  #  MUSICAL SYMBOL LEFT REPEAT SIGN         (looks like |: )
+    $ent{'msrrep'}       = chr(0x1D107);  #  MUSICAL SYMBOL RIGHT REPEAT SIGN        (looks like :| )
+
     ###############################################################################
     ## GREEK ENTITIES REMAPPED:
 
@@ -1731,6 +1736,7 @@ BEGIN {
     $ent{'Asc'}         = chr(0x1D00); # small caps A
     $ent{'Dsc'}         = chr(0x1D05); # small caps D
     $ent{'Esc'}         = chr(0x1D07); # small caps E
+    $ent{'Lsc'}         = chr(0x029F); # small caps L
     $ent{'Ysc'}         = chr(0x028F); # small caps Y
 
     $ent{'Escbreve'}    = chr(0x1D07) . chr(0x0306); # small caps E with breve

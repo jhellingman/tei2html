@@ -251,7 +251,10 @@ BEGIN {
     $langNameHash{"grc"}            = "Greek (classical)";
     $langNameHash{"grc-Latn"}       = "Greek (classical, Latin transcription)";
     $langNameHash{"grt"}            = "Garo";
+    $langNameHash{"hai"}            = "Haida";
     $langNameHash{"haw"}            = "Hawaiian";
+    $langNameHash{"hax"}            = "Southern Haida";
+    $langNameHash{"hdn"}            = "Northern Haida";
     $langNameHash{"hil"}            = "Hiligaynon";
     $langNameHash{"ibl"}            = "Ibaloi";
     $langNameHash{"ifu"}            = "Ifugao";
