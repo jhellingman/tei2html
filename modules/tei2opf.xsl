@@ -681,9 +681,9 @@
 
 
     <xsl:function name="f:is-local-audio-file" as="xs:boolean">
-        <xsl:param name="url" as="xs:string"/>
+        <xsl:param name="url" as="xs:string?"/>
 
-        <xsl:sequence select="matches($url, '^[^:]+\.(mp3|mid|midi|mxl)$')"/>
+        <xsl:sequence select="$url and matches($url, '^[^:]+\.(mp3|mid|midi|mxl)$')"/>
     </xsl:function>
 
 

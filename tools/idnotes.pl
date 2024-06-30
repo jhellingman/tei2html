@@ -44,7 +44,9 @@ sub idNotes($$) {
         my $notePlace = getAttrVal('place', $noteAttrs);
         my $noteId = getAttrVal('id', $noteAttrs);
         my $noteLang = getAttrVal('lang', $noteAttrs);
+        my $noteSameAs = getAttrVal('sameAs', $noteAttrs);
         my $noteLangAttr = $noteLang ne '' ? " lang=\"$noteLang\"" : '';
+        my $noteSameAsAttr = $noteSameAs ne '' ? " sameAs=$noteSameAs" : '';
         my $newNoteTag = $noteTag;
         if ($pageNumber =~ m/[clxvi]+/) {
             $spacer = ".";
@@ -52,11 +54,11 @@ sub idNotes($$) {
             $spacer = "";
         }
         if ($noteNumber =~ m/([0-9]+|[A-Z])/ and $noteId eq '' and ($notePlace eq '' or $notePlace eq 'foot')) {
-            $newNoteTag = "<note n=$noteNumber id=n$spacer$pageNumber.$noteNumber$noteLangAttr>";
+            $newNoteTag = "<note n=$noteNumber id=n$spacer$pageNumber.$noteNumber$noteLangAttr$noteSameAsAttr>";
         }
         if ($noteId eq '' and $notePlace eq 'apparatus') {
             $appNoteNumber++;
-            $newNoteTag = "<note place=apparatus id=an$pageNumber.$appNoteNumber$noteLangAttr>";
+            $newNoteTag = "<note place=apparatus id=an$pageNumber.$appNoteNumber$noteLangAttr$noteSameAsAttr>";
         }
 
         print STDERR "$noteTag    ->    $newNoteTag\n";

@@ -2,6 +2,7 @@
 
     <!ENTITY prime       "&#x2032;">
     <!ENTITY tcomma      "&#x02BB;">
+    <!ENTITY mlrexcl     "&#xA71D;">
     <!ENTITY startMark   "&#xFF08;&#x2D35;">
     <!ENTITY endMark     "&#x2D35;&#xFF09;">
 
@@ -831,7 +832,7 @@
     <xsl:function name="f:strip-diacritics-and-marks" as="xs:string">
         <xsl:param name="string" as="xs:string"/>
 
-        <xsl:variable name="string" select="fn:replace($string, '[&#x0640;&#x02BE;&#x02BC;&#x02BD;&#x02BF;&#x02b9;&tcomma;&prime;-]', '')" as="xs:string"/>
+        <xsl:variable name="string" select="fn:replace($string, '[&#x0640;&#x02BE;&#x02BC;&#x02BD;&#x02BF;&#x02b9;&tcomma;&prime;&mlrexcl;-]', '')" as="xs:string"/>
         <xsl:variable name="string" select="f:mask-indic-vowel-signs($string)" as="xs:string"/>
         <xsl:variable name="string" select="fn:replace(fn:normalize-unicode($string, 'NFD'), '\p{M}', '')" as="xs:string"/>
         <xsl:variable name="string" select="f:restore-indic-vowel-signs($string)" as="xs:string"/>
@@ -865,7 +866,7 @@
                 </xsl:non-matching-substring>
             </xsl:analyze-string>
         </xsl:variable>
-         
+
         <xsl:sequence select="string-join($result, '')"/>
     </xsl:function>
 
@@ -930,6 +931,22 @@
         <xsl:variable name="string" select="fn:replace($string, '&#x017F;', 's')"/> <!-- Latin small letter long s -->
 
         <xsl:variable name="string" select="fn:replace($string, '&#x207F;', 'n')"/> <!-- Superscript Latin small letter n -->
+
+        <!-- Phonetic extensions -->
+        <xsl:variable name="normalization-map" as="map(xs:string, xs:string)" select="map {
+            '&#x1D00;' : 'A',
+            '&#x1D04;' : 'C',
+            '&#x1D05;' : 'D',
+            '&#x1D07;' : 'E',
+            '&#x1D0A;' : 'J',
+            '&#x1D0B;' : 'K',
+            '&#x1D0C;' : 'L',
+            '&#x1D0D;' : 'M'
+        }"/>
+
+        <xsl:variable name="string" select="fn:replace($string, '&#x1D00;', 'a')"/> <!-- Latin Letter Small Capital A -->
+        <xsl:variable name="string" select="fn:replace($string, '&#x1D07;', 'e')"/> <!-- Latin Letter Small Capital E -->
+        <xsl:variable name="string" select="fn:replace($string, '&#x1D0C;', 'l')"/> <!-- Latin Letter Small Capital L -->
 
         <!-- Hebrew script -->
         <xsl:variable name="string" select="fn:replace($string, '&#xFB21;', '&#x05D0;')"/> <!-- Hebrew letter wide alef -> alef -->

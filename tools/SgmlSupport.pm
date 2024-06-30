@@ -1739,6 +1739,37 @@ BEGIN {
     $ent{'Lsc'}         = chr(0x029F); # small caps L
     $ent{'Ysc'}         = chr(0x028F); # small caps Y
 
+    # Swinton: Haida texts and myths:
+    $ent{'mlrexcl'}     = chr(0xA71D);          # Modifier letter raised exclamation mark
+    $ent{'mlplus'}      = chr(0x02D6);          # Modifier letter plus sign
+    $ent{'scplus'}      = chr(0x207A);          # Superscript plus sign
+    
+    $ent{'Kexcl'}       = 'K' . chr(0xA71D);    # K followed by exclamation mark (represented by modifier letter raised exclamation mark)
+    $ent{'kexcl'}       = 'k' . chr(0xA71D);    # k followed by exclamation mark
+    $ent{'Qexcl'}       = 'Q' . chr(0xA71D);    # Q followed by exclamation mark
+    $ent{'qexcl'}       = 'q' . chr(0xA71D);    # q followed by exclamation mark
+    $ent{'Sexcl'}       = 'S' . chr(0xA71D);    # S followed by exclamation mark
+    $ent{'sexcl'}       = 's' . chr(0xA71D);    # s followed by exclamation mark
+    $ent{'Texcl'}       = 'T' . chr(0xA71D);    # T followed by exclamation mark
+    $ent{'texcl'}       = 't' . chr(0xA71D);    # t followed by exclamation mark
+    $ent{'Cexcl'}       = 'C' . chr(0xA71D);    # C followed by exclamation mark
+    $ent{'cexcl'}       = 'c' . chr(0xA71D);    # c followed by exclamation mark
+
+    $ent{'Lscexcl'}     = chr(0x029F) . chr(0xA71D); # small caps L followed by exclamation mark
+
+    $ent{'gstop'}       = 'g' . chr(0x0307);    # g followed by a full-stop (represented by combining dot above)
+    $ent{'Gstop'}       = 'G' . chr(0x0307);    # G followed by a full-stop 
+    $ent{'xstop'}       = 'x' . chr(0x0323);    # x followed by a full-stop (represented by combining dot below)
+    $ent{'Xstop'}       = 'X' . chr(0x0323);    # X followed by a full-stop
+    $ent{'lstop'}       = 'l' . chr(0x0323);    # l followed by a full-stop (represented by combining dot below)
+    $ent{'Lstop'}       = 'L' . chr(0x0323);    # L followed by a full-stop
+    $ent{'Lstopexcl'}   = 'L' . chr(0x0323) . chr(0xA71D);    # L followed by a full-stop and exclamation mark (could be just normal !)
+
+    $ent{'Lscstop'}     = chr(0x029F) . chr(0x0323); # small caps L followed by a full-stop
+    $ent{'Lscstopexcl'} = chr(0x029F) . chr(0x0323) . chr(0xA71D); # small caps L followed by a full-stop and exclamation mark (could be just normal !)
+    # End of Swinton related characters.
+
+
     $ent{'Escbreve'}    = chr(0x1D07) . chr(0x0306); # small caps E with breve
 
     $ent{'vdiagstrok'}  = chr(0xA75F); # v with diagonal stroke
