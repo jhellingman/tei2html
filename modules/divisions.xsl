@@ -95,6 +95,7 @@
             <xsl:apply-templates/>
 
             <xsl:call-template name="insert-div0-footnotes"/>
+            <xsl:call-template name="insert-trailing-figure"/>
         </div>
     </xsl:template>
 
@@ -152,10 +153,10 @@
                 <xsl:if test="not(f:has-rend-value(@rend, 'align-with') or f:has-rend-value(@rend, 'align-with-document'))">
                     <xsl:call-template name="insert-footnotes"/>
                 </xsl:if>
+                <xsl:call-template name="insert-trailing-figure"/>
             </div>
         </xsl:if>
     </xsl:template>
-
 
     <xd:doc>
         <xd:short>Format head element of div1.</xd:short>
@@ -191,6 +192,7 @@
                     <xsl:with-param name="headingLevel" select="'h2'"/>
                 </xsl:call-template>
                 <xsl:call-template name="handle-div"/>
+                <xsl:call-template name="insert-trailing-figure"/>
             </div>
         </xsl:if>
     </xsl:template>
@@ -209,6 +211,7 @@
                 <xsl:call-template name="generate-div-class"/>
                 <xsl:call-template name="pgComment"/>
                 <xsl:call-template name="handle-div"/>
+                <xsl:call-template name="insert-trailing-figure"/>
             </div>
         </xsl:if>
     </xsl:template>
@@ -252,6 +255,7 @@
                 <xsl:if test="parent::front | parent::body | parent::back">
                     <xsl:call-template name="insert-footnotes"/>
                 </xsl:if>
+                <xsl:call-template name="insert-trailing-figure"/>
             </div>
         </xsl:if>
     </xsl:template>
@@ -345,6 +349,13 @@
                 </xsl:if>
             </xsl:otherwise>
         </xsl:choose>
+    </xsl:template>
+
+
+    <xsl:template name="insert-trailing-figure">
+        <xsl:if test="p/figure[f:rend-value(@rend, 'position') = 'belowtrailer']">
+            <xsl:apply-templates select="p/figure[f:rend-value(@rend, 'position') = 'belowtrailer']"/>
+        </xsl:if>
     </xsl:template>
 
 
@@ -504,10 +515,10 @@
 
 
     <xd:doc>
-        <xd:short>Skip images already placed above the chapter heading.</xd:short>
+        <xd:short>Skip images already placed above the chapter heading or after the trailer.</xd:short>
     </xd:doc>
 
-    <xsl:template match="p[figure[f:rend-value(@rend, 'position') = 'abovehead']]"/>
+    <xsl:template match="p[figure[f:rend-value(@rend, 'position') = ('abovehead', 'belowtrailer')]]"/>
 
 
     <xd:doc>

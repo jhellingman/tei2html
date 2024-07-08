@@ -1734,6 +1734,7 @@ BEGIN {
     $ent{'Rum'}         = chr(0xA776); # small capital Rum (r with stroke through tail)
 
     $ent{'Asc'}         = chr(0x1D00); # small caps A
+    $ent{'Ascacute'}    = chr(0x1D00) . chr(0x0301); # small caps A with acute (probably typo in Swanton's Haida texts and myths)
     $ent{'Dsc'}         = chr(0x1D05); # small caps D
     $ent{'Esc'}         = chr(0x1D07); # small caps E
     $ent{'Lsc'}         = chr(0x029F); # small caps L

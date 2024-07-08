@@ -1693,6 +1693,9 @@ sub StripDiacritics($) {
         tr/\x{0131}\x{0138}\x{013f}\x{0141}\x{0140}\x{0142}/ikLLll/;
         tr/\x{014a}\x{0149}\x{014b}\x{00d8}\x{00f8}\x{017f}/NnnOos/;
         tr/\x{00de}\x{0166}\x{00fe}\x{0167}/TTtt/;
+
+        # Small-caps phonetic letters.
+        tr/\x{1D00}\x{1D07}\x{00fe}\x{029F}/ael/;
     }
     return $string;
 }

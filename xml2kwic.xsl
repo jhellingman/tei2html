@@ -946,7 +946,8 @@
 
         <xsl:variable name="string" select="fn:replace($string, '&#x1D00;', 'a')"/> <!-- Latin Letter Small Capital A -->
         <xsl:variable name="string" select="fn:replace($string, '&#x1D07;', 'e')"/> <!-- Latin Letter Small Capital E -->
-        <xsl:variable name="string" select="fn:replace($string, '&#x1D0C;', 'l')"/> <!-- Latin Letter Small Capital L -->
+        <xsl:variable name="string" select="fn:replace($string, '&#x029F;', 'l')"/> <!-- Latin Letter Small Capital L -->
+        <xsl:variable name="string" select="fn:replace($string, '&#x1D0C;', 'l')"/> <!-- Latin Letter Small Capital L with stroke -->
 
         <!-- Hebrew script -->
         <xsl:variable name="string" select="fn:replace($string, '&#xFB21;', '&#x05D0;')"/> <!-- Hebrew letter wide alef -> alef -->

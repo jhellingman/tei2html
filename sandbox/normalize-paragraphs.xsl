@@ -94,7 +94,7 @@ in a separate pre-processing step in a pipeline of XSL transformations.
                                 or $node/self::q[@rend = 'block']
                                 or $node/self::letter
                                 or $node/self::list
-                                or $node/self::figure[not(f:is-inline(.) or f:rend-value(@rend, 'position') = 'abovehead')]
+                                or $node/self::figure[not(f:is-inline(.) or f:rend-value(@rend, 'position') = ('abovehead', 'belowtrailer'))]
                                 or $node/self::table[not(f:is-inline(.))]
                              )
                           then true()

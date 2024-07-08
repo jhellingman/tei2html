@@ -431,8 +431,8 @@ width:{$width};
         <xsl:variable name="filename" select="f:determine-image-filename(.)" as="xs:string"/>
 
         <xsl:if test="f:is-image-included($filename)">
-            <xsl:if test="not(f:rend-value(@rend, 'position') = 'abovehead')">
-                <!-- Render a figure outside the paragraph context if its position is 'abovehead'. -->
+            <xsl:if test="not(f:rend-value(@rend, 'position') = ('abovehead', 'belowtrailer'))">
+                <!-- Render a figure outside the paragraph context if its position is 'abovehead' or 'belowtrailer'. -->
                 <xsl:call-template name="closepar"/>
             </xsl:if>
             <div class="figure">
@@ -450,7 +450,7 @@ width:{$width};
                 <xsl:call-template name="figure-annotations-bottom"/>
                 <xsl:apply-templates/>
             </div>
-            <xsl:if test="not(f:rend-value(@rend, 'position') = 'abovehead')">
+            <xsl:if test="not(f:rend-value(@rend, 'position') = ('abovehead', 'belowtrailer'))">
                 <xsl:call-template name="reopenpar"/>
             </xsl:if>
         </xsl:if>
