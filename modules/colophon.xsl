@@ -74,6 +74,12 @@
         <h3 class="main"><xsl:value-of select="f:message('msgAvailability')"/></h3>
         <xsl:apply-templates select="/*[self::TEI.2 or self::TEI]/teiHeader/fileDesc/publicationStmt/availability"/>
 
+        <xsl:if test="//figure[@id = 'cover-image'][f:rend-value(@rend, 'image') = 'images/new-cover.jpg']">
+            <p>
+                <xsl:value-of select="f:message('msgPGCoverArtDedication')"/>
+            </p>
+        </xsl:if>
+
         <xsl:call-template name="colophonMetadata"/>
         <!-- <xsl:call-template name="catalogEntries"/> -->
 

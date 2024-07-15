@@ -591,6 +591,8 @@
 
         <msg:message name="msgAndThePgdpTeam">and the Online Distributed Proofreading Team at https://www.pgdp.net.</msg:message>
 
+        <msg:message name="msgPGCoverArtDedication">The new cover art included with this eBook is hereby granted to the public domain.</msg:message>
+
         <msg:message name="msgPGHeader">
             <p>The Project Gutenberg EBook of <i><msg:param name="title"/></i>, by <b><msg:param name="authors"/></b>.</p>
             <p class="smallprint">This eBook is for the use of anyone anywhere in the United States and most other parts of the world at no cost and with almost no restrictions whatsoever. You may copy it, give it away or re-use it under the terms of the Project Gutenberg License included with <a href="#pglicense">this eBook</a> or online at <a href='https://www.gutenberg.org/'>www.gutenberg.org</a>. If you are not located in the United States, you&apos;ll have to check the laws of the country where you are located before using this ebook.</p>
@@ -1203,14 +1205,16 @@
         <msg:message name="zh">Chinesisch</msg:message>
 
         <msg:message name="msgPGHeader">
-            <p>Das Project Gutenberg E-buch <i><msg:param name="title"/></i>, durch <b><msg:param name="authors"/></b>.</p>
-            <p class="smallprint">Dieses E-buch ist zum allgemeinen, kostenlosen Gebrauch bestimmt, annähernd ohne Einschränkungen. Sie dürfen es kopieren, weitergeben oder weiterverwenden, unter den Bedingungen der Project-Gutenberg-Lizenz. Diese finden Sie im Anhang <a href="#pglicense">dieses Buches</a> oder online unter <a href='https://www.gutenberg.org/'>www.gutenberg.org</a>.</p>
+            <p>Das Project Gutenberg E-Buch <i><msg:param name="title"/></i>, durch <b><msg:param name="authors"/></b>.</p>
+            <p class="smallprint">Dieses E-Buch ist zum allgemeinen, kostenlosen Gebrauch bestimmt, annähernd ohne Einschränkungen. Sie dürfen es kopieren, weitergeben oder weiterverwenden, unter den Bedingungen der Project-Gutenberg-Lizenz. Diese finden Sie im Anhang <a href="#pglicense">dieses Buches</a> oder online unter <a href='https://www.gutenberg.org/'>www.gutenberg.org</a>.</p>
             <p class="smallprint">Titel: <msg:param name="title"/>.</p>
             <p class="smallprint">Autor: <msg:param name="authors"/>.</p>
-            <p class="smallprint">Publikationsdatum: <msg:param name="releasedate"/> [E-buch Nummer: <msg:param name="pgnum"/>]</p>
+            <p class="smallprint">Publikationsdatum: <msg:param name="releasedate"/> [E-Buch Nummer: <msg:param name="pgnum"/>]</p>
             <p class="smallprint">Sprache: <msg:param name="language"/>.</p>
             <p class="smallprint">Zeichensatz: UTF-8.</p>
         </msg:message>
+
+        <msg:message name="msgPGCoverArtDedication">Das neue Titelbild dieses E-Buches wird hiermit der Gemeinfreiheit überlassen.</msg:message>
 
     </msg:messages>
 
@@ -1772,6 +1776,8 @@
         <msg:message name="msgNotCopyrightedUS">Dit boek is vrij van auteursrechten in de Verenigde Staten. Als u ergens anders woont, raadpleeg dan alstublieft de wetgeving in uw land voordat u dit boek downloadt.</msg:message>
 
         <msg:message name="msgAndThePgdpTeam">en het Online Distributed Proofreading Team op https://www.pgdp.net/.</msg:message>
+
+        <msg:message name="msgPGCoverArtDedication">De nieuwe omslagillustratie van dit eBoek is hiermee aan het publieke domein verleend.</msg:message>
 
         <msg:message name="msgPGComment">Dit boek is geproduceerd door Project Gutenberg en is gratis beschikbaar op https://www.gutenberg.org/.</msg:message>
 
