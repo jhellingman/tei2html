@@ -14,11 +14,27 @@ my $pdftopng = "pdftopng.exe";
 my $pdfcount = 1000;
 my $resolutionDpi = 300;
 my $extractActualImages = 0;
+my $showHelp = 0;
 
 GetOptions(
     'j' => \$extractActualImages,
-    'r=i' => \$resolutionDpi
+    'r=i' => \$resolutionDpi,
+    'q' => \$showHelp,
+    'help' => \$showHelp
     );
+
+
+if ($showHelp == 1) {
+    print "extractPdf.pl -- Wrapper around pdfimages.exe to extract images from a PDF file.\n\n";
+    print "Usage: extractPdf.pl [-jq] [-r=i] <file>\n\n";
+    print "Options:\n";
+    print "    j         Extract actual embedded images.\n";
+    print "    r=i       Output resolution in DPI.\n";
+    print "    q         Print this help and exit.\n";
+
+    exit(0);
+}
+
 
 sub list_recursively($);
 

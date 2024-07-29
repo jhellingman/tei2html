@@ -888,6 +888,17 @@
 
     <msg:messages xml:lang="de" name="German">
 
+        <msg:message name="msgCountCorrectionsAppliedToText" plural="zero">Es wurden keine Korrekturen am Text vorgenommen.</msg:message>
+        <msg:message name="msgCountCorrectionsAppliedToText" plural="one">Die folgende Korrektur wurde am Text vorgenommen:</msg:message>
+        <msg:message name="msgCountCorrectionsAppliedToText">Die folgenden <msg:param name="count" type="integer"/> Korrekturen wurden am Text vorgenommen:</msg:message>
+
+        <msg:message name="msgCorrectionsNotAppliedToText">Die folgenden möglichen Korrekturen wurden nicht vorgenommen.</msg:message>
+        <msg:message name="msgQuestionablesOverview">Übersicht der möglichen Korrekturen.</msg:message>
+        <msg:message name="msgSuggestedCorrection">Vorgeschlagene Korrektur</msg:message>
+
+        <msg:message name="msgDramatisPersonae">Dramatis personae.</msg:message>
+        <msg:message name="msgUnidentifiedSpeaker">Unbekannter Sprecher.</msg:message>
+
         <msg:message name="msgGutenbergNoExternalReferences">Project Gutenberg verwendet keine aktiven externen Links in seinen E-Books.</msg:message>
         <msg:message name="msgGutenbergExternalReferencesExplanation">Die folgenden URLs dienen rein zur Information. Bei Bedarf können Sie sie in die Adressleiste Ihres Browsers kopieren.</msg:message>
         <msg:message name="msgIllustrator">Illustrator</msg:message>
@@ -909,6 +920,9 @@
         <msg:message name="msgReturnToNoteMarkInText">Zurück zur Note <msg:param name="mark"/> im Text.</msg:message>
 
         <msg:message name="msgPassim">Passim</msg:message>
+
+        <msg:message name="msgCountOccurrences" plural="zero">keine Fälle</msg:message>
+        <msg:message name="msgCountOccurrences" plural="one">ein Fall</msg:message>
         <msg:message name="msgCountOccurrences"><msg:param name="count"/> Fälle</msg:message>
         <msg:message name="msgContributor">Beiträger</msg:message>
 
@@ -968,7 +982,6 @@
         <msg:message name="msgCorrection">Korrektur</msg:message>
         <msg:message name="msgCorrections">Korrekturen</msg:message>
         <msg:message name="msgCorrectionsAppliedToText">Die folgenden Korrekturen sind am Text angewendet worden:</msg:message>
-        <msg:message name="msgCountCorrectionsAppliedToText">Die folgenden <msg:param name="count"/> Korrekturen sind am Text angewendet worden:</msg:message>
         <msg:message name="msgCorrectionsOverview">Übersicht der Korrekturen im Text</msg:message>
         <msg:message name="msgCover">Umslag</msg:message>
         <msg:message name="msgCoverImage">Titelbild</msg:message>

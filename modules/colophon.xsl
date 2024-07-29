@@ -74,7 +74,7 @@
         <h3 class="main"><xsl:value-of select="f:message('msgAvailability')"/></h3>
         <xsl:apply-templates select="/*[self::TEI.2 or self::TEI]/teiHeader/fileDesc/publicationStmt/availability"/>
 
-        <xsl:if test="//figure[@id = 'cover-image'][f:rend-value(@rend, 'image') = 'images/new-cover.jpg']">
+        <xsl:if test="f:is-set('pg.compliant') and //figure[@id = 'cover-image'][f:rend-value(@rend, 'image') = 'images/new-cover.jpg']">
             <p>
                 <xsl:value-of select="f:message('msgPGCoverArtDedication')"/>
             </p>
@@ -1044,8 +1044,8 @@
         <div class="transcriberNote">
             <h2 class="main"><xsl:value-of select="f:message('msgOverviewForeignFragments')"/></h2>
 
-            <xsl:variable name="mainlang" select="/*[self::TEI.2 or self::TEI]/@lang"/>
-            <xsl:for-each-group select="//*[@lang != $mainlang]" group-by="@lang">
+            <xsl:variable name="mainLanguage" select="/*[self::TEI.2 or self::TEI]/@lang"/>
+            <xsl:for-each-group select="//*[@lang != $mainLanguage]" group-by="@lang">
                 <xsl:sort select="@lang"/>
                 <xsl:variable name="lang" select="@lang"/>
                 <h3 class="main"><xsl:value-of select="f:message($lang)"/></h3>
