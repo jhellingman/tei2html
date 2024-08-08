@@ -69,6 +69,7 @@ my @borderBottomLine    = ('',     '=',    '=',    '=',    '=',    '=',    '=', 
 my @borderBottomCross   = ('',     '=+=',  '===',  '===',  '===',  '===',  '===',  '');
 my @borderBottomRight   = ('',     '=+',   '==',   '=/',   '',     '',     '',     '');
 
+# $borderStyle = 6;
 # my @predefinedColumnWidths = (3, 5, 5, 10, 32);
 my @predefinedColumnWidths = ();
 
@@ -100,7 +101,7 @@ while (<>) {
         $line = $before . $';
     }
 
-    # drop comments from text (replace with single space).
+    # drop inline comments from text (replace with single space).
     $line =~ s/\s*<!--.*?-->\s*/ /g;
 
     # Handle predefined column widths (given in a processing instruction)
@@ -116,7 +117,7 @@ while (<>) {
     # drop processing instructions from text (replace with nothing).
     $line =~ s/\s*<\?.*?\?>\s*//;
 
-    # warn for remaining comments
+    # warn for remaining (multi-line) comments
     $line =~ s/<!--/[**ERROR: unhandled comment start]/g;
 
     # warn for notes (which should have been handled in a separate process)
@@ -183,6 +184,10 @@ while (<>) {
 
 sub handleLine($) {
     my $line = shift;
+
+    if (!defined $line) {
+        return '';
+    }
 
     # convert entities
     if ($useUnicode == 1) {
@@ -320,7 +325,7 @@ sub handleSegments($) {
     my $remainder = shift;
 
     my $result = '';
-    while ($remainder =~ /<seg(.*?)>(.*?)<\/seg>/) {
+    while (defined $remainder && $remainder =~ /<seg(.*?)>(.*?)<\/seg>/) {
         my $before = $`;
         my $attrs = $1;
         my $content = $2;
@@ -346,7 +351,7 @@ sub handleSegments($) {
             $result .= $content;
         }
     }
-    return $result . $remainder;
+    return (defined $remainder) ? $result . $remainder : $result;
 }
 
 sub useDittoMarks($) {
@@ -384,6 +389,8 @@ sub parseTable($) {
     my $table = shift;
     my $tableId = shift;
     my $tableHead = '';
+    my $comments = '';
+    my $inComment = 0;
 
     # print STDERR "DEBUG: Parsing table: $table.\n";
 
@@ -392,10 +399,28 @@ sub parseTable($) {
 
         $line = handleSegments($line);
 
-        if ($line =~ /<head>(.*?)<\/head>/) {
-            $tableHead = $1;
+        # Deal with multi-line comment
+        if ($line =~ /<!--/) {
+            $inComment = 1;
         }
-        $table .= $line;
+        if ($line =~ /-->/) {
+            if ($comments ne '') {
+                print $comments;
+                print "-->\n";
+                $comments = '';
+            }
+            $inComment = 0;
+        }
+
+        if ($inComment == 1) {
+            $comments .= $line;
+        } else {
+            if ($line =~ /<head>(.*?)<\/head>/) {
+                $tableHead .= $1 . "\n";
+            }
+            $table .= $line;
+        }
+
         if ($line =~ /<\/table>/) {
             my @result = handleTable($table);
             my @wrappedTable = sizeTableColumns($pageWidth - 1, $tableId, @result);
