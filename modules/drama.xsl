@@ -42,7 +42,7 @@
 
     <xsl:template match="lg">
         <xsl:choose>
-            <xsl:when test="f:rend-value(@rend, 'display') = 'none'"/>
+            <xsl:when test="not(f:should-display-lg(.))"/>
             <xsl:when test="f:has-rend-value(@rend, 'align-with')">
                 <xsl:call-template name="handleAlignedLg"/>
             </xsl:when>
@@ -51,6 +51,20 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+
+
+    <xsl:function name="f:should-display-lg" as="xs:boolean">
+        <xsl:param name="node"/>
+
+        <xsl:sequence select="f:rend-value($node/@rend, 'display') != 'none' and not(f:is-aligned-with-other-lg($node))"/>
+    </xsl:function>
+
+    <xsl:function name="f:is-aligned-with-other-lg" as="xs:boolean">
+        <xsl:param name="node"/>
+        <xsl:variable name="id" select="$node/@id"/>
+
+        <xsl:sequence select="boolean(($root//lg)[f:rend-value(@rend, 'align-with') = $id])"/>
+    </xsl:function>
 
 
     <xsl:template match="div[l]">
@@ -342,6 +356,10 @@
             <xsl:copy-of select="f:log-warning('Number of elements in verses to align does not match!', ())"/>
         </xsl:if>
 
+        <!-- Determine the language of each side, so we can correctly indicate it on the cells. -->
+        <xsl:variable name="firstLang" select="($a/ancestor-or-self::*/@lang)[last()]" as="xs:string?"/>
+        <xsl:variable name="secondLang" select="($b/ancestor-or-self::*/@lang)[last()]" as="xs:string?"/>
+
         <table class="alignedVerse">
             <xsl:for-each select="$a/*">
                 <xsl:variable name="position" select="count(preceding-sibling::*) + 1"/>
@@ -358,8 +376,14 @@
                             </xsl:choose>
                         </td>
                     </xsl:if>
-                    <td class="first"><xsl:apply-templates mode="align-verse" select="."/></td>
-                    <td class="second"><xsl:apply-templates mode="align-verse" select="$b/*[$position]"/></td>
+                    <td class="first">
+                        <xsl:copy-of select="f:generate-lang-attribute($firstLang)"/>
+                        <xsl:apply-templates mode="align-verse" select="."/>
+                    </td>
+                    <td class="second">
+                        <xsl:copy-of select="f:generate-lang-attribute($secondLang)"/>
+                        <xsl:apply-templates mode="align-verse" select="$b/*[$position]"/>
+                    </td>
                 </tr>
             </xsl:for-each>
         </table>
