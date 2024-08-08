@@ -1740,6 +1740,7 @@ BEGIN {
     $ent{'Lsc'}         = chr(0x029F); # small caps L
     $ent{'Ysc'}         = chr(0x028F); # small caps Y
 
+
     # Swinton: Haida texts and myths:
     $ent{'mlrexcl'}     = chr(0xA71D);          # Modifier letter raised exclamation mark
     $ent{'mlplus'}      = chr(0x02D6);          # Modifier letter plus sign
@@ -1758,8 +1759,8 @@ BEGIN {
 
     $ent{'Lscexcl'}     = chr(0x029F) . chr(0xA71D); # small caps L followed by exclamation mark
 
-    $ent{'gstop'}       = 'g' . chr(0x0307);    # g followed by a full-stop (represented by combining dot above)
-    $ent{'Gstop'}       = 'G' . chr(0x0307);    # G followed by a full-stop 
+    $ent{'gstop'}       = 'g' . chr(0x0323);    # g followed by a full-stop (represented by combining dot above)
+    $ent{'Gstop'}       = 'G' . chr(0x0323);    # G followed by a full-stop 
     $ent{'xstop'}       = 'x' . chr(0x0323);    # x followed by a full-stop (represented by combining dot below)
     $ent{'Xstop'}       = 'X' . chr(0x0323);    # X followed by a full-stop
     $ent{'lstop'}       = 'l' . chr(0x0323);    # l followed by a full-stop (represented by combining dot below)
