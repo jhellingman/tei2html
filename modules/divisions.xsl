@@ -702,7 +702,7 @@
 
             <xsl:choose>
                 <xsl:when test="f:is-division($first) and f:is-division($second) and not($first/@n = $anchors) and not($second/@n = $anchors)">
-                    <xsl:copy-of select="f:log-info('Align nested division {1} with division {2}.', ($first/@id, $second/@id))"/>
+                    <xsl:copy-of select="f:log-info('Align nested division {1} with division {2} (n={3}).', ($first/@id, $second/@id, $first/@n))"/>
                     <!-- add a spacer row to separate the divisions -->
                     <tr>
                         <td id="{f:generate-id($first)}" class="first alignedDiv{f:div-level($first)}">
@@ -746,7 +746,7 @@
 
             <xsl:choose>
                 <xsl:when test="f:is-division($first) and f:is-division($second)">
-                    <xsl:copy-of select="f:log-info('Align nested division {1} with division {2}.', ($first/@id, $second/@id))"/>
+                    <xsl:copy-of select="f:log-info('Align nested division {1} with division {2} (n={3}).', ($first/@id, $second/@id, $first/@n))"/>
                     <!-- add a spacer row to separate the divisions -->
                     <tr>
                         <td id="{f:generate-id($first)}" class="first alignedDiv{f:div-level($first)}">
