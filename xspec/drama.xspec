@@ -8,8 +8,15 @@
 
 ]>
 <x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+               xmlns:xs="http://www.w3.org/2001/XMLSchema"
                stylesheet="test-tei2html.xsl"
                version="3.0">
+
+    <!-- Redefine global variables used in localization.xsl -->
+    <x:param name="language" as="xs:string" select="'en'"/>
+    <x:param name="root" select="self::document-node()">
+        <TEI/>
+    </x:param>
 
     <x:param name="imageInfo">
         <imageInfo>
@@ -217,6 +224,48 @@ text-indent:2em;
                <tr>
                   <td>
                      <p id="l2" class="line">Second.</p>
+                  </td>
+               </tr>
+            </table>
+        </x:expect>
+    </x:scenario>
+
+
+    <!-- aligned verse -->
+
+    <!-- Use display(none) on the second verse to prevent it from appearing again. Note
+         that this should not be needed if both verses are under the $root variable,
+         which isn't the case in this test case. -->
+
+    <x:scenario label="When rendering two aligned lg's with two lines of verse">
+        <x:context>
+            <lg id="lg.1" rend="align-with(lg.2)">
+                <l id="l1.1">First,</l>
+                <l id="l1.2">Second.</l>
+            </lg>
+
+            <lg id="lg.2" rend="display(none)">
+                <l id="l2.1">Eerste,</l>
+                <l id="l2.2">Tweede.</l>
+            </lg>
+        </x:context>
+        <x:expect label="will result in an HTML div with two paragraphs">
+            <table xmlns="http://www.w3.org/1999/xhtml"
+                   class="alignedVerse">
+               <tr>
+                  <td class="first">
+                     <p id="l1.1" class="line">First,</p>
+                  </td>
+                  <td class="second">
+                     <p id="l2.1" class="line">Eerste,</p>
+                  </td>
+               </tr>
+               <tr>
+                  <td class="first">
+                     <p id="l1.2" class="line">Second.</p>
+                  </td>
+                  <td class="second">
+                     <p id="l2.2" class="line">Tweede.</p>
                   </td>
                </tr>
             </table>

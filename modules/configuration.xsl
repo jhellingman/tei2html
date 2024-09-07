@@ -72,8 +72,11 @@
             <pg.includeComments>false</pg.includeComments>                  <!-- Include references to Project Gutenberg in comments. -->
             <pg.compliant>false</pg.compliant>                              <!-- Only use HTML and CSS constructs that are compliant with to Project Gutenberg guidelines. -->
 
+            <align.internal>true</align.internal>                           <!-- Include internal divisions indicated by "align-with()" -->
+            <align.external>true</align.external>                           <!-- Include external divisions indicated by "align-with-document()" -->
+            <align.nestedVerse>false</align.nestedVerse>                    <!-- Internally align verse included in an aligned division (TODO: complete feature) -->
+
             <showParagraphNumbers>false</showParagraphNumbers>              <!-- Output paragraph numbers, using the value of the @n attribute. -->
-            <includeAlignedDivisions>true</includeAlignedDivisions>         <!-- Include divisions indicated by "align-with-document()" -->
             <useRegularizedUnits>false</useRegularizedUnits>                <!-- Use the regularized units specified in the measure-tag. (false: both are shown, the original in the text, the regularized units in a
                                                                                  pop-up; true: regularized in text, original in pop-up) -->
             <xref.show>always</xref.show>                                   <!-- Method used to generate external links, possible values:
@@ -177,7 +180,9 @@
                 <xref.table>true</xref.table>
 
                 <pageNumbers.show>false</pageNumbers.show>
-                <includeAlignedDivisions>false</includeAlignedDivisions>
+                <align.internal>false</align.internal>
+                <align.external>false</align.external>
+                <align.nestedVerse>false</align.nestedVerse>
 
                 <math.mathJax.format>MML</math.mathJax.format>
             </output>

@@ -350,6 +350,16 @@
     </xsl:function>
 
 
+    <xd:doc>
+        <xd:short>Determine a node is a line-group.</xd:short>
+    </xd:doc>
+
+    <xsl:function name="f:is-line-group" as="xs:boolean">
+        <xsl:param name="node"/>
+        <xsl:sequence select="local-name($node) = 'lg'"/>
+    </xsl:function>
+
+
     <!--====================================================================-->
     <!-- Generate labels for heads in the correct language -->
 

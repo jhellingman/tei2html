@@ -299,7 +299,7 @@
 
     <xsl:template name="handle-div">
         <xsl:choose>
-            <xsl:when test="f:is-set('includeAlignedDivisions') and f:has-rend-value(@rend, 'align-with')">
+            <xsl:when test="f:is-set('align.internal') and f:has-rend-value(@rend, 'align-with')">
                 <xsl:variable name="otherId" select="f:rend-value(@rend, 'align-with')"/>
                 <xsl:choose>
                     <xsl:when test="//*[@id = $otherId]">
@@ -316,7 +316,7 @@
                 </xsl:choose>
             </xsl:when>
 
-            <xsl:when test="f:is-set('includeAlignedDivisions') and f:has-rend-value(@rend, 'align-with-document')">
+            <xsl:when test="f:is-set('align.external') and f:has-rend-value(@rend, 'align-with-document')">
                 <xsl:variable name="target" select="f:rend-value(@rend, 'align-with-document')"/>
                 <xsl:variable name="document" select="substring-before($target, '#')"/>
                 <xsl:variable name="otherId" select="substring-after($target, '#')"/>
@@ -387,7 +387,7 @@
         <xsl:param name="node"/>
         <xsl:variable name="id" select="$node/@id"/>
 
-        <xsl:sequence select="f:is-set('includeAlignedDivisions') and boolean(($root//div | $root//div0 | $root//div1 | $root//div2 | $root//div3 | $root//div4 | $root//div5 | $root//div6)[f:rend-value(@rend, 'align-with') = $id])"/>
+        <xsl:sequence select="f:is-set('align.internal') and boolean(($root//div | $root//div0 | $root//div1 | $root//div2 | $root//div3 | $root//div4 | $root//div5 | $root//div6)[f:rend-value(@rend, 'align-with') = $id])"/>
     </xsl:function>
 
 
@@ -690,7 +690,7 @@
                     <xsl:sequence select="string(.)"/>
                 </xsl:if>
                 <xsl:if test="count(current-group()) &gt; 2">
-                    <xsl:copy-of select="f:log-warning('The n attribute {1} occurs more than twice, this may cause issues in alignment.', (string(.)))"/>
+                    <xsl:copy-of select="f:log-error('The n attribute {1} occurs more than twice, this will cause issues in alignment.', (string(.)))"/>
                 </xsl:if>
             </xsl:for-each-group>
         </xsl:variable>
@@ -717,6 +717,22 @@
                         <xsl:with-param name="b" select="$second"/>
                     </xsl:call-template>
                     <!-- Deal with unmatched content following these divisions -->
+                    <xsl:call-template name="output-initial-paragraphs">
+                        <xsl:with-param name="first" select="$first/following-sibling::*[1]"/>
+                        <xsl:with-param name="second" select="$second/following-sibling::*[1]"/>
+                        <xsl:with-param name="firstLang" select="$firstLang"/>
+                        <xsl:with-param name="secondLang" select="$secondLang"/>
+                        <xsl:with-param name="anchors" select="$anchors"/>
+                    </xsl:call-template>
+                </xsl:when>
+
+                <xsl:when test="f:is-set('align.nestedVerse') and f:is-line-group($first) and f:is-line-group($second) and not($first/@n = $anchors) and not($second/@n = $anchors)">
+                    <xsl:copy-of select="f:log-info('Align nested line-group {1} with line-group {2} (n={3}).', ($first/@id, $second/@id, $first/@n))"/>
+                    <xsl:call-template name="align-verses-nested-in-division">
+                        <xsl:with-param name="a" select="$first"/>
+                        <xsl:with-param name="b" select="$second"/>
+                    </xsl:call-template>
+                    <!-- Deal with unmatched content following these line-groups -->
                     <xsl:call-template name="output-initial-paragraphs">
                         <xsl:with-param name="first" select="$first/following-sibling::*[1]"/>
                         <xsl:with-param name="second" select="$second/following-sibling::*[1]"/>
@@ -761,6 +777,22 @@
                         <xsl:with-param name="b" select="$second"/>
                     </xsl:call-template>
                     <!-- Deal with unmatched content following these divisions -->
+                    <xsl:call-template name="output-initial-paragraphs">
+                        <xsl:with-param name="first" select="$first/following-sibling::*[1]"/>
+                        <xsl:with-param name="second" select="$second/following-sibling::*[1]"/>
+                        <xsl:with-param name="firstLang" select="$firstLang"/>
+                        <xsl:with-param name="secondLang" select="$secondLang"/>
+                        <xsl:with-param name="anchors" select="$anchors"/>
+                    </xsl:call-template>
+                </xsl:when>
+
+                <xsl:when test="f:is-set('align.nestedVerse') and f:is-line-group($first) and f:is-line-group($second)">
+                    <xsl:copy-of select="f:log-info('Align nested line-group {1} with line-group {2} (n={3}).', ($first/@id, $second/@id, $first/@n))"/>
+                    <xsl:call-template name="align-verses-nested-in-division">
+                        <xsl:with-param name="a" select="$first"/>
+                        <xsl:with-param name="b" select="$second"/>
+                    </xsl:call-template>
+                    <!-- Deal with unmatched content following these line-groups -->
                     <xsl:call-template name="output-initial-paragraphs">
                         <xsl:with-param name="first" select="$first/following-sibling::*[1]"/>
                         <xsl:with-param name="second" select="$second/following-sibling::*[1]"/>

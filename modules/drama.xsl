@@ -391,6 +391,38 @@
     </xsl:template>
 
 
+    <xsl:template name="align-verses-nested-in-division">
+        <xsl:param name="a" as="element(lg)"/>
+        <xsl:param name="b" as="element(lg)"/>
+
+        <xsl:variable name="hasNumbers" select="$a/*[@n] | $b/*[@n]"/>
+
+        <xsl:copy-of select="f:log-info('Elements in first: {1}; elements in second: {2}', (xs:string(count($a/*)), xs:string(count($b/*))))"/>
+        <xsl:if test="count($a/*) != count($b/*)">
+            <xsl:copy-of select="f:log-warning('Number of elements in verses to align does not match!', ())"/>
+        </xsl:if>
+
+        <!-- Determine the language of each side, so we can correctly indicate it on the cells. -->
+        <xsl:variable name="firstLang" select="($a/ancestor-or-self::*/@lang)[last()]" as="xs:string?"/>
+        <xsl:variable name="secondLang" select="($b/ancestor-or-self::*/@lang)[last()]" as="xs:string?"/>
+
+        <xsl:for-each select="$a/*">
+            <xsl:variable name="position" select="count(preceding-sibling::*) + 1"/>
+            <!-- TODO: deal with line-numbers as with non-nested verse above. -->
+            <tr>
+                <td class="first">
+                    <xsl:copy-of select="f:generate-lang-attribute($firstLang)"/>
+                    <xsl:apply-templates mode="align-verse" select="."/>
+                </td>
+                <td class="second">
+                    <xsl:copy-of select="f:generate-lang-attribute($secondLang)"/>
+                    <xsl:apply-templates mode="align-verse" select="$b/*[$position]"/>
+                </td>
+            </tr>
+        </xsl:for-each>
+    </xsl:template>
+
+
     <xd:doc>
         <xd:short>Format a head in aligned verse.</xd:short>
         <xd:detail>Since we cannot have an <code>h2</code>-elements inside tables in HTML, we place the head in
