@@ -2,6 +2,7 @@
 <!DOCTYPE x:description [
 
         <!ENTITY nbsp       "&#160;">
+        <!ENTITY mdash      "&#x2014;">
         <!ENTITY zwsp       "&#x200B;">
         <!ENTITY ldquo      "&#x201C;">
         <!ENTITY asterism   "&#x2042;">
@@ -116,12 +117,35 @@
                   <hr class="tb tb01" id="..."/>
                   <p class="tb" id="...">. . . . . . . . . . . . . . . . . . . . .</p>
                   <p class="tb" id="...">*&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;*</p>
-                   <p class="tb" id="...">*&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;*</p>
+                  <p class="tb" id="...">*&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;*</p>
                   <p class="tb" id="...">*</p>
                   <p class="tb" id="...">&asterism;</p>
                   <p class="tb" id="..."/>
                   <hr class="tb dotted" id="..."/>
                   <hr class="tb dashed" id="..."/>
+                  <p id="...">Blah blah.</p>
+               </div>
+            </div>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering a tb with rend='repeat(char, separator, count)' inside a div">
+        <x:context>
+            <div>
+                <p>Blah blah.</p>
+                <milestone unit="tb" rend="repeat(*, &nbsp;, 4)"/>
+                <milestone unit="tb" rend="repeat(&mdash;, &nbsp;, 4)"/>
+                <milestone unit="tb" rend="repeat(4)"/>
+                <p>Blah blah.</p>
+            </div>
+        </x:context>
+        <x:expect label="will result extra paragraphs representing the thematic break">
+            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1 last-child">
+               <div class="divBody">
+                  <p id="..." class="first">Blah blah.</p>
+                  <p class="tb" id="...">*&nbsp;*&nbsp;*&nbsp;*</p>
+                  <p class="tb" id="...">&mdash;&nbsp;&mdash;&nbsp;&mdash;&nbsp;&mdash;</p>
+                  <p class="tb" id="...">*&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;*</p>
                   <p id="...">Blah blah.</p>
                </div>
             </div>

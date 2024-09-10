@@ -456,13 +456,8 @@
                 <xsl:when test="$property='hemistich'"/>            <!-- render text given in value invisible (i.e., white) to indent with width of previous line. -->
 
                 <!-- Non-CSS properties related to decorative initials -->
-                <xsl:when test="$property='dropcap'"/>
-                <xsl:when test="$property='dropcap-height'"/>
-                <xsl:when test="$property='dropcap-offset'"/>
-                <xsl:when test="$property='initial-height'"/>
-                <xsl:when test="$property='initial-image'"/>
-                <xsl:when test="$property='initial-offset'"/>
-                <xsl:when test="$property='initial-width'"/>
+                <xsl:when test="$property = ('dropcap', 'dropcap-height', 'dropcap-offset')"/>
+                <xsl:when test="$property = ('initial-height', 'initial-image', 'initial-offset', 'initial-width')"/>
 
                 <!-- divGen related special handling. -->
                 <xsl:when test="$element = 'divGen' and $property = 'include'"/>
@@ -485,7 +480,7 @@
                 <xsl:when test="$element='lb' and $property='indent'"/>
 
                 <!-- Thematic breaks with decorative stars -->
-                <xsl:when test="$element='tb' and $property='stars'"/>
+                <xsl:when test="$element='milestone' and $property = ('stars', 'repeat')"/>
 
                 <!-- Properties related to special font usage -->
                 <xsl:when test="$property='font' and $value='fraktur'">font-family:'<xsl:value-of select="f:get-setting('css.frakturFont')"/>'; </xsl:when>

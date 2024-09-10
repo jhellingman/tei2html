@@ -246,7 +246,7 @@
     <xd:doc>
         <xd:short>Handle a milestone (thematic break).</xd:short>
         <xd:detail>Handle a document milestone. This is mostly used to encode thematic breaks. Generates
-            slightly different outputs, depending on the <code>@type</code> and <code>@rend</code>-attributes.</xd:detail>
+            slightly different outputs, depending on the <code>@unit</code> and <code>@rend</code>-attributes.</xd:detail>
     </xd:doc>
 
     <xsl:template match="milestone[@unit='theme' or @unit='tb']">
@@ -260,6 +260,25 @@
                     <xsl:with-param name="string" select="f:repeat('*', '&nbsp;&nbsp;&nbsp;', xs:integer(f:rend-value(@rend, 'stars')))"/>
                 </xsl:call-template>
             </xsl:when>
+
+            <xsl:when test="f:has-rend-value(@rend, 'repeat')">
+                <xsl:variable name="repeat" select="f:rend-value(@rend, 'repeat')"/>
+                <xsl:variable name="string" as="xs:string">
+                <xsl:analyze-string select="$repeat" regex="(.+?),\s*(.+?),\s*([0-9]+)">
+                    <xsl:matching-substring>
+                        <xsl:value-of select="f:repeat(regex-group(1), regex-group(2), xs:integer(regex-group(3)))"/>
+                    </xsl:matching-substring>
+                    <xsl:non-matching-substring>
+                        <xsl:copy-of select="f:log-error('unexpected parameters for repeat([char], [separator], [count]) in: repeat({1}).', ($repeat))"/>
+                        <xsl:value-of select="f:repeat('*', '&nbsp;&nbsp;&nbsp;', 3)"/>
+                    </xsl:non-matching-substring>
+                </xsl:analyze-string>
+                </xsl:variable>
+                <xsl:call-template name="generate-milestone-paragraph">                           
+                    <xsl:with-param name="string" select="$string"/>                            
+                </xsl:call-template>
+            </xsl:when>
+
             <xsl:when test="@rend = map:keys($milestone-markers)">
                 <xsl:call-template name="generate-milestone-paragraph">
                     <xsl:with-param name="string" select="$milestone-markers(@rend)"/>
