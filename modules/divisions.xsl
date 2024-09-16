@@ -878,27 +878,61 @@
         <xsl:param name="secondLang" as="xs:string?"/>
         <xsl:param name="anchors" as="xs:string*"/>
 
-        <tr>
-            <td class="first">
-                <xsl:copy-of select="f:generate-lang-attribute($firstLang)"/>
+        <xsl:choose>
+            <xsl:when test="f:rend-value($first/@rend, 'span-alignment') = 'both'">
+                <tr>
+                    <td colspan="2">
+                        <xsl:copy-of select="f:generate-lang-attribute($firstLang)"/>
 
-                <xsl:apply-templates select="$first"/>
-                <xsl:call-template name="output-inserted-paragraphs">
-                    <xsl:with-param name="start" select="$first"/>
-                    <xsl:with-param name="anchors" select="$anchors"/>
-                </xsl:call-template>
-            </td>
+                        <xsl:apply-templates select="$first"/>
+                        <xsl:call-template name="output-inserted-paragraphs">
+                            <xsl:with-param name="start" select="$first"/>
+                            <xsl:with-param name="anchors" select="$anchors"/>
+                        </xsl:call-template>
 
-            <td class="second">
-                <xsl:copy-of select="f:generate-lang-attribute($secondLang)"/>
+                        <xsl:copy-of select="f:log-warning('Left-side paragraph {1} will span both columns; matching right-side column will be skipped.', ($first/@n))"/>
+                    </td>
+                </tr>
+            </xsl:when>
+            <xsl:when test="f:rend-value($second/@rend, 'span-alignment') = 'both'">
+                <tr>
+                    <td colspan="2">
+                        <xsl:copy-of select="f:generate-lang-attribute($secondLang)"/>
 
-                <xsl:apply-templates select="$second"/>
-                <xsl:call-template name="output-inserted-paragraphs">
-                    <xsl:with-param name="start" select="$second"/>
-                    <xsl:with-param name="anchors" select="$anchors"/>
-                </xsl:call-template>
-            </td>
-        </tr>
+                        <xsl:apply-templates select="$second"/>
+                        <xsl:call-template name="output-inserted-paragraphs">
+                            <xsl:with-param name="start" select="$second"/>
+                            <xsl:with-param name="anchors" select="$anchors"/>
+                        </xsl:call-template>
+
+                        <xsl:copy-of select="f:log-warning('Right-side paragraph {1} will span both columns; matching left-side column will be skipped.', ($second/@n))"/>
+                    </td>
+                </tr>
+            </xsl:when>
+            <xsl:otherwise>
+                <tr>
+                    <td class="first">
+                        <xsl:copy-of select="f:generate-lang-attribute($firstLang)"/>
+
+                        <xsl:apply-templates select="$first"/>
+                        <xsl:call-template name="output-inserted-paragraphs">
+                            <xsl:with-param name="start" select="$first"/>
+                            <xsl:with-param name="anchors" select="$anchors"/>
+                        </xsl:call-template>
+                    </td>
+
+                    <td class="second">
+                        <xsl:copy-of select="f:generate-lang-attribute($secondLang)"/>
+
+                        <xsl:apply-templates select="$second"/>
+                        <xsl:call-template name="output-inserted-paragraphs">
+                            <xsl:with-param name="start" select="$second"/>
+                            <xsl:with-param name="anchors" select="$anchors"/>
+                        </xsl:call-template>
+                    </td>
+                </tr>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
 

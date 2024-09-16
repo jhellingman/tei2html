@@ -15,6 +15,14 @@ To present bilingual text side-by-side with the `tei2html`, you can do the follo
 
 When running `tei2html`, it will generate a table, with the text of the first division on the left, and the text of the second division on the right. Table cells will be used to make sure matching elements are aligned. The code understands sub-divisions and will recurse into them, still using a single table.
 
+=== Excluding content from alignment
+
+Sometimes, you want to exclude certain elements from the alignment (e.g., non-translated sections, headings, or figures). To do so, you have to include the element on both sides with the same `@n` attribute, and
+give one the following `@rend` attribute:
+
+    rend="span-alignment(both)"
+
+The other element should remain empty (as it will be skipped).
 
 === Aligned text from a separate file
 

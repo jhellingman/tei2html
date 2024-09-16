@@ -367,6 +367,7 @@
                     <xsl:if test="$hasNumbers">
                         <td class="lineNumbers">
                             <xsl:choose>
+                                <!-- Only one of the line-numbers will be retained: they are assumed to be the same. -->
                                 <xsl:when test="@n">
                                     <span class="lineNum"><xsl:value-of select="@n"/><xsl:text> </xsl:text></span>
                                 </xsl:when>

@@ -430,6 +430,7 @@
                 <!-- Non-CSS properties handled otherwise -->
                 <xsl:when test="$property='align-with'"/>           <!-- align one division with another in a table -->
                 <xsl:when test="$property='align-with-document'"/>  <!-- align one division (in an external document) with another in a table -->
+                <xsl:when test="$property='span-alignment' and $value='both'"/> <!-- exclude element from division alignment -->
                 <xsl:when test="$property='class'"/>                <!-- pass-through CSS class. -->
                 <xsl:when test="$property='columns'"/>              <!-- number of columns to use on list, table, etc. -->
                 <xsl:when test="$property='cover-image'"/>          <!-- cover-image for ePub versions. -->
