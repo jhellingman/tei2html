@@ -44,10 +44,10 @@
         <xsl:choose>
             <xsl:when test="not(f:should-display-lg(.))"/>
             <xsl:when test="f:has-rend-value(@rend, 'align-with')">
-                <xsl:call-template name="handleAlignedLg"/>
+                <xsl:call-template name="handle-align-lg"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:call-template name="handleLg"/>
+                <xsl:call-template name="handle-lg"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -141,7 +141,7 @@
             on the screen, and still keep the left side of all stanzas aligned.</xd:detail>
     </xd:doc>
 
-    <xsl:template name="handleLg">
+    <xsl:template name="handle-lg">
         <xsl:context-item as="element(lg)" use="required"/>
 
         <xsl:call-template name="closepar"/>
@@ -164,7 +164,7 @@
         <xd:detail>Format two aligned lg elements: determine which two verses need to be aligned.</xd:detail>
     </xd:doc>
 
-    <xsl:template name="handleAlignedLg">
+    <xsl:template name="handle-align-lg">
         <xsl:context-item as="element(lg)" use="required"/>
         <xsl:variable name="otherId" select="f:rend-value(@rend, 'align-with')"/>
         <xsl:copy-of select="f:log-info('Align verse {1} with verse {2}.', (@id, $otherId))"/>
