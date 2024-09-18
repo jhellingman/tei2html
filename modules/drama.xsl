@@ -118,7 +118,7 @@
                 margin: 0;
                 white-space: nowrap;
             }
-            
+
             td.lineGroupBrace {
                 vertical-align: middle;
             }
@@ -330,7 +330,7 @@
 
 
     <!--====================================================================-->
-    <!-- code to align two verses  -->
+    <!-- code to align two verses / line-groups  -->
 
     <xd:doc mode="align-verse">
         <xd:short>Mode used to format lines in aligned verse.</xd:short>
@@ -339,64 +339,150 @@
 
     <xd:doc>
         <xd:short>Align two verses.</xd:short>
-        <xd:detail>Align two verses in a table. Here the assumption is that both verses have
-        the same number of elements. We simply iterate through both, and place them side-by-side.
+        <xd:detail>Align two verses in a table. Here the assumption is that both verses / line-groups have
+        the same number of elements. We simply iterate through thie first, and place the matching elements from the second side-by-side.
         Note that the <code>@rend</code> attribute on the <code>lg</code> elements will be ignored. Line numbers will be inserted
-        from either of both verses to be aligned, in a separate column.</xd:detail>
+        from either of both verses to be aligned, in a separate column. When we encounter a nested <code>lg</code> element, we
+        recurse into that element, but without creating a new table.</xd:detail>
     </xd:doc>
 
     <xsl:template name="align-verses">
         <xsl:param name="a" as="element(lg)"/>
         <xsl:param name="b" as="element(lg)"/>
 
-        <xsl:variable name="hasNumbers" select="$a/*[@n] | $b/*[@n]"/>
+        <!-- Do we have a line with a line-number anywhere in our hierarchy? -->
+        <xsl:variable name="hasLineNumbers" select="boolean($a//l[@n] | $b//l[@n])" as="xs:boolean"/>
 
         <xsl:copy-of select="f:log-info('Elements in first: {1}; elements in second: {2}', (xs:string(count($a/*)), xs:string(count($b/*))))"/>
         <xsl:if test="count($a/*) != count($b/*)">
             <xsl:copy-of select="f:log-warning('Number of elements in verses to align does not match!', ())"/>
         </xsl:if>
 
-        <!-- Determine the language of each side, so we can correctly indicate it on the cells. -->
-        <xsl:variable name="firstLang" select="($a/ancestor-or-self::*/@lang)[last()]" as="xs:string?"/>
-        <xsl:variable name="secondLang" select="($b/ancestor-or-self::*/@lang)[last()]" as="xs:string?"/>
-
         <table class="alignedVerse">
             <xsl:for-each select="$a/*">
-                <xsl:variable name="position" select="count(preceding-sibling::*) + 1"/>
-                <tr>
-                    <xsl:if test="$hasNumbers">
-                        <td class="lineNumbers">
-                            <xsl:choose>
-                                <!-- Only one of the line-numbers will be retained: they are assumed to be the same. -->
-                                <xsl:when test="@n">
-                                    <span class="lineNum"><xsl:value-of select="@n"/><xsl:text> </xsl:text></span>
-                                </xsl:when>
-                                <xsl:when test="$b/*[$position]/@n">
-                                    <span class="lineNum"><xsl:value-of select="$b/*[$position]/@n"/><xsl:text> </xsl:text></span>
-                                </xsl:when>
-                            </xsl:choose>
-                        </td>
-                    </xsl:if>
-                    <td class="first">
-                        <xsl:copy-of select="f:generate-lang-attribute($firstLang)"/>
-                        <xsl:apply-templates mode="align-verse" select="."/>
-                    </td>
-                    <td class="second">
-                        <xsl:copy-of select="f:generate-lang-attribute($secondLang)"/>
-                        <xsl:apply-templates mode="align-verse" select="$b/*[$position]"/>
-                    </td>
-                </tr>
+                <xsl:variable name="position" select="count(preceding-sibling::*) + 1" as="xs:integer"/>
+                <xsl:variable name="first" select="."/>
+                <xsl:variable name="second" select="$b/*[$position]"/>
+
+                <xsl:if test="name($first) != name($second)">
+                    <xsl:copy-of select="f:log-warning('Element type ''{1}'' on left not matching with element ''{2}'' on right!', (name($first), name($second)))"/>
+                </xsl:if>
+
+                <xsl:choose>
+                    <xsl:when test="name($first) = 'lg' and name($second) = 'lg'">
+                        <xsl:call-template name="align-nested-verses">
+                            <xsl:with-param name="a" select="$first"/>
+                            <xsl:with-param name="b" select="$second"/>
+                            <xsl:with-param name="position" select="$position"/>
+                            <xsl:with-param name="hasLineNumbers" select="$hasLineNumbers"/>
+                        </xsl:call-template>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:call-template name="align-single-element">
+                            <xsl:with-param name="first" select="$first"/>
+                            <xsl:with-param name="second" select="($second, '')[1]"/>
+                            <xsl:with-param name="hasLineNumbers" select="$hasLineNumbers"/>
+                        </xsl:call-template>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:for-each>
         </table>
+    </xsl:template>
 
+
+    <xsl:template name="align-single-element">
+        <xsl:param name="first"/>
+        <xsl:param name="second"/>
+        <xsl:param name="hasLineNumbers" as="xs:boolean"/>
+
+        <!-- Determine the language of each side, so we can correctly indicate it on the cells. -->
+        <xsl:variable name="firstLang" select="if ($first = '') then '' else ($first/ancestor-or-self::*/@lang)[last()]" as="xs:string?"/>
+        <xsl:variable name="secondLang" select="if ($second = '') then '' else ($second/ancestor-or-self::*/@lang)[last()]" as="xs:string?"/>
+
+        <tr>
+            <xsl:if test="$hasLineNumbers">
+                <td class="lineNumbers">
+                    <xsl:choose>
+                        <!-- Ignore numbers on non-lines -->
+                        <xsl:when test="not(name($first) = 'l' and name($second) = 'l')">
+                            <xsl:copy-of select="f:log-warning('ignoring @n attribute {1} on {2}!', ($first/@n, name($first)))"/>
+                        </xsl:when>
+
+                        <!-- Only one of the line-numbers will be retained: they are assumed to be the same. -->
+                        <xsl:when test="$first/@n">
+                            <span class="lineNum"><xsl:value-of select="$first/@n"/><xsl:text> </xsl:text></span>
+                        </xsl:when>
+                        <xsl:when test="$second/@n">
+                            <span class="lineNum"><xsl:value-of select="$second/@n"/><xsl:text> </xsl:text></span>
+                        </xsl:when>
+                    </xsl:choose>
+                </td>
+            </xsl:if>
+            <td class="first">
+                <xsl:copy-of select="f:generate-lang-attribute($firstLang)"/>
+                <xsl:apply-templates mode="align-verse" select="$first"/>
+            </td>
+            <td class="second">
+                <xsl:copy-of select="f:generate-lang-attribute($secondLang)"/>
+                <xsl:apply-templates mode="align-verse" select="$second"/>
+            </td>
+        </tr>
+    </xsl:template>
+
+
+    <xsl:template name="align-nested-verses">
+        <xsl:param name="a" as="element(lg)"/>
+        <xsl:param name="b" as="element(lg)"/>
+        <xsl:param name="position" as="xs:integer"/>
+        <xsl:param name="hasLineNumbers" as="xs:boolean"/>
+
+        <xsl:copy-of select="f:log-info('Aligning nested line-groups', ())"/>
+
+        <xsl:copy-of select="f:log-info('Elements in first: {1}; elements in second: {2}', (xs:string(count($a/*)), xs:string(count($b/*))))"/>
+        <xsl:if test="count($a/*) != count($b/*)">
+            <xsl:copy-of select="f:log-warning('Number of elements in verses to align does not match!', ())"/>
+        </xsl:if>
+
+        <!-- Insert some extra space between stanzas -->
+        <xsl:if test="$position != 1">
+            <tr>
+                <td class="lgSpacer" colspan="{if ($hasLineNumbers) then 3 else 2}"/>
+            </tr>
+        </xsl:if>
+
+        <xsl:for-each select="$a/*">
+            <xsl:variable name="position" select="count(preceding-sibling::*) + 1" as="xs:integer"/>
+            <xsl:variable name="first" select="."/>
+            <xsl:variable name="second" select="$b/*[$position]"/>
+
+            <xsl:if test="name($first) != name($second)">
+                <xsl:copy-of select="f:log-warning('Element type ''{1}'' on left not matching with element ''{2}'' on right!', (name($first), name($second)))"/>
+            </xsl:if>
+
+            <xsl:choose>
+                <xsl:when test="name($first) = 'lg' and name($second) = 'lg'">
+                    <xsl:call-template name="align-nested-verses">
+                        <xsl:with-param name="a" select="$first"/>
+                        <xsl:with-param name="b" select="$second"/>
+                        <xsl:with-param name="position" select="$position"/>
+                        <xsl:with-param name="hasLineNumbers" select="$hasLineNumbers"/>
+                    </xsl:call-template>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:call-template name="align-single-element">
+                        <xsl:with-param name="first" select="$first"/>
+                        <xsl:with-param name="second" select="($second, '')[1]"/>
+                        <xsl:with-param name="hasLineNumbers" select="$hasLineNumbers"/>
+                    </xsl:call-template>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:for-each>
     </xsl:template>
 
 
     <xsl:template name="align-verses-nested-in-division">
         <xsl:param name="a" as="element(lg)"/>
         <xsl:param name="b" as="element(lg)"/>
-
-        <xsl:variable name="hasNumbers" select="$a/*[@n] | $b/*[@n]"/>
 
         <xsl:copy-of select="f:log-info('Elements in first: {1}; elements in second: {2}', (xs:string(count($a/*)), xs:string(count($b/*))))"/>
         <xsl:if test="count($a/*) != count($b/*)">
@@ -426,12 +512,12 @@
 
     <xd:doc>
         <xd:short>Format a head in aligned verse.</xd:short>
-        <xd:detail>Since we cannot have an <code>h2</code>-elements inside tables in HTML, we place the head in
-        a span, and give it the CSS-class <code>h2</code>, so we can make it look like a head.</xd:detail>
+        <xd:detail>Since we cannot have an <code>h4</code>-element inside tables in HTML, we place the head in
+        a span, and give it the CSS-class <code>h4</code>, so we can make it look like a head.</xd:detail>
     </xd:doc>
 
     <xsl:template mode="align-verse" match="head">
-        <span class="h4"><xsl:apply-templates/></span>
+        <span class="h4 alignedVerseHead"><xsl:apply-templates/></span>
     </xsl:template>
 
 
@@ -456,6 +542,14 @@
         </xsl:element>
     </xsl:template>
 
+    <xd:doc>
+        <xd:short>Format any remaining element in aligned verse.</xd:short>
+    </xd:doc>
+
+    <xsl:template mode="align-verse" match="*">
+        <xsl:copy-of select="f:log-warning('Unexpected element {1} in aligned verse.', (name(.)))"/>
+        <xsl:apply-templates select="."/>
+    </xsl:template>
 
     <!--====================================================================-->
     <!-- Drama -->

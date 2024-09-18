@@ -273,6 +273,254 @@ text-indent:2em;
     </x:scenario>
 
 
+    <x:scenario label="When rendering two aligned lg's with nested lg with two lines of verse">
+        <x:context>
+            <lg id="lg.1" rend="align-with(lg.2)">
+                <lg>
+                    <l id="l1.1">First,</l>
+                    <l id="l1.2">Second.</l>
+                </lg>
+            </lg>
+
+            <lg id="lg.2" rend="display(none)">
+                <lg>
+                    <l id="l2.1">Eerste,</l>
+                    <l id="l2.2">Tweede.</l>
+                </lg>
+            </lg>
+        </x:context>
+        <x:expect label="will result in an HTML div with two paragraphs">
+            <table xmlns="http://www.w3.org/1999/xhtml"
+                   class="alignedVerse">
+               <tr>
+                  <td class="first">
+                     <p id="l1.1" class="line">First,</p>
+                  </td>
+                  <td class="second">
+                     <p id="l2.1" class="line">Eerste,</p>
+                  </td>
+               </tr>
+               <tr>
+                  <td class="first">
+                     <p id="l1.2" class="line">Second.</p>
+                  </td>
+                  <td class="second">
+                     <p id="l2.2" class="line">Tweede.</p>
+                  </td>
+               </tr>
+            </table>
+        </x:expect>
+    </x:scenario>
+
+
+    <x:scenario label="When rendering two aligned lg's with two nested lg's with two lines of verse each">
+        <x:context>
+            <lg id="lg.1" rend="align-with(lg.2)">
+                <lg>
+                    <l id="l1.1">First,</l>
+                    <l id="l1.2">Second.</l>
+                </lg>
+                <lg>
+                    <l id="l1.3">Third,</l>
+                    <l id="l1.4">Fourth.</l>
+                </lg>
+            </lg>
+
+            <lg id="lg.2" rend="display(none)">
+                <lg>
+                    <l id="l2.1">Eerste,</l>
+                    <l id="l2.2">Tweede.</l>
+                </lg>
+                <lg>
+                    <l id="l2.3">Derde,</l>
+                    <l id="l2.4">Vierde.</l>
+                </lg>
+            </lg>
+        </x:context>
+        <x:expect label="will result in an HTML div with two paragraphs">
+            <table xmlns="http://www.w3.org/1999/xhtml"
+                   class="alignedVerse">
+               <tr>
+                  <td class="first">
+                     <p id="l1.1" class="line">First,</p>
+                  </td>
+                  <td class="second">
+                     <p id="l2.1" class="line">Eerste,</p>
+                  </td>
+               </tr>
+               <tr>
+                  <td class="first">
+                     <p id="l1.2" class="line">Second.</p>
+                  </td>
+                  <td class="second">
+                     <p id="l2.2" class="line">Tweede.</p>
+                  </td>
+               </tr>
+               <tr>
+                  <td class="lgSpacer" colspan="2" />
+               </tr>
+               <tr>
+                  <td class="first">
+                     <p id="l1.3" class="line">Third,</p>
+                  </td>
+                  <td class="second">
+                     <p id="l2.3" class="line">Derde,</p>
+                  </td>
+               </tr>
+               <tr>
+                  <td class="first">
+                     <p id="l1.4" class="line">Fourth.</p>
+                  </td>
+                  <td class="second">
+                     <p id="l2.4" class="line">Vierde.</p>
+                  </td>
+               </tr>
+            </table>
+        </x:expect>
+    </x:scenario>
+
+
+
+    <x:scenario label="When rendering two aligned lg's with two lines of verse, some having line-numbers">
+        <x:context>
+            <lg id="lg.1" rend="align-with(lg.2)">
+                <l id="l1.1" n="1">First,</l>
+                <l id="l1.2">Second.</l>
+            </lg>
+
+            <lg id="lg.2" rend="display(none)">
+                <l id="l2.1">Eerste,</l>
+                <l id="l2.2" n="2">Tweede.</l>
+            </lg>
+        </x:context>
+        <x:expect label="will result in an HTML div with two paragraphs and the line-numbes in a separate column">
+            <table xmlns="http://www.w3.org/1999/xhtml"
+                   class="alignedVerse">
+               <tr>
+                  <td class="lineNumbers">
+                     <span class="lineNum">1 </span>
+                  </td>
+                  <td class="first">
+                     <p id="l1.1" class="line">First,</p>
+                  </td>
+                  <td class="second">
+                     <p id="l2.1" class="line">Eerste,</p>
+                  </td>
+               </tr>
+               <tr>
+                  <td class="lineNumbers">
+                     <span class="lineNum">2 </span>
+                  </td>
+                  <td class="first">
+                     <p id="l1.2" class="line">Second.</p>
+                  </td>
+                  <td class="second">
+                     <p id="l2.2" class="line">Tweede.</p>
+                  </td>
+               </tr>
+            </table>
+        </x:expect>
+    </x:scenario>
+
+
+    <x:scenario label="When rendering two aligned lg's with two lines of verse and a page-break">
+        <x:context>
+            <lg id="lg.1" rend="align-with(lg.2)">
+                <l id="l1.1">First,</l>
+                <pb n="12"/>
+                <l id="l1.2">Second.</l>
+            </lg>
+
+            <lg id="lg.2" rend="display(none)">
+                <l id="l2.1">Eerste,</l>
+                <pb n="12"/>
+                <l id="l2.2">Tweede.</l>
+            </lg>
+        </x:context>
+        <x:expect label="will result in an HTML div with two paragraphs (and a warning in the log)">
+            <table xmlns="http://www.w3.org/1999/xhtml"
+                   class="alignedVerse">
+               <tr>
+                  <td class="first">
+                     <p id="l1.1" class="line">First,</p>
+                  </td>
+                  <td class="second">
+                     <p id="l2.1" class="line">Eerste,</p>
+                  </td>
+               </tr>
+               <tr>
+                  <td class="first">
+                     <p>
+                        <span class="pageNum" id="...">[<a href="...">12</a>]</span>
+                     </p>
+                  </td>
+                  <td class="second">
+                     <p>
+                        <span class="pageNum" id="...">[<a href="...">12</a>]</span>
+                     </p>
+                  </td>
+               </tr>
+               <tr>
+                  <td class="first">
+                     <p id="l1.2" class="line">Second.</p>
+                  </td>
+                  <td class="second">
+                     <p id="l2.2" class="line">Tweede.</p>
+                  </td>
+               </tr>
+            </table>
+        </x:expect>
+    </x:scenario>
+
+
+
+    <x:scenario label="When rendering two aligned lg's with two lines of verse and a page-break in the first and a milestone in the second">
+        <x:context>
+            <lg id="lg.1" rend="align-with(lg.2)">
+                <l id="l1.1">First,</l>
+                <pb n="12"/>
+                <l id="l1.2">Second.</l>
+            </lg>
+
+            <lg id="lg.2" rend="display(none)">
+                <l id="l2.1">Eerste,</l>
+                <milestone n="12"/>
+                <l id="l2.2">Tweede.</l>
+            </lg>
+        </x:context>
+        <x:expect label="will result in an HTML div with two paragraphs (and some warnings in the log)">
+            <table xmlns="http://www.w3.org/1999/xhtml"
+                   class="alignedVerse">
+               <tr>
+                  <td class="first">
+                     <p id="l1.1" class="line">First,</p>
+                  </td>
+                  <td class="second">
+                     <p id="l2.1" class="line">Eerste,</p>
+                  </td>
+               </tr>
+               <tr>
+                  <td class="first">
+                     <p>
+                        <span class="pageNum" id="...">[<a href="...">12</a>]</span>
+                     </p>
+                  </td>
+                  <td class="second">
+                     <a id="..."/>
+                  </td>
+               </tr>
+               <tr>
+                  <td class="first">
+                     <p id="l1.2" class="line">Second.</p>
+                  </td>
+                  <td class="second">
+                     <p id="l2.2" class="line">Tweede.</p>
+                  </td>
+               </tr>
+            </table>
+        </x:expect>
+    </x:scenario>
+
     <!-- sp -->
 
     <x:scenario label="When rendering a fragment of drama with a speaker">
