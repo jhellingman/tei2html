@@ -6,7 +6,7 @@ To present bilingual text side-by-side with the `tei2html`, you can do the follo
 
 1. Encode the two texts, each should be in a separate divisions (`div1`, `div2`, etc.).
 2. Give each of the divisions an `@id` attribute.
-3. On one of the divisions, at the following `@rend` attribute:
+3. On one of the divisions, add the following `@rend` attribute:
 
     rend="align-with(id-of-div-to-align)"
 
@@ -15,14 +15,15 @@ To present bilingual text side-by-side with the `tei2html`, you can do the follo
 
 When running `tei2html`, it will generate a table, with the text of the first division on the left, and the text of the second division on the right. Table cells will be used to make sure matching elements are aligned. The code understands sub-divisions and will recurse into them, still using a single table.
 
+
 === Excluding content from alignment
 
-Sometimes, you want to exclude certain elements from the alignment (e.g., non-translated sections, headings, or figures). To do so, you have to include the element on both sides with the same `@n` attribute, and
-give one the following `@rend` attribute:
+Sometimes, you want to exclude certain elements from the alignment (e.g., non-translated sections, headings, or figures). To do so, you have to include the element on both sides with the same `@n` attribute, and give one the following `@rend` attribute:
 
     rend="span-alignment(both)"
 
 The other element should remain empty (as it will be skipped).
+
 
 === Aligned text from a separate file
 
@@ -31,4 +32,18 @@ It is also possible to align texts kept in separate files. To do so, use the fol
     rend="align-with-document(filename.xml#id-of-div-to-align)"
 
 When using the perl scripts that come with `tei2html`, the to-be-aligned sections will be included in an intermediate document in a pre-processing step (in `include.xsl`), which replaces `align-with-document` with `align-with` and places the to-be aligned section directly after the section it will be aligned with. By doing so, generated tables of contents, lists of issues in the colophon, and footnotes will be processed correctly. The `tei2html` xslt stylesheeets can also do this directly, but with limited support for those additional items.
+
+
+=== Footnotes in aligned texts
+
+Footnotes in aligned text will be placed at the bottom of the column they appear in. If footnotes are present in both aligned texts, both sides will have footnotes.
+
+
+=== Aligned verse
+
+When aligning verses (or actually line-groups, encoded with the `lg` element), there is no need to number matching lines with a `@n` attribute. However, the number of items in the line-groups needs to match. Again to align two line-groups, on one of the line-groups add the following `@rend` attribute:
+
+    rend="align-with(id-of-lg-to-align)"
+
+This will generate a table, in which all lines are placed in rows side-by-side. The code will recurse into nested `lg` elements, still using a single table.
 

@@ -57,9 +57,18 @@ td.alignedDiv5, td.alignedDiv6, td.alignedDiv7 {
 }
 
 
-/* Collapsing of margins doesn't work for table cells */
+/* Collapsing of touching margins doesn't work if they are inside table cells */
 table.alignedText p:not(.first) {
     margin-top: 0;
+}
+
+.alignedVerseHead {
+    margin: 1em 0 1em 0;
+    display: inline-block;  
+}
+
+.alignedVerseSpacer {
+    height: 1.4em; /* 1em + 1.4em = 2.4em */
 }
 
 /* End of aligned-text.css */

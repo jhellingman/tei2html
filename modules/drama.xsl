@@ -446,7 +446,7 @@
         <!-- Insert some extra space between stanzas -->
         <xsl:if test="$position != 1">
             <tr>
-                <td class="lgSpacer" colspan="{if ($hasLineNumbers) then 3 else 2}"/>
+                <td class="alignedVerseSpacer" colspan="{if ($hasLineNumbers) then 3 else 2}"/>
             </tr>
         </xsl:if>
 
