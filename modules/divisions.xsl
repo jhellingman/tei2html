@@ -816,20 +816,45 @@
 
         <!-- Include footnotes if at div1 level (for both sides) -->
         <xsl:if test="$a/../div1">
-            <xsl:if test="$a//note[f:is-footnote(.)] or $b//note[f:is-footnote(.)]">
-                <tr>
-                    <td class="first">
-                        <xsl:call-template name="insert-footnotes">
-                            <xsl:with-param name="div" select="$a"/>
-                        </xsl:call-template>
-                    </td>
-                    <td class="second">
-                        <xsl:call-template name="insert-footnotes">
-                            <xsl:with-param name="div" select="$b"/>
-                        </xsl:call-template>
-                    </td>
-                </tr>
-            </xsl:if>
+            <xsl:choose>
+                <!-- Only footnotes on left-hand side -->
+                <xsl:when test="$a//note[f:is-footnote(.)] and not($b//note[f:is-footnote(.)])">
+                    <tr>
+                        <td colspan="2">
+                            <xsl:call-template name="insert-footnotes">
+                                <xsl:with-param name="div" select="$a"/>
+                            </xsl:call-template>
+                        </td>
+                    </tr>
+                </xsl:when>
+
+                <!-- Only footnotes on right-hand side -->
+                <xsl:when test="not($a//note[f:is-footnote(.)]) and $b//note[f:is-footnote(.)]">
+                    <tr>
+                        <td colspan="2">
+                            <xsl:call-template name="insert-footnotes">
+                                <xsl:with-param name="div" select="$b"/>
+                            </xsl:call-template>
+                        </td>
+                    </tr>
+                </xsl:when>
+
+                <!-- Footnotes on either side -->
+                <xsl:when test="$a//note[f:is-footnote(.)] or $b//note[f:is-footnote(.)]">
+                    <tr>
+                        <td class="first">
+                            <xsl:call-template name="insert-footnotes">
+                                <xsl:with-param name="div" select="$a"/>
+                            </xsl:call-template>
+                        </td>
+                        <td class="second">
+                            <xsl:call-template name="insert-footnotes">
+                                <xsl:with-param name="div" select="$b"/>
+                            </xsl:call-template>
+                        </td>
+                    </tr>
+                </xsl:when>
+            </xsl:choose>
         </xsl:if>
     </xsl:template>
 

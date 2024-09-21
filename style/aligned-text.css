@@ -6,6 +6,7 @@
 
 table.alignedText, table.alignedVerse {
     border-collapse: collapse;
+    width: 100%;
 }
 
 table.alignedText td.first, table.alignedText td.second {
