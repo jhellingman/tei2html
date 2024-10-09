@@ -1192,6 +1192,7 @@ span.ditto span.d {
 
 table.alignedText, table.alignedVerse {
  border-collapse: collapse;
+ width: 100%;
 }
 
 table.alignedText td.first, table.alignedText td.second {
@@ -1248,7 +1249,17 @@ table.alignedText p:not(.first) {
  margin-top: 0;
 }
 
-  
+.alignedVerseHead {
+ margin: 1em 0 1em 0;
+ display: inline-block; 
+}
+
+.alignedVerseSpacer {
+ height: 1.4em; 
+}
+
+ 
+ 
 
 .epub-media-overlay-active {
  background-color: yellow;

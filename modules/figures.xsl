@@ -259,6 +259,7 @@
 
         <img src="{$file}">
             <xsl:attribute name="alt"><xsl:value-of select="$alt"/></xsl:attribute>
+            <xsl:if test="$alt = '' and f:is-set('pg.compliant')"><xsl:attribute name="data-role">presentation</xsl:attribute></xsl:if>
             <xsl:if test="$class != ''"><xsl:attribute name="class"><xsl:value-of select="$class"/></xsl:attribute></xsl:if>
             <xsl:if test="$width != ''"><xsl:attribute name="width"><xsl:value-of select="$width"/></xsl:attribute></xsl:if>
             <xsl:if test="$height != ''"><xsl:attribute name="height"><xsl:value-of select="$height"/></xsl:attribute></xsl:if>
