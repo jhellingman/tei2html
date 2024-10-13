@@ -80,13 +80,13 @@
         <xsl:param name="default" as="xs:string"/>
 
         <xsl:sequence select="
-            if (f:has-rend-value($node/@rend, 'image-alt'))
+            normalize-space(if (f:has-rend-value($node/@rend, 'image-alt'))
             then f:rend-value($node/@rend, 'image-alt')
             else if ($node/figDesc)
                  then $node/figDesc[1]
                  else if ($node/head)
                       then $node/head[1]
-                      else $default"/>
+                      else $default)"/>
     </xsl:function>
 
 
