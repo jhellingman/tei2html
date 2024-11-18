@@ -1718,6 +1718,17 @@ table | text)*)))>
      facs CDATA #IMPLIED
      TEIform CDATA "pb" >
 
+<!ELEMENT cb - O EMPTY>
+
+<!ATTLIST cb
+     id ID #IMPLIED
+     pos CDATA #IMPLIED
+     lang IDREF #IMPLIED
+     rend CDATA #IMPLIED
+     ed CDATA #IMPLIED
+     n CDATA #IMPLIED
+     TEIform CDATA "cb" >
+
 <!ELEMENT lb - O EMPTY>
 
 <!ATTLIST lb
@@ -2061,7 +2072,7 @@ table | text)*))) -(stage) >
 <!--  7:  Top-level parts of default structure                 -->
 
 <!ELEMENT text - - ((front)?, (body | group), (back)?) +(index |
-interp | interpGrp | lb | milestone | pb) >
+interp | interpGrp | lb | milestone | pb | cb) >
 
 <!ATTLIST text
      ana IDREFS #IMPLIED

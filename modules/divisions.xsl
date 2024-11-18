@@ -487,7 +487,8 @@
         <xsl:context-item as="element(head)" use="required"/>
 
         <xsl:if test="f:has-rend-value(@rend, 'image')">
-            <div class="figure">
+            <xsl:variable name="class" select="if (f:rend-value(@rend, 'display') = 'image-only') then (f:generate-class(.) || ' figure') else 'figure'"/>
+            <div class="{$class}">
                 <xsl:copy-of select="f:generate-lang-attribute(@lang)"/>
                 <xsl:variable name="alt">
                     <xsl:choose>

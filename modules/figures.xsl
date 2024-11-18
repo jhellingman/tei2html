@@ -417,6 +417,12 @@ width:{$width};
         <xsl:sequence select="$fileSize"/>
     </xsl:function>
 
+    <xsl:function name="f:image-file-date" as="xs:string?">
+        <xsl:param name="file" as="xs:string"/>
+        <xsl:variable name="fileDate" select="$imageInfo/img:images/img:image[@path=$file]/@filedate"/>
+        <xsl:sequence select="$fileDate"/>
+    </xsl:function>
+
 
     <xd:doc>
         <xd:short>Handle a figure element.</xd:short>
