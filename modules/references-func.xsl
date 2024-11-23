@@ -259,7 +259,10 @@
 
         <xsl:copy-of select="f:log-debug('URL {1}; pattern: {2}; replacement: {3}.', ($url, $prefixDef/@matchPattern, $prefixDef/@replacementPattern))"/>
 
-        <xsl:value-of select="replace($locator, $prefixDef/@matchPattern, $prefixDef/@replacementPattern)"/>
+        <!-- Handle the PGDP project id -->
+        <xsl:variable name="replacementPattern" select="replace($prefixDef/@replacementPattern, '\$\{PGDPProjectId\}', root($prefixDef)//idno[@type = 'PGDPProjectId'])"/>
+
+        <xsl:value-of select="replace($locator, $prefixDef/@matchPattern, $replacementPattern)"/>
     </xsl:function>
 
 
