@@ -197,7 +197,7 @@
             <td><xsl:value-of select="$value"/></td>
             <td>
                 <xsl:choose>
-                    <xsl:when test="f:show-xref($url)">
+                    <xsl:when test="f:show-external-reference($url, $node)">
                         <a href="{$url}" class="{f:translate-xref-class($url)}"><xsl:value-of select="$urlText"/></a>
                     </xsl:when>
                     <xsl:when test="f:is-valid($url)">
@@ -212,13 +212,6 @@
     </xsl:function>
 
 
-    <xsl:function name="f:show-xref" as="xs:boolean">
-        <xsl:param name="url" as="xs:string?"/>
-
-        <xsl:sequence select="f:is-valid($url) and ((f:get-setting('xref.show') != 'never' and not(f:is-set('pg.compliant'))) or f:is-allowed-url($url))"/>
-    </xsl:function>
-
-
     <xsl:function name="f:metadata-line-as-url">
         <xsl:param name="key" as="xs:string"/>
         <xsl:param name="node"/>
@@ -230,7 +223,7 @@
             <td><b><xsl:value-of select="if ($key = '') then '' else $key || ':'"/></b></td>
             <td>
                 <xsl:choose>
-                    <xsl:when test="f:show-xref($url)">
+                    <xsl:when test="f:show-external-reference($url, $node)">
                         <a href="{$url}" class="{f:translate-xref-class($url)}"><xsl:value-of select="$value"/></a>
                     </xsl:when>
                     <xsl:when test="f:is-valid($url)">

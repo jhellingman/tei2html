@@ -199,8 +199,7 @@
                 </xsl:choose>
             </xsl:when>
 
-            <xsl:when test="f:get-setting('xref.show') = 'always' and not(f:is-set('pg.compliant'))
-                            or (f:get-setting('xref.show') = 'colophon' and ancestor::teiHeader)">
+            <xsl:when test="f:show-external-reference($url, .)">
                 <xsl:call-template name="handle-xref">
                     <xsl:with-param name="url" select="$url"/>
                 </xsl:call-template>
@@ -211,6 +210,30 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+
+
+    <!-- When to show an external reference (url) in the output:
+
+        * url is a valid string and
+            * url is on allowed list or
+            * setting 'pg.compliant' is false and
+                * setting 'xref.show' = 'always'
+                * setting 'xref.show' = 'colophon' and we are rendering the colophon (i.e. our parent is the TEI header).
+    -->
+
+    <xsl:function name="f:show-external-reference" as="xs:boolean">
+        <xsl:param name="url"/>
+        <xsl:param name="node"/>
+
+        <xsl:sequence select="f:is-valid($url)
+            and (f:is-allowed-url($url)               
+                 or (not(f:is-set('pg.compliant'))
+                     and (f:get-setting('xref.show') = 'always' 
+                          or (f:get-setting('xref.show') = 'colophon' and $node/ancestor::teiHeader)
+                         )
+                    )
+                )"/>
+    </xsl:function>
 
 
     <xd:doc>
