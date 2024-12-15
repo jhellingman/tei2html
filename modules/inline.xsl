@@ -964,18 +964,33 @@
 
     <xsl:template match="ab">
         <xsl:if test="not(@rend='hide')">
-            <!-- If the item is to go flush right, add some space to avoid a colission in HTML. -->
+            <!-- If the item is to go flush right, add some (non-breaking) space to avoid a colission in HTML. -->
             <xsl:if test="@type='tocPageNum' or @type='flushright' or @type='adPrice'">
                 <xsl:text>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </xsl:text>
             </xsl:if>
-            <span>
-                <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
-                <xsl:variable name="class">
-                    <xsl:value-of select="@type"/>
-                </xsl:variable>
-                <xsl:copy-of select="f:set-class-attribute-with(., $class)"/>
-                <xsl:apply-templates/>
-            </span>
+            <xsl:choose>
+                <xsl:when test="f:has-rend-value(./@rend, 'direction-override')">
+                    <xsl:variable name="dir" select="f:rend-value(./@rend, 'direction-override')"/>
+                    <bdo dir="{$dir}">
+                        <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+                        <xsl:variable name="class">
+                            <xsl:value-of select="@type"/>
+                        </xsl:variable>
+                        <xsl:copy-of select="f:set-class-attribute-with(., $class)"/>
+                        <xsl:apply-templates/>                        
+                    </bdo>
+                </xsl:when>
+                <xsl:otherwise>
+                    <span>
+                        <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+                        <xsl:variable name="class">
+                            <xsl:value-of select="@type"/>
+                        </xsl:variable>
+                        <xsl:copy-of select="f:set-class-attribute-with(., $class)"/>
+                        <xsl:apply-templates/>
+                    </span>
+                </xsl:otherwise>
+            </xsl:choose>
         </xsl:if>
     </xsl:template>
 

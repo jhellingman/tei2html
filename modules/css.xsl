@@ -495,6 +495,7 @@
 
                 <!-- CSS properties not acceptable to ePub, so handled otherwise. -->
                 <xsl:when test="$property='direction'"/>
+                <xsl:when test="$property='direction-override'"/>
 
                 <!-- Filter out CSS3 stuff (for Project Gutenberg submissions). -->
                 <xsl:when test="f:get-setting('css.support') = '2' and $property = ('writing-mode')">

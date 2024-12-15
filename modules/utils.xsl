@@ -301,6 +301,9 @@
                 <xsl:value-of select="substring($lang, 1, 3) || upper-case(substring($lang, 4, 2))"/>
             </xsl:when>
             <!-- Avoid 2-letter language + 4-letter script code, if in pg-compliant mode -->
+            <xsl:when test="f:is-set('pg.compliant') and matches($lang, '^(zh-Hant|zh-Hans)$')">
+                <xsl:value-of select="'zh'"/>
+            </xsl:when>
             <xsl:when test="f:is-set('pg.compliant') and matches($lang, '^[a-z]{2}-[A-Za-z]{4}$')">
                 <!-- Use 'und' to prevent browsers from automatically selecting the font for the default script -->
                 <xsl:value-of select="'und'"/>
