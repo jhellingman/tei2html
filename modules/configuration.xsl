@@ -153,6 +153,8 @@
             <colophon.showAbbreviations>true</colophon.showAbbreviations>   <!-- Show a list of abbreviations in the colophon. -->
             <colophon.showExternalReferences>true</colophon.showExternalReferences>   <!-- Show a section on external references in the colophon. -->
             <colophon.maxCorrectionCount>20</colophon.maxCorrectionCount>   <!-- Maximum number of identical corrections that will be listed individually in the list of corrections. -->
+            <colophon.showAvailability>true</colophon.showAvailability>     <!-- Show the availability section in the colophon (credits + copyright license). -->
+            <colophon.showMetadata>true</colophon.showMetadata>             <!-- Show metadata in the colophon (details of author, etc.). -->
 
             <math.decimalSeparator>.</math.decimalSeparator>
             <math.thousandsSeparator>,</math.thousandsSeparator>

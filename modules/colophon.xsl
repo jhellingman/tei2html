@@ -71,8 +71,11 @@
 
     <xsl:template name="colophonBody">
         <xsl:context-item as="element(divGen)" use="required"/>
-        <h3 class="main"><xsl:value-of select="f:message('msgAvailability')"/></h3>
-        <xsl:apply-templates select="/*[self::TEI.2 or self::TEI]/teiHeader/fileDesc/publicationStmt/availability"/>
+
+        <xsl:if test="not(f:is-set('pg.compliant')) and f:is-set('colophon.showAvailability')">
+            <h3 class="main"><xsl:value-of select="f:message('msgAvailability')"/></h3>
+            <xsl:apply-templates select="/*[self::TEI.2 or self::TEI]/teiHeader/fileDesc/publicationStmt/availability"/>
+        </xsl:if>
 
         <xsl:if test="f:is-set('pg.compliant') and //figure[@id = 'cover-image'][f:rend-value(@rend, 'image') = 'images/new-cover.jpg']">
             <p>
@@ -80,8 +83,10 @@
             </p>
         </xsl:if>
 
-        <xsl:call-template name="colophonMetadata"/>
-        <!-- <xsl:call-template name="catalogEntries"/> -->
+        <xsl:if test="not(f:is-set('pg.compliant')) and f:is-set('colophon.showMetadata')">
+            <xsl:call-template name="colophonMetadata"/>
+            <!-- <xsl:call-template name="catalogEntries"/> -->
+        </xsl:if>
 
         <xsl:if test="f:is-valid(/*[self::TEI.2 or self::TEI]/teiHeader/encodingDesc/p[1])">
             <h3 class="main"><xsl:value-of select="f:message('msgEncoding')"/></h3>
