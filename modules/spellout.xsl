@@ -16,12 +16,12 @@
   <!-- power and log functions not in saxon-HE, so make do with poor-man’s versions. -->
   <xsl:function name="f:power1000" as="xs:integer">
     <xsl:param name="group" as="xs:integer"/>
-    <xsl:value-of select="if ($group = 0) then 1 else f:power1000($group - 1) * 1000"/>
+    <xsl:sequence select="if ($group = 0) then 1 else f:power1000($group - 1) * 1000"/>
   </xsl:function>
 
   <xsl:function name="f:log1000" as="xs:integer">
     <xsl:param name="number" as="xs:integer"/>
-    <xsl:value-of select="xs:integer(ceiling(string-length(xs:string($number)) div 3)) - 1"/>
+    <xsl:sequence select="xs:integer(ceiling(string-length(xs:string($number)) div 3)) - 1"/>
   </xsl:function>
 
 

@@ -37,31 +37,35 @@
     </xsl:template>
 
     <xsl:template match="front">
-        <div class="front">
+        <xsl:element name="{$section.element}">
+            <xsl:attribute name="class" select="'front'"/>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
-        </div>
+        </xsl:element>
     </xsl:template>
 
     <xsl:template match="group">
-        <div class="group">
+        <xsl:element name="{$section.element}">
+            <xsl:attribute name="class" select="'group'"/>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
-        </div>
+        </xsl:element>
     </xsl:template>
 
     <xsl:template match="body">
-        <div class="body">
+        <xsl:element name="{$section.element}">
+            <xsl:attribute name="class" select="'body'"/>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
-        </div>
+        </xsl:element>
     </xsl:template>
 
     <xsl:template match="back">
-        <div class="back">
+        <xsl:element name="{$section.element}">
+            <xsl:attribute name="class" select="'back'"/>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
-        </div>
+        </xsl:element>
     </xsl:template>
 
 
@@ -86,7 +90,7 @@
 
     <xsl:template match="div0">
         <xsl:copy-of select="f:show-debug-tags(.)"/>
-        <div>
+        <xsl:element name="{$section.element}">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:call-template name="generate-div-class"/>
             <xsl:call-template name="generate-label"/>
@@ -96,7 +100,7 @@
 
             <xsl:call-template name="insert-div0-footnotes"/>
             <xsl:call-template name="insert-trailing-figure"/>
-        </div>
+        </xsl:element>
     </xsl:template>
 
 
@@ -123,9 +127,11 @@
     </xd:doc>
 
     <xsl:template match="div1[@type='TranscriberNote']">
-        <div class="transcriberNote" id="{f:generate-id(.)}">
+        <xsl:element name="{$section.element}">
+            <xsl:attribute name="class" select="'transcriberNote'"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
-        </div>
+        </xsl:element>
     </xsl:template>
 
 
@@ -142,7 +148,7 @@
         </xsl:if>
 
         <xsl:if test="f:should-display-division(.)">
-            <div>
+            <xsl:element name="{$section.element}">
                 <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                 <xsl:call-template name="generate-div-class"/>
                 <xsl:call-template name="generate-toc-link"/>
@@ -154,7 +160,7 @@
                     <xsl:call-template name="insert-footnotes"/>
                 </xsl:if>
                 <xsl:call-template name="insert-trailing-figure"/>
-            </div>
+            </xsl:element>
         </xsl:if>
     </xsl:template>
 
@@ -183,7 +189,7 @@
     <xsl:template match="div2">
         <xsl:copy-of select="f:show-debug-tags(.)"/>
         <xsl:if test="f:should-display-division(.)">
-            <div>
+            <xsl:element name="{$section.element}">
                 <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                 <xsl:call-template name="generate-div-class"/>
                 <xsl:call-template name="generate-toc-link"/>
@@ -193,7 +199,7 @@
                 </xsl:call-template>
                 <xsl:call-template name="handle-div"/>
                 <xsl:call-template name="insert-trailing-figure"/>
-            </div>
+            </xsl:element>
         </xsl:if>
     </xsl:template>
 
@@ -206,13 +212,14 @@
     <xsl:template match="div3 | div4 | div5 | div6">
         <xsl:copy-of select="f:show-debug-tags(.)"/>
         <xsl:if test="f:should-display-division(.)">
-            <div class="{name()}">
+            <xsl:element name="{$section.element}">
+                <xsl:attribute name="class" select="name()"/>
                 <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                 <xsl:call-template name="generate-div-class"/>
                 <xsl:call-template name="pgComment"/>
                 <xsl:call-template name="handle-div"/>
                 <xsl:call-template name="insert-trailing-figure"/>
-            </div>
+            </xsl:element>
         </xsl:if>
     </xsl:template>
 
@@ -242,7 +249,7 @@
         <xsl:copy-of select="f:show-debug-tags(.)"/>
         <xsl:if test="f:rend-value(@rend, 'display') != 'none'">
             <xsl:variable name="level" select="f:div-level(.)"/>
-            <div>
+              <xsl:element name="{$section.element}">
                 <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                 <xsl:call-template name="generate-div-class"/>
                 <xsl:if test="$level &lt; 3">
@@ -256,7 +263,7 @@
                     <xsl:call-template name="insert-footnotes"/>
                 </xsl:if>
                 <xsl:call-template name="insert-trailing-figure"/>
-            </div>
+            </xsl:element>
         </xsl:if>
     </xsl:template>
 

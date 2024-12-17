@@ -10,6 +10,7 @@
     <xsl:include href="../modules/utils.xsl"/>
     <xsl:include href="../modules/utils.html.xsl"/>
     <xsl:include href="../modules/betacode.xsl"/>
+    <xsl:include href="../modules/spellout.xsl"/>
     <xsl:include href="../modules/configuration.xsl"/>
     <xsl:include href="../modules/log.xsl"/>
     <xsl:include href="../modules/localization.xsl"/>
@@ -52,6 +53,7 @@
     <xsl:variable name="outputFormat" select="'html'"/>
 
     <xsl:variable name="p.element" select="if (f:is-pdf()) then 'div' else 'p'"/>
+    <xsl:variable name="section.element" select="'div'"/>
 
     <xsl:template match="/">
         <xsl:apply-templates/>

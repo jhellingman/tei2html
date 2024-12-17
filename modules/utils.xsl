@@ -499,6 +499,317 @@
     </xsl:function>
 
 
+    <xd:short>MARC code list for relators.</xd:short>
+    <xd:detail>
+        <p>Derived from the MARC Code List for Relators [https://www.loc.gov/marc/relators/relaterm.html].</p>
+    </xd:detail>
+
+    <xsl:variable name="relators">
+        <relators>
+            <relator code="abr" message="msgAbridger">abridger</relator>
+            <relator code="act" message="msgActor">actor</relator>
+            <relator code="adp" message="msgAdapter">adapter</relator>
+            <relator code="rcp" message="msgAddressee">addressee</relator>
+            <relator code="anl" message="msgAnalyst">analyst</relator>
+            <relator code="anm" message="msgAnimator">animator</relator>
+            <relator code="ann" message="msgAnnotator">annotator</relator>
+            <relator code="anc" message="msgAnnouncer">announcer</relator>
+            <relator code="apl" message="msgAppellant">appellant</relator>
+            <relator code="ape" message="msgAppellee">appellee</relator>
+            <relator code="app" message="msgApplicant">applicant</relator>
+            <relator code="arc" message="msgArchitect">architect</relator>
+            <relator code="arr" message="msgArranger">arranger</relator>
+            <relator code="acp" message="msgArtCopyist">art copyist</relator>
+            <relator code="adi" message="msgArtDirector">art director</relator>
+            <relator code="art" message="msgArtist">artist</relator>
+            <relator code="ard" message="msgArtistic director">artistic director</relator>
+            <relator code="asg" message="msgAssignee">assignee</relator>
+            <relator code="asn" message="msgAssociatedName">associated name</relator>
+            <relator code="att" message="msgAttributedName">attributed name</relator>
+            <relator code="auc" message="msgAuctioneer">auctioneer</relator>
+            <relator code="aue" message="msgAudioEngineer">audio engineer</relator>
+            <relator code="aup" message="msgAudioProducer">audio producer</relator>
+            <relator code="aut" message="msgAuthor">author</relator>
+            <relator code="aqt" message="msgAuthorInQuotations">author in quotations or text abstracts</relator>
+            <relator code="aft" message="msgAuthorOfAfterword">author of afterword, colophon, etc.</relator>
+            <relator code="aud" message="msgAuthorOfDialog">author of dialog</relator>
+            <relator code="aui" message="msgAuthorOfIntroduction">author of introduction, etc.</relator>
+            <relator code="ato" message="msgAutographer">autographer</relator>
+            <relator code="ant" message="msgBibliographicAntecedent">bibliographic antecedent</relator>
+            <relator code="bnd" message="msgBinder">binder</relator>
+            <relator code="bdd" message="msgBindingDesigner">binding designer</relator>
+            <relator code="blw" message="msgBlurbWriter">blurb writer</relator>
+            <relator code="bka" message="msgBookArtist">book artist</relator>
+            <relator code="bkd" message="msgBookDesigner">book designer</relator>
+            <relator code="bkp" message="msgBookProducer">book producer</relator>
+            <relator code="bjd" message="msgBookjacketDesigner">bookjacket designer</relator>
+            <relator code="bpd" message="msgBookplateDesigner">bookplate designer</relator>
+            <relator code="bsl" message="msgBookseller">bookseller</relator>
+            <relator code="brl" message="msgBrailleEmbosser">braille embosser</relator>
+            <relator code="brd" message="msgBroadcaster">broadcaster</relator>
+            <relator code="cll" message="msgCalligrapher">calligrapher</relator>
+            <relator code="cop" message="msgCameraOperator">camera operator</relator>
+            <relator code="ctg" message="msgCartographer">cartographer</relator>
+            <relator code="cas" message="msgCaster">caster</relator>
+            <relator code="cad" message="msgCastingDirector">casting director</relator>
+            <relator code="cns" message="msgCensor">censor</relator>
+            <relator code="chr" message="msgChoreographer">choreographer</relator>
+            <relator code="cng" message="msgCinematographer">cinematographer</relator>
+            <relator code="cli" message="msgClient">client</relator>
+            <relator code="cor" message="msgCollectionRegistrar">collection registrar</relator>
+            <relator code="col" message="msgCollector">collector</relator>
+            <relator code="clt" message="msgCollotyper">collotyper</relator>
+            <relator code="clr" message="msgColorist">colorist</relator>
+            <relator code="cmm" message="msgCommentator">commentator</relator>
+            <relator code="cwt" message="msgCommentatorForWrittenText">commentator for written text</relator>
+            <relator code="com" message="msgCompiler">compiler</relator>
+            <relator code="cpl" message="msgComplainant">complainant</relator>
+            <relator code="cpt" message="msgComplainantAppellant">complainant-appellant</relator>
+            <relator code="cpe" message="msgComplainantAppellee">complainant-appellee</relator>
+            <relator code="cmp" message="msgComposer">composer</relator>
+            <relator code="cmt" message="msgCompositor">compositor</relator>
+            <relator code="ccp" message="msgConceptor">conceptor</relator>
+            <relator code="cnd" message="msgConductor">conductor</relator>
+            <relator code="con" message="msgConservator">conservator</relator>
+            <relator code="csl" message="msgConsultant">consultant</relator>
+            <relator code="csp" message="msgConsultantToAProject">consultant to a project</relator>
+            <relator code="cos" message="msgContestant">contestant</relator>
+            <relator code="cot" message="msgContestantAppellant">contestant-appellant</relator>
+            <relator code="coe" message="msgContestantAppellee">contestant-appellee</relator>
+            <relator code="cts" message="msgContestee">contestee</relator>
+            <relator code="ctt" message="msgContesteeAppellant">contestee-appellant</relator>
+            <relator code="cte" message="msgContesteeAppellee">contestee-appellee</relator>
+            <relator code="ctr" message="msgContractor">contractor</relator>
+            <relator code="ctb" message="msgContributor">contributor</relator>
+            <relator code="cpc" message="msgCopyrightClaimant">copyright claimant</relator>
+            <relator code="cph" message="msgCopyrightHolder">copyright holder</relator>
+            <relator code="crr" message="msgCorrector">corrector</relator>
+            <relator code="crp" message="msgCorrespondent">correspondent</relator>
+            <relator code="cst" message="msgCostumeDesigner">costume designer</relator>
+            <relator code="cou" message="msgCourtGoverned">court governed</relator>
+            <relator code="crt" message="msgCourtReporter">court reporter</relator>
+            <relator code="cov" message="msgCoverDesigner">cover designer</relator>
+            <relator code="cre" message="msgCreator">creator</relator>
+            <relator code="cur" message="msgCurator">curator</relator>
+            <relator code="dnc" message="msgDancer">dancer</relator>
+            <relator code="dtc" message="msgDataContributor">data contributor</relator>
+            <relator code="dtm" message="msgDataManager">data manager</relator>
+            <relator code="dte" message="msgDedicatee">dedicatee</relator>
+            <relator code="dto" message="msgDedicator">dedicator</relator>
+            <relator code="dfd" message="msgDefendant">defendant</relator>
+            <relator code="dft" message="msgDefendantAppellant">defendant-appellant</relator>
+            <relator code="dfe" message="msgDefendantAppellee">defendant-appellee</relator>
+            <relator code="dgc" message="msgDegreeCommitteeMember">degree committee member</relator>
+            <relator code="dgg" message="msgDegreeGrantingInstitution">degree granting institution</relator>
+            <relator code="dgs" message="msgDegreeSupervisor">degree supervisor</relator>
+            <relator code="dln" message="msgDelineator">delineator</relator>
+            <relator code="dpc" message="msgDepicted">depicted</relator>
+            <relator code="dpt" message="msgDepositor">depositor</relator>
+            <relator code="dsr" message="msgDesigner">designer</relator>
+            <relator code="drt" message="msgDirector">director</relator>
+            <relator code="dis" message="msgDissertant">dissertant</relator>
+            <relator code="dbp" message="msgDistributionPlace">distribution place</relator>
+            <relator code="dst" message="msgDistributor">distributor</relator>
+            <relator code="djo" message="msgDj">dj</relator>
+            <relator code="dnr" message="msgDonor">donor</relator>
+            <relator code="drm" message="msgDraftsman">draftsman</relator>
+            <relator code="dbd" message="msgDubbingDirector">dubbing director</relator>
+            <relator code="dub" message="msgDubiousAuthor">dubious author</relator>
+            <relator code="edt" message="msgEditor">editor</relator>
+            <relator code="edc" message="msgEditorOfCompilation">editor of compilation</relator>
+            <relator code="edm" message="msgEditorOfMovingImageWork">editor of moving image work</relator>
+            <relator code="edd" message="msgEditorialDirector">editorial director</relator>
+            <relator code="elg" message="msgElectrician">electrician</relator>
+            <relator code="elt" message="msgElectrotyper">electrotyper</relator>
+            <relator code="enj" message="msgEnactingJurisdiction">enacting jurisdiction</relator>
+            <relator code="eng" message="msgEngineer">engineer</relator>
+            <relator code="egr" message="msgEngraver">engraver</relator>
+            <relator code="etr" message="msgEtcher">etcher</relator>
+            <relator code="evp" message="msgEventPlace">event place</relator>
+            <relator code="exp" message="msgExpert">expert</relator>
+            <relator code="fac" message="msgFacsimilist">facsimilist</relator>
+            <relator code="fld" message="msgFieldDirector">field director</relator>
+            <relator code="fmd" message="msgFilmDirector">film director</relator>
+            <relator code="fds" message="msgFilmDistributor">film distributor</relator>
+            <relator code="flm" message="msgFilmEditor">film editor</relator>
+            <relator code="fmp" message="msgFilmProducer">film producer</relator>
+            <relator code="fmk" message="msgFilmmaker">filmmaker</relator>
+            <relator code="fpy" message="msgFirstParty">first party</relator>
+            <relator code="frg" message="msgForger">forger</relator>
+            <relator code="fmo" message="msgFormerOwner">former owner</relator>
+            <relator code="fon" message="msgFounder">founder</relator>
+            <relator code="fnd" message="msgFunder">funder</relator>
+            <relator code="gdv" message="msgGameDeveloper">game developer</relator>
+            <relator code="gis" message="msgGeographicInformationSpecialist">geographic information specialist</relator>
+            <relator code="hnr" message="msgHonoree">honoree</relator>
+            <relator code="hst" message="msgHost">host</relator>
+            <relator code="his" message="msgHost institution">host institution</relator>
+            <relator code="ilu" message="msgIlluminator">illuminator</relator>
+            <relator code="ill" message="msgIllustrator">illustrator</relator>
+            <relator code="ins" message="msgInscriber">inscriber</relator>
+            <relator code="itr" message="msgInstrumentalist">instrumentalist</relator>
+            <relator code="ive" message="msgInterviewee">interviewee</relator>
+            <relator code="ivr" message="msgInterviewer">interviewer</relator>
+            <relator code="inv" message="msgInventor">inventor</relator>
+            <relator code="isb" message="msgIssuingBody">issuing body</relator>
+            <relator code="jud" message="msgJudge">judge</relator>
+            <relator code="jug" message="msgJurisdictionGoverned">jurisdiction governed</relator>
+            <relator code="lbr" message="msgLaboratory">laboratory</relator>
+            <relator code="ldr" message="msgLaboratoryDirector">laboratory director</relator>
+            <relator code="lsa" message="msgLandscapeArchitect">landscape architect</relator>
+            <relator code="led" message="msgLead">lead</relator>
+            <relator code="len" message="msgLender">lender</relator>
+            <relator code="ltr" message="msgLetterer">letterer</relator>
+            <relator code="lil" message="msgLibelant">libelant</relator>
+            <relator code="lit" message="msgLibelantAppellant">libelant-appellant</relator>
+            <relator code="lie" message="msgLibelantAppellee">libelant-appellee</relator>
+            <relator code="lel" message="msgLibelee">libelee</relator>
+            <relator code="let" message="msgLibeleeAppellant">libelee-appellant</relator>
+            <relator code="lee" message="msgLibeleeAppellee">libelee-appellee</relator>
+            <relator code="lbt" message="msgLibrettist">librettist</relator>
+            <relator code="lse" message="msgLicensee">licensee</relator>
+            <relator code="lso" message="msgLicensor">licensor</relator>
+            <relator code="lgd" message="msgLightingDesigner">lighting designer</relator>
+            <relator code="ltg" message="msgLithographer">lithographer</relator>
+            <relator code="lyr" message="msgLyricist">lyricist</relator>
+            <relator code="mka" message="msgMakeupArtist">makeup artist</relator>
+            <relator code="mfp" message="msgManufacturePlace">manufacture place</relator>
+            <relator code="mfr" message="msgManufacturer">manufacturer</relator>
+            <relator code="mrb" message="msgMarbler">marbler</relator>
+            <relator code="mrk" message="msgMarkupEditor">markup editor</relator>
+            <relator code="med" message="msgMedium">medium</relator>
+            <relator code="mdc" message="msgMetadataContact">metadata contact</relator>
+            <relator code="mte" message="msgMetalEngraver">metal-engraver</relator>
+            <relator code="mtk" message="msgMinuteTaker">minute taker</relator>
+            <relator code="mxe" message="msgMixingEngineer">mixing engineer</relator>
+            <relator code="mod" message="msgModerator">moderator</relator>
+            <relator code="mon" message="msgMonitor">monitor</relator>
+            <relator code="mcp" message="msgMusicCopyist">music copyist</relator>
+            <relator code="mup" message="msgMusicProgrammer">music programmer</relator>
+            <relator code="msd" message="msgMusicalDirector">musical director</relator>
+            <relator code="mus" message="msgMusician">musician</relator>
+            <relator code="nrt" message="msgNarrator">narrator</relator>
+            <relator code="nan" message="msgNewsAnchor">news anchor</relator>
+            <relator code="onp" message="msgOnscreenParticipant">onscreen participant</relator>
+            <relator code="osp" message="msgOnscreenPresenter">onscreen presenter</relator>
+            <relator code="opn" message="msgOpponent">opponent</relator>
+            <relator code="orm" message="msgOrganizer">organizer</relator>
+            <relator code="org" message="msgOriginator">originator</relator>
+            <relator code="oth" message="msgOther">other</relator>
+            <relator code="own" message="msgOwner">owner</relator>
+            <relator code="pan" message="msgPanelist">panelist</relator>
+            <relator code="ppm" message="msgPapermaker">papermaker</relator>
+            <relator code="pta" message="msgPatentApplicant">patent applicant</relator>
+            <relator code="pth" message="msgPatentHolder">patent holder</relator>
+            <relator code="pat" message="msgPatron">patron</relator>
+            <relator code="prf" message="msgPerformer">performer</relator>
+            <relator code="pma" message="msgPermittingAgency">permitting agency</relator>
+            <relator code="pht" message="msgPhotographer">photographer</relator>
+            <relator code="pad" message="msgPlaceOfAddress">place of address</relator>
+            <relator code="ptf" message="msgPlaintiff">plaintiff</relator>
+            <relator code="ptt" message="msgPlaintiffAppellant">plaintiff-appellant</relator>
+            <relator code="pte" message="msgPlaintiffAppellee">plaintiff-appellee</relator>
+            <relator code="plt" message="msgPlatemaker">platemaker</relator>
+            <relator code="pra" message="msgPraeses">praeses</relator>
+            <relator code="pre" message="msgPresenter">presenter</relator>
+            <relator code="prt" message="msgPrinter">printer</relator>
+            <relator code="pop" message="msgPrinterOfPlates">printer of plates</relator>
+            <relator code="prm" message="msgPrintmaker">printmaker</relator>
+            <relator code="prc" message="msgProcessContact">process contact</relator>
+            <relator code="pro" message="msgProducer">producer</relator>
+            <relator code="prn" message="msgProductionCompany">production company</relator>
+            <relator code="prs" message="msgProductionDesigner">production designer</relator>
+            <relator code="pmn" message="msgProductionManager">production manager</relator>
+            <relator code="prd" message="msgProductionPersonnel">production personnel</relator>
+            <relator code="prp" message="msgProductionPlace">production place</relator>
+            <relator code="prg" message="msgProgrammer">programmer</relator>
+            <relator code="pdr" message="msgProjectDirector">project director</relator>
+            <relator code="pfr" message="msgProofreader">proofreader</relator>
+            <relator code="prv" message="msgProvider">provider</relator>
+            <relator code="pup" message="msgPublicationPlace">publication place</relator>
+            <relator code="pbl" message="msgPublisher">publisher</relator>
+            <relator code="pbd" message="msgPublishingDirector">publishing director</relator>
+            <relator code="ppt" message="msgPuppeteer">puppeteer</relator>
+            <relator code="rdd" message="msgRadioDirector">radio director</relator>
+            <relator code="rpc" message="msgRadioProducer">radio producer</relator>
+            <relator code="rap" message="msgRapporteur">rapporteur</relator>
+            <relator code="rce" message="msgRecordingEngineer">recording engineer</relator>
+            <relator code="rcd" message="msgRecordist">recordist</relator>
+            <relator code="red" message="msgRedactor">redactor</relator>
+            <relator code="rxa" message="msgRemixArtist">remix artist</relator>
+            <relator code="ren" message="msgRenderer">renderer</relator>
+            <relator code="rpt" message="msgReporter">reporter</relator>
+            <relator code="rps" message="msgRepository">repository</relator>
+            <relator code="rth" message="msgResearchTeamHead">research team head</relator>
+            <relator code="rtm" message="msgResearchTeamMember">research team member</relator>
+            <relator code="res" message="msgResearcher">researcher</relator>
+            <relator code="rsp" message="msgRespondent">respondent</relator>
+            <relator code="rst" message="msgRespondentAppellant">respondent-appellant</relator>
+            <relator code="rse" message="msgRespondentAppellee">respondent-appellee</relator>
+            <relator code="rpy" message="msgResponsibleParty">responsible party</relator>
+            <relator code="rsg" message="msgRestager">restager</relator>
+            <relator code="rsr" message="msgRestorationist">restorationist</relator>
+            <relator code="rev" message="msgReviewer">reviewer</relator>
+            <relator code="rbr" message="msgRubricator">rubricator</relator>
+            <relator code="sce" message="msgScenarist">scenarist</relator>
+            <relator code="sad" message="msgScientificAdvisor">scientific advisor</relator>
+            <relator code="aus" message="msgScreenwriter">screenwriter</relator>
+            <relator code="scr" message="msgScribe">scribe</relator>
+            <relator code="scl" message="msgSculptor">sculptor</relator>
+            <relator code="spy" message="msgSecondParty">second party</relator>
+            <relator code="sec" message="msgSecretary">secretary</relator>
+            <relator code="sll" message="msgSeller">seller</relator>
+            <relator code="std" message="msgSetDesigner">set designer</relator>
+            <relator code="stg" message="msgSetting">setting</relator>
+            <relator code="sgn" message="msgSigner">signer</relator>
+            <relator code="sng" message="msgSinger">singer</relator>
+            <relator code="swd" message="msgSoftwareDeveloper">software developer</relator>
+            <relator code="sds" message="msgSoundDesigner">sound designer</relator>
+            <relator code="sde" message="msgSoundEngineer">sound engineer</relator>
+            <relator code="spk" message="msgSpeaker">speaker</relator>
+            <relator code="sfx" message="msgSpecialEffectsProvider">special effects provider</relator>
+            <relator code="spn" message="msgSponsor">sponsor</relator>
+            <relator code="sgd" message="msgStageDirector">stage director</relator>
+            <relator code="stm" message="msgStageManager">stage manager</relator>
+            <relator code="stn" message="msgStandardsBody">standards body</relator>
+            <relator code="str" message="msgStereotyper">stereotyper</relator>
+            <relator code="stl" message="msgStoryteller">storyteller</relator>
+            <relator code="sht" message="msgSupportingHost">supporting host</relator>
+            <relator code="srv" message="msgSurveyor">surveyor</relator>
+            <relator code="tch" message="msgTeacher">teacher</relator>
+            <relator code="tad" message="msgTechnicalAdvisor">technical advisor</relator>
+            <relator code="tcd" message="msgTechnicalDirector">technical director</relator>
+            <relator code="tld" message="msgTelevisionDirector">television director</relator>
+            <relator code="tlg" message="msgTelevisionGuest">television guest</relator>
+            <relator code="tlh" message="msgTelevisionHost">television host</relator>
+            <relator code="tlp" message="msgTelevisionProducer">television producer</relator>
+            <relator code="tau" message="msgTelevisionWriter">television writer</relator>
+            <relator code="ths" message="msgThesisAdvisor">thesis advisor</relator>
+            <relator code="trc" message="msgTranscriber">transcriber</relator>
+            <relator code="trl" message="msgTranslator">translator</relator>
+            <relator code="tyd" message="msgTypeDesigner">type designer</relator>
+            <relator code="tyg" message="msgTypographer">typographer</relator>
+            <relator code="uvp" message="msgUniversityPlace">university place</relator>
+            <relator code="vdg" message="msgVideographer">videographer</relator>
+            <relator code="vfx" message="msgVisualEffectsProvider">visual effects provider</relator>
+            <relator code="vac" message="msgVoiceActor">voice actor</relator>
+            <relator code="wit" message="msgWitness">witness</relator>
+            <relator code="wde" message="msgWoodEngraver">wood engraver</relator>
+            <relator code="wdc" message="msgWoodcutter">woodcutter</relator>
+            <relator code="wam" message="msgWriterOfAccompanying material">writer of accompanying material</relator>
+            <relator code="wac" message="msgWriterOfAddedCommentary">writer of added commentary</relator>
+            <relator code="wal" message="msgWriterOfAddedLyrics">writer of added lyrics</relator>
+            <relator code="wat" message="msgWriterOfAddedText">writer of added text</relator>
+            <relator code="wfs" message="msgWriterOfFilmStory">writer of film story</relator>
+            <relator code="wft" message="msgWriterOfIntertitles">writer of intertitles</relator>
+            <relator code="win" message="msgWriterOfIntroduction">writer of introduction</relator>
+            <relator code="wpr" message="msgWriterOfPreface">writer of preface</relator>
+            <relator code="wst" message="msgWriterOfSupplementaryTextualContent">writer of supplementary textual content</relator>
+            <relator code="wts" message="msgWriterOfTelevisionStory">writer of television story</relator>
+        </relators>
+    </xsl:variable>
+
+
     <xd:doc>
         <xd:short>Strip all diacritics from a string.</xd:short>
         <xd:detail>

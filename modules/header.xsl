@@ -145,7 +145,7 @@
             </xsl:if>
         </xsl:for-each>
 
-        <!-- Link in MathJax script -->
+        <!-- Load MathJax script -->
         <xsl:if test="f:get-setting('math.mathJax.format') = 'MathJax' and //formula[@notation='TeX']">
             <script type="text/javascript" async="async"
               src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config={f:get-setting('math.mathJax.configuration')}">
