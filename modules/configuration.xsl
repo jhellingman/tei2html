@@ -116,6 +116,8 @@
             <images.maxWidth>720</images.maxWidth>                          <!-- Warn if image is wider than this number of pixels (after applying images.scale). -->
             <images.maxHeight>720</images.maxHeight>                        <!-- Warn if image is taller than this number of pixels (after applying images.scale). -->
 
+            <aria.enable>false</aria.enable>                                <!-- Enable the generation of ARIA attributes on certain elements. -->
+
             <audio.useControls>false</audio.useControls>                    <!-- Use controls for links to local audio (MP3, Midi, Ogg) formats (HTML5 only). -->
 
             <text.parentheses>()[]{}</text.parentheses>                     <!-- Pairs of parentheses, first opening, then closing. -->

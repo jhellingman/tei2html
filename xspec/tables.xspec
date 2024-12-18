@@ -613,7 +613,8 @@
                  <p class="footnote">
                     <span class="fnlabel">
                        <a class="noteRef"
-                          href="#n1src">1</a>
+                          href="#n1src"
+                          title="Return to note 1 in text.">1</a>
                     </span> Note.&nbsp;<a class="fnarrow"
                        href="#n1src"
                        title="Return to note 1 in text.">&uparrow;</a>

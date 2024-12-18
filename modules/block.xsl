@@ -101,6 +101,10 @@
     <xsl:template name="pb-margin">
         <xsl:context-item as="element(pb)" use="required"/>
         <span class="pageNum" id="{f:generate-id(.)}">
+            <xsl:if test="f:is-set('aria.enable')">
+                <xsl:attribute name="aria-hidden" select="'true'"/>
+            </xsl:if>
+
             <xsl:if test="@n and f:is-set('pageNumbers.show')">
                 <xsl:value-of select="f:get-setting('pageNumbers.before')"/>
                 <a href="{f:generate-href(.)}">

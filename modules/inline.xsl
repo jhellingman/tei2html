@@ -818,6 +818,9 @@
                     <xsl:value-of select="@value"/>
                 </xsl:attribute>
             </xsl:if>
+            <xsl:if test="f:is-set('aria.enable')">
+                <xsl:attribute name="aria-label" select="@value"/>
+            </xsl:if>
             <xsl:apply-templates/>
         </span>
     </xsl:template>

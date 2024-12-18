@@ -815,14 +815,14 @@
         <x:context select="$sample6//body/div1[1]"/>
         <x:expect label="will result an HTML document with those divisions, and links back to the toc">
             <div xmlns="http://www.w3.org/1999/xhtml" id="ch1" class="div1 last-child chapter">
-               <span class="pageNum">[<a href="#ch1.toc">Contents</a>]</span>
+               <span class="pageNum">[<a href="#ch1.toc" title="Go to the table of contents">Contents</a>]</span>
                <div class="divHead">
                   <h2 id="..." class="main">Chapter I.</h2>
                </div>
                <div class="divBody">
                   <p id="..." class="first">The first chapter &mldr;</p>
                   <div id="ch1.1" class="div2 last-child section">
-                     <span class="pageNum">[<a href="#ch1.1.toc">Contents</a>]</span>
+                     <span class="pageNum">[<a href="#ch1.1.toc" title="Go to the table of contents">Contents</a>]</span>
                      <div class="divHead">
                         <h3 id="..." class="main">Section 1.</h3>
                      </div>
@@ -872,14 +872,14 @@
         <x:context select="$sample7//body/div[1]"/>
         <x:expect label="will result an HTML document with those divisions, and links back to the toc (exactly the same as above)">
             <div xmlns="http://www.w3.org/1999/xhtml" id="ch1" class="div1 last-child chapter">
-               <span class="pageNum">[<a href="#ch1.toc">Contents</a>]</span>
+               <span class="pageNum">[<a href="#ch1.toc" title="Go to the table of contents">Contents</a>]</span>
                <div class="divHead">
                   <h2 id="..." class="main">Chapter I.</h2>
                </div>
                <div class="divBody">
                   <p id="..." class="first">The first chapter &mldr;</p>
                   <div id="ch1.1" class="div2 last-child section">
-                     <span class="pageNum">[<a href="#ch1.1.toc">Contents</a>]</span>
+                     <span class="pageNum">[<a href="#ch1.1.toc" title="Go to the table of contents">Contents</a>]</span>
                      <div class="divHead">
                         <h3 id="..." class="main">Section 1.</h3>
                      </div>

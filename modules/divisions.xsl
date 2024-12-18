@@ -565,6 +565,12 @@
                         <xsl:variable name="tocEntry" select="(//*[starts-with(@id, 'toc')]//ref[@target = $id])[1]"/>
                         <xsl:variable name="divGen" select="(//divGen[@id = 'toc'][@type = 'toc'])[1]"/>
                         <xsl:variable name="maxLevel" select="f:generated-toc-max-level($divGen)"/>
+                
+                        <xsl:if test="f:is-set('aria.enable')">
+                            <xsl:attribute name="aria-label" select="f:message('msgGoToToc')"/>
+                        </xsl:if>
+                        
+                        <xsl:attribute name="title" select="f:message('msgGoToToc')"/>
 
                         <xsl:attribute name="href" select="
                             if ($tocEntry)

@@ -44,6 +44,7 @@
         <msg:message name="msgValues">Values</msg:message>
         <msg:message name="msgFtpLink">Link to FTP server</msg:message>
         <msg:message name="msgLinkToLibraryOfCongress">Link to Library of Congress record</msg:message>
+        <msg:message name="msgGoToNoteMark">Go to note <msg:param name="mark"/>.</msg:message>
         <msg:message name="msgReturnToNoteInText">Return to note in text.</msg:message>
         <msg:message name="msgReturnToNoteMarkInText">Return to note <msg:param name="mark"/> in text.</msg:message>
 
@@ -344,6 +345,7 @@
         <msg:message name="msgText">Text</msg:message>
         <msg:message name="msgTitlePage">Title Page</msg:message>
         <msg:message name="msgToc">Contents</msg:message>
+        <msg:message name="msgGoToToc">Go to the table of contents</msg:message>
         <msg:message name="msgTranscription">Transcription</msg:message>
         <msg:message name="msgTranscriptions">Transcriptions</msg:message>
         <msg:message name="msgUnknown">Unknown</msg:message>
@@ -1266,6 +1268,7 @@
         <msg:message name="msgOccurrences">Aantal</msg:message>
         <msg:message name="msgOccurrences.abbr">Aant.</msg:message>
         <msg:message name="msgValues">Waarden</msg:message>
+        <msg:message name="msgGoToNoteMark">Ga naar noot <msg:param name="mark"/>.</msg:message>
         <msg:message name="msgReturnToNoteInText">Ga terug naar noot in tekst.</msg:message>
         <msg:message name="msgReturnToNoteMarkInText">Ga terug naar noot <msg:param name="mark"/> in tekst.</msg:message>
 
@@ -1559,6 +1562,7 @@
         <msg:message name="msgText">Tekst</msg:message>
         <msg:message name="msgTitlePage">Titelpagina</msg:message>
         <msg:message name="msgToc">Inhoud</msg:message>
+        <msg:message name="msgGoToToc">Ga naar de inhoudsopgave</msg:message>
         <msg:message name="msgTranscription">Transcriptie</msg:message>
         <msg:message name="msgTranscriptions">Transcripties</msg:message>
         <msg:message name="msgUnknown">Onbekend</msg:message>

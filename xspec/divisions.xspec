@@ -95,7 +95,7 @@
                         <h2 id="..." class="main">Division 1</h2>
                     </div>
                     <div class="divBody">
-                        <p id="..." class="first">Paragraph 2.1<a class="noteRef" id="n.1src" href="#n.1">1</a></p>
+                        <p id="..." class="first">Paragraph 2.1<a class="noteRef" id="n.1src" href="#n.1" title="Go to note 1.">1</a></p>
                         <p id="...">Paragraph 2.2</p>
                     </div>
                     <div class="footnotes">
@@ -104,7 +104,7 @@
                             <div class="fndiv" id="...">
                                 <p class="footnote">
                                     <span class="fnlabel">
-                                        <a class="noteRef" href="...">1</a>
+                                        <a class="noteRef" href="..." title="Return to note 1 in text.">1</a>
                                     </span> Footnote 1.&nbsp;<a class="fnarrow" href="#n.1src" title="Return to note 1 in text.">&uparrow;</a>
                                 </p>
                             </div>
@@ -318,7 +318,7 @@
                      </tr>
                      <tr>
                         <td class="first">
-                           <p id="..." class="first">Paragraph 1.1<a class="noteRef" id="n.1src" href="#n.1">1</a></p>
+                           <p id="..." class="first">Paragraph 1.1<a class="noteRef" id="n.1src" href="#n.1" title="Go to note 1.">1</a></p>
                         </td>
                         <td class="second">
                            <p id="..." class="first">Paragraph 2.1</p>
@@ -329,7 +329,7 @@
                            <p id="...">Paragraph 1.2</p>
                         </td>
                         <td class="second">
-                           <p id="...">Paragraph 2.2<a class="noteRef" id="n.2src" href="#n.2">1</a></p>
+                           <p id="...">Paragraph 2.2<a class="noteRef" id="n.2src" href="#n.2" title="Go to note 1.">1</a></p>
                         </td>
                      </tr>
                      <tr>
@@ -341,7 +341,7 @@
                                       id="n.1">
                                     <p class="footnote">
                                        <span class="fnlabel">
-                                          <a class="noteRef" href="#n.1src">1</a>
+                                          <a class="noteRef" href="#n.1src" title="Return to note 1 in text.">1</a>
                                        </span> Footnote 1.&nbsp;<a class="fnarrow" href="#n.1src" title="Return to note 1 in text.">&uparrow;</a>
                                     </p>
                                  </div>
@@ -356,7 +356,7 @@
                                       id="n.2">
                                     <p class="footnote">
                                        <span class="fnlabel">
-                                          <a class="noteRef" href="#n.2src">1</a>
+                                          <a class="noteRef" href="#n.2src" title="Return to note 1 in text.">1</a>
                                        </span> Footnote 2.&nbsp;<a class="fnarrow" href="#n.2src" title="Return to note 1 in text.">&uparrow;</a>
                                     </p>
                                  </div>

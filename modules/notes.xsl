@@ -110,11 +110,15 @@
 
     <xsl:template name="insert-note-ref">
         <xsl:context-item as="element(note)" use="required"/>
-        <a class="noteRef" id="{f:generate-id(.)}src" href="{f:generate-footnote-href(.)}">
+        <xsl:variable name="mark" select="f:note-marker(.)"/>
+        <a class="noteRef" 
+           id="{f:generate-id(.)}src" 
+           href="{f:generate-footnote-href(.)}"
+           title="{f:format-message('msgGoToNoteMark', map{'mark': $mark})}">
             <xsl:if test="f:is-epub()">
                 <xsl:attribute name="epub:type" select="'noteref'"/>
             </xsl:if>
-            <xsl:call-template name="footnote-number"/>
+            <xsl:value-of select="$mark"/>
         </a>
     </xsl:template>
 
@@ -339,9 +343,12 @@
 
     <xsl:template name="footnote-marker">
         <xsl:context-item as="element(note)" use="required"/>
+        <xsl:variable name="mark" select="f:note-marker(.)"/>
         <span class="fnlabel">
-            <a class="noteRef" href="{f:generate-href(.)}src">
-                <xsl:value-of select="f:note-marker(.)"/>
+            <a class="noteRef" 
+               href="{f:generate-href(.)}src"
+               title="{f:format-message('msgReturnToNoteMarkInText', map{'mark': $mark})}">
+                <xsl:value-of select="$mark"/>
             </a>
         </span>
         <xsl:text> </xsl:text>
@@ -519,11 +526,17 @@
 
     <xsl:template match="note[f:is-footnote(.)]" mode="noterefnumber">
         <xsl:param name="sourceNote" as="element(note)"/>
-        <a class="pseudoNoteRef" id="{f:generate-id($sourceNote)}src" href="{f:generate-footnote-href(.)}">
+        <xsl:variable name="mark">
+            <xsl:call-template name="footnote-number"/>
+        </xsl:variable>
+        <a class="pseudoNoteRef" 
+           id="{f:generate-id($sourceNote)}src" 
+           href="{f:generate-footnote-href(.)}"
+           title="{f:format-message('msgGoToNoteMark', map{'mark': $mark})}">
             <xsl:if test="f:is-epub()">
                 <xsl:attribute name="epub:type" select="'noteref'"/>
             </xsl:if>
-            <xsl:call-template name="footnote-number"/>
+            <xsl:value-of select="$mark"/>
         </a>
     </xsl:template>
 
