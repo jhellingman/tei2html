@@ -5,9 +5,16 @@
                stylesheet="../modules/spellout.xsl"
                version="3.0">
 
+  <!-- Top-level functions with language parameter -->
+
   <x:scenario label="When spelling-out a number">
     <x:call function="f:spell-out"><x:param select="'en'"/><x:param select="0"/></x:call>
     <x:expect label="will return zero" select="'zero'"/>
+  </x:scenario>
+
+  <x:scenario label="When spelling-out a number">
+    <x:call function="f:spell-out"><x:param select="'en'"/><x:param select="3.14"/></x:call>
+    <x:expect label="will return 'three and fourteen hunderdths'" select="'three and fourteen hunderdths'"/>
   </x:scenario>
 
   <!-- English -->
@@ -61,6 +68,45 @@
         select="'one hundred twenty-three quadrillion four hundred fifty-six trillion seven hundred eighty-nine billion one hundred twenty-three million four hundred fifty-six thousand seven hundred eighty-nine'"/>
   </x:scenario>
 
+  <!-- English digits -->
+
+  <x:scenario label="When spelling-out 1234567890 as digits in English">
+    <x:call function="f:en-spell-out-digits"><x:param select="'1234567890'"/></x:call>
+    <x:expect label="will return 'one two three four five six seven eight nine zero'" select="'one two three four five six seven eight nine zero'"/>
+  </x:scenario>
+
+  <!-- English decimals -->
+
+  <x:scenario label="When spelling-out 1.1 in English">
+    <x:call function="f:en-spell-out-decimal"><x:param select="1.1"/></x:call>
+    <x:expect label="will return 'one and one tenth'" select="'one and one tenth'"/>
+  </x:scenario>
+
+  <x:scenario label="When spelling-out 1.10 in English">
+    <x:call function="f:en-spell-out-decimal"><x:param select="1.10"/></x:call>
+    <x:expect label="will return 'one and one tenth'" select="'one and one tenth'"/>
+  </x:scenario>
+
+  <x:scenario label="When spelling-out 1.01 in English">
+    <x:call function="f:en-spell-out-decimal"><x:param select="1.01"/></x:call>
+    <x:expect label="will return 'one and one hundredth'" select="'one and one hundredth'"/>
+  </x:scenario>
+
+  <x:scenario label="When spelling-out 1.5 in English">
+    <x:call function="f:en-spell-out-decimal"><x:param select="1.5"/></x:call>
+    <x:expect label="will return 'one and a half'" select="'one and a half'"/>
+  </x:scenario>
+
+  <x:scenario label="When spelling-out 14.9375 in English">
+    <x:call function="f:en-spell-out-decimal"><x:param select="14.9375"/></x:call>
+    <x:expect label="will return 'fourteen and fifteen sixteenths'" select="'fourteen and fifteen sixteenths'"/>
+  </x:scenario>
+
+  <x:scenario label="When spelling-out 3.141592 in English">
+    <x:call function="f:en-spell-out-decimal"><x:param select="3.141592"/></x:call>
+    <x:expect label="will return 'three point one four one five nine two'" select="'three point one four one five nine two'"/>
+  </x:scenario>
+
   <!-- Dutch -->
 
   <x:scenario label="When spelling-out 1 in Dutch">
@@ -112,4 +158,43 @@
         select="'honderddrieëntwintig biljard vierhonderdzesenvijftig biljoen zevenhonderdnegenentachtig miljard honderddrieëntwintig miljoen vierhonderdzesenvijftigduizend zevenhonderdnegenentachtig'"/>
   </x:scenario>
   
+  <!-- Dutch digits -->
+
+  <x:scenario label="When spelling-out 1234567890 as digits in Dutch">
+    <x:call function="f:nl-spell-out-digits"><x:param select="'1234567890'"/></x:call>
+    <x:expect label="will return 'een twee drie vier vijf zes zeven acht negen nul'" select="'een twee drie vier vijf zes zeven acht negen nul'"/>
+  </x:scenario>
+
+  <!-- Dutch decimals -->
+
+  <x:scenario label="When spelling-out 1.1 in Dutch">
+    <x:call function="f:nl-spell-out-decimal"><x:param select="1.1"/></x:call>
+    <x:expect label="will return 'één en één tiende'" select="'één en één tiende'"/>
+  </x:scenario>
+
+  <x:scenario label="When spelling-out 1.10 in Dutch">
+    <x:call function="f:nl-spell-out-decimal"><x:param select="1.10"/></x:call>
+    <x:expect label="will return 'één en één tiende'" select="'één en één tiende'"/>
+  </x:scenario>
+
+  <x:scenario label="When spelling-out 1.01 in Dutch">
+    <x:call function="f:nl-spell-out-decimal"><x:param select="1.01"/></x:call>
+    <x:expect label="will return 'één en één honderste'" select="'één en één honderste'"/>
+  </x:scenario>
+
+  <x:scenario label="When spelling-out 1.5 in Dutch">
+    <x:call function="f:nl-spell-out-decimal"><x:param select="1.5"/></x:call>
+    <x:expect label="will return 'één en een half'" select="'één en een half'"/>
+  </x:scenario>
+
+  <x:scenario label="When spelling-out 14.9375 in Dutch">
+    <x:call function="f:nl-spell-out-decimal"><x:param select="14.9375"/></x:call>
+    <x:expect label="will return 'veertien en vijftien zestiende'" select="'veertien en vijftien zestiende'"/>
+  </x:scenario>
+
+  <x:scenario label="When spelling-out 3.141592 in Dutch">
+    <x:call function="f:nl-spell-out-decimal"><x:param select="3.141592"/></x:call>
+    <x:expect label="will return 'drie komma een vier een vijf negen twee'" select="'drie komma een vier een vijf negen twee'"/>
+  </x:scenario>
+
 </x:description>

@@ -8,9 +8,14 @@
 
   <xsl:function name="f:spell-out" as="xs:string">
     <xsl:param name="lang" as="xs:string"/>
-    <xsl:param name="number" as="xs:integer"/>
+    <xsl:param name="number"/>
 
-    <xsl:sequence select="if ($lang = 'nl') then f:nl-spell-out($number) else f:en-spell-out($number)"/>
+    <xsl:variable name="number" select="xs:string($number)"/>
+
+    <xsl:sequence select="
+      if (matches($number, '^[0-9]+$')) then f:spell-out-integer($lang, xs:integer($number))
+      else if (matches($number, '^[0-9]+\.[0-9]+$')) then f:spell-out-decimal($lang, xs:decimal($number))
+      else $number"/>
   </xsl:function>
 
   <!-- power and log functions not in saxon-HE, so make do with poor-man’s versions. -->
@@ -24,10 +29,31 @@
     <xsl:sequence select="xs:integer(ceiling(string-length(xs:string($number)) div 3)) - 1"/>
   </xsl:function>
 
+  <!-- Language selection -->
+  <xsl:function name="f:spell-out-digits">
+    <xsl:param name="lang" as="xs:string"/>
+    <xsl:param name="number" as="xs:string"/>
+
+    <xsl:sequence select="if ($lang = 'nl') then f:nl-spell-out-digits($number) else f:en-spell-out-digits($number)"/>
+  </xsl:function>
+
+  <xsl:function name="f:spell-out-integer" as="xs:string">
+    <xsl:param name="lang" as="xs:string"/>
+    <xsl:param name="number" as="xs:integer"/>
+
+    <xsl:sequence select="if ($lang = 'nl') then f:nl-spell-out($number) else f:en-spell-out($number)"/>
+  </xsl:function>
+
+  <xsl:function name="f:spell-out-decimal" as="xs:string">
+    <xsl:param name="lang" as="xs:string"/>
+    <xsl:param name="number" as="xs:decimal"/>
+
+    <xsl:sequence select="if ($lang = 'nl') then f:nl-spell-out-decimal($number) else f:en-spell-out-decimal($number)"/>
+  </xsl:function>
 
   <!-- English -->
 
-  <xsl:variable name="en-cardinal" select="map {
+  <xsl:variable name="en-cardinal" as="map(xs:integer, xs:string)" select="map {
       0:  'zero',
       1:  'one',
       2:  'two',
@@ -58,7 +84,7 @@
       90: 'ninety'
      }"/>
 
-  <xsl:variable name="en-group" select="map {
+  <xsl:variable name="en-group" as="map(xs:integer, xs:string)" select="map {
       1:  'thousand',
       2:  'million',
       3:  'billion',
@@ -94,6 +120,61 @@
                         else f:en-spell-out-thousands($number)"/>
   </xsl:function>
 
+  <xsl:variable name="en-special-fractions" as="map(xs:string, xs:string)" select="map {
+      '1': 'one tenth',
+      '2': 'one fifth',
+      '4': 'two fifths',
+      '5': 'a half',
+      '6': 'three fifths',
+      '8': 'four fifths',
+      '01': 'one hundredth',
+      '25': 'one quarter',
+      '75': 'three quarters',
+      '001': 'one thousandth',
+      '125': 'one eigth',
+      '375': 'three eigths',
+      '625': 'five eigths',
+      '875': 'seven eigths',
+      '0625': 'one sixteenth',
+      '1875': 'three sixteenths',
+      '3125': 'five sixteenths',
+      '4375': 'seven sixteenths',
+      '5625': 'nine sixteenths',
+      '6875': 'eleven sixteenths',
+      '8125': 'thirteen sixteenths',
+      '9375': 'fifteen sixteenths'
+    }"/>
+
+  <xsl:function name="f:en-spell-out-decimal" as="xs:string">
+    <xsl:param name="decimal" as="xs:decimal"/>
+
+    <xsl:variable name="integer-part" select="xs:integer(substring-before(xs:string($decimal), '.'))" as="xs:integer"/>
+    <xsl:variable name="fractional-part" select="substring-after(xs:string($decimal), '.')" as="xs:string"/>
+
+    <!-- remove trailing zeros from the fractional-part -->
+    <xsl:variable name="fractional-part" select="replace($fractional-part, '([0-9]+?)0*', '$1')"/>
+
+    <xsl:sequence select="f:en-spell-out($integer-part) ||
+      (if ($en-special-fractions($fractional-part)) then ' and ' || $en-special-fractions($fractional-part)
+       else if (string-length($fractional-part) = 1) then ' and ' || f:en-spell-out(xs:integer($fractional-part)) || ' tenths'
+       else if (string-length($fractional-part) = 2) then ' and ' || f:en-spell-out(xs:integer($fractional-part)) || ' hunderdths'
+       else if (string-length($fractional-part) = 3) then ' and ' || f:en-spell-out(xs:integer($fractional-part)) || ' thousandths'
+       else ' point ' || f:en-spell-out-digits($fractional-part))"/>
+  </xsl:function>
+
+  <xsl:function name="f:en-spell-out-digits" as="xs:string">
+    <xsl:param name="number" as="xs:string"/>
+
+    <xsl:variable name="result">
+      <xsl:for-each select="string-to-codepoints($number)">
+        <xsl:value-of select="$en-cardinal(xs:integer(codepoints-to-string(.)))"/>
+        <xsl:text> </xsl:text>
+      </xsl:for-each>
+    </xsl:variable>
+
+    <xsl:sequence select="normalize-space($result)"/>
+  </xsl:function>
+
   <xsl:function name="f:en-spell-out-tens" as="xs:string">
     <xsl:param name="number" as="xs:integer"/>
 
@@ -125,7 +206,7 @@
 
   <!-- Dutch -->
 
-  <xsl:variable name="nl-cardinal" select="map {
+  <xsl:variable name="nl-cardinal" as="map(xs:integer, xs:string)" select="map {
       0: 'nul',
       1: 'een',
       2: 'twee',
@@ -156,7 +237,7 @@
       90: 'negentig'
      }"/>
 
-  <xsl:variable name="nl-group" select="map {
+  <xsl:variable name="nl-group" as="map(xs:integer, xs:string)" select="map {
      1: 'duizend',
      2: 'miljoen',
      3: 'miljard',
@@ -191,6 +272,61 @@
                       else if ($number &lt; 1000)
                         then f:nl-spell-out-hundreds($number)
                         else f:nl-spell-out-thousands($number)"/>
+  </xsl:function>
+
+  <xsl:variable name="nl-special-fractions" as="map(xs:string, xs:string)" select="map {
+      '1': 'één tiende',
+      '2': 'één vijfde',
+      '4': 'twee vijfde',
+      '5': 'een half',
+      '6': 'drie vijfde',
+      '8': 'vier vijfde',
+      '01': 'één honderste',
+      '25': 'een kwart',
+      '75': 'drie kwart',
+      '001': 'één duizendste',
+      '125': 'één achtste',
+      '375': 'drie achtste',
+      '625': 'vijf achtste',
+      '875': 'zeven achtste',
+      '0625': 'één zestiende',
+      '1875': 'drie zestiende',
+      '3125': 'vijf zestiende',
+      '4375': 'zeven zestiende',
+      '5625': 'negen zestiende',
+      '6875': 'elf zestiende',
+      '8125': 'dertien zestiende',
+      '9375': 'vijftien zestiende'
+    }"/>
+
+  <xsl:function name="f:nl-spell-out-decimal" as="xs:string">
+    <xsl:param name="decimal" as="xs:decimal"/>
+
+    <xsl:variable name="integer-part" select="xs:integer(substring-before(xs:string($decimal), '.'))" as="xs:integer"/>
+    <xsl:variable name="fractional-part" select="substring-after(xs:string($decimal), '.')" as="xs:string"/>
+
+    <!-- remove trailing zeros from the fractional-part -->
+    <xsl:variable name="fractional-part" select="replace($fractional-part, '([0-9]+?)0*', '$1')"/>
+
+    <xsl:sequence select="f:nl-spell-out($integer-part) ||
+      (if ($nl-special-fractions($fractional-part)) then ' en ' || $nl-special-fractions($fractional-part)
+       else if (string-length($fractional-part) = 1) then ' en ' || f:nl-spell-out(xs:integer($fractional-part)) || ' tienden'
+       else if (string-length($fractional-part) = 2) then ' en ' || f:nl-spell-out(xs:integer($fractional-part)) || ' hondersten'
+       else if (string-length($fractional-part) = 3) then ' en ' || f:nl-spell-out(xs:integer($fractional-part)) || ' duizendsten'
+       else ' komma ' || f:nl-spell-out-digits($fractional-part))"/>
+  </xsl:function>
+
+  <xsl:function name="f:nl-spell-out-digits" as="xs:string">
+    <xsl:param name="number" as="xs:string"/>
+
+    <xsl:variable name="result">
+      <xsl:for-each select="string-to-codepoints($number)">
+        <xsl:value-of select="$nl-cardinal(xs:integer(codepoints-to-string(.)))"/>
+        <xsl:text> </xsl:text>
+      </xsl:for-each>
+    </xsl:variable>
+
+    <xsl:sequence select="normalize-space($result)"/>
   </xsl:function>
 
   <xsl:function name="f:nl-spell-out-tens" as="xs:string">
