@@ -123,6 +123,7 @@
             <text.parentheses>()[]{}</text.parentheses>                     <!-- Pairs of parentheses, first opening, then closing. -->
             <text.quotes>&ldquo;&rdquo;&lsquo;&rsquo;&laquo;&raquo;&bdquo;&rdquo;</text.quotes> <!-- Pairs of quotation marks, first opening, then closing. -->
             <text.curlyApos>true</text.curlyApos>                           <!-- Replace a plain apostrophe (') with a right single quote. -->
+            <text.convertLongEs>false</text.convertLongEs>                  <!-- Convert long-s to normal s. -->
             <text.spaceQuotes>true</text.spaceQuotes>                       <!-- Insert a hair space between consecutive quotation marks. -->
             <text.useEllipses>true</text.useEllipses>                       <!-- Replace three consecutive periods with an ellipsis character. -->
             <text.useIJLigature>false</text.useIJLigature>                  <!-- Replace ij with the ij-ligature (Dutch and letter-spaced text only). -->

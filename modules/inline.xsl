@@ -21,6 +21,7 @@
     <!ENTITY frac34     "&#x00BE;">
     <!ENTITY ijlig      "&#x0133;">
     <!ENTITY IJlig      "&#x0132;">
+    <!ENTITY longs      "&#x017F;">
 
     <!ENTITY boKa       "&#x0F40;">
     <!ENTITY boRra      "&#x0F6C;">
@@ -46,13 +47,13 @@
     <!--====================================================================-->
     <!-- Plain Text -->
 
-    <xsl:template match="text()">
+    <xsl:template match="text()" mode="#default remove-initial titlePage toc-head">
         <xsl:variable name="text" select="if (f:is-set('lb.hyphen.remove'))
                                         then f:remove-eol-hyphens(.)
                                         else ."/>
 
         <xsl:variable name="lang" select="f:get-current-lang(.)"/>
-        <xsl:variable name="text" select="f:process-text($text, $lang, f:is-letter-spaced(.))"/>
+        <xsl:variable name="text" select="f:process-text($text, $lang, f:is-letter-spaced(.), f:is-small-caps(.))"/>
 
         <xsl:copy-of select="if ($lang = 'bo') then f:tweak-tibetan-line-breaks-wbr($text) else $text"/>
     </xsl:template>
@@ -66,13 +67,21 @@
         <xsl:sequence select="$ex and not($ex/descendant::note)"/>
     </xsl:function>
 
+    <xsl:function name="f:is-small-caps" as="xs:boolean">
+        <xsl:param name="node"/>
+
+        <xsl:variable name="sc" select="($node/ancestor-or-self::hi[@rend=('sc', 'asc', 'uc')] | $node/ancestor-or-self::sc)[1]"/>
+        <!-- Ignore hi[@rend='sc'] elements if we are in a note, when it is outside the note -->
+        <xsl:sequence select="$sc and not($sc/descendant::note)"/>
+    </xsl:function>
+
 
     <!-- Old version to keep other usages simple -->
     <xsl:function name="f:process-text" as="xs:string">
         <xsl:param name="text" as="xs:string"/>
         <xsl:param name="lang" as="xs:string"/>
 
-        <xsl:value-of select="f:process-text($text, $lang, false())"/>
+        <xsl:value-of select="f:process-text($text, $lang, false(), false())"/>
     </xsl:function>
 
 
@@ -80,6 +89,7 @@
         <xsl:param name="text" as="xs:string"/>
         <xsl:param name="lang" as="xs:string"/>
         <xsl:param name="is-letter-spaced" as="xs:boolean"/>
+        <xsl:param name="is-small-caps" as="xs:boolean"/>
 
         <xsl:variable name="text" select="if ($lang = 'grc' and f:is-set('beta.convert'))
                                             then f:beta-to-unicode($text, f:is-set('beta.caseSensitive'))
@@ -87,10 +97,11 @@
         <!-- <xsl:variable name="text" select="if ($lang = 'bo')
                                             then f:tweak-tibetan-line-breaks-zwsp($text)
                                             else $text"/> -->
-        <xsl:variable name="text" select="if ($lang != 'xx' and f:is-set('text.curlyApos')) then f:curly-apos($text) else $text"/>
-        <xsl:variable name="text" select="if ($lang != 'xx' and f:is-set('text.spaceQuotes')) then f:handle-quotes($text) else $text"/>
-        <xsl:variable name="text" select="if ($lang != 'xx' and f:is-set('text.useEllipses')) then f:handle-ellipses($text) else $text"/>
-        <xsl:variable name="text" select="if ($lang = ('nl', 'nl-1900') and $is-letter-spaced and f:is-set('text.useIJLigature')) then f:use-ij-ligature($text) else $text"/>
+        <xsl:variable name="text" select="if ($lang != ('xx', 'zxx') and f:is-set('text.curlyApos')) then f:curly-apos($text) else $text"/>
+        <xsl:variable name="text" select="if ($lang != ('xx', 'zxx') and f:is-set('text.spaceQuotes')) then f:handle-quotes($text) else $text"/>
+        <xsl:variable name="text" select="if ($lang != ('xx', 'zxx') and f:is-set('text.useEllipses')) then f:handle-ellipses($text) else $text"/>
+        <xsl:variable name="text" select="if ($lang  = ('nl', 'nl-1900') and $is-letter-spaced and f:is-set('text.useIJLigature')) then f:use-ij-ligature($text) else $text"/>
+        <xsl:variable name="text" select="if ($is-small-caps or f:is-set('text.convertLongEs')) then f:convert-long-es($text) else $text"/>
 
         <xsl:variable name="text" select="f:no-break-initials($text)"/>
 
@@ -260,6 +271,12 @@
         <xsl:variable name="text" as="xs:string" select="replace($text, 'IJ', '&IJlig;')"/>
 
         <xsl:value-of select="$text"/>
+    </xsl:function>
+
+    <xsl:function name="f:convert-long-es" as="xs:string">
+        <xsl:param name="text" as="xs:string"/>
+
+        <xsl:value-of select="replace($text, '&longs;', 's')"/>
     </xsl:function>
 
 
