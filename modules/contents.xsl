@@ -209,7 +209,7 @@
         <xsl:param name="show-page-numbers" tunnel="yes" as="xs:boolean" select="true()"/>
         <xsl:param name="show-div-numbers" tunnel="yes" as="xs:boolean" select="true()"/>
 
-        <xsl:if test="@n and f:is-set('toc.numberEntries') and $show-div-numbers">
+        <xsl:if test="@n and f:is-set('toc.numberEntries') and $show-div-numbers and not(f:rend-value(@rend, 'toc-hide-number') = 'true')">
             <xsl:copy-of select="f:convert-markdown(@n)"/><xsl:text>. </xsl:text>
         </xsl:if>
         <a href="{f:generate-href(.)}">
@@ -413,6 +413,7 @@
                 <!-- Do we have a head to display in the toc? -->
                 <xsl:when test="f:has-toc-head(.)">
                     <tr id="{f:generate-id(.) || '.' || $divGenId}">
+                        <xsl:attribute name="class" select="'tocLevel' || $curLevel"/>
                         <xsl:call-template name="generate-toc-entry-table">
                             <xsl:with-param name="maxLevel" select="$maxLevel"/>
                             <xsl:with-param name="curLevel" select="$curLevel"/>
@@ -451,7 +452,7 @@
             </td>
         </xsl:if>
         <td class="tocDivNum">
-            <xsl:if test="@n and f:is-set('toc.numberEntries') and $show-div-numbers">
+            <xsl:if test="@n and f:is-set('toc.numberEntries') and $show-div-numbers and not(f:rend-value(@rend, 'toc-hide-number') = 'true')">
                 <xsl:copy-of select="f:convert-markdown(@n)"/><xsl:text>. </xsl:text>
             </xsl:if>
         </td>

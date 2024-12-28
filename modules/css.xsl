@@ -451,6 +451,7 @@
                 <xsl:when test="$property='title'"/>                <!-- title text for links, etc. -->
                 <xsl:when test="$property='toc'"/>                  <!-- indicates how to include a head in the toc. -->
                 <xsl:when test="$property='toc-head'"/>             <!-- head to be used in table of contents. -->
+                <xsl:when test="$property='toc-hide-number'"/>      <!-- hide the division number in table of contents (even when the @n attribute is present, default: false). -->
                 <xsl:when test="$property='toc-max-level'"/>        <!-- the maximum level (depth) of a generated table of contents. -->
 
                 <!-- Non-CSS properties used to render verse -->
