@@ -89,7 +89,6 @@
     <xsl:variable name="outputFormat" select="'epub'"/>
 
     <xsl:variable name="p.element" select="'p'"/>
-    <xsl:variable name="section.element" select="'div'"/>
 
     <!--====================================================================-->
 

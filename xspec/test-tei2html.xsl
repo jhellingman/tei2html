@@ -53,7 +53,6 @@
     <xsl:variable name="outputFormat" select="'html'"/>
 
     <xsl:variable name="p.element" select="if (f:is-pdf()) then 'div' else 'p'"/>
-    <xsl:variable name="section.element" select="'div'"/>
 
     <xsl:template match="/">
         <xsl:apply-templates/>
