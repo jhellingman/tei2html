@@ -71,8 +71,6 @@
     <xsl:variable name="p.element" select="'p'"/>
 
 
-
-
     <xsl:template match="/">
         <images>
             <xsl:apply-templates mode="imageinfo"/>

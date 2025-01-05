@@ -100,6 +100,17 @@
     </xsl:template>
 
 
+    <xsl:function name="f:has-head" as="xs:boolean">
+        <xsl:param name="div"/>
+        <xsl:sequence select="$div/head[not(f:rend-value(./@rend, 'display') = 'image-only')]"/>
+    </xsl:function>
+
+    <xsl:function name="f:determine-output-div-element" as="xs:string">
+        <xsl:param name="div"/>
+        <xsl:sequence select="if (f:is-html5() and f:has-head($div)) then 'section' else 'div'"/>
+    </xsl:function>
+
+
     <xd:doc>
         <xd:short>Format head element of div0.</xd:short>
         <xd:detail>Format a head element for a <code>div0</code>. At this level we still set the running header (for ePub3).</xd:detail>
