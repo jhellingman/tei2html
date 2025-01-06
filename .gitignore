@@ -196,3 +196,13 @@ test/pipe.xpl
 tei-table.xml
 tei2ods.xsl
 test/out.html
+/pptools/corpus tools/Nederlandsch Woordenlijst/Articles
+/pptools/corpus tools/Nederlandsch Woordenlijst
+/pptools/attic
+pptools/corpus tools/out.features
+pptools/corpus tools/test/Akbar.html
+pptools/dictionaries/dict-nl_1900.oxt/dict-nl_1900.oxt
+tools/test/cdd-test.tei
+tools/test/cdd.tei
+tools/test/test-err.txt
+tools/test/test-out.txt
