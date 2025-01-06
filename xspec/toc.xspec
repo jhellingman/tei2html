@@ -108,27 +108,27 @@
             <div xmlns="http://www.w3.org/1999/xhtml" class="div1" id="toc">
                 <h2 class="main">Table of Contents</h2>
                 <table summary="Table of Contents">
-                    <tr id="preface.toc">
+                    <tr id="preface.toc" class="tocLevel0">
                         <td class="tocDivNum"/>
                         <td class="tocDivTitle"><a href="#preface">Preface</a></td>
                         <td class="tocPageNum"/>
                     </tr>
-                    <tr id="ch1.toc">
+                    <tr id="ch1.toc" class="tocLevel0">
                         <td class="tocDivNum">I. </td>
                         <td class="tocDivTitle"><a href="#ch1">Chapter I.</a></td>
                         <td class="tocPageNum" />
                     </tr>
-                    <tr id="ch2.toc">
+                    <tr id="ch2.toc" class="tocLevel0">
                         <td class="tocDivNum">II. </td>
                         <td class="tocDivTitle"><a href="#ch2">Chapter II.</a></td>
                         <td class="tocPageNum" />
                     </tr>
-                    <tr id="ch3.toc">
+                    <tr id="ch3.toc" class="tocLevel0">
                         <td class="tocDivNum">III. </td>
                         <td class="tocDivTitle"><a href="#ch3">Chapter III.</a></td>
                         <td class="tocPageNum" />
                     </tr>
-                    <tr id="index.toc">
+                    <tr id="index.toc" class="tocLevel0">
                         <td class="tocDivNum"/>
                         <td class="tocDivTitle"><a href="#index">Index</a></td>
                         <td class="tocPageNum" />
@@ -181,27 +181,27 @@
             <div xmlns="http://www.w3.org/1999/xhtml" class="div1" id="toc">
                 <h2 class="main">Table of Contents</h2>
                 <table summary="Table of Contents">
-                    <tr id="preface.toc">
+                    <tr id="preface.toc" class="tocLevel0">
                         <td class="tocDivNum"/>
                         <td class="tocDivTitle"><a href="#preface">Preface</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#preface">1</a></td>
                     </tr>
-                    <tr id="ch1.toc">
+                    <tr id="ch1.toc" class="tocLevel0">
                         <td class="tocDivNum">I. </td>
                         <td class="tocDivTitle"><a href="#ch1">Chapter I.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch1">2</a></td>
                     </tr>
-                    <tr id="ch2.toc">
+                    <tr id="ch2.toc" class="tocLevel0">
                         <td class="tocDivNum">II. </td>
                         <td class="tocDivTitle"><a href="#ch2">Chapter II.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch2">2</a></td>
                     </tr>
-                    <tr id="ch3.toc">
+                    <tr id="ch3.toc" class="tocLevel0">
                         <td class="tocDivNum">III. </td>
                         <td class="tocDivTitle"><a href="#ch3">Chapter III.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch3">3</a></td>
                     </tr>
-                    <tr id="index.toc">
+                    <tr id="index.toc" class="tocLevel0">
                         <td class="tocDivNum"/>
                         <td class="tocDivTitle"><a href="#index">Index</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#index">3</a></td>
@@ -255,27 +255,27 @@
             <div xmlns="http://www.w3.org/1999/xhtml" class="div1" id="toc">
                 <h2 class="main">Table of Contents</h2>
                 <table summary="Table of Contents">
-                    <tr id="preface.toc">
+                    <tr id="preface.toc" class="tocLevel0">
                         <td class="tocDivNum"/>
                         <td class="tocDivTitle"><a href="#preface">Preface</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#preface">1</a></td>
                     </tr>
-                    <tr id="ch1.toc">
+                    <tr id="ch1.toc" class="tocLevel0">
                         <td class="tocDivNum">I. </td>
                         <td class="tocDivTitle"><a href="#ch1">Chapter I.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch1">2</a></td>
                     </tr>
-                    <tr id="ch2.toc">
+                    <tr id="ch2.toc" class="tocLevel0">
                         <td class="tocDivNum">II. </td>
                         <td class="tocDivTitle"><a href="#ch2">Chapter II.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch2">2</a></td>
                     </tr>
-                    <tr id="ch3.toc">
+                    <tr id="ch3.toc" class="tocLevel0">
                         <td class="tocDivNum">III. </td>
                         <td class="tocDivTitle"><a href="#ch3">Chapter III.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch3">3</a></td>
                     </tr>
-                    <tr id="index.toc">
+                    <tr id="index.toc" class="tocLevel0">
                         <td class="tocDivNum"/>
                         <td class="tocDivTitle"><a href="#index">Index</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#index">3</a></td>
@@ -320,12 +320,12 @@
             <div xmlns="http://www.w3.org/1999/xhtml" class="div1" id="toc">
                 <h2 class="main">Table of Contents</h2>
                 <table summary="Table of Contents">
-                    <tr id="ch1.toc">
+                    <tr id="ch1.toc" class="tocLevel0">
                         <td class="tocDivNum">I. </td>
                         <td class="tocDivTitle" colspan="2"><a href="#ch1">Chapter I.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch1">2</a></td>
                     </tr>
-                    <tr id="ch1.1.toc">
+                    <tr id="ch1.1.toc" class="tocLevel1">
                         <td/>
                         <td class="tocDivNum">1. </td>
                         <td class="tocDivTitle"><a href="#ch1.1">Section 1.</a></td>
@@ -375,18 +375,18 @@
             <div xmlns="http://www.w3.org/1999/xhtml" class="div1" id="toc">
                 <h2 class="main">Table of Contents</h2>
                 <table summary="Table of Contents">
-                    <tr id="ch1.toc">
+                    <tr id="ch1.toc" class="tocLevel0">
                         <td class="tocDivNum">I. </td>
                         <td class="tocDivTitle" colspan="3"><a href="#ch1">Chapter I.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch1">2</a></td>
                     </tr>
-                    <tr id="ch1.1.toc">
+                    <tr id="ch1.1.toc" class="tocLevel1">
                         <td/>
                         <td class="tocDivNum">1. </td>
                         <td class="tocDivTitle" colspan="2"><a href="#ch1.1">Section 1.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch1.1">2</a></td>
                     </tr>
-                    <tr id="ch1.1.A.toc">
+                    <tr id="ch1.1.A.toc" class="tocLevel2">
                         <td colspan="2"/>
                         <td class="tocDivNum">A. </td>
                         <td class="tocDivTitle"><a href="#ch1.1.A">Subsection A.</a></td>
@@ -453,42 +453,42 @@
             <div xmlns="http://www.w3.org/1999/xhtml" class="div1" id="toc">
                 <h2 class="main">Table of Contents</h2>
                 <table summary="Table of Contents">
-                    <tr id="ch1.toc">
+                    <tr id="ch1.toc" class="tocLevel0">
                         <td class="tocDivNum">I. </td>
                         <td class="tocDivTitle" colspan="6"><a href="#ch1">Chapter I.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch1">2</a></td>
                     </tr>
-                    <tr id="ch1.1.toc">
+                    <tr id="ch1.1.toc" class="tocLevel1">
                         <td/>
                         <td class="tocDivNum">1. </td>
                         <td class="tocDivTitle" colspan="5"><a href="#ch1.1">Section 1.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch1.1">2</a></td>
                     </tr>
-                    <tr id="ch1.1.A.toc">
+                    <tr id="ch1.1.A.toc" class="tocLevel2">
                         <td colspan="2"/>
                         <td class="tocDivNum">A. </td>
                         <td class="tocDivTitle" colspan="4"><a href="#ch1.1.A">Subsection A.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch1.1.A">2</a></td>
                     </tr>
-                    <tr id="ch1.1.A.a.toc">
+                    <tr id="ch1.1.A.a.toc" class="tocLevel3">
                         <td colspan="3"/>
                         <td class="tocDivNum">a. </td>
                         <td class="tocDivTitle" colspan="3"><a href="#ch1.1.A.a">Subsubsection a.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch1.1.A.a">2</a></td>
                     </tr>
-                    <tr id="ch1.1.A.a.i.toc">
+                    <tr id="ch1.1.A.a.i.toc" class="tocLevel4">
                         <td colspan="4"/>
                         <td class="tocDivNum">i. </td>
                         <td class="tocDivTitle" colspan="2"><a href="#ch1.1.A.a.i">Subsubsubsection i.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch1.1.A.a.i">2</a></td>
                     </tr>
-                    <tr id="ch1.1.A.a.i.1.toc">
+                    <tr id="ch1.1.A.a.i.1.toc" class="tocLevel5">
                         <td colspan="5"/>
                         <td class="tocDivNum">1. </td>
                         <td class="tocDivTitle"><a href="#ch1.1.A.a.i.1">Subsubsubsubsection 1.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch1.1.A.a.i.1">2</a></td>
                     </tr>
-                    <tr id="ch2.toc">
+                    <tr id="ch2.toc" class="tocLevel0">
                         <td class="tocDivNum">II. </td>
                         <td class="tocDivTitle" colspan="6"><a href="#ch2">Chapter II.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch2">2</a></td>
@@ -547,42 +547,42 @@
             <div xmlns="http://www.w3.org/1999/xhtml" class="div1" id="toc">
                 <h2 class="main">Table of Contents</h2>
                 <table summary="Table of Contents">
-                    <tr id="ch1.toc">
+                    <tr id="ch1.toc" class="tocLevel0">
                         <td class="tocDivNum">I. </td>
                         <td class="tocDivTitle" colspan="6"><a href="#ch1">Chapter I.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch1">2</a></td>
                     </tr>
-                    <tr id="ch1.1.toc">
+                    <tr id="ch1.1.toc" class="tocLevel1">
                         <td/>
                         <td class="tocDivNum">1. </td>
                         <td class="tocDivTitle" colspan="5"><a href="#ch1.1">Section 1.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch1.1">2</a></td>
                     </tr>
-                    <tr id="ch1.1.A.toc">
+                    <tr id="ch1.1.A.toc" class="tocLevel2">
                         <td colspan="2"/>
                         <td class="tocDivNum">A. </td>
                         <td class="tocDivTitle" colspan="4"><a href="#ch1.1.A">Subsection A.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch1.1.A">2</a></td>
                     </tr>
-                    <tr id="ch1.1.A.a.toc">
+                    <tr id="ch1.1.A.a.toc" class="tocLevel3">
                         <td colspan="3"/>
                         <td class="tocDivNum">a. </td>
                         <td class="tocDivTitle" colspan="3"><a href="#ch1.1.A.a">Subsubsection a.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch1.1.A.a">2</a></td>
                     </tr>
-                    <tr id="ch1.1.A.a.i.toc">
+                    <tr id="ch1.1.A.a.i.toc" class="tocLevel4">
                         <td colspan="4"/>
                         <td class="tocDivNum">i. </td>
                         <td class="tocDivTitle" colspan="2"><a href="#ch1.1.A.a.i">Subsubsubsection i.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch1.1.A.a.i">2</a></td>
                     </tr>
-                    <tr id="ch1.1.A.a.i.1.toc">
+                    <tr id="ch1.1.A.a.i.1.toc" class="tocLevel5">
                         <td colspan="5"/>
                         <td class="tocDivNum">1. </td>
                         <td class="tocDivTitle"><a href="#ch1.1.A.a.i.1">Subsubsubsubsection 1.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch1.1.A.a.i.1">2</a></td>
                     </tr>
-                    <tr id="ch2.toc">
+                    <tr id="ch2.toc" class="tocLevel0">
                         <td class="tocDivNum">II. </td>
                         <td class="tocDivTitle" colspan="6"><a href="#ch2">Chapter II.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch2">2</a></td>
@@ -641,24 +641,24 @@
             <div xmlns="http://www.w3.org/1999/xhtml" class="div1" id="toc">
                 <h2 class="main">Table of Contents</h2>
                 <table summary="Table of Contents">
-                    <tr id="ch1.toc">
+                    <tr id="ch1.toc" class="tocLevel0">
                         <td class="tocDivNum">I. </td>
                         <td class="tocDivTitle" colspan="3"><a href="#ch1">Chapter I.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch1">2</a></td>
                     </tr>
-                    <tr id="ch1.1.toc">
+                    <tr id="ch1.1.toc" class="tocLevel1">
                         <td/>
                         <td class="tocDivNum">1. </td>
                         <td class="tocDivTitle" colspan="2"><a href="#ch1.1">Section 1.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch1.1">2</a></td>
                     </tr>
-                    <tr id="ch1.1.A.toc">
+                    <tr id="ch1.1.A.toc" class="tocLevel2">
                         <td colspan="2"/>
                         <td class="tocDivNum">A. </td>
                         <td class="tocDivTitle"><a href="#ch1.1.A">Subsection A.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch1.1.A">2</a></td>
                     </tr>
-                    <tr id="ch2.toc">
+                    <tr id="ch2.toc" class="tocLevel0">
                         <td class="tocDivNum">II. </td>
                         <td class="tocDivTitle" colspan="3"><a href="#ch2">Chapter II.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch2">2</a></td>
@@ -717,24 +717,24 @@
             <div xmlns="http://www.w3.org/1999/xhtml" class="div1" id="toc">
                 <h2 class="main">Table of Contents</h2>
                 <table summary="Table of Contents">
-                    <tr id="ch1.toc">
+                    <tr id="ch1.toc" class="tocLevel0">
                         <td class="tocDivNum">I. </td>
                         <td class="tocDivTitle" colspan="3"><a href="#ch1">Chapter I.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch1">2</a></td>
                     </tr>
-                    <tr id="ch1.1.toc">
+                    <tr id="ch1.1.toc" class="tocLevel1">
                         <td/>
                         <td class="tocDivNum">1. </td>
                         <td class="tocDivTitle" colspan="2"><a href="#ch1.1">Section 1.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch1.1">2</a></td>
                     </tr>
-                    <tr id="ch1.1.A.toc">
+                    <tr id="ch1.1.A.toc" class="tocLevel2">
                         <td colspan="2"/>
                         <td class="tocDivNum">A. </td>
                         <td class="tocDivTitle"><a href="#ch1.1.A">Subsection A.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch1.1.A">2</a></td>
                     </tr>
-                    <tr id="ch2.toc">
+                    <tr id="ch2.toc" class="tocLevel0">
                         <td class="tocDivNum">II. </td>
                         <td class="tocDivTitle" colspan="3"><a href="#ch2">Chapter II.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch2">2</a></td>
@@ -793,12 +793,12 @@
             <div xmlns="http://www.w3.org/1999/xhtml" class="div1" id="toc">
                 <h2 class="main">Table of Contents</h2>
                    <table summary="Table of Contents">
-                      <tr id="ch1.toc">
+                      <tr id="ch1.toc" class="tocLevel0">
                          <td class="tocDivNum">I. </td>
                          <td class="tocDivTitle"><a href="#ch1">Chapter I.</a></td>
                          <td class="tocPageNum"><a class="pageref" href="#ch1">2</a></td>
                       </tr>
-                      <tr id="ch2.toc">
+                      <tr id="ch2.toc" class="tocLevel0">
                          <td class="tocDivNum">II. </td>
                          <td class="tocDivTitle"><a href="#ch2">Chapter II.</a></td>
                          <td class="tocPageNum"><a class="pageref" href="#ch2">2</a></td>
