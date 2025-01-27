@@ -1,6 +1,6 @@
 == Using the `@rend` attribute
 
-The `@rend` attribute is a simple hook into the TEI structure to document or specify how features are rendered. Within `tei2html` they can be used to achieve certain formatting effects. This feature should be used with moderation. A number of different ways of using the `@rend` attribute can be distinguished.
+The `@rend` attribute is a simple hook into the TEI structure to document or specify how features are rendered. Within `tei2html` they can be used to achieve certain formatting effects. This feature should be used with moderation. Several ways of using the `@rend` attribute can be distinguished.
 
 Note that according to the TEI Guidelines, the rendering attributes are intended to describe the presentation of the source material, and are not to prescribe any presentation of the output. Since the intention here is to faithfully reproduce text, this distinction is not really important for `tei2html`.
 
@@ -76,7 +76,7 @@ As an alternative to the `@rend` attribute, the current TEI guidelines also prov
 
 ==== Directionality
 
-Since ePub does not allows CSS to be used for directionality, but requires that the HTML `@dir` attribute is used, the following `@rend` values are translated to a `@dir` attribute in HTML.
+Since ePub does not allow CSS to be used for directionality, but requires that the HTML `@dir` attribute is used, the following `@rend` values are translated to a `@dir` attribute in HTML.
 
 . `direction(...)`
 . `class(rtl)` and `class(ltr)` and the bare equivalents.
@@ -93,5 +93,5 @@ Since ePub does not allows CSS to be used for directionality, but requires that 
 * verify `&lt;rendition&gt;` elements for the given class names are present in the `&lt;tagsDecl&gt;` of the TEI file.
 * warn if this is not the case.
 . Handle the `&lt;rendition&gt;` tags in the `&lt;tagsDecl&gt;`.
-* verify the rendition id is actually used in the file.
+* verify the rendition id is used in the file.
 * output the corresponding CSS verbatim.

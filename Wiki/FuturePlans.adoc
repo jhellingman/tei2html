@@ -3,14 +3,14 @@
 I intend, when possible, to add the following to the tei2html tool-set.
 
 * Support for Customization
-* Support for PDF output via Prince-XML. (Mostly done)
+* Support for PDF output via Prince-XML. (Mostly done.)
 * Support for ePub output. (DONE)
 * Support for XHTML output. (DONE, for ePub).
 
 === Tidbits
 
-* Update extractPDF with the latest version of tools and option to extract to png format. (DONE)
-* support for `&lt;prefixDef&gt;` (DONE)
+* Update extractPDF with the latest version of tools and option to extract to PNG format. (DONE.)
+* Support for `&lt;prefixDef&gt;` (DONE)
 
 === Support TEI P5
 
@@ -80,7 +80,6 @@ The following elements are foreseen for this configuration file:
 
 ** externalLinks (Y|N, Generate external links, default Y. N may be desired on devices without internet connectivity.)
 * Textual Constants
-
 ** organization (name of organization responsible for publication)
 ** organizationUrl (url of organization)
 ** copyrightStatement (copyright statement to be used in metadata)
@@ -128,6 +127,6 @@ See the http://sourceforge.net/projects/xslt2processor/[XSLT2Processor] project.
 
 === A Note on DRM
 
-DRM are a misguided attempt dupe end-user from using works to their fullest extend. I will never include any support for ePub related DRM schemes. Users and re-distributors of this code are gently reminded of section 3 of the GPL, which aims to remove the legal 'stick behind the door' without which DRM schemes would be pointless anyway.
+DRM are a misguided attempt dupe end-user from using works to their fullest extent. I will never include any support for ePub related DRM schemes. Users and re-distributors of this code are gently reminded of section 3 of the GPL, which aims to remove the legal 'stick behind the door' without which DRM schemes would be pointless anyway.
 
 Also note that this code inserts parts of itself into the resulting products (similar to Bison), hence I intend to include a similar exception to the GPL for generated ePub books. However, this exception will not except section 3 of the GPL.

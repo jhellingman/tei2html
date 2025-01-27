@@ -2,7 +2,7 @@
 
 === Figures according to TEI P3
 
-Currently, `tei2html` supports figures following the TEI P3 model, with some modifications.
+Currently, `tei2html` supports figures following the TEI P3-model, with some modifications.
 
 A `figure` element describes a single image, and optional some heading, legend text and a description.
 
@@ -18,5 +18,5 @@ The new model allows multiple graphics in a figure and specifies the attribute `
 
 The current code should remain functional for existing texts.
 
-* When a single `graphic` element appears in a figure, behavior should be the same as an P3 style `figure` with an attribute, that is, the width of the block is the width of the image. (DONE)
+* When a single `graphic` element appears in a figure, behavior should be the same as an P3 style `figure` with an attribute, that is, the width of the block is the width of the image. (DONE.)
 * When multiple `graphic` elements appear, the images should be rendered under each other; the width of the entire block being the widest of these images.

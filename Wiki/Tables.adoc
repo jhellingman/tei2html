@@ -13,12 +13,11 @@ Tables are supported in `tei2html` with the following features:
 
 In addition to the TEI model, `tei2html` supports column definitions. These can be used to apply styling to all cells in a column. The following elements are defined:
 
-`column`: a column definition, which can have the following attributes: `@cols` the number of columns this column definition applies to, by default only a single column; `@rend` the rendering that should be applied to each of the cells in the column matching the position of the column definition.
+`column`: a column definition, which can have the following attributes: `@cols` the number of columns this column definition applies to, by default only a single column; `@rend` the rendering that should be applied to each cell in the column matching the position of the column definition.
 
 `columnGroup`: a group of column definitions, that can be repeated multiple times. A `columnGroup` should always have the attribute `@repeat` which indicates the number of times the column-group should be repeated.
 
-Note that the `@rend` value `align(decimal)` triggers some special processing when generating HTML. Since HTML does not directly support alignment on the decimal separator, any column with `align(decimal)` will be split into two columns, with in the first the integer part of the numbers, and in the second the fractional
-part. CSS is used to make those parts align as expected.
+Note that the `@rend` value `align(decimal)` triggers some special processing when generating HTML. Since HTML does not directly support alignment on the decimal separator, any column with `align(decimal)` will be split into two columns, with in the first the integer part of the numbers, and in the second the fractional part. CSS is used to make those parts align as expected.
 
 === Braces
 

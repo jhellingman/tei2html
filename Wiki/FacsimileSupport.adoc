@@ -10,7 +10,7 @@ The facsimile files themselves can be either hosted locally (on a file-system un
 
 Finally, we can refer directly to the facsimiles, or generate an HTML wrapper that includes the facsimile (assumed to be an image in a supported format here). The HTML wrapper will be required if we include the facsimile images in an ePub file.
 
-All combined, this gives a number of options to take into account when dealing with facsimile editions.
+All combined, this gives several options to take into account when dealing with facsimile editions.
 
 === Facsimile Element
 
@@ -93,7 +93,7 @@ By convention, the facsimile images and wrapper pages will go into a directory `
       <div class="facsimile-navigation">
          <!-- Buttons to go to previous and next page, and back to text -->
       </div>
-      <div class="facsimile-page>
+      <div class="facsimile-page">
          <img src="\images\pages\p123.gif"/>
       </div>
     </body>

@@ -8,7 +8,7 @@ Larger works were often issued in multi-volume sets, and as a result often also 
 
 The idea is to create an XSLT stylesheet that will merge the individual volumes, and provide them with a new TEI-header (which in turn can also be put together from elements pulled from the TEI-header of one or more of the source TEI files. Some things to consider:
 
-* Combined TEI-header. Often using the contents of the first TEI-header, with some minor changes will be sufficient.
+* Combined TEI-header. Often using the contents of the first TEI-header, with some minor changes will be enough.
 * Combined tables-of-contents. Here, we may need to have some smart xpath queries to extract the various fragments of the table-of-contents from the various volumes (or simply generate the entire thing anew).
 * Combined body content, which may require the introduction of a new level of divisions ("parts" or "volumes"), which in turn may require adjusting the levels of numbered `div` elements (e.g. `div1` may need to become `div2`, etc.).
 * Combined material in the front- or back-matter (such as Appendices), which may require some re-numbering.

@@ -8,7 +8,7 @@
 * notes to tables
 * apparatus notes
 
-Each of these types is handled in a slightly different way.
+Each type is handled in a slightly different way.
 
 === Footnotes
 

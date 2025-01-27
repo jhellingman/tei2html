@@ -13,7 +13,7 @@ The current implementation is in `css2xml.xsl`, which is incomplete. The CSS is 
 . determine selectors.
 . clean-up parsing artifacts.
 
-Items remaining todo are:
+Items remaining to do are:
 
 * Better follow tokenization as defined for http://www.w3.org/TR/CSS21/syndata.html#tokenization[CSS 2.1 tokenization].
 * Properly understand all valid CSS 2.1 features.

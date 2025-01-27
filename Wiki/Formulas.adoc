@@ -2,11 +2,11 @@
 
 === Requirements
 
-Use the suggested TEI notation: `&lt;formula id=f1 notation=&quot;TeX&quot;&gt;$E = mc^2$&lt;/formula&gt;` (see https://www.tei-c.org/release/doc/tei-p5-doc/en/html/FT.html#FTFOR[TEI guidelines])
+Use the suggested TEI notation: `&lt;formula id=f1 notation=&quot;TeX&quot;&gt;$E = mc^2$&lt;/formula&gt;` (see https://www.tei-c.org/release/doc/tei-p5-doc/en/html/FT.html#FTFOR[TEI guidelines]).
 
 * Meet Project Gutenberg rules, that is convert to HTML and ePub without any dynamic content (that is, no javascript, no external fonts or dependencies on non-standard software, etc.)
 * Look as good as normal (dynamic) MathJax output.
-* Fully automated processing on command line (that is, it can be integrated in a build process)
+* Fully automated processing on command line (that is, it can be integrated in a build process).
 
 
 === Implementation
@@ -72,7 +72,7 @@ Very often, a single letter or digit is (correctly) marked as an equation. To av
 
 ==== Labeled equations
 
-Numbered equations have a label (between parentheses) set flush-right. Here we use the label encoded on `@n` attribute, format it, and place it flush right. The configuration setting `math.label.position` (with possible values `left` and `right`) can be used to determine whether the label should go to the left or right edge of the text. (note that to maintain centering, a label will be generated on both sides of the display formula in any case, and either the right or the left will be made invisible.)
+Numbered equations have a label (between parentheses) set flush-right. Here we use the label encoded on `@n` attribute, format it, and place it flush right. The configuration setting `math.label.position` (with possible values `left` and `right`) can be used to determine whether the label should go to the left or right edge of the text. (Note that to maintain centering, a label will be generated on both sides of the display formula in any case, and either the right or the left will be made invisible.)
 
 Since we cannot have further mark-up in the values of attributes, we use a 'light' markup syntax to use italics and bold on labels. To get 1*a*, type `1_a_`; to get 2**b**, type `2__b__`. Parenthesis can be supplied, based on the setting `math.label.before` and `math.label.after`.
 
@@ -81,4 +81,4 @@ Since we cannot have further mark-up in the values of attributes, we use a 'ligh
 
 . _Unexpected Line breaks._ Currently, we see linebreaks directly after the HTML `&lt;span&gt;`, even when punctuation marks directly follow the math. We will probably have to wrap the entire formula and the following punctuation in a no-wrap `&lt;span&gt;` to prevent this. A simple work-around is to put the final punctuation inside the equation.
 . _Punctuation after labeled display math._ Some books place punctuation after the label to end a sentence or phrase. With the current implementation, this is very tricky to emulate. Placing the punctuation after the formula is the most logical from a semantic point of view, but will require a lot of effort. As a work-around place this punctuation within the displayed equation.
-. _No line-breaks._ Since HTML is unable to break SVG into lines, math formulas will not be broken into lines. You may consider breaking very long formulas into multiple fragments as a measure of last resort.
+. _No line-breaks._ Since browsers rendering HTML cannot break SVG into lines, math formulas will not be broken into lines. You may consider breaking very long formulas into multiple fragments as a measure of last resort.

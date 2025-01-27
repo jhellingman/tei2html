@@ -33,7 +33,7 @@ If you give it any other name, you can tell the perl script about it, using the 
 
 ==== CCS Selectors
 
-To indicate on what elements in your TEI file your CSS rules should apply to, you can use a number of techniques.
+To indicate on what elements in your TEI file your CSS rules should apply to, you can use several techniques.
 
 * Based on ID attributes.
 * Based on `tei2html` generated class attributes.
@@ -44,7 +44,7 @@ Since `tei2html` in most cases lifts the ids used in the source to the output, y
 
 Care need to be taken that ids used in this fashion meet both the syntax rules for CSS and XML.
 
-Second, `tei2html` generates class attributes on its output that correspondent to the element type in TEI from which the output element was generated. These can be used as a convenient way to use `.class` selectors. In addition, `tei2html` also generates additional class attributes for some types of elements. A complete overview will be given in the following table.
+Second, `tei2html` generates class attributes on its output that correspondent to the element type in TEI from which the output element was generated. These can be used as a convenient way to use `.class` selectors. In addition, `tei2html` generates additional class attributes for some types of elements. A complete overview will be given in the following table.
 
 [cols="<,<,<"]
 |===
@@ -77,7 +77,7 @@ Tables pose some peculiar problems for rendering. By default, tables are rendere
 
 When a TEI table is converted to HTML, it is surrounded by a `&lt;div&gt;` element, and the `&lt;head&gt;`, if present, is lifted from the table, as support for the HTML caption element in browsers is limited. The table proper is converted to an HTML table.
 
-Rendering attributes on tables can be applied in four ways: on the table as a whole, and on column, row, or cell level.
+Rendering attributes on tables can be applied in four ways: on the table as a whole, and on column, row or cell level.
 
 Rendering on the whole table is handled the normal way.
 

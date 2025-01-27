@@ -388,7 +388,7 @@
             <xsl:with-param name="divGenId" select="$divGenId"/>
         </xsl:apply-templates>
 
-        <xsl:apply-templates mode="gentoc-table" select="./body/group | ./body/div0 | ./body/div1 | ./body/div">
+        <xsl:apply-templates mode="gentoc-table" select="./group | ./body/div0 | ./body/div1 | ./body/div">
             <xsl:with-param name="maxLevel" select="$maxLevel"/>
             <xsl:with-param name="divGenId" select="$divGenId"/>
         </xsl:apply-templates>
