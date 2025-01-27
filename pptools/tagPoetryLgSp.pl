@@ -3,6 +3,9 @@
 use strict;
 use warnings;
 
+my $initialSpaceCount = 0;
+my $initialSpaces = ' ' x $initialSpaceCount;
+
 my $lgSeen = 0;
 my $spSeen = 0;
 my $spLooksLikeProse = 0;
@@ -70,16 +73,16 @@ while (<>) {
             print "</lg>\n\n<lg>\n";
         } elsif ($line =~ /^\s*<l>/) {  # Already tagged
             print $line;
-        } else {
+        } else {            
             # count white space before
             $line =~ /^(\s*)(.*)$/;
             my $spaces = $1;
             $line = $2;
             my $n = length($spaces);
             if ($n == 0) {
-                print "    <l>$line\n";
+                print "$initialSpaces<l>$line\n";
             } else {
-                print "    $spaces<l rend=\"indent($n)\">$line\n";
+                print "$initialSpaces$spaces<l rend=\"indent($n)\">$line\n";
             }
         }
     }
