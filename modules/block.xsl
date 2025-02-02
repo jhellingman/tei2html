@@ -313,7 +313,10 @@
     <xsl:template name="generate-milestone-paragraph">
         <xsl:context-item as="element(milestone)" use="required"/>
         <xsl:param name="string" as="xs:string"/>
-        <xsl:element name="{$p.element}">
+
+        <xsl:variable name="element" select="if (parent::list or parent::castList) then 'li' else $p.element"/>
+
+        <xsl:element name="{$element}">
             <xsl:attribute name="class">tb</xsl:attribute>
             <xsl:attribute name="id"><xsl:value-of select="f:generate-id(.)"/></xsl:attribute>
             <xsl:value-of select="$string"/>

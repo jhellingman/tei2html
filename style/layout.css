@@ -99,7 +99,7 @@ h4, .h4 {
     text-align: justify;
 }
 
-p.tb, hr.tb, .par.tb {
+p.tb, hr.tb, .par.tb, li.tb {
     margin: 1.6em auto;
     text-align: center;
 }
