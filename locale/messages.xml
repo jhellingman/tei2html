@@ -19,6 +19,14 @@
 
     <msg:messages xml:lang="en" name="English">
 
+        <msg:message name="msgCountChangesMadeToText" plural="zero">No changes have been made to the text.</msg:message>
+        <msg:message name="msgCountChangesMadeToText" plural="one">The following change has been made to the text:</msg:message>
+        <msg:message name="msgCountChangesMadeToText">The following <msg:param name="count" type="integer"/> changes have been made to the text:</msg:message>
+
+        <msg:message name="msgChangesNotMadeToText">The following suggested changes have not been made.</msg:message>
+        <msg:message name="msgSuggestedChangesOverview">Overview of suggested changes.</msg:message>
+        <msg:message name="msgSuggestedChange">Suggested change</msg:message>
+
         <msg:message name="msgCountCorrectionsAppliedToText" plural="zero">No corrections have been applied to the text.</msg:message>
         <msg:message name="msgCountCorrectionsAppliedToText" plural="one">The following correction has been applied to the text:</msg:message>
         <msg:message name="msgCountCorrectionsAppliedToText">The following <msg:param name="count" type="integer"/> corrections have been applied to the text:</msg:message>
@@ -1249,6 +1257,19 @@
         <msg:message name="msgPostscript">Naschrift</msg:message>
         <msg:message name="msgUnknownBibleBook">Onbekend Bijbelboek</msg:message>
 
+        <msg:message name="msgCountChangesMadeToText" plural="zero">Er zijn geen aanpassingen gemaakt in de tekst.</msg:message>
+        <msg:message name="msgCountChangesMadeToText" plural="one">De volgende aanpassing is gemaakt in de tekst:</msg:message>
+        <msg:message name="msgCountChangesMadeToText">De volgende <msg:param name="count" type="integer"/> aanpassingen zijn gemaakt in de tekst:</msg:message>
+
+        <msg:message name="msgChangesNotMadeToText">De volgende voorgestelde aanpassingen zijn niet gemaakt.</msg:message>
+        <msg:message name="msgSuggestedChangesOverview">Overzicht van voorgestelde aanpassingen.</msg:message>
+        <msg:message name="msgSuggestedChange">Voorgestelde aanpassing</msg:message>
+
+        <msg:message name="msgCorrectionsAppliedToText">De volgende verbeteringen zijn aangebracht in de tekst:</msg:message>
+        <msg:message name="msgCountCorrectionsAppliedToText" plural="zero">Er zijn geen verbeteringen aangebracht in de tekst.</msg:message>
+        <msg:message name="msgCountCorrectionsAppliedToText" plural="one">De volgende verbetering is aangebracht in de tekst:</msg:message>
+        <msg:message name="msgCountCorrectionsAppliedToText">De volgende <msg:param name="count" type="integer"/> verbeteringen zijn aangebracht in de tekst:</msg:message>
+        
         <msg:message name="msgCorrectionsNotAppliedToText">De volgende mogelijke verbeteringen zijn niet toegepast.</msg:message>
         <msg:message name="msgQuestionablesOverview">Overzicht van mogelijke verbeteringen.</msg:message>
         <msg:message name="msgSuggestedCorrection">Voorgestelde verbetering</msg:message>
@@ -1373,10 +1394,7 @@
         <msg:message name="msgContents">Inhoud</msg:message>
         <msg:message name="msgCorrection">Verbetering</msg:message>
         <msg:message name="msgCorrections">Verbeteringen</msg:message>
-        <msg:message name="msgCorrectionsAppliedToText">De volgende verbeteringen zijn aangebracht in de tekst:</msg:message>
-        <msg:message name="msgCountCorrectionsAppliedToText" plural="zero">Er zijn geen verbeteringen aangebracht in de tekst.</msg:message>
-        <msg:message name="msgCountCorrectionsAppliedToText" plural="one">De volgende verbetering is aangebracht in de tekst:</msg:message>
-        <msg:message name="msgCountCorrectionsAppliedToText">De volgende <msg:param name="count" type="integer"/> verbeteringen zijn aangebracht in de tekst:</msg:message>
+
         <msg:message name="msgCorrectionsOverview">Overzicht van verbeteringen aangebracht in de tekst.</msg:message>
         <msg:message name="msgCover">Omslag</msg:message>
         <msg:message name="msgCoverImage">Kaftafbeelding</msg:message>

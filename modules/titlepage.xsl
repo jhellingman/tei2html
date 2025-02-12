@@ -39,35 +39,39 @@
     </xsl:template>
 
     <xsl:template match="titlePart" mode="titlePage">
-        <h1>
+        <xsl:variable name="element" 
+            select="if (f:is-set('pg.compliant') and not(preceding::titlePart[not(@type) or @type='main']))
+                    then 'h1'
+                    else 'div'"/>
+        <xsl:element name="{$element}">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'mainTitle')"/>
             <xsl:apply-templates mode="titlePage"/>
-        </h1>
+        </xsl:element>
     </xsl:template>
 
     <xsl:template match="titlePart[@type='sub']" mode="titlePage">
-        <h1>
+        <div>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'subTitle')"/>
             <xsl:apply-templates mode="titlePage"/>
-        </h1>
+        </div>
     </xsl:template>
 
     <xsl:template match="titlePart[@type=('series', 'Series')]" mode="titlePage">
-        <h1>
+        <div>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'seriesTitle')"/>
             <xsl:apply-templates mode="titlePage"/>
-        </h1>
+        </div>
     </xsl:template>
 
     <xsl:template match="titlePart[@type=('volume', 'Volume')]" mode="titlePage">
-        <h1>
+        <div>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:copy-of select="f:set-class-attribute-with(., 'volumeTitle')"/>
             <xsl:apply-templates mode="titlePage"/>
-        </h1>
+        </div>
     </xsl:template>
 
     <xsl:template match="byline" mode="titlePage">

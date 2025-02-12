@@ -61,8 +61,17 @@
 
     <xsl:template name="generate-html-header">
         <head>
+            <xsl:variable name="titleStmt" select="teiHeader/fileDesc/titleStmt"/>
+            <xsl:variable name="title" 
+                select="if ($titleStmt/title[@type='short']) 
+                        then $titleStmt/title[@type='short'][1]
+                        else $titleStmt/title[not(@type) or @type='main'][1]"/>
+            <xsl:variable name="title"
+                select="if (f:is-set('pg.compliant'))
+                        then $title || ' | Project Gutenberg'
+                        else $title"/>                   
             <title>
-                <xsl:value-of select="teiHeader/fileDesc/titleStmt/title[not(@type) or @type='main'][1]"/>
+                <xsl:value-of select="$title"/>
             </title>
 
             <xsl:call-template name="generate-metadata"/>
@@ -107,7 +116,9 @@
         </xsl:if>
 
         <!-- Insert Dublin Core metadata -->
-        <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"/>
+        <xsl:if test="not(f:is-set('pg.compliant'))">
+            <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"/>
+        </xsl:if>
 
         <xsl:for-each select="teiHeader/fileDesc/titleStmt/title[not(@type) or @type='main']">
             <meta name="DC.Title" content="{.}"/>

@@ -1,5 +1,5 @@
 #
-# fixAttributes.pl -- reorder attributes in SGML/XML files
+# sortAttributes.pl -- reorder attributes in SGML/XML files
 #
 
 use strict;
