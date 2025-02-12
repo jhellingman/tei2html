@@ -51,7 +51,7 @@
 
 
     <xd:doc>
-        <xd:short>Extract a single page based on its number (@n-attribute; first occurence will be used).</xd:short>
+        <xd:short>Extract a single page based on its number (@n-attribute; first occurrence will be used).</xd:short>
     </xd:doc>
 
     <xsl:function name="f:extract-page-by-number">
