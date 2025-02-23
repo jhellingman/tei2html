@@ -36,7 +36,9 @@ while (<INPUTFILE>) {
     # Replace ampersands (if they are not likely to start entities):
     $_ =~ s/\& /\&amp; /g;
     $_ =~ s/\&$/\&amp;/g;
+    $_ =~ s/\&([^a-zA-Z0-9_])/\&amp;$1/g;
     $_ =~ s/\&c\./\&amp;c./g;
+    $_ =~ s/\&c([^a-zA-Z0-9_-])/\&amp;c$1/g;
 
     # Replace PGDP page-separators (preserving proofreader names):
     # $_ =~ s/^-*File: (0*)([0-9]+)\.png-*\\([^\\]+)\\([^\\]+)\\([^\\]+)\\([^\\]+)\\.*$/<pb n=\1 resp="\2|\3|\4|\5">/g;
