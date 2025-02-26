@@ -558,10 +558,10 @@
                  <td id="..." class="cellRight">4</td>
               </tr>
               <tr id="...">
-                 <td id="..." class="cellLeft cellBottom">
+                 <td id="..." class="sum cellLeft cellBottom">
                     <span class="sum">4</span>
                  </td>
-                 <td id="..." class="cellRight cellBottom">
+                 <td id="..." class="sum cellRight cellBottom">
                     <span class="sum">6</span>
                  </td>
               </tr>
