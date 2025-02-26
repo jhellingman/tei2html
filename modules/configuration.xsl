@@ -108,6 +108,8 @@
             <notes.apparatus.returnMarker>&deg;</notes.apparatus.returnMarker> <!-- Note marker used with text-critical notes (coded with place=apparatus) used before note, to return to text. -->
             <notes.apparatus.format>block</notes.apparatus.format>          <!-- How to format text-critical notes: as separate paragraphs or as a single block. Possible values: paragraphs | block. -->
 
+            <table.sum.overline>true</table.sum.overline>                   <!-- Surround the content of a cell with @role='sum' (or other aggregate roles) with a span to produce an overline -->
+
             <images.path></images.path>                                     <!-- Prefix of path to images, relative to the HTML file -->
             <images.include>true</images.include>                           <!-- Include images in the generated output. -->
             <images.requireInfo>true</images.requireInfo>                   <!-- Require image-info to be present for an image (otherwise they won't be included in output) [TODO]. -->

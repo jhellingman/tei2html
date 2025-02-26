@@ -232,7 +232,7 @@
                         <xsl:copy-of select="f:output-image('images/rbrace' || @rows || '.png', '}')"/>
                     </xsl:if>
                 </xsl:when>
-                <xsl:when test="f:is-sum-cell(.)">
+                <xsl:when test="f:is-sum-cell(.) and f:is-set('table.sum.overline')">
                     <span class="sum">
                         <xsl:apply-templates/>
                     </span>
@@ -305,7 +305,8 @@
         <xsl:context-item as="element(cell)" use="required"/>
 
         <xsl:variable name="class">
-            <xsl:if test="@role and not(@role = ('data', 'sum'))"><xsl:value-of select="@role"/><xsl:text> </xsl:text></xsl:if>
+            <xsl:if test="f:is-sum-cell(.)">sum </xsl:if>
+            <xsl:if test="@role and not(@role = 'data') and not(f:is-sum-cell(.))"><xsl:value-of select="@role"/><xsl:text> </xsl:text></xsl:if>
             <xsl:if test="@rows > 1">rowspan </xsl:if>
             <xsl:if test="@cols > 1">colspan </xsl:if>
             <xsl:if test="@rows &gt; 1 and normalize-space(.) = '{'">leftbrace </xsl:if>
