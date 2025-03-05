@@ -7,7 +7,12 @@
 *.xsx
 *.zip
 
-.idea/
+.idea
+.classpath
+.project
+.settings
+.vscode
+
 _Deparsed_XSubs.pm
 
 bin/
@@ -21,7 +26,6 @@ target/
 test/attick/
 xspec/xspec/
 
-.vscode/tasks.json
 align-paragraphs-output.html
 align-paragraphs-output-orig.xml
 audio/test.ogg
@@ -30,7 +34,18 @@ covers/reference250.jpg
 covers/reference500.jpg
 databases/queries.txt
 dependencies.txt
+documentation/issues.xml
+documentation/metadata.xml
+documentation/README.md
+documentation/TEI-Guidelines.gutcheck
 documentation/TEI-Guidelines.html
+documentation/TEI-Guidelines.jeebies
+documentation/TEI-Guidelines.txt
+documentation/TEI-Guidelines.xml
+documentation/TEI-Guidelines-0.6-checks.html
+documentation/TEI-Guidelines-included.xml
+documentation/TEI-Guidelines-preprocessed.xml
+documentation/TEI-Guidelines-words.html
 documentation/TEI-PG-Guidelines-0.6.odt
 i18n.xml
 images/audio.png
@@ -41,17 +56,70 @@ images/stock_book_yellow-16.png
 images/stock_book-16.png
 images/stock_volume-16.png
 images/thumbs/cover500.jpg
+locale/messages.xlf
+locale/Spanish--chatGPT.txt
 messages.csv
 messages.po
 messages.xlsx
 messages-with-missing.xml
 messages-with-missing-de-translations.xml
 package.json
+pptools/attic
+pptools/corpus tools/Nederlandsch Woordenlijst
+pptools/corpus tools/Nederlandsch Woordenlijst/Articles
+pptools/corpus tools/out.features
+pptools/corpus tools/test/Akbar.html
+pptools/dictionaries/dict-nl_1900.oxt/dict-nl_1900.oxt
 Sample ePubs/
+samples/Cole - Philippine Folk Tales/issues.xml
+samples/Cole - Philippine Folk Tales/PhilippineFolkTales.html
+samples/Cole - Philippine Folk Tales/PhilippineFolkTales.xml
+samples/Cole - Philippine Folk Tales/PhilippineFolkTales-1.1-checks.html
+samples/Cole - Philippine Folk Tales/PhilippineFolkTales-included.xml
 samples/Cole - Philippine Folk Tales/PhilippineFolkTales-pos.xml
+samples/Cole - Philippine Folk Tales/PhilippineFolkTales-preprocessed.xml
+samples/Cole - Philippine Folk Tales/PhilippineFolkTales-words.html
+samples/Fansler - Filipino Popular Tales/FilipinoPopularTales.html
+samples/Fansler - Filipino Popular Tales/FilipinoPopularTales-1.0-checks.html
+samples/Fansler - Filipino Popular Tales/FilipinoPopularTales-included.xml
+samples/Fansler - Filipino Popular Tales/FilipinoPopularTales-preprocessed.xml
+samples/Fansler - Filipino Popular Tales/FilipinoPopularTales-words.html
+samples/Fansler - Filipino Popular Tales/issues.xml
+samples/Fansler - Filipino Popular Tales/metadata.xml
+samples/Fansler - Filipino Popular Tales/qr8299.png
+samples/Fansler - Filipino Popular Tales/README.md
+samples/Kayme - Anting-Anting Stories/AntingAnting.html
+samples/Kayme - Anting-Anting Stories/AntingAnting-1.0-checks.html
+samples/Kayme - Anting-Anting Stories/AntingAnting-included.xml
+samples/Kayme - Anting-Anting Stories/AntingAnting-preprocessed.xml
+samples/Kayme - Anting-Anting Stories/AntingAnting-words.html
+samples/Kayme - Anting-Anting Stories/issues.xml
+samples/Kayme - Anting-Anting Stories/metadata.xml
+samples/Kayme - Anting-Anting Stories/qr24690.png
+samples/Kayme - Anting-Anting Stories/README.md
+samples/Pratt - Armenia and the Armenians/ArmeniaArmenians.html
+samples/Pratt - Armenia and the Armenians/ArmeniaArmenians-1.0-checks.html
+samples/Pratt - Armenia and the Armenians/ArmeniaArmenians-included.xml
+samples/Pratt - Armenia and the Armenians/ArmeniaArmenians-preprocessed.xml
+samples/Pratt - Armenia and the Armenians/ArmeniaArmenians-words.html
+samples/Pratt - Armenia and the Armenians/issues.xml
+samples/Pratt - Armenia and the Armenians/metadata.xml
+samples/Pratt - Armenia and the Armenians/qr52371.png
+samples/Pratt - Armenia and the Armenians/README.md
+samples/Shakespeare - Twee Edellieden van Verona/issues.xml
+samples/Shakespeare - Twee Edellieden van Verona/metadata.xml
+samples/Shakespeare - Twee Edellieden van Verona/qr26594.png
+samples/Shakespeare - Twee Edellieden van Verona/README.md
+samples/Shakespeare - Twee Edellieden van Verona/WS-03-EdelliedenVerona.html
+samples/Shakespeare - Twee Edellieden van Verona/WS-03-EdelliedenVerona-1.0-checks.html
+samples/Shakespeare - Twee Edellieden van Verona/WS-03-EdelliedenVerona-included.xml
+samples/Shakespeare - Twee Edellieden van Verona/WS-03-EdelliedenVerona-preprocessed.xml
+samples/Shakespeare - Twee Edellieden van Verona/WS-03-EdelliedenVerona-words.html
 sandbox/
+tei2ods.xsl
 tei2odt.pl
 tei2odt.xsl
+tei-table.xml
 test.epub
 test.fodt
 test.odt
@@ -64,9 +132,12 @@ test/images/mail.png
 test/images/stock_book_yellow-16.png
 test/images/stock_book-16.png
 test/images/stock_volume-16.png
+test/out.html
+test/pipe.xpl
 test/testMath/formulas/
 test/testMath/issues.xml
 test/testMath/metadata.xml
+test/testMath/README.adoc
 test/testMath/README.md
 test/testMath/testMath.gutcheck
 test/testMath/testMath.html
@@ -75,6 +146,7 @@ test/testMath/testMath.txt
 test/testMath/testMath-0.0-checks.html
 test/testMath/testMath-included.xml
 test/testMath/testMath-preprocessed.xml
+test/testMath/testMath-utf8.txt
 test/testMath/testMath-words.html
 test/test-normalized-p5.xml
 test/test-p5.html
@@ -82,7 +154,8 @@ test/test-preprocessed.xml
 test/test-preprocessed-p5.xml
 test/testTable/issues.xml
 test/testTable/metadata.xml
-test/testTable/README.md
+test/testTable/Processed/testTable.xml
+test/testTable/README.adoc
 test/testTable/testTable.gutcheck
 test/testTable/testTable.html
 test/testTable/testTable.jeebies
@@ -91,6 +164,7 @@ test/testTable/testTable.xml
 test/testTable/testTable-checks.html
 test/testTable/testTable-included.xml
 test/testTable/testTable-preprocessed.xml
+test/testTable/testTable-utf8.txt
 test/testTable/testTable-words.html
 test-kwic.html
 test-normalized.xml
@@ -101,6 +175,7 @@ test-prince.html
 tmp.xhtml
 tmp.xml
 tmp-odt.xhtml
+tools/attic/
 tools/corpus tools/Nederlandsch Woordenlijst/
 tools/corpus tools/out.features
 tools/corpus tools/test/
@@ -108,102 +183,19 @@ tools/dictionaries/dict-nl_1900.oxt/dict-nl_1900.oxt
 tools/lib/
 tools/lib/bin/SaxonEE9-9-1-8J/**
 tools/patc/transcriptions/arabic/Downloaded/arabic.gif
+tools/patc/transcriptions/indic/numeric_entities_to_utf8.py
 tools/pubtext/
 tools/tei2xml.pl
 tools/test.txt
-tools/tmp/convertCrossWord-test.tei
-tools/attic/
-
-.classpath
-.project
-.settings/org.eclipse.jdt.apt.core.prefs
-.settings/org.eclipse.jdt.core.prefs
-.settings/org.eclipse.m2e.core.prefs
-documentation/issues.xml
-documentation/metadata.xml
-documentation/README.md
-documentation/TEI-Guidelines-0.6-checks.html
-documentation/TEI-Guidelines-included.xml
-documentation/TEI-Guidelines-preprocessed.xml
-documentation/TEI-Guidelines-words.html
-documentation/TEI-Guidelines.xml
-samples/Cole - Philippine Folk Tales/issues.xml
-samples/Cole - Philippine Folk Tales/PhilippineFolkTales-1.1-checks.html
-samples/Cole - Philippine Folk Tales/PhilippineFolkTales-included.xml
-samples/Cole - Philippine Folk Tales/PhilippineFolkTales-preprocessed.xml
-samples/Cole - Philippine Folk Tales/PhilippineFolkTales-words.html
-samples/Cole - Philippine Folk Tales/PhilippineFolkTales.xml
-samples/Cole - Philippine Folk Tales/Processed/images/qr12814.png
-samples/Fansler - Filipino Popular Tales/FilipinoPopularTales-1.0-checks.html
-samples/Fansler - Filipino Popular Tales/FilipinoPopularTales-included.xml
-samples/Fansler - Filipino Popular Tales/FilipinoPopularTales-preprocessed.xml
-samples/Fansler - Filipino Popular Tales/FilipinoPopularTales-words.html
-samples/Fansler - Filipino Popular Tales/FilipinoPopularTales.html
-samples/Fansler - Filipino Popular Tales/issues.xml
-samples/Fansler - Filipino Popular Tales/metadata.xml
-samples/Fansler - Filipino Popular Tales/qr8299.png
-samples/Fansler - Filipino Popular Tales/README.md
-samples/Kayme - Anting-Anting Stories/AntingAnting-1.0-checks.html
-samples/Kayme - Anting-Anting Stories/AntingAnting-included.xml
-samples/Kayme - Anting-Anting Stories/AntingAnting-preprocessed.xml
-samples/Kayme - Anting-Anting Stories/AntingAnting-words.html
-samples/Kayme - Anting-Anting Stories/AntingAnting.html
-samples/Kayme - Anting-Anting Stories/issues.xml
-samples/Kayme - Anting-Anting Stories/metadata.xml
-samples/Kayme - Anting-Anting Stories/qr24690.png
-samples/Kayme - Anting-Anting Stories/README.md
-samples/Pratt - Armenia and the Armenians/ArmeniaArmenians-1.0-checks.html
-samples/Pratt - Armenia and the Armenians/ArmeniaArmenians-included.xml
-samples/Pratt - Armenia and the Armenians/ArmeniaArmenians-preprocessed.xml
-samples/Pratt - Armenia and the Armenians/ArmeniaArmenians-words.html
-samples/Pratt - Armenia and the Armenians/ArmeniaArmenians.html
-samples/Pratt - Armenia and the Armenians/issues.xml
-samples/Pratt - Armenia and the Armenians/metadata.xml
-samples/Pratt - Armenia and the Armenians/qr52371.png
-samples/Pratt - Armenia and the Armenians/README.md
-samples/Shakespeare - Twee Edellieden van Verona/issues.xml
-samples/Shakespeare - Twee Edellieden van Verona/metadata.xml
-samples/Shakespeare - Twee Edellieden van Verona/qr26594.png
-samples/Shakespeare - Twee Edellieden van Verona/README.md
-samples/Shakespeare - Twee Edellieden van Verona/WS-03-EdelliedenVerona-1.0-checks.html
-samples/Shakespeare - Twee Edellieden van Verona/WS-03-EdelliedenVerona-included.xml
-samples/Shakespeare - Twee Edellieden van Verona/WS-03-EdelliedenVerona-preprocessed.xml
-samples/Shakespeare - Twee Edellieden van Verona/WS-03-EdelliedenVerona-words.html
-samples/Shakespeare - Twee Edellieden van Verona/WS-03-EdelliedenVerona.html
-tools/test-out.txt
-tools/test-err.txt
-samples/Cole - Philippine Folk Tales/imageinfo.xml
-.vscode/settings.json
-documentation/TEI-Guidelines.gutcheck
-documentation/TEI-Guidelines.jeebies
-documentation/TEI-Guidelines.txt
-Wiki/AuxiliaryTools.html
-Wiki/Index.html
-samples/Cole - Philippine Folk Tales/PhilippineFolkTales.html
-samples/Cole - Philippine Folk Tales/README.adoc
-test/testMath/README.adoc
-test/testMath/testMath-utf8.txt
-test/testTable/Processed/testTable.xml
-test/testTable/testTable-utf8.txt
-tools/patc/transcriptions/indic/numeric_entities_to_utf8.py
-xml2kwic.py
-xml2kwic.sh
-locale/Spanish--chatGPT.txt
-test/testTable/README.adoc
-.settings/org.eclipse.core.resources.prefs
-locale/messages.xlf
-test/pipe.xpl
-tei-table.xml
-tei2ods.xsl
-test/out.html
-/pptools/corpus tools/Nederlandsch Woordenlijst/Articles
-/pptools/corpus tools/Nederlandsch Woordenlijst
-/pptools/attic
-pptools/corpus tools/out.features
-pptools/corpus tools/test/Akbar.html
-pptools/dictionaries/dict-nl_1900.oxt/dict-nl_1900.oxt
-tools/test/cdd-test.tei
 tools/test/cdd.tei
+tools/test/cdd-test.tei
 tools/test/test-err.txt
 tools/test/test-out.txt
-/trial
+tools/test-err.txt
+tools/test-out.txt
+tools/tmp/convertCrossWord-test.tei
+trial
+Wiki/AuxiliaryTools.html
+Wiki/Index.html
+xml2kwic.py
+xml2kwic.sh
