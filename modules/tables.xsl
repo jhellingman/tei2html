@@ -295,8 +295,8 @@
                 <li>whether the cell contains a dash, ellipsis, or similar character,</li>
                 <li>the presence of a left or right brace as the content of a multi-row cell.</li>
                 <li>the position of the cell in the table; the following classes can appear:
-                        for data-cells: <code>cellTop cellRight cellBottom cellLeft</code>;
-                        for header-cells: <code>cellHeadTop cellHeadRight cellHeadBottom cellHeadLeft</code>.</li>
+                        for data-cells: <code>cell-top cell-right cell-bottom cell-left</code>;
+                        for header-cells: <code>cell-head-top cell-head-right cell-head-bottom cell-head-left</code>.</li>
             </ol>
         </xd:detail>
     </xd:doc>
@@ -368,7 +368,7 @@
         </xsl:if>
 
         <!-- A cell is considered part of the table head if it has a @role of label or unit. -->
-        <xsl:variable name="prefix" select="if (f:is-header-row(..)) then 'cellHead' else 'cell'"/>
+        <xsl:variable name="prefix" select="if (f:is-header-row(..)) then 'cell-head-' else 'cell-'"/>
 
         <!-- Some stuff to determine this cell is at the bottom of a column in an N-up table. -->
         <xsl:variable name="parentTable" select="ancestor::table[1]"/>
@@ -390,30 +390,30 @@
         <xsl:choose>
             <!-- If we have the @col attribute on the table we can use that attributes. -->
             <xsl:when test="@col">
-                <xsl:if test="@col = 1"><xsl:value-of select="$prefix"/><xsl:text>Left </xsl:text></xsl:if>
-                <xsl:if test="@col + $cols - 1 = ../../@cols"><xsl:value-of select="$prefix"/><xsl:text>Right </xsl:text></xsl:if>
+                <xsl:if test="@col = 1"><xsl:value-of select="$prefix"/><xsl:text>left </xsl:text></xsl:if>
+                <xsl:if test="@col + $cols - 1 = ../../@cols"><xsl:value-of select="$prefix"/><xsl:text>right </xsl:text></xsl:if>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:copy-of select="f:log-warning('Table {1}, Column position not specified: using simple heuristic to determine borders.', (f:generate-id(ancestor::table[1])))"/>
-                <xsl:if test="not(preceding-sibling::cell)"><xsl:value-of select="$prefix"/><xsl:text>Left </xsl:text></xsl:if>
-                <xsl:if test="not(following-sibling::cell)"><xsl:value-of select="$prefix"/><xsl:text>Right </xsl:text></xsl:if>
+                <xsl:if test="not(preceding-sibling::cell)"><xsl:value-of select="$prefix"/><xsl:text>left </xsl:text></xsl:if>
+                <xsl:if test="not(following-sibling::cell)"><xsl:value-of select="$prefix"/><xsl:text>right </xsl:text></xsl:if>
             </xsl:otherwise>
         </xsl:choose>
 
         <xsl:choose>
             <xsl:when test="f:is-header-row(..)">
-                <xsl:if test="not(../preceding-sibling::row)"><xsl:text>cellHeadTop </xsl:text></xsl:if>
-                <xsl:if test="not(../following-sibling::row[f:is-header-row(.)])"><xsl:text>cellHeadBottom </xsl:text></xsl:if>
+                <xsl:if test="not(../preceding-sibling::row)"><xsl:text>cell-head-top </xsl:text></xsl:if>
+                <xsl:if test="not(../following-sibling::row[f:is-header-row(.)])"><xsl:text>cell-head-bottom </xsl:text></xsl:if>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:if test="$is-top-cell or not(../preceding-sibling::row)"><xsl:text>cellTop </xsl:text></xsl:if>
-                <xsl:if test="$is-bottom-cell or not(../following-sibling::row)"><xsl:text>cellBottom </xsl:text></xsl:if>
+                <xsl:if test="$is-top-cell or not(../preceding-sibling::row)"><xsl:text>cell-top </xsl:text></xsl:if>
+                <xsl:if test="$is-bottom-cell or not(../following-sibling::row)"><xsl:text>cell-bottom </xsl:text></xsl:if>
             </xsl:otherwise>
         </xsl:choose>
 
         <!-- Handle the case when a bottom cell is spanned -->
-        <xsl:if test="@rows &gt; 1  and @row + @rows - 1 = ../../@headrows"><xsl:value-of select="$prefix"/><xsl:text>Bottom </xsl:text></xsl:if>
-        <xsl:if test="@rows &gt; 1  and @row + @rows - 1 = ../../@rows"><xsl:value-of select="$prefix"/><xsl:text>Bottom </xsl:text></xsl:if>
+        <xsl:if test="@rows &gt; 1  and @row + @rows - 1 = ../../@headrows"><xsl:value-of select="$prefix"/><xsl:text>bottom </xsl:text></xsl:if>
+        <xsl:if test="@rows &gt; 1  and @row + @rows - 1 = ../../@rows"><xsl:value-of select="$prefix"/><xsl:text>bottom </xsl:text></xsl:if>
     </xsl:template>
 
 

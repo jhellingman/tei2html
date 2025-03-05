@@ -346,8 +346,8 @@
                             </span> &lt;/p&gt;<div class="table" id="...">
                             <table>
                               <tr id="...">
-                                 <td id="..." class="cellLeft cellTop cellBottom">first cell</td>
-                                 <td id="..." class="cellRight cellTop cellBottom">second cell</td>
+                                 <td id="..." class="cell-left cell-top cell-bottom">first cell</td>
+                                 <td id="..." class="cell-right cell-top cell-bottom">second cell</td>
                               </tr>
                             </table>
                          </div>&lt;p&gt;</p>
