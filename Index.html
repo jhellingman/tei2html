@@ -1405,13 +1405,16 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>@sortkey</code> attribute on <code>&lt;author&gt;</code> and related elements is used to supply a sort key for a name. Typically, such sort keys would drop accents, such that they will sort in the expected place in lists.</p>
+<p>The <code>@key</code> attribute on <code>&lt;author&gt;</code> and related elements is used to supply a sort key for a name. Typically, such sort keys would drop accents, such that they will sort in the expected place in lists.</p>
+</div>
+<div class="paragraph">
+<p>I also use the <code>@ref</code> key to provide a link to the viaf.org authority file.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="xml">    <span class="tag">&lt;author</span> <span class="attribute-name">sortkey</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">Rhijn, Rembrandt van</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>Rembrandt van Rhijn<span class="tag">&lt;/author&gt;</span>
-    <span class="tag">&lt;author</span> <span class="attribute-name">sortkey</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">MacKenzee, John</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>John McKenzee<span class="tag">&lt;/author&gt;</span>
-    <span class="tag">&lt;author</span> <span class="attribute-name">sortkey</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">Hotel, Desire l'</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>Desiré l'Hôtel<span class="tag">&lt;/author&gt;</span></code></pre>
+<pre class="CodeRay highlight"><code data-lang="xml">    <span class="tag">&lt;author</span> <span class="attribute-name">key</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">Rijn, Rembrandt, Harmenszoon van</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">ref</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://viaf.org/viaf/64013650</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>Rembrandt van Rhijn (1606-1669)<span class="tag">&lt;/author&gt;</span>
+    <span class="tag">&lt;author</span> <span class="attribute-name">key</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">MacKenzee, John</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>John McKenzee<span class="tag">&lt;/author&gt;</span>
+    <span class="tag">&lt;author</span> <span class="attribute-name">key</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">Hotel, Desire l'</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>Desiré l'Hôtel<span class="tag">&lt;/author&gt;</span></code></pre>
 </div>
 </div>
 </div>
@@ -1449,7 +1452,7 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 <p>See also: <a href="http://blog.threepress.org/2009/11/20/best-practices-in-epub-cover-images/" class="bare">http://blog.threepress.org/2009/11/20/best-practices-in-epub-cover-images/</a></p>
 </div>
 <div class="sect3">
-<h4 id="_cover_thumbnail_todo">Cover Thumbnail [TODO]</h4>
+<h4 id="_cover_thumbnail">Cover Thumbnail</h4>
 <div class="paragraph">
 <p>Sometimes it makes sense to also have a cover thumbnail which isn&#8217;t just a reduction of the (original) cover page. To do this, just specify (as a hack) <code>cover-thumbnail(imagefile)</code> in the rend attribute of the text element. Similarly, <code>cover-image(imagefile)</code> can be used to specify a cover image that is not part of the original book, for those who like to have both.</p>
 </div>
@@ -3919,7 +3922,7 @@ opening mark, there should be a corresponding closing mark.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-03-07 16:22:06 UTC
+Last updated 2025-03-07 16:49:17 UTC
 </div>
 </div>
 </body>
