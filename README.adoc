@@ -32,7 +32,7 @@ If you need modifications, extensions of these scripts, or need to have other TE
 
 == Directories
 
-* `Wiki`: wiki-pages that give some instructions and background documentation.
+* `Wiki`: wiki-pages that give some instructions and background documentation. Also available as a http://jhellingman.github.io/tei2html/Index.html[single HTML file].
 * `samples`: a few sample TEI files of books posted to Project Gutenberg. I am currently adding my TEI source files to GitHub: see https://github.com/GutenbergSource[GutenbergSource] for many more examples.
 * `sandbox`: experimental code, better ignored if you don't want to play around.
 * `schemas`: schema definitions for some supplementary XML formats.
