@@ -81,11 +81,13 @@ The `@nfc` attribute on `&lt;title&gt;` elements is used to indicate the number 
     <title nfc="3">An Introduction to Mathematics</title>
 ----
 
-The `@sortkey` attribute on `&lt;author&gt;` and related elements is used to supply a sort key for a name. Typically, such sort keys would drop accents, such that they will sort in the expected place in lists.
+The `@key` attribute on `&lt;author&gt;` and related elements is used to supply a sort key for a name. Typically, such sort keys would drop accents, such that they will sort in the expected place in lists.
+
+I also use the `@ref` key to provide a link to the viaf.org authority file.
 
 [source,xml]
 ----
-    <author sortkey="Rhijn, Rembrandt van">Rembrandt van Rhijn</author>
-    <author sortkey="MacKenzee, John">John McKenzee</author>
-    <author sortkey="Hotel, Desire l'">Desiré l'Hôtel</author>
+    <author key="Rijn, Rembrandt, Harmenszoon van" ref="http://viaf.org/viaf/64013650">Rembrandt van Rhijn (1606-1669)</author>
+    <author key="MacKenzee, John">John McKenzee</author>
+    <author key="Hotel, Desire l'">Desiré l'Hôtel</author>
 ----
