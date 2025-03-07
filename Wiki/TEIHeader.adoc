@@ -87,7 +87,7 @@ I also use the `@ref` key to provide a link to the viaf.org authority file.
 
 [source,xml]
 ----
-    <author key="Rijn, Rembrandt, Harmenszoon van" ref="http://viaf.org/viaf/64013650">Rembrandt van Rhijn (1606-1669)</author>
+    <author key="Rijn, Rembrandt Harmenszoon van" ref="http://viaf.org/viaf/64013650">Rembrandt van Rijn (1606-1669)</author>
     <author key="MacKenzee, John">John McKenzee</author>
     <author key="Hotel, Desire l'">Desiré l'Hôtel</author>
 ----
