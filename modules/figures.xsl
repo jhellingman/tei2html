@@ -195,9 +195,15 @@
 
         <xsl:choose>
             <xsl:when test="f:has-rend-value($node/@rend, 'hover-overlay')">
-                <div class="{f:generate-id($node) || 'overlay'}">
+                <div class="{f:generate-id($node) || '-overlay'}">
                     <xsl:copy-of select="f:output-image-tag($file, $alt, $node/@rend, 'img-front')"/>
                     <xsl:copy-of select="f:output-image-tag(f:rend-value($node/@rend, 'hover-overlay'), $alt, '', 'img-back')"/>
+                </div>
+            </xsl:when>
+            <xsl:when test="f:has-rend-value($node/@rend, 'image-frame')">
+                <div class="{f:generate-id($node) || '-framed-image'}">
+                    <xsl:copy-of select="f:output-image-tag(f:rend-value($node/@rend, 'image-frame'), $alt, '', 'img-frame')"/>
+                    <xsl:copy-of select="f:output-image-tag($file, $alt, $node/@rend, 'img-framed')"/>
                 </div>
             </xsl:when>
             <xsl:otherwise>
@@ -206,7 +212,7 @@
         </xsl:choose>
     </xsl:function>
 
-
+    
     <xd:doc>
         <xd:short>Generate an image tag.</xd:short>
         <xd:detail>
@@ -336,7 +342,9 @@
 
         <xsl:if test="f:is-image-included($filename)">
             <xsl:call-template name="generate-css-rule"/>
-            <xsl:copy-of select="f:output-image-width-css(., $filename)"/>
+            <xsl:if test="not(f:has-rend-value(./@rend, 'image-frame'))">
+                <xsl:copy-of select="f:output-image-width-css(., $filename)"/>
+            </xsl:if>
             <xsl:apply-templates mode="css"/>
         </xsl:if>
     </xsl:template>
@@ -347,7 +355,7 @@
 
         <xsl:variable name="width" select="f:image-width($filename)" as="xs:string?"/>
         <xsl:variable name="height" select="f:image-height($filename)" as="xs:string?"/>
-        <xsl:variable name="selector" select="f:escape-css-selector(f:generate-id(.) || 'overlay')"/>
+        <xsl:variable name="selector" select="f:escape-css-selector(f:generate-id(.) || '-overlay')"/>
 
         <xsl:if test="f:is-image-included($filename)"><xsl:text expand-text="yes">
 .{$selector} {{
@@ -372,6 +380,53 @@
 </xsl:text></xsl:if>
         <xsl:next-match/>
     </xsl:template>
+
+
+    <xsl:template match="figure[f:has-rend-value(./@rend, 'image-frame')]" mode="css">
+        <xsl:variable name="filename" select="f:determine-image-filename(.)" as="xs:string"/>
+        <xsl:variable name="frame-filename" select="f:rend-value(./@rend, 'image-frame')" as="xs:string"/>
+
+        <xsl:variable name="width" select="f:strip-units(f:image-width($filename))" as="xs:integer"/>
+        <xsl:variable name="height" select="f:strip-units(f:image-height($filename))" as="xs:integer"/>
+
+        <xsl:variable name="frame-width" select="f:strip-units(f:image-width($frame-filename))" as="xs:integer"/>
+        <xsl:variable name="frame-height" select="f:strip-units(f:image-height($frame-filename))" as="xs:integer"/>
+
+        <xsl:variable name="top-distance" select="($frame-height - $height) div 2"/>
+        <xsl:variable name="left-distance" select="($frame-width - $width) div 2"/>
+
+        <xsl:variable name="selector" select="f:escape-css-selector(f:generate-id(.) || '-framed-image')"/>
+
+        <xsl:if test="f:is-image-included($filename)"><xsl:text expand-text="yes">
+.{f:generate-id(.)}width {{
+    width: {$frame-width}px;
+}}
+.{$selector} {{
+    margin: auto;
+    position: relative;
+    top: 0;
+    left: 0;
+}}
+.{$selector} .img-frame {{
+    position: relative;
+    top: 0;
+    left: 0;
+}}
+.{$selector} .img-framed {{
+    position: absolute;
+    top: {$top-distance}px;
+    left: {$left-distance}px;
+}}
+</xsl:text></xsl:if>
+        <xsl:next-match/>
+    </xsl:template>
+
+
+    <!-- Strip the units from a CSS measurement value, that is, 30px becomes 30 -->
+    <xsl:function name="f:strip-units" as="xs:integer">
+        <xsl:param name="string"/>
+        <xsl:sequence select="xs:integer(replace($string, '[a-z%]+$', ''))"/>
+    </xsl:function>
 
 
     <xsl:template match="figure[f:is-inline(.)]" mode="css">

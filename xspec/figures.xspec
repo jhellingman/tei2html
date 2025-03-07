@@ -109,7 +109,7 @@
         </x:context>
         <x:expect label="will result in an HTML div with two img inside">
             <div xmlns="http://www.w3.org/1999/xhtml" class="figure fig_01width" id="fig_01">
-               <div class="fig_01overlay">
+               <div class="fig_01-overlay">
                   <img src="images/fig_01.jpg" class="img-front" alt="" width="12" height="40"/>
                   <img src="images/fig_02.jpg" class="img-back" alt="" width="20" height="30"/>
                </div>
@@ -124,23 +124,23 @@
         </x:context>
         <x:expect label="will result relevant CSS to make images swap on hover">
 <x:text>
-.fig_01overlay {
+.fig_01-overlay {
     width: 12px;
     height: 40px;
     position: relative;
     margin-bottom: 4px;
 }
-.fig_01overlay .img-back {
+.fig_01-overlay .img-back {
     display: none;
     position: absolute;
     top: 0;
     left: 0;
     z-index: 99;
 }
-.fig_01overlay:hover .img-back {
+.fig_01-overlay:hover .img-back {
     display: inline;
 }
-.fig_01overlay:hover .img-front {
+.fig_01-overlay:hover .img-front {
     display: none;
 }
 
