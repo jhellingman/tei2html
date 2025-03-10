@@ -2129,15 +2129,27 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>&lt;figure rend=&quot;hover-overlay(images/overlay.jpg)&quot;&gt;</code></p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>figure</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>image-frame</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">In HTML output, the image is placed centered on top of image specified as frame (using CSS positioning), such that the frame surrounds the image. For this, of course, the image with the frame should be larger than the image being framed.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&lt;figure rend=&quot;image-frame(images/frame.jpg)&quot;&gt;</code></p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>table</code>, <code>list</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>columns</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Set the element in multiple columns. May be applied to tables and lists.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>&lt;list rend=&quot;columns(2)&quot;&gt;&#8230;&#8203;&lt;/list&gt;</code></p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>milestone</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>stars</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Render a milestone element with the indicated number of stars</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&lt;milestone rend=&quot;stars(7)&quot;/&gt;</code></p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>Any</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>class</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Sets a class attribute in the corresponding HTML output. This can be used in combination with custom CSS stylesheets to achieve special effects.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sets a class attribute in the corresponding HTML output. This can be used in combination with custom CSS stylesheets to achieve special effects. (Note: just using the naming the class without following parenthesis in the rend attribute is now sufficient)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>&lt;p rend=&quot;class(myClass)&quot;&gt;</code></p></td>
 </tr>
 <tr>
@@ -3922,7 +3934,7 @@ opening mark, there should be a corresponding closing mark.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-03-07 23:07:11 UTC
+Last updated 2025-03-10 16:34:05 UTC
 </div>
 </div>
 </body>
