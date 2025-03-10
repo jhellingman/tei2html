@@ -342,7 +342,6 @@
     </xsl:function>
 
 
-
     <xd:doc>
         <xd:short>Determine a node is a division.</xd:short>
     </xd:doc>
@@ -820,7 +819,7 @@
 
     <xsl:function name="f:strip-diacritics" as="xs:string">
         <xsl:param name="string" as="xs:string"/>
-        <xsl:value-of select="replace(normalize-unicode($string, 'NFKD'), '\p{M}' ,'')"/>
+        <xsl:value-of select="replace(normalize-unicode($string, 'NFKD'), '\p{M}', '')"/>
     </xsl:function>
 
 
@@ -1004,6 +1003,5 @@
         <xsl:param name="string"/>
         <xsl:sequence select="matches(string($string), '^([&mdash;&ndash;&hellip;-]|(\.\.\.+))$', 'i')"/>
     </xsl:function>
-
 
 </xsl:stylesheet>

@@ -483,7 +483,7 @@
                 <xsl:when test="$element='lb' and $property='indent'"/>
 
                 <!-- Thematic breaks with decorative stars -->
-                <xsl:when test="$element='milestone' and $property = ('stars', 'repeat')"/>
+                <xsl:when test="$element='milestone' and $property = ('stars', 'repeat', 'marker', 'repeat-lines')"/>
 
                 <!-- Properties related to special font usage -->
                 <xsl:when test="$property='font' and $value='fraktur'">font-family:'<xsl:value-of select="f:get-setting('css.frakturFont')"/>'; </xsl:when>

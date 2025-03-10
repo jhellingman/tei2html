@@ -111,7 +111,7 @@
             <link rel="icon" href="{$cover-file}" type="image/x-cover"/>
         </xsl:if>
 
-        <xsl:if test="f:is-image-present('images/favicon.jpg')">
+        <xsl:if test="f:is-image-present('images/favicon.jpg') and not(f:is-set('pg.compliant'))">
             <link rel="icon" href="images/favicon.jpg" type="image/x-icon"/>
         </xsl:if>
 

@@ -79,7 +79,7 @@
         <xsl:param name="node" as="element()"/>
         <xsl:param name="default" as="xs:string"/>
 
-        <xsl:sequence select="
+        <xsl:variable name="alt-text" select="
             normalize-space(if (f:has-rend-value($node/@rend, 'image-alt'))
             then f:rend-value($node/@rend, 'image-alt')
             else if ($node/figDesc)
@@ -87,6 +87,17 @@
                  else if ($node/head)
                       then $node/head[1]
                       else $default)"/>
+
+        <xsl:sequence select="if (f:strip-punctuation(lower-case(normalize-space($alt-text))) = $decorative-alt-text) then '' else $alt-text"/>
+    </xsl:function>
+
+    <xsl:variable name="decorative-alt-text"
+        select="('decoration', 'decorative header', 'decorative image', 'decorative line', 'decorative', 'divider', 'ornament', 'ornamental line', 'ornamental')"/>
+
+    <xsl:function name="f:strip-punctuation" as="xs:string">
+        <xsl:param name="string" as="xs:string"/>
+
+        <xsl:value-of select="replace($string, '\p{P}', '')"/>
     </xsl:function>
 
 
@@ -260,7 +271,7 @@
             <xsl:copy-of select="f:log-warning('Image {1} file-size larger than {3} kB ({2} kB).', ($file, xs:string(ceiling(number($fileSize) div 1024)), $maxFileSize))"/>
         </xsl:if>
         <xsl:if test="$alt = ''">
-            <xsl:copy-of select="f:log-warning('Image {1} has no alt-text defined.', ($file))"/>
+            <xsl:copy-of select="f:log-warning('Image {1} has no alt-text defined (okay if it is an ornament).', ($file))"/>
         </xsl:if>
 
         <img src="{$file}">
@@ -297,6 +308,7 @@
                 <body>
                     <div class="figure">
                         <img src="{$imagefile}" alt="{$alt}"/>
+                        <xsl:if test="$alt = '' and f:is-set('pg.compliant')"><xsl:attribute name="data-role">presentation</xsl:attribute></xsl:if>
                         <xsl:apply-templates/>
                     </div>
                 </body>

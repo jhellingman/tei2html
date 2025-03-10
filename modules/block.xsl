@@ -259,6 +259,7 @@
             <xsl:when test="@rend = ('dotted', 'dashed')">
                 <hr id="{f:generate-id(.)}" class="tb {@rend}"/>
             </xsl:when>
+
             <xsl:when test="f:has-rend-value(@rend, 'stars')">
                 <xsl:call-template name="generate-milestone-paragraph">
                     <xsl:with-param name="string" select="f:repeat('*', '&nbsp;&nbsp;&nbsp;', xs:integer(f:rend-value(@rend, 'stars')))"/>
@@ -288,6 +289,13 @@
                     <xsl:with-param name="string" select="$milestone-markers(@rend)"/>
                 </xsl:call-template>
             </xsl:when>
+
+            <xsl:when test="f:has-rend-value(@rend, 'marker')">
+                <xsl:call-template name="generate-milestone-paragraph">
+                    <xsl:with-param name="string" select="$milestone-markers(f:rend-value(@rend, 'marker'))"/>
+                </xsl:call-template>
+            </xsl:when>
+
             <xsl:when test="f:has-rend-value(@rend, 'image')">
                 <div class="figure">
                     <xsl:variable name="alt">
@@ -320,6 +328,12 @@
             <xsl:attribute name="class">tb</xsl:attribute>
             <xsl:attribute name="id"><xsl:value-of select="f:generate-id(.)"/></xsl:attribute>
             <xsl:value-of select="$string"/>
+            <xsl:if test="f:has-rend-value(@rend, 'repeat-lines')">
+                <xsl:variable name="lines" select="xs:integer(f:rend-value(@rend, 'repeat-lines'))"/>
+                <xsl:for-each select="1 to $lines - 1">
+                    <br/><xsl:value-of select="$string"/>
+                </xsl:for-each>
+            </xsl:if>
         </xsl:element>
     </xsl:template>
 
