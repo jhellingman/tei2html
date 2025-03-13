@@ -3,26 +3,27 @@ use strict;
 use warnings;
 
 # Define file paths (update as needed)
-my $schxslt_jar    = "schxslt-cli-1.7.4.jar";  # SchXslt CLI
-my $saxon_jar      = "saxon-he-10.6.jar";      # Saxon XSLT processor
-my $schematron_file = "tei-validation.sch";    # Your Schematron rules
-my $xslt_file      = "schematron-report.xsl";  # XSLT for HTML output
-my $xml_file       = shift or die "Usage: perl validate-tei.pl input.xml\n";
-my $report_file    = "validation-report.xml";  # XML output
-my $html_report    = "validation-report.html"; # Final HTML report
+my $schxslt         = "../tools/lib/schxslt-cli.jar";    # Schematron processor, see https://github.com/schxslt/schxslt
+my $saxon           = "../tools/lib/saxon9he.jar";       # Saxon XSLT processor
+my $schematron_file = "tei-validation.sch";              # Schematron rules
+my $xslt_file       = "validation-report.xsl";           # XSLT for HTML output
 
-# Check if required files exist
-die "Error: SchXslt JAR not found!\n" unless -e $schxslt_jar;
-die "Error: Saxon JAR not found!\n" unless -e $saxon_jar;
+my $report_file     = "validation-report.xml";  # XML output
+my $html_report     = "validation-report.html"; # Final HTML report
+
+my $xml_file        = shift or die "Usage: perl validate-tei.pl input.xml\n";
+
+
+die "Error: SchXslt JAR not found!\n" unless -e $schxslt;
+die "Error: Saxon JAR not found!\n" unless -e $saxon;
 die "Error: Schematron file not found!\n" unless -e $schematron_file;
 die "Error: XSLT file not found!\n" unless -e $xslt_file;
 die "Error: XML file '$xml_file' not found!\n" unless -e $xml_file;
 
-# See: https://github.com/schxslt/schxslt
 
 # Run Schematron validation
 print "🔍 Validating $xml_file...\n";
-my $validate_cmd = "java -jar $schxslt_jar validate -s $schematron_file -d $xml_file -o $report_file";
+my $validate_cmd = "java -jar $schxslt -s $schematron_file -d $xml_file -o $report_file";
 my $validate_result = system($validate_cmd);
 
 # Check validation success
@@ -34,7 +35,7 @@ if ($validate_result == 0) {
 
 # Convert XML report to HTML
 print "🎨 Converting validation report to HTML...\n";
-my $transform_cmd = "java -jar $saxon_jar -s:$report_file -xsl:$xslt_file -o:$html_report";
+my $transform_cmd = "java -jar $saxon -s:$report_file -xsl:$xslt_file -o:$html_report";
 my $transform_result = system($transform_cmd);
 
 # Check transformation success

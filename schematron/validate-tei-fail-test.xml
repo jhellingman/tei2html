@@ -6,7 +6,7 @@
                 <author>Test Author</author>
             </titleStmt>
             <publicationStmt>
-                <idno type="epub-id">urn:uuid:2d886f57-c44c-4ac2-93d5-c7c4bfde9c0e</idno>
+                <idno type="epub-id">urn:xuid:2d886f57-c44c-4ac2-93d5-c7c4bfde9c0e</idno>
             </publicationStmt>
         </fileDesc>
     </teiHeader>

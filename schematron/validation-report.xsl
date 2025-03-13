@@ -12,6 +12,7 @@
                 <style>
                     body { font-family: Arial, sans-serif; margin: 20px; }
                     h1 { color: #333; }
+                    .info { color: blue; font-weight: bold; }
                     .error { color: red; font-weight: bold; }
                     .warning { color: orange; font-weight: bold; }
                     .valid { color: green; font-weight: bold; }
@@ -22,6 +23,16 @@
             </head>
             <body>
                 <h1>Schematron Validation Report</h1>
+                
+                <xsl:if test="//svrl:successful-report">
+                    <xsl:for-each select="//svrl:successful-report">
+                        <p class="info">
+                            <xsl:value-of select="svrl:text/text()"/>                
+                        </p>
+                    </xsl:for-each>
+                </xsl:if>
+                
+                
                 <xsl:choose>
                     <xsl:when test="//svrl:failed-assert">
                         <table>
@@ -36,10 +47,10 @@
                                         <xsl:value-of select="@test"/>
                                     </td>
                                     <td>
-                                        <xsl:value-of select="text()"/>
+                                        <xsl:value-of select="svrl:text/text()"/>
                                     </td>
                                     <td>
-                                        <xsl:value-of select="@location"/>
+                                        <xsl:value-of select="replace(@location, 'Q\{http://www.tei-c.org/ns/1.0\}', 'tei:')"/>
                                     </td>
                                 </tr>
                             </xsl:for-each>
