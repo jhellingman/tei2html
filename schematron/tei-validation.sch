@@ -60,13 +60,74 @@
       </sch:rule>
     </sch:pattern>
 
+    <sch:pattern id="name-has-key">
+        <sch:rule context="tei:titleStmt/tei:respStmt/tei:name">
+            <sch:assert test="@key">
+                ❌ No @key attribute present for name: <sch:value-of select="."/>
+            </sch:assert>
+        </sch:rule>
+    </sch:pattern>
+
+    <sch:pattern id="author-ref-valid-viaf-url">
+        <sch:rule context="tei:titleStmt/tei:author[@ref]">
+            <sch:assert test="matches(@ref, '^https://viaf\.org/viaf/[0-9]+/$')">
+                ❌ The @ref attribute "<sch:value-of select="@ref"/>" on author "<sch:value-of select="."/>" is not a valid viaf.org URL.
+            </sch:assert>
+        </sch:rule>
+    </sch:pattern>
+
+    <sch:pattern id="editor-ref-valid-viaf-url">
+        <sch:rule context="tei:titleStmt/tei:editor[@ref]">
+            <sch:assert test="matches(@ref, '^https://viaf\.org/viaf/[0-9]+/$')">
+                ❌ The @ref attribute "<sch:value-of select="@ref"/>" on editor "<sch:value-of select="."/>" is not a valid viaf.org URL.
+            </sch:assert>
+        </sch:rule>
+    </sch:pattern>
+
+    <sch:pattern id="name-ref-valid-viaf-url">
+        <sch:rule context="tei:titleStmt/tei:respStmt/tei:name[@ref]">
+            <sch:assert test="matches(@ref, '^https://viaf\.org/viaf/[0-9]+/$')">
+                ❌ The @ref attribute "<sch:value-of select="@ref"/>" on name "<sch:value-of select="."/>" is not a valid viaf.org URL.
+            </sch:assert>
+        </sch:rule>
+    </sch:pattern>
+
+    <sch:pattern id="author-has-ref">
+        <sch:rule context="tei:titleStmt/tei:author">
+            <sch:assert test="@ref or . = ('Anonymous', 'Anoniem')">
+                ❌ No @ref attribute present for author: <sch:value-of select="."/>
+            </sch:assert>
+        </sch:rule>
+    </sch:pattern>
+
+    <sch:pattern id="editor-has-ref">
+        <sch:rule context="tei:titleStmt/tei:editor">
+            <sch:assert test="@ref">
+                ❌ No @ref attribute present for editor: <sch:value-of select="."/>
+            </sch:assert>
+        </sch:rule>
+    </sch:pattern>
+
+    <sch:pattern id="name-has-ref-except-transcription">
+        <sch:rule context="tei:titleStmt/tei:respStmt[tei:resp != 'Transcription']/tei:name">
+            <sch:assert test="@ref">
+                ❌ No @ref attribute present for name: <sch:value-of select="."/>
+            </sch:assert>
+        </sch:rule>
+    </sch:pattern>
+
     <sch:pattern id="check-epub-id">
         <sch:rule context="tei:publicationStmt">
             <sch:assert test="count(tei:idno[@type = 'epub-id']) = 1">
                 ❌ The publicationStmt must contain exactly one idno element with type="epub-id".
             </sch:assert>
-            <sch:assert test="f:is-valid-uuid(tei:idno[@type='epub-id'])">
-                ❌ The idno element with type="epub-id" must match the GUID URN format (urn:uuid:xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx).
+        </sch:rule>
+    </sch:pattern>
+
+    <sch:pattern id="check-epub-id-format">
+        <sch:rule context="tei:publicationStmt/tei:idno[@type='epub-id']">
+            <sch:assert test="f:is-valid-uuid(.)">
+                ❌ The idno element '<sch:value-of select="."/>' with @type="epub-id" must match the GUID URN format (urn:uuid:xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx).
             </sch:assert>
         </sch:rule>
     </sch:pattern>
