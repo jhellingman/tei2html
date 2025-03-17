@@ -15,6 +15,12 @@
         <xsl:sequence select="matches($id, $uuidPattern)"/>
     </xsl:function>
 
+    <xsl:function name="f:strip-hash" as="xs:string">
+        <xsl:param name="target" as="xs:string"/>
+        <xsl:value-of select="if (starts-with($target, '#')) then substring($target, 2) else $target"/>
+    </xsl:function>
+
+
     <sch:pattern id="report-title">
       <sch:rule context="//tei:titleStmt">
         <sch:report role="info" test="tei:title">ℹ️ Title: <sch:value-of select="tei:title"/></sch:report>
@@ -131,5 +137,114 @@
             </sch:assert>
         </sch:rule>
     </sch:pattern>
+
+
+    <sch:pattern id="seg-copyOf-has-matching-id">
+        <sch:rule context="tei:seg[@copyOf]">
+            <sch:assert role="error" test="//*[@id = current()/@copyOf]">
+                ❌ The @copyOf attribute "<sch:value-of select="@copyOf"/>" of seg element has no matching @id.
+            </sch:assert>
+        </sch:rule>
+    </sch:pattern>
+
+    <sch:pattern id="ref-noteRef-should-be-note-sameAs">
+        <sch:rule context="tei:ref[@type='noteRef']">
+            <sch:report role="trivial" test="true()">  
+                ⚠️ A ref with @type='noteRef' is better replaced with a note with a @sameAs attribute.
+            </sch:report>
+        </sch:rule>
+    </sch:pattern>
+    
+    <sch:pattern id="ditto-should-be-seg-copyOf">
+        <sch:rule context="tei:ditto">
+            <sch:report role="trivial" test="true()">  
+                ⚠️ The non-standard <sch:name/> element is better replaced with a seg element with a @copyOf attribute.
+            </sch:report>
+        </sch:rule>
+    </sch:pattern>
+
+
+    <sch:pattern id="text-structure-validation-front">
+        <sch:rule context="tei:text">
+            <sch:assert role="error" test="tei:front or ancestor::tei:q or ancestor::tei:group">
+                ❌ No front element present!
+            </sch:assert>
+        </sch:rule>
+    </sch:pattern>
+
+    <sch:pattern id="text-structure-validation-body">
+        <sch:rule context="tei:text">
+            <sch:assert role="error" test="tei:body">
+                ❌ No body element present!
+            </sch:assert>
+        </sch:rule>
+    </sch:pattern>
+
+    <sch:pattern id="text-structure-validation-back">
+        <sch:rule context="tei:text">
+            <sch:assert role="error" test="tei:back or ancestor::tei:q or ancestor::tei:group">
+                ❌ No back element present!
+            </sch:assert>
+        </sch:rule>
+    </sch:pattern>
+
+    <sch:pattern id="toc-is-present">
+        <sch:rule context="tei:text">
+            <sch:report role="error" test="not(//tei:divGen[@type = ('toc', 'toca')] or //tei:div[@id = 'toc'] or //tei:div1[@id = 'toc'])">
+                ⚠️ No Table of Contents (ToC) present.
+            </sch:report>
+        </sch:rule>
+    </sch:pattern>
+
+    <sch:pattern id="only-one-toc-present">
+        <sch:rule context="tei:text">
+            <sch:report role="error" test="//tei:divGen[@type = ('toc', 'toca')] and (//tei:div[@id = 'toc'] or //tei:div1[@id = 'toc'])">
+                ⚠️ Both generated and original Table of Contents (ToC) are present.
+            </sch:report>
+        </sch:rule>
+    </sch:pattern>
+
+
+    <sch:pattern id="id-references-validation">
+
+        <!-- Check that @target points to an existing @id -->
+        <sch:rule context="//*[@target]">
+            <sch:assert role="error" test="//*[@id = f:strip-hash(current()/@target)]">
+                ❌ Element <sch:name/>: target attribute value "<sch:value-of select="@target"/>" not present as an @id.
+            </sch:assert>
+        </sch:rule>
+
+        <!-- Check that @rendition points to an existing rendition element -->
+        <sch:rule context="//*[@rendition]">
+            <sch:let name="renditionIds" value="tokenize(@rendition, ' ')" />
+            <sch:assert role="error" test="every $id in $renditionIds satisfies //tei:rendition[@id = $id]">
+                ❌ Element <sch:name/>: rendition attribute references missing rendition element(s): "<sch:value-of select="@rendition"/>".
+            </sch:assert>
+        </sch:rule>
+
+        <!-- Check that @sameAs points to an existing @id -->
+        <sch:rule context="//*[@sameAs]">
+            <sch:assert role="error" test="//*[@id = f:strip-hash(current()/@sameAs)]">
+                ❌ Element <sch:name/>: sameAs attribute value "<sch:value-of select="@sameAs"/>" not present as an @id of any element.
+            </sch:assert>
+        </sch:rule>
+
+        <!-- Check that @who points to an existing @id on a role element -->
+        <sch:rule context="//*[@who]">
+            <sch:assert role="error" test="//tei:role[@id = f:strip-hash(current()/@who)]">
+                ❌ Element <sch:name/>: who attribute value "<sch:value-of select="@who"/>" not present as an @id of a role.
+            </sch:assert>
+        </sch:rule>
+
+        <!-- Check that language @id or @ident is actually used in @lang or @xml:lang -->
+        <sch:rule context="//tei:language[@id or @ident]">
+            <sch:let name="ident" value="if (@ident) then @ident else @id"/>
+            <sch:assert role="error" test="//*[@lang = $ident] or //*[@xml:lang = $ident]">
+                ❌ Language "<sch:value-of select="$ident"/>" is declared but not used in the text.
+            </sch:assert>
+        </sch:rule>
+
+    </sch:pattern>
+
 
 </sch:schema>

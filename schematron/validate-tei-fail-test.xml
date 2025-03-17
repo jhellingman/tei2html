@@ -14,4 +14,12 @@
             </publicationStmt>
         </fileDesc>
     </teiHeader>
+    <text>
+        <body>
+            <div1>
+                <p id="existing-id">This is a <ref target="#non-existing-id">reference</ref> to a non-existing id.</p>
+                <p>This is a <ref target="#existing-id">reference</ref> to an existing id.</p>
+            </div1>
+        </body>
+    </text>
 </TEI>

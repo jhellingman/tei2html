@@ -24,12 +24,32 @@
             <body>
                 <h1>Schematron Validation Report</h1>
 
+
                 <xsl:if test="//svrl:successful-report">
-                    <xsl:for-each select="//svrl:successful-report">
-                        <p class="info">
-                            <xsl:value-of select="svrl:text/text()"/>
-                        </p>
-                    </xsl:for-each>
+                    <table>
+                        <tr>
+                            <th>Rule</th>
+                            <th>Role</th>
+                            <th>Message</th>
+                            <th>Location</th>
+                        </tr>
+                        <xsl:for-each select="//svrl:successful-report">
+                            <tr>
+                                <td class="warning">
+                                    <xsl:value-of select="@test"/>
+                                </td>
+                                <td>
+                                    <xsl:value-of select="@role"/>
+                                </td>
+                                <td>
+                                    <xsl:value-of select="svrl:text/text()"/>
+                                </td>
+                                <td>
+                                    <xsl:value-of select="replace(@location, 'Q\{http://www.tei-c.org/ns/1.0\}', '')"/>
+                                </td>
+                            </tr>
+                        </xsl:for-each>
+                    </table>
                 </xsl:if>
 
 
