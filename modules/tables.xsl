@@ -359,7 +359,7 @@
     </xsl:template>
 
 
-    <!-- Find relative postion of cell in table -->
+    <!-- Find relative position of cell in table -->
     <xsl:template name="cell-pos-class">
         <xsl:context-item as="element(cell)" use="required"/>
 

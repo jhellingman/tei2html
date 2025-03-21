@@ -919,7 +919,7 @@
                 <tr><td>Other       </td><td>ccOther    </td><td>Anything else.</td></tr>
             </table>
 
-            <p>The content of (embedded) notes will ignored, and if the element already has a <code>@rend</code> attribute with a relevant type, and empty string will be returned.</p>
+            <p>The content of (embedded) notes will be ignored. If the element already has a <code>@rend</code> attribute with a relevant type, an empty string will be returned.</p>
         </xd:detail>
     </xd:doc>
 

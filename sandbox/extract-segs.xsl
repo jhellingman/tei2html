@@ -11,7 +11,7 @@
     <xd:doc type="stylesheet">
         <xd:short>Extract segments from a TEI document.</xd:short>
         <xd:detail>
-            <p>This stylesheet extracts segments from an XHTML document.</p>
+            <html:p>This stylesheet extracts segments from an XHTML document.</html:p>
         </xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
         <xd:copyright>2014, Jeroen Hellingman</xd:copyright>

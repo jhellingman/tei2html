@@ -71,7 +71,7 @@
                 <publisher>
                     <xsl:value-of select="fb2:publish-info/fb2:publisher"/>
                 </publisher>
-                <pubPlace></pubPlace>
+                <pubPlace/>
                 <idno type="isbn">
                     <xsl:value-of select="fb2:publish-info/fb2:isbn"/>
                 </idno>
@@ -357,7 +357,7 @@
             <xsl:when test="$contentType = 'image/jpeg'">.jpg</xsl:when>
             <xsl:when test="$contentType = 'image/png'">.png</xsl:when>
             <xsl:when test="$contentType = 'image/gif'">.gif</xsl:when>
-            <xsl:otherwise></xsl:otherwise>
+            <xsl:otherwise/>
         </xsl:choose>
     </xsl:variable>
 

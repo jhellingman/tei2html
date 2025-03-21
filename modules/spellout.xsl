@@ -157,7 +157,7 @@
     <xsl:sequence select="f:en-spell-out($integer-part) ||
       (if ($en-special-fractions($fractional-part)) then ' and ' || $en-special-fractions($fractional-part)
        else if (string-length($fractional-part) = 1) then ' and ' || f:en-spell-out(xs:integer($fractional-part)) || ' tenths'
-       else if (string-length($fractional-part) = 2) then ' and ' || f:en-spell-out(xs:integer($fractional-part)) || ' hunderdths'
+       else if (string-length($fractional-part) = 2) then ' and ' || f:en-spell-out(xs:integer($fractional-part)) || ' hundrerdths'
        else if (string-length($fractional-part) = 3) then ' and ' || f:en-spell-out(xs:integer($fractional-part)) || ' thousandths'
        else ' point ' || f:en-spell-out-digits($fractional-part))"/>
   </xsl:function>

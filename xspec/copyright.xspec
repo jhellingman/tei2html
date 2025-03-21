@@ -67,7 +67,7 @@
                 </titleStmt>
             </x:param>
         </x:call>
-        <x:expect label="will return the most resent death date extracted" select="1616"/>
+        <x:expect label="will return the most recent death date extracted" select="1616"/>
     </x:scenario>
 
     <x:scenario label="When finding the last relevant death-date">
@@ -79,7 +79,7 @@
                 </titleStmt>
             </x:param>
         </x:call>
-        <x:expect label="will return the most resent death date extracted" select="1924"/>
+        <x:expect label="will return the most recent death date extracted" select="1924"/>
     </x:scenario>
 
 

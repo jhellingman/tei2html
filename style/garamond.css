@@ -4,6 +4,11 @@ body {
     line-height: 1.4;
 }
 
+/* Disable unwanted feature of EB Garamond when using Latin. */
+:lang(la) {
+    font-feature-settings: "locl" 0;
+}
+
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .titlePage {
     font-family: 'EB Garamond', serif;
 }
@@ -26,3 +31,4 @@ h5, h6 {
 .hangqqq { text-indent: -0.68em; }
 
 .grek, .cyrl { font-family: 'EB Garamond', serif; }
+

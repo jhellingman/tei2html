@@ -14,7 +14,7 @@
 
   <x:scenario label="When spelling-out a number">
     <x:call function="f:spell-out"><x:param select="'en'"/><x:param select="3.14"/></x:call>
-    <x:expect label="will return 'three and fourteen hunderdths'" select="'three and fourteen hunderdths'"/>
+    <x:expect label="will return 'three and fourteen hundredths'" select="'three and fourteen hundredths'"/>
   </x:scenario>
 
   <!-- English -->

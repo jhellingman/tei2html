@@ -4,6 +4,41 @@
                stylesheet="../preprocess.xsl"
                version="3.0">
 
+    <!-- combine marginal notes -->
+
+    <x:scenario label="When preprocessing a marginal note element">
+        <x:context>
+            <note type="margin">Test!</note>
+        </x:context>
+        <x:expect label="will result in a single note element">
+            <note type="margin">Test!</note>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When preprocessing two consecutive marginal note elements">
+        <x:context>
+            <note type="margin">Test1!</note>
+            <note type="margin">Test2!</note>
+        </x:context>
+        <x:expect label="will result in a single note element">
+            <note type="margin">Test1!<lb/>Test2!</note>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When preprocessing two consecutive marginal note elements, followed by a paragraph and another marginal note.">
+        <x:context>
+            <note id="n1" type="margin">Test1!</note>
+            <note id="n2" type="margin">Test2!</note>
+            <p>Intermediate text.</p>
+            <note id="n3" type="margin">Test3!</note>
+        </x:context>
+        <x:expect label="will result in a single note element for the first two, and a separate note for the third.">
+            <note id="n1" type="margin">Test1!<lb id="n2"/>Test2!</note>
+            <p>Intermediate text.</p>
+            <note id="n3" type="margin">Test3!</note>
+        </x:expect>
+    </x:scenario>
+
     <!-- ab -->
 
     <x:scenario label="When preprocessing an ab element">
