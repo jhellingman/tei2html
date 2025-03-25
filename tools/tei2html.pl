@@ -35,6 +35,12 @@ my $java      = "java $javaOptions";
 my $prince    = $princeHome . "/Engine/bin/prince.exe";                     # see https://www.princexml.com/
 my $saxon     = "$java -jar " . $saxonHome . "/saxon9he.jar ";              # see http://saxon.sourceforge.net/
 my $epubcheck = "$java -jar " . $toolsdir . "/lib/epubcheck-4.0.2.jar ";    # see https://github.com/IDPF/epubcheck
+my $schxslt   = "$java -jar " . $toolsdir . "/lib/schxslt-cli.jar";         # Schematron processor, see https://github.com/schxslt/schxslt
+
+my $schematronFile = $home . "/schematron/tei-validation.sch";              # Schematron rules
+my $schematronXslt = $home . "/schematron/validation-report.xsl";           # XSLT to convert the schematron report to HTML
+my $namespaceXslt = $home . "/schematron/tei-namespace.xsl";                # XSLT to add TEI namespace to document
+
 my $jeebies   = "C:\\Bin\\jeebies";                                         # see http://gutcheck.sourceforge.net/
 my $gutcheck  = "gutcheck";
 my $nsgmls    = "nsgmls";                                                   # see http://www.jclark.com/sp/ or http://openjade.sourceforge.net/doc/index.htm
@@ -1060,7 +1066,7 @@ sub longestString {
 sub runChecks($) {
     my $basename = shift;
     my $filename = shift;
-
+   
     $filename =~ /^(.*)\.(xml|tei)$/;
     my $format = $2;
     my $checkFilename = $basename . '-checks.html';
@@ -1101,6 +1107,8 @@ sub runChecks($) {
 
     system ("$saxon \"$xmlFilename\" $xsldir/checks.xsl " . determineSaxonParameters() . " > \"$checkFilename\"");
 
+    runSchematron($basename, $xmlFilename);
+
     $makeKwic && makeKwic($basename, $xmlFilename);
 
     if ($filename ne $intraFile) {
@@ -1111,6 +1119,29 @@ sub runChecks($) {
     }
     removeFile($positionInfoFilename);
     removeFile($xmlFilename);
+}
+
+
+sub runSchematron($) {
+    my $basename = shift;
+    my $xmlFilename = shift;
+
+    ## The schematron wants the document to be in the TEI namespace: "http://www.tei-c.org/ns/1.0"
+    my $tmpFile = "$basename-ns.xml";
+    system("$saxon -s:$xmlFilename -xsl:$namespaceXslt -o:$tmpFile");
+
+    trace("Run schematron checks: $schxslt -s $schematronFile -d $xmlFilename -o $xmlFilename-report.xml");
+    my $result = system("$schxslt -s $schematronFile -d $basename-ns.xml -o $xmlFilename-report.xml");
+
+    if ($result != 0) {
+        warning("Schematron validation failed!");
+    }
+
+    trace("Transform schematron result to HTML: $saxon -s:$xmlFilename-report.xml -xsl:$schematronXslt -o:$basename-report.html");
+    my $transform_result = system("$saxon -s:$xmlFilename-report.xml -xsl:$schematronXslt -o:$basename-schematron-report.html");
+
+    removeFile($tmpFile);
+    removeFile("$xmlFilename-report.xml");
 }
 
 

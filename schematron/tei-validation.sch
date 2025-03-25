@@ -6,7 +6,9 @@
     queryBinding="xslt3">
 
     <sch:ns prefix="tei" uri="http://www.tei-c.org/ns/1.0"/>
-    <sch:ns uri="#functions" prefix="f"/>
+    <sch:ns uri="urn:stylesheet-functions" prefix="f"/>
+
+    <xsl:include href="../modules/numbers.xsl"/>
 
     <xsl:function name="f:is-valid-uuid" as="xs:boolean">
         <xsl:param name="id"/>
@@ -246,5 +248,65 @@
 
     </sch:pattern>
 
+
+    <sch:pattern id="pb-location-check">
+      <sch:rule context="tei:front/tei:pb[not(preceding-sibling::tei:titlePage)] | tei:body/tei:pb | tei:back/tei:pb">
+        <sch:assert role="warn" test="false()">
+          ❌ `pb` element should not appear directly under `front`, `body`, or `back` (unless immediately following a `titlePage` in `front`).
+        </sch:assert>
+      </sch:rule>
+    </sch:pattern>
+
+    <sch:pattern id="pb-under-text">
+      <sch:rule context="tei:text/tei:pb">
+        <sch:assert role="warn" test="false()">
+          ❌ `pb` element should not appear directly under `text`.
+        </sch:assert>
+      </sch:rule>
+    </sch:pattern>
+
+    <sch:pattern id="note-pb-sequence-check">
+      <sch:rule context="tei:note[.//tei:pb]">
+        <sch:let name="n1" value="(.//tei:pb/@n)[1]"/>
+        <sch:let name="n0" value="preceding::tei:pb[1]/@n"/>
+        <sch:let name="v1" value="if (f:is-roman($n1)) then f:from-roman($n1) else number($n1)"/>
+        <sch:let name="v0" value="if (f:is-roman($n0)) then f:from-roman($n0) else number($n0)"/>
+        <sch:assert role="warn" test="not(f:is-integer($v0) and f:is-integer($v1)) or $v1 = $v0 + 1">
+          ❌ Page break in note: page <sch:value-of select="$n1"/> out of sequence (preceding <sch:value-of select="$n0"/>).
+        </sch:assert>
+      </sch:rule>
+    </sch:pattern>
+
+    <sch:pattern id="correction-equals-sic-attribute">
+      <sch:rule context="tei:corr[@sic]">
+        <sch:assert test="string(.) != string(@sic)">
+          ⚠️ The correction text (<sch:value-of select="."/>) is the same as the value of the @sic attribute.
+        </sch:assert>
+      </sch:rule>
+    </sch:pattern>
+
+    <sch:pattern id="correction-in-choice-equals-sic">
+      <sch:rule context="tei:choice[tei:sic and tei:corr]">
+        <sch:assert test="string(tei:sic) != string(tei:corr)">
+          ⚠️ The correction (<sch:value-of select="tei:corr"/>) is the same as the original text  inside a choice element.
+        </sch:assert>
+      </sch:rule>
+    </sch:pattern>
+
+    <sch:pattern id="redundant-lang-attribute">
+      <sch:rule context="*[@lang]">
+        <sch:assert test="not((ancestor::*[@lang])[last()]/@lang = @lang)">
+          ⚠️ The @lang attribute is redundant: it has the same value '<sch:value-of select="@lang"/>' as the nearest ancestor with @lang, <sch:value-of select="name((ancestor::*[@lang])[last()])"/>.
+        </sch:assert>
+      </sch:rule>
+    </sch:pattern>
+
+    <sch:pattern id="redundant-xml-lang-attribute">
+      <sch:rule context="*[@xml:lang]">
+        <sch:assert test="not((ancestor::*[@xml:lang])[last()]/@xml:lang = @xml:lang)">
+          ⚠️ The @xml:lang attribute is redundant: it has the same value '<sch:value-of select="@xml:lang"/>' as the nearest ancestor with @xml:lang, <sch:value-of select="name((ancestor::*[@xml:lang])[last()])"/>.
+        </sch:assert>
+      </sch:rule>
+    </sch:pattern>
 
 </sch:schema>
