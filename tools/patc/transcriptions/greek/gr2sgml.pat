@@ -212,7 +212,6 @@
 "'\"i"      p "&iadgr;"
 "=\"i"      p "&icdgr;"
 
-
 "k"         p "&kgr;"
 "K"         p "&Kgr;"
 
@@ -399,8 +398,8 @@
 ">"         e "gr2sgml.pat: stand alone >"
 "\""        e "gr2sgml.pat: stand alone \""
 "`"         e "gr2sgml.pat: stand alone `"
-"["         e "gr2sgml.pat: illegal character ["
-"]"         e "gr2sgml.pat: illegal character ]"
+% "["         e "gr2sgml.pat: illegal character ["
+% "]"         e "gr2sgml.pat: illegal character ]"
 
 
 @patterns 2  % jumping SGML entities in source

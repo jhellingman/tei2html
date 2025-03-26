@@ -1,9 +1,17 @@
-<TEI xmlns="http://www.tei-c.org/ns/1.0" lang="en">
+<TEI xmlns="http://www.tei-c.org/ns/1.0" lang="en" xml:lang="en">
     <teiHeader>
         <fileDesc>
             <titleStmt>
                 <title>Test Validation of TEI files</title>
-                <author>Test Author</author>
+                <title nfc="3">Test Validation of TEI files</title>
+                <title nfc="4">The test Validation of TEI files</title>
+                <title nfc="3">A test Validation of TEI files</title>
+            	<title>A test Validation of TEI files</title>
+
+		<title xml:lang="nl" nfc="2">A test Validation of TEI files</title>
+                <title xml:lang="nl" nfc="3">Een test Validatie van TEI bestanden</title>
+
+		<author>Test Author</author>
                 <respStmt>
                     <resp>Illustrator</resp>
                     <name>John Doe</name>

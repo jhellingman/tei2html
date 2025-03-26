@@ -654,7 +654,7 @@
 ">"         e "grt2sgml.pat: stand alone >"
 "\""        e "grt2sgml.pat: stand alone \""
 "`"         e "grt2sgml.pat: stand alone `"
-"["         e "grt2sgml.pat: illegal character ["
-"]"         e "grt2sgml.pat: illegal character ]"
+% "["         e "grt2sgml.pat: illegal character ["
+% "]"         e "grt2sgml.pat: illegal character ]"
 
 @end

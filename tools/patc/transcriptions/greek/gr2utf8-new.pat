@@ -163,6 +163,12 @@
 "&iscgr;"   p "ἶ"    % ">=i"
 "&Iscgr;"   p "Ἶ"    % ">=I"
 
+"&idigr;"   p "ϊ"    % "\"i" 
+"&Idigr;"   p "Ϊ"    % "\"I" 
+"&igdgr;"   p "ῒ"    % "`\"i"
+"&iadgr;"   p "ΐ"    % "'\"i"
+"&icdgr;"   p "ῗ"    % "=\"i"
+
 "&kgr;"     p "κ"     % "k"
 "&Kgr;"     p "Κ"     % "K"
 

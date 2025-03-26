@@ -172,6 +172,12 @@
 "ἶ"          p ">=i"             % &iscgr;
 "Ἶ"          p ">=I"             % &Iscgr;
 
+"ϊ"          p "\"i"             % &idigr;
+"Ϊ"          p "\"I"             % &Idigr;
+"ῒ"          p "`\"i"            % &igdgr;
+"ΐ"          p "'\"i"            % &iadgr;
+"ῗ"          p "=\"i"            % &icdgr;
+
 "κ"          p "k"             % &kgr;
 "Κ"          p "K"             % &Kgr;
 

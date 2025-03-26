@@ -3,6 +3,7 @@
     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
     xmlns:tei="http://www.tei-c.org/ns/1.0"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:map="http://www.w3.org/2005/xpath-functions/map"
     queryBinding="xslt3">
 
     <sch:ns prefix="tei" uri="http://www.tei-c.org/ns/1.0"/>
@@ -22,6 +23,18 @@
         <xsl:value-of select="if (starts-with($target, '#')) then substring($target, 2) else $target"/>
     </xsl:function>
 
+    <xsl:function name="f:articles-for-lang" as="xs:string*">
+      <xsl:param name="lang" as="xs:string?"/>
+      <xsl:variable name="base-lang" select="lower-case(tokenize($lang, '-')[1])"/>
+      <xsl:variable name="article-map" as="map(xs:string, xs:string*)"
+        select="map {
+          'en': ('a', 'an', 'the'),
+          'fr': ('le', 'la', 'les', 'l’'),
+          'de': ('der', 'die', 'das', 'ein', 'eine', 'einer', 'eines'),
+          'nl': ('de', 'het', 'een', '’t', '’n', 'eene')
+        }"/>
+      <xsl:sequence select="if ($base-lang) then map:get($article-map, $base-lang) else ''"/>
+    </xsl:function>
 
     <sch:pattern id="report-title">
       <sch:rule context="//tei:titleStmt">
@@ -305,6 +318,27 @@
       <sch:rule context="*[@xml:lang]">
         <sch:assert test="not((ancestor::*[@xml:lang])[last()]/@xml:lang = @xml:lang)">
           ⚠️ The @xml:lang attribute is redundant: it has the same value '<sch:value-of select="@xml:lang"/>' as the nearest ancestor with @xml:lang, <sch:value-of select="name((ancestor::*[@xml:lang])[last()])"/>.
+        </sch:assert>
+      </sch:rule>
+    </sch:pattern>
+
+
+    <sch:pattern id="title-nfc-correct">
+      <sch:rule context="tei:titleStmt/tei:title">
+        <sch:let name="lang" value="ancestor-or-self::*[@xml:lang][1]/@xml:lang"/>
+        <sch:let name="title-text" value="normalize-space(string(.))"/>
+        <sch:let name="first-word" value="lower-case(substring-before(concat($title-text, ' '), ' '))"/>
+        <sch:let name="articles" value="f:articles-for-lang($lang)"/>
+        <sch:let name="expected-nfc" value="string-length($first-word) + 1"/>
+
+        <!-- If title starts with article, @nfc must be present and correct -->
+        <sch:assert test="not($first-word = $articles) or @nfc = $expected-nfc">
+          ⚠️ Title begins with article "<sch:value-of select="$first-word"/>", so @nfc should be "<sch:value-of select="$expected-nfc"/>".
+        </sch:assert>
+
+        <!-- If title does NOT start with article, @nfc must be absent -->
+        <sch:assert test="($first-word = $articles) or not(@nfc)">
+          ⚠️ Title does not begin with an article "<sch:value-of select="$first-word"/>", so @nfc should be omitted (found: "<sch:value-of select="@nfc"/>").
         </sch:assert>
       </sch:rule>
     </sch:pattern>
