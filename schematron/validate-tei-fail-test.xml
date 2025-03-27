@@ -23,12 +23,17 @@
         </fileDesc>
     </teiHeader>
     <text>
+        <front>
+            <div1 type="Intro">
+            <head type="mistake">Introduction</head>
+            </div1>
+        </front>
         <body>
             <div1>
                 <p id="existing-id">This is a <ref target="#non-existing-id">reference</ref> to a non-existing id.</p>
                 <p>This is a <ref target="#existing-id">reference</ref> to an existing id.</p>
 
-                <p lang="en">This paragraph has a <ab lang="en">redundant</ab> <ab lang="de">language</ab> attribute.</p>
+                <p lang="en">This paragraph has a <ab lang="en">redundant</ab> <ab type="strange" lang="de">language</ab> attribute.</p>
             </div1>
         </body>
     </text>

@@ -343,4 +343,53 @@
       </sch:rule>
     </sch:pattern>
 
+
+    <sch:pattern id="allowed-attribute-values" abstract="true">
+      <sch:rule context="$context">
+        <sch:let name="values" value="$allowed-values"/>
+        <sch:let name="attr" value="@*[name() = $attribute]"/>
+        <sch:assert test="$attr = $values">
+          The <sch:name/> element has an invalid value for "@<sch:value-of select="$attribute"/>": 
+          "<sch:value-of select="$attr"/>". 
+          Allowed values are: <sch:value-of select="string-join($values, ', ')"/>.
+        </sch:assert>
+      </sch:rule>
+    </sch:pattern>
+
+    <sch:pattern is-a="allowed-attribute-values">
+      <sch:param name="context" value="tei:head[@type]"/>
+      <sch:param name="attribute" value="'type'"/>
+      <sch:param name="allowed-values" value="('main', 'sub', 'super', 'label')"/>
+    </sch:pattern>
+    
+    <sch:pattern is-a="allowed-attribute-values">
+      <sch:param name="context" value="tei:front/tei:div1[@type]"/>
+      <sch:param name="attribute" value="'type'"/>
+      <sch:param name="allowed-values" value="('Advertisement', 'Advertisements', 'Bibliography', 'CastList', 'Contents', 'Copyright', 'Cover', 'Dedication', 'Epigraph', 'Errata', 'Foreword', 'FrenchTitle', 'Frontispiece', 'Glossary', 'Imprint', 'Introduction', 'Motto', 'Note', 'Notes', 'Preface', 'TitlePage')"/>
+    </sch:pattern>
+
+    <sch:pattern is-a="allowed-attribute-values">
+      <sch:param name="context" value="tei:body/tei:div0[@type]"/>
+      <sch:param name="attribute" value="'type'"/>
+      <sch:param name="allowed-values" value="('Book', 'Issue', 'Part', 'Volume')"/>
+    </sch:pattern>
+
+    <sch:pattern is-a="allowed-attribute-values">
+      <sch:param name="context" value="tei:body/tei:div1[@type]"/>
+      <sch:param name="attribute" value="'type'"/>
+      <sch:param name="allowed-values" value="('Act', 'Scene', 'Article', 'Chapter', 'Part', 'Poem', 'Story', 'Tale')"/>
+    </sch:pattern>
+
+    <sch:pattern is-a="allowed-attribute-values">
+      <sch:param name="context" value="tei:back/tei:div1[@type]"/>
+      <sch:param name="attribute" value="'type'"/>
+      <sch:param name="allowed-values" value="('Advertisement', 'Advertisements', 'Appendix', 'Bibliography', 'Conclusion', 'Contents', 'Cover', 'Epilogue', 'Errata', 'Glossary', 'Imprint', 'Index', 'Note', 'Notes', 'Spine', 'Vocabulary')"/>
+    </sch:pattern>
+
+    <sch:pattern is-a="allowed-attribute-values">
+      <sch:param name="context" value="tei:ab[@type]"/>
+      <sch:param name="attribute" value="'type'"/>
+      <sch:param name="allowed-values" value="('verseNum', 'lineNum', 'parNum', 'tocPageNum', 'tocDivNum', 'divNum', 'itemNum', 'figNum', 'keyRef', 'lineNumRef', 'endNoteNum', 'textRef', 'keyNum', 'intra', 'top', 'bottom', 'price', 'phantom')"/>
+    </sch:pattern>
+
 </sch:schema>
