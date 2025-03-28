@@ -1068,6 +1068,41 @@
         <xsl:next-match/>
     </xsl:template>
 
+    <!-- Ignore identical corrections in transcription, added automatically, and remove distinctions in accents -->
+    <xsl:template mode="checks" match="choice[sic and corr][not(ancestor::reg[@type='trans'])]">
+
+        <xsl:variable name="sic" select="f:serialize-xml(sic/node())"/>
+        <xsl:variable name="corr" select="f:serialize-xml(corr/node())"/>
+
+        <xsl:if test="$sic = $corr">
+            <xsl:copy-of select="f:issue(., 'C02', 'Corrections', 'Warning', 'Correction &ldquo;' || string($corr) || '&rdquo; same as original text.')"/>
+        </xsl:if>
+        <xsl:next-match/>
+    </xsl:template>
+
+    <xsl:function name="f:serialize-xml" as="xs:string">
+        <xsl:param name="nodes" as="item()*"/>
+              
+        <!-- get rid of the @pos attributes we added -->
+        <xsl:variable name="nodes">
+            <xsl:apply-templates select="$nodes" mode="remove-pos"/>
+        </xsl:variable>
+
+        <xsl:sequence select="serialize($nodes, map {
+            'method': 'xml',
+            'omit-xml-declaration': true(),
+            'indent': false()
+        })"/>
+    </xsl:function>
+
+    <xsl:template match="@*|node()" mode="remove-pos">
+        <xsl:copy>
+            <xsl:apply-templates select="@*|node()" mode="remove-pos"/>
+        </xsl:copy>
+    </xsl:template>
+
+    <xsl:template match="@pos" mode="remove-pos"/>
+
 
     <!-- Figures -->
 

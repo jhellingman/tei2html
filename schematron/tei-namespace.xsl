@@ -8,7 +8,7 @@
 
     <xsl:template match="*">
         <xsl:element name="tei:{local-name(.)}">
-            <xsl:apply-templates select="@*|*|text()"/>
+            <xsl:apply-templates select="@*|node()"/>
         </xsl:element>
     </xsl:template>
 

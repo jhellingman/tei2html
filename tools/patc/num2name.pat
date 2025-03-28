@@ -137,7 +137,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Again, now without the zero
 
-
 "&#x100;" p "&Amacr;"     % Ā   Latin Capital letter A with macron
 "&#x101;" p "&amacr;"     % ā   Latin Small letter A with macron
 "&#x102;" p "&Abreve;"    % Ă   Latin Capital letter A with breve
@@ -267,41 +266,35 @@
 "&#x17E;" p "&zcaron;"    % ž   Latin Small letter Z with caron
 "&#x17F;" p "&longs;"     % ſ   Latin Small letter long S
 
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-"&#x1E0C;"  p "&Ddotb;"
-"&#x1E0D;"  p "&ddotb;"
-"&#x1E24;"  p "&Hdotb;"
-"&#x1E25;"  p "&hdotb;"
-"&#x1E32;"  p "&Kdotb;"
-"&#x1E33;"  p "&kdotb;"
-"&#x1E36;"  p "&Ldotb;"
-"&#x1E37;"  p "&ldotb;"
-"&#x1E40;"  p "&Mdota;"
-"&#x1E41;"  p "&mdota;"
-"&#x1E42;"  p "&Mdotb;"
-"&#x1E43;"  p "&mdotb;"
-"&#x1E44;"  p "&Ndota;"
-"&#x1E45;"  p "&ndota;"
-"&#x1E46;"  p "&Ndotb;"
-"&#x1E47;"  p "&ndotb;"
-"&#x1E5A;"  p "&Rdotb;"
-"&#x1E5B;"  p "&rdotb;"
-"&#x1E62;"  p "&Sdotb;"
-"&#x1E63;"  p "&sdotb;"
-"&#x1E6C;"  p "&Tdotb;"
-"&#x1E6D;"  p "&tdotb;"
-"&#x1E96;"  p "&hbarb;"
-"&#x1EA1;"  p "&adotb;"
-"&#x1EBD;"  p "&etilde;"
-
-"&#xA793;"  p "&cbar;"
-
-
-
+"&#x1E0C;"  p "&Ddotb;"   % Ḍ
+"&#x1E0D;"  p "&ddotb;"   % ḍ
+"&#x1E24;"  p "&Hdotb;"   % Ḥ
+"&#x1E25;"  p "&hdotb;"   % ḥ
+"&#x1E32;"  p "&Kdotb;"   % Ḳ
+"&#x1E33;"  p "&kdotb;"   % ḳ
+"&#x1E36;"  p "&Ldotb;"   % Ḷ
+"&#x1E37;"  p "&ldotb;"   % ḷ
+"&#x1E40;"  p "&Mdota;"   % Ṁ
+"&#x1E41;"  p "&mdota;"   % ṁ
+"&#x1E42;"  p "&Mdotb;"   % Ṃ
+"&#x1E43;"  p "&mdotb;"   % ṃ
+"&#x1E44;"  p "&Ndota;"   % Ṅ
+"&#x1E45;"  p "&ndota;"   % ṅ
+"&#x1E46;"  p "&Ndotb;"   % Ṇ
+"&#x1E47;"  p "&ndotb;"   % ṇ
+"&#x1E5A;"  p "&Rdotb;"   % Ṛ
+"&#x1E5B;"  p "&rdotb;"   % ṛ
+"&#x1E62;"  p "&Sdotb;"   % Ṣ
+"&#x1E63;"  p "&sdotb;"   % ṣ
+"&#x1E6C;"  p "&Tdotb;"   % Ṭ
+"&#x1E6D;"  p "&tdotb;"   % ṭ
+"&#x1E96;"  p "&hbarb;"   % ẖ
+"&#x1EA1;"  p "&adotb;"   % ạ
+"&#x1EBD;"  p "&etilde;"  % ẽ
+                          
+"&#xA793;"  p "&cbar;"    % ꞓ
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %

@@ -347,12 +347,6 @@
 
 %% additional entities not in TEI
 
-"ϊ"          p "\"i"               % "&iuml;"
-"Ϊ"          p "\"I"               % "&Iuml;"
-"ῒ"          p "`\"i"              % "&igdgr;"
-"ΐ"          p "'\"i"              % "&iadgr;"
-"ῗ"          p "=\"i"              % "&icdgr;"
-
 "ᾱ"          p "\\=a"              % &amacgr;
 "Ᾱ"          p "\\=A"              % &Amacgr;
 "ᾰ"          p ")a"                % &abregr;
