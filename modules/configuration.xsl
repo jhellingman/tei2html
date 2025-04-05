@@ -145,7 +145,7 @@
             <css.useCommonPrint>true</css.useCommonPrint>                   <!-- Use the build-in stylesheets (for print media) -->
             <css.useCommonAural>false</css.useCommonAural>                  <!-- Use the build-in stylesheets (for aural support) -->
             <css.inline>true</css.inline>                                   <!-- use an inline (embedded in HTML) stylesheet; ignored for ePub. -->
-            <css.support>2</css.support>                                    <!-- Level of support for CSS: used to filter out newer features. Possible values: 2 | 3. -->
+            <css.support>3</css.support>                                    <!-- Level of support for CSS: used to filter out newer features. Possible values: 2 | 3. -->
             <css.frakturFont>Walbaum-Fraktur</css.frakturFont>              <!-- The font to use when font(fraktur) is specified. -->
             <css.blackletterFont>UnifrakturMaguntia</css.blackletterFont>   <!-- The font to use when font(blackletter) is specified. -->
 

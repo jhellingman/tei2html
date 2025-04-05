@@ -43,6 +43,13 @@
 "<expan>"           p "<expan>"
 "</expan>"          p "</expan>"
 
+"<pb>               p "<pb>"
+
+% some TEI tags with attributes to skip
+"<pb "              3 "<pb "
+
+
+
 "a"         p "&agr;"
 "A"         p "&Agr;"
 "a|"        p "&aiotgr;"
@@ -402,7 +409,7 @@
 % "]"         e "gr2sgml.pat: illegal character ]"
 
 
-@patterns 2  % jumping SGML entities in source
+@patterns 2  % skip SGML entities in source
 
 ";"         1 ";"               % end of entity: jump back
 "</EL>"     0 ";</foreign>"     % closing Greek early. Forgive.
@@ -411,6 +418,10 @@
 "</GRA>"    0 ";"               % closing Greek early. Forgive.
 "</ALS>"     0 ";</foreign>"    % closing Tosk early. Forgive.
 " "         1 " "               % something unexpected, also jump back.
+
+@patterns 3 % skip certain SGML tags in source
+
+">"         1 ">"               % end of tag: jump back
 
 
 @end

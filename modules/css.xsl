@@ -500,8 +500,8 @@
                 <xsl:when test="$property='direction-override'"/>
 
                 <!-- Filter out CSS3 stuff (for Project Gutenberg submissions). -->
-                <xsl:when test="f:get-setting('css.support') = '2' and $property = ('writing-mode')">
-                    <xsl:copy-of select="f:log-info('Ignoring CCS3 property ''{1}''', $property)"/>
+                <xsl:when test="(f:is-set('pg.compliant') or f:get-setting('css.support') = '2') and not($property = $css2properties)">
+                    <xsl:copy-of select="f:log-info('Removed property ''{1}'', which is not CSS2.1', $property)"/>
                 </xsl:when>
 
                 <!-- Assume the rest can straightforwardly be translated to CSS. -->

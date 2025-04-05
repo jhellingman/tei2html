@@ -200,3 +200,7 @@ Wiki/Index.html
 xml2kwic.py
 xml2kwic.sh
 test/testTable/README.md
+schematron/validation-report.html
+schematron/StoicsEpicureansSceptics.xml
+schematron/StoriesAndFolkloreOfWestCornwall.xml
+schematron/validation-report.xml
