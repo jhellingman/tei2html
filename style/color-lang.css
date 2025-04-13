@@ -32,7 +32,7 @@
 
 /* Romance languages */
 
-:lang(la)  { background-color: #d9ffb3; }
+:lang(la)  { background-color: #e1ffc3; }
 :lang(fr)  { background-color: #b3ffb3; }
 :lang(es)  { background-color: #ccffe6; }
 
@@ -50,7 +50,7 @@
 /* Classic languages */
 
 :lang(el)  { background-color: #e5e5ff; }
-:lang(grc) { background-color: #b3b3ff; }
+:lang(grc) { background-color: #dedeff; }
 
 /* Semitic languages */
 

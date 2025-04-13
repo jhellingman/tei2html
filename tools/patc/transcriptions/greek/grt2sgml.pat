@@ -66,6 +66,13 @@
 "<expan>"           p "<expan>"
 "</expan>"          p "</expan>"
 
+"<pb>               p "<pb>"
+
+% some TEI tags with attributes to skip
+"<pb "              3 "<pb "
+
+
+
 "&"         2 "&"
 
 "a"         p "a"
@@ -656,5 +663,11 @@
 "`"         e "grt2sgml.pat: stand alone `"
 % "["         e "grt2sgml.pat: illegal character ["
 % "]"         e "grt2sgml.pat: illegal character ]"
+
+
+@patterns 3 % skip certain SGML tags in source
+
+">"         1 ">"               % end of tag: jump back
+
 
 @end

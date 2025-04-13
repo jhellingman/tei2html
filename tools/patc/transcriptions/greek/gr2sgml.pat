@@ -416,7 +416,7 @@
 "</ELA>"    0 ";"               % closing Greek early. Forgive.
 "</GR>"     0 ";</foreign>"     % closing Greek early. Forgive.
 "</GRA>"    0 ";"               % closing Greek early. Forgive.
-"</ALS>"     0 ";</foreign>"    % closing Tosk early. Forgive.
+"</ALS>"    0 ";</foreign>"     % closing Tosk early. Forgive.
 " "         1 " "               % something unexpected, also jump back.
 
 @patterns 3 % skip certain SGML tags in source
