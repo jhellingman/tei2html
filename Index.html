@@ -532,49 +532,201 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_introduction">Introduction</a>
 <ul class="sectlevel2">
-<li><a href="#_introduction">Introduction</a></li>
-<li><a href="#_prerequisites_and_installation">Prerequisites and Installation</a></li>
-<li><a href="#_required_downloads">Required Downloads</a></li>
+<li><a href="#_guiding_principles">Guiding Principles</a></li>
+<li><a href="#_sgml_versus_xml">SGML versus XML</a></li>
+<li><a href="#_considerations_for_output_formats">Considerations for Output Formats</a></li>
+<li><a href="#_special_characters_in_sgml_files">Special Characters in SGML files</a></li>
+</ul>
+</li>
+<li><a href="#_prerequisites_and_installation">Prerequisites and Installation</a>
+<ul class="sectlevel2">
+<li><a href="#_running_from_the_command_line">Running from the command line</a></li>
+<li><a href="#_running_interactively">Running interactively</a></li>
+<li><a href="#_running_with_oxygen">Running with Oxygen</a></li>
+</ul>
+</li>
+<li><a href="#_required_downloads">Required Downloads</a>
+<ul class="sectlevel2">
+<li><a href="#_saxon">Saxon</a></li>
+<li><a href="#_java">Java</a></li>
+<li><a href="#_perl">Perl</a></li>
+<li><a href="#_sx_nsgml">SX, NSGML</a></li>
+<li><a href="#_zip">ZIP</a></li>
+<li><a href="#_node_js">Node.js</a></li>
+<li><a href="#_patc">Patc</a></li>
+<li><a href="#_epubcheck">epubcheck</a></li>
+<li><a href="#_prince_xml">Prince XML</a></li>
+<li><a href="#_xsltdoc">XSLTdoc</a></li>
 <li><a href="#_configuration">Configuration</a></li>
-<li><a href="#_processing_steps">Processing Steps</a></li>
-<li><a href="#_configuration_2">Configuration</a></li>
-<li><a href="#_the_tei_header">The TEI Header</a></li>
-<li><a href="#_cover_pages">Cover Pages</a></li>
-<li><a href="#_those_pesky_page_breaks">Those Pesky Page-Breaks</a></li>
-<li><a href="#_figures">Figures</a></li>
-<li><a href="#_tables">Tables</a></li>
-<li><a href="#_notes">Notes</a></li>
-<li><a href="#_mathematical_formulas">Mathematical formulas</a></li>
-<li><a href="#_using_the_rend_attribute">Using the <code>@rend</code> attribute</a></li>
-<li><a href="#_aligned_bilingual_text">Aligned Bilingual Text</a></li>
-<li><a href="#_facsimile_support">Facsimile Support</a></li>
-<li><a href="#_epub3_support">ePub3 Support</a></li>
-<li><a href="#_media_overlays_in_epub3">Media-Overlays in ePub3</a></li>
-<li><a href="#_coding_conventions">Coding Conventions</a></li>
-<li><a href="#_tools">Tools</a>
+</ul>
+</li>
+<li><a href="#_processing_steps">Processing Steps</a>
 <ul class="sectlevel2">
-<li><a href="#_auxiliary_tools">Auxiliary Tools</a></li>
+<li><a href="#_step_1_convert_from_sgml_to_xml_optional">Step 1: Convert from SGML to XML (<em>Optional</em>)</a></li>
+<li><a href="#_step_2_run_saxon_to_generate_html_and_epub">Step 2: Run Saxon to generate HTML and ePub</a></li>
+</ul>
+</li>
+<li><a href="#_configuration_2">Configuration</a>
+<ul class="sectlevel2">
+<li><a href="#_current_status">Current Status</a></li>
+<li><a href="#_future_ideas">Future Ideas</a></li>
+<li><a href="#_things_that_can_be_handled_via_css">Things that can be handled via CSS</a></li>
+</ul>
+</li>
+<li><a href="#_the_tei_header">The TEI Header</a>
+<ul class="sectlevel2">
+<li><a href="#_the_file_description">The File Description</a></li>
+</ul>
+</li>
+<li><a href="#_cover_pages">Cover Pages</a>
+<ul class="sectlevel2">
+<li><a href="#_cover_thumbnail">Cover Thumbnail</a></li>
+<li><a href="#_favicon">favicon</a></li>
+</ul>
+</li>
+<li><a href="#_those_pesky_page_breaks">Those Pesky Page-Breaks</a>
+<ul class="sectlevel2">
+<li><a href="#_encoding">Encoding</a></li>
+<li><a href="#_page_images">Page Images</a></li>
+<li><a href="#_cross_references">Cross-References</a></li>
+</ul>
+</li>
+<li><a href="#_figures">Figures</a>
+<ul class="sectlevel2">
+<li><a href="#_figures_according_to_tei_p3">Figures according to TEI P3</a></li>
+<li><a href="#_figures_according_to_tei_p5">Figures according to TEI P5</a></li>
+</ul>
+</li>
+<li><a href="#_tables">Tables</a>
+<ul class="sectlevel2">
+<li><a href="#_columns">Columns</a></li>
+<li><a href="#_braces">Braces</a></li>
+<li><a href="#_table_processing">Table processing</a></li>
+</ul>
+</li>
+<li><a href="#_notes">Notes</a>
+<ul class="sectlevel2">
+<li><a href="#_footnotes">Footnotes</a></li>
+<li><a href="#_marginal_notes">Marginal notes.</a></li>
+<li><a href="#_table_notes">Table notes.</a></li>
+<li><a href="#_apparatus_notes">Apparatus notes.</a></li>
+</ul>
+</li>
+<li><a href="#_mathematical_formulas">Mathematical formulas</a>
+<ul class="sectlevel2">
+<li><a href="#_requirements">Requirements</a></li>
+<li><a href="#_implementation">Implementation</a></li>
+<li><a href="#_configuration_3">Configuration</a></li>
+<li><a href="#_installation_of_tools">Installation of tools</a></li>
+<li><a href="#_implementation_details">Implementation details</a></li>
+<li><a href="#_open_issues">Open Issues</a></li>
+</ul>
+</li>
+<li><a href="#_using_the_rend_attribute">Using the <code>@rend</code> attribute</a>
+<ul class="sectlevel2">
+<li><a href="#_simple">Simple</a></li>
+<li><a href="#_rendition_ladders">Rendition Ladders</a></li>
+</ul>
+</li>
+<li><a href="#_aligned_bilingual_text">Aligned Bilingual Text</a>
+<ul class="sectlevel2">
+<li><a href="#_excluding_content_from_alignment">Excluding content from alignment</a></li>
+<li><a href="#_aligned_text_from_a_separate_file">Aligned text from a separate file</a></li>
+<li><a href="#_footnotes_in_aligned_texts">Footnotes in aligned texts</a></li>
+<li><a href="#_aligned_verse">Aligned verse</a></li>
+</ul>
+</li>
+<li><a href="#_facsimile_support">Facsimile Support</a>
+<ul class="sectlevel2">
+<li><a href="#_facsimile_element">Facsimile Element</a></li>
+<li><a href="#_the_facs_attribute">The <code>@facs</code> Attribute</a></li>
+<li><a href="#_comparison_of_direct_and_indirect_linking_to_facsimiles">Comparison of direct and indirect linking to facsimiles</a></li>
+<li><a href="#_generated_output">Generated Output</a></li>
+</ul>
+</li>
+<li><a href="#_epub3_support">ePub3 Support</a>
+<ul class="sectlevel2">
+<li><a href="#_things_to_do">Things to do</a></li>
+<li><a href="#_changes_to_the_opf_file">Changes to the .OPF file</a></li>
+<li><a href="#_navigation_document">Navigation Document</a></li>
+<li><a href="#_validation">Validation</a></li>
+<li><a href="#_xhtml">XHTML</a></li>
+</ul>
+</li>
+<li><a href="#_media_overlays_in_epub3">Media-Overlays in ePub3</a>
+<ul class="sectlevel2">
+<li><a href="#_references">References</a></li>
+<li><a href="#_alternative_viewers">Alternative viewers</a></li>
+<li><a href="#_synchronizing_text">Synchronizing Text</a></li>
+<li><a href="#_smil_files">SMIL Files</a></li>
+<li><a href="#_mp3_or_ogg_files">MP3 or OGG Files</a></li>
+<li><a href="#_opf_file">OPF File</a></li>
+<li><a href="#_implementation_in_tei2html">Implementation in <code>tei2html</code></a></li>
+<li><a href="#_todo">TODO</a></li>
+<li><a href="#_implementation_observations">Implementation observations</a></li>
+</ul>
+</li>
+<li><a href="#_coding_conventions">Coding Conventions</a>
+<ul class="sectlevel2">
+<li><a href="#_xslt_domain">XSLT Domain</a></li>
+<li><a href="#_tei_domain">TEI Domain</a></li>
+</ul>
+</li>
+<li><a href="#_tools">Tools</a></li>
+<li><a href="#_auxiliary_tools">Auxiliary Tools</a>
+<ul class="sectlevel2">
+<li><a href="#_the_main_tools">The main tools</a></li>
 <li><a href="#_tools_to_generate_plain_text_files">Tools to generate plain text files</a></li>
 <li><a href="#_tools_for_post_processing_pgdp_output">Tools for post-processing PGDP output</a></li>
 <li><a href="#_tools_for_preparing_texts_for_pgdp">Tools for preparing texts for PGDP</a></li>
-<li><a href="#_merging_texts">Merging Texts</a></li>
-<li><a href="#_checking_a_tei_file">Checking a TEI file</a></li>
-<li><a href="#_generating_a_kwic_index">Generating a KWIC index</a></li>
 </ul>
 </li>
-<li><a href="#_future_ideas_2">Future Ideas</a>
+<li><a href="#_merging_texts">Merging Texts</a>
 <ul class="sectlevel2">
-<li><a href="#_css_stylesheet_redesign_todo">CSS stylesheet redesign [TODO]</a></li>
-<li><a href="#_parsing_css_experimental">Parsing CSS [Experimental]</a></li>
+<li><a href="#_steps">Steps</a></li>
+<li><a href="#_galley_file_support_functions">Galley File Support Functions</a></li>
+</ul>
+</li>
+<li><a href="#_checking_a_tei_file">Checking a TEI file</a>
+<ul class="sectlevel2">
+<li><a href="#_metadata_2">Metadata</a></li>
+<li><a href="#_rendering">Rendering</a></li>
+<li><a href="#_types">Types</a></li>
+<li><a href="#_numbering">Numbering</a></li>
+<li><a href="#_spacing_and_punctuation">Spacing and Punctuation</a></li>
+<li><a href="#_quotation_marks">Quotation Marks</a></li>
+</ul>
+</li>
+<li><a href="#_generating_a_kwic_index">Generating a KWIC index</a>
+<ul class="sectlevel2">
+<li><a href="#_requirements_2">Requirements</a></li>
+<li><a href="#_development">Development</a></li>
+<li><a href="#_having_fun_with_kwics">Having fun with KWICs</a></li>
+</ul>
+</li>
+<li><a href="#_future_ideas_2">Future Ideas</a></li>
+<li><a href="#_css_stylesheet_redesign_todo">CSS stylesheet redesign [TODO]</a>
+<ul class="sectlevel2">
+<li><a href="#_bem_for_epub">BEM for ePub</a></li>
+</ul>
+</li>
+<li><a href="#_parsing_css_experimental">Parsing CSS [Experimental]</a>
+<ul class="sectlevel2">
+<li><a href="#_current_implementation">Current Implementation</a></li>
+<li><a href="#_usage">Usage</a></li>
+<li><a href="#_references_2">References</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 <div id="content">
-<div class="sect2">
-<h3 id="_introduction">Introduction</h3>
+<div class="sect1">
+<h2 id="_introduction">Introduction</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>The TEI format is the standard format for transcribing scholarly texts in humanities. Unlike common word-processing formats, TEI focuses on the semantics of text elements instead of the look-and-feel. This is great for research purposes, as it enables software to answer questions like "give me all citations in Shakespeare where Hamlet uses the past tense," (provided of course somebody has encoded that data) but makes it harder to produce nicely formatted output from the same source. This is where the <code>tei2html</code> stylesheets kick-in.</p>
 </div>
@@ -590,8 +742,8 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="paragraph">
 <p>Originally, <code>tei2html</code> was developed to produce beautiful new editions of public domain texts for Project Gutenberg, but it can also be used for other TEI files.</p>
 </div>
-<div class="sect3">
-<h4 id="_guiding_principles">Guiding Principles</h4>
+<div class="sect2">
+<h3 id="_guiding_principles">Guiding Principles</h3>
 <div class="paragraph">
 <p>The design of <code>tei2html</code> is based on a small set of guiding principles and design decisions. These are some assumptions, that I believe are reasonable to expect when digitizing text for research and preservation.</p>
 </div>
@@ -634,8 +786,8 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <p>As a result of these design decisions, a document can be neatly formatted with CSS with minimal rendering information 'polluting' the TEI master file. Note that to meet ePub restrictions on CSS, no inline (that is, in an attribute on an HTML element) CSS is generated.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_sgml_versus_xml">SGML versus XML</h4>
+<div class="sect2">
+<h3 id="_sgml_versus_xml">SGML versus XML</h3>
 <div class="paragraph">
 <p>Originally, TEI was defined in SGML. Since version P4, this TEI has moved on to XML. XML is a considerably simplified reincarnation of SGML. It does away with much of the complexity of SGML. However, TEI (and TEILite) was originally developed for SGML, and I started using TEI even before XML was conceived.</p>
 </div>
@@ -662,8 +814,8 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </ol>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_considerations_for_output_formats">Considerations for Output Formats</h4>
+<div class="sect2">
+<h3 id="_considerations_for_output_formats">Considerations for Output Formats</h3>
 <div class="paragraph">
 <p>TEI files are typically prepared from pre-existing sources, that is printed books, magazines or other textual works. In those cases, it may be desirable to not only to include the logical content of the work being transcribed, but also to describe the physical appearance of some aspects of the text. In that case, the <code>@rend</code>, <code>@style</code> and <code>@rendition</code> attributes can be used to record those aspects.</p>
 </div>
@@ -702,8 +854,8 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <p>In a few other cases, the transformation may not result in entirely correct results. Always validate the result with tools such as <code>tidy</code> or <code>epubcheck</code>.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_special_characters_in_sgml_files">Special Characters in SGML files</h4>
+<div class="sect2">
+<h3 id="_special_characters_in_sgml_files">Special Characters in SGML files</h3>
 <div class="paragraph">
 <p>For XML files actually used by the XSLT stylesheets, any character encoding supported by XML/XSLT works. For SGML, the options are more limited.</p>
 </div>
@@ -732,8 +884,8 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="paragraph">
 <p>For longer fragments in a non-Latin script, I normally use an ASCII based transliteration scheme, and supply tools (called <code>patc</code>) to convert these to Unicode. For documents completely a non-Latin script, it will probably be better to work with Unicode in a suitable editor (and using XML directly).</p>
 </div>
-<div class="sect4">
-<h5 id="_fractions_entities">Fractions entities</h5>
+<div class="sect3">
+<h4 id="_fraction_entities">Fraction entities</h4>
 <div class="paragraph">
 <p>Fractions of one figure above and below.</p>
 </div>
@@ -748,8 +900,8 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <code>&amp;frac23_100;</code></p>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_special_filling_characters_for_leaders">Special filling characters for leaders</h5>
+<div class="sect3">
+<h4 id="_special_filling_characters_for_leaders">Special filling characters for leaders</h4>
 <div class="paragraph">
 <p><em>Future plan</em></p>
 </div>
@@ -784,16 +936,18 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_prerequisites_and_installation">Prerequisites and Installation</h3>
+</div>
+<div class="sect1">
+<h2 id="_prerequisites_and_installation">Prerequisites and Installation</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>See the page on <a href="Installation.adoc">installation</a>.</p>
 </div>
 <div class="paragraph">
 <p>Note that currently no installer is present, so you will need to get the code from the repository directly.</p>
 </div>
-<div class="sect3">
-<h4 id="_running_from_the_command_line">Running from the command line</h4>
+<div class="sect2">
+<h3 id="_running_from_the_command_line">Running from the command line</h3>
 <div class="paragraph">
 <p>Most of the interaction on the command line is with small Perl scripts that start the actual XSLT processor, and some other scripts.</p>
 </div>
@@ -804,26 +958,28 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <p>The various <code>.jar</code> files (for Saxon and epubcheck), and the SGML catalog files need to be located in a specific subdirectory of the directory where the perl scripts reside.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_running_interactively">Running interactively</h4>
+<div class="sect2">
+<h3 id="_running_interactively">Running interactively</h3>
 <div class="paragraph">
 <p>No easy window-based interface is yet available. I am working on a small HTML application to run the scripts interactively.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_running_with_oxygen">Running with Oxygen</h4>
+<div class="sect2">
+<h3 id="_running_with_oxygen">Running with Oxygen</h3>
 <div class="paragraph">
 <p>You can use the stylesheets with Oxygen, provided your sources are in XML format. Make sure you select an XSLT 3.0 processor to perform the transformation.</p>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_required_downloads">Required Downloads</h3>
+</div>
+<div class="sect1">
+<h2 id="_required_downloads">Required Downloads</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>The <code>tei2html</code> code has a range of dependencies on third-party software. This page lists those.</p>
 </div>
-<div class="sect3">
-<h4 id="_saxon">Saxon</h4>
+<div class="sect2">
+<h3 id="_saxon">Saxon</h3>
 <div class="paragraph">
 <p>An XSLT 3.0 processor is required for <code>tei2html</code>, any XSLT 3.0 processor should work, however, I&#8217;ve developed these stylesheets with Saxon (using the freely available version Saxon HE).</p>
 </div>
@@ -831,8 +987,8 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <p>You should download a reasonable recent version of Saxon-HE product from <a href="http://www.saxonica.com/products.html">saxonica.com</a>. I will take care <code>tei2html</code> will continue to work with the free versions of Saxon, no matter how tempting the additional features in the paid versions are (such as higher order functions, binary file handling, etc.)</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_java">Java</h4>
+<div class="sect2">
+<h3 id="_java">Java</h3>
 <div class="paragraph">
 <p>Saxon-HE requires Java.</p>
 </div>
@@ -843,8 +999,8 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <p>If you do not have Java, you can download it from <a href="http://java.com/en/" class="bare">http://java.com/en/</a></p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_perl">Perl</h4>
+<div class="sect2">
+<h3 id="_perl">Perl</h3>
 <div class="paragraph">
 <p>If you are planning to use the provided Perl scripts to glue things together, you will need a Perl interpreter.</p>
 </div>
@@ -854,8 +1010,8 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="paragraph">
 <p><em>Note</em> Upgrading Strawberry Perl does not work properly: please save-guard local installations in your site directory before upgrading, as the uninstaller will throw those files away.</p>
 </div>
-<div class="sect4">
-<h5 id="_packages_used">Packages used</h5>
+<div class="sect3">
+<h4 id="_packages_used">Packages used</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -904,8 +1060,8 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_sx_nsgml">SX, NSGML</h4>
+<div class="sect2">
+<h3 id="_sx_nsgml">SX, NSGML</h3>
 <div class="paragraph">
 <p><em>Optional, only needed you want to use SGML as source format.</em></p>
 </div>
@@ -926,14 +1082,14 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 the names in the main <code>tei2html.pl</code> script in that case.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_zip">ZIP</h4>
+<div class="sect2">
+<h3 id="_zip">ZIP</h3>
 <div class="paragraph">
 <p>To compress ePub files, you will need a zip utility. <code>tei2html</code> uses <a href="http://www.info-zip.org/Zip.html">info-zip</a> to handle the peculiar requirements of the ePub format. (See e.g., <a href="http://www.snee.com/bobdc.blog/2008/03/creating-epub-files.html">this blog entry on creating ePub files</a>.)</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_node_js">Node.js</h4>
+<div class="sect2">
+<h3 id="_node_js">Node.js</h3>
 <div class="paragraph">
 <p><em>Optional, only needed when you use mathematical formulas in TeX notation.</em></p>
 </div>
@@ -951,8 +1107,8 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 </ul>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_patc">Patc</h4>
+<div class="sect2">
+<h3 id="_patc">Patc</h3>
 <div class="paragraph">
 <p><em>Optional, only needed when you use the transcription schemes for non-Latin scripts I use in SGML.</em></p>
 </div>
@@ -960,8 +1116,8 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 <p>Patc (pattern changer) is a small utility written in C to do multiple find-and-replace actions at once. You will need a C compiler to get it to work. It enables you to execute multiple find-replace actions in an efficient way. Mostly used to change the transliteration of non-Roman scripts I&#8217;ve used. If you don&#8217;t use that, you’ll not need it. (I’ve successfully compiled this on a variety of platforms, including Unix, and Windows; a solution file for Visual Studio 7.0 is included; contact me if you need a Windows binary. A make file for use with linux is also included.)</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_epubcheck">epubcheck</h4>
+<div class="sect2">
+<h3 id="_epubcheck">epubcheck</h3>
 <div class="paragraph">
 <p><em>Optional, only needed if you want to check generated ePubs.</em></p>
 </div>
@@ -972,8 +1128,8 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 <p>This tool also requires Java; the scripts assume you use <code>epubcheck-3.0.1.jar</code>, placed in the tools/lib subdirectory.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_prince_xml">Prince XML</h4>
+<div class="sect2">
+<h3 id="_prince_xml">Prince XML</h3>
 <div class="paragraph">
 <p><em>Optional, only needed if you want generated PDF output.</em></p>
 </div>
@@ -981,14 +1137,13 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 <p>Note that Prince is a commercial product; a free version can be used for strictly private purposes, and downloaded from: <a href="https://www.princexml.com/" class="bare">https://www.princexml.com/</a>. The free version does include a small icon on the first page to promote Prince. Shouldn&#8217;t be a big nuisance.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_xsltdoc">XSLTdoc</h4>
+<div class="sect2">
+<h3 id="_xsltdoc">XSLTdoc</h3>
 <div class="paragraph">
 <p><em>Optional, only needed if you want to browse through the documentation of the code.</em></p>
 </div>
 <div class="paragraph">
 <p>You can clone XSLTdoc (at time of writing version 1.3.3) from <a href="https://github.com/XSLTdoc/XSLTdoc">GitHub</a>, where you can also find the <a href="https://xsltdoc.github.io">documentation</a>.</p>
-</div>
 </div>
 </div>
 <div class="sect2">
@@ -1013,82 +1168,87 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_processing_steps">Processing Steps</h3>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_processing_steps">Processing Steps</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>For my internal processing, I follow a number of steps to go from my master TEI file to HTML or ePub output. These are described here.</p>
 </div>
-<div class="sect3">
-<h4 id="_step_1_convert_from_sgml_to_xml_optional">Step 1: Convert from SGML to XML (<em>Optional</em>)</h4>
+<div class="sect2">
+<h3 id="_step_1_convert_from_sgml_to_xml_optional">Step 1: Convert from SGML to XML (<em>Optional</em>)</h3>
 <div class="paragraph">
 <p>Most of my TEI files are in (old-school) SGML format with the '.tei' extension. This needs to be converted to XML, before XSLT wants to do anything with it.</p>
 </div>
-<div class="sect4">
-<h5 id="_step_1_1_convert_transcriptions_to_sgml_entities">Step 1.1: Convert transcriptions to SGML entities.</h5>
+<div class="sect3">
+<h4 id="_step_1_1_convert_transcriptions_to_sgml_entities">Step 1.1: Convert transcriptions to SGML entities.</h4>
 <div class="paragraph">
 <p>Some of my TEI files include snippets of non-Latin script in various transcription formats. These need to be converted to SGML entities (either named or numeric) before we can actually transform to XML. For this, I use a 'patc' tool that will change such transcriptions. For each transcription, a separate run is needed. The <code>tei2html.pl</code> script will check for such transcriptions, and run the right patc tool as needed. (For most text, this is irrelevant.)</p>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_step_1_2_convert_to_xml">Step 1.2: Convert to XML.</h5>
+<div class="sect3">
+<h4 id="_step_1_2_convert_to_xml">Step 1.2: Convert to XML.</h4>
 <div class="paragraph">
 <p>The actual SGML to XML conversion is achieved by running the James Clark&#8217;s SX tool.</p>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_step_1_3_normalize_case">Step 1.3: Normalize case.</h5>
+<div class="sect3">
+<h4 id="_step_1_3_normalize_case">Step 1.3: Normalize case.</h4>
 <div class="paragraph">
 <p>Use Sebastian Rahtz' <code>tei2tei.xsl</code> stylesheet to use the proper casing for TEI elements. After this step, the TEI should be valid TEI (according to TEI P4) in XML form. The <code>tei2html</code> stylesheets should be able to deal with the text now.</p>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_step_1_5_convert_to_tei_p5_optional">Step 1.5: Convert to TEI P5. (<em>Optional</em>)</h5>
+<div class="sect3">
+<h4 id="_step_1_5_convert_to_tei_p5_optional">Step 1.5: Convert to TEI P5. (<em>Optional</em>)</h4>
 <div class="paragraph">
 <p>Use Sebastian Rahtz' <code>p4top5.xsl</code> stylesheet to convert the TEI P4 to TEI P5. The <code>tei2html</code> stylesheets should still be able to deal with the text, although I&#8217;ve not extensively tested this. The main distinction is that <code>div0</code> elements will have been changed to <code>div1</code> elements, and all underlying numbered <code>divX</code> elements have been 'elevated,' which impacts the appearance and breaking up into chunks when generating ePubs.</p>
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_step_2_run_saxon_to_generate_html_and_epub">Step 2: Run Saxon to generate HTML and ePub</h4>
+<div class="sect2">
+<h3 id="_step_2_run_saxon_to_generate_html_and_epub">Step 2: Run Saxon to generate HTML and ePub</h3>
 <div class="paragraph">
 <p>Now that we have XML, we can apply the XSLT transformation on it. This will result in a single HTML output file. Here, again a few intermediate steps are needed.</p>
 </div>
-<div class="sect4">
-<h5 id="_step_2_1_normalize_tables">Step 2.1: Normalize tables</h5>
+<div class="sect3">
+<h4 id="_step_2_1_normalize_tables">Step 2.1: Normalize tables</h4>
 <div class="paragraph">
 <p>Table handling in TEI and HTML is complicated. To deal with them correctly, we have a separate XSLT stylesheet (<code>normalize-table.xsl</code>) that adds row and column numbers to cells in tables (leaving the rest of the XML untouched). With those numbers present, styling can be applied to tables more reliable. This script will also warn you when you have tables where the number of (effective, after dealing with cells that span multiple rows or cells) columns is different for each row.</p>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_step_2_2_transform_to_html">Step 2.2: Transform to HTML</h5>
+<div class="sect3">
+<h4 id="_step_2_2_transform_to_html">Step 2.2: Transform to HTML</h4>
 <div class="paragraph">
 <p>After the tables have been normalised, we&#8217;re ready to transform to HTML. This is done by the main XSLT stylesheet <code>tei2html.xsl</code>, which pulls in the various partial stylesheets.</p>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_step_2_3_transform_to_epub">Step 2.3: Transform to ePub</h5>
+<div class="sect3">
+<h4 id="_step_2_3_transform_to_epub">Step 2.3: Transform to ePub</h4>
 <div class="paragraph">
 <p>Similar to the conversion to HTML, the conversion to ePub 3.0 is done with the XSLT stylesheet <code>tei2epub.xsl</code>, which re-uses most of the stylesheets used by <code>tei2html.xsl</code>. The results of this transform are placed in a directory which mirrors the internal structure of an ePub archive.</p>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_step_2_4_package_epub">Step 2.4: Package ePub</h5>
+<div class="sect3">
+<h4 id="_step_2_4_package_epub">Step 2.4: Package ePub</h4>
 <div class="paragraph">
 <p>In a final step, the ePub files are compressed into a single zip file, following the conventions of an ePub container.</p>
 </div>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_configuration_2">Configuration</h3>
+</div>
+<div class="sect1">
+<h2 id="_configuration_2">Configuration</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Currently, there are several options to change the generated output. These can be configured by using a file named <code>tei2html.config</code> in which various parameters can be set. If you add such a file to the directory where you TEI file is located, the <code>tei2html.pl</code> perl script will automatically pick it up.</p>
 </div>
 <div class="paragraph">
 <p>It is only necessary to specify those items that differ from the default in your configuration file.</p>
 </div>
-<div class="sect3">
-<h4 id="_current_status">Current Status</h4>
+<div class="sect2">
+<h3 id="_current_status">Current Status</h3>
 <div class="paragraph">
 <p>The default configuration file is given below. Its actual value can be found in the <code>modules/configuration.xsl</code>.</p>
 </div>
@@ -1233,8 +1393,8 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 <p>This can also be found <code>configuration.xsl</code>.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_future_ideas">Future Ideas</h4>
+<div class="sect2">
+<h3 id="_future_ideas">Future Ideas</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1267,8 +1427,8 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 </ul>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_things_that_can_be_handled_via_css">Things that can be handled via CSS</h4>
+<div class="sect2">
+<h3 id="_things_that_can_be_handled_via_css">Things that can be handled via CSS</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1281,8 +1441,10 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_the_tei_header">The TEI Header</h3>
+</div>
+<div class="sect1">
+<h2 id="_the_tei_header">The TEI Header</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>The TEI header (<code>&lt;teiHeader&gt;</code>) contains information about the text and the sources it is derived from. This metadata is grouped in various sections, in which it is often possible to distinguish information related to the electronic file from that related to the original source.</p>
 </div>
@@ -1305,8 +1467,8 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
     <span class="tag">&lt;/teiHeader&gt;</span></code></pre>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_the_file_description">The File Description</h4>
+<div class="sect2">
+<h3 id="_the_file_description">The File Description</h3>
 <div class="paragraph">
 <p>The first element of the TEI header is the file description, <code>&lt;fileDesc&gt;</code>. This contains the most important meta-data in three main elements, the <code>&lt;titleStmt&gt;</code>, <code>&lt;publicationStmt&gt;</code>, and <code>&lt;sourceDesc&gt;</code>. Our template looks like this.</p>
 </div>
@@ -1393,8 +1555,8 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 <div class="paragraph">
 <p>In the <code>&lt;sourceDesc&gt;</code>, the title and author information appears again. This time, you should use the exact title and author names as given on the title page of the original work used to prepare your Project Gutenberg text. If the title on the spine or cover of the book differs, this may be noted, but the title page is leading.</p>
 </div>
-<div class="sect4">
-<h5 id="_extensions_to_tei">Extensions to TEI</h5>
+<div class="sect3">
+<h4 id="_extensions_to_tei">Extensions to TEI</h4>
 <div class="paragraph">
 <p>The <code>@nfc</code> attribute on <code>&lt;title&gt;</code> elements is used to indicate the number of non-filing characters, used when sorting a title. Counted should be all characters up to the character on which the title should be sorted, including spaces.</p>
 </div>
@@ -1420,8 +1582,10 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_cover_pages">Cover Pages</h3>
+</div>
+<div class="sect1">
+<h2 id="_cover_pages">Cover Pages</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Older books where often sold in simple paper covers, often just repeating the information on the title page. It was expected that the buyer of the book would bind it (or more likely have it bound by a professional bookbinder). As a result, covers for older books are not standard, and often do not contain more than a short title on the spine. The practice of selling books in nice decorative covers started in the late nineteenth century. Including the original cover of the book as an illustration in the TEI version is often nice, and is also a great feature for ePub devices, which use cover images to generate thumbnails from.</p>
 </div>
@@ -1451,21 +1615,23 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 <div class="paragraph">
 <p>See also: <a href="http://blog.threepress.org/2009/11/20/best-practices-in-epub-cover-images/" class="bare">http://blog.threepress.org/2009/11/20/best-practices-in-epub-cover-images/</a></p>
 </div>
-<div class="sect3">
-<h4 id="_cover_thumbnail">Cover Thumbnail</h4>
+<div class="sect2">
+<h3 id="_cover_thumbnail">Cover Thumbnail</h3>
 <div class="paragraph">
 <p>Sometimes it makes sense to also have a cover thumbnail which isn&#8217;t just a reduction of the (original) cover page. To do this, just specify (as a hack) <code>cover-thumbnail(imagefile)</code> in the rend attribute of the text element. Similarly, <code>cover-image(imagefile)</code> can be used to specify a cover image that is not part of the original book, for those who like to have both.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_favicon">favicon</h4>
+<div class="sect2">
+<h3 id="_favicon">favicon</h3>
 <div class="paragraph">
 <p>Simply drop an image file named <code>favicon.jpg</code> in the images directory, and <code>tei2html</code> will generate the metadata in the HTML to use it. Use a square image, upto 192 x 192 pixels.</p>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_those_pesky_page_breaks">Those Pesky Page-Breaks</h3>
+</div>
+<div class="sect1">
+<h2 id="_those_pesky_page_breaks">Those Pesky Page-Breaks</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Printed books have pages, and thus page-breaks every couple of hundred words or so. Electronic files do not have this concept, but since pages and page numbers have traditionally been used to refer to passages in books, they can be captured in <code>&lt;pb&gt;</code> elements, which, for good reason, can appear almost anywhere in a TEI document. Here is where the trouble starts.</p>
 </div>
@@ -1479,8 +1645,8 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 </li>
 </ul>
 </div>
-<div class="sect3">
-<h4 id="_encoding">Encoding</h4>
+<div class="sect2">
+<h3 id="_encoding">Encoding</h3>
 <div class="paragraph">
 <p>When a page-break occurs between two divisions, it can be encoded in various was, <em>e.g.</em>, before the closing tag:</p>
 </div>
@@ -1518,14 +1684,14 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 <p>It should be very well possible to write a small XSLT script to normalize this usage, avoiding complications in the other XSLT scripts.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_page_images">Page Images</h4>
+<div class="sect2">
+<h3 id="_page_images">Page Images</h3>
 <div class="paragraph">
 <p>See <a href="FacsimileSupport.adoc">facsimile support</a></p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_cross_references">Cross-References</h4>
+<div class="sect2">
+<h3 id="_cross_references">Cross-References</h3>
 <div class="paragraph">
 <p>As mentioned, cross-references in printed books often reference to page numbers. The easiest way to encode this is to do something like this:</p>
 </div>
@@ -1591,10 +1757,12 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 </div>
 </div>
 </div>
+</div>
+<div class="sect1">
+<h2 id="_figures">Figures</h2>
+<div class="sectionbody">
 <div class="sect2">
-<h3 id="_figures">Figures</h3>
-<div class="sect3">
-<h4 id="_figures_according_to_tei_p3">Figures according to TEI P3</h4>
+<h3 id="_figures_according_to_tei_p3">Figures according to TEI P3</h3>
 <div class="paragraph">
 <p>Currently, <code>tei2html</code> supports figures following the TEI P3-model, with some modifications.</p>
 </div>
@@ -1605,17 +1773,16 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 <p>The way the image itself was left somewhat implementation dependent. Within the structure of SGML, it could be specified as an entity, which was hardly supported anywhere. <code>tei2html</code> worked around this by deriving the image file from the <code>@id</code>, using an additional attribute <code>@url</code>, or placing the image file name in a rendition ladder in the <code>@rend</code> attribute.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_figures_according_to_tei_p5">Figures according to TEI P5</h4>
+<div class="sect2">
+<h3 id="_figures_according_to_tei_p5">Figures according to TEI P5</h3>
 <div class="paragraph">
 <p>TEI P5 revised the figure model, introducing a graphic element, and allowing multiple graphics to be part of a single figure. This better matches with practices in books, but requires a revision of the code.</p>
 </div>
 <div class="paragraph">
 <p>The new model allows multiple graphics in a figure and specifies the attribute <code>@url</code> as the way to specify the image.</p>
 </div>
-</div>
 <div class="sect3">
-<h4 id="_adjustments_to_code">Adjustments to Code</h4>
+<h4 id="_adjustments_needed_for_tei_p5">Adjustments needed for TEI P5</h4>
 <div class="paragraph">
 <p>The current code should remain functional for existing texts.</p>
 </div>
@@ -1631,8 +1798,11 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_tables">Tables</h3>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_tables">Tables</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Tables are supported in <code>tei2html</code> with the following features:</p>
 </div>
@@ -1658,8 +1828,8 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 </li>
 </ul>
 </div>
-<div class="sect3">
-<h4 id="_columns">Columns</h4>
+<div class="sect2">
+<h3 id="_columns">Columns</h3>
 <div class="paragraph">
 <p>In addition to the TEI model, <code>tei2html</code> supports column definitions. These can be used to apply styling to all cells in a column. The following elements are defined:</p>
 </div>
@@ -1673,14 +1843,14 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 <p>Note that the <code>@rend</code> value <code>align(decimal)</code> triggers some special processing when generating HTML. Since HTML does not directly support alignment on the decimal separator, any column with <code>align(decimal)</code> will be split into two columns, with in the first the integer part of the numbers, and in the second the fractional part. CSS is used to make those parts align as expected.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_braces">Braces</h4>
+<div class="sect2">
+<h3 id="_braces">Braces</h3>
 <div class="paragraph">
 <p>Sometimes, rows are preceded by a tall brace. <code>tei2html</code> will automatically generate HTML to include an image of a tall brace when a cell spans more than one row and only includes a single brace character.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_table_processing">Table processing</h4>
+<div class="sect2">
+<h3 id="_table_processing">Table processing</h3>
 <div class="paragraph">
 <p><code>tei2html</code> cannot directly process tables correctly. A number of pre-processing steps are required to correctly deal with the complexities tables introduce. These are handled in the xslt file <code>normalize-table.xsl</code>, which includes code to determine the correct column of each cell (taking into consideration spanned rows and columns) and the special handling of decimal alignment. The <code>tei2html.pl</code> perl script normally applies this transform to the XML before applying the main transform.</p>
 </div>
@@ -1689,8 +1859,10 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_notes">Notes</h3>
+</div>
+<div class="sect1">
+<h2 id="_notes">Notes</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p><code>tei2html</code> supports various types of notes, that is:</p>
 </div>
@@ -1716,8 +1888,8 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 <div class="paragraph">
 <p>Each type is handled in a slightly different way.</p>
 </div>
-<div class="sect3">
-<h4 id="_footnotes">Footnotes</h4>
+<div class="sect2">
+<h3 id="_footnotes">Footnotes</h3>
 <div class="paragraph">
 <p>Notes, given in the element <code>&lt;note&gt;</code> are, by default, considered footnotes. That can be made explicit by adding <code>@place=&quot;foot&quot;</code></p>
 </div>
@@ -1737,8 +1909,8 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 <p>If you want to override the automatically assigned note number, you can provide an alternative marker with <code>@rend=&quot;note-marker(*)&quot;</code>. Note that this will <em>not</em> change the generated number of other notes, that is, the note will still be counted [TODO: fix this].</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_marginal_notes">Marginal notes.</h4>
+<div class="sect2">
+<h3 id="_marginal_notes">Marginal notes.</h3>
 <div class="paragraph">
 <p><code>tei2html</code> support various types of marginal notes. The way they are placed in the margin in the HTML output is defined by various CSS rules. To indicate a note is a marginal note, use the <code>@place</code> attribute. This can have the following values:</p>
 </div>
@@ -1768,8 +1940,8 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 <p>Some care is need to prevent marginal notes to overlap each other. Simply don&#8217;t place them too close to each other (although that may not be an option when digitizing pre-existing books). It may help to widen the margin if needed.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_table_notes">Table notes.</h4>
+<div class="sect2">
+<h3 id="_table_notes">Table notes.</h3>
 <div class="paragraph">
 <p>Notes that appear inside a table can be marked with <code>@place=&quot;table&quot;</code>. In that case, the notes will be rendered directly below the table, and numbered with lower-case letters, starting anew for each table.</p>
 </div>
@@ -1777,8 +1949,8 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 <p>Notes in tables not marked as table notes will be treated as footnotes to the division the table appears in.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_apparatus_notes">Apparatus notes.</h4>
+<div class="sect2">
+<h3 id="_apparatus_notes">Apparatus notes.</h3>
 <div class="paragraph">
 <p>Text-critical works often include numerous notes linked to words or lines in the source text, indicating variant readings of the text in one or more editions being compared.</p>
 </div>
@@ -1796,10 +1968,12 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 </div>
 </div>
 </div>
+</div>
+<div class="sect1">
+<h2 id="_mathematical_formulas">Mathematical formulas</h2>
+<div class="sectionbody">
 <div class="sect2">
-<h3 id="_mathematical_formulas">Mathematical formulas</h3>
-<div class="sect3">
-<h4 id="_requirements">Requirements</h4>
+<h3 id="_requirements">Requirements</h3>
 <div class="paragraph">
 <p>Use the suggested TEI notation: <code>&lt;formula id=f1 notation=&quot;TeX&quot;&gt;$E = mc^2$&lt;/formula&gt;</code> (see <a href="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/FT.html#FTFOR">TEI guidelines</a>).</p>
 </div>
@@ -1817,8 +1991,8 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 </ul>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_implementation">Implementation</h4>
+<div class="sect2">
+<h3 id="_implementation">Implementation</h3>
 <div class="paragraph">
 <p>The Project Gutenberg prohibition on active content make the direct use of MathJax impossible, so we need to follow a more complicated way to include mathematical formulas in text intended for PG.</p>
 </div>
@@ -1845,8 +2019,8 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 <p>The script <code>convertFormulas.pl</code> will convert these files to files named <code>(inline|display)-&lt;ID&gt;.svg</code>. This script will use node.js with mathjax-node-cli to produce HTML, SVG, and MathML files from the exported formulas.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_configuration_3">Configuration</h4>
+<div class="sect2">
+<h3 id="_configuration_3">Configuration</h3>
 <div class="paragraph">
 <p>The following configuration options are available:</p>
 </div>
@@ -1886,8 +2060,8 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 </ul>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_installation_of_tools">Installation of tools</h4>
+<div class="sect2">
+<h3 id="_installation_of_tools">Installation of tools</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -1902,10 +2076,10 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 </ol>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_implementation_details">Implementation details</h3>
 <div class="sect3">
-<h4 id="_implementation_details">Implementation details</h4>
-<div class="sect4">
-<h5 id="_baseline_correction">Baseline correction</h5>
+<h4 id="_baseline_correction">Baseline correction</h4>
 <div class="paragraph">
 <p>The baseline is stored in the SVG files generated by MathJax. They can be read from the SVG file, using Xpath <code>/svg/@style</code>, and then parsing for the CSS value <code>vertical-align</code>. Similarly, the width and height can be retrieved from <code>/svg/@width</code> and <code>/svg/@height/</code>, and need to be set in CSS. All this CSS should apply to the <code>&lt;img&gt;</code> tag, to make sure that the SVG image is rendered at the correct size and on the proper baseline.</p>
 </div>
@@ -1926,20 +2100,20 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 </ol>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_deduplication">Deduplication</h5>
+<div class="sect3">
+<h4 id="_deduplication">Deduplication</h4>
 <div class="paragraph">
 <p>Often, the same formula appears multiple times in the same document. It makes sense to only generate a single SVG file for each formula, and include it multiple times.</p>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_trivial_math">Trivial math</h5>
+<div class="sect3">
+<h4 id="_trivial_math">Trivial math</h4>
 <div class="paragraph">
 <p>Very often, a single letter or digit is (correctly) marked as an equation. To avoid needless use of MathJax, we can simply render those trivial expressions directly in HTML, and thus for some texts reduce the number of invocations of MathJax dramatically. Be aware that in this case, the appearance of letters in such trivial equations may differ from those in more complex equations, due to differences in font rendering and the way SVG is handled by browsers.</p>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_labeled_equations">Labeled equations</h5>
+<div class="sect3">
+<h4 id="_labeled_equations">Labeled equations</h4>
 <div class="paragraph">
 <p>Numbered equations have a label (between parentheses) set flush-right. Here we use the label encoded on <code>@n</code> attribute, format it, and place it flush right. The configuration setting <code>math.label.position</code> (with possible values <code>left</code> and <code>right</code>) can be used to determine whether the label should go to the left or right edge of the text. (Note that to maintain centering, a label will be generated on both sides of the display formula in any case, and either the right or the left will be made invisible.)</p>
 </div>
@@ -1948,8 +2122,8 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_open_issues">Open Issues</h4>
+<div class="sect2">
+<h3 id="_open_issues">Open Issues</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -1965,16 +2139,18 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_using_the_rend_attribute">Using the <code>@rend</code> attribute</h3>
+</div>
+<div class="sect1">
+<h2 id="_using_the_rend_attribute">Using the <code>@rend</code> attribute</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>The <code>@rend</code> attribute is a simple hook into the TEI structure to document or specify how features are rendered. Within <code>tei2html</code> they can be used to achieve certain formatting effects. This feature should be used with moderation. Several ways of using the <code>@rend</code> attribute can be distinguished.</p>
 </div>
 <div class="paragraph">
 <p>Note that according to the TEI Guidelines, the rendering attributes are intended to describe the presentation of the source material, and are not to prescribe any presentation of the output. Since the intention here is to faithfully reproduce text, this distinction is not really important for <code>tei2html</code>.</p>
 </div>
-<div class="sect3">
-<h4 id="_simple">Simple</h4>
+<div class="sect2">
+<h3 id="_simple">Simple</h3>
 <div class="paragraph">
 <p>Simple rendering attribute values provide single keywords to provide a rendering hint. This type of usage is sufficient most of the time. The pre-defined rendering keywords are often element specific, and should be considered as hints only, that is, ignoring the rend attribute should not render the document illegible.</p>
 </div>
@@ -2021,13 +2197,13 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 </tbody>
 </table>
 </div>
-<div class="sect3">
-<h4 id="_rendition_ladders">Rendition Ladders</h4>
+<div class="sect2">
+<h3 id="_rendition_ladders">Rendition Ladders</h3>
 <div class="paragraph">
 <p>A slightly more powerful mechanism is provided by so-called 'rendering ladders', in which a number of key-value pairs are provided. These take the form <code>key(value)</code>, and multiple can be present in a <code>@rend</code> attribute. They are either translated to CSS, or given a specific meaning, sometimes depending on the element they are applied to.</p>
 </div>
-<div class="sect4">
-<h5 id="_css_equivalents">CSS equivalents</h5>
+<div class="sect3">
+<h4 id="_css_equivalents">CSS equivalents</h4>
 <div class="paragraph">
 <p>In most cases, rendition ladders are one-on-one translated to equivalent CSS rules. For example, the following snippet of TEI:</p>
 </div>
@@ -2056,8 +2232,8 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 <p>Note that if the same value for the <code>@rend</code> attribute is used multiple times, only one CSS rule will be generated matching all occurrences (and the same class attribute will be used on each of them).</p>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_special_interpretations">Special interpretations</h5>
+<div class="sect3">
+<h4 id="_special_interpretations">Special interpretations</h4>
 <div class="paragraph">
 <p>In a number of places, rendition ladders are interpreted by <code>tei2html</code> directly.</p>
 </div>
@@ -2161,14 +2337,14 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 </tbody>
 </table>
 </div>
-<div class="sect4">
-<h5 id="_using_style_and_rendition">Using <code>@style</code> and <code>@rendition</code></h5>
+<div class="sect3">
+<h4 id="_using_style_and_rendition">Using <code>@style</code> and <code>@rendition</code></h4>
 <div class="paragraph">
 <p>As an alternative to the <code>@rend</code> attribute, the current TEI guidelines also provide <code>@style</code> and <code>@rendition</code> to define presentation in a formally defined language. <code>tei2html</code> assumes that is CSS. See the <a href="http://www.tei-c.org/release/doc/tei-p5-doc/en/html/ref-att.global.rendition.html">TEI guidelines on rendition attributes</a>. Unlike the values of <code>@rend</code>, the specified CSS values are not interpreted at all, but passed to the output CSS directly.</p>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_directionality">Directionality</h5>
+<div class="sect3">
+<h4 id="_directionality">Directionality</h4>
 <div class="paragraph">
 <p>Since ePub does not allow CSS to be used for directionality, but requires that the HTML <code>@dir</code> attribute is used, the following <code>@rend</code> values are translated to a <code>@dir</code> attribute in HTML.</p>
 </div>
@@ -2183,8 +2359,8 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 </ol>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_implementation_notes">Implementation notes:</h5>
+<div class="sect3">
+<h4 id="_implementation_notes">Implementation notes:</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2240,8 +2416,10 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_aligned_bilingual_text">Aligned Bilingual Text</h3>
+</div>
+<div class="sect1">
+<h2 id="_aligned_bilingual_text">Aligned Bilingual Text</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>When you have a bilingual text, it is nice to show them side-by-side, such that the translations are aligned. Books sometimes places such bilingual texts on facing pages, but in an unpaged medium, that is not an option.</p>
 </div>
@@ -2275,8 +2453,8 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 <div class="paragraph">
 <p>When running <code>tei2html</code>, it will generate a table, with the text of the first division on the left, and the text of the second division on the right. Table cells will be used to make sure matching elements are aligned. The code understands sub-divisions and will recurse into them, still using a single table.</p>
 </div>
-<div class="sect3">
-<h4 id="_excluding_content_from_alignment">Excluding content from alignment</h4>
+<div class="sect2">
+<h3 id="_excluding_content_from_alignment">Excluding content from alignment</h3>
 <div class="paragraph">
 <p>Sometimes, you want to exclude certain elements from the alignment (e.g., non-translated sections, headings, or figures). To do so, you have to include the element on both sides with the same <code>@n</code> attribute, and give one the following <code>@rend</code> attribute:</p>
 </div>
@@ -2289,8 +2467,8 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 <p>The other element should remain empty (as it will be skipped).</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_aligned_text_from_a_separate_file">Aligned text from a separate file</h4>
+<div class="sect2">
+<h3 id="_aligned_text_from_a_separate_file">Aligned text from a separate file</h3>
 <div class="paragraph">
 <p>It is also possible to align texts kept in separate files. To do so, use the following <code>@rend</code> attribute:</p>
 </div>
@@ -2303,14 +2481,14 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 <p>When using the perl scripts that come with <code>tei2html</code>, the to-be-aligned sections will be included in an intermediate document in a pre-processing step (in <code>include.xsl</code>), which replaces <code>align-with-document</code> with <code>align-with</code> and places the to-be aligned section directly after the section it will be aligned with. By doing so, generated tables of contents, lists of issues in the colophon, and footnotes will be processed correctly. The <code>tei2html</code> xslt stylesheeets can also do this directly, but with limited support for those additional items.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_footnotes_in_aligned_texts">Footnotes in aligned texts</h4>
+<div class="sect2">
+<h3 id="_footnotes_in_aligned_texts">Footnotes in aligned texts</h3>
 <div class="paragraph">
 <p>Footnotes in aligned text will be placed at the bottom of the column they appear in. If footnotes are present in both aligned texts, both sides will have footnotes.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_aligned_verse">Aligned verse</h4>
+<div class="sect2">
+<h3 id="_aligned_verse">Aligned verse</h3>
 <div class="paragraph">
 <p>When aligning verses (or actually line-groups, encoded with the <code>lg</code> element), there is no need to number matching lines with a <code>@n</code> attribute. However, the number of items in the line-groups needs to match. Again to align two line-groups, on one of the line-groups add the following <code>@rend</code> attribute:</p>
 </div>
@@ -2324,8 +2502,10 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_facsimile_support">Facsimile Support</h3>
+</div>
+<div class="sect1">
+<h2 id="_facsimile_support">Facsimile Support</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>TEI P5 contains a <a href="http://www.tei-c.org/release/doc/tei-p5-doc/en/html/ref-facsimile.html">facsimile element</a> to represent scanned documents, as well as some other features to better support facsimiles. These features can be used to link to the original scans.</p>
 </div>
@@ -2344,8 +2524,8 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 <div class="paragraph">
 <p>All combined, this gives several options to take into account when dealing with facsimile editions.</p>
 </div>
-<div class="sect3">
-<h4 id="_facsimile_element">Facsimile Element</h4>
+<div class="sect2">
+<h3 id="_facsimile_element">Facsimile Element</h3>
 <div class="paragraph">
 <p>The <code>facsimile</code> element is a top-level element, that describes a series of page images, and can stand independently of the transcribed text. This allows to specify just the metadata (in the Header) and the scans, to produce a digital facsimile.</p>
 </div>
@@ -2357,8 +2537,8 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_facs_attribute"><code>@facs</code> Attribute</h4>
+<div class="sect2">
+<h3 id="_the_facs_attribute">The <code>@facs</code> Attribute</h3>
 <div class="paragraph">
 <p>The <code>@facs</code> attribute on <code>pb</code> elements can be used to point to scanned images of transcribed pages. This can be used to either link to some external source of page images (for example in the Internet Archive), or to link to an internal set of images (kept in a page-images subdirectory, for example).</p>
 </div>
@@ -2388,10 +2568,10 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 <p>The two ways should not be combined. Currently, the code only allows the "direct" way of linking to page images.</p>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_comparison_of_direct_and_indirect_linking_to_facsimiles">Comparison of direct and indirect linking to facsimiles</h3>
 <div class="sect3">
-<h4 id="_comparison_of_direct_and_indirect_linking_to_facsimiles">Comparison of direct and indirect linking to facsimiles</h4>
-<div class="sect4">
-<h5 id="_direct">Direct</h5>
+<h4 id="_direct">Direct</h4>
 <div class="paragraph">
 <p>Generate output wrapper file for each <code>pb</code>-element. <code>[DONE]</code></p>
 </div>
@@ -2405,8 +2585,8 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 <p>Non-transcribed pages cannot be included (or we should encode additional <code>pb</code>-elements for those pages).</p>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_indirect">Indirect</h5>
+<div class="sect3">
+<h4 id="_indirect">Indirect</h4>
 <div class="paragraph">
 <p>Generate output wrapper file for each <code>graphic</code>-element. <code>[DONE]</code></p>
 </div>
@@ -2424,10 +2604,10 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_generated_output">Generated Output</h3>
 <div class="sect3">
-<h4 id="_generated_output">Generated Output</h4>
-<div class="sect4">
-<h5 id="_html">HTML</h5>
+<h4 id="_html">HTML</h4>
 <div class="paragraph">
 <p>The output consists of a series of HTML pages, one per page, with some metadata in the heading of the page, and some navigational aids to conveniently jump to another page.</p>
 </div>
@@ -2458,8 +2638,8 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 <p>For each <code>pb</code>-element for which a <code>@facs</code> attribute is present, a link will be generated to the wrapper file, decorated with a facsimile page-image icon.</p>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_things_to_show">Things to show</h5>
+<div class="sect3">
+<h4 id="_things_to_show">Things to show</h4>
 <div class="paragraph">
 <p>In header</p>
 </div>
@@ -2516,8 +2696,8 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 </ul>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_epub">ePub</h5>
+<div class="sect3">
+<h4 id="_epub">ePub</h4>
 <div class="paragraph">
 <p>Similar to HTML, taking into account additions to Spine, metadata, etc.</p>
 </div>
@@ -2537,8 +2717,10 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_epub3_support">ePub3 Support</h3>
+</div>
+<div class="sect1">
+<h2 id="_epub3_support">ePub3 Support</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>The ePub 3 standard is a broad overhaul of ePub, and adds a lot of important features to ePub, including support for HTML5 and CSS3, better support for multilingual documents, etc.</p>
 </div>
@@ -2586,8 +2768,8 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 <div class="paragraph">
 <p>Features not within current scope are JavaScript support (we like to keep our books passive) and media overlays.</p>
 </div>
-<div class="sect3">
-<h4 id="_things_to_do">Things to do</h4>
+<div class="sect2">
+<h3 id="_things_to_do">Things to do</h3>
 <div class="paragraph">
 <p>For <code>tei2html</code> to support ePub 3.0 we need to do add some new information to our ePub files. In most cases, that information can easily be derived from the existing TEI files, so no changes to data-files will be required.</p>
 </div>
@@ -2621,10 +2803,10 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 </ul>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_changes_to_the_opf_file">Changes to the .OPF file</h3>
 <div class="sect3">
-<h4 id="_changes_to_the_opf_file">Changes to the .OPF file</h4>
-<div class="sect4">
-<h5 id="_metadata">Metadata</h5>
+<h4 id="_metadata">Metadata</h4>
 <div class="paragraph">
 <p>New metadata uses the <code>&lt;meta&gt;</code> tag (samples taken from draft ePub 3.0 specification).</p>
 </div>
@@ -2644,7 +2826,7 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
     <span class="tag">&lt;meta</span> <span class="attribute-name">about</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">#src-id</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">property</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">scheme</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>isbn<span class="tag">&lt;/meta&gt;</span>
 
     <span class="tag">&lt;meta</span> <span class="attribute-name">property</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">dcterms:title</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">title</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>Norwegian Wood<span class="tag">&lt;/meta&gt;</span>
-    <span class="tag">&lt;meta</span> <span class="attribute-name">about</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">#title</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">property</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">alternate-script</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">xml:lang</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">ja</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>ノルウェイの森<span class="tag">&lt;/meta&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="attribute-name">about</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">#title</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">property</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">alternate-script</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">xml:lang</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">ja</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>???????<span class="tag">&lt;/meta&gt;</span>
     <span class="tag">&lt;meta</span> <span class="attribute-name">about</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">#title</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">property</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">title-type</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>primary<span class="tag">&lt;/meta&gt;</span>
 
     <span class="tag">&lt;meta</span> <span class="attribute-name">property</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">dcterms:modified</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>2011-01-01T12:00:00Z<span class="tag">&lt;/meta&gt;</span>
@@ -2652,7 +2834,7 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
     <span class="tag">&lt;meta</span> <span class="attribute-name">property</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">page-progression-direction</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>ltr<span class="tag">&lt;/meta&gt;</span>
 
     <span class="tag">&lt;meta</span> <span class="attribute-name">property</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">dcterms:creator</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">creator</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>Haruki Murakami<span class="tag">&lt;/meta&gt;</span>
-    <span class="tag">&lt;meta</span> <span class="attribute-name">about</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">#creator</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">property</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">alternate-script</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">xml:lang</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">ja</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>村上 春樹<span class="tag">&lt;/meta&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="attribute-name">about</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">#creator</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">property</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">alternate-script</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">xml:lang</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">ja</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>?? ??<span class="tag">&lt;/meta&gt;</span>
     <span class="tag">&lt;meta</span> <span class="attribute-name">about</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">#creator</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">property</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">file-as</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>Murakami, Haruki<span class="tag">&lt;/meta&gt;</span>
     <span class="tag">&lt;meta</span> <span class="attribute-name">about</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">#creator</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">property</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">role</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>aut<span class="tag">&lt;/meta&gt;</span>
 <span class="tag">&lt;/metadata&gt;</span></code></pre>
@@ -2688,8 +2870,8 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 <p>Results in a Package ID: <code>urn:uuid:A1B0D67E-2E81-4DF5-9E67-A64CBE366809@2011-01-01T12:00:00Z</code>.</p>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_manifest">Manifest</h5>
+<div class="sect3">
+<h4 id="_manifest">Manifest</h4>
 <div class="paragraph">
 <p>The manifest now has <a href="http://idpf.org/epub/30/spec/epub30-publications.html#sec-item-property-values">manifest item properties</a>, to specify specific roles of the items listed. This can be used to indicate what is the navigation document, and cover-images. This is also required if certain features are used in an element (e.g., mathml, scripted, remove-content, SVG).</p>
 </div>
@@ -2702,20 +2884,20 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_navigation_document">Navigation Document</h4>
+<div class="sect2">
+<h3 id="_navigation_document">Navigation Document</h3>
 <div class="paragraph">
 <p>The navigation document is now a valid <code>XHTML</code> page, wrapped in the <code>&lt;nav&gt;</code> element.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_validation">Validation</h4>
+<div class="sect2">
+<h3 id="_validation">Validation</h3>
 <div class="paragraph">
 <p>See this <a href="https://web.archive.org/web/20111221091114/blog.threepress.org/2011/06/13/validating-epub-3-today/">short article originally from threepress</a>.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_xhtml">XHTML</h4>
+<div class="sect2">
+<h3 id="_xhtml">XHTML</h3>
 <div class="paragraph">
 <p>Will need to generate valid XHTML, which means:</p>
 </div>
@@ -2728,13 +2910,15 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_media_overlays_in_epub3">Media-Overlays in ePub3</h3>
+</div>
+<div class="sect1">
+<h2 id="_media_overlays_in_epub3">Media-Overlays in ePub3</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Based on a little reverse engineering of a working book (with the freely available Azardi ePub reader; also tested output with Tobi, which correctly picks-up the files, and the Readium app for Chrome. Other readers remain to be tested).</p>
 </div>
-<div class="sect3">
-<h4 id="_references">References</h4>
+<div class="sect2">
+<h3 id="_references">References</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -2764,8 +2948,8 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 </ul>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_alternative_viewers">Alternative viewers</h4>
+<div class="sect2">
+<h3 id="_alternative_viewers">Alternative viewers</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -2777,8 +2961,8 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 </ul>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_synchronizing_text">Synchronizing Text</h4>
+<div class="sect2">
+<h3 id="_synchronizing_text">Synchronizing Text</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -2796,8 +2980,8 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 </ul>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_smil_files">SMIL Files</h4>
+<div class="sect2">
+<h3 id="_smil_files">SMIL Files</h3>
 <div class="paragraph">
 <p>SMIL files have a structure as given below, and must be placed in the same directory as the referenced HTML file.</p>
 </div>
@@ -2822,16 +3006,16 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_mp3_or_ogg_files">MP3 or OGG Files</h4>
+<div class="sect2">
+<h3 id="_mp3_or_ogg_files">MP3 or OGG Files</h3>
 <div class="paragraph">
 <p>The actual audio files are in a subdirectory called <code>audio</code>.</p>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_opf_file">OPF File</h3>
 <div class="sect3">
-<h4 id="_opf_file">OPF File</h4>
-<div class="sect4">
-<h5 id="_metadata_section">Metadata section</h5>
+<h4 id="_metadata_section">Metadata section</h4>
 <div class="paragraph">
 <p>Add a number of media overlay metadata items; they reference items in the manifest.</p>
 </div>
@@ -2847,8 +3031,8 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 <p>Except for the narrator, these items are derived from the <code>.smil</code> files related to each section.</p>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_manifest_section">Manifest section</h5>
+<div class="sect3">
+<h4 id="_manifest_section">Manifest section</h4>
 <div class="paragraph">
 <p>Add the <code>.smil</code> and audio files added to the ePub container:</p>
 </div>
@@ -2873,8 +3057,8 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_implementation_in_tei2html">Implementation in <code>tei2html</code></h4>
+<div class="sect2">
+<h3 id="_implementation_in_tei2html">Implementation in <code>tei2html</code></h3>
 <div class="paragraph">
 <p>Currently, there is no support for SMIL types of overlay in TEI. We can solve this most conveniently by adding a <code>rend</code> attribute to a division, indicating the <code>.smil</code> file to use as an overlay.</p>
 </div>
@@ -2890,8 +3074,8 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 <p>All this is handled in the file <code>tei2opf.xml</code>.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_todo">TODO</h4>
+<div class="sect2">
+<h3 id="_todo">TODO</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -2903,8 +3087,8 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 </ul>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_implementation_observations">Implementation observations</h4>
+<div class="sect2">
+<h3 id="_implementation_observations">Implementation observations</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -2926,27 +3110,29 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 </div>
 </div>
 </div>
+</div>
+<div class="sect1">
+<h2 id="_coding_conventions">Coding Conventions</h2>
+<div class="sectionbody">
 <div class="sect2">
-<h3 id="_coding_conventions">Coding Conventions</h3>
-<div class="sect3">
-<h4 id="_xslt_domain">XSLT Domain</h4>
+<h3 id="_xslt_domain">XSLT Domain</h3>
 <div class="paragraph">
 <p>In the XSLT domain, the main naming convention uses dashes, so we use dashes for names of templates, modes, etc., except where such names directly reflect elements from the TEI domain that use <em>camelCase</em>.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_tei_domain">TEI Domain</h4>
+<div class="sect2">
+<h3 id="_tei_domain">TEI Domain</h3>
 <div class="paragraph">
 <p>In the TEI domain, the main naming convention is <em>camelCase</em>, so for names primarily used in a TEI context, we follow that.</p>
 </div>
-<div class="sect4">
-<h5 id="_use_of_the_type_attribute">Use of the <code>@type</code> attribute</h5>
+<div class="sect3">
+<h4 id="_use_of_the_type_attribute">Use of the <code>@type</code> attribute</h4>
 <div class="paragraph">
 <p>The <code>@type</code> attribute can indicate a subclass or special use of a certain element.</p>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_special_values">Special values</h5>
+<div class="sect3">
+<h4 id="_special_values">Special values</h4>
 <div class="paragraph">
 <p>The following table gives special values for the <code>@type</code> attribute in various contexts. These are
 handled in a special way when processing the TEI file.</p>
@@ -3310,14 +3496,21 @@ handled in a special way when processing the TEI file.</p>
 </div>
 </div>
 </div>
+</div>
 <div class="sect1">
 <h2 id="_tools">Tools</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_auxiliary_tools">Auxiliary Tools</h3>
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_auxiliary_tools">Auxiliary Tools</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Besides the main XSLT scripts, <code>tei2html</code> includes Perl scripts for various tasks. Many of these are quick hacks to get things done.</p>
 </div>
+<div class="sect2">
+<h3 id="_the_main_tools">The main tools</h3>
 <div class="sect3">
 <h4 id="_tei2html_pl">tei2html.pl</h4>
 <div class="paragraph">
@@ -3467,15 +3660,18 @@ brackets.</p>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_merging_texts">Merging Texts</h3>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_merging_texts">Merging Texts</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Larger works were often issued in multi-volume sets, and as a result often also encoded as separate TEI files. However, in files do not have the restrictions of physical bound volumes, and it is often beneficial to merge two or more TEI files into a single TEI file. This will help in particular when there are a lot of internal cross-references between the volumes, such as will happen with an index (which often appears in the last volume).</p>
 </div>
+<div class="sect2">
+<h3 id="_steps">Steps</h3>
 <div class="sect3">
-<h4 id="_steps">Steps</h4>
-<div class="sect4">
-<h5 id="_1_create_an_xslt_galley_file">1. Create an XSLT 'galley' file</h5>
+<h4 id="_1_create_an_xslt_galley_file">1. Create an XSLT 'galley' file</h4>
 <div class="paragraph">
 <p>The idea is to create an XSLT stylesheet that will merge the individual volumes, and provide them with a new TEI-header (which in turn can also be put together from elements pulled from the TEI-header of one or more of the source TEI files. Some things to consider:</p>
 </div>
@@ -3496,21 +3692,21 @@ brackets.</p>
 </ul>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_2_run_the_xslt_galley_file">2. Run the XSLT galley file</h5>
+<div class="sect3">
+<h4 id="_2_run_the_xslt_galley_file">2. Run the XSLT galley file</h4>
 <div class="paragraph">
 <p>Here we run XSLT over the galley file to create a new TEI file. In this step we will collect the content, and put it together to form a new single TEI file.</p>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_3_use_the_combined_file_as_source">3. Use the combined file as source</h5>
+<div class="sect3">
+<h4 id="_3_use_the_combined_file_as_source">3. Use the combined file as source</h4>
 <div class="paragraph">
 <p>Here we run XSLT again to perform the conversion to the final output format, on the output of step 2 above.</p>
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_galley_file_support_functions">Galley File Support Functions</h4>
+<div class="sect2">
+<h3 id="_galley_file_support_functions">Galley File Support Functions</h3>
 <div class="paragraph">
 <p>Most of the hard work happens in the creation of the galley file. For this a number of support functions are needed.</p>
 </div>
@@ -3531,19 +3727,21 @@ brackets.</p>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_checking_a_tei_file">Checking a TEI file</h3>
+</div>
+<div class="sect1">
+<h2 id="_checking_a_tei_file">Checking a TEI file</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>XSLT style-sheet to check various TEI conventions and textual issues.</p>
 </div>
-<div class="sect3">
-<h4 id="_metadata_2">Metadata</h4>
+<div class="sect2">
+<h3 id="_metadata_2">Metadata</h3>
 <div class="paragraph">
 <p>Verify metadata is present and correct.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_rendering">Rendering</h4>
+<div class="sect2">
+<h3 id="_rendering">Rendering</h3>
 <div class="paragraph">
 <p>Verify valid rendering attributes are used</p>
 </div>
@@ -3558,14 +3756,14 @@ brackets.</p>
 </ul>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_types">Types</h4>
+<div class="sect2">
+<h3 id="_types">Types</h3>
 <div class="paragraph">
 <p>Verify types for elements are valid according to the conventions.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_numbering">Numbering</h4>
+<div class="sect2">
+<h3 id="_numbering">Numbering</h3>
 <div class="paragraph">
 <p>Verify whether numbered items are in sequence.</p>
 </div>
@@ -3580,14 +3778,14 @@ brackets.</p>
 </ul>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_spacing_and_punctuation">Spacing and Punctuation</h4>
+<div class="sect2">
+<h3 id="_spacing_and_punctuation">Spacing and Punctuation</h3>
 <div class="paragraph">
 <p>Verify punctuation marks are properly spaced.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_quotation_marks">Quotation Marks</h4>
+<div class="sect2">
+<h3 id="_quotation_marks">Quotation Marks</h3>
 <div class="paragraph">
 <p>Verify whether quotation marks are applied correctly.</p>
 </div>
@@ -3626,13 +3824,15 @@ opening mark, there should be a corresponding closing mark.</p>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_generating_a_kwic_index">Generating a KWIC index</h3>
+</div>
+<div class="sect1">
+<h2 id="_generating_a_kwic_index">Generating a KWIC index</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>For quite some time, I wanted to be able to generate a KWIC (Key Word In Context) index of TEI files. With a KWIC, you can quickly inspect the usage of certain words in a context, which helps to determine how words are used.</p>
 </div>
-<div class="sect3">
-<h4 id="_requirements_2">Requirements</h4>
+<div class="sect2">
+<h3 id="_requirements_2">Requirements</h3>
 <div class="paragraph">
 <p>The KWIC generator should:</p>
 </div>
@@ -3683,8 +3883,8 @@ opening mark, there should be a corresponding closing mark.</p>
 </ul>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_development">Development</h4>
+<div class="sect2">
+<h3 id="_development">Development</h3>
 <div class="paragraph">
 <p>For a long time, I have felt that XSLT 2.0 was the right tool for the job. XSLT 1.0 lacked the required regular expression facilities to break text into words effectively, while other programming languages, such as PERL or Python, are much less suited to handling XML textual data.</p>
 </div>
@@ -3738,8 +3938,8 @@ opening mark, there should be a corresponding closing mark.</p>
 <p><code>tei2html -k --kwicvariants=2 --kwiccasesensitive=true</code></p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_having_fun_with_kwic">Having fun with KWIC</h4>
+<div class="sect2">
+<h3 id="_having_fun_with_kwics">Having fun with KWICs</h3>
 <div class="paragraph">
 <p>The KWIC little tool already has helped me to locate numerous small issues Project Gutenberg texts that would otherwise have escaped the attention of proofreaders. In particular variant spellings of names and consistent usage of hyphenated versus non-hyphenated words are often difficult to catch, while in a KWIC, they simply jump into your face.</p>
 </div>
@@ -3771,12 +3971,15 @@ opening mark, there should be a corresponding closing mark.</p>
 </div>
 </div>
 </div>
-</div>
 <div class="sect1">
 <h2 id="_future_ideas_2">Future Ideas</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_css_stylesheet_redesign_todo">CSS stylesheet redesign [TODO]</h3>
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_css_stylesheet_redesign_todo">CSS stylesheet redesign [TODO]</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>The CSS stylesheets with <code>tei2html</code> have grown over time, and as a result are not very consistent or easy to maintain. To remedy this, I will redesign them using a more structured approach.</p>
 </div>
@@ -3793,8 +3996,8 @@ opening mark, there should be a corresponding closing mark.</p>
 </li>
 </ol>
 </div>
-<div class="sect3">
-<h4 id="_bem_for_epub">BEM for ePub</h4>
+<div class="sect2">
+<h3 id="_bem_for_epub">BEM for ePub</h3>
 <div class="paragraph">
 <p>BEM (Block Element Modifier) was developed to make the maintenance of CSS for websites easier. This does not always translate one-on-one to ebooks, but most of the principles can be applied without much trouble.</p>
 </div>
@@ -3844,13 +4047,15 @@ opening mark, there should be a corresponding closing mark.</p>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_parsing_css_experimental">Parsing CSS [Experimental]</h3>
+</div>
+<div class="sect1">
+<h2 id="_parsing_css_experimental">Parsing CSS [Experimental]</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>If we could easily parse CSS with XSLT, this would make it far easier to generate optimized HTML. Currently, we include the full CSS stylesheets with even the simplest texts, which increases clutter. If we parse a CSS stylesheet, and only retain those CSS rules that actually apply, text size and clutter is reduced.</p>
 </div>
-<div class="sect3">
-<h4 id="_current_implementation">Current Implementation</h4>
+<div class="sect2">
+<h3 id="_current_implementation">Current Implementation</h3>
 <div class="paragraph">
 <p>The current implementation is in <code>css2xml.xsl</code>, which is incomplete. The CSS is parsed in a number of passes. Currently, the code not yet parses all valid CSS 2.1 stylesheets. In particular, <code>@media</code> groups are not supported.</p>
 </div>
@@ -3893,8 +4098,8 @@ opening mark, there should be a corresponding closing mark.</p>
 </ul>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_usage">Usage</h4>
+<div class="sect2">
+<h3 id="_usage">Usage</h3>
 <div class="paragraph">
 <p>Having CSS in XML, makes it easier to determine from within XSLT what rules within CSS kan be removed or rewritten in a simpler form.</p>
 </div>
@@ -3912,8 +4117,8 @@ opening mark, there should be a corresponding closing mark.</p>
 <p>As a result, the CSS stylesheet can be pruned, and only the relevant rules emitted in the output.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_references_2">References</h4>
+<div class="sect2">
+<h3 id="_references_2">References</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -3931,10 +4136,9 @@ opening mark, there should be a corresponding closing mark.</p>
 </div>
 </div>
 </div>
-</div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-04-13 19:10:44 UTC
+Last updated 2025-04-15 21:13:01 UTC
 </div>
 </div>
 </body>
