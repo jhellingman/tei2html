@@ -370,4 +370,14 @@
       <sch:param name="allowed-values" value="('verseNum', 'lineNum', 'parNum', 'tocPageNum', 'tocDivNum', 'divNum', 'itemNum', 'figNum', 'keyRef', 'lineNumRef', 'endNoteNum', 'textRef', 'keyNum', 'intra', 'top', 'bottom', 'price', 'phantom')"/>
     </sch:pattern>
 
+
+    <sch:pattern id="pb-in-note-id-check">
+      <sch:rule context="tei:note//tei:pb[@id]">
+        <sch:assert test="ends-with(@id, 'n')">
+          A <sch:name/> inside a &lt;note&gt; must have an @id ending in "n", but found "<sch:value-of select="@id"/>".
+        </sch:assert>
+      </sch:rule>
+    </sch:pattern>
+
+
 </sch:schema>

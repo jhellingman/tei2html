@@ -1,6 +1,9 @@
-== Auxiliary Tools
+= Auxiliary Tools
 
 Besides the main XSLT scripts, `tei2html` includes Perl scripts for various tasks. Many of these are quick hacks to get things done.
+
+
+== The main tools
 
 === tei2html.pl
 

@@ -1,4 +1,4 @@
-== Cover Pages
+= Cover Pages
 
 Older books where often sold in simple paper covers, often just repeating the information on the title page. It was expected that the buyer of the book would bind it (or more likely have it bound by a professional bookbinder). As a result, covers for older books are not standard, and often do not contain more than a short title on the spine. The practice of selling books in nice decorative covers started in the late nineteenth century. Including the original cover of the book as an illustration in the TEI version is often nice, and is also a great feature for ePub devices, which use cover images to generate thumbnails from.
 
@@ -24,12 +24,11 @@ When a cover image is missing, a title page image can be used instead, as long a
 
 See also: http://blog.threepress.org/2009/11/20/best-practices-in-epub-cover-images/
 
-=== Cover Thumbnail
+== Cover Thumbnail
 
 Sometimes it makes sense to also have a cover thumbnail which isn't just a reduction of the (original) cover page. To do this, just specify (as a hack) `cover-thumbnail(imagefile)` in the rend attribute of the text element. Similarly, `cover-image(imagefile)` can be used to specify a cover image that is not part of the original book, for those who like to have both.
 
 
-=== favicon
+== favicon
 
 Simply drop an image file named `favicon.jpg` in the images directory, and `tei2html` will generate the metadata in the HTML to use it. Use a square image, upto 192 x 192 pixels.
-

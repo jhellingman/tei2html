@@ -1,4 +1,4 @@
-== Introduction
+= Introduction
 
 The TEI format is the standard format for transcribing scholarly texts in humanities. Unlike common word-processing formats, TEI focuses on the semantics of text elements instead of the look-and-feel. This is great for research purposes, as it enables software to answer questions like "give me all citations in Shakespeare where Hamlet uses the past tense," (provided of course somebody has encoded that data) but makes it harder to produce nicely formatted output from the same source. This is where the `tei2html` stylesheets kick-in.
 
@@ -10,7 +10,7 @@ Whether TEI is useful for you depends on your needs. If you are occasionally pro
 
 Originally, `tei2html` was developed to produce beautiful new editions of public domain texts for Project Gutenberg, but it can also be used for other TEI files.
 
-=== Guiding Principles
+== Guiding Principles
 
 The design of `tei2html` is based on a small set of guiding principles and design decisions. These are some assumptions, that I believe are reasonable to expect when digitizing text for research and preservation.
 
@@ -29,7 +29,7 @@ The design decisions are:
 
 As a result of these design decisions, a document can be neatly formatted with CSS with minimal rendering information 'polluting' the TEI master file. Note that to meet ePub restrictions on CSS, no inline (that is, in an attribute on an HTML element) CSS is generated.
 
-=== SGML versus XML
+== SGML versus XML
 
 Originally, TEI was defined in SGML. Since version P4, this TEI has moved on to XML. XML is a considerably simplified reincarnation of SGML. It does away with much of the complexity of SGML. However, TEI (and TEILite) was originally developed for SGML, and I started using TEI even before XML was conceived.
 
@@ -42,7 +42,7 @@ Of course, you can work directly in XML instead of SGML, and the stylesheets are
 . Can use embedded namespaces for other XML schemas.
 . Can use one or more of the various XML authoring tools available.
 
-=== Considerations for Output Formats
+== Considerations for Output Formats
 
 TEI files are typically prepared from pre-existing sources, that is printed books, magazines or other textual works. In those cases, it may be desirable to not only to include the logical content of the work being transcribed, but also to describe the physical appearance of some aspects of the text. In that case, the `@rend`, `@style` and `@rendition` attributes can be used to record those aspects.
 
@@ -63,7 +63,7 @@ _Nesting of paragraphs._ In HTML, it is impossible to nest paragraphs. Usually, 
 
 In a few other cases, the transformation may not result in entirely correct results. Always validate the result with tools such as `tidy` or `epubcheck`.
 
-=== Special Characters in SGML files
+== Special Characters in SGML files
 
 For XML files actually used by the XSLT stylesheets, any character encoding supported by XML/XSLT works. For SGML, the options are more limited.
 
@@ -78,7 +78,7 @@ Use entities from the following sets:
 
 For longer fragments in a non-Latin script, I normally use an ASCII based transliteration scheme, and supply tools (called `patc`) to convert these to Unicode. For documents completely a non-Latin script, it will probably be better to work with Unicode in a suitable editor (and using XML directly).
 
-==== Fractions entities
+=== Fraction entities
 
 Fractions of one figure above and below.
 
@@ -89,7 +89,7 @@ Fractions with more than one figure above or below.
 `&amp;frac3_16;`
 `&amp;frac23_100;`
 
-==== Special filling characters for leaders
+=== Special filling characters for leaders
 
 _Future plan_
 

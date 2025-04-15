@@ -65,12 +65,25 @@ sub handleParagraph($) {
         $paragraph =~ s/<RU>(.*?)<\/RU>/<span class=trans title=\"<RUTA>$1<\/RUTA>\"><RU>$1<\/RU><\/span>/g;
         $paragraph =~ s/<RUX>(.*?)<\/RUX>/<span class=trans title=\"<RUTA>$1<\/RUTA>\"><RUX>$1<\/RUX><\/span>/g;
     } else {
-        $paragraph =~ s/<GR>(.*?)<\/GR>/<choice><orig><GR>$1<\/GR><\/orig><reg type=\"trans\"><GRT>$1<\/GRT><\/reg><\/choice>/g;
-        $paragraph =~ s/<CY>(.*?)<\/CY>/<choice><orig><CY>$1<\/CY><\/orig><reg type=\"trans\"><CYT>$1<\/CYT><\/reg><\/choice>/g;
-        $paragraph =~ s/<RU>(.*?)<\/RU>/<choice><orig><RU>$1<\/RU><\/orig><reg type=\"trans\"><RUT>$1<\/RUT><\/reg><\/choice>/g;
-        $paragraph =~ s/<RUX>(.*?)<\/RUX>/<choice><orig><RUX>$1<\/RUX><\/orig><reg type=\"trans\"><RUXT>$1<\/RUXT><\/reg><\/choice>/g;
-        $paragraph =~ s/<SR>(.*?)<\/SR>/<choice><orig><SR>$1<\/SR><\/orig><reg type=\"trans\"><SRT>$1<\/SRT><\/reg><\/choice>/g;
+        $paragraph =~ s/<(GR)>(.*?)<\/GR>/rewriteTranscription($1, $2)/eg;
+        $paragraph =~ s/<(CY)>(.*?)<\/CY>/rewriteTranscription($1, $2)/eg;
+        $paragraph =~ s/<(RU)>(.*?)<\/RU>/rewriteTranscription($1, $2)/eg;
+        $paragraph =~ s/<(RUX)>(.*?)<\/RUX>/rewriteTranscription($1, $2)/eg;
+        $paragraph =~ s/<(SR)>(.*?)<\/SR>/rewriteTranscription($1, $2)/eg;
     }
 
     return $paragraph;
+}
+
+sub rewriteTranscription {
+    my $code = shift;
+    my $trans = shift;
+    my $t = 'T';
+
+    # Filter <pb> and <choice> tags from the transcription in $trans.
+    my $clean = $trans;
+    $clean =~ s/<pb.*?>//g;
+    $clean =~ s/<choice><sic>.*?<\/sic><corr>(.*?)<\/corr><\/choice>/$1/g;
+    
+    return "<choice><orig><$code>$trans<\/$code><\/orig><reg type=\"trans\"><$code$t>$clean<\/$code$t><\/reg><\/choice>";
 }

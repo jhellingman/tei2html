@@ -1,10 +1,10 @@
-== Cross-References
+= Cross-References
 
-=== Internal Cross-References
+== Internal Cross-References
 
 Internal cross-references are to be encoded using the `&lt;ref&gt;` element, with the `@target` attribute carrying the id of the target element referenced to.
 
-==== Special types of references
+=== Special types of references
 
 *Footnotes:* Sometimes footnotes markers appear multiple times on a page, each referring to the same note. When these are encoded as follows:
 
@@ -21,11 +21,12 @@ They will be rendered as a superscript number with the actual number replacing t
 
 When this is rendered on page media, the content will be replaced with the actual page number of the page the reference appears on.
 
-=== External Cross References
+
+== External Cross References
 
 External cross-references are to be encoded using the `&lt;xref&gt;` element, with the `@url` attribute carrying the url of the resource referenced.
 
-==== Shorthand notations
+=== Shorthand notations
 
 *Project Gutenberg text:* Use `pg:&lt;_ebook number_&gt;` as url.
 
@@ -46,6 +47,7 @@ This will link to a page at the http://www.biblegateway.com/passage/?search=job%
 *Custom Shorthand notations:* Use `prefixDef` elements in the TeiHeader.
 
 Also supported are https://tei-c.org/release/doc/tei-p5-doc/en/html/ref-prefixDef.html[prefixDef definitions] from TEI P5, which allows you to define your own prefix and replacement pattern for external links.
+
 
 === External Link Locations
 

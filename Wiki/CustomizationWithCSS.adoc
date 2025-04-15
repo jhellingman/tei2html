@@ -1,4 +1,4 @@
-== Customization with CSS
+= Customization with CSS
 
 Since many details of the layout of the output (For both HTML and PDF) are defined in CSS, it is very well possible to define custom CSS to customize the layout of your output.
 
@@ -17,7 +17,7 @@ Order of precedence of renditions:
 . Default CSS stylesheets.
 . Browser defaults.
 
-=== Steps for Custom Layout
+== Steps for Custom Layout
 
 The following steps need to be taken to define custom layout.
 
@@ -25,13 +25,13 @@ The following steps need to be taken to define custom layout.
 * Tell the transformation process about the CSS file.
 * Define the points of attachments (selectors) for the CSS rules.
 
-==== Custom CSS files
+=== Custom CSS files
 
 The custom layout CSS file can simply be added by creating a file `custom.css` If this file is present, the Perl script will pick it up and signal it to the XSLT processor for inclusion in the output.
 
 If you give it any other name, you can tell the perl script about it, using the `-c &lt;filename&gt;` option.
 
-==== CCS Selectors
+=== CCS Selectors
 
 To indicate on what elements in your TEI file your CSS rules should apply to, you can use several techniques.
 
@@ -71,7 +71,7 @@ Second, `tei2html` generates class attributes on its output that correspondent t
 
 (_to be completed…_)
 
-==== Tables
+=== Tables
 
 Tables pose some peculiar problems for rendering. By default, tables are rendered without any borders or special spacing, but due to their nature, you often want to manipulate the rendering of tables or cells, and thus use `@rend` attributes.
 
@@ -111,7 +111,7 @@ Furthermore, cells get attributes to indicate whether they are the topmost, righ
 |left |`cell-head-left` |`cell-left` 
 |===
 
-==== Footnotes
+=== Footnotes
 
 Footnotes can generate a range of elements in the output, depending on the output settings and format.
 

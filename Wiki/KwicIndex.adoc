@@ -1,8 +1,8 @@
-== Generating a KWIC index
+= Generating a KWIC index
 
 For quite some time, I wanted to be able to generate a KWIC (Key Word In Context) index of TEI files. With a KWIC, you can quickly inspect the usage of certain words in a context, which helps to determine how words are used.
 
-=== Requirements
+== Requirements
 
 The KWIC generator should:
 
@@ -21,7 +21,7 @@ The KWIC generator should:
 * Optionally ignore differences between look-alike characters or sequences (such as _b_ and _h_, or _rn_ and _m_)
 * Optionally only show words of which more than one variant appears after ignoring minor differences.
 
-=== Development
+== Development
 
 For a long time, I have felt that XSLT 2.0 was the right tool for the job. XSLT 1.0 lacked the required regular expression facilities to break text into words effectively, while other programming languages, such as PERL or Python, are much less suited to handling XML textual data.
 
@@ -50,7 +50,7 @@ A particularly useful way of generating a kwic is with:
 
 `tei2html -k --kwicvariants=2 --kwiccasesensitive=true`
 
-=== Having fun with KWIC
+== Having fun with KWICs
 
 The KWIC little tool already has helped me to locate numerous small issues Project Gutenberg texts that would otherwise have escaped the attention of proofreaders. In particular variant spellings of names and consistent usage of hyphenated versus non-hyphenated words are often difficult to catch, while in a KWIC, they simply jump into your face.
 

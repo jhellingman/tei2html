@@ -1,14 +1,14 @@
-== Scratch Pad [Future]
+= Scratch Pad [Future]
 
-=== Small improvements
+== Small improvements
 
 * Use page-break-after in CSS for ePub versions. See http://css-tricks.com/almanac/properties/p/page-break/ and http://www.w3schools.com/cssref/pr_print_pageba.asp
 
-=== Interesting Links
+== Interesting Links
 
 * http://code.google.com/p/hyphenator/ Javascript hyphenator.
 
-=== Packaging in .zip for PG
+== Packaging in .zip for PG
 
 When submitting a text to PG, it needs to be packaged in a zip-file and provided with PG headers, footers and small-print.
 
@@ -37,12 +37,12 @@ Also add check to the checking tool to verify this, and adjust all code to deal 
 <title type="sub">And in Borneo and the Philippines</title>
 
 <title type="main">War and Peace</title>
-<title type="uniform">Война и Мир, English</title>
+<title type="uniform">????? ? ???, English</title>
 
 <title type="series">...</title>
 ----
 
-=== Metadata
+== Metadata
 
 Adding metadata about the series a book belongs to in ePub is not yet standardized. Follow the calibre convention for now:
 
@@ -53,7 +53,7 @@ Adding metadata about the series a book belongs to in ePub is not yet standardiz
 
 For ePub 3.0, see http://www.idpf.org/epub/301/spec/epub-publications.html#sec-opf-dctitle
 
-==== Collections
+=== Collections
 
 To indicate that a TEI file belongs to a certain collection, we can use the following kludge with the `idno` element in the TEI header.
 
@@ -65,7 +65,7 @@ To indicate that a TEI file belongs to a certain collection, we can use the foll
 
 The first `idno` gives the number the text has in the Project Gutenberg collection; the other in some locally defined collections.
 
-=== Hanging punctuation
+== Hanging punctuation
 
 CSS3 defines hanging punctuation, however, it is not supported by any browser. (http://www.w3schools.com/cssref/css3_pr_hanging-punctuation.asp)
 
@@ -74,3 +74,4 @@ None of the workarounds so-far have been satisfactory.
 See: http://dabblet.com/gist/9623025
 
 and http://webdesign.tutsplus.com/articles/getting-the-hang-of-hanging-punctuation--cms-19890
+

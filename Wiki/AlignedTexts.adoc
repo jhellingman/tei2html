@@ -1,4 +1,4 @@
-== Aligned Bilingual Text
+= Aligned Bilingual Text
 
 When you have a bilingual text, it is nice to show them side-by-side, such that the translations are aligned. Books sometimes places such bilingual texts on facing pages, but in an unpaged medium, that is not an option.
 
@@ -16,7 +16,7 @@ To present bilingual text side-by-side with the `tei2html`, you can do the follo
 When running `tei2html`, it will generate a table, with the text of the first division on the left, and the text of the second division on the right. Table cells will be used to make sure matching elements are aligned. The code understands sub-divisions and will recurse into them, still using a single table.
 
 
-=== Excluding content from alignment
+== Excluding content from alignment
 
 Sometimes, you want to exclude certain elements from the alignment (e.g., non-translated sections, headings, or figures). To do so, you have to include the element on both sides with the same `@n` attribute, and give one the following `@rend` attribute:
 
@@ -25,7 +25,7 @@ Sometimes, you want to exclude certain elements from the alignment (e.g., non-tr
 The other element should remain empty (as it will be skipped).
 
 
-=== Aligned text from a separate file
+== Aligned text from a separate file
 
 It is also possible to align texts kept in separate files. To do so, use the following `@rend` attribute:
 
@@ -34,12 +34,12 @@ It is also possible to align texts kept in separate files. To do so, use the fol
 When using the perl scripts that come with `tei2html`, the to-be-aligned sections will be included in an intermediate document in a pre-processing step (in `include.xsl`), which replaces `align-with-document` with `align-with` and places the to-be aligned section directly after the section it will be aligned with. By doing so, generated tables of contents, lists of issues in the colophon, and footnotes will be processed correctly. The `tei2html` xslt stylesheeets can also do this directly, but with limited support for those additional items.
 
 
-=== Footnotes in aligned texts
+== Footnotes in aligned texts
 
 Footnotes in aligned text will be placed at the bottom of the column they appear in. If footnotes are present in both aligned texts, both sides will have footnotes.
 
 
-=== Aligned verse
+== Aligned verse
 
 When aligning verses (or actually line-groups, encoded with the `lg` element), there is no need to number matching lines with a `@n` attribute. However, the number of items in the line-groups needs to match. Again to align two line-groups, on one of the line-groups add the following `@rend` attribute:
 

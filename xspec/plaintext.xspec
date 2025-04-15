@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description 
+    xmlns:x="http://www.jenitennison.com/xslt/xspec"
+    xmlns:f="urn:stylesheet-functions"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    stylesheet="../modules/plaintext.xsl">
+
+  <x:scenario label="Split string with max length 40">
+
+    <x:call function="f:split-into-lines">
+        <x:param select="'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'"/>
+        <x:param select="40"/>
+    </x:call>
+
+    <x:expect label="Expected line-by-line output" 
+      select="('Lorem ipsum dolor sit amet, consectetur',
+               'adipiscing elit. Sed do eiusmod tempor',
+               'incididunt ut labore et dolore magna',
+               'aliqua.')"/>
+
+  </x:scenario>
+
+</x:description>

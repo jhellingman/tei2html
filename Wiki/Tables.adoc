@@ -1,4 +1,4 @@
-== Tables
+= Tables
 
 Tables are supported in `tei2html` with the following features:
 
@@ -9,7 +9,7 @@ Tables are supported in `tei2html` with the following features:
 * `verticalBorderInside`: the columns are separated by vertical lines.
 * `borderAll`: all cells are given a border. Outside borders and the border between the table head and table body are thicker.
 
-=== Columns
+== Columns
 
 In addition to the TEI model, `tei2html` supports column definitions. These can be used to apply styling to all cells in a column. The following elements are defined:
 
@@ -19,11 +19,11 @@ In addition to the TEI model, `tei2html` supports column definitions. These can 
 
 Note that the `@rend` value `align(decimal)` triggers some special processing when generating HTML. Since HTML does not directly support alignment on the decimal separator, any column with `align(decimal)` will be split into two columns, with in the first the integer part of the numbers, and in the second the fractional part. CSS is used to make those parts align as expected.
 
-=== Braces
+== Braces
 
 Sometimes, rows are preceded by a tall brace. `tei2html` will automatically generate HTML to include an image of a tall brace when a cell spans more than one row and only includes a single brace character.
 
-=== Table processing
+== Table processing
 
 `tei2html` cannot directly process tables correctly. A number of pre-processing steps are required to correctly deal with the complexities tables introduce. These are handled in the xslt file `normalize-table.xsl`, which includes code to determine the correct column of each cell (taking into consideration spanned rows and columns) and the special handling of decimal alignment. The `tei2html.pl` perl script normally applies this transform to the XML before applying the main transform.
 

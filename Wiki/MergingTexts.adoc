@@ -1,10 +1,10 @@
-== Merging Texts
+= Merging Texts
 
 Larger works were often issued in multi-volume sets, and as a result often also encoded as separate TEI files. However, in files do not have the restrictions of physical bound volumes, and it is often beneficial to merge two or more TEI files into a single TEI file. This will help in particular when there are a lot of internal cross-references between the volumes, such as will happen with an index (which often appears in the last volume).
 
-=== Steps
+== Steps
 
-==== 1. Create an XSLT 'galley' file
+=== 1. Create an XSLT 'galley' file
 
 The idea is to create an XSLT stylesheet that will merge the individual volumes, and provide them with a new TEI-header (which in turn can also be put together from elements pulled from the TEI-header of one or more of the source TEI files. Some things to consider:
 
@@ -13,15 +13,15 @@ The idea is to create an XSLT stylesheet that will merge the individual volumes,
 * Combined body content, which may require the introduction of a new level of divisions ("parts" or "volumes"), which in turn may require adjusting the levels of numbered `div` elements (e.g. `div1` may need to become `div2`, etc.).
 * Combined material in the front- or back-matter (such as Appendices), which may require some re-numbering.
 
-==== 2. Run the XSLT galley file
+=== 2. Run the XSLT galley file
 
 Here we run XSLT over the galley file to create a new TEI file. In this step we will collect the content, and put it together to form a new single TEI file.
 
-==== 3. Use the combined file as source
+=== 3. Use the combined file as source
 
 Here we run XSLT again to perform the conversion to the final output format, on the output of step 2 above.
 
-=== Galley File Support Functions
+== Galley File Support Functions
 
 Most of the hard work happens in the creation of the galley file. For this a number of support functions are needed.
 

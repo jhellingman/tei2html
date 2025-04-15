@@ -1,10 +1,10 @@
-== Using the `@rend` attribute
+= Using the `@rend` attribute
 
 The `@rend` attribute is a simple hook into the TEI structure to document or specify how features are rendered. Within `tei2html` they can be used to achieve certain formatting effects. This feature should be used with moderation. Several ways of using the `@rend` attribute can be distinguished.
 
 Note that according to the TEI Guidelines, the rendering attributes are intended to describe the presentation of the source material, and are not to prescribe any presentation of the output. Since the intention here is to faithfully reproduce text, this distinction is not really important for `tei2html`.
 
-=== Simple
+== Simple
 
 Simple rendering attribute values provide single keywords to provide a rendering hint. This type of usage is sufficient most of the time. The pre-defined rendering keywords are often element specific, and should be considered as hints only, that is, ignoring the rend attribute should not render the document illegible.
 
@@ -21,11 +21,11 @@ Simple rendering attribute values provide single keywords to provide a rendering
 |_Any_ |_Any_ (_these will be added to the class attribute of the output element in HTML_)
 |===
 
-=== Rendition Ladders
+== Rendition Ladders
 
 A slightly more powerful mechanism is provided by so-called 'rendering ladders', in which a number of key-value pairs are provided. These take the form `key(value)`, and multiple can be present in a `@rend` attribute. They are either translated to CSS, or given a specific meaning, sometimes depending on the element they are applied to.
 
-==== CSS equivalents
+=== CSS equivalents
 
 In most cases, rendition ladders are one-on-one translated to equivalent CSS rules. For example, the following snippet of TEI:
 
@@ -47,7 +47,7 @@ And the following CSS rule:
 
 Note that if the same value for the `@rend` attribute is used multiple times, only one CSS rule will be generated matching all occurrences (and the same class attribute will be used on each of them).
 
-==== Special interpretations
+=== Special interpretations
 
 In a number of places, rendition ladders are interpreted by `tei2html` directly.
 
@@ -72,18 +72,18 @@ The following keys and values are supported: (Note that this list is not exhaust
 |`l` |`hemistich` |Indents the current line with a certain space. When the value starts with a `^` followed by a number _n_, the content of the line _n_ lines before is used, when the value starts with a `#` followed by an id, the content of the element with the id is used, otherwise, the literal content is used. |`&lt;l rend=&quot;hemistich(^1)&quot;&gt;`, `&lt;l rend=&quot;hemistich(#vs21)&quot;&gt;`, `&lt;l rend=&quot;hemistich(Content)&quot;&gt;`
 |===
 
-==== Using `@style` and `@rendition`
+=== Using `@style` and `@rendition`
 
 As an alternative to the `@rend` attribute, the current TEI guidelines also provide `@style` and `@rendition` to define presentation in a formally defined language. `tei2html` assumes that is CSS. See the http://www.tei-c.org/release/doc/tei-p5-doc/en/html/ref-att.global.rendition.html[TEI guidelines on rendition attributes]. Unlike the values of `@rend`, the specified CSS values are not interpreted at all, but passed to the output CSS directly.
 
-==== Directionality
+=== Directionality
 
 Since ePub does not allow CSS to be used for directionality, but requires that the HTML `@dir` attribute is used, the following `@rend` values are translated to a `@dir` attribute in HTML.
 
 . `direction(...)`
 . `class(rtl)` and `class(ltr)` and the bare equivalents.
 
-==== Implementation notes:
+=== Implementation notes:
 
 . Handle the `@style` attribute, and output it as a CSS rule.
 * generate a unique class name for the CSS fragment.
