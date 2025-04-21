@@ -81,7 +81,7 @@
                             <xsl:if test="@id">
                                 <xsl:attribute name="id" select="@id"/>
                             </xsl:if>
-                            <xsl:message>INFO: merged consecutive marginal notes.</xsl:message>
+                            <!-- <xsl:message>INFO: merged consecutive marginal notes.</xsl:message> -->
                         </lb>
                     </xsl:if>
                     <xsl:apply-templates/>
