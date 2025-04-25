@@ -326,4 +326,58 @@
                   test="normalize-space(.) = '.p1 { font-size:large; }'"/>
     </x:scenario>
 
+    <!-- convert rendition elements to CSS -->
+
+    <x:scenario label="When having simple valid properties">
+        <x:context mode="rendition">
+            <rendition selector=".basic">color: red; font-size: 12px;</rendition>
+        </x:context>
+        <x:expect 
+            label="will result in a correct CSS."
+            test="normalize-space(.) = '.basic { color: red; font-size: 12px; }'"/>
+    </x:scenario>
+
+    <x:scenario label="When having a quoted value with a semicolon (double quotes)">
+        <x:context mode="rendition">
+            <rendition selector=".quoted">content: "hello; world";</rendition>
+        </x:context>
+        <x:expect 
+            label="will result in a correct CSS."
+            test="normalize-space(.) = '.quoted { content: &quot;hello; world&quot;; }'"/>
+    </x:scenario>
+
+    <x:scenario label="When having a quoted value with a semicolon (single quotes)">
+        <x:context mode="rendition">
+            <rendition selector=".quoted-single">content: 'hi; there';</rendition>
+        </x:context>
+        <x:expect 
+            label="will result in a correct CSS."
+            test="normalize-space(.) = '.quoted-single { content: ''hi; there''; }'"/>
+    </x:scenario>
+
+    <x:scenario label="When having invalid properties">
+        <x:context mode="rendition">
+            <rendition selector=".filter">bogus: xyz; padding: 1em;</rendition>
+        </x:context>
+        <x:expect 
+            label="will result in a correct filtered CSS."
+            test="normalize-space(.) = '.filter { padding: 1em; }'"/>
+    </x:scenario>
+
+    <x:scenario label="When having properties across multiple lines">
+        <x:context mode="rendition">
+            <rendition selector=".multi">
+                color: red;
+                font-size:
+                16px;
+                content: "line
+                    with; semicolon";
+            </rendition>
+        </x:context>
+        <x:expect 
+            label="will result in a correct CSS."
+            test="normalize-space(.) = '.multi { color: red; font-size: 16px; content: &quot;line with; semicolon&quot;; }'"/>
+    </x:scenario>
+
+
 </x:description>
