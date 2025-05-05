@@ -1680,22 +1680,24 @@ BEGIN {
     $ent{'Ygrave'}      = 'Y' . chr(0x0300); # Y with grave
     $ent{'Zgrave'}      = 'Z' . chr(0x0300); # Z with grave
 
-    $ent{'kacute'}      = 'k' . chr(0x0301); # k with acute
-    $ent{'oeacute'}     = chr(0x0153) . chr(0x0301); # oe ligature with acute
-    $ent{'OEacute'}     = chr(0x0152) . chr(0x0301); # OE ligature with acute
-    $ent{'hacute'}      = 'h' . chr(0x0301); # h with acute
-    $ent{'vacute'}      = 'v' . chr(0x0301); # v with acute
-    $ent{'Vacute'}      = 'V' . chr(0x0301); # V with acute
-    $ent{'tacute'}      = 't' . chr(0x0301); # t with acute
-    $ent{'Tacute'}      = 'T' . chr(0x0301); # T with acute
-    $ent{'pacute'}      = 'p' . chr(0x0301); # p with acute
-    $ent{'Pacute'}      = 'P' . chr(0x0301); # P with acute
-    $ent{'xacute'}      = 'x' . chr(0x0301); # x with acute
-    $ent{'Xacute'}      = 'X' . chr(0x0301); # X with acute
     $ent{'dacute'}      = 'd' . chr(0x0301); # d with acute
     $ent{'Dacute'}      = 'D' . chr(0x0301); # D with acute
+    $ent{'hacute'}      = 'h' . chr(0x0301); # h with acute
     $ent{'jacute'}      = 'j' . chr(0x0301); # j with acute
     $ent{'Jacute'}      = 'J' . chr(0x0301); # J with acute
+    $ent{'kacute'}      = 'k' . chr(0x0301); # k with acute
+    $ent{'macute'}      = 'm' . chr(0x0301); # m with acute
+    $ent{'Macute'}      = 'M' . chr(0x0301); # M with acute
+    $ent{'OEacute'}     = chr(0x0152) . chr(0x0301); # OE ligature with acute
+    $ent{'oeacute'}     = chr(0x0153) . chr(0x0301); # oe ligature with acute
+    $ent{'pacute'}      = 'p' . chr(0x0301); # p with acute
+    $ent{'Pacute'}      = 'P' . chr(0x0301); # P with acute
+    $ent{'tacute'}      = 't' . chr(0x0301); # t with acute
+    $ent{'Tacute'}      = 'T' . chr(0x0301); # T with acute
+    $ent{'vacute'}      = 'v' . chr(0x0301); # v with acute
+    $ent{'Vacute'}      = 'V' . chr(0x0301); # V with acute
+    $ent{'xacute'}      = 'x' . chr(0x0301); # x with acute
+    $ent{'Xacute'}      = 'X' . chr(0x0301); # X with acute
 
     $ent{'Kcirc'}       = 'K' . chr(0x0302); # K with circumflex
     $ent{'kcirc'}       = 'k' . chr(0x0302); # k with circumflex
@@ -2451,6 +2453,7 @@ BEGIN {
     $ent{'ph.supV'}   = "<ab type='phantom'>" . chr(0x2C7D) . '</ab>';   # Phantom superscript V
     $ent{'ph.supVI'}  = "<ab type='phantom'>" . chr(0x2C7D) . chr(0x1D35) . '</ab>';  # Phantom superscript VI
 
+
     %reverse = ();
 
     foreach my $key (keys %ent) {
@@ -2463,6 +2466,12 @@ BEGIN {
             }
         }
     }
+
+
+    # Croaking sounds from Bleek: Specimens of Bushman folklore.
+    $ent{'scroak'}  = "®"; # a strong croaking sound in the throat. Actual symbol not in Unicode, so replaced by ® registered sign.
+    $ent{'gcroak'}  = "©"; # a gentle croaking sound in the throat. Actual symbol not in Unicode, so replaced by © copyright sign.
+
 
     # Duplicate entities from above.
     $ent{'peso'}        = chr(0x20B1);  # Peso sign
