@@ -514,4 +514,190 @@
    </x:scenario>
 
 
+   <!-- Transpose -->
+
+    <x:scenario label="When transposing a straightforward table">
+      <x:context mode="transpose">
+        <table id="simple_table"
+               rend="summary(A straightforward table to demonstrate tables in TEI) class(verticalBorderInside)">
+            <column/>
+            <column/>
+            <column/>
+            <row>
+                <cell>A1</cell>
+                <cell>A2</cell>
+                <cell>A3</cell>
+            </row>
+            <row>
+                <cell>B1</cell>
+                <cell>B2</cell>
+                <cell>B3</cell>
+            </row>
+            <row>
+                <cell>C1</cell>
+                <cell>C2</cell>
+                <cell>C3</cell>
+            </row>
+            <row>
+                <cell>D1</cell>
+                <cell>D2</cell>
+                <cell>D3</cell>
+            </row>
+        </table>
+      </x:context>
+      <x:expect label="will return in a table with rows and columns transposed">
+        <table id="simple_table"
+               rend="summary(A straightforward table to demonstrate tables in TEI) class(verticalBorderInside)"
+               rows="3"
+               cols="4">
+           <column/>
+           <column/>
+           <column/>
+           <column/>
+           <row>
+              <cell row="1" col="1">A1</cell>
+              <cell row="1" col="2">B1</cell>
+              <cell row="1" col="3">C1</cell>
+              <cell row="1" col="4">D1</cell>
+           </row>
+           <row>
+              <cell row="2" col="1">A2</cell>
+              <cell row="2" col="2">B2</cell>
+              <cell row="2" col="3">C2</cell>
+              <cell row="2" col="4">D2</cell>
+           </row>
+           <row>
+              <cell row="3" col="1">A3</cell>
+              <cell row="3" col="2">B3</cell>
+              <cell row="3" col="3">C3</cell>
+              <cell row="3" col="4">D3</cell>
+           </row>
+        </table>
+      </x:expect>
+   </x:scenario>
+
+
+    <x:scenario label="When transposing a table with spans">
+      <x:context mode="transpose">
+        <table id="simple_table"
+               rend="summary(A straightforward table to demonstrate tables in TEI) class(verticalBorderInside)">
+            <column/>
+            <column/>
+            <column/>
+            <row>
+                <cell>A1</cell>
+                <cell>A2</cell>
+                <cell>A3</cell>
+            </row>
+            <row>
+                <cell>B1</cell>
+                <cell rows="2">B2</cell>
+                <cell>B3</cell>
+            </row>
+            <row>
+                <cell>C1</cell>
+                <cell>C3</cell>
+            </row>
+            <row>
+                <cell>D1</cell>
+                <cell cols="2">D2</cell>
+            </row>
+        </table>
+      </x:context>
+      <x:expect label="will return in a table with spans rows and columns transposed">
+        <table id="simple_table"
+               rend="summary(A straightforward table to demonstrate tables in TEI) class(verticalBorderInside)"
+               rows="3"
+               cols="4">
+           <column/>
+           <column/>
+           <column/>
+           <column/>
+           <row>
+              <cell row="1" col="1">A1</cell>
+              <cell row="1" col="2">B1</cell>
+              <cell row="1" col="3">C1</cell>
+              <cell row="1" col="4">D1</cell>
+           </row>
+           <row>
+              <cell row="2" col="1">A2</cell>
+              <cell row="2" col="2" cols="2">B2</cell>
+              <cell row="2" col="4" rows="2">D2</cell>
+           </row>
+           <row>
+              <cell row="3" col="1">A3</cell>
+              <cell row="3" col="2">B3</cell>
+              <cell row="3" col="3">C3</cell>
+           </row>
+        </table>
+      </x:expect>
+   </x:scenario>
+
+
+    <x:scenario label="When transposing a table with spans and labels">
+      <x:context mode="transpose">
+        <table id="simple_table"
+               rend="summary(A straightforward table to demonstrate tables in TEI) class(verticalBorderInside)">
+            <column/>
+            <column/>
+            <column/>
+            <row role="label">
+                <cell>First</cell>
+                <cell>Second</cell>
+                <cell>Third</cell>
+            </row>
+            <row>
+                <cell>A1</cell>
+                <cell>A2</cell>
+                <cell>A3</cell>
+            </row>
+            <row>
+                <cell>B1</cell>
+                <cell rows="2">B2</cell>
+                <cell>B3</cell>
+            </row>
+            <row>
+                <cell>C1</cell>
+                <cell>C3</cell>
+            </row>
+            <row>
+                <cell>D1</cell>
+                <cell cols="2">D2</cell>
+            </row>
+        </table>
+      </x:context>
+      <x:expect label="will return in a table with spans rows and columns transposed">
+        <table id="simple_table"
+               rend="summary(A straightforward table to demonstrate tables in TEI) class(verticalBorderInside)"
+               rows="3"
+               cols="5">
+           <column role="label"/>
+           <column/>
+           <column/>
+           <column/>
+           <column/>
+           <row>
+              <cell row="1" col="1">First</cell>
+              <cell row="1" col="2">A1</cell>
+              <cell row="1" col="3">B1</cell>
+              <cell row="1" col="4">C1</cell>
+              <cell row="1" col="5">D1</cell>
+           </row>
+           <row>
+              <cell row="2" col="1">Second</cell>
+              <cell row="2" col="2">A2</cell>
+              <cell row="2" col="3" cols="2">B2</cell>
+              <cell row="2" col="5" rows="2">D2</cell>
+           </row>
+           <row>
+              <cell row="3" col="1">Third</cell>
+              <cell row="3" col="2">A3</cell>
+              <cell row="3" col="3">B3</cell>
+              <cell row="3" col="4">C3</cell>
+           </row>
+        </table>
+      </x:expect>
+   </x:scenario>
+
+
 </x:description>

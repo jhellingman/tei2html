@@ -13,7 +13,6 @@
     <xsl:include href="modules/stripns.xsl"/>
     <xsl:include href="modules/normalize-table.xsl"/>
 
-
     <xd:doc type="stylesheet">
         <xd:short>Stylesheet to preprocess TEI documents.</xd:short>
         <xd:detail><h:p>This stylesheet preprocesses TEI documents, so the final conversion to HTML
@@ -38,6 +37,14 @@
 
 
     <xsl:template match="@TEIform" mode="#all"/>
+
+
+    <xsl:template match="table[f:has-rend-value(@rend, 'transpose')]">
+        <xsl:variable name="transposed-table">
+            <xsl:apply-templates select="." mode="transpose"/>
+        </xsl:variable>
+        <xsl:apply-templates select="$transposed-table/table" mode="normalize-table"/>
+    </xsl:template>
 
 
     <xsl:template match="table">

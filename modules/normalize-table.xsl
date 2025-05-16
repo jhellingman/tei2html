@@ -4,9 +4,9 @@
     <!ENTITY rsquo      "&#x2019;">
 ]>
 
-<xsl:stylesheet version="3.0"
-                xmlns="http://www.w3.org/1999/xhtml"
+<xsl:stylesheet version="3.0"                
                 xmlns:f="urn:stylesheet-functions"
+                xmlns:tei="http://www.tei-c.org/ns/1.0"
                 xmlns:xd="http://www.pnp-software.com/XSLTdoc"
                 xmlns:xs="http://www.w3.org/2001/XMLSchema"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -37,6 +37,7 @@
         </xd:detail>
     </xd:doc>
 
+    <xsl:namespace-alias stylesheet-prefix="tei" result-prefix="#default"/> 
 
     <!-- stub function used by log.xsl -->
     <xsl:function name="f:is-set" as="xs:boolean">
@@ -47,6 +48,78 @@
 
     <xsl:include href="log.xsl"/>
     <xsl:include href="rend.xsl"/>
+
+
+    <xsl:template match="table" mode="transpose">
+
+        <!-- Transpose counter-clockwise and reverse order of rows -->
+
+        <!-- Step 1: normalize the table -->
+        <xsl:variable name="normalized-table">
+            <xsl:apply-templates select="." mode="normalize-table"/>
+        </xsl:variable>
+
+        <!-- now we have position attributes on each cell, in @row and @col attributes -->
+        <!-- when dealing with nested tables, we only transpose the top-level one, unless explicitely indicated -->
+
+        <tei:table>
+            <xsl:variable name="cols" select="$normalized-table/table/@cols" as="xs:integer"/>
+            <!-- <xsl:variable name="rows" select="xs:integer($normalized-table/table/@rows) + xs:integer($normalized-table/table/@headrows)" as="xs:integer"/> -->
+            <xsl:variable name="rows" select="$normalized-table/table/@rows" as="xs:integer"/>
+
+            <xsl:attribute name="rows" select="$cols"/>
+            <xsl:attribute name="cols" select="$rows"/>
+            <xsl:attribute name="rend" select="f:remove-rend-value($normalized-table/table/@rend, 'transpose')"/>
+            <xsl:copy-of select="$normalized-table/table/@*[not(name() = ('rows', 'headrows', 'cols', 'rend'))]"/>
+
+            <!-- create column objects for each row in the original table -->
+            <xsl:for-each select="1 to $rows">
+                <tei:column>
+                    <!-- Copy the @rend and @role attribute from the corresponding row -->
+                    <xsl:variable name="row" select="."/>
+                    <xsl:variable name="rend" select="$normalized-table/table/row[cell[@row = $row][1]]/@rend"/>
+                    <xsl:if test="$rend">
+                        <xsl:attribute name="rend" select="$rend"/>
+                    </xsl:if>
+                    <xsl:variable name="role" select="$normalized-table/table/row[cell[@row = $row][1]]/@role"/>
+                    <xsl:if test="$role">
+                        <xsl:attribute name="role" select="$role"/>
+                    </xsl:if>
+                </tei:column>
+            </xsl:for-each>
+
+            <!-- create a row for each column in the original table -->
+            <xsl:for-each select="1 to $cols">
+                <tei:row>
+                    <!-- Copy the @rend and @role attribute from the corresponding @column -->
+                    <xsl:variable name="col" select="."/>
+                    <xsl:variable name="rend" select="$normalized-table/table/column[$col]/@rend"/>
+                    <xsl:if test="$rend">
+                        <xsl:attribute name="rend" select="$rend"/>
+                    </xsl:if>
+                    <xsl:variable name="role" select="$normalized-table/table/column[$col]/@role"/>
+                    <xsl:if test="$role">
+                        <xsl:attribute name="role" select="$role"/>
+                    </xsl:if>
+
+                    <xsl:for-each select="1 to $rows">
+                        <xsl:variable name="row" select="."/>
+                        <xsl:variable name="cell" select="$normalized-table/table/row/cell[@row = $row and @col = $col]"/>
+                        <xsl:if test="$cell">
+                            <tei:cell>
+                                <xsl:attribute name="row" select="$col"/>
+                                <xsl:if test="$cell/@cols"><xsl:attribute name="rows" select="$cell/@cols"/></xsl:if>
+                                <xsl:attribute name="col" select="$row"/>
+                                <xsl:if test="$cell/@rows"><xsl:attribute name="cols" select="$cell/@rows"/></xsl:if>
+                                <!-- Copy contents -->
+                                <xsl:copy-of select="$cell/node()"/>
+                            </tei:cell>
+                        </xsl:if>
+                    </xsl:for-each>
+                </tei:row>
+            </xsl:for-each>
+        </tei:table>
+    </xsl:template>
 
 
     <xsl:template match="table" mode="normalize-table">
@@ -77,10 +150,10 @@
         </xsl:variable>
 
         <!-- Step 5: recurse for nested tables (but make sure not to start with the top-level table) -->
-        <xsl:element name="table" namespace="">
+        <tei:table>
             <xsl:copy-of select="$split-table/table/@*"/>
             <xsl:apply-templates select="$split-table/table/node()" mode="normalize-table"/>
-        </xsl:element>
+        </tei:table>
     </xsl:template>
 
 
@@ -110,7 +183,7 @@
     <xsl:template match="cell[@cols]" mode="normalize-table-colspans">
         <xsl:variable name="cell" select="." as="element(cell)"/>
         <xsl:for-each select="1 to @cols">
-            <xsl:element name="cell" namespace="">
+            <tei:cell>
                 <xsl:copy-of select="$cell/@*[not(name() = 'cols')]"/>
                 <xsl:choose>
                     <xsl:when test="position() = 1">
@@ -126,18 +199,18 @@
                         <xsl:attribute name="spanned" select="'true'"/>
                     </xsl:otherwise>
                 </xsl:choose>
-            </xsl:element>
+            </tei:cell>
         </xsl:for-each>
     </xsl:template>
 
     <xsl:template match="cell" mode="normalize-table-colspans">
-        <xsl:element name="cell" namespace="">
+        <tei:cell>
             <xsl:if test="@rows">
                 <xsl:attribute name="orig_rows" select="@rows"/>
             </xsl:if>
             <xsl:copy-of select="@*"/>
             <xsl:copy-of select="./node()"/>
-        </xsl:element>
+        </tei:cell>
     </xsl:template>
 
 
@@ -335,11 +408,11 @@
     </xd:doc>
 
     <xsl:template mode="split-decimal-columns" match="table">
-        <xsl:element name="table" namespace="">
+        <tei:table>
             <xsl:copy-of select="@*[not(name() = 'cols')]"/>
             <xsl:attribute name="cols" select="f:new-cols-value(., 1, @cols)"/>
             <xsl:apply-templates mode="split-decimal-columns"/>
-        </xsl:element>
+        </tei:table>
     </xsl:template>
 
 
@@ -352,18 +425,18 @@
         <xsl:variable name="rend" select="f:remove-rend-value(@rend, 'align')" as="xs:string"/>
         <xsl:variable name="rend" select="f:adjust-rend-dimension($rend, 'width', 0.5)"/>
 
-        <xsl:element name="column" namespace="">
+        <tei:column>
             <xsl:copy-of select="@*[not(name() = 'rend')]"/>
             <xsl:if test="$rend != ''">
                 <xsl:attribute name="rend" select="$rend"/>
             </xsl:if>
-        </xsl:element>
-        <xsl:element name="column" namespace="">
+        </tei:column>
+        <tei:column>
             <xsl:copy-of select="@*[not(name() = ('rend', 'id'))]"/>
             <xsl:if test="$rend != ''">
                 <xsl:attribute name="rend" select="$rend"/>
             </xsl:if>
-        </xsl:element>
+        </tei:column>
     </xsl:template>
 
 
@@ -448,7 +521,7 @@
         <xsl:variable name="rend" select="f:adjust-rend-dimension($rend, 'width', 0.5)" as="xs:string"/>
 
         <!-- Generate the cell for the integer part -->
-        <xsl:element name="cell" namespace="">
+        <tei:cell>
             <xsl:copy-of select="@*[not(name() = ('col', 'rend', 'role'))]"/>
             <xsl:attribute name="col" select="f:new-col-value(../.., @col)"/>
             <xsl:attribute name="rend" select="f:add-class($rend, 'alignDecimalIntegerPart')"/>
@@ -457,10 +530,10 @@
             </xsl:if>
             <xsl:apply-templates select="*[not(preceding-sibling::text()[normalize-space(.) != ''])]"/>
             <xsl:value-of select="$integer"/>
-        </xsl:element>
+        </tei:cell>
 
         <!-- Generate the cell for the fractional part -->
-        <xsl:element name="cell" namespace="">
+        <tei:cell>
             <xsl:copy-of select="@*[not(name() = ('col', 'cols', 'rend', 'role'))]"/>
             <xsl:attribute name="col" select="f:new-col-value(../.., @col) + 1"/>
             <xsl:attribute name="rend" select="f:add-class($rend, 'alignDecimalFractionPart')"/>
@@ -472,7 +545,7 @@
             </xsl:if>
             <xsl:value-of select="$fraction"/>
             <xsl:apply-templates select="(*|text())[preceding-sibling::text()[normalize-space(.) != '']]"/>
-        </xsl:element>
+        </tei:cell>
     </xsl:template>
 
 
@@ -482,30 +555,30 @@
 
     <xsl:template mode="split-cell" match="cell">
         <xsl:variable name="rend" select="if (@rend) then @rend else ''" as="xs:string"/>
-        <xsl:element name="cell" namespace="">
+        <tei:cell>
             <xsl:copy-of select="@*[not(name() = ('col', 'cols', 'rend'))]"/>
             <xsl:attribute name="cols" select="if (@cols) then f:new-cols-value(../.., @col, @cols) + 1 else 2"/>
             <xsl:attribute name="col" select="f:new-col-value(../.., @col)"/>
             <xsl:attribute name="rend" select="f:add-class($rend, 'alignDecimalNotNumber')"/>
             <xsl:copy-of select="*|text()"/>
-        </xsl:element>
+        </tei:cell>
     </xsl:template>
 
     <xsl:template mode="adjust-cell" match="cell[@cols > 1]">
-        <xsl:element name="cell" namespace="">
+        <tei:cell>
             <xsl:copy-of select="@*[not(name() = ('col', 'cols'))]"/>
             <xsl:attribute name="cols" select="f:new-cols-value(../.., @col, @cols)"/>
             <xsl:attribute name="col" select="f:new-col-value(../.., @col)"/>
             <xsl:copy-of select="*|text()"/>
-        </xsl:element>
+        </tei:cell>
     </xsl:template>
 
     <xsl:template mode="adjust-cell" match="cell">
-        <xsl:element name="cell" namespace="">
+        <tei:cell>
             <xsl:copy-of select="@*[not(name() = 'col')]"/>
             <xsl:attribute name="col" select="f:new-col-value(../.., @col)"/>
             <xsl:copy-of select="*|text()"/>
-        </xsl:element>
+        </tei:cell>
     </xsl:template>
 
     <xd:doc>

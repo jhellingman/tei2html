@@ -48,6 +48,7 @@ my @ignored_patterns = (
 
     qr/^[0-9]+.txt$/,
     qr/^[0-9]+-8.txt$/,
+    qr/^[0-9]+-0.txt$/,
     qr/^[0-9]+-h.htm$/,
 );
 
@@ -55,7 +56,7 @@ find(\&wanted, $source);
 
 if (defined $repo) {
     print "\n\nNow verify the git directory, remove any redundant files, and say\n";
-    print "\ngit add -A\ngit commit -m \"...\"\n";
+    print "\ngit add -A\ngit commit -m \"updated ebook\"\ngit push\n";
 }
 
 sub wanted {
@@ -115,7 +116,7 @@ sub extract_pgsrc_id {
         return undef;
     };
 
-    my ($tei_file) = grep { /\.tei$/ && -f "$dir/$_" } readdir($dh);
+    my ($tei_file) = grep { /[0-9]\.[0-9]+\.tei$/ && -f "$dir/$_" } readdir($dh);
     closedir $dh;
 
     return undef unless $tei_file;
