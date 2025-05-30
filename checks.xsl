@@ -976,6 +976,7 @@
         'parNum',
         'tocPageNum',
         'tocDivNum',
+        'tocFigNum',
         'divNum',
         'itemNum',
         'figNum',

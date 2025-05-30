@@ -10,10 +10,10 @@ use Cwd 'abs_path';
 
 # Option parsing
 my $dry_run = 0;
-GetOptions('dry-run' => \$dry_run) or die "Usage: $0 [--dry-run] source_dir target_dir\n";
+GetOptions('dry-run' => \$dry_run) or die "Usage: $0 [--dry-run] source_dir [target_dir]\n";
 
 # Positional arguments
-die "Usage: $0 [--dry-run] source_dir target_dir\n" unless @ARGV == 2;
+die "Usage: $0 [--dry-run] source_dir target_dir\n" unless @ARGV == 2 || @ARGV == 1;
 
 my ($source, $target) = @ARGV;
 $source = abs_path($source);
@@ -29,6 +29,8 @@ my $repo = extract_pgsrc_id($source);
 if (defined $repo) {
     $target = $root . "/" . $repo;
 }
+
+die "No target directory defined\n" unless defined $target;
 
 die "Target directory '$target' does not exist!\n" unless -d $target or $dry_run;
 

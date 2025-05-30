@@ -23,6 +23,15 @@ Note that the `@rend` value `align(decimal)` triggers some special processing wh
 
 Sometimes, rows are preceded by a tall brace. `tei2html` will automatically generate HTML to include an image of a tall brace when a cell spans more than one row and only includes a single brace character.
 
+== Special rendering
+
+Using `@rend` values, the rendering of the table can be adjusted.
+
+* `transpose(ccw)` will swap rows and colums.
+* `columns(n)` will set the table in _n_ columns, repeating the headers above each column (in the original table).
+* when using multiple columns, `item-order(column-major)` will put the consequetive rows next to each other, before going to the next row; `item-order(column-major)` (the default), will put the rows below each other before going to the next column.
+* Columns will not have equal length if the number of rows cannot be divided by the number of colums.
+
 == Table processing
 
 `tei2html` cannot directly process tables correctly. A number of pre-processing steps are required to correctly deal with the complexities tables introduce. These are handled in the xslt file `normalize-table.xsl`, which includes code to determine the correct column of each cell (taking into consideration spanned rows and columns) and the special handling of decimal alignment. The `tei2html.pl` perl script normally applies this transform to the XML before applying the main transform.

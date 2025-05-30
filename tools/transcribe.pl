@@ -12,7 +12,7 @@ my $patcdir   = $toolsdir . "/patc/transcriptions";  	# location of patc transcr
 
 main();
 
-sub main() {
+sub main {
 
     my $infile = $ARGV[0];
 
@@ -38,8 +38,7 @@ sub main() {
     unlink($tmpFile3);
 }
 
-sub adjustNotationTags($$) {
-
+sub adjustNotationTags {
     my $inputFileName = shift;
     my $outputFileName = shift;
 

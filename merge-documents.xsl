@@ -30,7 +30,7 @@
 
     <xsl:function name="f:import-document">
         <xsl:param name="location" as="xs:string"/>
-        <xsl:param name="baseNode"/>
+        <xsl:param name="baseNode" as="node()"/>
         <xsl:param name="prefix" as="xs:string"/>
         <xsl:param name="keepPrefix" as="xs:string"/>
 
@@ -57,7 +57,7 @@
 
     <xsl:function name="f:import-document">
         <xsl:param name="location" as="xs:string"/>
-        <xsl:param name="baseNode"/>
+        <xsl:param name="baseNode" as="node()"/>
 
         <xsl:copy-of select="document($location, $baseNode)"/>
     </xsl:function>
@@ -74,11 +74,14 @@
     </xd:doc>
 
     <xsl:function name="f:prefix-id" as="xs:string">
-        <xsl:param name="id" as="xs:string"/>
-        <xsl:param name="prefix" as="xs:string"/>
-        <xsl:param name="keepPrefixes" as="xs:string*"/>
+        <xsl:param name="id" as="xs:string" />
+        <xsl:param name="prefix" as="xs:string" />
+        <xsl:param name="keepPrefixes" as="xs:string*" />
 
-        <xsl:sequence select="if (f:starts-with-any($id, $keepPrefixes)) then $id else concat($prefix, $id)"/>
+        <xsl:sequence 
+            select="if (f:starts-with-any($id, $keepPrefixes)) 
+                    then $id 
+                    else $prefix || $id" />
     </xsl:function>
 
 
@@ -86,7 +89,7 @@
         <xsl:param name="id" as="xs:string"/>
         <xsl:param name="keepPrefixes" as="xs:string*"/>
 
-        <xsl:sequence select="sum(for $prefix in $keepPrefixes return (if (starts-with($id, $prefix)) then 1 else 0)) &gt; 0"/>
+        <xsl:sequence select="exists($keepPrefixes[starts-with($id, .)])"/>
     </xsl:function>
 
 
@@ -245,13 +248,11 @@
     </xsl:function>
 
 
-
     <!-- Stub methods from included stylesheets -->
 
     <xsl:function name="f:is-set" as="xs:boolean">
         <xsl:param name="node" as="xs:string"/>
         <xsl:sequence select="false()"/>
     </xsl:function>
-
 
 </xsl:stylesheet>
