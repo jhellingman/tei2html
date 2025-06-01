@@ -65,11 +65,11 @@
             </xsl:when>
             <xsl:otherwise>
                 <xsl:call-template name="closepar"/>
-                <div class="table">
-                    <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
-                    <xsl:apply-templates mode="table-caption" select="head"/>
-                    <xsl:call-template name="inner-table"/>
-                </div>
+                    <div class="table">
+                        <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+                        <xsl:apply-templates mode="table-caption" select="head"/>
+                        <xsl:call-template name="inner-table"/>
+                    </div>
                 <xsl:call-template name="reopenpar"/>
             </xsl:otherwise>
         </xsl:choose>

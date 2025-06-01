@@ -71,7 +71,7 @@ sub cleanText($) {
         open(INPUTFILE, '<:encoding(UTF-8)', $textFile) || die("Could not open UTF-8 file $textFile for reading");
         $verbose and print STDERR "Reading UTF-8 text file: $textFile\n";
     } else {
-        open(INPUTFILE, $textFile) || die("Could not open file $textFile for reading");
+        open(INPUTFILE, '<:encoding(cp1252)', $textFile) || die("Could not open file $textFile for reading");
         $verbose and print STDERR "Reading text file: $textFile\n";
     }
     open(OUTPUTFILE, "> $textFile.tmp") || die("Could not open $textFile.tmp for writing.");

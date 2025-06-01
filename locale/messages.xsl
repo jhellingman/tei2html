@@ -5,7 +5,7 @@
                 xmlns:msg="http://www.gutenberg.ph/2006/schemas/messages"
                 xmlns:xd="http://www.pnp-software.com/XSLTdoc"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                exclude-result-prefixes="msg xd xhtml">
+                exclude-result-prefixes="msg xd">
 
     <xsl:output
         doctype-public="-//W3C//DTD HTML 4.01 Transitional//EN"

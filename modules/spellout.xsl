@@ -18,7 +18,7 @@
       else $number"/>
   </xsl:function>
 
-  <!-- power and log functions not in saxon-HE, so make do with poor-man’s versions. -->
+  <!-- power and log functions not in saxon-HE, so make do with poor-man's versions. -->
   <xsl:function name="f:power1000" as="xs:integer">
     <xsl:param name="group" as="xs:integer"/>
     <xsl:sequence select="if ($group = 0) then 1 else f:power1000($group - 1) * 1000"/>
