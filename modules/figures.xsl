@@ -362,6 +362,24 @@
     </xsl:template>
 
 
+    <xsl:template match="figure[f:has-rend-value(./@rend, 'shape-outside-url')]" mode="css">
+        <xsl:if test="not(f:is-set('pg.compliant'))">
+            <xsl:variable name="filename" select="f:determine-image-filename(.)" as="xs:string"/>
+            <xsl:variable name="shape-outside-url" select="f:rend-value(./@rend, 'shape-outside-url')" as="xs:string"/>
+            <xsl:variable name="shape-outside-url" select="if ($shape-outside-url = '.') then $filename else $shape-outside-url"/>
+
+            <xsl:variable name="selector" select="f:escape-css-selector(f:generate-id(.) || '-shape-outside')"/>
+
+            <xsl:if test="f:is-image-included($filename)"><xsl:text expand-text="yes">
+.{$selector} {{
+    shape-outside: url('{$shape-outside-url}');
+}}
+</xsl:text></xsl:if>
+            </xsl:if>
+        <xsl:next-match/>
+    </xsl:template>
+
+
     <xsl:template match="figure[f:has-rend-value(./@rend, 'hover-overlay')]" mode="css">
         <xsl:variable name="filename" select="f:determine-image-filename(.)" as="xs:string"/>
 
@@ -542,7 +560,9 @@ width:{$width};
             <xsl:if test="f:rend-value($node/@rend, 'float') = 'right'">floatRight </xsl:if>
 
             <!-- Add the class that sets the width, if known. -->
-            <xsl:if test="$width != ''"><xsl:value-of select="f:generate-id($node)"/><xsl:text>width</xsl:text></xsl:if>
+            <xsl:if test="$width != ''"><xsl:value-of select="f:generate-id($node)"/><xsl:text>width </xsl:text></xsl:if>
+
+            <xsl:if test="not(f:is-set('pg.compliant')) and f:has-rend-value($node/@rend, 'shape-outside-url')"><xsl:value-of select="f:generate-id($node)"/><xsl:text>-shape-outside</xsl:text></xsl:if>
         </xsl:variable>
         <xsl:copy-of select="f:set-class-attribute-with($node, $class)"/>
     </xsl:function>
