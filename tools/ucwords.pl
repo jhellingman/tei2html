@@ -257,6 +257,8 @@ sub handleTag($$) {
         my $lang = getAttrVal('lang', $tag);
         if ($lang ne '') {
             pushLang($element, $lang);
+        } elsif ($element eq 'formula' || $element eq 'rendition') {
+            pushLang($element, 'xx');
         } else {
             pushLang($element, getLang());
         }

@@ -226,9 +226,9 @@
         <xsl:param name="node"/>
 
         <xsl:sequence select="f:is-valid($url)
-            and (f:is-allowed-url($url)               
+            and (f:is-allowed-url($url)
                  or (not(f:is-set('pg.compliant'))
-                     and (f:get-setting('xref.show') = 'always' 
+                     and (f:get-setting('xref.show') = 'always'
                           or (f:get-setting('xref.show') = 'colophon' and $node/ancestor::teiHeader)
                          )
                     )
@@ -257,18 +257,39 @@
                 </audio>
             </xsl:when>
             <xsl:otherwise>
-                <a>
-                    <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
-                    <xsl:attribute name="class">
-                        <xsl:value-of select="f:translate-xref-class($url)"/>
-                        <xsl:text> </xsl:text>
-                        <xsl:value-of select="f:generate-class-name(.)"/>
-                    </xsl:attribute>
-                    <xsl:copy-of select="f:create-attribute-if-present('title', f:translate-xref-title($url))"/>
-                    <xsl:copy-of select="f:create-attribute-if-present('href', f:translate-xref-url($url, substring(f:get-document-lang(), 1, 2)))"/>
-                    <xsl:copy-of select="f:create-attribute-if-present('rel', @rel)"/>
-                    <xsl:apply-templates/>
-                </a>
+                <xsl:variable name="href" select="f:translate-xref-url($url, substring(f:get-document-lang(), 1, 2))"/>
+                <xsl:choose>
+                    <!-- resulting href is empty -->
+                    <xsl:when test="$href = ''">
+                        <xsl:apply-templates/>
+                    </xsl:when>
+                    <!-- resulting href is an internal link (todo: check presence of target) -->
+                    <xsl:when test="starts-with($href, '#')">
+                        <a>
+                            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+                            <xsl:attribute name="class">
+                                <xsl:value-of select="f:generate-class-name(.)"/>
+                            </xsl:attribute>
+                            <xsl:copy-of select="f:create-attribute-if-present('href', $href)"/>
+                            <xsl:apply-templates/>
+                        </a>
+                    </xsl:when>
+                    <!-- resulting href is an external link -->
+                    <xsl:otherwise>
+                        <a>
+                            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+                            <xsl:attribute name="class">
+                                <xsl:value-of select="f:translate-xref-class($url)"/>
+                                <xsl:text> </xsl:text>
+                                <xsl:value-of select="f:generate-class-name(.)"/>
+                            </xsl:attribute>
+                            <xsl:copy-of select="f:create-attribute-if-present('title', f:translate-xref-title($url))"/>
+                            <xsl:copy-of select="f:create-attribute-if-present('href', $href)"/>
+                            <xsl:copy-of select="f:create-attribute-if-present('rel', @rel)"/>
+                            <xsl:apply-templates/>
+                        </a>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>

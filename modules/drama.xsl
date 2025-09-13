@@ -216,9 +216,32 @@
                     <xsl:copy-of select="f:handle-hemistich-value(.)"/>
                 </span>
             </xsl:if>
+            <xsl:if test="@part = ('M', 'F')">
+                <span class="hemistich">
+                    <xsl:copy-of select="f:handle-partial-line(.)"/>
+                </span>
+            </xsl:if>
+                
             <xsl:apply-templates/>
         </xsl:element>
     </xsl:template>
+
+    <xsl:function name="f:handle-partial-line">
+        <xsl:param name="node" as="element()"/>
+
+        <!-- Look for the initial part, that is, the nearest preceding line with @part="I" -->
+        <!-- Look for intermediate parts, that is, preceding lines with @part="M" after the initial part -->
+        <!-- Concatenate all these into a single node with spaces between them -->
+
+        <xsl:variable name="parts" select="($node/preceding::l[@part='I'][1], $node/preceding::l[@part='I'][1]/following::l[@part='M'][. &lt;&lt; $node])"/>
+        <xsl:for-each select="$parts">
+            <xsl:variable name="content">
+                <xsl:apply-templates select="./node()"/>
+            </xsl:variable>
+            <xsl:copy-of select="f:copy-without-ids($content)"/>
+            <xsl:text> </xsl:text>
+        </xsl:for-each>
+    </xsl:function>
 
     <xsl:function name="f:handle-hemistich-value">
         <xsl:param name="node" as="element()"/>
