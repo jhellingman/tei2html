@@ -1171,7 +1171,7 @@ in all copies or substantial portions of the Software.
 
 <xsl:template match="@part">
     <xsl:if test="not(. = 'n' or . = 'N')">
-        <xsl:attribute name="part"><xsl:value-of select="."/></xsl:attribute>
+        <xsl:attribute name="part"><xsl:value-of select="upper-case(.)"/></xsl:attribute>
     </xsl:if>
 </xsl:template>
 
