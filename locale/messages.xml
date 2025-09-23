@@ -59,7 +59,7 @@
         <msg:message name="msgPrologue" help="In fiction: a part of a book that comes before the beginning of the story to introduce characters or events preceding the actual start of the story.">Prologue</msg:message>
         <msg:message name="msgEpilogue" help="In fiction: part of book that comes after the end of the story to provide a conclusion to some open story lines.">Epilogue</msg:message>
         <msg:message name="msgForeword" help="A part of a book before the main text not written by the author. Typically written by an authority to introduce the book and explain why the reader should read the book.">Foreword</msg:message>
-        <msg:message name="msgPreface" help="A part of a book before the main text  written by the author. Explains how the book came about.">Preface</msg:message>
+        <msg:message name="msgPreface" help="A part of a book before the main text written by the author. Explains how the book came about.">Preface</msg:message>
         <msg:message name="msgIntroduction" help="A part of a book before the main text written by the author. Provides a short overview of the contents.">Introduction</msg:message>
         <msg:message name="msgAfterword" help="A part of a book after the main text written similar to a foreword. May be used to respond to critical remarks made about a previous edition.">Afterword</msg:message>
         <msg:message name="msgPostscript" help="A part of a book after the main text to provide some further information about the preceding work.">Postscript</msg:message>
@@ -1846,6 +1846,15 @@
     <!-- Afrikaans translation -->
 
     <msg:messages xml:lang="af" fallback="en" name="Afrikaans">
+
+        <msg:message name="msgGoToToc">Gaan na die inhoudsopgawe</msg:message>
+        <msg:message name="msgGoToNoteMark">Gaan na nota <msg:param name="mark"/>.</msg:message>
+        <msg:message name="msgReturnToNoteMarkInText">Terug na nota <msg:param name="mark"/> in die teks.</msg:message>
+        <msg:message name="msgTranslator">Vertaler</msg:message>
+        <msg:message name="msgGenerationDate">Lêer-aanmaakdatum</msg:message>
+        <msg:message name="msgCoverImage">Omslagprent</msg:message>
+        <msg:message name="msgDedication">Opdrag</msg:message>
+        <msg:message name="msgPreface">Voorwoord</msg:message>
 
         <msg:message name="af">Afrikaans</msg:message>
         <msg:message name="en">Engels</msg:message>
