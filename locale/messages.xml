@@ -1847,6 +1847,12 @@
 
     <msg:messages xml:lang="af" fallback="en" name="Afrikaans">
 
+        <msg:message name="msgLinkToPg">Skakel na Project Gutenberg-eboek</msg:message>
+        <msg:message name="msgQrCode">QR-kode</msg:message>
+        <msg:message name="msgQrCodePgUrl">QR-kode van Project Gutenberg-URL</msg:message>
+        <msg:message name="msgNotCopyrightedUS">Hierdie boek is nie outeursregtelik beskerm in die Verenigde State nie. As u elders woon, verifieer asseblief die wette van u land voordat u hierdie boek aflaai.</msg:message>
+        <msg:message name="msgProjectGutenberg">Project Gutenberg</msg:message>
+
         <msg:message name="msgGoToToc">Gaan na die inhoudsopgawe</msg:message>
         <msg:message name="msgGoToNoteMark">Gaan na nota <msg:param name="mark"/>.</msg:message>
         <msg:message name="msgReturnToNoteMarkInText">Terug na nota <msg:param name="mark"/> in die teks.</msg:message>
