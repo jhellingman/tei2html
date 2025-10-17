@@ -75,7 +75,7 @@ text-indent:2em;
         </x:context>
         <x:expect label="will result in two HTML paragraphs">
             <p xmlns="http://www.w3.org/1999/xhtml" id="..." class="line">A line of verse</p>
-            <p xmlns="http://www.w3.org/1999/xhtml" id="..." class="line"><span class="hemistich">A line of verse </span>and a hemistich</p>
+            <p xmlns="http://www.w3.org/1999/xhtml" id="..." class="line"><span class="hemistich">A line of verse</span> and a hemistich</p>
         </x:expect>
     </x:scenario>
 
@@ -86,7 +86,7 @@ text-indent:2em;
         </x:context>
         <x:expect label="will result in two HTML paragraphs">
             <p xmlns="http://www.w3.org/1999/xhtml" id="..." class="line">A line of verse</p>
-            <p xmlns="http://www.w3.org/1999/xhtml" id="..." class="line"><span class="hemistich">A line of verse </span>and a hemistich</p>
+            <p xmlns="http://www.w3.org/1999/xhtml" id="..." class="line"><span class="hemistich">A line of verse</span> and a hemistich</p>
         </x:expect>
     </x:scenario>
 
@@ -97,7 +97,7 @@ text-indent:2em;
         </x:context>
         <x:expect label="will result in two HTML paragraphs, no ids will be generated in copied content">
             <p xmlns="http://www.w3.org/1999/xhtml" id="..." class="line">A <i id="...">line</i> of verse</p>
-            <p xmlns="http://www.w3.org/1999/xhtml" id="..." class="line"><span class="hemistich">A <i>line</i> of verse </span>and a <i id="...">hemistich</i></p>
+            <p xmlns="http://www.w3.org/1999/xhtml" id="..." class="line"><span class="hemistich">A <i>line</i> of verse</span> and a <i id="...">hemistich</i></p>
         </x:expect>
     </x:scenario>
 
@@ -109,8 +109,8 @@ text-indent:2em;
         </x:context>
         <x:expect label="will result in three HTML paragraphs, correct hemistiches, and no ids will be generated in copied content">
             <p xmlns="http://www.w3.org/1999/xhtml" id="hs1" class="line">First,</p>
-            <p xmlns="http://www.w3.org/1999/xhtml" id="hs2" class="line"><span class="hemistich">First, </span><i id="...">second</i>, and</p>
-            <p xmlns="http://www.w3.org/1999/xhtml" id="hs3" class="line"><span class="hemistich">First, <i>second</i>, and </span>third.</p> 
+            <p xmlns="http://www.w3.org/1999/xhtml" id="hs2" class="line"><span class="hemistich">First,</span><x:text> </x:text><i id="...">second</i>, and</p>
+            <p xmlns="http://www.w3.org/1999/xhtml" id="hs3" class="line"><span class="hemistich">First, <i>second</i>, and</span> third.</p> 
         </x:expect>
     </x:scenario>
 
@@ -122,8 +122,8 @@ text-indent:2em;
         </x:context>
         <x:expect label="will result in three HTML paragraphs, correct hemistiches, and no ids will be generated in copied content">
             <p xmlns="http://www.w3.org/1999/xhtml" id="hs1" class="line">First,</p>
-            <p xmlns="http://www.w3.org/1999/xhtml" id="hs2" class="line"><span class="hemistich">First, </span><i id="...">second</i>, and</p>
-            <p xmlns="http://www.w3.org/1999/xhtml" id="hs3" class="line"><span class="hemistich">First, <i>second</i>, and </span>third.</p> 
+            <p xmlns="http://www.w3.org/1999/xhtml" id="hs2" class="line"><span class="hemistich">First,</span><x:text> </x:text><i id="...">second</i>, and</p>
+            <p xmlns="http://www.w3.org/1999/xhtml" id="hs3" class="line"><span class="hemistich">First, <i>second</i>, and</span> third.</p> 
         </x:expect>
     </x:scenario>
 
@@ -135,8 +135,8 @@ text-indent:2em;
         </x:context>
         <x:expect label="will result in three HTML paragraphs, correct hemistiches, and no ids will be generated in copied content">
             <p xmlns="http://www.w3.org/1999/xhtml" id="hs1" class="line">First,</p>
-            <p xmlns="http://www.w3.org/1999/xhtml" id="hs2" class="line"><span class="hemistich">First, </span><i id="...">second</i>, and</p>
-            <p xmlns="http://www.w3.org/1999/xhtml" id="hs3" class="line"><span class="hemistich">First, <i>second</i>, and </span>third.</p> 
+            <p xmlns="http://www.w3.org/1999/xhtml" id="hs2" class="line"><span class="hemistich">First,</span><x:text> </x:text><i id="...">second</i>, and</p>
+            <p xmlns="http://www.w3.org/1999/xhtml" id="hs3" class="line"><span class="hemistich">First, <i>second</i>, and</span> third.</p> 
         </x:expect>
     </x:scenario>
 
@@ -148,10 +148,21 @@ text-indent:2em;
         </x:context>
         <x:expect label="will result in two HTML paragraphs">
             <p xmlns="http://www.w3.org/1999/xhtml" id="..." class="line">A line of verse</p>
-            <p xmlns="http://www.w3.org/1999/xhtml" id="..." class="line"><span class="hemistich">A line of verse </span>and a hemistich</p>
+            <p xmlns="http://www.w3.org/1999/xhtml" id="..." class="line"><span class="hemistich">A line of verse</span> and a hemistich</p>
         </x:expect>
     </x:scenario>
 
+    <x:scenario label="When rendering two lines of verse with a hemistich (by part) and a stage instruction">
+        <x:context>
+            <l part="I"><stage rend="inline">mumbles</stage> A line of verse</l>
+            <l part="F">and a hemistich</l>
+        </x:context>
+        <x:expect label="will result in two HTML paragraphs">
+            <p xmlns="http://www.w3.org/1999/xhtml" id="..." class="line"><span id="..." class="stage">mumbles</span> A line of verse</p>
+            <p xmlns="http://www.w3.org/1999/xhtml" id="..." class="line"><span class="hemistich"> A line of verse</span> and a hemistich</p>
+        </x:expect>
+    </x:scenario>
+   
     <x:scenario label="When rendering three lines of verse with multiple parts (by @part)">
         <x:context>
             <l id="hs1" part="I">First,</l>
@@ -160,8 +171,8 @@ text-indent:2em;
         </x:context>
         <x:expect label="will result in three HTML paragraphs, correct hemistiches, and no ids will be generated in copied content">
             <p xmlns="http://www.w3.org/1999/xhtml" id="hs1" class="line">First,</p>
-            <p xmlns="http://www.w3.org/1999/xhtml" id="hs2" class="line"><span class="hemistich">First, </span><i id="...">second</i>, and</p>
-            <p xmlns="http://www.w3.org/1999/xhtml" id="hs3" class="line"><span class="hemistich">First, <i>second</i>, and </span>third.</p> 
+            <p xmlns="http://www.w3.org/1999/xhtml" id="hs2" class="line"><span class="hemistich">First,</span><x:text> </x:text><i id="...">second</i>, and</p>
+            <p xmlns="http://www.w3.org/1999/xhtml" id="hs3" class="line"><span class="hemistich">First, <i>second</i>, and</span> third.</p> 
         </x:expect>
     </x:scenario>
 
@@ -177,12 +188,12 @@ text-indent:2em;
         </x:context>
         <x:expect label="will result in three HTML paragraphs, correct hemistiches, and no ids will be generated in copied content">
             <p xmlns="http://www.w3.org/1999/xhtml" id="hs1" class="line">First,</p>
-            <p xmlns="http://www.w3.org/1999/xhtml" id="hs2" class="line"><span class="hemistich">First, </span><i id="...">second</i>, and</p>
-            <p xmlns="http://www.w3.org/1999/xhtml" id="hs3" class="line"><span class="hemistich">First, <i>second</i>, and </span>third.</p> 
+            <p xmlns="http://www.w3.org/1999/xhtml" id="hs2" class="line"><span class="hemistich">First,</span><x:text> </x:text><i id="...">second</i>, and</p>
+            <p xmlns="http://www.w3.org/1999/xhtml" id="hs3" class="line"><span class="hemistich">First, <i>second</i>, and</span> third.</p> 
             
             <p xmlns="http://www.w3.org/1999/xhtml" id="hs4" class="line">Second first,</p>
-            <p xmlns="http://www.w3.org/1999/xhtml" id="hs5" class="line"><span class="hemistich">Second first, </span>second <i id="...">second</i>, and</p>
-            <p xmlns="http://www.w3.org/1999/xhtml" id="hs6" class="line"><span class="hemistich">Second first, second <i>second</i>, and </span>second third.</p> 
+            <p xmlns="http://www.w3.org/1999/xhtml" id="hs5" class="line"><span class="hemistich">Second first,</span> second <i id="...">second</i>, and</p>
+            <p xmlns="http://www.w3.org/1999/xhtml" id="hs6" class="line"><span class="hemistich">Second first, second <i>second</i>, and</span> second third.</p> 
         </x:expect>
     </x:scenario>
 

@@ -224,7 +224,7 @@
         </xsl:if>
 
         <xsl:if test="//lg or //sp or //castList">
-            <xsl:value-of select="f:css-stylesheet('../style/verse.css')"/>
+            <xsl:value-of select="f:css-stylesheet('../style/drama.css')"/>
         </xsl:if>
 
         <xsl:if test="//ab[@type='intra']">

@@ -215,12 +215,14 @@
                 <span class="hemistich">
                     <xsl:copy-of select="f:handle-hemistich-value(.)"/>
                 </span>
+                <xsl:text> </xsl:text>
             </xsl:if>
 
             <xsl:if test="@part = ('M', 'm', 'F', 'f')">
                 <span class="hemistich">
                     <xsl:copy-of select="f:handle-partial-line(.)"/>
                 </span>
+                <xsl:text> </xsl:text>
             </xsl:if>
 
             <xsl:apply-templates/>
@@ -239,13 +241,32 @@
             <xsl:copy-of select="f:log-error('No previous part(s) found for medial or final part: {1}', ($node))"/>
         </xsl:if>
         <xsl:for-each select="$parts">
+            <xsl:if test="position() &gt; 1">
+              <xsl:text> </xsl:text>
+            </xsl:if>
             <xsl:variable name="content">
-                <xsl:apply-templates select="./node()"/>
+                <xsl:apply-templates select="f:copy-without-stage-instructions(./node())"/>
             </xsl:variable>
             <xsl:copy-of select="f:copy-without-ids($content)"/>
-            <xsl:text> </xsl:text>
         </xsl:for-each>
     </xsl:function>
+
+
+    <xsl:function name="f:copy-without-stage-instructions">
+        <xsl:param name="nodes"/>
+        <xsl:apply-templates mode="copy-without-stage-instructions" select="$nodes"/>
+    </xsl:function>
+
+    <xsl:template mode="copy-without-stage-instructions" match="stage"/>
+
+    <xsl:template mode="copy-without-stage-instructions" match="pb"/>
+
+    <xsl:template mode="copy-without-stage-instructions" match="@*|node()">
+        <xsl:copy>
+            <xsl:apply-templates mode="copy-without-stage-instructions" select="@*|node()"/>
+        </xsl:copy>
+    </xsl:template>
+
 
     <xsl:function name="f:handle-hemistich-value">
         <xsl:param name="node" as="element()"/>
@@ -259,6 +280,7 @@
                     <!-- We can have a hemistich that recursively builds up from previous hemistiches. -->
                     <xsl:if test="f:has-rend-value($target-node/@rend, 'hemistich')">
                         <xsl:copy-of select="f:handle-hemistich-value($target-node)"/>
+                        <xsl:text> </xsl:text>
                     </xsl:if>
                     <xsl:apply-templates select="$target-node/node()"/>
                 </xsl:variable>
@@ -285,6 +307,7 @@
                             <xsl:variable name="hemistich-line" select="$target-node/ancestor-or-self::l"/>
                             <xsl:if test="f:has-rend-value($hemistich-line/@rend, 'hemistich')">
                                 <xsl:copy-of select="f:handle-hemistich-value($hemistich-line)"/>
+                                <xsl:text> </xsl:text>
                             </xsl:if>
                             <xsl:apply-templates select="$target-node/node()"/>
                         </xsl:variable>
@@ -303,7 +326,6 @@
                 <xsl:value-of select="f:rend-value($node/@rend, 'hemistich')"/>
             </xsl:otherwise>
         </xsl:choose>
-        <xsl:text> </xsl:text>
     </xsl:function>
 
 
