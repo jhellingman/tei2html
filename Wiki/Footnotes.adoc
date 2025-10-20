@@ -12,17 +12,19 @@ Each type is handled in a slightly different way.
 
 == Footnotes
 
-Notes, given in the element `&lt;note&gt;` are, by default, considered footnotes. That can be made explicit by adding `@place=&quot;foot&quot;`
+Notes, given in the element `&lt;note&gt;` are, by default, considered footnotes. This can be made explicit by adding `@place=&quot;foot&quot;`
 
 Footnotes appear at the bottom (or foot) of the page. Since HTML does not have the concept of a page, `tei2html` collects all footnotes at the end of the `div0` or `div1` element they appear in.
 
 If this is undesired, you can also explicitly call for the footnotes to be rendered, by inserting a `&lt;divGen type=&quot;footnotes&quot;&gt;`, which will generate the footnotes in a generate section. If only the body of that section is desired, use `&lt;divGen type=&quot;footnotebody&quot;&gt;`.
 
-Footnotes will be automatically numbered per division. In the text, a small superscript number will link to the actual footnote. This same number is rendered in front of the footnote, and will link back to the location in the text. A small up-arrow at the end of the footnote will also link back to the text.
+Footnotes will be automatically numbered per division. In the text, a small superscript number will link to the actual footnote. This same number is rendered in front of the footnote, and will link back to the location in the text. A small up-arrow at the end of the footnote will also link back to the text. This up-arrow can be surpressed by setting the configuration item `notes.foot.returnArrow` to `false`.
 
 Sometimes, multiple footnote references on a page refer to the same footnote. This can be encoded using the `@sameAs` attribute, linking it to the `@id` of the referenced footnote. This way, multiple references can be made to the same footnote (using the same number). The up-arrow after such a duplicated note will be followed lower-case letters, each linking back to an instance of the note reference in the text.
 
-If you want to override the automatically assigned note number, you can provide an alternative marker with `@rend=&quot;note-marker(*)&quot;`. Note that this will _not_ change the generated number of other notes, that is, the note will still be counted [TODO: fix this].
+If you want to override the automatically assigned note number, you can provide an alternative marker with `@rend=&quot;note-marker(*)&quot;`. Note that this will _not_ change the generated number of other notes, that is, the note will still be counted in the sequence of notes.
+
+You can change the scope by with notes are numberd by setting the configuration item `notes.foot.counter`. Possible values: `chapter` (default) or `text`.
 
 == Marginal notes.
 
@@ -42,7 +44,7 @@ Some care is need to prevent marginal notes to overlap each other. Simply don't 
 
 Notes that appear inside a table can be marked with `@place=&quot;table&quot;`. In that case, the notes will be rendered directly below the table, and numbered with lower-case letters, starting anew for each table.
 
-Notes in tables not marked as table notes will be treated as footnotes to the division the table appears in.
+Notes in tables not marked as table notes will be treated as ordinary footnotes.
 
 == Apparatus notes.
 

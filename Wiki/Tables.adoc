@@ -34,6 +34,6 @@ Using `@rend` values, the rendering of the table can be adjusted.
 
 == Table processing
 
-`tei2html` cannot directly process tables correctly. A number of pre-processing steps are required to correctly deal with the complexities tables introduce. These are handled in the xslt file `normalize-table.xsl`, which includes code to determine the correct column of each cell (taking into consideration spanned rows and columns) and the special handling of decimal alignment. The `tei2html.pl` perl script normally applies this transform to the XML before applying the main transform.
+`tei2html` cannot process tables in a single step. A number of pre-processing steps are required to correctly deal with the complexities tables introduce. These are handled in the xslt file `normalize-table.xsl`, which includes code to determine the correct column of each cell (taking into consideration spanned rows and columns) and the special handling of decimal alignment. The `tei2html.pl` perl script normally applies this transform to the XML before applying the main transform.
 
 Nested tables are supported.
