@@ -588,7 +588,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#_favicon">favicon</a></li>
 </ul>
 </li>
-<li><a href="#_those_pesky_page_breaks">Those Pesky Page-Breaks</a>
+<li><a href="#_dealing_with_page_breaks">Dealing with Page-Breaks</a>
 <ul class="sectlevel2">
 <li><a href="#_encoding">Encoding</a></li>
 <li><a href="#_page_images">Page Images</a></li>
@@ -1644,7 +1644,7 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_those_pesky_page_breaks">Those Pesky Page-Breaks</h2>
+<h2 id="_dealing_with_page_breaks">Dealing with Page-Breaks</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Printed books have pages, and thus page-breaks every couple of hundred words or so. Electronic files do not have this concept, but since pages and page numbers have traditionally been used to refer to passages in books, they can be captured in <code>&lt;pb&gt;</code> elements, which, for good reason, can appear almost anywhere in a TEI document. Here is where the trouble starts.</p>
@@ -1888,7 +1888,7 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 <div class="sect2">
 <h3 id="_table_processing">Table processing</h3>
 <div class="paragraph">
-<p><code>tei2html</code> cannot directly process tables correctly. A number of pre-processing steps are required to correctly deal with the complexities tables introduce. These are handled in the xslt file <code>normalize-table.xsl</code>, which includes code to determine the correct column of each cell (taking into consideration spanned rows and columns) and the special handling of decimal alignment. The <code>tei2html.pl</code> perl script normally applies this transform to the XML before applying the main transform.</p>
+<p><code>tei2html</code> cannot process tables in a single step. A number of pre-processing steps are required to correctly deal with the complexities tables introduce. These are handled in the xslt file <code>normalize-table.xsl</code>, which includes code to determine the correct column of each cell (taking into consideration spanned rows and columns) and the special handling of decimal alignment. The <code>tei2html.pl</code> perl script normally applies this transform to the XML before applying the main transform.</p>
 </div>
 <div class="paragraph">
 <p>Nested tables are supported.</p>
@@ -1927,7 +1927,7 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 <div class="sect2">
 <h3 id="_footnotes">Footnotes</h3>
 <div class="paragraph">
-<p>Notes, given in the element <code>&lt;note&gt;</code> are, by default, considered footnotes. That can be made explicit by adding <code>@place=&quot;foot&quot;</code></p>
+<p>Notes, given in the element <code>&lt;note&gt;</code> are, by default, considered footnotes. This can be made explicit by adding <code>@place=&quot;foot&quot;</code></p>
 </div>
 <div class="paragraph">
 <p>Footnotes appear at the bottom (or foot) of the page. Since HTML does not have the concept of a page, <code>tei2html</code> collects all footnotes at the end of the <code>div0</code> or <code>div1</code> element they appear in.</p>
@@ -1936,13 +1936,16 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 <p>If this is undesired, you can also explicitly call for the footnotes to be rendered, by inserting a <code>&lt;divGen type=&quot;footnotes&quot;&gt;</code>, which will generate the footnotes in a generate section. If only the body of that section is desired, use <code>&lt;divGen type=&quot;footnotebody&quot;&gt;</code>.</p>
 </div>
 <div class="paragraph">
-<p>Footnotes will be automatically numbered per division. In the text, a small superscript number will link to the actual footnote. This same number is rendered in front of the footnote, and will link back to the location in the text. A small up-arrow at the end of the footnote will also link back to the text.</p>
+<p>Footnotes will be automatically numbered per division. In the text, a small superscript number will link to the actual footnote. This same number is rendered in front of the footnote, and will link back to the location in the text. A small up-arrow at the end of the footnote will also link back to the text. This up-arrow can be surpressed by setting the configuration item <code>notes.foot.returnArrow</code> to <code>false</code>.</p>
 </div>
 <div class="paragraph">
 <p>Sometimes, multiple footnote references on a page refer to the same footnote. This can be encoded using the <code>@sameAs</code> attribute, linking it to the <code>@id</code> of the referenced footnote. This way, multiple references can be made to the same footnote (using the same number). The up-arrow after such a duplicated note will be followed lower-case letters, each linking back to an instance of the note reference in the text.</p>
 </div>
 <div class="paragraph">
-<p>If you want to override the automatically assigned note number, you can provide an alternative marker with <code>@rend=&quot;note-marker(*)&quot;</code>. Note that this will <em>not</em> change the generated number of other notes, that is, the note will still be counted [TODO: fix this].</p>
+<p>If you want to override the automatically assigned note number, you can provide an alternative marker with <code>@rend=&quot;note-marker(*)&quot;</code>. Note that this will <em>not</em> change the generated number of other notes, that is, the note will still be counted in the sequence of notes.</p>
+</div>
+<div class="paragraph">
+<p>You can change the scope by with notes are numberd by setting the configuration item <code>notes.foot.counter</code>. Possible values: <code>chapter</code> (default) or <code>text</code>.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1982,7 +1985,7 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
 <p>Notes that appear inside a table can be marked with <code>@place=&quot;table&quot;</code>. In that case, the notes will be rendered directly below the table, and numbered with lower-case letters, starting anew for each table.</p>
 </div>
 <div class="paragraph">
-<p>Notes in tables not marked as table notes will be treated as footnotes to the division the table appears in.</p>
+<p>Notes in tables not marked as table notes will be treated as ordinary footnotes.</p>
 </div>
 </div>
 <div class="sect2">
@@ -4174,7 +4177,7 @@ opening mark, there should be a corresponding closing mark.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-10-17 21:01:02 UTC
+Last updated 2025-10-20 20:21:53 UTC
 </div>
 </div>
 </body>
