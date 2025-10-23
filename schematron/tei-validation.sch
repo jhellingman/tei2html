@@ -379,5 +379,35 @@
       </sch:rule>
     </sch:pattern>
 
+  <sch:pattern id="check-line-parts">
+    <sch:title>Ensure correct sequencing and grouping of hemistich parts (@part) across lg boundaries</sch:title>
+
+    <sch:rule context="tei:l[@part='I']">
+      <sch:assert test="following::tei:l[@part][1][@part=('M', 'F')]">
+        A line with @part='I' must be followed by a line with @part='M' or @part='F'.
+      </sch:assert>
+      <sch:assert test="not(preceding::tei:l[@part][1][@part=('I', 'M')])">
+        A line with @part='I' must not follow another line with @part='I' or @part='M'.
+      </sch:assert>
+    </sch:rule>
+
+    <sch:rule context="tei:l[@part='M']">
+      <sch:assert test="preceding::tei:l[@part][1][@part=('I', 'M')]">
+        A line with @part='M' must be preceded by a line with @part='I' or @part='M'.
+      </sch:assert>
+      <sch:assert test="following::tei:l[@part][1][@part=('M', 'F')]">
+        A line with @part='M' must be followed by a line with @part='M' or @part='F'.
+      </sch:assert>
+    </sch:rule>
+
+    <sch:rule context="tei:l[@part='F']">
+      <sch:assert test="preceding::tei:l[@part][1][@part=('M','I')]">
+        A line with @part='F' must be preceded by a line with @part='M' or @part='I'.
+      </sch:assert>
+      <sch:assert test="not(following::tei:l[@part][1][@part=('M', 'F')])">
+        A line with @part='F' must not be followed by a line with @part='M' or @part='F'.
+      </sch:assert>
+    </sch:rule>
+  </sch:pattern>
 
 </sch:schema>

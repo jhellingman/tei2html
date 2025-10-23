@@ -6,12 +6,12 @@
                 <title nfc="3">Test Validation of TEI files</title>
                 <title nfc="4">The test Validation of TEI files</title>
                 <title nfc="3">A test Validation of TEI files</title>
-            	<title>A test Validation of TEI files</title>
+                <title>A test Validation of TEI files</title>
 
-		<title xml:lang="nl" nfc="2">A test Validation of TEI files</title>
+        <title xml:lang="nl" nfc="2">A test Validation of TEI files</title>
                 <title xml:lang="nl" nfc="3">Een test Validatie van TEI bestanden</title>
 
-		<author>Test Author</author>
+        <author>Test Author</author>
                 <respStmt>
                     <resp>Illustrator</resp>
                     <name>John Doe</name>
@@ -32,6 +32,10 @@
             <div1>
                 <p id="existing-id">This is a <ref target="#non-existing-id">reference</ref> to a non-existing id.</p>
                 <p>This is a <ref target="#existing-id">reference</ref> to an existing id.</p>
+
+                <lg>
+                    <l part="F">Final without initial part!</l>
+                </lg>
 
                 <p lang="en">This paragraph has a <ab lang="en">redundant</ab> <ab type="strange" lang="de">language</ab> attribute.</p>
             </div1>

@@ -310,8 +310,8 @@ BEGIN {
 sub getLanguage($) {
     my $code = shift;
     my $language = $langNameHash{$code};
-    if (defined $language) {
+    if (!defined $language || $language eq '') {
         $language = "Language with code $code";
     }
-    return $langNameHash{$code};
+    return $language;
 }
