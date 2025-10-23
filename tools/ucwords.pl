@@ -692,7 +692,7 @@ sub reportWordStatistics() {
 # reportWords
 #
 sub reportWords($) {
-    my $language = shift;
+    my $languageCode = shift;
 
     my $prevKey  = '';
     my $prevLetter = '';
@@ -702,8 +702,8 @@ sub reportWords($) {
     $unknownTotalWords = 0;
     $unknownUniqWords = 0;
 
-    print "\n\n\n<h2>Word frequencies in " . getLanguage($language) . "</h2>\n";
-    loadDictionary($language);
+    print "\n\n\n<h2>Word frequencies in " . getLanguage($languageCode) . "</h2>\n";
+    loadDictionary($languageCode);
 
     foreach my $item (@wordList) {
         my ($key, $word) = split(/!/, $item, 2);
@@ -719,7 +719,7 @@ sub reportWords($) {
             $prevLetter = $letter;
         }
 
-        reportWord($word, $language);
+        reportWord($word, $languageCode);
     }
 
     reportWordStatistics();
