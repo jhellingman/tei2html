@@ -1,20 +1,22 @@
 <?xml version="1.0"?>
 <xsl:stylesheet version="1.0"
     xmlns:edate="http://exslt.org/dates-and-times"
+    xmlns:f="urn:stylesheet-functions"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:tei="http://www.tei-c.org/ns/1.0"
     xmlns="http://www.tei-c.org/ns/1.0"
-    exclude-result-prefixes="tei edate">
+    exclude-result-prefixes="tei edate f xs">
 
     <!--
          P4 to P5 converter
-  
+
          Sebastian Rahtz <sebastian.rahtz@oucs.ox.ac.uk>
-  
+
          $Date: 2007-11-01 16:33:34 +0000 (Thu, 01 Nov 2007) $  $Id: p4top5.xsl 3927 2007-11-01 16:33:34Z rahtz $
-  
+
          Copyright 2007 TEI Consortium
-  
+
          Permission is hereby granted, free of charge, to any person obtaining
          a copy of this software and any associated documentation files (the
          ``Software''), to deal in the Software without restriction, including
@@ -22,7 +24,7 @@
          distribute, sublicense, and/or sell copies of the Software, and to
          permit persons to whom the Software is furnished to do so, subject to
          the following conditions:
-  
+
          The above copyright notice and this permission notice shall be included
          in all copies or substantial portions of the Software.
     -->
@@ -673,10 +675,51 @@
     </div1>
   </xsl:template>
 
-  <!-- Additions by Jeroen Hellingman, to clean up specific stuff, introduced in table-normalization -->
+  <!-- Additions by Jeroen Hellingman -->
+ 
+  <!-- Clean up non-standard attributes, introduced in table-normalization -->
 
   <xsl:template match="cell/@col"/>
   <xsl:template match="cell/@row"/>
   <xsl:template match="table/@headrows"/>
+
+  <!-- Convert figure handling according to my conventions in P3 -->
+
+  <xsl:include href="modules/functions.xsl"/>
+  <xsl:include href="modules/configuration.xsl"/>
+  <xsl:include href="modules/log.xsl"/>
+  <xsl:include href="modules/rend.xsl"/>
+
+  <!-- Function borrowed from modules/utils.xsl -->
+
+    <xsl:function name="f:is-inline" as="xs:boolean">
+        <xsl:param name="node" as="element()"/>
+        <xsl:sequence select="$node/@rend = 'inline' or f:rend-value($node/@rend, 'position') = 'inline' or f:rend-value($node/@rend, 'display') = 'inline'"/>
+    </xsl:function>
+
+  <xsl:variable name="outputFormat" select="'xml'"/>
+
+  <!-- image file indicated in rendition ladder: rend="image(path/to/image)" -->
+  <xsl:template match="figure[f:has-rend-value(@rend, 'image')]">
+    <figure>
+        <xsl:copy-of select="@* except @rend"/>
+        <xsl:variable name="rend" select="f:remove-rend-value(@rend, 'image')"/>
+        <xsl:if test="$rend">
+            <xsl:attribute name="rend" select="$rend"/>
+        </xsl:if>
+        <graphic url="{f:rend-value(@rend, 'image')}"/>
+        <xsl:apply-templates/>
+    </figure>
+  </xsl:template>
+
+  <!-- image file derived from id attribute, supposed to be .jpg in a directory images -->
+  <xsl:template match="figure[@id and not(f:has-rend-value(@rend, 'image'))]">
+    <figure>
+        <xsl:copy-of select="@*"/>
+        <graphic url="{'images/' || @id || (if (f:is-inline(.)) then '.png' else '.jpg')}"/>
+        <xsl:apply-templates/>
+    </figure>
+  </xsl:template>
+
 
 </xsl:stylesheet>

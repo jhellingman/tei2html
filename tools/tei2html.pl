@@ -84,6 +84,7 @@ my $makeText            = 0;
 my $makeWordlist        = 0;
 my $makeXML             = 0;
 my $makeZip             = 0;
+my $makeAsciiDoc        = 0;
 
 my $noTranscription     = 0;
 my $noTranscriptionPopups = 0;
@@ -118,6 +119,7 @@ GetOptions(
     'w=i' => \$pageWidth,
     'l=i' => \$logLevel,
 
+    'adoc' => \$makeAsciiDoc,
     'clean' => \$clean,
     'debug' => \$debug,
     'epubversion=s' => \$epubVersion,
@@ -174,6 +176,7 @@ if ($showHelp == 1) {
     print "    s=<value> Set the custom option (handed to XSLT processor).\n";
     print "    w=<int>   Set the page width (default: 72 characters).\n\n";
 
+    print "    adoc                            Create an AsciiDoc file.\n";
     print "    clean                           Clean intermediate files normally preserved.\n";
     print "    debug                           Debug mode.\n";
     print "    heatmap                         Generate a heatmap version.\n";
@@ -207,6 +210,10 @@ if ($explicitMakeText == 0 && $makeHtml == 0 && $makePdf == 0 && $makeEpub == 0 
     $makeHtml = 1;
     $makeWordlist = 1;
     $runChecks = 1;
+}
+
+if ($makeAsciiDoc == 1) {
+    $makeP5 = 1;
 }
 
 if ($debug == 1) {
@@ -321,6 +328,7 @@ sub processFile($) {
     $makeText     && makeText($basename,     $filename);
     $makeP5       && makeP5($basename,       $preprocessedXmlFilename);
     $makeSQL      && makeSql($preprocessedXmlFilename);
+    $makeAsciiDoc && makeAsciiDoc($basename, $preprocessedXmlFilename);
 
     $makePGTEI && system ("$saxon $preprocessedXmlFilename $xsldir/tei2pgtei.xsl > $basename-pgtei.xml");
 
@@ -1129,6 +1137,22 @@ sub runSchematron($) {
 
     removeFile($tmpFile);
     removeFile("$xmlFilename-report.xml");
+}
+
+
+sub makeAsciiDoc($$) {
+    my $basename = shift;
+    my $xmlFilename = shift;
+    my $xmlP5FileName = $basename . '-p5.xml';
+
+    ## tei2asciidoc.xsl wants the document to be in the TEI namespace: "http://www.tei-c.org/ns/1.0"
+    my $tmpFile = "$basename-ns.xml";
+    system("$saxon -s:$xmlP5FileName -xsl:$namespaceXslt -o:$tmpFile");
+
+    trace("Convert to AsciiDoc: $saxon -s:$tmpFile -xsl:$xsldir/tei2asciidoc.xsl -o:$basename.adoc");    
+    my $transform_result = system("$saxon -s:$tmpFile -xsl:$xsldir/tei2asciidoc.xsl -o:$basename.adoc");
+
+    removeFile($tmpFile);
 }
 
 
