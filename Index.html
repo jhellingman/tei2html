@@ -1284,7 +1284,15 @@ the names in the main <code>tei2html.pl</code> script in that case.</p>
     <span class="tag">&lt;lb.removable.hyphen&gt;</span><span class="entity">&amp;not;</span><span class="tag">&lt;/lb.removable.hyphen&gt;</span>                <span class="comment">&lt;!-- Character used for removable hyphen before a line-break (DTA convention). --&gt;</span>
     <span class="tag">&lt;lb.hyphen&gt;</span>-<span class="tag">&lt;/lb.hyphen&gt;</span>                                        <span class="comment">&lt;!-- Character used for non-removable hyphen before line-break. --&gt;</span>
 
-    <span class="tag">&lt;toc.numberEntries&gt;</span>true<span class="tag">&lt;/toc.numberEntries&gt;</span>                     <span class="comment">&lt;!-- Provide numbers with generated TOC entries. --&gt;</span>
+    <span class="tag">&lt;toc.numberEntries&gt;</span>true<span class="tag">&lt;/toc.numberEntries&gt;</span>                     <span class="comment">&lt;!-- Provide numbers with generated TOC entries (at all levels, if true, uses specific levels if false). --&gt;</span>
+    <span class="tag">&lt;toc.numberEntries.level0&gt;</span>false<span class="tag">&lt;/toc.numberEntries.level0&gt;</span>      <span class="comment">&lt;!-- Provide numbers with generated TOC entries at div0 level. --&gt;</span>
+    <span class="tag">&lt;toc.numberEntries.level1&gt;</span>false<span class="tag">&lt;/toc.numberEntries.level1&gt;</span>      <span class="comment">&lt;!-- Provide numbers with generated TOC entries at div1 level. --&gt;</span>
+    <span class="tag">&lt;toc.numberEntries.level2&gt;</span>false<span class="tag">&lt;/toc.numberEntries.level2&gt;</span>      <span class="comment">&lt;!-- Provide numbers with generated TOC entries at div2 level. --&gt;</span>
+    <span class="tag">&lt;toc.numberEntries.level3&gt;</span>false<span class="tag">&lt;/toc.numberEntries.level3&gt;</span>      <span class="comment">&lt;!-- Provide numbers with generated TOC entries at div3 level. --&gt;</span>
+    <span class="tag">&lt;toc.numberEntries.level4&gt;</span>false<span class="tag">&lt;/toc.numberEntries.level4&gt;</span>      <span class="comment">&lt;!-- Provide numbers with generated TOC entries at div4 level. --&gt;</span>
+    <span class="tag">&lt;toc.numberEntries.level5&gt;</span>false<span class="tag">&lt;/toc.numberEntries.level5&gt;</span>      <span class="comment">&lt;!-- Provide numbers with generated TOC entries at div5 level. --&gt;</span>
+    <span class="tag">&lt;toc.numberEntries.level6&gt;</span>false<span class="tag">&lt;/toc.numberEntries.level6&gt;</span>      <span class="comment">&lt;!-- Provide numbers with generated TOC entries at div6 level. --&gt;</span>
+
     <span class="tag">&lt;toc.defaultEntries&gt;</span>false<span class="tag">&lt;/toc.defaultEntries&gt;</span>                  <span class="comment">&lt;!-- Use generic heads in entries in the TOC, if no head is present. --&gt;</span>
 
     <span class="tag">&lt;pg.includeHeaders&gt;</span>false<span class="tag">&lt;/pg.includeHeaders&gt;</span>                    <span class="comment">&lt;!-- Include Project Gutenberg headers and footers. --&gt;</span>
@@ -4177,7 +4185,7 @@ opening mark, there should be a corresponding closing mark.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-10-24 20:02:45 UTC
+Last updated 2025-10-26 22:01:33 UTC
 </div>
 </div>
 </body>
