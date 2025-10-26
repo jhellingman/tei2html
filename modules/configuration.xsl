@@ -65,7 +65,15 @@
             <lb.removable.hyphen>&not;</lb.removable.hyphen>                <!-- Character used for removable hyphen before a line-break (DTA convention). -->
             <lb.hyphen>-</lb.hyphen>                                        <!-- Character used for non-removable hyphen before line-break. -->
 
-            <toc.numberEntries>true</toc.numberEntries>                     <!-- Provide numbers with generated TOC entries. -->
+            <toc.numberEntries>true</toc.numberEntries>                     <!-- Provide numbers with generated TOC entries (at all levels, if true, uses specific levels if false). -->
+            <toc.numberEntries.level0>false</toc.numberEntries.level0>      <!-- Provide numbers with generated TOC entries at div0 level. -->
+            <toc.numberEntries.level1>false</toc.numberEntries.level1>      <!-- Provide numbers with generated TOC entries at div1 level. -->
+            <toc.numberEntries.level2>false</toc.numberEntries.level2>      <!-- Provide numbers with generated TOC entries at div2 level. -->
+            <toc.numberEntries.level3>false</toc.numberEntries.level3>      <!-- Provide numbers with generated TOC entries at div3 level. -->
+            <toc.numberEntries.level4>false</toc.numberEntries.level4>      <!-- Provide numbers with generated TOC entries at div4 level. -->
+            <toc.numberEntries.level5>false</toc.numberEntries.level5>      <!-- Provide numbers with generated TOC entries at div5 level. -->
+            <toc.numberEntries.level6>false</toc.numberEntries.level6>      <!-- Provide numbers with generated TOC entries at div6 level. -->
+
             <toc.defaultEntries>false</toc.defaultEntries>                  <!-- Use generic heads in entries in the TOC, if no head is present. -->
 
             <pg.includeHeaders>false</pg.includeHeaders>                    <!-- Include Project Gutenberg headers and footers. -->

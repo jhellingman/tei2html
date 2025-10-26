@@ -898,6 +898,8 @@
 
     <msg:messages xml:lang="de" name="German">
 
+        <msg:message name="msgBodyMatter">Hauptteil</msg:message>
+        <msg:message name="msgGoToToc">Zum Inhaltsverzeichnis</msg:message>
         <msg:message name="msgCountCorrectionsAppliedToText" plural="zero">Es wurden keine Korrekturen am Text vorgenommen.</msg:message>
         <msg:message name="msgCountCorrectionsAppliedToText" plural="one">Die folgende Korrektur wurde am Text vorgenommen:</msg:message>
         <msg:message name="msgCountCorrectionsAppliedToText">Die folgenden <msg:param name="count" type="integer"/> Korrekturen wurden am Text vorgenommen:</msg:message>

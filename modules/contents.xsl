@@ -452,7 +452,7 @@
             </td>
         </xsl:if>
         <td class="tocDivNum">
-            <xsl:if test="@n and f:is-set('toc.numberEntries') and $show-div-numbers and not(f:rend-value(@rend, 'toc-hide-number') = 'true')">
+            <xsl:if test="f:showTocDivNum(., $curLevel, $show-div-numbers)">
                 <xsl:copy-of select="f:convert-markdown(@n)"/><xsl:text>. </xsl:text>
             </xsl:if>
         </td>
@@ -470,6 +470,18 @@
             </xsl:if>
         </td>
     </xsl:template>
+
+
+    <xsl:function name="f:showTocDivNum" as="xs:boolean">
+        <xsl:param name="div"/>
+        <xsl:param name="curLevel" as="xs:integer"/>
+        <xsl:param name="show-div-numbers" as="xs:boolean"/>
+
+        <xsl:variable name="tocNumberEntries"
+            select="(f:is-set('toc.numberEntries')) or ($curLevel &lt; 7 and f:is-set('toc.numberEntries.level' || $curLevel))"/>
+            
+        <xsl:sequence select="$div/@n and $tocNumberEntries and $show-div-numbers and not(f:rend-value($div/@rend, 'toc-hide-number') = 'true')"/>
+    </xsl:function>
 
 
     <xsl:template name="insert-toc-page-number-table">
