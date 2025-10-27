@@ -15,6 +15,8 @@
         <xd:copyright>2024, Jeroen Hellingman</xd:copyright>
     </xd:doc>
 
+    <xsl:param name="imageDir" select="'images'"/>
+
     <xsl:variable name="outputFormat" select="markdown"/>
 
     <xsl:include href="modules/functions.xsl"/>
@@ -47,6 +49,7 @@
 
         <xsl:text>== About This Ebook&lf;&lf;</xsl:text>
 
+        <xsl:text>[cols="1,3"]&lf;</xsl:text>
         <xsl:text>|===&lf;</xsl:text>
         <xsl:text>|Field |Value&lf;</xsl:text>
         <xsl:text>&lf;</xsl:text>
@@ -63,8 +66,10 @@
             <xsl:apply-templates select="teiHeader/fileDesc/publicationStmt/availability"/>
             <xsl:apply-templates select="teiHeader/profileDesc/textClass/keywords/list" mode="keywords"/>
             <xsl:apply-templates select="teiHeader/fileDesc/notesStmt/note[@type='Description']" mode="descriptions"/>
-            <xsl:if test="f:is-valid(teiHeader/fileDesc/publicationStmt/idno[@type='PGnum'])">
-                <xsl:text>|PG Ebook Number |https://www.gutenberg.org/ebooks/{teiHeader/fileDesc/publicationStmt/idno[@type='PGnum']}[{teiHeader/fileDesc/publicationStmt/idno[@type='PGnum']}]&lf;</xsl:text>
+            <xsl:variable name="pgNum" select="teiHeader/fileDesc/publicationStmt/idno[@type='PGnum']"/>
+            <xsl:if test="f:is-valid($pgNum)">
+                <xsl:text>|PG Ebook Number |https://www.gutenberg.org/ebooks/{$pgNum}[{$pgNum}]&lf;</xsl:text>
+                <xsl:text>|QR Code for download a|image::Processed/{$imageDir}/qr{$pgNum}.png[QR code,148,148]&lf;</xsl:text>
             </xsl:if>
     </xsl:template>
 

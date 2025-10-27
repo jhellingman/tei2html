@@ -524,8 +524,15 @@ sub makeReadme($) {
         return;
     }
 
+    my $imageDir = 'images';
+    if (-d 'Processed/images@1') {
+        $imageDir = 'images@1';
+    }
+
+    my $imageDirParameter = "imageDir=\"$imageDir\"";
+
     trace("Extract metadata to README.adoc...");
-    system ("$saxon $xmlFilename $xsldir/tei2adoc.xsl > README.adoc");
+    system ("$saxon $xmlFilename $xsldir/tei2adoc.xsl $imageDirParameter > README.adoc");
 }
 
 
@@ -1188,15 +1195,15 @@ sub temporaryFile($$) {
 
 
 #
-# collectImageInfo -- collect some information about images in the imageinfo.xml file.
+# collectImageInfo -- collect information about images in the imageinfo.xml file.
 #
 sub collectImageInfo() {
     if (-d 'images') {
         trace("Collect image dimensions from 'images'...");
         system ("perl $toolsdir/imageinfo.pl images > imageinfo.xml");
-    } elsif (-d 'Processed/images') {
+    } elsif (-d 'Processed') {
         trace("Collect image dimensions from 'Processed/images'...");
-        system ("perl $toolsdir/imageinfo.pl -d=1 Processed/images > imageinfo.xml");
+        system ("perl $toolsdir/imageinfo.pl -d=1 Processed > imageinfo.xml");
     }
 
     if (-d 'music') {
