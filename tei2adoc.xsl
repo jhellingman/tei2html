@@ -37,21 +37,21 @@
     <xsl:variable name="pubdate" select="/*[self::TEI.2 or self::*:TEI]/*:teiHeader/*:fileDesc/*:publicationStmt/*:date"/>
     <xsl:variable name="pgnum" select="/*[self::TEI.2 or self::*:TEI]/*:teiHeader/*:fileDesc/*:publicationStmt/*:idno[@type='PGnum']"/>
 
-    <xsl:template match="/">
+    <xsl:template match="/" expand-text="yes">
 
-        <xsl:text>= About This Repository&lf;&lf;</xsl:text>
+        <xsl:text>= {f:message('t2aAboutThisRepository')}&lf;&lf;</xsl:text>
 
         <xsl:if test="$pgnum">
-            <xsl:text>This repository contains the TEI source file, and derived text and HTML files of an ebook posted to https://www.gutenberg.org/[Project Gutenberg]. Like the version posted to Project Gutenberg, this ebook is free from copyright in the U.S. No claim is made about its copyright status outside the U.S.&lf;&lf;</xsl:text>
+            <xsl:text>{f:message('t2aAboutThisRepositoryParagraph1')}&lf;&lf;</xsl:text>
 
-            <xsl:text>The version maintained in this repository may be slightly out-of-sync with the version maintained at Project Gutenberg. Mostly, fixes will be made first here, and only then reposted to Project Gutenberg. When you encounter any issue in this text, please report it here.&lf;&lf;</xsl:text>
+            <xsl:text>{f:message('t2aAboutThisRepositoryParagraph2')}&lf;&lf;</xsl:text>
         </xsl:if>
 
-        <xsl:text>== About This Ebook&lf;&lf;</xsl:text>
+        <xsl:text>== {f:message('t2aAboutThisEbook')}&lf;&lf;</xsl:text>
 
         <xsl:text>[cols="1,3"]&lf;</xsl:text>
         <xsl:text>|===&lf;</xsl:text>
-        <xsl:text>|Field |Value&lf;</xsl:text>
+        <xsl:text>|{f:message('t2aField')} |{f:message('t2aValue')}&lf;</xsl:text>
         <xsl:text>&lf;</xsl:text>
         <xsl:apply-templates/>
         <xsl:text>|===&lf;</xsl:text>
@@ -68,61 +68,61 @@
             <xsl:apply-templates select="teiHeader/fileDesc/notesStmt/note[@type='Description']" mode="descriptions"/>
             <xsl:variable name="pgNum" select="teiHeader/fileDesc/publicationStmt/idno[@type='PGnum']"/>
             <xsl:if test="f:is-valid($pgNum)">
-                <xsl:text>|PG Ebook Number |https://www.gutenberg.org/ebooks/{$pgNum}[{$pgNum}]&lf;</xsl:text>
-                <xsl:text>|QR Code for download a|image::Processed/{$imageDir}/qr{$pgNum}.png[QR code,148,148]&lf;</xsl:text>
+                <xsl:text>|{f:message('t2aPGEbookNumber')} |https://www.gutenberg.org/ebooks/{$pgNum}[{$pgNum}]&lf;</xsl:text>
+                <xsl:text>|{f:message('t2aQRCodeForDownload')} a|image::Processed/{$imageDir}/qr{$pgNum}.png[QR code,148,148]&lf;</xsl:text>
             </xsl:if>
     </xsl:template>
 
     <xsl:template match="title" expand-text="yes">
-        <xsl:text>|Title |{normalize-space(f:plain-text(.))}&lf;</xsl:text>
+        <xsl:text>|{f:message('msgTitle')} |{normalize-space(f:plain-text(.))}&lf;</xsl:text>
     </xsl:template>
 
     <xsl:template match="title[@type='short']" expand-text="yes">
-        <xsl:text>|Short title |{normalize-space(f:plain-text(.))}&lf;</xsl:text>
+        <xsl:text>|{f:message('msgShortTitle')} |{normalize-space(f:plain-text(.))}&lf;</xsl:text>
     </xsl:template>
 
     <xsl:template match="title[@type='original']" expand-text="yes">
-        <xsl:text>|Original title |{normalize-space(f:plain-text(.))}&lf;</xsl:text>
+        <xsl:text>|{f:message('msgOriginalTitle')} |{normalize-space(f:plain-text(.))}&lf;</xsl:text>
     </xsl:template>
 
     <xsl:template match="author" expand-text="yes">
-        <xsl:text>|Author |{normalize-space(.)}&lf;</xsl:text>
+        <xsl:text>|{f:message('msgAuthor')} |{normalize-space(.)}&lf;</xsl:text>
     </xsl:template>
 
     <xsl:template match="editor" expand-text="yes">
-        <xsl:text>|Editor |{normalize-space(.)}&lf;</xsl:text>
+        <xsl:text>|{f:message('msgEditor')} |{normalize-space(.)}&lf;</xsl:text>
     </xsl:template>
 
     <xsl:template match="respStmt[resp = ('Translator', 'Translation')]" expand-text="yes">
-        <xsl:text>|Translator |{normalize-space(name)}&lf;</xsl:text>
+        <xsl:text>|{f:message('msgTranslator')} |{normalize-space(name)}&lf;</xsl:text>
     </xsl:template>
 
     <xsl:template match="respStmt[resp = 'Illustrator']" expand-text="yes">
-        <xsl:text>|Illustrator |{normalize-space(name)}&lf;</xsl:text>
+        <xsl:text>|{f:message('msgIllustrator')} |{normalize-space(name)}&lf;</xsl:text>
     </xsl:template>
 
     <xsl:template match="respStmt[resp = 'Contributor']" expand-text="yes">
-        <xsl:text>|Contributor |{normalize-space(name)}&lf;</xsl:text>
+        <xsl:text>|{f:message('msgContributor')} |{normalize-space(name)}&lf;</xsl:text>
     </xsl:template>
 
     <xsl:template match="respStmt"/>
 
     <xsl:template match="publicationStmt" expand-text="yes">
-        <xsl:text>|Publisher |{publisher}, {pubPlace}, {date}&lf;</xsl:text>
-        <xsl:text>|Publication date |{date}&lf;</xsl:text>
+        <xsl:text>|{f:message('msgPublisher')} |{publisher}, {pubPlace}, {date}&lf;</xsl:text>
+        <xsl:text>|{f:message('msgPublicationDate')} |{date}&lf;</xsl:text>
     </xsl:template>
 
     <xsl:template match="availability" expand-text="yes">
         <xsl:if test="f:is-valid(.)">
             <xsl:variable name="availability"><xsl:apply-templates mode="text"/></xsl:variable>
-            <xsl:text>|Availability |{normalize-space(string($availability))}&lf;</xsl:text>
+            <xsl:text>|{f:message('msgAvailability')} |{normalize-space(string($availability))}&lf;</xsl:text>
         </xsl:if>
     </xsl:template>
 
     <xsl:template match="item" mode="keywords" expand-text="yes">
         <!-- Filter out empty subjects and our template default placeholder -->
         <xsl:if test="f:is-valid(.)">
-            <xsl:text>|Keyword |{normalize-space(.)}&lf;</xsl:text>
+            <xsl:text>|{f:message('msgKeyword')} |{normalize-space(.)}&lf;</xsl:text>
         </xsl:if>
     </xsl:template>
 
@@ -130,19 +130,18 @@
         <!-- Filter out empty descriptions and our template default placeholder -->
         <xsl:if test="f:is-valid(.)">
             <xsl:variable name="description"><xsl:apply-templates mode="text"/></xsl:variable>
-            <xsl:text>|Description |{normalize-space(string($description))}&lf;</xsl:text>
+            <xsl:text>|{f:message('msgDescription')} |{normalize-space(string($description))}&lf;</xsl:text>
         </xsl:if>
     </xsl:template>
 
     <xsl:template match="*"/>
 
     <xsl:template match="xref" mode="text" expand-text="yes">
-        <xsl:text>{f:translate-xref-url(@url, 'en')}[{.}]</xsl:text>
+        <xsl:text>{f:translate-xref-url(@url, $baseLanguage)}[{.}]</xsl:text>
     </xsl:template>
 
     <xsl:template match="text()">
         <xsl:value-of select="."/>
     </xsl:template>
-
 
 </xsl:stylesheet>

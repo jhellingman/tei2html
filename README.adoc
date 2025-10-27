@@ -32,16 +32,18 @@ If you need modifications, extensions of these scripts, or need to have other TE
 
 == Directories
 
-* `Wiki`: wiki-pages that give some instructions and background documentation. Also available as a http://jhellingman.github.io/tei2html/Index.html[single HTML file].
+* `dtd`: some DTD's with a catalog file (mostly for use by `nsgml`)
+* `locale`: localization information.
+* `modules`: most of the XSLT code itself.
+* `pptools`: post-processing tools that are mostly useful for preparing TEI-files from the output of Project Gutenberg Distributed Proofreaders. 
 * `samples`: a few sample TEI files of books posted to Project Gutenberg. I am currently adding my TEI source files to GitHub: see https://github.com/GutenbergSource[GutenbergSource] for many more examples.
 * `sandbox`: experimental code, better ignored if you don't want to play around.
 * `schemas`: schema definitions for some supplementary XML formats.
-* `modules`: most of the XSLT code itself.
-* `locale`: localization information.
+* `schematron`: a schematron file to validate several aspects of TEI files.
 * `style`: CSS stylesheets, used by the generated HTML and ePub results.
 * `test`: a test TEI file, complete with the generated output in XML, HTML and ePub format. This is used to verify the correct transformation. It contains various examples, and serves as a regression test when refactoring the XSLT transforms.
 * `tools`: perl scripts used to apply the transforms; also includes perl scripts that can be used while preparing TEI files.
-* `pptools`: tools that are mostly useful for preparing TEI-files from the output of Project Gutenberg Distributed Proofreaders. 
+* `Wiki`: wiki-pages that give some instructions and background documentation. Also available as a http://jhellingman.github.io/tei2html/Index.html[single HTML file].
 * `xspec`: xspec tests that cover various (but not yet all) aspects of the XSLT transforms.
 
 == External Links

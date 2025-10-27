@@ -19,6 +19,21 @@
 
     <msg:messages xml:lang="en" name="English">
 
+        <!-- /tei2adoc.xsl -->
+        
+        <msg:message name="t2aAboutThisRepository">About This Repository</msg:message>
+        <msg:message name="t2aAboutThisRepositoryParagraph1">This repository contains the TEI source file, and derived text and HTML files of an ebook posted to https://www.gutenberg.org/[Project Gutenberg]. Like the version posted to Project Gutenberg, this ebook is free from copyright in the U.S. No claim is made about its copyright status outside the U.S.</msg:message>
+        <msg:message name="t2aAboutThisRepositoryParagraph2">The version maintained in this repository may be slightly out-of-sync with the version maintained at Project Gutenberg. Mostly, fixes will be made first here, and only then reposted to Project Gutenberg. When you encounter any issue in this text, please report it here.</msg:message>
+        
+        <msg:message name="t2aAboutThisEbook">About This Ebook</msg:message>
+        <msg:message name="t2aField">Field</msg:message>
+        <msg:message name="t2aValue">Value</msg:message>
+        
+        <msg:message name="t2aPGEbookNumber">PG Ebook Number</msg:message>
+        <msg:message name="t2aQRCodeForDownload">QR Code for download</msg:message>
+
+        <!-- /tei2adoc.xsl -->
+
         <msg:message name="msgCountChangesMadeToText" plural="zero">No changes have been made to the text.</msg:message>
         <msg:message name="msgCountChangesMadeToText" plural="one">The following change has been made to the text:</msg:message>
         <msg:message name="msgCountChangesMadeToText">The following <msg:param name="count" type="integer"/> changes have been made to the text:</msg:message>
@@ -84,6 +99,7 @@
         <msg:message name="msgGitHub">GitHub</msg:message>
 
         <msg:message name="msgTitle">Title</msg:message>
+        <msg:message name="msgShortTitle">Short Title</msg:message>
         <msg:message name="msgMetadata">Metadata</msg:message>
         <msg:message name="msgInfo">Info</msg:message>
         <msg:message name="msgLanguage">Language</msg:message>
@@ -130,6 +146,7 @@
         <msg:message name="msgThesisAdvisor">Thesis advisor</msg:message>
         <msg:message name="msgTranscriber">Transcriber</msg:message>
         <msg:message name="msgTranslator">Translator</msg:message>
+        <msg:message name="msgPublisher">Publisher</msg:message>
 
         <msg:message name="msgAdaptor">Adaptor</msg:message>
         <msg:message name="msgIllustrator">Illustrator</msg:message>
@@ -745,6 +762,21 @@
 
     <msg:messages xml:lang="fr" name="French">
 
+        <!-- /tei2adoc.xsl -->
+        
+        <msg:message name="t2aAboutThisRepository">À propos de ce dépôt</msg:message>
+        <msg:message name="t2aAboutThisRepositoryParagraph1">Ce dépôt contient le fichier source TEI, ainsi que les fichiers texte et HTML dérivés d'un livre électronique publié sur Project Gutenberg. Comme la version publiée sur https://www.gutenberg.org/[Project Gutenberg], ce livre électronique est libre de droits d'auteur aux États-Unis. Aucune revendication n'est faite quant à son statut juridique en matière de droits d'auteur en dehors des États-Unis.</msg:message>
+        <msg:message name="t2aAboutThisRepositoryParagraph2">La version conservée dans ce dépôt peut être légèrement différente de celle maintenue sur Project Gutenberg. En général, les corrections seront effectuées ici en premier, puis répercutées sur Project Gutenberg. Si vous rencontrez un problème dans ce texte, veuillez le signaler ici.</msg:message>
+        
+        <msg:message name="t2aAboutThisEbook">À propos de ce livre électronique</msg:message>
+        <msg:message name="t2aField">Champ</msg:message>
+        <msg:message name="t2aValue">Valeur</msg:message>
+        
+        <msg:message name="t2aPGEbookNumber">Numéro du livre électronique PG</msg:message>
+        <msg:message name="t2aQRCodeForDownload">Code QR pour le téléchargement</msg:message>
+
+        <!-- /tei2adoc.xsl -->
+
         <msg:message name="msgAbbreviation">Abbréviation</msg:message>
         <msg:message name="msgAbbreviations">Abbréviations</msg:message>
         <msg:message name="msgAppendices">Annexes</msg:message>
@@ -809,7 +841,8 @@
         <msg:message name="msgTranscriptions">Transcriptions</msg:message>
         <msg:message name="msgVolume">Volume</msg:message>
         <msg:message name="msgVolumes">Volumes</msg:message>
-
+        <msg:message name="msgPublisher">Éditeur</msg:message>
+        
         <!-- Days and Months -->
 
         <msg:message name="msgJanuary">Janvier</msg:message>
@@ -898,6 +931,21 @@
 
     <msg:messages xml:lang="de" name="German">
 
+        <!-- /tei2adoc.xsl -->
+        
+        <msg:message name="t2aAboutThisRepository">Über dieses Repository</msg:message>
+        <msg:message name="t2aAboutThisRepositoryParagraph1">Dieses Repository enthält die TEI-Quelldatei sowie die abgeleiteten Text- und HTML-Dateien eines E-Books, das bei https://www.gutenberg.org/[Project Gutenberg] veröffentlicht wurde. Wie die bei Project Gutenberg veröffentlichte Version ist auch dieses E-Book in den USA urheberrechtsfrei. Es wird kein Anspruch auf den Urheberrechtsstatus außerhalb der USA erhoben.</msg:message>
+        <msg:message name="t2aAboutThisRepositoryParagraph2">Die in diesem Repository gepflegte Version kann geringfügig von der bei Project Gutenberg gepflegten Version abweichen. In der Regel werden Korrekturen zuerst hier vorgenommen und anschließend bei Project Gutenberg aktualisiert. Wenn Sie in diesem Text auf ein Problem stoßen, melden Sie es bitte hier.</msg:message>
+        
+        <msg:message name="t2aAboutThisEbook">Über dieses E-Book</msg:message>
+        <msg:message name="t2aField">Feld</msg:message>
+        <msg:message name="t2aValue">Wert</msg:message>
+        
+        <msg:message name="t2aPGEbookNumber">PG-E-Book-Nummer</msg:message>
+        <msg:message name="t2aQRCodeForDownload">QR-Code zum Herunterladen</msg:message>
+
+        <!-- /tei2adoc.xsl -->
+
         <msg:message name="msgBodyMatter">Hauptteil</msg:message>
         <msg:message name="msgGoToToc">Zum Inhaltsverzeichnis</msg:message>
         <msg:message name="msgCountCorrectionsAppliedToText" plural="zero">Es wurden keine Korrekturen am Text vorgenommen.</msg:message>
@@ -928,6 +976,7 @@
         <msg:message name="msgOccurrences.abbr">Vork.</msg:message>
         <msg:message name="msgValues">Werte</msg:message>
         <msg:message name="msgTranslator">Übersetzer</msg:message>
+        <msg:message name="msgPublisher">Verlag</msg:message>
         <msg:message name="msgReturnToNoteInText">Zurück zur Note im Text.</msg:message>
         <msg:message name="msgReturnToNoteMarkInText">Zurück zur Note <msg:param name="mark"/> im Text.</msg:message>
 
@@ -955,6 +1004,7 @@
         <msg:message name="msgUnknown">Unbekannt</msg:message>
 
         <msg:message name="msgTitle">Titel</msg:message>
+        <msg:message name="msgShortTitle">Kurztitel</msg:message>
         <msg:message name="msgMetadata">Metadaten</msg:message>
         <msg:message name="msgInfo">Information</msg:message>
         <msg:message name="msgLanguage">Sprache</msg:message>
@@ -1249,6 +1299,21 @@
 
     <msg:messages xml:lang="nl" name="Dutch">
 
+        <!-- /tei2adoc.xsl -->
+        
+        <msg:message name="t2aAboutThisRepository">Over dit archief</msg:message>
+        <msg:message name="t2aAboutThisRepositoryParagraph1">Dit archief bevat het TEI-bronbestand, evenals afgeleide tekst- en HTML-bestanden van een eboek dat is gepubliceerd door https://www.gutenberg.org/[Project Gutenberg]. Net als de versie die op Project Gutenberg is gepubliceerd, is dit eboek vrij van auteursrechten in de Verenigde Staten. Er wordt geen uitspraak gedaan over de auteursrechtelijke status buiten de Verenigde Staten.</msg:message>
+        <msg:message name="t2aAboutThisRepositoryParagraph2">De versie die in dit archief wordt onderhouden, kan enigszins afwijken van de versie die bij Project Gutenberg wordt beheerd. Meestal worden correcties eerst hier aangebracht en pas daarna opnieuw op Project Gutenberg geplaatst. Wanneer je een probleem tegenkomt in deze tekst, meld het dan hier.</msg:message>
+        
+        <msg:message name="t2aAboutThisEbook">Over dit eboek</msg:message>
+        <msg:message name="t2aField">Veld</msg:message>
+        <msg:message name="t2aValue">Waarde</msg:message>
+        
+        <msg:message name="t2aPGEbookNumber">PG eboeknummer</msg:message>
+        <msg:message name="t2aQRCodeForDownload">QR-code voor download</msg:message>
+
+        <!-- /tei2adoc.xsl -->
+        
         <msg:message name="msgFtpLink">Link naar FTP-server</msg:message>
         <msg:message name="msgLinkToLibraryOfCongress">Link naar Library of Congress-record</msg:message>
         <msg:message name="msgPrologue">Proloog</msg:message>
@@ -1321,6 +1386,7 @@
         <msg:message name="msgReturnToSourceLocation">Terug naar plaats in bron</msg:message>
 
         <msg:message name="msgTitle">Titel</msg:message>
+        <msg:message name="msgShortTitle">Korte titel</msg:message>
         <msg:message name="msgMetadata">Metadata</msg:message>
         <msg:message name="msgInfo">Info</msg:message>
         <msg:message name="msgLanguage">Taal</msg:message>
@@ -1334,8 +1400,8 @@
         <msg:message name="msgAuthorOfIntroduction">Auteur van introductie</msg:message>
         <msg:message name="msgOriginalBackCover">Originele achterkant</msg:message>
         <msg:message name="msgOriginalFrontCover">Originele voorkant</msg:message>
-        <msg:message name="msgOriginalSpine">Originele Rug</msg:message>
-        <msg:message name="msgOriginalTitle">Oorspronkelijke Titel</msg:message>
+        <msg:message name="msgOriginalSpine">Originele rug</msg:message>
+        <msg:message name="msgOriginalTitle">Oorspronkelijke titel</msg:message>
 
         <msg:message name="msgAuthorOfAfterword">Auteur van nawoord</msg:message>
         <msg:message name="msgAuthorOfColophon">Auteur van colofon</msg:message>
@@ -1409,12 +1475,12 @@
         <msg:message name="msgEpigraph">Epigraaf</msg:message>
         <msg:message name="msgExternalLink">Externe link</msg:message>
         <msg:message name="msgExternalReferences">Externe Referenties</msg:message>
-        <msg:message name="msgExternalReferencesDisclaimer">Dit eBoek bevat externe verwijzingen. Het kan zijn dat deze voor u niet werken.</msg:message>
+        <msg:message name="msgExternalReferencesDisclaimer">Dit eboek bevat externe verwijzingen. Het kan zijn dat deze voor u niet werken.</msg:message>
         <msg:message name="msgFigure">Figuur</msg:message>
         <msg:message name="msgFigures">Figuren</msg:message>
         <msg:message name="msgFragment">Fragment</msg:message>
         <msg:message name="msgFrontMatter">Voorwerk</msg:message>
-        <msg:message name="msgGitHubRepository">GitHub repository voor dit eBoek</msg:message>
+        <msg:message name="msgGitHubRepository">GitHub repository voor dit eboek</msg:message>
         <msg:message name="msgGlossary">Verklarende woordenlijst</msg:message>
         <msg:message name="msgGuide">Gids</msg:message>
         <msg:message name="msgGuides">Gidsen</msg:message>
@@ -1588,6 +1654,7 @@
         <msg:message name="msgUnknown">Onbekend</msg:message>
         <msg:message name="msgTranscriber">Transcribent</msg:message>
         <msg:message name="msgTranslator">Vertaler</msg:message>
+        <msg:message name="msgPublisher">Uitgever</msg:message>
         <msg:message name="msgUrl">URL</msg:message>
         <msg:message name="msgVolume">Deel</msg:message>
         <msg:message name="msgVolumes">Delen</msg:message>
@@ -1814,22 +1881,22 @@
 
         <msg:message name="msgAndThePgdpTeam">en het Online Distributed Proofreading Team op https://www.pgdp.net/.</msg:message>
 
-        <msg:message name="msgPGCoverArtDedication">De nieuwe omslagillustratie van dit eBoek is hiermee aan het publieke domein verleend.</msg:message>
+        <msg:message name="msgPGCoverArtDedication">De nieuwe omslagillustratie van dit eboek is hiermee aan het publieke domein verleend.</msg:message>
 
         <msg:message name="msgPGComment">Dit boek is geproduceerd door Project Gutenberg en is gratis beschikbaar op https://www.gutenberg.org/.</msg:message>
 
         <msg:message name="msgPGHeader">
-            <p>Het Project Gutenberg EBoek <i><msg:param name="title"/></i>, door <b><msg:param name="authors"/></b>.</p>
-            <p class="smallprint">Dit eBoek is bedoeld voor kosteloos gebruik door iedereen overal in de Verenigde Staten en de meeste andere delen van de wereld, met vrijwel geen beperkingen van welke aard dan ook. U mag het kopiëren, weggeven of hergebruiken onder de voorwaarden van de <a href="#pglicense">Project Gutenberg Licentie</a>, opgenomen in dit eBoek (Engelstalig) of on-line op <a href='https://www.gutenberg.org/'>www.gutenberg.org</a>. Als u zich niet in de Verenigde Staten bevindt, dan dient u de wetgeving van het land waar u zich bevindt te controleren voordat u dit eBoek gebruikt.</p>
+            <p>Het Project Gutenberg eboek <i><msg:param name="title"/></i>, door <b><msg:param name="authors"/></b>.</p>
+            <p class="smallprint">Dit eboek is bedoeld voor kosteloos gebruik door iedereen overal in de Verenigde Staten en de meeste andere delen van de wereld, met vrijwel geen beperkingen van welke aard dan ook. U mag het kopiëren, weggeven of hergebruiken onder de voorwaarden van de <a href="#pglicense">Project Gutenberg Licentie</a>, opgenomen in dit eboek (Engelstalig) of on-line op <a href='https://www.gutenberg.org/'>www.gutenberg.org</a>. Als u zich niet in de Verenigde Staten bevindt, dan dient u de wetgeving van het land waar u zich bevindt te controleren voordat u dit eboek gebruikt.</p>
             <p class="smallprint">Titel:  <msg:param name="title"/>.</p>
             <p class="smallprint">Auteur: <msg:param name="authors"/>.</p>
-            <p class="smallprint">Publicatiedatum: <msg:param name="releasedate"/> [EBoek Nummer: <msg:param name="pgnum"/>]</p>
+            <p class="smallprint">Publicatiedatum: <msg:param name="releasedate"/> [Eboeknummer: <msg:param name="pgnum"/>]</p>
             <p class="smallprint">Taal: <msg:param name="language"/>.</p>
             <p class="smallprint">Character set codering: UTF-8.</p>
         </msg:message>
 
         <msg:message name="msgPGFooter">
-            <p class="smallprint">Einde van het Project Gutenberg EBoek <i><msg:param name="title"/></i>, door <b><msg:param name="authors"/></b>.</p>
+            <p class="smallprint">Einde van het Project Gutenberg eboek <i><msg:param name="title"/></i>, door <b><msg:param name="authors"/></b>.</p>
             <p class="smallprint">Dit bestand zou <msg:param name="pgnum"/>-h.html of <msg:param name="pgnum"/>-h.zip moeten heten.</p>
             <p class="smallprint">Dit en alle bijbehorende bestanden in verschillende formaten kunnen worden gevonden in:</p>
             <p class="smallprint">https://www.gutenberg.org/<msg:param name="pgpath"/></p>
@@ -1837,7 +1904,7 @@
 
             <p class="smallprint">Bijgewerkte versies zullen de vorige versie vervangen&mdash;de oude versie zal een andere naam krijgen.</p>
 
-            <p class="smallprint">Omdat we deze werken reproduceren van gedrukte edities waarop geen Amerikaans auteursrecht rust, heeft niemand in de Verenigde Staten een auteursrecht op deze werken. De Stichting (en jij!) mogen deze werken dus zonder toestemming, en zonder het betalen van vergoedingen, kopiëren en verspreiden in de Verenigde Staten. Bijzondere regels, uiteengezet in de Algemene Voorwaarden voor Gebruik van deze licentie zijn van toepassing op het kopiëren en verspreiden van Project Gutenberg&tm; elektronische werken om het PROJECT GUTENBERG&tm; concept en handelsmerk te beschermen. Project Gutenberg is een geregistreerd handelsmerk en mag alleen worden gebruikt als je hiervoor specifiek toestemming heeft gekregen. Als je niets rekent voor kopiëren van dit eBoek, dan is het zeer eenvoudig je aan deze regels te houden. Je mag dit eBoek gebruiken voor bijna elke doel, zoals het maken van afgeleide werken, rapporten, voorstellingen en onderzoek. Ze mogen worden aangepast, gedrukt en weggegeven.&#x2014;Je mag vrijwel ALLES doen met eBoeken in het publiek domein. Verspreiding, en in het bijzonder commerciële verspreiding, is onderworpen aan de licentie op het handelsmerk.</p>
+            <p class="smallprint">Omdat we deze werken reproduceren van gedrukte edities waarop geen Amerikaans auteursrecht rust, heeft niemand in de Verenigde Staten een auteursrecht op deze werken. De Stichting (en jij!) mogen deze werken dus zonder toestemming, en zonder het betalen van vergoedingen, kopiëren en verspreiden in de Verenigde Staten. Bijzondere regels, uiteengezet in de Algemene Voorwaarden voor Gebruik van deze licentie zijn van toepassing op het kopiëren en verspreiden van Project Gutenberg&tm; elektronische werken om het PROJECT GUTENBERG&tm; concept en handelsmerk te beschermen. Project Gutenberg is een geregistreerd handelsmerk en mag alleen worden gebruikt als je hiervoor specifiek toestemming heeft gekregen. Als je niets rekent voor kopiëren van dit eboek, dan is het zeer eenvoudig je aan deze regels te houden. Je mag dit eboek gebruiken voor bijna elke doel, zoals het maken van afgeleide werken, rapporten, voorstellingen en onderzoek. Ze mogen worden aangepast, gedrukt en weggegeven.&#x2014;Je mag vrijwel ALLES doen met eboeken in het publiek domein. Verspreiding, en in het bijzonder commerciële verspreiding, is onderworpen aan de licentie op het handelsmerk.</p>
 
             <p class="smallprint">De volledige licentie is om juridische redenen niet vertaald en volgt hieronder in het Engels.</p>
         </msg:message>
@@ -1859,6 +1926,7 @@
         <msg:message name="msgGoToNoteMark">Gaan na nota <msg:param name="mark"/>.</msg:message>
         <msg:message name="msgReturnToNoteMarkInText">Terug na nota <msg:param name="mark"/> in die teks.</msg:message>
         <msg:message name="msgTranslator">Vertaler</msg:message>
+        <msg:message name="msgPublisher">Uitgewer</msg:message>
         <msg:message name="msgGenerationDate">Lêer-aanmaakdatum</msg:message>
         <msg:message name="msgCoverImage">Omslagprent</msg:message>
         <msg:message name="msgDedication">Opdrag</msg:message>
@@ -1901,7 +1969,7 @@
         <msg:message name="msgExpansion">Uitbreiding</msg:message>
         <msg:message name="msgExternalLink">Eksterne skakel</msg:message>
         <msg:message name="msgExternalReferences">Eksterne verwysings</msg:message>
-        <msg:message name="msgExternalReferencesDisclaimer">Hierdie e-boek bevat eksterne verwysings. Hierdie skakels werk moontlik nie vir u nie.</msg:message>
+        <msg:message name="msgExternalReferencesDisclaimer">Hierdie eboek bevat eksterne verwysings. Hierdie skakels werk moontlik nie vir u nie.</msg:message>
         <msg:message name="msgInfo">Info</msg:message>
         <msg:message name="msgLanguage">Taal</msg:message>
         <msg:message name="msgMetadata">Metadata</msg:message>
@@ -2119,6 +2187,7 @@
         <msg:message name="msgSponsor">Patrocinador</msg:message>
         <msg:message name="msgTranscriber">Transcriptor</msg:message>
         <msg:message name="msgTranslator">Traductor</msg:message>
+        <msg:message name="msgPublisher">Editorial</msg:message>
         <msg:message name="msgAdaptor">Adaptador</msg:message>
         <msg:message name="msgIllustrator">Ilustrador</msg:message>
         <msg:message name="msgContributor">Autor de comunicación </msg:message>
