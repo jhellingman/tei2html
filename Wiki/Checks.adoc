@@ -1,6 +1,6 @@
 = Checking a TEI file
 
-XSLT style-sheet to check various TEI conventions and textual issues.
+`checks.xsl` is an XSLT stylesheet to check various TEI conventions and textual issues. I am in the process of converting most of these tests to schematron, but for the time being it will be the primary way to check for correctness of TEI files being processed by `tei2html`.
 
 == Metadata
 
@@ -11,7 +11,7 @@ Verify metadata is present and correct.
 Verify valid rendering attributes are used
 
 * valid CSS-based rendition ladders
-* valid tei2html extensions.
+* valid `tei2html` extensions.
 
 == Types
 
@@ -43,3 +43,5 @@ This is slightly complicated by several facts:
 * different conventions for languages and countries.
 * usage around other punctuation might vary.
 * non-closed marks are to be re-opened in next paragraph.
+
+To make this test work best, you should configure the exact type of quotation marks used in the `tei2html.config` file with your text, using the `text.quotes` setting.
