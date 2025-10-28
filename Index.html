@@ -3779,7 +3779,7 @@ brackets.</p>
 <h2 id="_checking_a_tei_file">Checking a TEI file</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>XSLT style-sheet to check various TEI conventions and textual issues.</p>
+<p><code>checks.xsl</code> is an XSLT stylesheet to check various TEI conventions and textual issues. I am in the process of converting most of these tests to schematron, but for the time being it will be the primary way to check for correctness of TEI files being processed by <code>tei2html</code>.</p>
 </div>
 <div class="sect2">
 <h3 id="_metadata_2">Metadata</h3>
@@ -3798,7 +3798,7 @@ brackets.</p>
 <p>valid CSS-based rendition ladders</p>
 </li>
 <li>
-<p>valid tei2html extensions.</p>
+<p>valid <code>tei2html</code> extensions.</p>
 </li>
 </ul>
 </div>
@@ -3868,6 +3868,9 @@ opening mark, there should be a corresponding closing mark.</p>
 <p>non-closed marks are to be re-opened in next paragraph.</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>To make this test work best, you should configure the exact type of quotation marks used in the <code>tei2html.config</code> file with your text, using the <code>text.quotes</code> setting.</p>
 </div>
 </div>
 </div>
@@ -4185,7 +4188,7 @@ opening mark, there should be a corresponding closing mark.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-10-28 08:15:39 UTC
+Last updated 2025-10-28 08:22:00 UTC
 </div>
 </div>
 </body>
