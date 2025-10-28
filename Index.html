@@ -3561,7 +3561,7 @@ handled in a special way when processing the TEI file.</p>
 <div class="sect3">
 <h4 id="_tei2html_pl">tei2html.pl</h4>
 <div class="paragraph">
-<p>The main 'glue' script. This will run the various commands to actually run the <code>tei2html</code> XSLT scripts.</p>
+<p>The Perl script <code>tei2html.pl</code> is the main 'glue' script. This will run the various commands to actually apply the <code>tei2html</code> XSLT stylesheets.</p>
 </div>
 <div class="paragraph">
 <p>Syntax: <code>perl.pl -S tei2html.pl [options] filename</code></p>
@@ -3573,7 +3573,7 @@ handled in a special way when processing the TEI file.</p>
 <div class="sect3">
 <h4 id="_ucwords_pl">ucwords.pl</h4>
 <div class="paragraph">
-<p>Perl script to list word-frequencies in an XML file. This script will recognize the <code>@lang</code> tag, and write a word-frequency list per language encountered. Words in the output will be color-coded, based on frequency and appearance in a spell-check dictionary.</p>
+<p>The Perl script <code>ucwords.pl</code> is used to list word-frequencies in an XML file. This script will recognize the <code>@lang</code> tag, and write a word-frequency list per language encountered. Words in the output will be color-coded, based on frequency and appearance in a spell-check dictionary.</p>
 </div>
 <div class="paragraph">
 <p>Syntax: <code>perl -S ucwords.pl filename</code></p>
@@ -3585,7 +3585,7 @@ handled in a special way when processing the TEI file.</p>
 <div class="sect3">
 <h4 id="_extractnotes_pl">extractNotes.pl</h4>
 <div class="paragraph">
-<p>Extract TEI tagged notes from a text file.</p>
+<p><code>extractNotes.pl</code> extracts TEI tagged notes from a text file.</p>
 </div>
 <div class="paragraph">
 <p>Usage:</p>
@@ -3621,7 +3621,7 @@ brackets.</p>
 <div class="sect3">
 <h4 id="_tei2txt_pl">tei2txt.pl</h4>
 <div class="paragraph">
-<p>Convert a TEI file to plain vanilla ASCII.</p>
+<p><code>tei2txt.pl</code> converts a TEI file to plain vanilla ASCII.</p>
 </div>
 <div class="paragraph">
 <p>Usage:</p>
@@ -3648,10 +3648,10 @@ brackets.</p>
 <div class="sect3">
 <h4 id="_tei2txt_bat">tei2txt.bat</h4>
 <div class="paragraph">
-<p>Convert a TEI file to plain vanilla ASCII.</p>
+<p><code>tei2txt.bat</code> converts a TEI file to plain vanilla ASCII.</p>
 </div>
 <div class="paragraph">
-<p>This batch files runs extractNotes.pl, concatenates the two resulting files, and then runs tei2txt.pl on the resulting file. The result is a single ASCII file.</p>
+<p>This batch file first runs <code>extractNotes.pl</code>, concatenates the two resulting files, and then runs <code>tei2txt.pl</code> on the resulting file. The result is a single ASCII file.</p>
 </div>
 </div>
 </div>
@@ -3660,7 +3660,7 @@ brackets.</p>
 <div class="sect3">
 <h4 id="_fixpb_pl">fixpb.pl</h4>
 <div class="paragraph">
-<p>Perl script to fix page numbers, as recorded in the <code>@n</code> attribute in <code>&lt;pb&gt;</code> elements. This will also set the <code>@id</code> attribute to <code>pb#</code>, where <code>#</code> is the current page number. Page-numbers will be changed after the page indicated, with an offset indicated. To fix mismatched page-numbers, always start with the first mismatch, and run the script as many times as needed (this typically occurs if the original source had unnumbered pages with illustrations.)</p>
+<p>The Perl script <code>fixpb.pl</code> fixes page numbers, as recorded in the <code>@n</code> attribute in <code>&lt;pb&gt;</code> elements. This will also set the <code>@id</code> attribute to <code>pb#</code>, where <code>#</code> is the current page number. Page-numbers will be changed after the page indicated, with an offset indicated. To fix mismatched page-numbers, always start with the first mismatch, and run the script as many times as needed (this typically occurs if the original source had unnumbered pages with illustrations.)</p>
 </div>
 <div class="paragraph">
 <p>For an overview of options, run <code>perl.pl -S fixpb.pl --help</code></p>
@@ -3669,13 +3669,13 @@ brackets.</p>
 <div class="sect3">
 <h4 id="_catpars_pl">catpars.pl</h4>
 <div class="paragraph">
-<p>Perl script to unwrap paragraphs, such that they appear on one line. Handle with care, as it might unwrap entire tables or lists if it deems them part of a paragraph.</p>
+<p>The Perl script <code>catpars.pl</code> unwraps paragraphs, such that they appear on one line. Handle with care, as it might unwrap entire tables or lists if it deems them part of a paragraph.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_quotes_pl">quotes.pl</h4>
 <div class="paragraph">
-<p>Perl script to replace ASCII single and double-quotes with curly quotes. May need some manual verification and correction where quotes and tags interfere with the simple algorithm used.</p>
+<p>The Perl script <code>quotes.pl</code> replaces ASCII single and double-quotes with curly quotes. May need some manual verification and correction where quotes and tags interfere with the simple algorithm used.</p>
 </div>
 <div class="paragraph">
 <p>Issues:</p>
@@ -3694,7 +3694,7 @@ brackets.</p>
 <div class="sect3">
 <h4 id="_pgpp_pl">pgpp.pl</h4>
 <div class="paragraph">
-<p>Script run initially on the output from PG Distributed Proofreaders, when converting that to TEI (The actual conversion is a manual process, as the resulting output is still very far removed from being an actual TEI file).</p>
+<p>The Perl script <code>pgpp.pl</code> should be run initially on the output from PG Distributed Proofreaders, when converting that to TEI (the actual conversion is a manual process, as the resulting output is still very far removed from a syntactically correct TEI file).</p>
 </div>
 </div>
 </div>
@@ -3703,7 +3703,7 @@ brackets.</p>
 <div class="sect3">
 <h4 id="_pgprepare_pl">pgprepare.pl</h4>
 <div class="paragraph">
-<p>Script run to convert a bunch of text files to UTF-8, normalize spacing, and remove unwanted characters.</p>
+<p>The Perl script <code>pgprepare.pl</code> converts a set of text files in a directory to UTF-8, normalizes spacing, and removes some unwanted characters. It assumes its input is in the latin-1 character set, so don&#8217;t run it twice on the same set of files.</p>
 </div>
 </div>
 </div>
@@ -4185,7 +4185,7 @@ opening mark, there should be a corresponding closing mark.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-10-27 21:36:11 UTC
+Last updated 2025-10-28 08:15:39 UTC
 </div>
 </div>
 </body>
