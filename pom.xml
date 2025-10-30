@@ -18,7 +18,7 @@
         <!--<saxon.version>10.1</saxon.version>-->
         <saxon.version>9.9.1-8</saxon.version>
 
-        <asciidoctor.maven.plugin.version>2.2.4</asciidoctor.maven.plugin.version>
+        <asciidoctor.maven.plugin.version>3.2.0</asciidoctor.maven.plugin.version>
         <asciidoctorj.epub.version>1.5.1</asciidoctorj.epub.version>
         <asciidoctorj.pdf.version>2.3.9</asciidoctorj.pdf.version>
         <asciidoctorj.version>2.5.10</asciidoctorj.version>
