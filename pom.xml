@@ -16,7 +16,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!--<saxon.version>10.1</saxon.version>-->
-        <saxon.version>9.9.1-8</saxon.version>
+        <saxon.version>12.9</saxon.version>
 
         <asciidoctor.maven.plugin.version>2.2.4</asciidoctor.maven.plugin.version>
         <asciidoctorj.epub.version>1.5.1</asciidoctorj.epub.version>
