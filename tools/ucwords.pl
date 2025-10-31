@@ -32,6 +32,7 @@ my $sqlReport = 0;      # Set to 1 to generate a report in SQL inserts.
 my $idBook = 0;
 my $docTitle = "";
 my $docAuthor = "";
+my $showHelp = 0;
 
 GetOptions(
     'v' => \$verbose,
@@ -40,10 +41,28 @@ GetOptions(
     'i' => \$ignoreLanguage,
     'c' => \$csvReport,
     's' => \$sqlReport,
-    'm' => \$makeHeatMap);
+    'm' => \$makeHeatMap,
 
-if (!defined $ARGV[0]) {
-    die "usage: ucwords.pl -imrvx <filename>\n";
+    'help' => \$showHelp);
+
+if (!defined $ARGV[0] || $showHelp == 1) {
+    print "ucwords.pl -- create a word-list from an XML file\n\n";
+
+    print "Usage: ucwords.pl [-options] <inputfile.xml>\n\n";
+
+    print "Options:\n\n";
+
+    print "    c         Report in CSV format.\n";
+    print "    i         Ignore language tags (all words will be in one list).\n";
+    print "    m         Create a heat-map version of the input file.\n";
+    print "    r         Create a retrograd word-list (sorted based on ending).\n";
+    print "    s         Report in SQL format (to be inserted into a database).\n";
+    print "    v         Verbose operation.\n";
+    print "    x         Report in XML format.\n\n";
+
+    print "    help      Show this help message.\n";
+
+    exit(0);
 }
 
 my $inputFile = $ARGV[0];
@@ -406,6 +425,8 @@ sub reportXML {
     reportTagsXML();
     reportRendXML();
 
+    reportStatisticsXML();
+
     print USAGEFILE "</usage>\n";
 }
 
@@ -475,13 +496,18 @@ sub reportLanguageWordsXML($) {
     my $language = shift;
     my @wordList = keys %{$wordHash{$language}};
 
-    foreach my $word (@wordList) {
-        my $key = NormalizeForLanguage($word, $language);
-        $word = "$key!$word";
+    my $totalCount = 0;
+    my $distinctCount = 0;
+    foreach my $item (@wordList) {
+        my $key = NormalizeForLanguage($item, $language);
+        $item = "$key!$item";
+        my ($dummy, $word) = split(/!/, $item, 2);
+        $totalCount += $wordHash{$language}{$word};
+        $distinctCount++;
     }
     @wordList = sort @wordList;
 
-    print USAGEFILE "\n<words xml:lang=\"$language\">\n";
+    print USAGEFILE "\n<words xml:lang=\"$language\" count=\"$totalCount\" distinct=\"$distinctCount\">\n";
 
     loadDictionary($language);
 
@@ -984,7 +1010,15 @@ sub reportCharsXML() {
     my @charList = keys %charHash;
     @charList = sort @charList;
 
-    print USAGEFILE "<characters>\n";
+    my $totalCount = 0;
+    my $distinctCount = 0;
+    foreach my $char (@charList) {
+        $totalCount += $charHash{$char};
+        $distinctCount++;
+    }
+    my $distinct = @charList.
+
+    print USAGEFILE "<characters count=\"$totalCount\" distinct=\"$distinctCount\">\n";
     foreach my $char (@charList) {
         my $count = $charHash{$char};
         my $ord = ord($char);
@@ -1168,6 +1202,26 @@ sub reportStatistics {
     print "\n</table>";
 }
 
+
+#
+# reportStatisticsXML()
+#
+sub reportStatisticsXML {
+    my $textWordCount      = $wordCount    - $headerWordCount;
+    my $textNonWordCount   = $nonWordCount - $headerNonWordCount;
+    my $textNumberCount    = $numberCount  - $headerNumberCount;
+    my $textCharCount      = $charCount    - $headerCharCount;
+
+    my $extend = $textWordCount + $textNumberCount;
+
+    print USAGEFILE "<summary>";
+    print USAGEFILE "<counter name=\"words\" text=\"$textWordCount\" header=\"$headerWordCount\"/>";
+    print USAGEFILE "<counter name=\"nonwords\" text=\"$textNonWordCount\" header=\"$headerNonWordCount\"/>";
+    print USAGEFILE "<counter name=\"numbers\" text=\"$textNumberCount\" header=\"$headerNumberCount\"/>";
+    print USAGEFILE "<counter name=\"characters\" text=\"$textCharCount\" header=\"$headerCharCount\"/>";
+    print USAGEFILE "<counter name=\"tags\" count=\"$grandTotalTags\"/>";
+    print USAGEFILE "</summary>";
+}
 
 #
 # reportCountCounts()

@@ -363,7 +363,8 @@
     </xd:doc>
 
     <xsl:template match="argument">
-        <div class="argument">
+        <div>
+            <xsl:copy-of select="f:set-class-attribute-with(., 'argument')"/>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
         </div>
