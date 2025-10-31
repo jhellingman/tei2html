@@ -21,7 +21,7 @@
         <asciidoctor.maven.plugin.version>3.2.0</asciidoctor.maven.plugin.version>
         <asciidoctorj.epub.version>2.2.0</asciidoctorj.epub.version>
         <asciidoctorj.pdf.version>2.3.9</asciidoctorj.pdf.version>
-        <asciidoctorj.version>2.5.10</asciidoctorj.version>
+        <asciidoctorj.version>3.0.0</asciidoctorj.version>
     </properties>
 
     <build>
