@@ -20,19 +20,25 @@
     <msg:messages xml:lang="en" name="English">
 
         <!-- /tei2adoc.xsl -->
-        
+
         <msg:message name="t2aAboutThisRepository">About This Repository</msg:message>
         <msg:message name="t2aAboutThisRepositoryParagraph1">This repository contains the TEI source file, and derived text and HTML files of an ebook posted to https://www.gutenberg.org/[Project Gutenberg]. Like the version posted to Project Gutenberg, this ebook is free from copyright in the U.S. No claim is made about its copyright status outside the U.S.</msg:message>
         <msg:message name="t2aAboutThisRepositoryParagraph2">The version maintained in this repository may be slightly out-of-sync with the version maintained at Project Gutenberg. Mostly, fixes will be made first here, and only then reposted to Project Gutenberg. When you encounter any issue in this text, please report it here.</msg:message>
-        
+
         <msg:message name="t2aAboutThisEbook">About This Ebook</msg:message>
         <msg:message name="t2aField">Field</msg:message>
         <msg:message name="t2aValue">Value</msg:message>
-        
+
         <msg:message name="t2aPGEbookNumber">PG Ebook Number</msg:message>
         <msg:message name="t2aQRCodeForDownload">QR Code for download</msg:message>
 
+        <msg:message name="t2aWordCount">Number of Words</msg:message>
+        <msg:message name="t2aApproximatelyXPages">approximately <msg:param name="count" type="integer"/> pages</msg:message>
+        <msg:message name="t2aApproximatelyXPages" plural="one">approximately <msg:param name="count" type="integer"/> page</msg:message>
+
         <!-- /tei2adoc.xsl -->
+
+        <msg:message name="msgDescription">Description</msg:message>
 
         <msg:message name="msgCountChangesMadeToText" plural="zero">No changes have been made to the text.</msg:message>
         <msg:message name="msgCountChangesMadeToText" plural="one">The following change has been made to the text:</msg:message>
@@ -763,17 +769,21 @@
     <msg:messages xml:lang="fr" name="French">
 
         <!-- /tei2adoc.xsl -->
-        
+
         <msg:message name="t2aAboutThisRepository">À propos de ce dépôt</msg:message>
         <msg:message name="t2aAboutThisRepositoryParagraph1">Ce dépôt contient le fichier source TEI, ainsi que les fichiers texte et HTML dérivés d'un livre électronique publié sur Project Gutenberg. Comme la version publiée sur https://www.gutenberg.org/[Project Gutenberg], ce livre électronique est libre de droits d'auteur aux États-Unis. Aucune revendication n'est faite quant à son statut juridique en matière de droits d'auteur en dehors des États-Unis.</msg:message>
         <msg:message name="t2aAboutThisRepositoryParagraph2">La version conservée dans ce dépôt peut être légèrement différente de celle maintenue sur Project Gutenberg. En général, les corrections seront effectuées ici en premier, puis répercutées sur Project Gutenberg. Si vous rencontrez un problème dans ce texte, veuillez le signaler ici.</msg:message>
-        
+
         <msg:message name="t2aAboutThisEbook">À propos de ce livre électronique</msg:message>
         <msg:message name="t2aField">Champ</msg:message>
         <msg:message name="t2aValue">Valeur</msg:message>
-        
+
         <msg:message name="t2aPGEbookNumber">Numéro du livre électronique PG</msg:message>
         <msg:message name="t2aQRCodeForDownload">Code QR pour le téléchargement</msg:message>
+
+        <msg:message name="t2aWordCount">Nombre de mots</msg:message>
+        <msg:message name="t2aApproximatelyXPages">environ <msg:param name="count" type="integer"/> pages</msg:message>
+        <msg:message name="t2aApproximatelyXPages" plural="one">environ <msg:param name="count" type="integer"/> page</msg:message>
 
         <!-- /tei2adoc.xsl -->
 
@@ -842,7 +852,7 @@
         <msg:message name="msgVolume">Volume</msg:message>
         <msg:message name="msgVolumes">Volumes</msg:message>
         <msg:message name="msgPublisher">Éditeur</msg:message>
-        
+
         <!-- Days and Months -->
 
         <msg:message name="msgJanuary">Janvier</msg:message>
@@ -932,17 +942,21 @@
     <msg:messages xml:lang="de" name="German">
 
         <!-- /tei2adoc.xsl -->
-        
+
         <msg:message name="t2aAboutThisRepository">Über dieses Repository</msg:message>
         <msg:message name="t2aAboutThisRepositoryParagraph1">Dieses Repository enthält die TEI-Quelldatei sowie die abgeleiteten Text- und HTML-Dateien eines E-Books, das bei https://www.gutenberg.org/[Project Gutenberg] veröffentlicht wurde. Wie die bei Project Gutenberg veröffentlichte Version ist auch dieses E-Book in den USA urheberrechtsfrei. Es wird kein Anspruch auf den Urheberrechtsstatus außerhalb der USA erhoben.</msg:message>
         <msg:message name="t2aAboutThisRepositoryParagraph2">Die in diesem Repository gepflegte Version kann geringfügig von der bei Project Gutenberg gepflegten Version abweichen. In der Regel werden Korrekturen zuerst hier vorgenommen und anschließend bei Project Gutenberg aktualisiert. Wenn Sie in diesem Text auf ein Problem stoßen, melden Sie es bitte hier.</msg:message>
-        
+
         <msg:message name="t2aAboutThisEbook">Über dieses E-Book</msg:message>
         <msg:message name="t2aField">Feld</msg:message>
         <msg:message name="t2aValue">Wert</msg:message>
-        
+
         <msg:message name="t2aPGEbookNumber">PG-E-Book-Nummer</msg:message>
         <msg:message name="t2aQRCodeForDownload">QR-Code zum Herunterladen</msg:message>
+
+        <msg:message name="t2aWordCount">Anzahl der Wörter</msg:message>
+        <msg:message name="t2aApproximatelyXPages">ungefähr <msg:param name="count" type="integer"/> Seiten</msg:message>
+        <msg:message name="t2aApproximatelyXPages" plural="one">ungefähr <msg:param name="count" type="integer"/> Seite</msg:message>
 
         <!-- /tei2adoc.xsl -->
 
@@ -1300,20 +1314,26 @@
     <msg:messages xml:lang="nl" name="Dutch">
 
         <!-- /tei2adoc.xsl -->
-        
+
         <msg:message name="t2aAboutThisRepository">Over dit archief</msg:message>
         <msg:message name="t2aAboutThisRepositoryParagraph1">Dit archief bevat het TEI-bronbestand, evenals afgeleide tekst- en HTML-bestanden van een eboek dat is gepubliceerd door https://www.gutenberg.org/[Project Gutenberg]. Net als de versie die op Project Gutenberg is gepubliceerd, is dit eboek vrij van auteursrechten in de Verenigde Staten. Er wordt geen uitspraak gedaan over de auteursrechtelijke status buiten de Verenigde Staten.</msg:message>
         <msg:message name="t2aAboutThisRepositoryParagraph2">De versie die in dit archief wordt onderhouden, kan enigszins afwijken van de versie die bij Project Gutenberg wordt beheerd. Meestal worden correcties eerst hier aangebracht en pas daarna opnieuw op Project Gutenberg geplaatst. Wanneer je een probleem tegenkomt in deze tekst, meld het dan hier.</msg:message>
-        
+
         <msg:message name="t2aAboutThisEbook">Over dit eboek</msg:message>
         <msg:message name="t2aField">Veld</msg:message>
         <msg:message name="t2aValue">Waarde</msg:message>
-        
+
         <msg:message name="t2aPGEbookNumber">PG eboeknummer</msg:message>
         <msg:message name="t2aQRCodeForDownload">QR-code voor download</msg:message>
 
+        <msg:message name="t2aWordCount">Aantal woorden</msg:message>
+        <msg:message name="t2aApproximatelyXPages">ongeveer <msg:param name="count" type="integer"/> bladzijden</msg:message>
+        <msg:message name="t2aApproximatelyXPages" plural="one">ongeveer <msg:param name="count" type="integer"/> bladzijde</msg:message>
+
         <!-- /tei2adoc.xsl -->
-        
+
+        <msg:message name="msgDescription">Beschrijving</msg:message>
+
         <msg:message name="msgFtpLink">Link naar FTP-server</msg:message>
         <msg:message name="msgLinkToLibraryOfCongress">Link naar Library of Congress-record</msg:message>
         <msg:message name="msgPrologue">Proloog</msg:message>
@@ -1336,7 +1356,7 @@
         <msg:message name="msgCountCorrectionsAppliedToText" plural="zero">Er zijn geen verbeteringen aangebracht in de tekst.</msg:message>
         <msg:message name="msgCountCorrectionsAppliedToText" plural="one">De volgende verbetering is aangebracht in de tekst:</msg:message>
         <msg:message name="msgCountCorrectionsAppliedToText">De volgende <msg:param name="count" type="integer"/> verbeteringen zijn aangebracht in de tekst:</msg:message>
-        
+
         <msg:message name="msgCorrectionsNotAppliedToText">De volgende mogelijke verbeteringen zijn niet toegepast.</msg:message>
         <msg:message name="msgQuestionablesOverview">Overzicht van mogelijke verbeteringen.</msg:message>
         <msg:message name="msgSuggestedCorrection">Voorgestelde verbetering</msg:message>

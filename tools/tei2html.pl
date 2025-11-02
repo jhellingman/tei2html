@@ -289,6 +289,9 @@ sub processFile($) {
             warning("Processed/$basename.epub is missing or out-of-date!");
             $makeEpub = 1;
         }
+        if (isNewer($filename, $basename . "-words.html")) {
+            $makeWordlist = 1;
+        }
     }
     if ($explicitMakeText == 1) {
         $makeText = 1;
@@ -315,9 +318,6 @@ sub processFile($) {
     my $preprocessedXmlFilename = "$basename-preprocessed.xml";
     preprocessXml($includedXmlFilename, $preprocessedXmlFilename);
 
-    makeMetadata($preprocessedXmlFilename);
-    makeReadme($preprocessedXmlFilename);
-
     $runChecks    && runChecks($basename,    $filename);
     $makeWordlist && makeWordlist($basename, $preprocessedXmlFilename);
     $makeHtml     && makeHtml($basename,     $preprocessedXmlFilename);
@@ -329,6 +329,9 @@ sub processFile($) {
     $makeP5       && makeP5($basename,       $preprocessedXmlFilename);
     $makeSQL      && makeSql($preprocessedXmlFilename);
     $makeAsciiDoc && makeAsciiDoc($basename, $preprocessedXmlFilename);
+
+    makeMetadata($preprocessedXmlFilename);
+    makeReadme($preprocessedXmlFilename);
 
     $makePGTEI && system ("$saxon $preprocessedXmlFilename $xsldir/tei2pgtei.xsl > $basename-pgtei.xml");
 
@@ -528,11 +531,15 @@ sub makeReadme($) {
     if (-d 'Processed/images@1') {
         $imageDir = 'images@1';
     }
-
     my $imageDirParameter = "imageDir=\"$imageDir\"";
 
+    my $usageFileParameter = "";
+    if (-e "usage.xml") {
+        $usageFileParameter = "usageFile=\"usage.xml\"";
+    }
+
     trace("Extract metadata to README.adoc...");
-    system ("$saxon $xmlFilename $xsldir/tei2adoc.xsl $imageDirParameter > README.adoc");
+    system ("$saxon $xmlFilename $xsldir/tei2adoc.xsl $imageDirParameter $usageFileParameter > README.adoc");
 }
 
 
@@ -827,7 +834,7 @@ sub makeWordlist($$) {
     $options .= $makeSQL ? ' -s ' : '';
 
     trace("Report on word usage...");
-    system ("perl $toolsdir/ucwords.pl $options $xmlFile > $tmpFile");
+    system ("perl $toolsdir/ucwords.pl -x $options $xmlFile > $tmpFile");
     system ("perl $toolsdir/ent2ucs.pl $tmpFile > $wordlistFile");
 
     removeFile($tmpFile);

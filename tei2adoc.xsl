@@ -17,6 +17,8 @@
 
     <xsl:param name="imageDir" select="'images'"/>
 
+    <xsl:param name="usageFile" select="''"/>
+
     <xsl:variable name="outputFormat" select="markdown"/>
 
     <xsl:include href="modules/functions.xsl"/>
@@ -36,6 +38,12 @@
     <xsl:variable name="publisher" select="/*[self::TEI.2 or self::*:TEI]/*:teiHeader/*:fileDesc/*:publicationStmt/*:publisher"/>
     <xsl:variable name="pubdate" select="/*[self::TEI.2 or self::*:TEI]/*:teiHeader/*:fileDesc/*:publicationStmt/*:date"/>
     <xsl:variable name="pgnum" select="/*[self::TEI.2 or self::*:TEI]/*:teiHeader/*:fileDesc/*:publicationStmt/*:idno[@type='PGnum']"/>
+
+    <xsl:variable name="wordCount" select="document($usageFile, .)/usage/summary/counter[@name='words']/@text"/>
+    <xsl:variable name="charCount" select="document($usageFile, .)/usage/summary/counter[@name='characters']/@text"/>
+    <xsl:variable name="pageCount" select="round($charCount div 1800)"/>
+
+    <xsl:variable name="cover" select="//*:figure[@id='cover-image']"/>
 
     <xsl:template match="/" expand-text="yes">
 
@@ -64,6 +72,9 @@
             <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/respStmt"/>
             <xsl:apply-templates select="teiHeader/fileDesc/publicationStmt"/>
             <xsl:apply-templates select="teiHeader/fileDesc/publicationStmt/availability"/>
+            <xsl:if test="$wordCount">
+                <xsl:text>|{f:message('t2aWordCount')} |{$wordCount} ({f:format-message('t2aApproximatelyXPages', map{'count': $pageCount})}) &lf;</xsl:text>
+            </xsl:if>
             <xsl:apply-templates select="teiHeader/profileDesc/textClass/keywords/list" mode="keywords"/>
             <xsl:apply-templates select="teiHeader/fileDesc/notesStmt/note[@type='Description']" mode="descriptions"/>
             <xsl:variable name="pgNum" select="teiHeader/fileDesc/publicationStmt/idno[@type='PGnum']"/>
