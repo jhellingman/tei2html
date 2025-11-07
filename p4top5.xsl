@@ -721,5 +721,18 @@
     </figure>
   </xsl:template>
 
+  <!-- head with image above indicated in rendition ladder -->
+  <xsl:template match="head[f:has-rend-value(@rend, 'image')]">
+    <head>
+        <xsl:variable name="rend" select="f:remove-rend-value(@rend, 'image')"/>
+        <xsl:copy-of select="@* except @rend"/>           
+        <xsl:if test="$rend">
+            <xsl:attribute name="rend" select="$rend"/>
+        </xsl:if>
+        <graphic url="{f:rend-value(@rend, 'image')}"/>
+        <xsl:apply-templates/>
+    </head>
+  </xsl:template>
+
 
 </xsl:stylesheet>
