@@ -116,7 +116,11 @@
             <xsl:value-of select="(preceding::pb[@n]/@n)[last()]"/>
         </xsl:variable>
 
-        <s:segment sourceElement="{name()}" sourcePage="{$page}">
+        <xsl:variable name="pageId" as="xs:string">
+            <xsl:value-of select="(preceding::pb[@n]/@id)[last()]"/>
+        </xsl:variable>
+
+        <s:segment sourceElement="{name()}" sourcePage="{$page}" sourcePageId="{$pageId}">
             <xsl:copy-of select="@*"/>
             <xsl:if test="not(@lang)">
                 <xsl:attribute name="lang"><xsl:value-of select="$lang"/></xsl:attribute>
@@ -200,7 +204,11 @@
             <xsl:value-of select="(preceding::pb[@n]/@n)[last()]"/>
         </xsl:variable>
 
-        <s:segment sourceElement="{name()}" sourcePage="{$page}">
+        <xsl:variable name="pageId" as="xs:string">
+            <xsl:value-of select="(preceding::pb[@n]/@id)[last()]"/>
+        </xsl:variable>
+
+        <s:segment sourceElement="{name()}" sourcePage="{$page}" sourcePageId="{$pageId}">
             <xsl:copy-of select="@*"/>
             <xsl:if test="not(@lang)">
                 <xsl:attribute name="lang"><xsl:value-of select="$lang"/></xsl:attribute>
@@ -233,7 +241,11 @@
             <xsl:value-of select="(preceding::pb[@n]/@n)[last()]"/>
         </xsl:variable>
 
-        <s:segment sourceElement="{name()}" sourcePage="{$page}">
+        <xsl:variable name="pageId" as="xs:string">
+            <xsl:value-of select="(preceding::pb[@n]/@id)[last()]"/>
+        </xsl:variable>
+
+        <s:segment sourceElement="{name()}" sourcePage="{$page}" sourcePageId="{$pageId}">
             <xsl:copy-of select="@*"/>
             <xsl:if test="not(@lang)">
                 <xsl:attribute name="lang"><xsl:value-of select="$lang"/></xsl:attribute>

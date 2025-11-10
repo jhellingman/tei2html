@@ -64,12 +64,14 @@ my $debug               = 0;
 my $epubVersion         = "3.0.1";
 my $explicitMakeText    = 0;
 my $force               = 0;
+
 my $kwicCaseSensitive   = "no";
 my $kwicLanguages       = "";
 my $kwicMixup           = "";
 my $kwicSort            = "";
 my $kwicVariants        = 1;
 my $kwicWords           = "";
+my $kwicNoCommonWords   = 0;
 
 my $makeEpub            = 0;
 my $makeHeatMap         = 0;
@@ -85,6 +87,8 @@ my $makeWordlist        = 0;
 my $makeXML             = 0;
 my $makeZip             = 0;
 my $makeAsciiDoc        = 0;
+my $makeReadme          = 0;
+my $makeMetadata        = 0;
 
 my $noTranscription     = 0;
 my $noTranscriptionPopups = 0;
@@ -120,12 +124,15 @@ GetOptions(
     'l=i' => \$logLevel,
 
     'adoc' => \$makeAsciiDoc,
+    'readme' => \$makeReadme,
+    'metadata' => \$makeMetadata,
     'clean' => \$clean,
     'debug' => \$debug,
     'epubversion=s' => \$epubVersion,
     'heatmap' => \$makeHeatMap,
     'help' => \$showHelp,
     'html5' => \$makeHtml5,
+    
     'kwiclang=s' => \$kwicLanguages,
     'kwicword=s' => \$kwicWords,
     'kwicwords=s' => \$kwicWords,
@@ -133,6 +140,8 @@ GetOptions(
     'kwiccasesensitive=s' => \$kwicCaseSensitive,
     'kwicmixup=s' => \$kwicMixup,
     'kwicvariants=i' => \$kwicVariants,
+    'kwicnocommonwords' => \$kwicNoCommonWords,
+
     'notranscription' => \$noTranscription,
     'notranscriptions' => \$noTranscription,
     'notranscriptionpopups' => \$noTranscriptionPopups,
@@ -179,13 +188,16 @@ if ($showHelp == 1) {
     print "    adoc                            Create an AsciiDoc file.\n";
     print "    clean                           Clean intermediate files normally preserved.\n";
     print "    debug                           Debug mode.\n";
-    print "    heatmap                         Generate a heatmap version.\n";
+    print "    heatmap                         Generate a heatmap version.\n\n";
+    
     print "    kwiclang=<languages>            Languages to be shown in KWIC, use ISO-639 codes, separated by spaces.\n";
     print "    kwicword=<words>                Words to be shown in KWIC, separate words by spaces.\n";
     print "    kwiccase=<yes/no>               Be case-sensitive in KWIC.\n";
     print "    kwicsort=<preceding/following>  Sort by (reverse) preceding or following context in KWIC.\n";
     print "    kwicmixup=<string>              Letters that can be mixed-up in KWIC, separate letters by spaces.\n";
     print "    kwicvariants=<number>           Report only words with at least this many variant spellings.\n";
+    print "    kwicnocommonwords               Ignore the roughly 1000 most common words.\n\n";
+
     print "    notranscription                 Don't use transcription schemes.\n";
     print "    notranscriptionpopups           Don't use pop-ups to show Latin transcription of Greek and Cyrillic.\n";
     print "    pagewidth=<int>                 Set the page width (default: 72 characters).\n";
@@ -209,6 +221,7 @@ if ($explicitMakeText == 0 && $makeHtml == 0 && $makePdf == 0 && $makeEpub == 0 
     $makeText = 1;
     $makeHtml = 1;
     $makeWordlist = 1;
+    $makeReadme = 1;
     $runChecks = 1;
 }
 
@@ -291,6 +304,13 @@ sub processFile($) {
         }
         if (isNewer($filename, $basename . "-words.html")) {
             $makeWordlist = 1;
+        }
+        if (isNewer($filename, "README.adoc")) {
+            $makeWordlist = 1;
+            $makeReadme = 1;
+        }
+        if (isNewer($filename, "metadata.xml")) {
+            $makeMetadata = 1;
         }
     }
     if ($explicitMakeText == 1) {
@@ -561,9 +581,10 @@ sub makeKwic($$) {
     my $kwicMixupParameter = ($kwicMixup eq '') ? '' : "mixup=\"$kwicMixup\"";
     my $kwicCaseSensitiveParameter = ($kwicCaseSensitive eq 'yes' or $kwicCaseSensitive eq 'true') ? 'case-sensitive=true' : '';
     my $kwicVariantsParameter = ($kwicVariants > 1) ? "min-variant-count=\"$kwicVariants\"" : '';
+    my $kwicNoCommonWordsParameter = ($kwicNoCommonWords == 1) ? "no-common-words=true" : '';
 
     trace("Generate a KWIC index (this may take some time)...");
-    system ("$saxon $xmlFilename $xsldir/xml2kwic.xsl $saxonParameters $kwicLanguagesParameter $kwicSortParameter $kwicKeywordParameter $kwicMixupParameter $kwicCaseSensitiveParameter $kwicVariantsParameter > $kwicFilename");
+    system ("$saxon $xmlFilename $xsldir/xml2kwic.xsl $saxonParameters $kwicLanguagesParameter $kwicSortParameter $kwicKeywordParameter $kwicMixupParameter $kwicCaseSensitiveParameter $kwicVariantsParameter $kwicNoCommonWordsParameter > $kwicFilename");
 }
 
 

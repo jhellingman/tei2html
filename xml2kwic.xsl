@@ -37,6 +37,8 @@
 
     <xsl:param name="output-segments" select="false()"/>
 
+    <xsl:param name="no-common-words" select="false()"/>
+
     <xd:doc>
         <xd:short>The keyword(s) to generate a KWIC for.</xd:short>
         <xd:detail>The keyword(s) to generate a KWIC for. If omitted, a KWIC will be generated for all words
@@ -99,6 +101,7 @@
 
     <xsl:param name="stopword-file" select="'locale/stopwords.xml'" as="xs:string"/>
 
+    <xsl:param name="commonword-file" select="'locale/commonwords.xml'" as="xs:string"/>
 
     <xd:doc>
         <xd:short>A map that maps a language code to a sequence of stopwords in that language.</xd:short>
@@ -113,6 +116,13 @@
         </xsl:map>
     </xsl:variable>
 
+    <xsl:variable name="commonwords" as="map(xs:string, xs:string*)">
+        <xsl:map>
+            <xsl:for-each select="document($commonword-file)//words">
+                <xsl:map-entry key="xs:string(@lang)" select="tokenize(., ' ')"/>
+            </xsl:for-each>
+        </xsl:map>
+    </xsl:variable>
 
     <xd:doc>
         <xd:short>Determine whether a word is a stop-word.</xd:short>
@@ -131,6 +141,23 @@
         <xsl:sequence select="$stopwords($lang) = $word"/>
     </xsl:function>
 
+    <xsl:function name="f:is-common-word" as="xs:boolean">
+        <xsl:param name="word" as="xs:string"/>
+        <xsl:param name="lang" as="xs:string"/>
+
+        <xsl:variable name="lang" select="if (not(exists($commonwords($lang))) and contains($lang, '-')) then substring-before($lang, '-') else $lang"/>
+        <xsl:variable name="word" select="lower-case($word)"/>
+
+        <xsl:sequence select="$commonwords($lang) = $word"/>
+    </xsl:function>
+
+
+    <xsl:function name="f:is-ignored-word" as="xs:boolean">
+        <xsl:param name="word" as="xs:string"/>
+        <xsl:param name="lang" as="xs:string"/>
+
+        <xsl:sequence select="f:is-stopword($word, $lang) or ($no-common-words and f:is-common-word($word, $lang))"/>
+    </xsl:function>
 
     <xd:doc>
         <xd:short>Generate the HTML output.</xd:short>
@@ -729,7 +756,7 @@
     </xd:doc>
 
     <xsl:template mode="multi-kwic" match="k:w">
-        <xsl:if test="not(f:is-stopword(., @xml:lang)) and f:is-selected-language(@xml:lang)">
+        <xsl:if test="not(f:is-ignored-word(., @xml:lang)) and f:is-selected-language(@xml:lang)">
             <k:match form="{@form}" page="{@page}" category="{@category}" xml:lang="{@xml:lang}">
                 <k:preceding><xsl:copy-of select="preceding-sibling::*[position() &lt; $context-size]"/></k:preceding>
                 <k:word><xsl:copy-of select="."/></k:word>
@@ -1053,6 +1080,7 @@
     <xsl:template name="analyze-text">
         <xsl:variable name="lang" select="(ancestor-or-self::*/@lang|ancestor-or-self::*/@xml:lang)[last()]"/>
         <xsl:variable name="page" select="preceding::pb[1]/@n"/>
+        <xsl:variable name="pageId" select="preceding::pb[1]/@id"/>
         <xsl:variable name="style" select="f:find-text-style(.)"/>
         <xsl:variable name="category" select="f:category(.)"/>
         <xsl:variable name="inReference" select="if (ancestor-or-self::ref[@target] or ancestor-or-self::xref[@url]) then 'true' else 'false'"/>
@@ -1066,6 +1094,9 @@
                         <xsl:attribute name="style" select="$style"/>
                     </xsl:if>
                     <xsl:attribute name="page" select="$page"/>
+                    <xsl:if test="$pageId != ''">
+                        <xsl:attribute name="pageId" select="$pageId"/>
+                    </xsl:if>
                     <xsl:if test="$category != ''">
                         <xsl:attribute name="category" select="$category"/>
                     </xsl:if>
