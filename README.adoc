@@ -26,13 +26,13 @@ Furthermore, the script can generate
 
 `tei2html` includes localisation support for English, Dutch, and to a lesser extent German, French, Spanish, Tagalog and Cebuano.
 
-Note, that these scripts partly depend on the use of rend attributes and other TEI conventions. It should not be expected that an arbitrary TEI file renders well with those scripts (although it should render reasonable in any case.)
+These scripts sometimes depend on a specific way of using `@rend` attributes and other TEI conventions. It should not be expected that an arbitrary TEI file renders well with those scripts, although they should render reasonable in any case.
 
 If you need modifications, extensions of these scripts, or need to have other TEI/XML/XSLT related work done, please be in touch with me on how I can help.
 
 == Directories
 
-* `dtd`: some DTD's with a catalog file (mostly for use by `nsgml`)
+* `dtd`: some DTDs with a catalog file (mostly for use by `nsgml`)
 * `locale`: localization information.
 * `modules`: most of the XSLT code itself.
 * `pptools`: post-processing tools that are mostly useful for preparing TEI-files from the output of Project Gutenberg Distributed Proofreaders. 

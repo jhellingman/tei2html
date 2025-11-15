@@ -8,8 +8,8 @@
     exclude-result-prefixes="f xd xs">
 
     <xd:doc type="stylesheet">
-        <xd:short>Stylesheet to convert beta-code to unicode.</xd:short>
-        <xd:detail>This stylesheet converts beta-code to unicode; to be applied to strings
+        <xd:short>Stylesheet to convert beta-code to Unicode.</xd:short>
+        <xd:detail>This stylesheet converts beta-code to Unicode; to be applied to strings
             encoded that way.</xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
         <xd:copyright>2020, Jeroen Hellingman</xd:copyright>

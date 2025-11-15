@@ -15,6 +15,7 @@
 <msg:repository
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:msg="http://www.gutenberg.ph/2006/schemas/messages"
+        xmlns:xml="http://www.w3.org/XML/1998/namespace"
         version="1.0">
 
     <msg:messages xml:lang="en" name="English">
@@ -1490,7 +1491,7 @@
         <msg:message name="msgDedication">Opdracht</msg:message>
         <msg:message name="msgDeleted">Verwijderd</msg:message>
         <msg:message name="msgElement">Element</msg:message>
-        <msg:message name="msgEmailLink">Verstuur emailbericht</msg:message>
+        <msg:message name="msgEmailLink">Verstuur email</msg:message>
         <msg:message name="msgEncoding">Codering</msg:message>
         <msg:message name="msgEpigraph">Epigraaf</msg:message>
         <msg:message name="msgExternalLink">Externe link</msg:message>
@@ -1581,8 +1582,8 @@
         <msg:message name="bible.John">Johannes</msg:message>
         <msg:message name="bible.Acts of the Apostles">Handelingen</msg:message>
         <msg:message name="bible.Romans">Romeinen</msg:message>
-        <msg:message name="bible.1 Corinthians">1 Korintiërs</msg:message>
-        <msg:message name="bible.2 Corinthians">2 Korintiërs</msg:message>
+        <msg:message name="bible.1 Corinthians">1 Korinthiërs</msg:message>
+        <msg:message name="bible.2 Corinthians">2 Korinthiërs</msg:message>
         <msg:message name="bible.Galatians">Galaten</msg:message>
         <msg:message name="bible.Ephesians">Efeziërs</msg:message>
         <msg:message name="bible.Philippians">Filippenzen</msg:message>
@@ -1924,7 +1925,7 @@
 
             <p class="smallprint">Bijgewerkte versies zullen de vorige versie vervangen&mdash;de oude versie zal een andere naam krijgen.</p>
 
-            <p class="smallprint">Omdat we deze werken reproduceren van gedrukte edities waarop geen Amerikaans auteursrecht rust, heeft niemand in de Verenigde Staten een auteursrecht op deze werken. De Stichting (en jij!) mogen deze werken dus zonder toestemming, en zonder het betalen van vergoedingen, kopiëren en verspreiden in de Verenigde Staten. Bijzondere regels, uiteengezet in de Algemene Voorwaarden voor Gebruik van deze licentie zijn van toepassing op het kopiëren en verspreiden van Project Gutenberg&tm; elektronische werken om het PROJECT GUTENBERG&tm; concept en handelsmerk te beschermen. Project Gutenberg is een geregistreerd handelsmerk en mag alleen worden gebruikt als je hiervoor specifiek toestemming heeft gekregen. Als je niets rekent voor kopiëren van dit eboek, dan is het zeer eenvoudig je aan deze regels te houden. Je mag dit eboek gebruiken voor bijna elke doel, zoals het maken van afgeleide werken, rapporten, voorstellingen en onderzoek. Ze mogen worden aangepast, gedrukt en weggegeven.&#x2014;Je mag vrijwel ALLES doen met eboeken in het publiek domein. Verspreiding, en in het bijzonder commerciële verspreiding, is onderworpen aan de licentie op het handelsmerk.</p>
+            <p class="smallprint">Omdat we deze werken reproduceren van gedrukte edities waarop geen Amerikaans auteursrecht rust, heeft niemand in de Verenigde Staten een auteursrecht op deze werken. De Stichting (en jij!) mogen deze werken dus zonder toestemming, en zonder het betalen van vergoedingen, kopiëren en verspreiden in de Verenigde Staten. Bijzondere regels, uiteengezet in de algemene voorwaarden voor gebruik van deze licentie zijn van toepassing op het kopiëren en verspreiden van Project Gutenberg&tm; elektronische werken om het PROJECT GUTENBERG&tm; concept en handelsmerk te beschermen. Project Gutenberg is een geregistreerd handelsmerk en mag alleen worden gebruikt als je hiervoor specifiek toestemming heeft gekregen. Als je niets rekent voor kopiëren van dit eboek, dan is het zeer eenvoudig je aan deze regels te houden. Je mag dit eboek gebruiken voor bijna elke doel, zoals het maken van afgeleide werken, rapporten, voorstellingen en onderzoek. Ze mogen worden aangepast, gedrukt en weggegeven.&#x2014;Je mag vrijwel ALLES doen met eboeken in het publiek domein. Verspreiding, en in het bijzonder commerciële verspreiding, is onderworpen aan de licentie op het handelsmerk.</p>
 
             <p class="smallprint">De volledige licentie is om juridische redenen niet vertaald en volgt hieronder in het Engels.</p>
         </msg:message>
@@ -1935,6 +1936,25 @@
     <!-- Afrikaans translation -->
 
     <msg:messages xml:lang="af" fallback="en" name="Afrikaans">
+
+        <!-- /tei2adoc.xsl -->
+
+        <msg:message name="t2aAboutThisRepository">Oor Hierdie Bewaarplek</msg:message>
+        <msg:message name="t2aAboutThisRepositoryParagraph1">Hierdie bewaarplek bevat die TEI-bronlêer, asook die afgeleide teks- en HTML-lêers van 'n e-boek wat op Project Gutenberg geplaas is. Net soos die weergawe wat op https://www.gutenberg.org/[Project Gutenberg] beskikbaar is, is hierdie e-boek vry van kopiereg in die V.S.A. Geen aanspraak word gemaak op die kopieregstatus daarvan buite die V.S.A. nie.</msg:message>
+        <msg:message name="t2aAboutThisRepositoryParagraph2">Die weergawe wat in hierdie bewaarplek onderhou word, mag effens uit pas wees met die weergawe wat by Project Gutenberg onderhou word. Gewoonlik sal regstellings eers hier aangebring word en daarna weer na Project Gutenberg opgelaai word. Indien jy enige probleem in hierdie teks teëkom, rapporteer dit asseblief hier.</msg:message>
+
+        <msg:message name="t2aAboutThisEbook">Oor Hierdie E-boek</msg:message>
+        <msg:message name="t2aField">Veld</msg:message>
+        <msg:message name="t2aValue">Waarde</msg:message>
+
+        <msg:message name="t2aPGEbookNumber">PG E-boeknommer</msg:message>
+        <msg:message name="t2aQRCodeForDownload">QR-kode vir aflaai</msg:message>
+
+        <msg:message name="t2aWordCount">Aantal woorde</msg:message>
+        <msg:message name="t2aApproximatelyXPages">ongeveer <msg:param name="count" type="integer"/> bladsye</msg:message>
+        <msg:message name="t2aApproximatelyXPages" plural="one">ongeveer <msg:param name="count" type="integer"/> bladsy</msg:message>
+
+        <!-- /tei2adoc.xsl -->
 
         <msg:message name="msgLinkToPg">Skakel na Project Gutenberg-eboek</msg:message>
         <msg:message name="msgQrCode">QR-kode</msg:message>
@@ -2168,7 +2188,7 @@
         <msg:message name="msgMetadata">Metadata</msg:message>
         <msg:message name="msgInfo">Información</msg:message>
         <msg:message name="msgLanguage">Idioma</msg:message>
-        <msg:message name="msgClassCode">Código de clasificacion</msg:message>
+        <msg:message name="msgClassCode">Código de clasificación</msg:message>
         <msg:message name="msgSourcePublisher">Editor original</msg:message>
         <msg:message name="msgSourcePubPlace">Lugar de la edición original</msg:message>
         <msg:message name="msgSourcePublicationDate">Fecha de la edición original</msg:message>
