@@ -70,11 +70,15 @@ sub handleParagraph($) {
         $paragraph =~ s/<(RU)>(.*?)<\/RU>/rewriteTranscription($1, $2)/eg;
         $paragraph =~ s/<(RUX)>(.*?)<\/RUX>/rewriteTranscription($1, $2)/eg;
         $paragraph =~ s/<(SR)>(.*?)<\/SR>/rewriteTranscription($1, $2)/eg;
+
+        $paragraph =~ s/<(BO)>(.*?)<\/BO>/keepTranscription($1, $2)/eg;
     }
 
     return $paragraph;
 }
 
+# Create a choice element of both the original script and a transcription. Filter the encoding, and put it between <xxT>...</xxT> tags, 
+# so that in a later face this will encoding be coverted to the proper Latin script transcription.
 sub rewriteTranscription {
     my $code = shift;
     my $trans = shift;
@@ -86,4 +90,18 @@ sub rewriteTranscription {
     $clean =~ s/<choice><sic>.*?<\/sic><corr>(.*?)<\/corr><\/choice>/$1/g;
     
     return "<choice><orig><$code>$trans<\/$code><\/orig><reg type=\"trans\"><$code$t>$clean<\/$code$t><\/reg><\/choice>";
+}
+
+# Create a choice element of both the original script and the encoding. Filter the encoding. Used when the encoding can directly
+# be used as the Latin transcription.
+sub keepTranscription {
+    my $code = shift;
+    my $trans = shift;
+
+    # Filter <pb> and <choice> tags from the transcription in $trans.
+    my $clean = $trans;
+    $clean =~ s/<pb.*?>//g;
+    $clean =~ s/<choice><sic>.*?<\/sic><corr>(.*?)<\/corr><\/choice>/$1/g;
+    
+    return "<choice><orig><$code>$trans<\/$code><\/orig><reg type=\"trans\">$clean<\/reg><\/choice>";
 }
