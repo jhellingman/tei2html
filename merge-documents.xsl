@@ -215,7 +215,7 @@
                 <xsl:variable name="rendition" select="current-group()[1]"/>
                 <xsl:for-each select="current-group()[position() != 1]">
                     <xsl:if test=". != $rendition">
-                        <xsl:message expand-text="yes">WARNING: Inconsitent rendition: {@selector} {{ {.} }}</xsl:message>
+                        <xsl:message expand-text="yes">WARNING: Inconsistent rendition: {@selector} {{ {.} }}</xsl:message>
                     </xsl:if>
                 </xsl:for-each>
             </xsl:for-each-group>

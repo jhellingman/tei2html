@@ -220,6 +220,7 @@ sub handleTeiFile {
 
     my $fileSize = -s $fullName;
     my $fileDate = time2str("%Y-%m-%d", stat($fullName)->mtime);
+    my $fileDateTime = time2str("%Y-%m-%d %H:%M:%S", stat($fullName)->mtime);
 
     my ($fileName, $filePath, $suffix) = fileparse($fullName, '.tei');
 
@@ -249,6 +250,7 @@ sub handleTeiFile {
     logMessage("Date:       $fileDate");
     print XMLFILE "      <date>$fileDate</date>\n";
     logMessage("Path:       $filePath");
+    print XMLFILE "      <dateTime>$fileDateTime</dateTime>\n";
     print XMLFILE "      <path>$filePath</path>\n";
 
     if (-e $filePath . 'Processed/' . $baseName . '-utf8.txt') {

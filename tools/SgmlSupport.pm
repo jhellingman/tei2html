@@ -1845,6 +1845,7 @@ BEGIN {
     $ent{'kdota'}       = 'k' . chr(0x0307); # k with dot above
     $ent{'ldota'}       = 'l' . chr(0x0307); # l with dot above
     $ent{'mdota'}       = 'm' . chr(0x0307); # m with dot above
+    $ent{'Mdota'}       = 'M' . chr(0x0307); # M with dot above
     $ent{'ndota'}       = 'n' . chr(0x0307); # n with dot above
     $ent{'Ndota'}       = 'N' . chr(0x0307); # N with dot above
     $ent{'odota'}       = 'o' . chr(0x0307); # o with dot above

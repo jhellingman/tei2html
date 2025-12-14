@@ -24,7 +24,7 @@ opendir(my $dh, $dir) or die "Cannot open directory '$dir': $!";
 my @files = grep { -f File::Spec->catfile($dir, $_) } readdir($dh);
 closedir($dh);
 
-# Filter image-like files (optional; remove if you want *all* files)
+# Filter image-like files
 @files = grep { /\.(?:jpg|jpeg|png|tif|tiff|bmp|gif)$/i } @files;
 
 # 2. Sort alphabetically (or reverse if requested)
