@@ -65,7 +65,7 @@
             <lb.removable.hyphen>&not;</lb.removable.hyphen>                <!-- Character used for removable hyphen before a line-break (DTA convention). -->
             <lb.hyphen>-</lb.hyphen>                                        <!-- Character used for non-removable hyphen before line-break. -->
 
-            <toc.numberEntries>true</toc.numberEntries>                     <!-- Provide numbers with generated TOC entries (at all levels, if true, uses specific levels if false). -->
+            <toc.numberEntries>true</toc.numberEntries>                     <!-- Provide numbers with generated TOC entries (if true: at all levels; if false: uses specific levels set below). -->
             <toc.numberEntries.level0>false</toc.numberEntries.level0>      <!-- Provide numbers with generated TOC entries at div0 level. -->
             <toc.numberEntries.level1>false</toc.numberEntries.level1>      <!-- Provide numbers with generated TOC entries at div1 level. -->
             <toc.numberEntries.level2>false</toc.numberEntries.level2>      <!-- Provide numbers with generated TOC entries at div2 level. -->

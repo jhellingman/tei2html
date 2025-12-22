@@ -11,7 +11,7 @@ my $inputFile = $ARGV[0];
 
 main();
 
-# [draughts]
+# [DRAUGHTS]
 #       +---+---+---+---+---+---+---+---+
 #       |###|   |###|   |###|   |###|   |
 #       +---+---+---+---+---+---+---+---+
@@ -29,7 +29,7 @@ main();
 #       +---+---+---+---+---+---+---+---+
 #       |   |###|   |###|   |###|   |###|
 #       +---+---+---+---+---+---+---+---+
-# [/draughts]
+# [/DRAUGHTS]
 
 sub main {
     open(INPUTFILE, $inputFile) || die("Could not open $inputFile");
@@ -38,12 +38,12 @@ sub main {
     while (<INPUTFILE>) {
         my $line = $_;
 
-        if ($line =~ m/\[draughts\]/) {
+        if ($line =~ m/\[DRAUGHTS\]/) {
             $line = "<table rend=draughts>\n";
             $mode = 1;
         }
 
-        if ($line =~ m/\[\/draughts]/) {
+        if ($line =~ m/\[\/DRAUGHTS]/) {
             $line = "</table>\n";
             $mode = 0;
         }
@@ -54,7 +54,7 @@ sub main {
         #   |W      white king              <cell>&#x26C1;
         #   |k      black man               <cell>&#x26C2;
         #   |K      black king              <cell>&#x26C3;
-        #   |0..9+  numbered square         <cell>
+        #   |0..9+  numbered square         <cell>        
         #   +---    horizontal line         (removed)
 
         if ($mode == 1) {
