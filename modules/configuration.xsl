@@ -139,6 +139,9 @@
             <text.useIJLigature>false</text.useIJLigature>                  <!-- Replace ij with the ij-ligature (Dutch and letter-spaced text only). -->
             <text.normalizeUnicode>true</text.normalizeUnicode>             <!-- Normalize Unicode to NFC (may break Hebrew or Tibetan text in some rare cases) -->
             <text.abbr>i.e.; I.e.; e.g.; E.g.; A.D.; B.C.; P.M.; A.M.</text.abbr> <!-- Common abbreviations, list separated by semicolons. -->
+            <text.showCorrectionPopups>true</text.showCorrectionPopups>     <!-- Show pop-ups with the original text (corr-tag). -->
+            <text.showMinorCorrectionPopups>false</text.showMinorCorrectionPopups> <!-- Show pop-ups with the original text (corr-tag) for corrections deemed 'minor'. -->
+            <text.showSuggestedCorrectionPopups>false</text.showSuggestedCorrectionPopups> <!-- Show pop-ups with a suggested correction (sic-tag). -->
 
             <table.classifyContent>false</table.classifyContent>            <!-- Attempt to determine the content-type of cells in a table; add relevant classes in the HTML output. -->
 

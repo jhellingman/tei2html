@@ -119,6 +119,70 @@
         </x:expect>
     </x:scenario>
 
+    <x:scenario label="When rendering a corr element with empty correction (i.e., a deletion)">
+        <x:context>
+            <corr sic="deletion"/>
+        </x:context>
+        <x:expect label="will result in an HTML span with just an id.">
+            <span xmlns="http://www.w3.org/1999/xhtml"
+                  id="..."/>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering a corr element without original content (i.e., an addition)">
+        <x:context>
+            <corr>addition</corr>
+        </x:context>
+        <x:expect label="will result in an HTML span with a pop-up title showing the original mistake.">
+            <span xmlns="http://www.w3.org/1999/xhtml"
+                  class="corr"
+                  id="..."
+                  title="Not in source">addition</span>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering a choice element containing a corr element">
+        <x:context>
+            <choice><sic>mistake</sic><corr>correction</corr></choice>
+        </x:context>
+        <x:expect label="will result in an HTML span with a pop-up title showing the original mistake.">
+            <span xmlns="http://www.w3.org/1999/xhtml"
+                  class="corr"
+                  id="..."
+                  title="Source: mistake">correction</span>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering a corr element with @type='minor'">
+        <x:context>
+            <corr sic="mistake" type="minor">correction</corr>
+        </x:context>
+        <x:expect label="will result in an HTML span without a pop-up.">
+            <span xmlns="http://www.w3.org/1999/xhtml"
+                  id="...">correction</span>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering a corr element with a small change in punctuation">
+        <x:context>
+            <corr sic=".">,</corr>
+        </x:context>
+        <x:expect label="will result in an HTML span without a pop-up.">
+            <span xmlns="http://www.w3.org/1999/xhtml"
+                  id="...">,</span>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering a choice element with @type='minor' containing a corr element">
+        <x:context>
+            <choice type="minor"><sic>mistake</sic><corr>correction</corr></choice>
+        </x:context>
+        <x:expect label="will result in an HTML span without a pop-up.">
+            <span xmlns="http://www.w3.org/1999/xhtml"
+                  id="...">correction</span>
+        </x:expect>
+    </x:scenario>
+
     <x:scenario label="When rendering a corr element in mode 'titlePage'">
         <x:context mode="titlePage">
             <corr sic="mistake">correction</corr>
@@ -174,6 +238,7 @@
                   title="for example">e.g.</abbr>
         </x:expect>
     </x:scenario>
+
 
     <!-- gap -->
 

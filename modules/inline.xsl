@@ -579,8 +579,8 @@
 
     <xd:doc>
         <xd:short>Handle Corrections.</xd:short>
-        <xd:detail>In this template, we filter out the minor and punctuation corrections (marked with the <code>@resp</code>
-        attribute with value <code>n</code> or <code>p</code>). Furthermore, the span will be given an id, such that
+        <xd:detail>In this template, we filter out the minor and punctuation corrections (marked with the <code>@type</code>
+        attribute with value <code>minor</code>). Furthermore, the span will be given an id, such that
         the list of corrections in the colophon can link to it.</xd:detail>
     </xd:doc>
 
@@ -591,6 +591,8 @@
         <xsl:variable name="msgSource" select="if (@resp = 'errata') then f:message('msgAuthorCorrection') else f:message('msgSource')"/>
         <xsl:variable name="msgNotInSource" select="if (@resp = 'errata') then f:message('msgAuthorAddition') else f:message('msgNotInSource')"/>
 
+        <xsl:variable name="showPopups" select="f:showCorrectionPopups($sic, $corr, @type)" as="xs:boolean"/>
+
         <!-- Concatenate string values ourselves to prevent the XSLT processor from inserting spaces when concatenating nodes
              (Tennison, Beginning XSLT 2.0, p. 358). -->
         <xsl:variable name="sicString">
@@ -600,18 +602,13 @@
         </xsl:variable>
 
         <xsl:choose>
-            <!-- Don't report minor or punctuation corrections; also don't report if we do not use mouse-over popups. -->
-            <!-- TODO: remove this abuse of the @resp attribute, use @type="minor" instead -->
-            <xsl:when test="@resp = ('m', 'p') or not(f:is-set('useMouseOverPopups'))">
+            <xsl:when test="not($showPopups)">
                 <span>
                     <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                     <xsl:apply-templates select="$corr"/>
                 </span>
             </xsl:when>
-            <!-- Also don't report minor corrections when they are small and we don't ask for them. -->
-            <xsl:when test="not(f:is-set('colophon.showMinorCorrections')) and f:correction-is-minor($sic, $corr, @type)">
-                <xsl:text/><xsl:apply-templates select="$corr"/><xsl:text/>
-            </xsl:when>
+            
             <xsl:when test="not($sic) or $sic = ''">
                 <span class="corr">
                     <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
@@ -621,10 +618,12 @@
                     <xsl:apply-templates select="$corr"/>
                 </span>
             </xsl:when>
+
             <!-- An empty span will be purged by some HTML tools; however, an anchor element is not allowed inside other anchors. -->
             <xsl:when test="not($corr) or $corr = ''">
                 <span id="{f:generate-id(.)}"/>
             </xsl:when>
+
             <xsl:otherwise>
                 <span class="corr">
                     <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
@@ -638,6 +637,21 @@
     </xsl:template>
 
 
+    <xsl:function name="f:showCorrectionPopups" as="xs:boolean">
+        <xsl:param name="sic" xs:as="node()*"/>
+        <xsl:param name="corr" xs:as="node()*"/>
+        <xsl:param name="type" xs:as="xs:string?"/>
+
+        <xsl:sequence select="if (not(f:is-set('useMouseOverPopups')))
+                              then false()
+                              else if (not(f:is-set('text.showCorrectionPopups')))
+                                   then false()
+                                   else if (not(f:is-set('text.showMinorCorrectionPopups')) and f:correction-is-minor($sic, $corr, $type))
+                                        then false()
+                                        else true()"/>
+    </xsl:function>
+
+
     <!--====================================================================-->
     <!-- Sic -->
 
@@ -648,7 +662,7 @@
 
     <xsl:template match="sic" mode="#default titlePage">
         <span class="sic" id="{f:generate-id(.)}">
-            <xsl:if test="@corr">
+            <xsl:if test="@corr and f:is-set('text.showSuggestedCorrectionPopups')">
                 <xsl:attribute name="title">
                     <xsl:value-of select="f:message('msgSuggestedCorrection')"/><xsl:text>: </xsl:text><xsl:value-of select="@corr"/>
                 </xsl:attribute>
