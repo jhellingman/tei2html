@@ -1107,7 +1107,8 @@ sub runChecks($) {
     }
     trace("Run checks on $filename.");
 
-    my $intraFile = convertIntraNotation($filename);
+    my $draughtsFile = convertDraughtsNotation($filename);
+    my $intraFile = convertIntraNotation($draughtsFile);
 
     my $transcribedFile = transcribe($intraFile, $noTranscriptionPopups);
 
@@ -1395,7 +1396,8 @@ sub tei2xml($$) {
     trace("Convert Latin-1 characters to entities...");
     system ("patc -p $toolsdir/patc/win2sgml.pat $sgmlFile $tmpFile0");
 
-    my $intraFile = convertIntraNotation($tmpFile0);
+    my $draughtsFile = convertDraughtsNotation($tmpFile0);
+    my $intraFile = convertIntraNotation($draughtsFile);
 
     my $transcribedFile = transcribe($intraFile, $noTranscriptionPopups);
 
@@ -1448,6 +1450,22 @@ sub convertIntraNotation() {
         my $tmpFile = temporaryFile('intra', '.tei');
         trace("Convert <INTRA> notation to standard TEI <ab>-elements...");
         system ("perl $toolsdir/intralinear.pl $filename > $tmpFile");
+        $filename = $tmpFile;
+    }
+    return $filename;
+}
+
+#
+# convertDraughtsNotation -- Convert [DRAUGHTS] notation.
+#
+sub convertDraughtsNotation() {
+    my $filename = shift;
+
+    my $containsDraughtsNotation = system ("grep -q \"[DRAUGHTS]\" $filename");
+    if ($containsDraughtsNotation == 0 && $noTranscription == 0) {
+        my $tmpFile = temporaryFile('intra', '.tei');
+        trace("Convert [DRAUGHTS] notation to standard TEI tables...");
+        system ("perl $toolsdir/convertDraughtsDiagram.pl $filename > $tmpFile");
         $filename = $tmpFile;
     }
     return $filename;
