@@ -31,7 +31,7 @@
     <xsl:function name="f:is-footnote" as="xs:boolean">
         <xsl:param name="note" as="element(note)"/>
         <xsl:sequence select="($note/@place = ('foot', 'unspecified') or (not($note/@place) and not($note/@type = 'margin')))
-            and not($note/ancestor::teiHeader)"/>
+            and not($note/ancestor::teiHeader) and not($note/parent::app)"/>
     </xsl:function>
 
     <xsl:function name="f:is-margin-note" as="xs:boolean">
@@ -46,7 +46,7 @@
 
     <xsl:function name="f:is-apparatus-note" as="xs:boolean">
         <xsl:param name="note" as="element(note)"/>
-        <xsl:sequence select="$note/@place = 'apparatus'"/>
+        <xsl:sequence select="($note/@place = 'apparatus') or ($note/parent::app)"/>
     </xsl:function>
 
     <xsl:function name="f:is-table-note" as="xs:boolean">
@@ -573,6 +573,33 @@
     </xsl:template>
 
 
+    <!--==== APPARATUS ====-->
+
+    <xd:doc>
+        <xd:short>Handle text-critical apparatus.</xd:short>
+        <xd:detail>Handle a text-critical apparatus. This code only supports the construction where
+        an &lt;app&gt; element contains a &lt;lem&gt; element and one or more &lt;note&gt; elements.</xd:detail>
+    </xd:doc>
+
+    <xsl:template match="app">
+        <span>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:text/><xsl:apply-templates select="note" mode="in-apparatus"/><xsl:text/>
+            <xsl:apply-templates select="lem"/>        
+        </span>
+    </xsl:template>
+
+    <xsl:template match="lem">
+        <span class="lemma">
+            <xsl:apply-templates/>
+        </span>
+    </xsl:template>
+
+    <xsl:template match="note" mode="in-apparatus">
+        <a id="{f:generate-id(.)}src"/>
+    </xsl:template>
+
+
     <!--==== APPARATUS NOTES ====-->
 
     <xd:doc>
@@ -719,7 +746,7 @@
         <xd:detail>Render a single text-critical note.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="note[@place='apparatus' and not(p)]" mode="apparatus">
+    <xsl:template match="note[f:is-apparatus-note(.) and not(p)]" mode="apparatus">
         <xsl:element name="{$p.element}">
             <xsl:variable name="class">
                 <xsl:if test="$p.element != 'p'"><xsl:text>par </xsl:text></xsl:if>
@@ -741,7 +768,7 @@
         from apparatus notes that do not contain paragraphs, to ensure the generated HTML is valid.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="note[@place='apparatus' and p]" mode="apparatus">
+    <xsl:template match="note[f:is-apparatus-note(.) and p]" mode="apparatus">
         <xsl:element name="{$p.element}">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:variable name="class">
@@ -761,7 +788,7 @@
     </xsl:template>
 
 
-    <xsl:template match="note[@place='apparatus' and @sameAs]" mode="apparatus"/>
+    <xsl:template match="note[f:is-apparatus-note(.) and @sameAs]" mode="apparatus"/>
 
 
     <xsl:template name="apparatus-note-marker">
@@ -838,7 +865,7 @@
     </xsl:template>
 
 
-    <xsl:template match="note[@place='apparatus' and not(p)]" mode="collect-apparatus">
+    <xsl:template match="note[f:is-apparatus-note(.) and not(p)]" mode="collect-apparatus">
         <tmp:span id="{f:generate-id(.)}">
             <xsl:attribute name="rend" select="@rend"/>
             <xsl:attribute name="lang" select="@lang"/>
@@ -849,13 +876,13 @@
     </xsl:template>
 
 
-    <xsl:template match="note[@place='apparatus' and p]" mode="collect-apparatus">
+    <xsl:template match="note[f:is-apparatus-note(.) and p]" mode="collect-apparatus">
         <xsl:apply-templates select="*[1]" mode="collect-apparatus-first"/>
         <xsl:apply-templates select="*[position() > 1]" mode="collect-apparatus"/>
     </xsl:template>
 
 
-    <xsl:template match="note[@place='apparatus' and @sameAs]" priority="1" mode="collect-apparatus"/>
+    <xsl:template match="note[f:is-apparatus-note(.) and @sameAs]" priority="1" mode="collect-apparatus"/>
 
 
     <xsl:template match="p" mode="collect-apparatus-first">

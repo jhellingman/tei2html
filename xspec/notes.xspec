@@ -791,4 +791,37 @@
     </x:scenario>
 
 
+    <!-- Apparatus -->
+    
+    <x:scenario label="When rendering an apparatus note in a div1 in an app-element with an explicit call for apparatus">
+        <x:context select="//text">
+            <TEI>
+                <text>
+                    <div1>
+                        <p>Surrounding <app><lem>text</lem><note id="n.1">Text of apparatus note.</note></app> and more text.</p>
+                    </div1>
+                    <divGen type="apparatus"/>
+                </text>
+            </TEI>
+        </x:context>
+        <x:expect label="will result in apparatus notes when called of the div">
+            <div xmlns="http://www.w3.org/1999/xhtml" id="..." class="div1">
+               <div class="divBody">
+                  <p id="..." class="first">Surrounding <span id="..."><a id="n.1src"/><span class="lemma">text</span></span> and more text.</p>
+               </div>
+            </div>
+            <div xmlns="http://www.w3.org/1999/xhtml" class="div1" id="...">
+            <h2 class="main">Textual Note</h2>
+               <div class="textual-notes-body">
+                  <p class="apparatus">
+                     <span class="apparatusnote" id="n.1">
+                        <a class="apparatusnotemarker" href="#n.1src"
+                           title="Return to source location">&deg;</a>Text of apparatus note.</span>
+                   <x:text> </x:text>
+                   </p>
+               </div>
+             </div>
+        </x:expect>
+    </x:scenario>
+
 </x:description>
