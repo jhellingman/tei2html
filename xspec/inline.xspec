@@ -119,6 +119,18 @@
         </x:expect>
     </x:scenario>
 
+    <x:scenario label="When rendering a corr element with elements inside">
+        <x:context>
+            <corr sic="mistake">correction <hi>and</hi> more</corr>
+        </x:context>
+        <x:expect label="will result in an HTML span with a pop-up title showing the original mistake.">
+            <span xmlns="http://www.w3.org/1999/xhtml"
+                  class="corr"
+                  id="..."
+                  title="Source: mistake">correction <i id="...">and</i> more</span>
+        </x:expect>
+    </x:scenario>
+
     <x:scenario label="When rendering a corr element with empty correction (i.e., a deletion)">
         <x:context>
             <corr sic="deletion"/>
@@ -173,6 +185,16 @@
         </x:expect>
     </x:scenario>
 
+    <x:scenario label="When rendering a corr element with a small change in punctuation and internal element">
+        <x:context>
+            <corr sic="."><hi>,</hi></corr>
+        </x:context>
+        <x:expect label="will result in an HTML span without a pop-up.">
+            <span xmlns="http://www.w3.org/1999/xhtml"
+                  id="..."><i id="...">,</i></span>
+        </x:expect>
+    </x:scenario>
+
     <x:scenario label="When rendering a choice element with @type='minor' containing a corr element">
         <x:context>
             <choice type="minor"><sic>mistake</sic><corr>correction</corr></choice>
@@ -180,6 +202,18 @@
         <x:expect label="will result in an HTML span without a pop-up.">
             <span xmlns="http://www.w3.org/1999/xhtml"
                   id="...">correction</span>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering a choice element containing a corr element with elements inside">
+        <x:context>
+            <choice><sic>mistake <hi>and</hi> more</sic><corr>correction <hi>and</hi> less</corr></choice>
+        </x:context>
+        <x:expect label="will result in an HTML span without a pop-up.">
+            <span xmlns="http://www.w3.org/1999/xhtml"
+                  class="corr"
+                  title="Source: mistake and more"
+                  id="...">correction <i id="...">...</i> less</span>
         </x:expect>
     </x:scenario>
 

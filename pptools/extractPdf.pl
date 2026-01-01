@@ -64,10 +64,10 @@ sub list_recursively($) {
 
 sub handle_file($) {
     my ($file) = @_;
-    if ($file =~ m/^(.*)\.(pdf)$/) {
+    if ($file =~ m/^(.*)\.(pdf|PDF)$/) {
         my $extension = $2;
         print "Extracting images from PDF: $file\n";
-        if ($extension eq 'pdf') {
+        if (lc($extension) eq 'pdf') {
             $pdfcount++;
             if ($extractActualImages == 0) {
                 system ("$pdftopng -r $resolutionDpi $file $pdfcount");

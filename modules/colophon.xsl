@@ -664,8 +664,8 @@
         <xsl:param name="corr"/>
         <xsl:param name="type"/>
 
-        <xsl:variable name="sic" select="if ($sic) then $sic else ''" as="xs:string"/>
-        <xsl:variable name="corr" select="if ($corr) then $corr else ''" as="xs:string"/>
+        <xsl:variable name="sic" as="xs:string"><xsl:value-of select="$sic" separator=""/></xsl:variable>
+        <xsl:variable name="corr" as="xs:string"><xsl:value-of select="$corr" separator=""/></xsl:variable>
         <xsl:variable name="type" select="if ($type) then $type else ''" as="xs:string"/>
 
         <!-- A correction is minor if it
