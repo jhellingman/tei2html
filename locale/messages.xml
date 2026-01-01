@@ -1075,6 +1075,7 @@
         <msg:message name="msgFigures">Figuren</msg:message>
         <msg:message name="msgFragment">Fragment</msg:message>
         <msg:message name="msgGlossary">Wörterverzeichnis</msg:message>
+        <msg:message name="msgGoToNoteMark">Gehe zur Fußnote <msg:param name="mark"/>.</msg:message>
         <msg:message name="msgGuide">Wegweiser</msg:message>
         <msg:message name="msgGuides">Wegweiser</msg:message>
         <msg:message name="msgHere">Hier</msg:message>
@@ -2145,6 +2146,25 @@
 
     <msg:messages xml:lang="es" name="Spanish">
 
+        <!-- /tei2adoc.xsl -->
+
+        <msg:message name="t2aAboutThisRepository">Acerca de este repositorio</msg:message>
+        <msg:message name="t2aAboutThisRepositoryParagraph1">Este repositorio contiene el archivo fuente TEI y los archivos de texto y HTML derivados de un libro electrónico publicado en https://www.gutenberg.org/[Project Gutenberg]. Al igual que la versión publicada en Project Gutenberg, este libro electrónico está libre de derechos de autor en los Estados Unidos. No se hace ninguna afirmación sobre su estado de derechos de autor fuera de los Estados Unidos.</msg:message>
+        <msg:message name="t2aAboutThisRepositoryParagraph2">La versión mantenida en este repositorio puede estar ligeramente desincronizada con la versión mantenida en Project Gutenberg. En la mayoría de los casos, las correcciones se realizarán primero aquí y solo después se volverán a publicar en Project Gutenberg. Si encuentra algún problema en este texto, repórtelo aquí.</msg:message>
+
+        <msg:message name="t2aAboutThisEbook">Acerca de este libro electrónico</msg:message>
+        <msg:message name="t2aField">Campo</msg:message>
+        <msg:message name="t2aValue">Valor</msg:message>
+
+        <msg:message name="t2aPGEbookNumber">Número de libro electrónico de PG</msg:message>
+        <msg:message name="t2aQRCodeForDownload">Código QR para descarga</msg:message>
+
+        <msg:message name="t2aWordCount">Número de palabras</msg:message>
+        <msg:message name="t2aApproximatelyXPages">aproximadamente <msg:param name="count" type="integer"/> páginas</msg:message>
+        <msg:message name="t2aApproximatelyXPages" plural="one">aproximadamente <msg:param name="count" type="integer"/> página</msg:message>
+
+        <!-- /tei2adoc.xsl -->
+
         <msg:message name="msgNotCopyrightedUS">Este libro no tiene derechos de autor en los Estados Unidos. Si vive en otro lugar, verifique las leyes de su país antes de descargar este libro.</msg:message>
         <msg:message name="msgPGComment">Este libro ha sido producido por Project Gutenberg y está disponible gratuitamente en https://www.gutenberg.org/.</msg:message>
         <msg:message name="msgTagUsageOverview">Resumen de los elementos TEI utilizados</msg:message>
@@ -2185,6 +2205,7 @@
         <msg:message name="msgOclcWorldCat">OCLC/WorldCat</msg:message>
         <msg:message name="msgGitHub">GitHub</msg:message>
         <msg:message name="msgTitle">Título</msg:message>
+        <msg:message name="msgShortTitle">Título corto</msg:message>
         <msg:message name="msgMetadata">Metadata</msg:message>
         <msg:message name="msgInfo">Información</msg:message>
         <msg:message name="msgLanguage">Idioma</msg:message>
@@ -2251,6 +2272,11 @@
         <msg:message name="msgCorrections">Correcciones</msg:message>
         <msg:message name="msgCorrectionsAppliedToText">Se han hecho las siguientes correcciones en el texto:</msg:message>
         <msg:message name="msgCorrectionsOverview">Sumario de las correcciones hechas sobre el texto.</msg:message>
+
+        <msg:message name="msgCountCorrectionsAppliedToText" plural="zero">No se han aplicado correcciones al texto.</msg:message>
+        <msg:message name="msgCountCorrectionsAppliedToText" plural="one">Se ha aplicado la siguiente corrección al texto:</msg:message>
+        <msg:message name="msgCountCorrectionsAppliedToText">Se han aplicado las siguientes <msg:param name="count" type="integer"/> correcciones al texto:</msg:message>
+
         <msg:message name="msgCoverImage">Imagen de la cubierta</msg:message>
         <msg:message name="msgDedication">Dedicación</msg:message>
         <msg:message name="msgDeleted">Borrado</msg:message>
@@ -2260,6 +2286,7 @@
         <msg:message name="msgExternalReferencesDisclaimer">Este libro digital contiene referencias externas. Es posible que éstas no funcionen para usted.</msg:message>
         <msg:message name="msgFigure">Figura</msg:message>
         <msg:message name="msgFigures">Figuras</msg:message>
+        <msg:message name="msgGoToNoteMark">Ir a la nota <msg:param name="mark"/>.</msg:message>
         <msg:message name="msgHere">Aquí</msg:message>
         <msg:message name="msgIllustration">Ilustración</msg:message>
         <msg:message name="msgIllustrations">Ilustraciones</msg:message>
@@ -2311,6 +2338,7 @@
         <msg:message name="msgText">Texto</msg:message>
         <msg:message name="msgTitlePage">Portada</msg:message>
         <msg:message name="msgToc">Índice</msg:message>
+        <msg:message name="msgGoToToc">Ir al índice</msg:message>
         <msg:message name="msgTranscription">Transcripción</msg:message>
         <msg:message name="msgTranscriptions">Transcripciones</msg:message>
         <msg:message name="msgUrl">URL</msg:message>
