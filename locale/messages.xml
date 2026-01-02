@@ -562,6 +562,7 @@
         <msg:message name="ti">Tigrinya</msg:message>
         <msg:message name="tk">Turkmen</msg:message>
         <msg:message name="tl">Tagalog</msg:message>
+        <msg:message name="tl-1920">Tagalog (old orthography)</msg:message>
         <msg:message name="tn">Setswana</msg:message>
         <msg:message name="to">Tonga</msg:message>
         <msg:message name="tr">Turkish</msg:message>
@@ -2272,11 +2273,9 @@
         <msg:message name="msgCorrections">Correcciones</msg:message>
         <msg:message name="msgCorrectionsAppliedToText">Se han hecho las siguientes correcciones en el texto:</msg:message>
         <msg:message name="msgCorrectionsOverview">Sumario de las correcciones hechas sobre el texto.</msg:message>
-
         <msg:message name="msgCountCorrectionsAppliedToText" plural="zero">No se han aplicado correcciones al texto.</msg:message>
         <msg:message name="msgCountCorrectionsAppliedToText" plural="one">Se ha aplicado la siguiente corrección al texto:</msg:message>
         <msg:message name="msgCountCorrectionsAppliedToText">Se han aplicado las siguientes <msg:param name="count" type="integer"/> correcciones al texto:</msg:message>
-
         <msg:message name="msgCoverImage">Imagen de la cubierta</msg:message>
         <msg:message name="msgDedication">Dedicación</msg:message>
         <msg:message name="msgDeleted">Borrado</msg:message>
@@ -2287,6 +2286,7 @@
         <msg:message name="msgFigure">Figura</msg:message>
         <msg:message name="msgFigures">Figuras</msg:message>
         <msg:message name="msgGoToNoteMark">Ir a la nota <msg:param name="mark"/>.</msg:message>
+        <msg:message name="msgGutenbergExternalReferencesExplanation">Las siguientes URL se muestran únicamente con fines informativos. Si lo desea, puede copiarlas en la barra de direcciones de su navegador.</msg:message>
         <msg:message name="msgHere">Aquí</msg:message>
         <msg:message name="msgIllustration">Ilustración</msg:message>
         <msg:message name="msgIllustrations">Ilustraciones</msg:message>
@@ -2301,6 +2301,8 @@
         <msg:message name="msgLocations">Ubicaciones</msg:message>
         <msg:message name="msgMissingText">falta texto</msg:message>
         <msg:message name="msgMissingTextWithExtentReason">Falta <msg:param name="extent"/> <msg:param name="unit"/>, por la siguiente razón: <msg:param name="reason"/>.</msg:message>
+        <msg:message name="msgMissingTextWithQuantityReason">Falta <msg:param name="quantity"/> <msg:param name="unit"/>, por la siguiente razón: <msg:param name="reason"/>.</msg:message>
+        <msg:message name="msgMissingTextWithReason">Falta texto, por la siguiente razón: <msg:param name="reason"/>.</msg:message>
         <msg:message name="msgNext">Siguiente</msg:message>
         <msg:message name="msgNotApplicable">N. A.</msg:message>
         <msg:message name="msgNotCopyrightedUS">Sin derechos de autor en los Estados Unidos. Si vive en otro lugar, consulte las leyes de su país antes de descargar este libro digital.</msg:message>
