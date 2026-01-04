@@ -584,15 +584,25 @@
     <xsl:template match="app">
         <span>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
-            <xsl:text/><xsl:apply-templates select="note" mode="in-apparatus"/><xsl:text/>
+            <!-- insert anchors for notes, except for the first -->
+            <xsl:text/><xsl:apply-templates select="note[position() > 1]" mode="in-apparatus"/><xsl:text/>
             <xsl:apply-templates select="lem"/>        
         </span>
     </xsl:template>
 
     <xsl:template match="lem">
         <span class="lemma">
+            <xsl:if test="../note">
+                <xsl:attribute name="id" select="f:generate-id(../note[1]) || 'src'"/>
+            </xsl:if>
             <xsl:apply-templates/>
         </span>
+        <xsl:if test="../note">
+            <a href="{f:generate-apparatus-note-href(../note[1])}">
+                <xsl:attribute name="title"><xsl:value-of select="f:title-from-note(../note[1])"/></xsl:attribute>
+                <xsl:value-of select="f:apparatus-note-marker(../note[1])"/>
+            </a>
+        </xsl:if>
     </xsl:template>
 
     <xsl:template match="note" mode="in-apparatus">
