@@ -9,7 +9,7 @@ use warnings;
 use File::Basename;
 use Getopt::Long;
 
-my $pdfimages = "pdfimages.exe"; # See http://www.foolabs.com/xpdf/download.html -> http://www.xpdfreader.com/download.html
+my $pdfimages = "pdfimages.exe"; # See http://www.foolabs.com/xpdf/download.html -> https://www.xpdfreader.com/download.html
 my $pdftopng = "pdftopng.exe";
 my $pdfcount = 1000;
 my $resolutionDpi = 300;
