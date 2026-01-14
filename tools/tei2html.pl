@@ -9,7 +9,7 @@ use File::stat;
 use File::Temp qw(mktemp);
 use File::Path qw(make_path remove_tree);
 use FindBin qw($Bin);
-use Getopt::Long;
+use Getopt::Long qw(:config no_ignore_case);
 use Cwd qw(abs_path);
 use Math::Round;
 use XML::XPath;
