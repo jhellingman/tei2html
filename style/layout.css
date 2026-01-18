@@ -401,6 +401,7 @@ p.footnote .fnlabel, .par.footnote .fnlabel {
     margin-left: -0.1em; /* compensate margin-left in a.noteRef rule */
     min-width: 1.0em;
     padding-right: 0.4em;
+    height: 1ex; /* avoid too large indented block in html5 */
 }
 
 .apparatusnote {
