@@ -109,6 +109,11 @@
 "U"         p "&#x073E;"    % SYRIAC ESASA BELOW
 "X"         p "&#x0748;"    % SYRIAC OBLIQUE LINE BELOW
 
+"@=a"       p "&#x0735;"    % SYRIAC ZQAPHA DOTTED
+"@a"        p "&#x0732;"    % SYRIAC PTHAHA DOTTED
+"@e"        p "&#x073C;"    % SYRIAC HBASA-ESASA DOTTED
+"@i"        p "&#x073C;"    % SYRIAC HBASA-ESASA DOTTED
+
 % Syriac marks
 
 "F"         p "&#x0740;"    % SYRIAC FEMININE DOT
