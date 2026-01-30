@@ -1,6 +1,6 @@
 # addTrans.pl -- Add transcription to Greek and Cyrillic text
 #
-# Assumption: Greek sections are marked <GR>...</GR>; Cyrillic sections are marked <CY>/<RU>/<CYX>; other tool will actually convert to transcription.
+# Assumption: Greek sections are marked <GR>...</GR>; Cyrillic sections are marked <CY>/<RU>/<CYX>; another tool will actually convert to transcription.
 #
 # Output:                               <choice><orig><GR>...</GR></orig><reg><GRT>...</GRT></reg></choice>
 #                                       <choice><orig><CY>...</CY></orig><reg><CYT>...</CYT></reg></choice>
@@ -22,41 +22,47 @@ GetOptions(
 main();
 
 sub main {
-    my $file = $ARGV[0];
+    my $file = shift @ARGV;
 
-    open(INPUTFILE, $file) || die("Could not open input file $file");
-    if ($utf8 != 0) {
-        binmode(INPUTFILE, ":utf8");
-        binmode(STDOUT, ":utf8");
+    my $fileHandle;
+    if (defined $file) {
+        open($fileHandle, '<', $file) or die "Could not open '$file': $!";
+    } else {
+        $fileHandle = *STDIN;
     }
 
-    my $paragraph = "";
+    if ($utf8) {
+        binmode($fileHandle, ':encoding(UTF-8)');
+        binmode(STDOUT, ':encoding(UTF-8)');
+    }
 
-    while (<INPUTFILE>) {
+    my $paragraph = '';
+
+    while (<$fileHandle>) {
         my $line = $_;
 
         # Deal with PGDP page separators.
         if ($_ =~ /-*File: ([0-9]+)\.png-*\\([^\\]*)(\\([^\\]+))?(\\([^\\]+))?(\\([^\\]+))?\\.*$/) {
             print "\n\n" . handleParagraph($paragraph);
             print "\n$line";
-            $paragraph = "";
+            $paragraph = '';
         } elsif ($line ne "\n") {
             chomp($line);
-            $paragraph .= " " . $line;
+            $paragraph .= ' ' . $line;
         } else {
             print "\n\n" . handleParagraph($paragraph);
-            $paragraph = "";
+            $paragraph = '';
         }
     }
 
-    if ($paragraph ne "") {
+    if ($paragraph ne '') {
         print "\n\n" . handleParagraph($paragraph);
     }
 
-    close INPUTFILE;
+    close $fileHandle;
 }
 
-sub handleParagraph($) {
+sub handleParagraph {
     my $paragraph = shift;
 
     if ($useXml == 0) {
@@ -87,7 +93,7 @@ sub rewriteTranscription {
     # Filter <pb> and <choice> tags from the transcription in $trans.
     my $clean = $trans;
     $clean =~ s/<pb.*?>//g;
-    $clean =~ s/<choice><sic>.*?<\/sic><corr>(.*?)<\/corr><\/choice>/$1/g;
+    $clean =~ s/<choice>\s*<sic>.*?<\/sic>\s*<corr>(.*?)<\/corr>\s*<\/choice>/$1/g;
     
     return "<choice><orig><$code>$trans<\/$code><\/orig><reg type=\"trans\"><$code$t>$clean<\/$code$t><\/reg><\/choice>";
 }
@@ -101,7 +107,7 @@ sub keepTranscription {
     # Filter <pb> and <choice> tags from the transcription in $trans.
     my $clean = $trans;
     $clean =~ s/<pb.*?>//g;
-    $clean =~ s/<choice><sic>.*?<\/sic><corr>(.*?)<\/corr><\/choice>/$1/g;
+    $clean =~ s/<choice>\s*<sic>.*?<\/sic>\s*<corr>(.*?)<\/corr>\s*<\/choice>/$1/g;
     
     return "<choice><orig><$code>$trans<\/$code><\/orig><reg type=\"trans\">$clean<\/reg><\/choice>";
 }

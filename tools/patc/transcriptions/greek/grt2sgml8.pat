@@ -43,18 +43,21 @@
 "</GRT>"     0 "</foreign>"
 "</GRTA>"    0 ""
 
-% some TEI tags:
+% some TEI tags commonly found inline:
 "<g>"               p "<g>"
 "<b>"               p "<b>"
+"<u>"               p "<u>"
 "<sc>"              p "<sc>"
 "<hi>"              p "<hi>"
 "<hi rend=ex>"      p "<hi rend='ex'>"
 "<hi rend=sc>"      p "<hi rend='sc'>"
 "<hi rend=bold>"    p "<hi rend='bold'>"
+"<hi rend=underline>" p "<hi rend='underline'>"
 "</g>"              p "</g>"
 "</b>"              p "</b>"
 "</sc>"             p "</sc>"
 "</hi>"             p "</hi>"
+"</u>"              p "</u>"
 
 "<choice>"          p "<choice>"
 "</choice>"         p "</choice>"
