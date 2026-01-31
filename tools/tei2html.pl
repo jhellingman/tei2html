@@ -57,6 +57,7 @@ my $nsgmls    = "nsgmls";                                                   # se
 my $sx        = "sx";                                                       # in the latter case, use onsgmls and osx instead of nsgmls and sx.
 my $mariadb   = "\"C:\\Program Files\\MariaDB 10.10\\bin\\mariadb.exe\"";
 
+
 my $LOG_LEVEL_ERROR = 1;
 my $LOG_LEVEL_WARNING = 2;
 my $LOG_LEVEL_INFO = 3;
@@ -142,7 +143,7 @@ GetOptions(
     'heatmap' => \$makeHeatMap,
     'help' => \$showHelp,
     'html5' => \$makeHtml5,
-    
+
     'kwiclang=s' => \$kwicLanguages,
     'kwicword=s' => \$kwicWords,
     'kwicwords=s' => \$kwicWords,
@@ -199,7 +200,7 @@ if ($showHelp == 1) {
     print "    clean                           Clean intermediate files normally preserved.\n";
     print "    debug                           Debug mode.\n";
     print "    heatmap                         Generate a heatmap version.\n\n";
-    
+
     print "    kwiclang=<languages>            Languages to be shown in KWIC, use ISO-639 codes, separated by spaces.\n";
     print "    kwicword=<words>                Words to be shown in KWIC, separate words by spaces.\n";
     print "    kwiccase=<yes/no>               Be case-sensitive in KWIC.\n";
@@ -244,6 +245,10 @@ if ($debug == 1) {
 }
 
 #==============================================================================
+
+
+my $TMP_FILE_PREFIX = "tmp-";
+my $TMP_FILE_TEMPLATE = "tmp-XXXXX";
 
 my $tmpBase = 'tmp';
 my $tmpCount = 0;
@@ -342,11 +347,12 @@ sub processFile {
         tei2xml($filename, $xmlFilename);
     }
 
-    my $includedXmlFilename = "$basename-included.xml";
+    my $includedXmlFilename = temporaryFile("inclusions", "xml");
     includeXml($xmlFilename, $includedXmlFilename);
 
-    my $preprocessedXmlFilename = "$basename-preprocessed.xml";
+    my $preprocessedXmlFilename = temporaryFile("preprocess", "xml");
     preprocessXml($includedXmlFilename, $preprocessedXmlFilename);
+    removeFile($includedXmlFilename);
 
     $runChecks    && runChecks($basename,    $filename);
     $makeWordlist && makeWordlist($basename, $preprocessedXmlFilename);
@@ -367,7 +373,9 @@ sub processFile {
 
     $makeZip == 1 && $pgNumber > 0 && makeZip($basename);
 
-    $clean && clean($basename, $version); 
+    removeFile($preprocessedXmlFilename);
+
+    $clean && clean($basename, $version);
 
     info("=== Done! ==================================================================");
 }
@@ -467,6 +475,29 @@ sub removeFile {
     my $fileAge = -M $fileToRemove;
     if ($fileAge > 0.0) {
         print "WARNING: attempt to remove file that pre-dates start time of script: $fileToRemove.\n";
+
+        if ($debug == 1) {
+            my $i = 1;
+            print STDERR "Stack Trace:\n";
+            while ( (my @call_details = (caller($i++))) ){
+                print STDERR $call_details[1].":".$call_details[2]." in function ".$call_details[3]."\n";
+            }
+        }
+
+        return;
+    }
+
+    if ($fileToRemove !~ /^tmp-/) {
+        print "WARNING: attempt to remove file that does not start with 'tmp-': $fileToRemove.\n";
+
+        if ($debug == 1) {
+            my $i = 1;
+            print STDERR "Stack Trace:\n";
+            while ( (my @call_details = (caller($i++))) ){
+                print STDERR $call_details[1].":".$call_details[2]." in function ".$call_details[3]."\n";
+            }
+        }
+
         return;
     }
 
@@ -708,7 +739,7 @@ sub makeHtmlCommon {
         return;
     }
 
-    my $tmpFile = temporaryFile('html', '.html');
+    my $tmpFile = temporaryFile('html', 'html');
     my $saxonParameters = determineSaxonParameters();
     trace("Create HTML version...");
     system ("$saxon $xmlFile $xsldir/$xsltFile $saxonParameters basename=\"$basename\" > $tmpFile");
@@ -716,9 +747,9 @@ sub makeHtmlCommon {
     if ($useTidy != 0) {
         system ("tidy -m -wrap $pageWidth -f $basename-tidy.err $htmlFile");
     } else {
-        my $tmpFile2 = temporaryFile('html', '.html');
+        my $tmpFile2 = temporaryFile('html', 'html');
         system ("perl $toolsdir/cleanHtml.pl $htmlFile > $tmpFile2");
-        removeFile($htmlFile);       
+        removeFile($htmlFile);
         move($tmpFile2, $htmlFile) or error("move failes: $!");
     }
     removeFile($tmpFile);
@@ -735,8 +766,8 @@ sub makePdf {
         return;
     }
 
-    my $tmpFile1 = temporaryFile('pdf', '.html');
-    my $tmpFile2 = temporaryFile('pdf', '.html');
+    my $tmpFile1 = temporaryFile('pdf', 'html');
+    my $tmpFile2 = temporaryFile('pdf', 'html');
     my $saxonParameters = determineSaxonParameters();
 
     # Do the HTML transform again, but with an additional parameter to apply Prince specific rules in the XSLT transform.
@@ -761,7 +792,7 @@ sub makeEpub {
         return;
     }
 
-    my $tmpFile = temporaryFile('epub', '.html');
+    my $tmpFile = temporaryFile('epub', 'html');
     my $saxonParameters = determineSaxonParameters();
     trace("Create ePub version from $xmlFile...");
     system ('mkdir epub');
@@ -795,27 +826,40 @@ sub makeText {
         return;
     }
 
-    my $transcribedFile = $filename;
+    trace("Create text version from $filename...");
+
+    my $transcribedFile = temporaryFile('transcribe', 'txt');
     if ($useUnicode == 1) {
         $transcribedFile = transcribe($filename, 1);
+    } else {
+        copy($filename, $transcribedFile);
     }
 
-    my $tmpFile1 = temporaryFile('txt', '.txt');
-    my $tmpFile2 = temporaryFile('txt', '.txt');
+    my $concatNotesFile = temporaryFile('concat-notes', 'txt');
 
-    trace("Create text version from $transcribedFile...");
     system ("perl $toolsdir/extractNotes.pl $transcribedFile");
-    system ("cat $transcribedFile.out $transcribedFile.notes > $tmpFile1");
-    system ("perl $toolsdir/tei2txt.pl " . ($useUnicode == 1 ? '-u ' : '') . " -w $pageWidth $tmpFile1 > $tmpFile2");
+
+    removeFile($transcribedFile);
+
+    system ("cat $transcribedFile.out $transcribedFile.notes > $concatNotesFile");
+
+    removeFile("$transcribedFile.out");
+    removeFile("$transcribedFile.notes");
+
+    my $stripTagsFile = temporaryFile('striptags', 'txt');
+    system ("perl $toolsdir/tei2txt.pl " . ($useUnicode == 1 ? '-u ' : '') . " -w $pageWidth $concatNotesFile > $stripTagsFile");
+    removeFile($concatNotesFile);
 
     if ($useUnicode == 1) {
         # Use our own script to wrap lines, as fmt cannot deal with unicode text.
-        # system ("perl -S wraplines.pl $tmpFile2 > $textFile");
-        system ("perl -S wrapLinesUnicode.pl -w=$pageWidth $tmpFile2 > $textFile");
+        # system ("perl -S wraplines.pl $stripTagsFile > $textFile");
+        system ("perl -S wrapLinesUnicode.pl -w=$pageWidth $stripTagsFile > $textFile");
     } else {
-        # system ("perl -S wraplines.pl $tmpFile2 > $basename.txt");
-        system ("fmt -sw$pageWidth $tmpFile2 > $textFile");
+        # system ("perl -S wraplines.pl $stripTagsFile > $basename.txt");
+        system ("fmt -sw$pageWidth $stripTagsFile > $textFile");
     }
+    removeFile($stripTagsFile);
+
     system ("$gutcheck $textFile > $basename.gutcheck");
     system ("$jeebies $textFile > $basename.jeebies");
 
@@ -823,15 +867,6 @@ sub makeText {
     if (-f "Processed/$textFile") {
         system ("$gutcheck Processed/$textFile > $basename-final.gutcheck");
     }
-
-    if ($filename ne $transcribedFile) {
-        removeFile($transcribedFile);
-    }
-
-    removeFile("$transcribedFile.out");
-    removeFile("$transcribedFile.notes");
-    removeFile($tmpFile1);
-    removeFile($tmpFile2);
 
     # check for required manual interventions
     my $containsError = system ("grep -q \"\\[ERROR:\" $textFile");
@@ -859,7 +894,7 @@ sub makeWordlist {
         return;
     }
 
-    my $tmpFile = temporaryFile('report', '.html');
+    my $tmpFile = temporaryFile('report', 'html');
     my $options = $debug ? ' -v ' : '';
     $options .= $makeHeatMap ? ' -m ' : '';
     $options .= $makeSQL ? ' -s ' : '';
@@ -1109,7 +1144,7 @@ sub longestString {
 sub runChecks {
     my $basename = shift;
     my $filename = shift;
-   
+
     $filename =~ /^(.*)\.(xml|tei)$/;
     my $format = $2;
     my $checkFilename = $basename . '-checks.html';
@@ -1120,18 +1155,19 @@ sub runChecks {
     }
     trace("Run checks on $filename.");
 
-    my $draughtsFile = convertDraughtsNotation($filename);
-    my $intraFile = convertIntraNotation($draughtsFile);
+    my $draughtsFile = convertDraughtsNotation($filename, $format);
+    my $intraFile = convertIntraNotation($draughtsFile, $format);
+    removeFile($draughtsFile);
 
     my $transcribedFile = transcribe($intraFile, $noTranscriptionPopups);
 
-    my $positionInfoFilename = $basename . '-pos.' . $format;
+    my $positionInfoFilename = temporaryFile("checks", $format);
 
     trace("Adding pos attributes to $inputFile");
     system ("perl $toolsdir/addPositionInfo.pl \"$transcribedFile\" > \"$positionInfoFilename\"");
 
     if ($format eq 'tei') {
-        my $tmpFile = temporaryFile('checks', '.tei');
+        my $tmpFile = temporaryFile('checks', 'tei');
 
         # Hide a number of entities for the checks, so matching pairs of punctuation can be
         # verified. The trick used is that unmatched parentheses and brackets can be represented
@@ -1139,14 +1175,14 @@ sub runChecks {
         # for the test only. Similarly, the &apos; entity is mapped to &mlapos;, instead of &rsquo;.
         system ("perl $toolsdir/precheck.pl \"$positionInfoFilename\" > \"$tmpFile\"");
         removeFile($positionInfoFilename);
+        $positionInfoFilename = temporaryFile('checks', 'xml');
 
-        tei2xml($tmpFile, $basename . '-pos.xml');
-        $positionInfoFilename = $basename . '-pos.xml';
+        tei2xml($tmpFile, $positionInfoFilename);
         removeFile($tmpFile);
         removeFile($tmpFile . '.err');
     }
 
-    my $xmlFilename = temporaryFile('checks', '.xml');
+    my $xmlFilename = temporaryFile('checks', 'xml');
     system ("$saxon \"$positionInfoFilename\" $xsldir/preprocess.xsl > $xmlFilename");
 
     system ("$saxon \"$xmlFilename\" $xsldir/checks.xsl " . determineSaxonParameters() . " > \"$checkFilename\"");
@@ -1171,21 +1207,22 @@ sub runSchematron {
     my $xmlFilename = shift;
 
     ## The schematron wants the document to be in the TEI namespace: "http://www.tei-c.org/ns/1.0"
-    my $tmpFile = "$basename-ns.xml";
-    system("$saxon -s:$xmlFilename -xsl:$namespaceXslt -o:$tmpFile");
+    my $namespacedXmlFile = temporaryFile("schematron", 'xml');
+    system("$saxon -s:$xmlFilename -xsl:$namespaceXslt -o:$namespacedXmlFile");
 
-    trace("Run schematron checks: $schxslt -s $schematronFile -d $xmlFilename -o $xmlFilename-report.xml");
-    my $result = system("$schxslt -s $schematronFile -d $basename-ns.xml -o $xmlFilename-report.xml");
+    my $schematronXmlReportFile = temporaryFile("schematron-report", 'xml');
+    trace("Run schematron checks: $schxslt -s $schematronFile -d $namespacedXmlFile -o $schematronXmlReportFile");
+    my $result = system("$schxslt -s $schematronFile -d $namespacedXmlFile -o $schematronXmlReportFile");
 
     if ($result != 0) {
         warning("Schematron validation failed!");
     }
 
-    trace("Transform schematron result to HTML: $saxon -s:$xmlFilename-report.xml -xsl:$schematronXslt -o:$basename-report.html");
-    my $transform_result = system("$saxon -s:$xmlFilename-report.xml -xsl:$schematronXslt -o:$basename-schematron-report.html");
+    trace("Transform schematron result to HTML: $saxon -s:$schematronXmlReportFile -xsl:$schematronXslt -o:$basename-schematron-report.html");
+    my $transform_result = system("$saxon -s:$schematronXmlReportFile -xsl:$schematronXslt -o:$basename-schematron-report.html");
 
-    removeFile($tmpFile);
-    removeFile("$xmlFilename-report.xml");
+    removeFile($namespacedXmlFile);
+    removeFile($schematronXmlReportFile);
 }
 
 
@@ -1198,7 +1235,7 @@ sub makeAsciiDoc {
     my $tmpFile = "$basename-ns.xml";
     system("$saxon -s:$xmlP5FileName -xsl:$namespaceXslt -o:$tmpFile");
 
-    trace("Convert to AsciiDoc: $saxon -s:$tmpFile -xsl:$xsldir/tei2asciidoc.xsl -o:$basename.adoc");    
+    trace("Convert to AsciiDoc: $saxon -s:$tmpFile -xsl:$xsldir/tei2asciidoc.xsl -o:$basename.adoc");
     my $transform_result = system("$saxon -s:$tmpFile -xsl:$xsldir/tei2asciidoc.xsl -o:$basename.adoc");
 
     removeFile($tmpFile);
@@ -1232,7 +1269,7 @@ sub temporaryFile {
     my $phase = shift;
     my $extension = shift;
     $tmpCount++;
-    return $tmpBase . '-' . $tmpCount . '-' . $phase . $extension;
+    return $TMP_FILE_PREFIX . $tmpCount . '-' . $phase . '.' . $extension;
 }
 
 
@@ -1405,29 +1442,33 @@ sub tei2xml {
     trace("Convert SGML file '$sgmlFile' to XML file '$xmlFile'.");
 
     # Convert Latin-1 characters to entities
-    my $tmpFile0 = temporaryFile('entities', '.tei');
+    my $entitiesFile = temporaryFile('entities', 'tei');
     trace("Convert Latin-1 characters to entities...");
-    system ("patc -p $toolsdir/patc/win2sgml.pat $sgmlFile $tmpFile0");
+    system ("patc -p $toolsdir/patc/win2sgml.pat $sgmlFile $entitiesFile");
 
-    my $draughtsFile = convertDraughtsNotation($tmpFile0);
-    my $intraFile = convertIntraNotation($draughtsFile);
+    my $draughtsFile = convertDraughtsNotation($entitiesFile, 'tei');
+    my $intraFile = convertIntraNotation($draughtsFile, 'tei');
+    removeFile($draughtsFile);
 
     my $transcribedFile = transcribe($intraFile, $noTranscriptionPopups);
 
+    my $nsgmlFile = temporaryFile("checkSgml", "nsgml");
+    my $sgmlErrorFile = temporaryFile("checkSgml", "err");
+
     trace("Check SGML...");
-    my $nsgmlresult = system ("$nsgmls -c \"$catalog\" -wall -E100000 -g -f $sgmlFile.raw.err $transcribedFile > $sgmlFile.nsgml");
+    my $nsgmlresult = system ("$nsgmls -c \"$catalog\" -wall -E100000 -g -f $sgmlErrorFile $transcribedFile > $nsgmlFile");
     if ($nsgmlresult != 0) {
         warning("NSGML found validation errors in $sgmlFile.");
     }
-    removeFile("$sgmlFile.nsgml");
-    system ("perl $toolsdir/filter-nsgmls-errors.pl $sgmlFile.raw.err > $sgmlFile.err");
+    removeFile($nsgmlFile);
+    system ("perl $toolsdir/filter-nsgmls-errors.pl $sgmlErrorFile > $sgmlFile.err");
     system ("cat $sgmlFile.err");
-    removeFile("$sgmlFile.raw.err");
+    removeFile($sgmlErrorFile);
 
-    my $tmpFile1 = temporaryFile('hide-entities', '.tei');
-    my $tmpFile2 = temporaryFile('sx', '.xml');
-    my $tmpFile3 = temporaryFile('restore-entities', '.xml');
-    my $tmpFile4 = temporaryFile('ucs', '.xml');
+    my $tmpFile1 = temporaryFile('hide-entities', 'tei');
+    my $tmpFile2 = temporaryFile('sx', 'xml');
+    my $tmpFile3 = temporaryFile('restore-entities', 'xml');
+    my $tmpFile4 = temporaryFile('ucs', 'xml');
 
     trace("Convert SGML to XML...");
 
@@ -1447,7 +1488,7 @@ sub tei2xml {
     removeFile($tmpFile3);
     removeFile($tmpFile2);
     removeFile($tmpFile1);
-    removeFile($tmpFile0);
+    removeFile($entitiesFile);
     removeFile($intraFile);
     removeFile($transcribedFile);
 }
@@ -1457,15 +1498,17 @@ sub tei2xml {
 #
 sub convertIntraNotation {
     my $filename = shift;
+    my $format = shift;
+    my $intraFile = temporaryFile('intra', $format);
 
     my $containsIntralinear = system ("grep -q \"<INTRA\" $filename");
     if ($containsIntralinear == 0 && $noTranscription == 0) {
-        my $tmpFile = temporaryFile('intra', '.tei');
         trace("Convert <INTRA> notation to standard TEI <ab>-elements...");
-        system ("perl $toolsdir/intralinear.pl $filename > $tmpFile");
-        $filename = $tmpFile;
+        system ("perl $toolsdir/intralinear.pl $filename > $intraFile");
+    } else {
+        copy($filename, $intraFile);
     }
-    return $filename;
+    return $intraFile;
 }
 
 #
@@ -1473,15 +1516,17 @@ sub convertIntraNotation {
 #
 sub convertDraughtsNotation {
     my $filename = shift;
+    my $format = shift;
+    my $draughtsFile = temporaryFile('draughts', $format);
 
     my $containsDraughtsNotation = system ("grep -q \"[DRAUGHTS]\" $filename");
     if ($containsDraughtsNotation == 0 && $noTranscription == 0) {
-        my $tmpFile = temporaryFile('intra', '.tei');
         trace("Convert [DRAUGHTS] notation to standard TEI tables...");
-        system ("perl $toolsdir/convertDraughtsDiagram.pl $filename > $tmpFile");
-        $filename = $tmpFile;
+        system ("perl $toolsdir/convertDraughtsDiagram.pl $filename > $draughtsFile");
+    } else {
+        copy($filename, $draughtsFile);
     }
-    return $filename;
+    return $draughtsFile;
 }
 
 #
@@ -1529,7 +1574,7 @@ sub transcribe {
 
 sub convertWylie {
     my $currentFile = shift;
-    my $tmpFile = temporaryFile('wylie', '.xml');
+    my $tmpFile = temporaryFile('wylie', 'xml');
 
     trace("Convert Tibetan transcription...");
     system ("perl $toolsdir/convertWylie.pl $currentFile > $tmpFile");
@@ -1548,13 +1593,13 @@ sub addTranscriptions {
     # Check for presence of Greek or Cyrillic
     my $containsGreek = system ("grep -q -e \"<EL>\\|<GR>\\|<ALS>\\|<CY>\\|<RU>\\|<UK>\\|<RUX>\\|<SR>\" $currentFile");
     if ($containsGreek == 0) {
-        my $tmpFile1 = temporaryFile('transcribe', '.xml');
-        my $tmpFile2 = temporaryFile('transcribe', '.xml');
-        my $tmpFile3 = temporaryFile('transcribe', '.xml');
-        my $tmpFile4 = temporaryFile('transcribe', '.xml');
-        my $tmpFile5 = temporaryFile('transcribe', '.xml');
-        my $tmpFile6 = temporaryFile('transcribe', '.xml');
-        my $tmpFile7 = temporaryFile('transcribe', '.xml');
+        my $tmpFile1 = temporaryFile('transcribe', 'xml');
+        my $tmpFile2 = temporaryFile('transcribe', 'xml');
+        my $tmpFile3 = temporaryFile('transcribe', 'xml');
+        my $tmpFile4 = temporaryFile('transcribe', 'xml');
+        my $tmpFile5 = temporaryFile('transcribe', 'xml');
+        my $tmpFile6 = temporaryFile('transcribe', 'xml');
+        my $tmpFile7 = temporaryFile('transcribe', 'xml');
 
         trace("Add a transcription of Greek or Cyrillic script in choice elements...");
         system ("perl $toolsdir/addTrans.pl -x $currentFile > $tmpFile1");
@@ -1590,7 +1635,7 @@ sub transcribeNotation {
     # Check for presence of notation (indicated by a given tag).
     my $containsNotation = system ("grep -q \"$tag\" $currentFile");
     if ($containsNotation == 0) {
-        my $tmpFile = temporaryFile('notation', '.xml');
+        my $tmpFile = temporaryFile('notation', 'xml');
 
         trace("Convert $name transcription...");
         system ("patc -p $patternFile $currentFile $tmpFile");
