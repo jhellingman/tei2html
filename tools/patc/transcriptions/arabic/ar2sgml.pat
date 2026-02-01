@@ -135,6 +135,7 @@
 "*k"        p "&#x06AE;"    % ARABIC LETTER KAF WITH THREE DOTS BELOW
 
 "g"         p "&#x06AF;"    % ARABIC LETTER GAF
+"*g"        p "&#x077F;"    % ARABIC LETTER KAF WITH TWO DOTS ABOVE
 
 "l"         p "&#x0644;"    % ARABIC LETTER LAM
 
