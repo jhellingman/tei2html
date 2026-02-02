@@ -104,6 +104,8 @@ while (<>) {
     # drop inline comments from text (replace with single space).
     $line =~ s/\s*<!--.*?-->\s*/ /g;
 
+    $line = cleanFormulas($line);
+
     # Handle predefined column widths (given in a processing instruction)
     if ($line =~ /<\?tei2txt columnWidths=\"(.*?)\"\?>/) {
         @predefinedColumnWidths = split('\s+', $1);
@@ -182,7 +184,31 @@ while (<>) {
     print $line;
 }
 
-sub handleLine($) {
+
+sub cleanFormulas {
+    my $line = shift;
+
+    # Deal with simple math formulas (on a single line)
+
+    # TeX fraction (optionally followed by punctuation):
+    $line =~ s/<formula\b(.*?)>\$?([0-9,\{\}]+)([.,:;]?)\$?<\/formula>/cleanTexNumber($2).$3/eg;
+    $line =~ s/<formula\b(.*?)>\$?([0-9,\{\}]+)\\frac\{([0-9,\{\}]+)}\{([0-9,\{\}]+)}([.,:;]?)\$?<\/formula>/cleanTexNumber($2).'-'.cleanTexNumber($3).'\/'.cleanTexNumber($4).$5/eg;
+    $line =~ s/<formula\b(.*?)>\$?\\frac\{([0-9,\{\}]+)}\{([0-9,\{\}]+)}([.,:;]?)\$?<\/formula>/cleanTexNumber($2).'\/'.cleanTexNumber($3).$4/eg;
+
+    # Any other single-line TeX formula: just use dollar signs
+    $line =~ s/<formula\b(.*?)>\$?(.*?)([.,:;]?)\$?<\/formula>/\$$2\$$3/g;
+
+    return $line;
+}
+
+# Remove the braces from a number, i.e. 1{,}234{,}567 -> 1,234,567
+sub cleanTexNumber {
+    my $number = shift;
+    $number =~ s/[\{\}]//g;
+    return $number;
+}
+
+sub handleLine {
     my $line = shift;
 
     if (!defined $line) {
@@ -258,7 +284,7 @@ sub handleLine($) {
     return $line;
 }
 
-sub handleEndNotes() {
+sub handleEndNotes {
     my $remainder = shift;
     my $result = '';
 
@@ -282,7 +308,7 @@ sub handleEndNotes() {
     return $result . $remainder;
 }
 
-sub spaces($) {
+sub spaces {
     my $n = shift;
     my $result = '';
     for (my $i = 0; $i < $n; $i++) {
@@ -291,7 +317,7 @@ sub spaces($) {
     return $result;
 }
 
-sub noBreakSpaces($) {
+sub noBreakSpaces {
     my $n = shift;
     my $result = '';
     for (my $i = 0; $i < $n; $i++) {
@@ -300,7 +326,7 @@ sub noBreakSpaces($) {
     return $result;
 }
 
-sub handleHighlighted($) {
+sub handleHighlighted {
     my $remainder = shift;
 
     my $result = '';
@@ -321,7 +347,7 @@ sub handleHighlighted($) {
 
 my %mapIdToContent;
 
-sub handleSegments($) {
+sub handleSegments {
     my $remainder = shift;
 
     my $result = '';
@@ -354,7 +380,7 @@ sub handleSegments($) {
     return (defined $remainder) ? $result . $remainder : $result;
 }
 
-sub useDittoMarks($) {
+sub useDittoMarks {
     my $string = shift;
     my $result = '';
     $string = handleLine($string);
@@ -370,14 +396,14 @@ sub useDittoMarks($) {
     return $result;
 }
 
-sub useDittoMark($) {
+sub useDittoMark {
     my $string = shift;
     my $spacesBefore = floor((length($string) - 2) / 2.0);
     my $spacesAfter = ceil((length($string) - 2) / 2.0);
     return noBreakSpaces($spacesBefore) . ',,' . noBreakSpaces($spacesAfter);
 }
 
-sub centerStringInWidth($$) {
+sub centerStringInWidth {
     my $string = shift;
     my $width = shift;
     my $spacesBefore = floor(($width - length($string)) / 2.0);
@@ -385,7 +411,7 @@ sub centerStringInWidth($$) {
     return spaces($spacesBefore) . $string . spaces($spacesAfter);
 }
 
-sub parseTable($) {
+sub parseTable {
     my $table = shift;
     my $tableId = shift;
     my $tableHead = '';
@@ -435,7 +461,7 @@ sub parseTable($) {
 
 # Place a table in a three-dimensional array: rows, cells, lines (within each cell)
 #
-sub handleTable($) {
+sub handleTable {
     my $table = shift;
     # $table =~ s/\n/ /gms; # Remove new-lines for easier handling with default regex.
     $table =~ /<table\b(.*?)>(.*?)<\/table>/ms;
@@ -456,7 +482,7 @@ sub handleTable($) {
     return @result;
 }
 
-sub handleRow($) {
+sub handleRow {
     my $row = shift;
     my @items = split(/<cell\b(.*?)>/ms, $row);
     my @cells = ();
@@ -494,7 +520,7 @@ sub handleRow($) {
     return @result;
 }
 
-sub handleCell($) {
+sub handleCell {
     my $cell = shift;
     my @lines = split("\n", $cell);
 
@@ -507,7 +533,7 @@ sub handleCell($) {
     return @result;
 }
 
-sub sizeTableColumns($$@) {
+sub sizeTableColumns {
     # See also: https://developer.mozilla.org/en-US/docs/Table_Layout_Strategy
     # See http://nothings.org/computer/badtable/
     # in particular: http://www.csse.monash.edu.au/~marriott/HurMarMou05.pdf
@@ -658,7 +684,7 @@ sub sizeTableColumns($$@) {
     return @rows;
 }
 
-sub totalTableWidth(@) {
+sub totalTableWidth {
     my @columnWidths = @_;
 
     my $totalTableWidth = length($borderLeft[$borderStyle]);
@@ -669,7 +695,7 @@ sub totalTableWidth(@) {
     return $totalTableWidth;
 }
 
-sub printTable(@) {
+sub printTable {
     my @rows = @_;
 
     # Establish the width of each column and height of each row
@@ -739,7 +765,7 @@ sub printTable(@) {
     }
 }
 
-sub printCenterSpacing($) {
+sub printCenterSpacing {
     my $lineWidth = shift;
 
     if ($centerTables != 0) {
@@ -750,7 +776,7 @@ sub printCenterSpacing($) {
     }
 }
 
-sub wrapLines($$) {
+sub wrapLines {
     my $paragraph = shift;
     my $maxLength = shift;
     my @lines = split("\n", $paragraph);
@@ -762,7 +788,7 @@ sub wrapLines($$) {
     return join ("\n", @result);
 }
 
-sub wrapLine($$) {
+sub wrapLine {
     my $line = shift;
     my $maxLength = shift;
     my $actualMaxLength = 0;
@@ -805,7 +831,7 @@ sub wrapLine($$) {
     return $result;
 }
 
-sub repeat($$) {
+sub repeat {
     my $char = shift;
     my $count = shift;
     my $result = '';
@@ -815,7 +841,7 @@ sub repeat($$) {
     return $result;
 }
 
-sub printTopBorder(@) {
+sub printTopBorder {
     my @columnWidths = @_;
     if (length ($borderTopLine[$borderStyle]) > 0) {
         print $borderTopLeft[$borderStyle];
@@ -827,7 +853,7 @@ sub printTopBorder(@) {
     }
 }
 
-sub printInnerBorder(@) {
+sub printInnerBorder {
     my @columnWidths = @_;
     if (length ($innerHorizontal[$borderStyle]) > 0) {
         print $borderLeftCross[$borderStyle];
@@ -839,7 +865,7 @@ sub printInnerBorder(@) {
     }
 }
 
-sub printBottomBorder(@) {
+sub printBottomBorder {
     my @columnWidths = @_;
     if (length ($borderBottomLine[$borderStyle]) > 0) {
         print $borderBottomLeft[$borderStyle];
@@ -851,7 +877,7 @@ sub printBottomBorder(@) {
     }
 }
 
-sub printWithPadding($$) {
+sub printWithPadding {
     my $string = shift;
     my $width = shift;
 
@@ -868,7 +894,7 @@ sub printWithPadding($$) {
     }
 }
 
-sub trim($) {
+sub trim {
     my $string = shift;
     $string =~ s/^\s+//;
     $string =~ s/\s+$//;
@@ -879,7 +905,7 @@ sub trim($) {
 # handleIntra: handle so-called intra-lineair text, by approaching
 # it in plain text.
 #
-sub handleIntra() {
+sub handleIntra {
 
     print "[** BEGIN INTRA --------------------------]\n";
 
@@ -955,25 +981,25 @@ sub handleIntra() {
     }
 }
 
-sub ltrim($) {
+sub ltrim {
     my $string = shift;
     $string =~ s/^\s+//g;
     return $string;
 }
 
-sub hideFootnoteMarkers($) {
+sub hideFootnoteMarkers {
     my $string = shift;
     $string =~ s/\[([0-9]+)\]/{$1}/g;
     return $string;
 }
 
-sub restoreFootnoteMarkers($) {
+sub restoreFootnoteMarkers {
     my $string = shift;
     $string =~ s/\{([0-9]+)\}/[$1]/g;
     return $string;
 }
 
-sub max($$) {
+sub max {
     my $first = shift;
     my $second = shift;
     return $first > $second ? $first : $second;
@@ -982,7 +1008,7 @@ sub max($$) {
 #
 # entities2iso88591: Convert SGML style entities to ISO 8859-1 values (if available)
 #
-sub entities2iso88591($) {
+sub entities2iso88591 {
     my $string = shift;
 
     # soft-hyphen:
