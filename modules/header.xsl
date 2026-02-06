@@ -158,9 +158,12 @@
 
         <!-- Load MathJax script -->
         <xsl:if test="f:get-setting('math.mathJax.format') = 'MathJax' and //formula[@notation='TeX']">
+            <!--
             <script type="text/javascript" async="async"
               src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config={f:get-setting('math.mathJax.configuration')}">
             </script>
+            -->
+            <script id="MathJax-script" async="async" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
         </xsl:if>
 
     </xsl:template>

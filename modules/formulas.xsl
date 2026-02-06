@@ -79,7 +79,7 @@
         <xsl:variable name="description" select="if (@title) then @title else if ($svgTitle) then $svgTitle else $texString" as="xs:string"/>
 
         <!-- Export the TeX string for the first instance -->
-        <xsl:if test="generate-id(.) = generate-id($firstInstance) and not(f:is-trivial-math(.))">
+        <xsl:if test="generate-id(.) = generate-id($firstInstance) and not(f:is-trivial-math(.)) and not(f:get-setting('math.mathJax.format') = 'MathJax')">
             <xsl:result-document
                     href="{$texFile}"
                     method="text"
@@ -101,7 +101,7 @@
 
             <xsl:choose>
                 <!-- Dynamic mathJax -->
-                <xsl:when test="f:get-setting('math.mathJax.format') = 'MathJax'">
+                <xsl:when test="f:get-setting('math.mathJax.format') = ('MathJax', 'CHTML')">
                     <xsl:value-of select="if (f:is-display-math(.)) then '$$' else '\('"/>
                     <xsl:value-of select="$texString"/>
                     <xsl:value-of select="if (f:is-display-math(.)) then '$$' else '\)'"/>

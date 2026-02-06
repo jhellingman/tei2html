@@ -179,7 +179,7 @@
             <math.label.before>(</math.label.before>
             <math.label.after>)</math.label.after>
             <math.keepTexInComment>true</math.keepTexInComment>
-            <math.filePath>formulas</math.filePath>                         <!-- Path where tei2html will write tex files and read SVG files. -->
+            <math.filePath>formulas</math.filePath>                         <!-- Path where tei2html will write tex files and read generated SVG files. -->
             <math.htmlPath>formulas</math.htmlPath>                         <!-- Path the generated HTML (and ePub) will use as location for included SVG or PNG files. -->
 
             <math.mathJax.format>SVG+IMG</math.mathJax.format>                      <!-- Options: MathJax; MML; SVG; SVG+IMG -->
