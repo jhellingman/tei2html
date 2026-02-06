@@ -10,11 +10,15 @@ body {
 
 /* The following rules use absolute positioning and are thus taboo in ePubs */
 
+/* Material set in the margin needs a reset of various properties they might otherwise inherit from their context */
+
 /* page numbers, placed in right margin */
 
 .pageNum {
+    font-variant: normal;
+    text-transform: none;
     display: inline;
-    font-size: 8.4pt;
+    font-size: 0.8rem;
     font-style: normal;
     margin: 0;
     padding: 0;
@@ -25,7 +29,9 @@ body {
 }
 
 .marginnote {
-    font-size: 0.8em;
+    font-variant: normal;
+    text-transform: none;
+    font-size: 0.8rem;
     height: 0;
     left: 1%;
     position: absolute;
@@ -35,7 +41,9 @@ body {
 }
 
 .right-marginnote {
-    font-size: 0.8em;
+    font-variant: normal;
+    text-transform: none;
+    font-size: 0.8rem;
     height: 0;
     right: 3%;
     position: absolute;
@@ -45,7 +53,9 @@ body {
 }
 
 .cut-in-left-note {
-    font-size: 0.8em;
+    font-variant: normal;
+    text-transform: none;
+    font-size: 0.8rem;
     left: 1%;
     float: left;
     text-indent: 0;
@@ -55,7 +65,9 @@ body {
 }
 
 .cut-in-right-note {
-    font-size: 0.8em;
+    font-variant: normal;
+    text-transform: none;
+    font-size: 0.8rem;
     left: 1%;
     float: right;
     text-indent: 0;
