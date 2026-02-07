@@ -20,9 +20,7 @@ if ($makeHtml == 0 && $makeMml == 0 && $makePng == 0) {
     $makeSvg = 1;
 }
 
-main();
-
-sub main() {
+sub main {
     my $file = $ARGV[0];
 
     if (!defined $file) {
@@ -39,21 +37,19 @@ sub listRecursively {
     my ($directory) = @_;
     my @files = (  );
 
-    unless (opendir(DIRECTORY, $directory)) {
-        print "Cannot open directory $directory!\n";
-        exit;
-    }
+    opendir(my $dirHandle, $directory) or die "Cannot open directory $directory: $!";
 
     # Read the directory, ignoring special entries "." and ".."
-    @files = grep (!/^\.\.?$/, readdir(DIRECTORY));
+    @files = grep (!/^\.\.?$/, readdir($dirHandle));
 
-    closedir(DIRECTORY);
+    closedir($dirHandle);
 
     foreach my $file (@files) {
-        if (-f "$directory\\$file") {
-            handleFile("$directory\\$file");
-        } elsif (-d "$directory\\$file") {
-            listRecursively("$directory\\$file");
+        my $filePath = "$directory/$file";
+        if (-f $filePath) {
+            handleFile($filePath);
+        } elsif (-d $filePath) {
+            listRecursively($filePath);
         }
     }
 }
@@ -64,32 +60,34 @@ sub handleFile {
         my $base = basename($file, '.tex');
         my $dirname = dirname($file);
 
-        my $svgFile = $dirname . '\\' . $base . '.svg';
-        my $htmlFile = $dirname . '\\' . $base . '.html';
-        my $mmlFile = $dirname . '\\' . $base . '.mml';
-        my $pngFile = $dirname . '\\' . $base . '.png';
+        my $svgFile = $dirname . '/' . $base . '.svg';
+        my $htmlFile = $dirname . '/' . $base . '.html';
+        my $mmlFile = $dirname . '/' . $base . '.mml';
+        my $pngFile = $dirname . '/' . $base . '.png';
 
         print "Converting TeX formula: $file\n";
 
-        open(INPUTFILE, $file) || die("Could not open input file $file");
+        open(my $fileHandle, '<', $file) or die("Could not open input file $file: $!");
         my $formula = "";
-        while (<INPUTFILE>) {
+        while (<$fileHandle>) {
             $formula .= $_;
         }
-        close INPUTFILE;
+        close $fileHandle;
 
         my $inlineMode = startsWith($base, "inline") ? "--inline" : "";
 
         # see https://github.com/mathjax/mathjax-node-cli
-        if ($makeSvg  && !-e $svgFile)  { system ("tex2svg     $inlineMode \"$formula\" > $svgFile"); }
-        if ($makeHtml && !-e $htmlFile) { system ("tex2htmlcss $inlineMode \"$formula\" > $htmlFile"); }
-        if ($makeMml  && !-e $mmlFile)  { system ("tex2mml     $inlineMode \"$formula\" > $mmlFile"); }
+        if ($makeSvg  && !-e $svgFile)  { system ('tex2svg',     $inlineMode, $formula, '>', $svgFile); }
+        if ($makeHtml && !-e $htmlFile) { system ('tex2htmlcss', $inlineMode, $formula, '>', $htmlFile); }
+        if ($makeMml  && !-e $mmlFile)  { system ('tex2mml',     $inlineMode, $formula, '>', $mmlFile); }
 
         # see https://github.com/shakiba/svgexport
-        if ($makePng  && !-e $pngFile)  { system ("svgexport $svgFile $pngFile 1.79x \"svg{background:white;}\""); }
+        if ($makePng  && !-e $pngFile)  { system ('svgexport', $svgFile, $pngFile, '1.79x', 'svg{background:white;}'); }
     }
 }
 
 sub startsWith {
     return substr($_[0], 0, length($_[1])) eq $_[1];
 }
+
+main();
