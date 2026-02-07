@@ -256,7 +256,7 @@
                         </xsl:when>
                         <!-- Include the head given -->
                         <xsl:otherwise>
-                            <xsl:apply-templates mode="toc-head"/>
+                            <xsl:apply-templates mode="toc-head" select="f:strip-corr-elements(.)"/>
                             <xsl:if test="following-sibling::head">
                                 <xsl:text> </xsl:text>
                             </xsl:if>
@@ -961,7 +961,7 @@
     </xd:doc>
 
     <!-- collect footnotes in a separate section, optionally divided by division -->
-    <xsl:template match="divGen[@type='Footnotes' or @type='footnotes']">
+    <xsl:template match="divGen[@type=('Footnotes', 'footnotes')]">
         <div class="div1 notes">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <h2 class="main"><xsl:value-of select="f:message('msgNotes')"/></h2>
