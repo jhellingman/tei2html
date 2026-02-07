@@ -36,6 +36,7 @@
     </xsl:template>
 
 
+    <!-- Remove TEIform attributes as they are TEI-specific metadata not needed in output -->
     <xsl:template match="@TEIform" mode="#all"/>
 
 
@@ -57,9 +58,16 @@
         <xsl:sequence select="$note/@place = 'margin' or $note/@type = 'margin'"/>
     </xsl:function>
 
+
+    <xsl:function name="f:has-preceding-margin-note" as="xs:boolean">
+        <xsl:param name="node" as="element()"/>
+        <xsl:sequence select="boolean($node/preceding-sibling::node()[not(self::text()[normalize-space()=''])][1]/self::note[f:is-margin-note(.)])"/>
+    </xsl:function>
+
+
     <!-- Consecutive marginal notes should be combined into a single marginal note. -->
     <xsl:template match="note[f:is-margin-note(.)]">
-        <xsl:if test="not(preceding-sibling::node()[not(self::text()[normalize-space()=''])][1]/self::note[f:is-margin-note(.)])">
+        <xsl:if test="not(f:has-preceding-margin-note(.))">
             <xsl:variable name="siblings" select="(., following-sibling::node())"/>
             <xsl:variable name="notes">
                 <xsl:iterate select="$siblings">
@@ -97,11 +105,12 @@
         </xsl:if>
     </xsl:template>
 
+
     <!-- Suppress individual notes that are merged -->
-    <xsl:template match="note[f:is-margin-note(.)][preceding-sibling::node()[not(self::text()[normalize-space()=''])][1]/self::note[f:is-margin-note(.)]]" priority="1"/>
+    <xsl:template match="note[f:is-margin-note(.)][f:has-preceding-margin-note(.)]" priority="1"/>
+
 
     <!-- Two consecutive "phantom"-elements can be merged -->
-
     <xsl:template match="ab[@type='phantom']" mode="#all">
         <xsl:variable name="following" select="following-sibling::node()[1]"/>
         <xsl:variable name="preceding" select="preceding-sibling::node()[1]"/>
