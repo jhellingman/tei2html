@@ -20,9 +20,22 @@ if ($makeHtml == 0 && $makeMml == 0 && $makePng == 0) {
     $makeSvg = 1;
 }
 
-sub listRecursively($);
+main();
 
-sub listRecursively($) {
+sub main() {
+    my $file = $ARGV[0];
+
+    if (!defined $file) {
+        $file = ".";
+    }
+    if (-d $file) {
+        listRecursively($file);
+    } else {
+        handleFile($file);
+    }
+}
+
+sub listRecursively {
     my ($directory) = @_;
     my @files = (  );
 
@@ -45,7 +58,7 @@ sub listRecursively($) {
     }
 }
 
-sub handleFile($) {
+sub handleFile {
     my ($file) = @_;
     if ($file =~ m/^(.*)\.tex$/) {
         my $base = basename($file, '.tex');
@@ -77,23 +90,6 @@ sub handleFile($) {
     }
 }
 
-
-sub startsWith($) {
+sub startsWith {
     return substr($_[0], 0, length($_[1])) eq $_[1];
 }
-
-
-sub main() {
-    my $file = $ARGV[0];
-
-    if (!defined $file) {
-        $file = ".";
-    }
-    if (-d $file) {
-        listRecursively($file);
-    } else {
-        handleFile($file);
-    }
-}
-
-main();
