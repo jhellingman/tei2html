@@ -28,6 +28,7 @@ my $errorCount = 0;
 my $totalOriginalSize = 0;
 my $totalResultSize = 0;
 my $imagesConverted = 0;
+my $imagesReduced = 0;
 
 my $verbose = 0;
 my $help = 0;
@@ -46,34 +47,44 @@ if ($help == 1) {
     exit;
 }
 
-sub list_recursively($);
+
+sub main {
+    my $directory = $ARGV[0];
+    if (not defined $directory) {
+        $directory = ".";
+    }
+
+    list_recursively($directory);
+
+    if ($verbose != 0) {
+        report();
+    }
+}
 
 
-sub list_recursively($) {
+sub list_recursively {
     my ($directory) = @_;
     my @files = (  );
 
-    unless (opendir(DIRECTORY, $directory)) {
-        print "Cannot open directory $directory!\n";
-        exit;
-    }
+    opendir(my $dirHandle, $directory) or die "Cannot open directory $directory: $!";
 
     # Read the directory, ignoring special entries "." and ".."
-    @files = grep (!/^\.\.?$/, readdir(DIRECTORY));
+    @files = grep (!/^\.\.?$/, readdir($dirHandle));
 
-    closedir(DIRECTORY);
+    closedir($dirHandle);
 
     foreach my $file (@files) {
-        if (-f "$directory\\$file") {
-            handle_file("$directory\\$file");
-        } elsif (-d "$directory\\$file") {
-            list_recursively("$directory\\$file");
+        my $filePath = "$directory/$file";
+        if (-f $filePath) {
+            handle_file($filePath);
+        } elsif (-d $filePath) {
+            list_recursively($filePath);
         }
     }
 }
 
 
-sub handle_file($) {
+sub handle_file {
     my ($file) = @_;
 
     if ($file =~ m/^(.*)\.(png|jpg|jpeg)$/) {
@@ -106,6 +117,7 @@ sub handle_file($) {
 
             if (-s $file > -s $newfile) {
                 move($newfile, $file);
+                $imagesReduced++;
             } else {
                 unlink $newfile;
             }
@@ -115,6 +127,7 @@ sub handle_file($) {
 
             if (-s $file > -s $newfile) {
                 move($newfile, $file);
+                $imagesReduced++;
             } else {
                 unlink $newfile;
             }
@@ -129,31 +142,16 @@ sub handle_file($) {
 }
 
 
-sub report() {
-
-    print "Number of images:          $imagesConverted\n";
+sub report {
+    print "Number of images:            $imagesConverted\n";
+    print "Number of images compressed: $imagesReduced\n"; 
     if ($errorCount > 0) {
-        print "Number of errors:          $errorCount\n";
+        print "Number of errors:            $errorCount\n";
     }
     if ($imagesConverted > 0) {
-        print "Original size of images:   $totalOriginalSize bytes\n";
-        print "New size of images:        $totalResultSize bytes\n";
-        print "Space saved:               " . ($totalOriginalSize - $totalResultSize) . " bytes\n";
-    }
-}
-
-
-sub main() {
-
-    my $directory = $ARGV[0];
-    if (not defined $directory) {
-        $directory = ".";
-    }
-
-    list_recursively($directory);
-
-    if ($verbose != 0) {
-        report();
+        print "Original size of images:     $totalOriginalSize bytes\n";
+        print "New size of images:          $totalResultSize bytes\n";
+        print "Space saved:                 " . ($totalOriginalSize - $totalResultSize) . " bytes\n";
     }
 }
 
