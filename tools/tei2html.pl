@@ -841,10 +841,10 @@ sub makeText {
 
     removeFile($transcribedFile);
 
-    system ("cat $transcribedFile.out $transcribedFile.notes > $concatNotesFile");
+    system ("cat tmp-$transcribedFile.out tmp-$transcribedFile.notes > $concatNotesFile");
 
-    removeFile("$transcribedFile.out");
-    removeFile("$transcribedFile.notes");
+    removeFile("tmp-$transcribedFile.out");
+    removeFile("tmp-$transcribedFile.notes");
 
     my $stripTagsFile = temporaryFile('striptags', 'txt');
     system ("perl $toolsdir/tei2txt.pl " . ($useUnicode == 1 ? '-u ' : '') . " -w $pageWidth $concatNotesFile > $stripTagsFile");

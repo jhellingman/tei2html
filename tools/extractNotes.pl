@@ -10,8 +10,8 @@ use warnings;
 use SgmlSupport qw/getAttrVal/;
 
 my $inputFile = $ARGV[0];
-my $outputFile = $inputFile . '.out';
-my $notesFile = $inputFile . '.notes';
+my $outputFile = 'tmp-' . $inputFile . '.out';
+my $notesFile = 'tmp-' . $inputFile . '.notes';
 
 my $noteNumber = 0;
 my $seqNumber = 0;
