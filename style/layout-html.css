@@ -18,7 +18,7 @@ body {
     font-variant: normal;
     text-transform: none;
     display: inline;
-    font-size: 0.8rem;
+    font-size: 12.8px;
     font-style: normal;
     margin: 0;
     padding: 0;
@@ -31,7 +31,7 @@ body {
 .marginnote {
     font-variant: normal;
     text-transform: none;
-    font-size: 0.8rem;
+    font-size: 12.8px;
     height: 0;
     left: 1%;
     position: absolute;
@@ -43,7 +43,7 @@ body {
 .right-marginnote {
     font-variant: normal;
     text-transform: none;
-    font-size: 0.8rem;
+    font-size: 12.8px;
     height: 0;
     right: 3%;
     position: absolute;
@@ -55,7 +55,7 @@ body {
 .cut-in-left-note {
     font-variant: normal;
     text-transform: none;
-    font-size: 0.8rem;
+    font-size: 12.8px;
     left: 1%;
     float: left;
     text-indent: 0;
@@ -67,7 +67,7 @@ body {
 .cut-in-right-note {
     font-variant: normal;
     text-transform: none;
-    font-size: 0.8rem;
+    font-size: 12.8px;
     left: 1%;
     float: right;
     text-indent: 0;
