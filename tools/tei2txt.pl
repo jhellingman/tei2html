@@ -116,6 +116,14 @@ while (<>) {
         print STDERR "tei2txt: Changed border style to: $borderStyle\n";
     }
 
+    # Deal with thematic breaks
+    $line =~  s/<milestone unit=tb rend=mdashes>/               \&mdash; \&mdash; \&mdash; \&mdash; \&mdash; \&mdash; \&mdash; \&mdash; \&mdash; \&mdash; \&mdash; \&mdash; \&mdash; \&mdash;/;
+    $line =~   s/<milestone unit=tb rend=dashes>/               - - - - - - - - - - - - - - - - - - - - -/;
+    $line =~     s/<milestone unit=tb rend=dots>/               . . . . . . . . . . . . . . . . . . . . ./;
+    $line =~     s/<milestone unit=tb rend=star>/                                   */;
+    $line =~     s/<milestone unit=tb rend=dots>/                               *   *   */;
+    $line =~ s/<milestone unit=tb rend=asterism>/                                   \&asterism;/;
+
     # drop processing instructions from text (replace with nothing).
     $line =~ s/\s*<\?.*?\?>\s*//;
 
@@ -192,13 +200,57 @@ sub cleanFormulas {
 
     # TeX fraction (optionally followed by punctuation):
     $line =~ s/<formula\b(.*?)>\$?([0-9,\{\}]+)([.,:;]?)\$?<\/formula>/cleanTexNumber($2).$3/eg;
-    $line =~ s/<formula\b(.*?)>\$?([0-9,\{\}]+)\\frac\{([0-9,\{\}]+)}\{([0-9,\{\}]+)}([.,:;]?)\$?<\/formula>/cleanTexNumber($2).'-'.cleanTexNumber($3).'\/'.cleanTexNumber($4).$5/eg;
-    $line =~ s/<formula\b(.*?)>\$?\\frac\{([0-9,\{\}]+)}\{([0-9,\{\}]+)}([.,:;]?)\$?<\/formula>/cleanTexNumber($2).'\/'.cleanTexNumber($3).$4/eg;
+    $line =~ s/<formula\b(.*?)>\$?([0-9,\{\}]+)\\frac\{([0-9,\{\}]+)}\{([0-9,\{\}]+)}([.,:;]?)\$?<\/formula>/cleanTeXNumberWithFraction($2, $3, $4).$5/eg;
+    $line =~ s/<formula\b(.*?)>\$?\\frac\{([0-9,\{\}]+)}\{([0-9,\{\}]+)}([.,:;]?)\$?<\/formula>/cleanTexFraction($2, $3).$4/eg;
 
     # Any other single-line TeX formula: just use dollar signs
     $line =~ s/<formula\b(.*?)>\$?(.*?)([.,:;]?)\$?<\/formula>/\$$2\$$3/g;
 
     return $line;
+}
+
+sub cleanTeXNumberWithFraction {
+    my $number = shift;
+    my $numerator = shift;
+    my $denominator = shift;
+
+    $number = cleanTexNumber($number);
+    my $fraction = cleanTexFraction($numerator, $denominator);
+
+    if (isEncodedFraction($fraction)) {
+        return $number . $fraction;
+    }
+    else {
+        return $number . '-' . $fraction;
+    }
+}
+
+sub isEncodedFraction {
+    my $fraction = shift;
+
+    my $newFraction = '';
+    if ($useUnicode == 1) {
+        $newFraction = sgml2utf($fraction);
+    } else {
+        $newFraction = entities2iso88591($fraction);
+    }
+    return length($newFraction) == 1;
+}
+
+sub cleanTexFraction {
+    my $numerator = shift;
+    my $denominator = shift;
+
+    $numerator = cleanTexNumber($numerator);
+    $denominator = cleanTexNumber($denominator);
+
+    if ($numerator =~ /^[0-9]$/ and $denominator =~ /^[0-9]+$/) {
+        return '&frac' . $numerator . $denominator . ';';
+    }
+    if ($numerator =~ /^[0-9]+$/ and $denominator =~ /^[0-9]+$/) {
+        return '&frac' . $numerator . '-' . $denominator . ';';
+    }
+    return $numerator . '/' . $denominator;
 }
 
 # Remove the braces from a number, i.e. 1{,}234{,}567 -> 1,234,567
@@ -1092,6 +1144,10 @@ sub entities2iso88591 {
 
     $string =~ s/\&laquo;/«/g;
     $string =~ s/\&raquo;/»/g;
+
+    $string =~ s/\&frac14;/¼/g;
+    $string =~ s/\&frac12;/½/g;
+    $string =~ s/\&frac34;/¾/g;
 
     # remove accented and special letters
     $string =~ s/\&eth;/dh/g;

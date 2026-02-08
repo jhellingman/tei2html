@@ -70,7 +70,7 @@ sub listRecursively {
 #
 # handleImage -- find the dimensions of an image.
 #
-sub handleImage($) {
+sub handleImage {
     my $imageFile = shift;
 
     my $imagePath = handlePath($imageFile, "images");
@@ -91,7 +91,7 @@ sub handleImage($) {
 #
 # handleMP3 -- find some information of an MP3 file.
 #
-sub handleMP3($) {
+sub handleMP3 {
     my $mp3File = shift;
 
     my $mp3Path = handlePath($mp3File, "music");
@@ -108,7 +108,7 @@ sub handleMP3($) {
 }
 
 
-sub handlePath($) {
+sub handlePath {
     my $imageFile = shift;
     my $defaultPath = shift;
     my $imagePath;
@@ -124,7 +124,7 @@ sub handlePath($) {
 }
 
 
-sub getFileDate($) {
+sub getFileDate {
     my $file = shift;
 
     my ($dev, $ino, $mode, $nlink, $uid, $gid, $rdev, $statFileSize, $atime, $mtime, $ctime, $blksize, $blocks) = stat($file);
@@ -138,7 +138,7 @@ sub getFileDate($) {
 #
 # dropPath -- drop the first $n levels from a directory path.
 #
-sub dropPath($$) {
+sub dropPath {
     my $path = shift;
     my $n = shift;
 

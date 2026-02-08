@@ -9,13 +9,12 @@ if (!defined $ARGV[0]) {
 }
 my $inputFile = $ARGV[0];
 
-main();
 
 sub main {
-    open(INPUTFILE, $inputFile) || die("Could not open $inputFile");
+    open(my $fileHandle, '<', $inputFile) || die("Could not open $inputFile: $!");
 
     my $mode = 0;
-    while (<INPUTFILE>) {
+    while (<fileHandle>) {
         my $line = $_;
 
         if ($line =~ m/\[crossword\]/) {
@@ -50,4 +49,8 @@ sub main {
 
         print $line;
     }
+
+    close $fileHandle;
 }
+
+main();

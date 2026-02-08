@@ -5,11 +5,11 @@ use warnings;
 
 my $inputFile = $ARGV[0];
 
-open(INPUTFILE, $inputFile) || die("Could not open $inputFile");
+open(my $fileHandle, '<', $inputFile) || die("Could not open $inputFile: $!");
 
 my $lineNumber = 0;
 
-while (<INPUTFILE>) {
+while (<$fileHandle>) {
     my $remainder = $_;
     $lineNumber++;
     my $column = 0;
@@ -30,3 +30,5 @@ while (<INPUTFILE>) {
     }
     print $remainder;
 }
+
+close $fileHandle;

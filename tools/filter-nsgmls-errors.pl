@@ -7,15 +7,15 @@ use warnings;
 
 my $inputFile = $ARGV[0];
 
-open(INPUTFILE, $inputFile) || die("Could not open $inputFile");
+open(my $fileHandle, '<', $inputFile) || die("Could not open $inputFile: $!");
 
 # print STDERR "Filter output of NSGMLS in $inputFile\n";
 
 my @lines = ();
-while (<INPUTFILE>) {
+while (<$fileHandle>) {
     push (@lines, $_);
 }
-close (INPUTFILE);
+close ($fileHandle);
 
 my %undefinedElements;
 my %nonExistentIDs;

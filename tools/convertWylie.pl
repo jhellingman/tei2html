@@ -18,14 +18,12 @@ my $wl = Lingua::BO::Wylie->new();
 
 my $pageNumber = 0;
 
-main();
-
 sub main {
     my $file = $ARGV[0];
 
-    open(INPUTFILE, $file) || die("Could not open input file $file");
+    open(my $fileHandle, '<', $file) || die("Could not open input file $file: $!");
 
-    while (<INPUTFILE>) {
+    while (<$fileHandle>) {
         print handleLine($_);
 
         if ($_ =~ m/(<pb\b(.*?)>)/) {
@@ -34,17 +32,16 @@ sub main {
             $DEBUG && print STDERR "Page $pageNumber\n";
         }
     }
-
-    close INPUTFILE;
+    close $fileHandle;
 }
 
-sub handleLine($) {
+sub handleLine {
     my $line = shift;
     $line =~ s/<BO>(.*?)<\/BO>/convertWylie($1)/ge;
     return $line;
 }
 
-sub convertWylie() {
+sub convertWylie {
     my $wylie = shift;
     $DEBUG && print STDERR "Converting Tibetan: $wylie\n";
     my $unicode = $wl->from_wylie($wylie);
@@ -60,3 +57,5 @@ sub test {
 
     print encode_entities($unicode);
 }
+
+main();
