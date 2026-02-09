@@ -1,13 +1,42 @@
-
 package LanguageNames;
 
-require Exporter;
-@ISA = qw(Exporter);
-@EXPORT = qw(getLanguage);
+use strict;
+use warnings;
 
+require Exporter;
+our @ISA = qw(Exporter);
+our @EXPORT = qw(getLanguage);
+
+=head1 NAME
+
+LanguageNames - Mapping of ISO 639 language codes to language names
+
+=head1 SYNOPSIS
+
+    use LanguageNames;
+    my $name = getLanguage('en');  # Returns "English"
+
+=head1 PUBLIC FUNCTIONS
+
+=head2 getLanguage($code)
+
+Returns the language name for a given ISO 639 language code.
+If the code is not found, returns "Language with code $code".
+
+=head1 PRIVATE VARIABLES
+
+=head2 %langNameHash
+
+Internal hash mapping language codes to names. 
+Do not access directly; use C<getLanguage()> instead.
+
+=cut
+
+our %langNameHash;
 
 BEGIN {
     %langNameHash = ();
+    
 
     # ISO 639-1 Language Codes (and variants)
 
@@ -16,7 +45,6 @@ BEGIN {
     $langNameHash{"af"}        = "Afrikaans";
     $langNameHash{"am"}        = "Amharic";
     $langNameHash{"an"}        = "Aragonese";
-    $langNameHash{"ang"}       = "Anglo-Saxon";
     $langNameHash{"ar"}        = "Arabic";
     $langNameHash{"ar-Latn"}   = "Arabic (Latin transcription)";
     $langNameHash{"as"}        = "Assamese";
@@ -24,7 +52,7 @@ BEGIN {
     $langNameHash{"ay"}        = "Aymara";
     $langNameHash{"az"}        = "Azerbaijani";
     $langNameHash{"ba"}        = "Bashkir";
-    $langNameHash{"be"}        = "Byelorussian (Belarusian)";
+    $langNameHash{"be"}        = "Belarusian";
     $langNameHash{"bg"}        = "Bulgarian";
     $langNameHash{"bh"}        = "Bihari";
     $langNameHash{"bi"}        = "Bislama";
@@ -223,7 +251,6 @@ BEGIN {
     $langNameHash{"wo"}        = "Wolof";
     $langNameHash{"xh"}        = "Xhosa";
     $langNameHash{"yi"}        = "Yiddish";
-    $langNameHash{"yi"}        = "Yiddish";
     $langNameHash{"yo"}        = "Yoruba";
     $langNameHash{"zh"}        = "Chinese";
     $langNameHash{"zh-CN"}     = "Chinese (Simplified)";
@@ -235,12 +262,12 @@ BEGIN {
     $langNameHash{"akk"}            = "Akkadian";
     $langNameHash{"akk-Latn"}       = "Akkadian (Latin transcription)";
     $langNameHash{"alq"}            = "Algonquian";
-    $langNameHash{"ang"}            = "Old English";
+    $langNameHash{"ang"}            = "Anglo-Saxon";
     $langNameHash{"bnc"}            = "Bontoc";
     $langNameHash{"bik"}            = "Bicolano or Bikol";
     $langNameHash{"bis"}            = "Bisayan (unspecified)";
-    $langNameHash{"brx"}            = "Bodo langauge";
-    $langNameHash{"brx-Latn"}       = "Bodo langauge (Latin transcription)";
+    $langNameHash{"brx"}            = "Bodo language";
+    $langNameHash{"brx-Latn"}       = "Bodo language (Latin transcription)";
     $langNameHash{"ceb"}            = "Cebuano";
     $langNameHash{"com"}            = "Comanche";
     $langNameHash{"crb"}            = "Chavacano, Chabacano or Zamboangue&ntilde;o";
@@ -315,3 +342,5 @@ sub getLanguage($) {
     }
     return $language;
 }
+
+1;
