@@ -4,7 +4,8 @@ use strict;
 use warnings;
 
 use Getopt::Long;
-use SgmlSupport qw/sgml2utf utf2sgml pgdp2sgml/;
+use PgdpSupport qw/pgdp2sgml/;
+use SgmlSupport qw/sgml2utf utf2sgml/;
 use HTML::Entities;
 
 my $ascii = 0;          # Input file is ascii.

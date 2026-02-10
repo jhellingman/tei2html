@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use HTML::Entities;
 use Getopt::Long;
-use SgmlSupport qw/pgdp2sgml/;
+use PgdpSupport qw/pgdp2sgml/;
 
 my $useExtensions = 0;
 my $mindTranscriptions = 0;
