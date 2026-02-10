@@ -14,6 +14,24 @@ our $VERSION = '1.00';
 our @ISA = qw(Exporter);
 our @EXPORT = qw(getAttrVal sgml2utf sgml2utf_html utf2sgml utf2entities utf2numericEntities pgdp2sgml translateEntity handlePgdpAccents);
 
+=head1 NAME
+
+SgmlSupport - Convert between SGML entities and Unicode characters
+
+=head1 SYNOPSIS
+
+  use SgmlSupport;
+  
+  my $utf8 = sgml2utf('&aacute;');  # Returns: á
+  my $html = sgml2utf_html('&lt;');  # Returns: &lt;
+
+=head1 FUNCTIONS
+
+=head2 sgml2utf($string)
+
+Converts SGML entities to UTF-8 characters.
+
+=cut
 
 our %ent;
 our %reverse;
@@ -31,7 +49,7 @@ sub getAttrVal {
     my $attrName = shift;
     my $attrs = shift;
 
-    my $escapedAttrName = quotemeta(attrName);
+    my $escapedAttrName = quotemeta($attrName);
     if ($attrs =~ /$escapedAttrName\s*=\s*([\w.-]+)/i) {
         return $1;
     } elsif ($attrs =~ /$escapedAttrName\s*=\s*\"(.*?)\"/i) {
