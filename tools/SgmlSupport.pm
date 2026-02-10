@@ -24,34 +24,20 @@ our %reverse;
 #   getAttrVal($attrName, $attrs)
 # Parameters:
 #   $attrName: the name of which the attribute value is required.
-#   $attrs: string with SGML style attributes:  A=abc B="test" C="aap"
+#   $attrs: string with SGML style attributes: A=abc B="test" C="aap"
 #           empty string when not present.
 
 sub getAttrVal {
     my $attrName = shift;
     my $attrs = shift;
 
-    if ($attrs =~ /$attrName\s*=\s*([\w.-]+)/i) {
+    my $escapedAttrName = quotemeta(attrName);
+    if ($attrs =~ /$escapedAttrName\s*=\s*([\w.-]+)/i) {
         return $1;
-    } elsif ($attrs =~ /$attrName\s*=\s*\"(.*?)\"/i) {
+    } elsif ($attrs =~ /$escapedAttrName\s*=\s*\"(.*?)\"/i) {
         return $1;
     }
     return '';
-}
-
-sub utf2chr {
-    my $string = shift;
-
-    my @chars = split(//, $string);
-    foreach (@chars) {
-        if (ord($_) > 127) {
-            $_ = 'chr(0x' . sprintf('%04X', ord($_)) . ')';
-        }
-        else {
-            $_ = '"' . $_ . '"';
-        }
-    }
-    return join(' . ', @chars);
 }
 
 # Map SGML entities to Unicode in UTF-8
@@ -2831,7 +2817,6 @@ BEGIN {
     foreach my $key (keys %ent) {
         my $nfcValue = NFC($ent{$key});
         if ($ent{$key} ne $nfcValue) {
-            # print STDERR "    \$ent{'$key'}    = " . utf2chr($nfcValue) . ";\n";
             $ent{$key} = $nfcValue;
         }
     }
