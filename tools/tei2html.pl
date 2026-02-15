@@ -350,7 +350,7 @@ sub processFile {
     my $includedXmlFilename = temporaryFile("inclusions", "xml");
     includeXml($xmlFilename, $includedXmlFilename);
 
-    my $preprocessedXmlFilename = temporaryFile("preprocess", "xml");
+    my $preprocessedXmlFilename = $basename . "-preprocessed.xml"; # temporaryFile("preprocess", "xml");
     preprocessXml($includedXmlFilename, $preprocessedXmlFilename);
     removeFile($includedXmlFilename);
 
@@ -373,7 +373,7 @@ sub processFile {
 
     $makeZip == 1 && $pgNumber > 0 && makeZip($basename);
 
-    removeFile($preprocessedXmlFilename);
+    # removeFile($preprocessedXmlFilename);
 
     $clean && clean($basename, $version);
 

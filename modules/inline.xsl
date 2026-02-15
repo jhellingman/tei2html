@@ -1269,4 +1269,10 @@
         <xsl:apply-templates select="corr" mode="stripCorrElements"/>
     </xsl:template>
 
+    <xsl:template match="sic" mode="stripCorrElements">
+        <xsl:apply-templates select="@corr" mode="stripCorrElements"/>
+    </xsl:template>
+
+    <xsl:template match="@sic" mode="stripCorrElements"/>
+
 </xsl:stylesheet>
