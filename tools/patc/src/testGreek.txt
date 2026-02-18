@@ -1,0 +1,14 @@
+
+
+This is a short test
+
+Run with 
+
+.\patc.exe -D -p "..\transcriptions\greek\gr2sgml.pat" < testGreek.txt
+
+Some Greek text:
+
+<GR>krat'ew</GR>
+
+End of test.
+

@@ -105,8 +105,7 @@ static void feedback(void);
 
 /* main */
 
-int main(int argc, char** argv)
-{
+int main(int argc, char** argv) {
   FILE *patfile     = NULL;
   char *patfilename = NULL;
   char *patcdir     = ".;..;\\etc\\patc";
@@ -125,8 +124,8 @@ int main(int argc, char** argv)
 
 #ifdef MSDOS
   /* test our memory structure */
-  if(heapcheck() != _HEAPOK)
-  { fprintf(stderr, "Heapcheck (1) fails\n");
+  if (heapcheck() != _HEAPOK) {
+    fprintf(stderr, "Heapcheck (1) fails\n");
     exit(1);
   }
 #endif
@@ -135,8 +134,8 @@ int main(int argc, char** argv)
   { case 'p' : patfilename = ARGF(); break;
     case 'D' : debug = TRUE; verbose = TRUE; break;
     case 'V' : veryverbose = TRUE;
-	 case 'v' : verbose = TRUE; break;
-	 case 'w' : wait = TRUE; break;
+	case 'v' : verbose = TRUE; break;
+	case 'w' : wait = TRUE; break;
     default  : break;
   }
   ARGEND;
@@ -148,66 +147,72 @@ int main(int argc, char** argv)
 #endif
 
   tmp = getenv("PATCDIR");
-  if(tmp != NULL) patcdir = tmp;
-  if(debug) fprintf(stderr, "PATCDIR=%s\n", patcdir);
+  if (tmp != NULL) patcdir = tmp;
+  if (debug) fprintf(stderr, "PATCDIR=%s\n", patcdir);
 
-  if(argc < 1) usage(); /* we need to read from a file */
+  if (patfilename == NULL) usage();
 
-  if(patfilename == NULL) usage();
-
-  if(searchfile(path, patfilename, patcsuffix, patcdir) != NULL)
-  { if(debug) fprintf(stderr, "trying to open pattern file %s\n", path); 
+  if (searchfile(path, patfilename, patcsuffix, patcdir) != NULL) {
+    if(debug) fprintf(stderr, "trying to open pattern file %s\n", path); 
     patfile = fopen(path, "r");
   }
-  if(patfile == NULL)
-  { fprintf(stderr, "%s: can't open pattern file %s\n", progname, patfilename);
+  if (patfile == NULL) {
+    fprintf(stderr, "%s: can't open pattern file %s\n", progname, patfilename);
     exit(2);
   }
   parsetables(patfile, patfilename);
-  if(debug) fprintf(stderr, "pattern file read\n");
+  if (debug) fprintf(stderr, "pattern file read\n");
   fclose(patfile);
 
-  if(argc >= 1)
-  { infilename = argv[0];
+  if (argc >= 1) { 
+    infilename = argv[0];
     infile = fopen(infilename, "r");
-    if(infile == NULL)
-    { fprintf(stderr, "%s: can't open %s\n", progname, infilename);
+    if (infile == NULL) { 
+      fprintf(stderr, "%s: can't open %s\n", progname, infilename);
       exit(2);
     }
+  } else {
+    infilename = "stdin";
+    infile = stdin;
   }
-  if(verbose) fprintf(stderr, "reading from %s\n", infilename);
 
-  if(argc >= 2)
-  { outfilename = argv[1];
+  if (verbose) fprintf(stderr, "reading from %s\n", infilename);
+
+  if (argc >= 2) {
+    outfilename = argv[1];
     outfile = fopen(outfilename, "w");
-    if(outfile == NULL)
-    { fprintf(stderr, "%s: can't create %s\n", progname, outfilename);
+    if (outfile == NULL) {
+      fprintf(stderr, "%s: can't create %s\n", progname, outfilename);
       exit(2);
     }
+  } else {
+    outfilename = "stdout";
+    outfile = stdout;
   }
-  if(verbose) fprintf(stderr, "writing to %s\n", outfilename);
+
+  if (verbose) fprintf(stderr, "writing to %s\n", outfilename);
 
 #ifdef MSDOS
-  if(heapcheck() != _HEAPOK)
-  { fprintf(stderr, "Heapcheck (2) fails\n");
+  if (heapcheck() != _HEAPOK) {
+    fprintf(stderr, "Heapcheck (2) fails\n");
     exit(1);
   }
 #endif
 
   patc();
 
-  if(argc >= 1) fclose(infile);
-  if(argc >= 2) fclose(outfile);
+  if (argc >= 1) fclose(infile);
+  if (argc >= 2) fclose(outfile);
 
-  if(wait)
-  { fprintf(stderr, "please press ENTER to return to the shell\n");
-	 getchar();
+  if (wait) {
+    fprintf(stderr, "please press ENTER to return to the shell\n");
+    getchar();
   }
   return 0;
 }
 
-static void usage()
-{ fprintf(stderr, "usage: %s [-v] [-p patfile] infile outfile\n", progname);
+static void usage() {
+  fprintf(stderr, "usage: %s [-v] [-p patfile] infile outfile\n", progname);
   exit(1);
 }
 

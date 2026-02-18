@@ -204,3 +204,4 @@ schematron/validation-report.html
 schematron/StoicsEpicureansSceptics.xml
 schematron/StoriesAndFolkloreOfWestCornwall.xml
 schematron/validation-report.xml
+*.o
