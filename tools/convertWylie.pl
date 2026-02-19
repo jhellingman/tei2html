@@ -1,3 +1,4 @@
+# convertWylie.pl -- convert Tibetan in Wylie notation to Unicode.
 
 use strict;
 use warnings;
@@ -19,9 +20,14 @@ my $wl = Lingua::BO::Wylie->new();
 my $pageNumber = 0;
 
 sub main {
-    my $file = $ARGV[0];
+    my $inputFile = $ARGV[0];
+    my $fileHandle;
 
-    open(my $fileHandle, '<', $file) || die("Could not open input file $file: $!");
+    if (defined $inputFile) {
+        open($fileHandle, '<', $inputFile) || die("Could not open $inputFile: $!");
+    } else {
+        $fileHandle = \*STDIN;
+    }
 
     while (<$fileHandle>) {
         print handleLine($_);
@@ -32,7 +38,10 @@ sub main {
             $DEBUG && print STDERR "Page $pageNumber\n";
         }
     }
-    close $fileHandle;
+
+    if (defined $inputFile) { 
+        close $fileHandle;
+    }
 }
 
 sub handleLine {

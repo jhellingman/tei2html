@@ -4,19 +4,19 @@ use strict;
 use warnings;
 use SgmlSupport qw/getAttrVal/;
 
-if (!defined $ARGV[0]) {
-    die "Usage: convertCrossWord.pl <filename>"
-}
 my $inputFile = $ARGV[0];
+my $fileHandle;
 
-main();
+if (defined $inputFile) {
+    open($fileHandle, '<', $inputFile) || die("Could not open $inputFile: $!");
+} else {
+    $fileHandle = \*STDIN;
+}
 
 sub main {
-    open(INPUTFILE, $inputFile) || die("Could not open $inputFile");
-
     my $mode = 0;
     my $previousLine = "";
-    while (<INPUTFILE>) {
+    while (<$fileHandle>) {
         my $line = $_;
 
         if ($line =~ m/\[crossword\]/) {
@@ -116,5 +116,11 @@ sub trim() {
     $string =~ s/^\s+//;
     $string =~ s/\s+$//;
     return $string;
+}
+
+main();
+
+if (defined $inputFile) { 
+    close $fileHandle;
 }
 

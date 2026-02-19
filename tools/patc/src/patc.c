@@ -1,26 +1,10 @@
 /* patc.c -- pattern processor
- * Copyright 1996, 1998 Jeroen Hellingman
- *
- * History:
- *   04-MAY-1998 recompiled on Mac (JH)
- *   26-JUL-1996 completely rewritten search for files (JH)
- *   06-JAN-1996 Removed free() in try_open() for debugging purposes (JH)
- *   31-DEC-1995 Added exit on allocation error (JH)
- *   30-DEC-1995 Added heapcheck (JH)
- *   23-DEC-1995 Further digging into stack-problems, made parser more
- *               robust, and added feedback dots. (JH)
- *   16-DEC-1995 Increased stack-size for Borland C, made most functions
- *               static, and made some big arrays static as to avoid
- *               using too much stack. (JH)
- *
- * Known problems:
- *   06-JAN-1995 Occasionally gets stuck because of a corrupted heap (JH)
- *   23-DEC-1995 Quickly runs out of stack on MS-DOS (4DOS) (JH)
+ * Copyright 1996-2026 Jeroen Hellingman
  */
 
 char *progname  = "patc";
-char *version   = "v1.2.9 04-MAY-1998";
-char *copyright = "Copyright 1996, 1998 Jeroen Hellingman";
+char *version   = "v1.3.0 2026-02-19";
+char *copyright = "Copyright 1996-2026 Jeroen Hellingman";
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -58,9 +42,10 @@ char *copyright = "Copyright 1996, 1998 Jeroen Hellingman";
 
 /* data types */
 
-typedef struct patterntree
-{ PSTree *t;      /* pattern tree for this node */
-  int     r;      /* restrictive or not? */
+typedef struct patterntree 
+{ 
+  PSTree *t;      /* pattern tree for this node */
+  int     r;      /* restrictive flag: 0 (FALSE) = non-restrictive, 1 (TRUE) = restrictive */
 } patterntree;
 
 /* globals */
@@ -105,7 +90,8 @@ static void feedback(void);
 
 /* main */
 
-int main(int argc, char** argv) {
+int main(int argc, char** argv) 
+{
   FILE *patfile     = NULL;
   char *patfilename = NULL;
   char *patcdir     = ".;..;\\etc\\patc";
@@ -124,26 +110,28 @@ int main(int argc, char** argv) {
 
 #ifdef MSDOS
   /* test our memory structure */
-  if (heapcheck() != _HEAPOK) {
+  if (heapcheck() != _HEAPOK) 
+  {
     fprintf(stderr, "Heapcheck (1) fails\n");
     exit(1);
   }
 #endif
 
-  ARGBEGIN
-  { case 'p' : patfilename = ARGF(); break;
+  ARGBEGIN 
+  { 
+    case 'p' : patfilename = ARGF(); break;
     case 'D' : debug = TRUE; verbose = TRUE; break;
     case 'V' : veryverbose = TRUE;
-	case 'v' : verbose = TRUE; break;
-	case 'w' : wait = TRUE; break;
+	  case 'v' : verbose = TRUE; break;
+	  case 'w' : wait = TRUE; break;
     default  : break;
   }
   ARGEND;
 
-  if(verbose) fprintf(stderr, "%s %s %s\n", progname, version, copyright);
-  if(debug) fputs("debugging mode...\n", stderr);
+  if (verbose) fprintf(stderr, "%s %s %s\n", progname, version, copyright);
+  if (debug) fputs("debugging mode...\n", stderr);
 #ifdef MSDOS
-  if(debug) fprintf(stderr, "%u stack, %ld memory\n", (unsigned)stackavail(), coreleft());
+  if (debug) fprintf(stderr, "%u stack, %ld memory\n", (unsigned)stackavail(), coreleft());
 #endif
 
   tmp = getenv("PATCDIR");
@@ -152,11 +140,13 @@ int main(int argc, char** argv) {
 
   if (patfilename == NULL) usage();
 
-  if (searchfile(path, patfilename, patcsuffix, patcdir) != NULL) {
+  if (searchfile(path, patfilename, patcsuffix, patcdir) != NULL) 
+  {
     if(debug) fprintf(stderr, "trying to open pattern file %s\n", path); 
     patfile = fopen(path, "r");
   }
-  if (patfile == NULL) {
+  if (patfile == NULL) 
+  {
     fprintf(stderr, "%s: can't open pattern file %s\n", progname, patfilename);
     exit(2);
   }
@@ -164,28 +154,36 @@ int main(int argc, char** argv) {
   if (debug) fprintf(stderr, "pattern file read\n");
   fclose(patfile);
 
-  if (argc >= 1) { 
+  if (argc >= 1) 
+  { 
     infilename = argv[0];
     infile = fopen(infilename, "r");
-    if (infile == NULL) { 
+    if (infile == NULL) 
+    { 
       fprintf(stderr, "%s: can't open %s\n", progname, infilename);
       exit(2);
     }
-  } else {
+  } 
+  else 
+  {
     infilename = "stdin";
     infile = stdin;
   }
 
   if (verbose) fprintf(stderr, "reading from %s\n", infilename);
 
-  if (argc >= 2) {
+  if (argc >= 2) 
+  {
     outfilename = argv[1];
     outfile = fopen(outfilename, "w");
-    if (outfile == NULL) {
+    if (outfile == NULL) 
+    {
       fprintf(stderr, "%s: can't create %s\n", progname, outfilename);
       exit(2);
     }
-  } else {
+  } 
+  else 
+  {
     outfilename = "stdout";
     outfile = stdout;
   }
@@ -193,7 +191,8 @@ int main(int argc, char** argv) {
   if (verbose) fprintf(stderr, "writing to %s\n", outfilename);
 
 #ifdef MSDOS
-  if (heapcheck() != _HEAPOK) {
+  if (heapcheck() != _HEAPOK) 
+  {
     fprintf(stderr, "Heapcheck (2) fails\n");
     exit(1);
   }
@@ -204,72 +203,85 @@ int main(int argc, char** argv) {
   if (argc >= 1) fclose(infile);
   if (argc >= 2) fclose(outfile);
 
-  if (wait) {
+  if (wait) 
+  {
     fprintf(stderr, "please press ENTER to return to the shell\n");
     getchar();
   }
   return 0;
 }
 
-static void usage() {
+static void usage() 
+{
   fprintf(stderr, "usage: %s [-v] [-p patfile] infile outfile\n", progname);
   exit(1);
 }
 
 /* parsing functions */
 
-static int readline(char *l, FILE* infile)
-{ int i = 0;
+static int readline(char *l, FILE *infile)
+{
+  int i = 0;
   int c = fgetc(infile);
   sourceline++;
-  while(isspace(c) && c != '\n' && c != EOF)
+  while (isspace(c) && c != '\n' && c != EOF)
     c = fgetc(infile); /* skip whitespace */
-  if(c == '%')
-    while(c != '\n' && c != EOF)
+  if (c == '%')
+    while (c != '\n' && c != EOF)
       c = fgetc(infile); /* skip comments */
-  while(c != '\n' && c != EOF && i < BUFSIZE)
-  { l[i] = (c == EOF) ? '\0' : (int) c;
+  while (c != '\n' && c != EOF && i < BUFSIZE)
+  {
+    l[i] = (c == EOF) ? '\0' : (int)c;
     i++;
     c = getc(infile);
   }
-  l[i] = '\0';    /* NULL-terminate */
+  l[i] = '\0'; /* NULL-terminate */
   return (c != EOF);
 }
 
 static int getword(char *s, char *d)
-{ int i = 0, j = 0;
-  while(isspace(s[i]) && s[i] != '\0')
+{
+  int i = 0, j = 0;
+  while (isspace(s[i]) && s[i] != '\0')
     i++;
-  while(isalnum(s[i]))
-  { d[j] = s[i];
-    j++; i++;
+  while (isalnum(s[i]))
+  {
+    d[j] = s[i];
+    j++;
+    i++;
   }
   d[j] = '\0';
   return i;
 }
 
 static int getquotedstring(const char *s, char *d)
-{ int i = 0;  /* no of chars read in source */
-  int j = 0;  /* no of chars inserted in destination */
-  while(isspace(s[i]) && s[i] != '\0')
+{
+  int i = 0; /* no of chars read in source */
+  int j = 0; /* no of chars inserted in destination */
+  while (isspace(s[i]) && s[i] != '\0')
     i++;
-  if(s[i] == '"')
-  { i++;
-    while(s[i] != '"')
-    { if(s[i] == '\\') /* escape char */
+  if (s[i] == '"')
+  {
+    i++;
+    while (s[i] != '"')
+    {
+      if (s[i] == '\\') /* escape char */
         i += what_escape(&s[i], &d[j]);
       else
-      { d[j] = s[i];
+      {
+        d[j] = s[i];
       }
-      j++; i++;
-      if(s[i] == '\0')
-      { fprintf(stderr, "unmatched quote in line %ld\n", sourceline);
+      j++;
+      i++;
+      if (s[i] == '\0')
+      {
+        fprintf(stderr, "unmatched quote in line %ld\n", sourceline);
         break;
       }
     }
   }
-  d[j] = '\0';    /* NULL-terminate */
-  i++;            /* skip final " */
+  d[j] = '\0'; /* NULL-terminate */
+  i++;         /* skip final " */
   return i;
 }
 
@@ -280,24 +292,28 @@ static int getquotedstring(const char *s, char *d)
 #define UNSIGNED(t) (char)(((t) < 0) ? (t) + 256 : (t))
 
 static int what_escape(const char *s, char *result)
-{ int i = 1;      /* length of escape sequence read */
+{ 
+  int i = 1;      /* length of escape sequence read */
   int ok = TRUE;
   int t = 0;      /* temporary result */
 
   switch(s[1])
-  { case '"':   *result = '"';  break;
+  { 
+    case '"':   *result = '"';  break;
     case '\\':  *result = '\\'; break;
     case 't':   *result = '\t'; break;
     case 'n':   *result = '\n'; break;
     case 'b':   *result = '\b'; break;
     case 'h':   /* hexadecimal */
-      while(i < 3 && ok)
-      { i++;
-        if(s[i]>='0' && s[i]<='9') t = t * 16 + (s[i] - '0');
-        else if(s[i]>='A' && s[i]<='F') t = t * 16 + (s[i] - 'A') + 10;
-        else if(s[i]>='a' && s[i]<='f') t = t * 16 + (s[i] - 'a') + 10;
+      while (i < 3 && ok)
+      { 
+        i++;
+        if (s[i]>='0' && s[i]<='9') t = t * 16 + (s[i] - '0');
+        else if (s[i]>='A' && s[i]<='F') t = t * 16 + (s[i] - 'A') + 10;
+        else if (s[i]>='a' && s[i]<='f') t = t * 16 + (s[i] - 'a') + 10;
         else
-        { if(i==2) /* no number after \h */
+        { 
+          if (i==2) /* no number after \h */
             *result = 'h';
           else /* short number after \h */
             *result = UNSIGNED(t);
@@ -305,14 +321,16 @@ static int what_escape(const char *s, char *result)
           ok = FALSE;
         }
       }
-      if(ok) *result = UNSIGNED(t);
+      if (ok) *result = UNSIGNED(t);
       break;
     case 'd':   /* decimal */
-      while(i < 4 && ok)
-      { i++;
-        if(s[i]>='0' && s[i]<='9') t = t * 10 + (s[i] - '0');
+      while (i < 4 && ok)
+      { 
+        i++;
+        if (s[i]>='0' && s[i]<='9') t = t * 10 + (s[i] - '0');
         else
-        { if(i==2) /* no number after \d */
+        { 
+          if (i==2) /* no number after \d */
             *result = 'd';
           else /* short number after \d */
             *result = UNSIGNED(t);
@@ -320,7 +338,7 @@ static int what_escape(const char *s, char *result)
           ok = FALSE;
         }
       }
-      if(ok) *result = UNSIGNED(t);
+      if (ok) *result = UNSIGNED(t);
       break;
     case '0':    /* try octal interpretation */
     case '1':
@@ -331,20 +349,23 @@ static int what_escape(const char *s, char *result)
     case '6':
     case '7':
       i--;
-      while(i < 3 && ok)
-      { i++;
-        if(s[i]>='0' && s[i]<='7') t = t * 8 + (s[i] - '0');
+      while (i < 3 && ok)
+      { 
+        i++;
+        if (s[i]>='0' && s[i]<='7') t = t * 8 + (s[i] - '0');
         else
-        { if(i==1) /* no number after \ */
+        { 
+          if(i==1) /* no number after \ */
             *result = s[i];
           else /* short number after \ */
-          { *result = UNSIGNED(t);
+          { 
+            *result = UNSIGNED(t);
             i--;
           }
           ok = FALSE;
         }
       }
-      if(ok) *result = UNSIGNED(t);
+      if (ok) *result = UNSIGNED(t);
       break;
     default:
       fprintf(stderr, "unknown escape \\%c in line %ld\n", s[1], sourceline);
@@ -353,7 +374,8 @@ static int what_escape(const char *s, char *result)
 }
 
 static void parsetables(FILE *patfile, char *patfilename)
-{ static char line[BUFSIZE];
+{ 
+  static char line[BUFSIZE];
   static char command[BUFSIZE];
   static char pattern[BUFSIZE];
   static char action[BUFSIZE];
@@ -362,28 +384,33 @@ static void parsetables(FILE *patfile, char *patfilename)
   char notEOF = TRUE;
   int currentpat = 0; /* current patterntree under construction */
 
-  while(notEOF)
-  { notEOF = readline(line, patfile);
+  while (notEOF)
+  { 
+    notEOF = readline(line, patfile);
     pos = 0;
-    switch(line[0])
-    { case '\0':  /* empty line */
+    switch (line[0])
+    { 
+      case '\0':  /* empty line */
        break;
       case '@':   /* command */
         pos++;
         pos += tolower(getword(&line[1], command));
-        if(strcmp(command, "patterns") == 0)
-        { pos += getword(&line[pos], command);
+        if (strcmp(command, "patterns") == 0)
+        { 
+          pos += getword(&line[pos], command);
           currentpat = atoi(command);
           pat[currentpat].r = FALSE;
         }
-        else if(strcmp(command, "rpatterns") == 0)
-        { pos += getword(&line[pos], command);
+        else if (strcmp(command, "rpatterns") == 0)
+        { 
+          pos += getword(&line[pos], command);
           currentpat = atoi(command);
           pat[currentpat].r = TRUE;
         }
-        else if(strcmp(command, "end") == 0) return;
+        else if (strcmp(command, "end") == 0) return;
         else
-        { fprintf(stderr, "Error: unknown command %s in line %ld\n", command, sourceline);
+        { 
+          fprintf(stderr, "Error: unknown command %s in line %ld\n", command, sourceline);
           exit(1);
         }
         break;
@@ -393,8 +420,9 @@ static void parsetables(FILE *patfile, char *patfilename)
         pos += getquotedstring(&line[pos], &action[1]);
         action[0] = command[0];
         tmp = malloc(strlen(action) + 3); /* made one longer than necessary */
-        if(tmp == NULL)
-        { fprintf(stderr, "Error: cannot allocate\n");
+        if (tmp == NULL)
+        { 
+          fprintf(stderr, "Error: cannot allocate\n");
           exit(3);
         }
         strcpy(tmp, action);
@@ -411,39 +439,47 @@ static void parsetables(FILE *patfile, char *patfilename)
 /* main pattern matching loop */
 
 static void patc()
-{ static char ps[PATLEN+1]; /* pattern to be search for */
+{ 
+  static char ps[PATLEN+1]; /* pattern to be search for */
   char *action;             /* action with pattern */
   int len = PATLEN;         /* length of found pattern; part of ps to be read */
   int current = 0;          /* current active patterntree */
   int i, j;                 /* counters */
 
   while(TRUE)
-  { if(veryverbose) feedback();
+  { 
+    if(veryverbose) feedback();
     /* fill pattern */
-    for(i = 0, j = len; j < PATLEN; i++, j++) ps[i] = ps[j];
-    for(i = PATLEN - len; i < PATLEN; i++)
-    { int c = readchar();
+    for (i = 0, j = len; j < PATLEN; i++, j++) ps[i] = ps[j];
+    for (i = PATLEN - len; i < PATLEN; i++)
+    { 
+      int c = readchar();
       ps[i] = (c == EOF) ? '\0' : c;
     }
     ps[PATLEN] = '\0'; /* NULL-terminate */
-    if(ps[0] == '\0') break;
+    if (ps[0] == '\0') break;
 
     /* find action */
 
     action = PSTmatch(pat[current].t, ps, &len);
-    if(len == 0)
-    { if(pat[current].r)   /* restrictive? */
-      { if(verbose)        /* complain */
+    if (len == 0)
+    { 
+      if (pat[current].r)   /* restrictive? */
+      { 
+        if (verbose)        /* complain */
           fprintf(stderr, "Warning: illegal character '%c' near line %ld\n", ps[0], linenumber);
       }
       else /* copy silently */
-      { fputc(ps[0], outfile);
+      { 
+        fputc(ps[0], outfile);
       }
       len = 1;
     }
     else /* do action */
-    { switch(action[0])
-      { case 'p':
+    { 
+      switch(action[0])
+      { 
+        case 'p':
           fputs(&action[1], outfile);
           break;
         case 'c':
@@ -498,16 +534,18 @@ static void patc()
       } /* switch */
     } /* else */
   } /* while */
-  if(current != 0)
+  if (current != 0)
     fprintf(stderr, "Warning: mode = %d at end of file\n", current);
 } /* patc() */
 
 /* special command implementing functions */
 
 static void skiptillchar(char c1)
-{ int c2;
+{ 
+  int c2;
   do
-  { c2 = readchar();
+  { 
+    c2 = readchar();
     if(c2 == EOF) return;
   } while(c2 != c1);
 }
@@ -516,17 +554,20 @@ static void skiptillmatchingbrace()
 /* skip a TeX group enclosed in braces.
  * next brace on input opens the group to skip
  */
-{ int i = 1;
+{ 
+  int i = 1;
   int c;
   do
-  { c = readchar();
-    if(c == EOF) return;
+  { 
+    c = readchar();
+    if (c == EOF) return;
   } while(c != '{');
-  while(i > 0)
-  { c = readchar();
-    if(c == '{') i++;
-    if(c == '}') i--;
-    if(c == EOF) return;
+  while (i > 0)
+  { 
+    c = readchar();
+    if (c == '{') i++;
+    if (c == '}') i--;
+    if (c == EOF) return;
   }
 }
 
@@ -534,13 +575,17 @@ static void copytexcommand()
 /* copy TeX commmand, including preceding \
  * this will work in plain TeX and LaTeX
  */
-{ int c = readchar();
-  if(c == '\\')
-  { fputc(c, outfile);
+{ 
+  int c = readchar();
+  if (c == '\\')
+  { 
+    fputc(c, outfile);
     c = readchar();
-    if(isalpha(c))
-    { while(isalpha(c))
-      { fputc(c, outfile);
+    if (isalpha(c))
+    { 
+      while (isalpha(c))
+      { 
+        fputc(c, outfile);
         c = readchar();
       }
       unreadchar(c);
@@ -556,12 +601,16 @@ static void skiptexcommand()
 /* skip TeX commmand, including preceding \
  * this will work in plain TeX and LaTeX
  */
-{ int c = readchar();
-  if(c == '\\')
-  { c = readchar();
-    if(isalpha(c))
-    { while(isalpha(c))
-      { c = readchar();
+{ 
+  int c = readchar();
+  if (c == '\\')
+  { 
+    c = readchar();
+    if (isalpha(c))
+    { 
+      while (isalpha(c))
+      { 
+        c = readchar();
       }
       unreadchar(c);
     }
@@ -571,10 +620,13 @@ static void skiptexcommand()
 }
 
 static void copycomment()
-{ int c = readchar();
-  if(c == '%')
-  { while(c != '\n' && c != EOF)
-    { fputc(c, outfile);
+{ 
+  int c = readchar();
+  if (c == '%')
+  { 
+    while (c != '\n' && c != EOF)
+    { 
+      fputc(c, outfile);
       c = readchar();
     }
     fputc('\n', outfile);
@@ -584,9 +636,11 @@ static void copycomment()
 }
 
 static void skipcomment()
-{ int c = readchar();
-  if(c == '%')
-  { while(c != '\n' && c != EOF) c = readchar();
+{ 
+  int c = readchar();
+  if (c == '%')
+  { 
+    while(c != '\n' && c != EOF) c = readchar();
   }
   else
     unreadchar(c);
@@ -595,9 +649,11 @@ static void skipcomment()
 /* pacifier (give some feedback to the user during processing) */
 
 static void feedback(void)
-{ static int count = 0;
-  if(count == PACIFY)
-  { putc('.', stderr);
+{ 
+  static int count = 0;
+  if (count == PACIFY)
+  { 
+    putc('.', stderr);
     count = 0;
   }
   else count++;
@@ -609,33 +665,39 @@ static void PUSHBACK(char *c)
 /* push the characters in string c back into the inputstream, works
  * with the pair of functions readchar() and unreadchar()
  */
-{ int i = (int)strlen(c)-1;
-  for( ;i >= 0; i--) unreadchar((int)c[i]);
+{ 
+  int i = (int)strlen(c)-1;
+  for ( ;i >= 0; i--) unreadchar((int)c[i]);
 }
 
 static int fbuffer[BUFSIZE];        /* buffer for file operations */
 static int last = 0;                /* last + 1 used in fbuffer */
 
 static int readchar()
-{ int result;
+{ 
+  int result;
 
-  if(last==0) /* niets in buffer */
+  if (last==0) /* niets in buffer */
     result = fgetc(infile);
   else /* pak first uit buffer */
-  { last--;
+  { 
+    last--;
     result = fbuffer[last];
   }
-  if(result == '\n') linenumber++;
+  if (result == '\n') linenumber++;
   return result;
 }
 
 static void unreadchar(int c)
-{ if(last == BUFSIZE)
-  { fprintf(stderr, "%s: push-back file buffer overflow\n", progname);
+{ 
+  if(last == BUFSIZE)
+  { 
+    fprintf(stderr, "%s: push-back file buffer overflow\n", progname);
     exit(1);
   }
   else /* insert after last in buffer */
-  { fbuffer[last] = c;
+  { 
+    fbuffer[last] = c;
     last++;
     if(c == '\n') linenumber--;
   }

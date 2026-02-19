@@ -1501,8 +1501,7 @@ sub convertIntraNotation {
     my $format = shift;
     my $intraFile = temporaryFile('intra', $format);
 
-    my $containsIntralinear = system ("grep -q \"<INTRA\" $filename");
-    if ($containsIntralinear == 0 && $noTranscription == 0) {
+    if (containsTag($filename, '<INTRA') && $noTranscription == 0) {
         trace("Convert <INTRA> notation to standard TEI <ab>-elements...");
         system ("perl $toolsdir/intralinear.pl $filename > $intraFile");
     } else {
@@ -1519,8 +1518,7 @@ sub convertDraughtsNotation {
     my $format = shift;
     my $draughtsFile = temporaryFile('draughts', $format);
 
-    my $containsDraughtsNotation = system ("grep -q \"[DRAUGHTS]\" $filename");
-    if ($containsDraughtsNotation == 0 && $noTranscription == 0) {
+    if (containsTag($filename, '[DRAUGHTS]') && $noTranscription == 0) {
         trace("Convert [DRAUGHTS] notation to standard TEI tables...");
         system ("perl $toolsdir/convertDraughtsDiagram.pl $filename > $draughtsFile");
     } else {
@@ -1563,12 +1561,17 @@ sub transcribe {
         $currentFile = transcribeNotation($currentFile, '<CO>',  'Coptic',                "$patcdir/coptic/co2sgml.pat");
         $currentFile = transcribeNotation($currentFile, '<HG>',  'Hieroglyphs',           "$patcdir/hieroglyphs/hg2sgml.pat");
 
-        my $containsTibetan = system ("grep -q -e \"<BO>\" $currentFile");
-        if ($containsTibetan == 0) {
+        if (containsTibetan($currentFile)) {
             $currentFile = convertWylie($currentFile);
         }
     }
     return $currentFile;
+}
+
+
+sub containsTibetan {
+    my $file = shift;
+    return system ('grep', '-q', '-e', '<BO>', $file) == 0;
 }
 
 
@@ -1632,16 +1635,22 @@ sub transcribeNotation {
     my $name = shift;
     my $patternFile = shift;
 
-    # Check for presence of notation (indicated by a given tag).
-    my $containsNotation = system ("grep -q \"$tag\" $currentFile");
-    if ($containsNotation == 0) {
+    if (containsTag($currentFile, $tag)) {
         my $tmpFile = temporaryFile('notation', 'xml');
 
         trace("Convert $name transcription...");
-        system ("patc -p $patternFile $currentFile $tmpFile");
+        system ('patc', '-p', $patternFile, $currentFile, $tmpFile);
 
         removeFile($currentFile);
         $currentFile = $tmpFile;
     }
     return $currentFile;
+}
+
+
+sub containsTag {
+    my $inputFile = shift;
+    my $tag = shift;
+
+    return system ('grep', '-q', $tag, $inputFile) == 0;
 }

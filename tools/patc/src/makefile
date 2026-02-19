@@ -1,20 +1,15 @@
-# Compiler settings for Windows with GCC
 CC = gcc
 CFLAGS = -Wall -O2
 LDFLAGS = 
+RM = rm -f
 
-# Platform detection and adjustments
 ifeq ($(OS),Windows_NT)
-    RM = del /Q
     TARGET = patc.exe
-    OBJ_EXT = .o
 else
-    RM = rm -f
     TARGET = patc
-    OBJ_EXT = .o
 endif
 
-objects = patc$(OBJ_EXT) pstree$(OBJ_EXT) searchfile$(OBJ_EXT)
+objects = patc.o pstree.o searchfile.o
 
 all: $(TARGET)
 
@@ -22,13 +17,13 @@ $(TARGET): $(objects)
 	$(CC) $(CFLAGS) -o $(TARGET) $(objects) $(LDFLAGS)
 
 # file dependencies:
-patc$(OBJ_EXT)       : patc.c pstree.h searchfile.h
+patc.o       : patc.c pstree.h searchfile.h
 	$(CC) $(CFLAGS) -c patc.c
 
-pstree$(OBJ_EXT)     : pstree.c pstree.h
+pstree.o     : pstree.c pstree.h
 	$(CC) $(CFLAGS) -c pstree.c
 
-searchfile$(OBJ_EXT) : searchfile.h searchfile.c
+searchfile.o : searchfile.h searchfile.c
 	$(CC) $(CFLAGS) -c searchfile.c
 
 clean :

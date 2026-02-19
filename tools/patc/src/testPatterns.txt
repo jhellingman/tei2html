@@ -1,0 +1,19 @@
+
+
+This is a short test
+
+Run with 
+
+cat testPatterns.txt | .\patc.exe -D -p "..\transcriptions\greek\gr2sgml.pat" | .\patc.exe -D -p "..\transcriptions\indic\dn2latn.pat" > out.txt
+ 
+
+Some Greek text:
+
+<GR>krat'ew</GR>
+
+Some Devanagari text:
+
+<HI>saba .tiika hai/</HI>
+
+End of test.
+
