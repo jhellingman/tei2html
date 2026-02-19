@@ -3,9 +3,14 @@
 use strict;
 use warnings;
 
-my $inputFile = $ARGV[0];
+my $file = shift @ARGV;
 
-open(my $fileHandle, '<', $inputFile) || die("Could not open $inputFile: $!");
+my $fileHandle;
+if (defined $file) {
+    open($fileHandle, '<', $file) or die "Could not open '$file': $!";
+} else {
+    $fileHandle = *STDIN;
+}
 
 my $lineNumber = 0;
 
@@ -31,4 +36,6 @@ while (<$fileHandle>) {
     print $remainder;
 }
 
-close $fileHandle;
+if (defined $file) { 
+    close $fileHandle;
+}

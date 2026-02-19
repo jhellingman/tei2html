@@ -19,8 +19,6 @@ GetOptions(
     'x' => \$useXml
     );
 
-main();
-
 sub main {
     my $file = shift @ARGV;
 
@@ -59,7 +57,9 @@ sub main {
         print "\n\n" . handleParagraph($paragraph);
     }
 
-    close $fileHandle;
+    if (defined $file) { 
+        close $fileHandle;
+    }
 }
 
 sub handleParagraph {
@@ -111,3 +111,5 @@ sub keepTranscription {
     
     return "<choice><orig><$code>$trans<\/$code><\/orig><reg type=\"trans\">$clean<\/reg><\/choice>";
 }
+
+main();

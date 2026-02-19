@@ -4,16 +4,16 @@ use strict;
 use warnings;
 use SgmlSupport qw/getAttrVal/;
 
-my $inputFile = $ARGV[0];
-my $fileHandle;
-
-if (defined $inputFile) {
-    open($fileHandle, '<', $inputFile) || die("Could not open $inputFile: $!");
-} else {
-    $fileHandle = \*STDIN;
-}
-
 sub main {
+    my $inputFile = $ARGV[0];
+    my $fileHandle;
+
+    if (defined $inputFile) {
+        open($fileHandle, '<', $inputFile) || die("Could not open $inputFile: $!");
+    } else {
+        $fileHandle = \*STDIN;
+    }
+
     my $mode = 0;
     my $previousLine = "";
     while (<$fileHandle>) {
@@ -50,6 +50,10 @@ sub main {
         } else {
             print $line;
         }
+    }
+
+    if (defined $inputFile) { 
+        close $fileHandle;
     }
 }
 
@@ -119,8 +123,3 @@ sub trim() {
 }
 
 main();
-
-if (defined $inputFile) { 
-    close $fileHandle;
-}
-

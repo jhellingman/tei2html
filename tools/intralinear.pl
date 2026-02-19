@@ -4,50 +4,47 @@ use strict;
 use warnings;
 use SgmlSupport qw/getAttrVal/;
 
-if (!defined $ARGV[0]) {
-    die "Usage: intralinear.pl -x <filename>"
+my $inputFile = shift @ARGV;
+
+my $fileHandle;
+if (defined $file) {
+    open($fileHandle, '<', $inputFile) or die "Could not open '$inputFile': $!";
+} else {
+    $fileHandle = *STDIN;
 }
-my $inputFile = $ARGV[0];
 
+print "\n\n<!-- DO NOT EDIT: DERIVED FILE!!! -->\n\n\n";
 
-sub main {
-    open(my $fileHandle, '<', $inputFile) || die("Could not open $inputFile: $!");
+my @langs = ( 'und', 'en' );
+my $mode = 0;
 
-    print STDERR "Processing $inputFile\n";
+while (<$fileHandle>) {
+    my $line = $_;
 
-    print "\n\n<!-- DO NOT EDIT: DERIVED FILE!!! -->\n\n\n";
-
-    my @langs = ( 'und', 'en' );
-    my $mode = 0;
-
-    while (<$fileHandle>) {
-        my $line = $_;
-
-        if ($line =~ m/<INTRA(.*?)>/) {
-            my $attrs = $1;
-            my $langs = getAttrVal('langs', $attrs);
-            if ($langs ne '') {
-                @langs = split(' ', $langs);
-            }
-            $line = '';
-            $mode = 1;
+    if ($line =~ m/<INTRA(.*?)>/) {
+        my $attrs = $1;
+        my $langs = getAttrVal('langs', $attrs);
+        if ($langs ne '') {
+            @langs = split(' ', $langs);
         }
-
-        if ($line =~ m/<\/INTRA>/) {
-            $line = '';
-            $mode = 0;
-        }
-
-        if ($mode == 1) {
-            $line =~ s/\[\|([^|]+?)\]/\n<ab type=\"intra\"><ab type=\"top\">&nbsp;<\/ab> <ab type=\"bottom\" lang=\"$langs[1]\">$1<\/ab><\/ab>\n/g;
-            $line =~ s/\[([^|]+?)\|\]/\n<ab type=\"intra\"><ab type=\"top\" lang=\"$langs[0]\">$1<\/ab> <ab type=\"bottom\">&nbsp;<\/ab><\/ab>\n/g;
-            $line =~ s/\[([^|]+?)\|([^|]+?)\]/\n<ab type=\"intra\"><ab type=\"top\" lang=\"$langs[0]\">$1<\/ab> <ab type=\"bottom\" lang=\"$langs[1]\">$2<\/ab><\/ab>\n/g;
-        }
-
-        print $line;
+        $line = '';
+        $mode = 1;
     }
 
-    close $fileHandle;
+    if ($line =~ m/<\/INTRA>/) {
+        $line = '';
+        $mode = 0;
+    }
+
+    if ($mode == 1) {
+        $line =~ s/\[\|([^|]+?)\]/\n<ab type=\"intra\"><ab type=\"top\">&nbsp;<\/ab> <ab type=\"bottom\" lang=\"$langs[1]\">$1<\/ab><\/ab>\n/g;
+        $line =~ s/\[([^|]+?)\|\]/\n<ab type=\"intra\"><ab type=\"top\" lang=\"$langs[0]\">$1<\/ab> <ab type=\"bottom\">&nbsp;<\/ab><\/ab>\n/g;
+        $line =~ s/\[([^|]+?)\|([^|]+?)\]/\n<ab type=\"intra\"><ab type=\"top\" lang=\"$langs[0]\">$1<\/ab> <ab type=\"bottom\" lang=\"$langs[1]\">$2<\/ab><\/ab>\n/g;
+    }
+
+    print $line;
 }
 
-main();
+if (defined $file) { 
+    close $fileHandle;
+}

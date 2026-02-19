@@ -1586,7 +1586,6 @@ sub convertWylie {
     return $tmpFile;
 }
 
-
 #
 # addTranscriptions -- add a transcription of Greek or Cyrillic script in choice elements.
 #
