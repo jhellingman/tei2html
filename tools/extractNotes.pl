@@ -1,8 +1,8 @@
 # extractNotes.pl -- extract notes from TEI tagged files
 #
-# Extract occurrences of footnotes in TEI tagged files to a separate foot-note file, with links back to the
-# original note locations. This code depends on valid TEI following a few formatting conventions (i.e. tags 
-# are always on a single line).
+# Extract occurrences of footnotes in TEI tagged files and output the main text
+# to stdout, followed by the extracted notes. This code depends on valid TEI
+# following a few formatting conventions (i.e. tags are always on a single line).
 
 use strict;
 use warnings;
@@ -10,31 +10,29 @@ use warnings;
 use SgmlSupport qw/getAttrVal/;
 
 my $inputFile = $ARGV[0];
-my $outputFile = 'tmp-' . $inputFile . '.out';
-my $notesFile = 'tmp-' . $inputFile . '.notes';
+my $fileHandle;
+
+if (defined $inputFile) {
+    open($fileHandle, '<', $inputFile) || die("Could not open $inputFile: $!");
+} else {
+    $fileHandle = \*STDIN;
+}
 
 my $noteNumber = 0;
 my $seqNumber = 0;
 my $pageNumber = 0;
 
-
-open(INPUTFILE, $inputFile) || die("Could not open $inputFile");
-open(OUTPUTFILE, "> $outputFile") || die("Could not open $outputFile");
-open(NOTESFILE, "> $notesFile") || die("Could not open $notesFile");
-
-print NOTESFILE "\n\nNOTES\n\n";
-
-
 my %mapNoteIdToSeqNumber;
+my @collectedNotes;  # Store notes to output at the end
 
-while (<INPUTFILE>) {
+while (<$fileHandle>) {
     my $line = $_;
     my $remainder = $line;
 
     # Skip TeiHeader;
     if ($remainder =~ m/<(teiHeader\b.*?)>/) {
         while ($remainder !~ m/<\/teiHeader>/) {
-            $remainder = <INPUTFILE>;
+            $remainder = <$fileHandle>;
         }
     }
 
@@ -49,7 +47,7 @@ while (<INPUTFILE>) {
         my $sameAs = getAttrVal('sameAs', $attributes);
         my $id = getAttrVal('id', $attributes);
 
-        print OUTPUTFILE $beforeNote;
+        print $beforeNote;
 
         # match the last <pb> tag before the note
         if ($beforeNote =~ /.*<(pb\b.*?)>/) {
@@ -85,7 +83,7 @@ while (<INPUTFILE>) {
                 }
             } else {
                 # Get the next line
-                $remainder .= <INPUTFILE>;
+                $remainder .= <$fileHandle>;
             }
         }
 
@@ -97,16 +95,16 @@ while (<INPUTFILE>) {
             # Lookup sequence number of original note.
             my $seqNumber = $mapNoteIdToSeqNumber{$sameAs};
             if (defined $seqNumber) {
-                print OUTPUTFILE "[$mapNoteIdToSeqNumber{$sameAs}]$followingSpace";
+                print "[$mapNoteIdToSeqNumber{$sameAs}]$followingSpace";
             } else {
                 print STDERR "WARNING: Note with id $sameAs not found (assumed to be earlier in the text.)\n";
             }
         } elsif ($notePlace eq 'margin' || $notePlace eq 'left' || $notePlace eq 'right' || $notePlace eq 'cut-in-left' || $notePlace eq 'cut-in-right') {
-            print OUTPUTFILE "[$noteText] ";
+            print "[$noteText] ";
         } else {
             $seqNumber++;
-            print OUTPUTFILE " [$seqNumber]$followingSpace";
-            print NOTESFILE "[$seqNumber] $noteText\n\n";
+            print " [$seqNumber]$followingSpace";
+            push @collectedNotes, "[$seqNumber] $noteText";
 
             if ($id ne '') {
                 # Store sequence number of this note.
@@ -121,5 +119,17 @@ while (<INPUTFILE>) {
         $pageNumber = getAttrVal('n', $tag);
     }
 
-    print OUTPUTFILE $remainder;
+    print $remainder;
+}
+
+# Output the collected notes at the end
+if (@collectedNotes) {
+    print "\n\nNOTES\n\n";
+    foreach my $note (@collectedNotes) {
+        print "$note\n\n";
+    }
+}
+
+if (defined $inputFile) { 
+    close $fileHandle;
 }

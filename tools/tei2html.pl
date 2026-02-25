@@ -837,14 +837,9 @@ sub makeText {
 
     my $concatNotesFile = temporaryFile('concat-notes', 'txt');
 
-    system ("perl $toolsdir/extractNotes.pl $transcribedFile");
+    system ("perl $toolsdir/extractNotes.pl $transcribedFile > $concatNotesFile");
 
     removeFile($transcribedFile);
-
-    system ("cat tmp-$transcribedFile.out tmp-$transcribedFile.notes > $concatNotesFile");
-
-    removeFile("tmp-$transcribedFile.out");
-    removeFile("tmp-$transcribedFile.notes");
 
     my $stripTagsFile = temporaryFile('striptags', 'txt');
     system ("perl $toolsdir/tei2txt.pl " . ($useUnicode == 1 ? '-u ' : '') . " -w $pageWidth $concatNotesFile > $stripTagsFile");
