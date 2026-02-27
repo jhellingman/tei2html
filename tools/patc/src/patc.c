@@ -2,50 +2,43 @@
  * Copyright 1996-2026 Jeroen Hellingman
  */
 
-char *progname  = "patc";
-char *version   = "v1.3.0 2026-02-19";
-char *copyright = "Copyright 1996-2026 Jeroen Hellingman";
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
 #include <assert.h>
+#include <stdbool.h>
 
-#ifdef MSDOS
-  #include <malloc.h>     /* MS-DOS, debug only */
+char *progname  = "patc";
+char *version   = "v1.3.1 2026-02-25";
+char *copyright = "Copyright 1996-2026 Jeroen Hellingman";
+
+/* Platform-specific path separator */
+#ifdef _WIN32
+  #define MAXPATH 256
+  #define DIRSEPARATOR_CHAR     '\\'
+  #define DIRSEPARATOR_STRING   "\\"
 #else
-  #define MAXPATH 128
-#endif
-
-#ifdef MAC
-  #include <console.h>
+  #define MAXPATH 256
+  #define DIRSEPARATOR_CHAR     '/'
+  #define DIRSEPARATOR_STRING   "/"
 #endif
 
 #include "args.h"
 #include "pstree.h"
 #include "searchfile.h"
 
-#ifndef TRUE
-  #define TRUE    (1==1)
-  #define FALSE   (1==0)
-#endif
-
-#define NUMPATS   10 /* number of pattern trees */
-#define PATLEN    50 /* maximum length of pattern */
-#define BUFSIZE  512 /* pushback buffer size (BUFSIZE >= PATLEN) */
-#define PACIFY   500 /* print '.' to stderr after this number of patterns
-                        recognised */
-
-#define DIRSEPARATOR_CHAR     '\\'
-#define DIRSEPARATOR_STRING   "\\"
+/* Constants */
+#define NUMPATS    10 /* number of pattern trees */
+#define PATLEN    256 /* maximum length of pattern - increased from 50 */
+#define BUFSIZE  2048 /* pushback buffer size (BUFSIZE >= PATLEN) - increased from 512 */
+#define PACIFY    500 /* print '.' to stderr after this number of patterns recognised */
 
 /* data types */
-
 typedef struct patterntree 
 { 
   PSTree *t;      /* pattern tree for this node */
-  int     r;      /* restrictive flag: 0 (FALSE) = non-restrictive, 1 (TRUE) = restrictive */
+  bool    r;      /* restrictive flag: false = non-restrictive, true = restrictive */
 } patterntree;
 
 /* globals */
@@ -54,24 +47,15 @@ FILE *infile;
 FILE *outfile;
 patterntree pat[NUMPATS];
 
-char *argv0;
-int  verbose = FALSE;           /* be verbose */
-int  veryverbose = FALSE;       /* be very verbose */
-int  debug = FALSE;             /* debugging mode */
-int  wait = FALSE;              /* wait for return at end */
+char *argv0;                    /* used by definitions in header file */
+bool verbose = false;           /* be verbose */
+bool veryverbose = false;       /* be very verbose */
+bool debug = false;             /* debugging mode */
+bool wait = false;              /* wait for return at end */
 long linenumber = 1;            /* current line in infile */
 long sourceline = 0;            /* current line in patcfile */
 
-int _stklen = 0x7FFF;           /* for Borland C on MS-DOS only */
-
 /* prototypes */
-
-#ifdef OLDCODE
-static FILE *try_fopen(char*, char*, char*, char*);
-static char *add_suffix(char*, char*);
-static char *force_suffix(char*, char*);
-static char *add_path(char*, char*);
-#endif
 
 static void parsetables(FILE *patfile, char *patfilename);
 static void patc(void);
@@ -85,7 +69,7 @@ static void skipcomment(void);
 static int  readchar(void);
 static void unreadchar(int);
 static int  what_escape(const char *s, char *result);
-static void PUSHBACK(char*);
+static void PUSHBACK(char *);
 static void feedback(void);
 
 /* main */
@@ -94,7 +78,7 @@ int main(int argc, char** argv)
 {
   FILE *patfile     = NULL;
   char *patfilename = NULL;
-  char *patcdir     = ".;..;\\etc\\patc";
+  char *patcdir     = ".;..";
   char *patcsuffix  = "pat";
   char *infilename  = "stdin";
   char *outfilename = "stdout";
@@ -104,35 +88,19 @@ int main(int argc, char** argv)
   infile = stdin;
   outfile = stdout;
 
-#ifdef MAC
-	argc = ccommand(&argv);
-#endif
-
-#ifdef MSDOS
-  /* test our memory structure */
-  if (heapcheck() != _HEAPOK) 
-  {
-    fprintf(stderr, "Heapcheck (1) fails\n");
-    exit(1);
-  }
-#endif
-
   ARGBEGIN 
   { 
     case 'p' : patfilename = ARGF(); break;
-    case 'D' : debug = TRUE; verbose = TRUE; break;
-    case 'V' : veryverbose = TRUE;
-	  case 'v' : verbose = TRUE; break;
-	  case 'w' : wait = TRUE; break;
+    case 'D' : debug = true; verbose = true; break;
+    case 'V' : veryverbose = true; /* fall-through */
+    case 'v' : verbose = true; break;
+    case 'w' : wait = true; break;
     default  : break;
   }
   ARGEND;
 
   if (verbose) fprintf(stderr, "%s %s %s\n", progname, version, copyright);
   if (debug) fputs("debugging mode...\n", stderr);
-#ifdef MSDOS
-  if (debug) fprintf(stderr, "%u stack, %ld memory\n", (unsigned)stackavail(), coreleft());
-#endif
 
   tmp = getenv("PATCDIR");
   if (tmp != NULL) patcdir = tmp;
@@ -190,14 +158,6 @@ int main(int argc, char** argv)
 
   if (verbose) fprintf(stderr, "writing to %s\n", outfilename);
 
-#ifdef MSDOS
-  if (heapcheck() != _HEAPOK) 
-  {
-    fprintf(stderr, "Heapcheck (2) fails\n");
-    exit(1);
-  }
-#endif
-
   patc();
 
   if (argc >= 1) fclose(infile);
@@ -229,7 +189,7 @@ static int readline(char *l, FILE *infile)
   if (c == '%')
     while (c != '\n' && c != EOF)
       c = fgetc(infile); /* skip comments */
-  while (c != '\n' && c != EOF && i < BUFSIZE)
+  while (c != '\n' && c != EOF && i < BUFSIZE - 1)
   {
     l[i] = (c == EOF) ? '\0' : (int)c;
     i++;
@@ -286,15 +246,14 @@ static int getquotedstring(const char *s, char *d)
 }
 
 /* Find out what escape sequence is used. If non can be found, we just
-   forget about the backslash. Interprete numbers up to 255/177/FF
-*/
+   forget about the backslash. Interprete numbers up to 255/177/FF */
 
 #define UNSIGNED(t) (char)(((t) < 0) ? (t) + 256 : (t))
 
 static int what_escape(const char *s, char *result)
 { 
   int i = 1;      /* length of escape sequence read */
-  int ok = TRUE;
+  bool ok = true;
   int t = 0;      /* temporary result */
 
   switch(s[1])
@@ -318,7 +277,7 @@ static int what_escape(const char *s, char *result)
           else /* short number after \h */
             *result = UNSIGNED(t);
           i--;
-          ok = FALSE;
+          ok = false;
         }
       }
       if (ok) *result = UNSIGNED(t);
@@ -335,7 +294,7 @@ static int what_escape(const char *s, char *result)
           else /* short number after \d */
             *result = UNSIGNED(t);
           i--;
-          ok = FALSE;
+          ok = false;
         }
       }
       if (ok) *result = UNSIGNED(t);
@@ -362,7 +321,7 @@ static int what_escape(const char *s, char *result)
             *result = UNSIGNED(t);
             i--;
           }
-          ok = FALSE;
+          ok = false;
         }
       }
       if (ok) *result = UNSIGNED(t);
@@ -379,9 +338,9 @@ static void parsetables(FILE *patfile, char *patfilename)
   static char command[BUFSIZE];
   static char pattern[BUFSIZE];
   static char action[BUFSIZE];
-  char *tmp;
+  char *action_copy;
   int pos = 1;
-  char notEOF = TRUE;
+  bool notEOF = true;
   int currentpat = 0; /* current patterntree under construction */
 
   while (notEOF)
@@ -399,13 +358,13 @@ static void parsetables(FILE *patfile, char *patfilename)
         { 
           pos += getword(&line[pos], command);
           currentpat = atoi(command);
-          pat[currentpat].r = FALSE;
+          pat[currentpat].r = false;
         }
         else if (strcmp(command, "rpatterns") == 0)
         { 
           pos += getword(&line[pos], command);
           currentpat = atoi(command);
-          pat[currentpat].r = TRUE;
+          pat[currentpat].r = true;
         }
         else if (strcmp(command, "end") == 0) return;
         else
@@ -419,14 +378,14 @@ static void parsetables(FILE *patfile, char *patfilename)
         pos += getword(&line[pos], command);
         pos += getquotedstring(&line[pos], &action[1]);
         action[0] = command[0];
-        tmp = malloc(strlen(action) + 3); /* made one longer than necessary */
-        if (tmp == NULL)
+        action_copy = malloc(strlen(action) + 1);
+        if (action_copy == NULL)
         { 
           fprintf(stderr, "Error: cannot allocate\n");
           exit(3);
         }
-        strcpy(tmp, action);
-        PSTinsert(&pat[currentpat].t, pattern, tmp);
+        strcpy(action_copy, action);
+        PSTinsert(&pat[currentpat].t, pattern, action_copy);
         break;
       default:
         fprintf(stderr, "Error: illegal line (%ld) '%s' in %s\n",
@@ -446,7 +405,7 @@ static void patc()
   int current = 0;          /* current active patterntree */
   int i, j;                 /* counters */
 
-  while(TRUE)
+  while(true)
   { 
     if(veryverbose) feedback();
     /* fill pattern */
@@ -667,7 +626,7 @@ static void PUSHBACK(char *c)
  */
 { 
   int i = (int)strlen(c)-1;
-  for ( ;i >= 0; i--) unreadchar((int)c[i]);
+  for ( ; i >= 0; i--) unreadchar((int)c[i]);
 }
 
 static int fbuffer[BUFSIZE];        /* buffer for file operations */
@@ -677,9 +636,9 @@ static int readchar()
 { 
   int result;
 
-  if (last==0) /* niets in buffer */
+  if (last==0) /* buffer empty */
     result = fgetc(infile);
-  else /* pak first uit buffer */
+  else /* read first from buffer */
   { 
     last--;
     result = fbuffer[last];
@@ -690,7 +649,7 @@ static int readchar()
 
 static void unreadchar(int c)
 { 
-  if(last == BUFSIZE)
+  if (last == BUFSIZE)
   { 
     fprintf(stderr, "%s: push-back file buffer overflow\n", progname);
     exit(1);
@@ -702,98 +661,5 @@ static void unreadchar(int c)
     if(c == '\n') linenumber--;
   }
 }
-
-
-#ifdef OLDCODE
-
-/* file name functions */
-
-static FILE *try_fopen(char *name, char *suffix, char *path, char *flags)
-{ FILE *result;
-  char *tmp1, *tmp2;
-
-  tmp1 = tmp2 = NULL;
-  result = fopen(name, flags);
-  if(debug) fprintf(stderr, "1. trying to open %s\n", name);
-  if(result == NULL)
-  { tmp1 = add_suffix(name, suffix);
-    result = fopen(tmp1, flags);
-    if(debug) fprintf(stderr, "2. trying to open %s\n", tmp1);
-    if(result == NULL)
-    { tmp2 = add_path(name, path);
-      result = fopen(tmp2, flags);
-      if(debug) fprintf(stderr, "3. trying to open %s\n", tmp2);
-      if(result == NULL)
-      { /* free(tmp2); TODO DEBUG */
-        tmp2 = add_path(tmp1, path);
-        result = fopen(tmp2, flags);
-        if(debug) fprintf(stderr, "4. trying to open %s\n", tmp2);
-      }
-    }
-  }
-  /* if(tmp1 != NULL) free(tmp1); TODO DEBUG */
-  /* if(tmp2 != NULL) free(tmp2); TODO DEBUG */
-  return result;
-}
-
-/* add suffix to name if it has none given */
-
-static char *add_suffix(char* name, char *suffix)
-{ int i;
-  int len0 = strlen(name);
-  int len1 = strlen(suffix);
-  char *result;
-
-  /* seek for a dot, if found we already have a suffix, so return name */
-  for(i=0; i<len0; i++)
-  { if(name[i] == '.') return name;
-  }
-  result = malloc(len0 + len1 + 2);
-  assert(result != NULL);
-  strcpy(result, name);
-  result[len0] = '.'; result[len0+1] = '\0';
-  strcat(result, suffix);
-  return result;
-}
-
-/* add suffix, remove orginal suffix if given */
-
-static char *force_suffix(char* name, char *suffix)
-{ int i;
-  int len0 = strlen(name);
-  int len1 = strlen(suffix);
-  char *result;
-
-  /* seek for dot, if found break */
-  for(i=0; i<len0; i++)
-  { if(name[i] == '.') break;
-  }
-  result = malloc(len0 + len1 + 2);
-  assert(result != NULL);
-  strcpy(result, name);
-  result[i] = '.'; result[i+1] = '\0';
-  strcat(result, suffix);
-  return result;
-}
-
-/* place a path in front of a file name */
-
-static char *add_path(char *filename, char *path)
-{
-  int len1, len2;
-  char *result;
-  if(path == NULL) return filename;
-  len1 = strlen(path);
-  len2 = strlen(filename);
-  result = malloc(len1 + len2 + 2);         /* one for possible '/', one for '\0' */ 
-  assert(result != NULL);
-  strcpy(result, path);
-  if(path[len1-1] != DIRSEPARATOR_CHAR)     /* add backslash if not already there */
-    strcat(result, DIRSEPARATOR_STRING);
-  strcat(result, filename);
-  return result;
-}
-
-#endif /* OLDCODE */
 
 /* end of patc.c */

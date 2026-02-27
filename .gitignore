@@ -205,3 +205,4 @@ schematron/StoicsEpicureansSceptics.xml
 schematron/StoriesAndFolkloreOfWestCornwall.xml
 schematron/validation-report.xml
 *.o
+tools/patc/src/out.txt
