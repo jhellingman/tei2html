@@ -830,7 +830,7 @@ sub makeText {
 
     my $transcribedFile = temporaryFile('transcribe', 'txt');
     if ($useUnicode == 1) {
-        $transcribedFile = transcribe($filename, 1);
+        transcribe($filename, $transcribedFile, 1);
     } else {
         copy($filename, $transcribedFile);
     }
@@ -1154,8 +1154,9 @@ sub runChecks {
     my $intraFile = convertIntraNotation($draughtsFile, $format);
     removeFile($draughtsFile);
 
-    my $transcribedFile = transcribe($intraFile, $noTranscriptionPopups);
-
+    my $transcribedFile = temporaryFile("checks", $format);
+    transcribe($intraFile, $transcribedFile, 1);
+    
     my $positionInfoFilename = temporaryFile("checks", $format);
 
     trace("Adding pos attributes to $inputFile");
@@ -1445,7 +1446,8 @@ sub tei2xml {
     my $intraFile = convertIntraNotation($draughtsFile, 'tei');
     removeFile($draughtsFile);
 
-    my $transcribedFile = transcribe($intraFile, $noTranscriptionPopups);
+    my $transcribedFile = temporaryFile("transcribe", 'tei');
+    transcribe($intraFile, $transcribedFile, $noTranscriptionPopups);
 
     my $nsgmlFile = temporaryFile("checkSgml", "nsgml");
     my $sgmlErrorFile = temporaryFile("checkSgml", "err");
@@ -1526,125 +1528,74 @@ sub convertDraughtsNotation {
 # transcribe -- transcribe foreign scripts in special notations to entities.
 #
 sub transcribe {
-    my $currentFile = shift;
+    my $inFile = shift;
+    my $outFile = shift;
     my $noPopups = shift;
 
-    if ($noTranscription == 0) {
-        if ($noPopups == 0) {
-            $currentFile = addTranscriptions($currentFile);
-        } else {
-            $currentFile = transcribeNotation($currentFile, '<EL>',  'Greek',                       "$patcdir/greek/gr2sgml.pat");
-            $currentFile = transcribeNotation($currentFile, '<GR>',  'Greek (classical)',           "$patcdir/greek/gr2sgml.pat");
-            $currentFile = transcribeNotation($currentFile, '<ALS>', 'Tosk (Southern Albanian)',    "$patcdir/greek/gr2sgml.pat");
-            $currentFile = transcribeNotation($currentFile, '<CY>',  'Cyrillic',                    "$patcdir/cyrillic/cy2sgml.pat");
-            $currentFile = transcribeNotation($currentFile, '<RU>',  'Russian',                     "$patcdir/cyrillic/cy2sgml.pat");
-            $currentFile = transcribeNotation($currentFile, '<UK>',  'Ukrainian',                   "$patcdir/cyrillic/cy2sgml.pat");
-            $currentFile = transcribeNotation($currentFile, '<SR>',  'Serbian',                     "$patcdir/cyrillic/sr2sgml.pat");
-        }
+    my @commands = ();
+    push (@commands, "cat $inFile");
 
-        $currentFile = transcribeNotation($currentFile, '<AR>',  'Arabic',                "$patcdir/arabic/ar2sgml.pat");
-        $currentFile = transcribeNotation($currentFile, '<UR>',  'Urdu',                  "$patcdir/arabic/ur2sgml.pat");
-        $currentFile = transcribeNotation($currentFile, '<FA>',  'Farsi',                 "$patcdir/arabic/ur2sgml.pat");
-        $currentFile = transcribeNotation($currentFile, '<AS>',  'Assamese',              "$patcdir/indic/as2ucs.pat");
-        $currentFile = transcribeNotation($currentFile, '<BN>',  'Bengali',               "$patcdir/indic/bn2ucs.pat");
-        $currentFile = transcribeNotation($currentFile, '<HE>',  'Hebrew',                "$patcdir/hebrew/he2sgml.pat");
-        $currentFile = transcribeNotation($currentFile, '<SA>',  'Sanskrit (Devanagari)', "$patcdir/indic/dn2ucs.pat");
-        $currentFile = transcribeNotation($currentFile, '<HI>',  'Hindi (Devanagari)',    "$patcdir/indic/dn2ucs.pat");
-        $currentFile = transcribeNotation($currentFile, '<TL>',  'Tagalog (Baybayin)',    "$patcdir/tagalog/tagalog.pat");
-        $currentFile = transcribeNotation($currentFile, '<TA>',  'Tamil',                 "$patcdir/indic/ta2ucs.pat");
-        $currentFile = transcribeNotation($currentFile, '<SY>',  'Syriac',                "$patcdir/syriac/sy2sgml.pat");
-        $currentFile = transcribeNotation($currentFile, '<CO>',  'Coptic',                "$patcdir/coptic/co2sgml.pat");
-        $currentFile = transcribeNotation($currentFile, '<HG>',  'Hieroglyphs',           "$patcdir/hieroglyphs/hg2sgml.pat");
+    my $containsGreek = containsGreek($inFile);
+    my $containsCyrillic = containsCyrillic($inFile);
+    my $containsSerbian = containsTag($inFile, '<SR>');
 
-        if (containsTibetan($currentFile)) {
-            $currentFile = convertWylie($currentFile);
-        }
+    if ($noPopups == 0 and needsTranscriptionPopups($inFile)) {
+        push (@commands, "perl $toolsdir/addTrans.pl -x");
+        $containsGreek      and push (@commands, "patc -p $patcdir/greek/grt2sgml.pat");
+        $containsCyrillic   and push (@commands, "patc -p $patcdir/cyrillic/cyt2sgml.pat");
+        $containsSerbian    and push (@commands, "patc -p $patcdir/cyrillic/srt2sgml.pat");
     }
-    return $currentFile;
+    
+    $containsGreek               and push (@commands, "patc -p $patcdir/greek/gr2sgml.pat");       # Greek; Classical Greek; Tosk (Southern Albanian)
+    $containsCyrillic            and push (@commands, "patc -p $patcdir/cyrillic/cy2sgml.pat");    # Russian; Ukrainian
+    $containsSerbian             and push (@commands, "patc -p $patcdir/cyrillic/sr2sgml.pat");    # Serbian
+    containsTag($inFile, '<HE>') and push (@commands, "patc -p $patcdir/hebrew/he2sgml.pat");      # Hebrew
+    containsTag($inFile, '<AR>') and push (@commands, "patc -p $patcdir/arabic/ar2sgml.pat");      # Arabic
+    containsTag($inFile, '<AS>') and push (@commands, "patc -p $patcdir/indic/as2ucs.pat");        # Assamese
+    containsTag($inFile, '<BN>') and push (@commands, "patc -p $patcdir/indic/bn2ucs.pat");        # Bengali
+    containsTag($inFile, '<TL>') and push (@commands, "patc -p $patcdir/tagalog/tagalog.pat");     # Tagalog (Baybayin)
+    containsTag($inFile, '<TA>') and push (@commands, "patc -p $patcdir/indic/ta2ucs.pat");        # Tamil
+    containsTag($inFile, '<SY>') and push (@commands, "patc -p $patcdir/syriac/sy2sgml.pat");      # Syriac
+    containsTag($inFile, '<CO>') and push (@commands, "patc -p $patcdir/coptic/co2sgml.pat");      # Coptic
+    containsTag($inFile, '<HG>') and push (@commands, "patc -p $patcdir/hieroglyphs/hg2sgml.pat"); # Hieroglyphs
+    containsDevanagari($inFile)  and push (@commands, "patc -p $patcdir/indic/dn2ucs.pat");        # Sanskrit (Devanagari); Hindi (Devanagari)
+    containsNastaliq($inFile)    and push (@commands, "patc -p $patcdir/arabic/ur2sgml.pat");      # Urdu; Farsi
+    containsTag($inFile, '<BO>') and push (@commands, "perl $toolsdir/convertWylie.pl");           # Tibetan
+
+    push (@commands, "cat >$outFile");
+
+    my $command = join (" | ", @commands);
+    trace("Executing transcription pipeline:\n$command");
+    system ($command);
 }
-
-
-sub containsTibetan {
-    my $file = shift;
-    return system ('grep', '-q', '-e', '<BO>', $file) == 0;
-}
-
-
-sub convertWylie {
-    my $currentFile = shift;
-    my $tmpFile = temporaryFile('wylie', 'xml');
-
-    trace("Convert Tibetan transcription...");
-    system ("perl $toolsdir/convertWylie.pl $currentFile > $tmpFile");
-
-    removeFile($currentFile);
-    return $tmpFile;
-}
-
-#
-# addTranscriptions -- add a transcription of Greek or Cyrillic script in choice elements.
-#
-sub addTranscriptions {
-    my $currentFile = shift;
-
-    # Check for presence of Greek or Cyrillic
-    my $containsGreek = system ("grep -q -e \"<EL>\\|<GR>\\|<ALS>\\|<CY>\\|<RU>\\|<UK>\\|<RUX>\\|<SR>\" $currentFile");
-    if ($containsGreek == 0) {
-        my $tmpFile1 = temporaryFile('transcribe', 'xml');
-        my $tmpFile2 = temporaryFile('transcribe', 'xml');
-        my $tmpFile3 = temporaryFile('transcribe', 'xml');
-        my $tmpFile4 = temporaryFile('transcribe', 'xml');
-        my $tmpFile5 = temporaryFile('transcribe', 'xml');
-        my $tmpFile6 = temporaryFile('transcribe', 'xml');
-        my $tmpFile7 = temporaryFile('transcribe', 'xml');
-
-        trace("Add a transcription of Greek or Cyrillic script in choice elements...");
-        system ("perl $toolsdir/addTrans.pl -x $currentFile > $tmpFile1");
-        system ("patc -p $patcdir/greek/grt2sgml.pat $tmpFile1 $tmpFile2");
-        system ("patc -p $patcdir/greek/gr2sgml.pat $tmpFile2 $tmpFile3");
-        system ("patc -p $patcdir/cyrillic/cyt2sgml.pat $tmpFile3 $tmpFile4");
-        system ("patc -p $patcdir/cyrillic/cy2sgml.pat $tmpFile4 $tmpFile5");
-        system ("patc -p $patcdir/cyrillic/srt2sgml.pat $tmpFile5 $tmpFile6");
-        system ("patc -p $patcdir/cyrillic/sr2sgml.pat $tmpFile6 $tmpFile7");
-
-        removeFile($tmpFile1);
-        removeFile($tmpFile2);
-        removeFile($tmpFile3);
-        removeFile($tmpFile4);
-        removeFile($tmpFile5);
-        removeFile($tmpFile6);
-        removeFile($currentFile);
-        $currentFile = $tmpFile7;
-    }
-    return $currentFile;
-}
-
-
-#
-# transcribeNotation -- transcribe some specific notation using patc.
-#
-sub transcribeNotation {
-    my $currentFile = shift;
-    my $tag = shift;
-    my $name = shift;
-    my $patternFile = shift;
-
-    if (containsTag($currentFile, $tag)) {
-        my $tmpFile = temporaryFile('notation', 'xml');
-
-        trace("Convert $name transcription...");
-        system ('patc', '-p', $patternFile, $currentFile, $tmpFile);
-
-        removeFile($currentFile);
-        $currentFile = $tmpFile;
-    }
-    return $currentFile;
-}
-
 
 sub containsTag {
     my $inputFile = shift;
     my $tag = shift;
-
     return system ('grep', '-q', $tag, $inputFile) == 0;
+}
+
+sub containsGreek {
+    my $file = shift;
+    return system ('grep', '-q', '-e', "<EL>\\|<GR>\\|<ALS>", $file) == 0;
+}
+
+sub containsCyrillic {
+    my $file = shift;
+    return system ('grep', '-q', '-e', "<CY>\\|<RU>\\|<UK>", $file) == 0;
+}
+
+sub containsDevanagari {
+    my $file = shift;
+    return system ('grep', '-q', '-e', "<SA>\\|<HI>", $file) == 0;
+}
+
+sub containsNastaliq {
+    my $file = shift;
+    return system ('grep', '-q', '-e', "<UR>\\|<FA>", $file) == 0;
+}
+
+sub needsTranscriptionPopups {
+    my $file = shift;
+    return system ('grep', '-q', '-e', "<EL>\\|<GR>\\|<ALS>\\|<CY>\\|<RU>\\|<UK>\\|<RUX>\\|<SR>", $file) == 0;
 }

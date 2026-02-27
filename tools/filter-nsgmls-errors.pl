@@ -5,17 +5,22 @@
 use strict;
 use warnings;
 
-my $inputFile = $ARGV[0];
+my $file = shift @ARGV;
 
-open(my $fileHandle, '<', $inputFile) || die("Could not open $inputFile: $!");
-
-# print STDERR "Filter output of NSGMLS in $inputFile\n";
+my $fileHandle;
+if (defined $file) {
+    open($fileHandle, '<', $file) or die "Could not open '$file': $!";
+} else {
+    $fileHandle = *STDIN;
+}
 
 my @lines = ();
 while (<$fileHandle>) {
     push (@lines, $_);
 }
-close ($fileHandle);
+if (defined $file) { 
+    close $fileHandle;
+}
 
 my %undefinedElements;
 my %nonExistentIDs;

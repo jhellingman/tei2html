@@ -11,7 +11,7 @@ use SgmlSupport qw/getAttrVal/;
 
 # binmode(STDOUT, ":utf8");
 
-my $DEBUG = 1;
+my $DEBUG = 0;
 
 GetOptions('d' => \$DEBUG);
 
