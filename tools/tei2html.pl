@@ -253,10 +253,6 @@ my $TMP_FILE_TEMPLATE = "tmp-XXXXX";
 my $tmpBase = 'tmp';
 my $tmpCount = 0;
 
-# Files
-
-
-
 # Metadata
 
 my $pgNumber = "00000";
@@ -1150,12 +1146,11 @@ sub runChecks {
     }
     trace("Run checks on $filename.");
 
-    my $draughtsFile = convertDraughtsNotation($filename, $format);
-    my $intraFile = convertIntraNotation($draughtsFile, $format);
-    removeFile($draughtsFile);
+    my $notationFile = temporaryFile('notation', 'tei');
+    convertNotations($filename, $notationFile);
 
     my $transcribedFile = temporaryFile("checks", $format);
-    transcribe($intraFile, $transcribedFile, 1);
+    transcribe($notationFile, $transcribedFile, 1);
     
     my $positionInfoFilename = temporaryFile("checks", $format);
 
@@ -1187,12 +1182,8 @@ sub runChecks {
 
     $makeKwic && makeKwic($basename, $xmlFilename);
 
-    if ($filename ne $intraFile) {
-        removeFile($intraFile);
-    }
-    if ($filename ne $transcribedFile) {
-        removeFile($transcribedFile);
-    }
+    removeFile($notationFile);
+    removeFile($transcribedFile);
     removeFile($positionInfoFilename);
     removeFile($xmlFilename);
 }
@@ -1442,15 +1433,14 @@ sub tei2xml {
     trace("Convert Latin-1 characters to entities...");
     system ("patc -p $toolsdir/patc/win2sgml.pat $sgmlFile $entitiesFile");
 
-    my $draughtsFile = convertDraughtsNotation($entitiesFile, 'tei');
-    my $intraFile = convertIntraNotation($draughtsFile, 'tei');
-    removeFile($draughtsFile);
+    my $notationFile = temporaryFile('notation', 'tei');
+    convertNotations($entitiesFile, $notationFile);
 
-    my $transcribedFile = temporaryFile("transcribe", 'tei');
-    transcribe($intraFile, $transcribedFile, $noTranscriptionPopups);
+    my $transcribedFile = temporaryFile('transcribe', 'tei');
+    transcribe($notationFile, $transcribedFile, $noTranscriptionPopups);
 
-    my $nsgmlFile = temporaryFile("checkSgml", "nsgml");
-    my $sgmlErrorFile = temporaryFile("checkSgml", "err");
+    my $nsgmlFile = temporaryFile('checkSgml', "nsgml");
+    my $sgmlErrorFile = temporaryFile('checkSgml', "err");
 
     trace("Check SGML...");
     my $nsgmlresult = system ("$nsgmls -c \"$catalog\" -wall -E100000 -g -f $sgmlErrorFile $transcribedFile > $nsgmlFile");
@@ -1486,43 +1476,31 @@ sub tei2xml {
     removeFile($tmpFile2);
     removeFile($tmpFile1);
     removeFile($entitiesFile);
-    removeFile($intraFile);
+    removeFile($notationFile);
     removeFile($transcribedFile);
 }
 
-#
-# convertIntraNotation -- Convert <INTRA> notation.
-#
-sub convertIntraNotation {
-    my $filename = shift;
-    my $format = shift;
-    my $intraFile = temporaryFile('intra', $format);
 
-    if (containsTag($filename, '<INTRA') && $noTranscription == 0) {
-        trace("Convert <INTRA> notation to standard TEI <ab>-elements...");
-        system ("perl $toolsdir/intralinear.pl $filename > $intraFile");
-    } else {
-        copy($filename, $intraFile);
+sub convertNotations {
+    my $inFile = shift;
+    my $outFile = shift;
+
+    my @commands = ();
+    push (@commands, "cat $inFile");
+
+    if ($noTranscription == 0) {
+        containsTag($inFile, '<INTRA')      and push (@commands, "perl $toolsdir/intralinear.pl");
+        containsTag($inFile, '[DRAUGHTS]')  and push (@commands, "perl $toolsdir/convertDraughtsDiagram.pl");
+        containsTag($inFile, '[crossword]') and push (@commands, "perl $toolsdir/convertCrossWord.pl");
     }
-    return $intraFile;
+
+    push (@commands, "cat >$outFile");
+
+    my $command = join (" | ", @commands);
+    trace("Executing notation pipeline:\n$command");
+    system ($command);
 }
 
-#
-# convertDraughtsNotation -- Convert [DRAUGHTS] notation.
-#
-sub convertDraughtsNotation {
-    my $filename = shift;
-    my $format = shift;
-    my $draughtsFile = temporaryFile('draughts', $format);
-
-    if (containsTag($filename, '[DRAUGHTS]') && $noTranscription == 0) {
-        trace("Convert [DRAUGHTS] notation to standard TEI tables...");
-        system ("perl $toolsdir/convertDraughtsDiagram.pl $filename > $draughtsFile");
-    } else {
-        copy($filename, $draughtsFile);
-    }
-    return $draughtsFile;
-}
 
 #
 # transcribe -- transcribe foreign scripts in special notations to entities.
@@ -1535,32 +1513,34 @@ sub transcribe {
     my @commands = ();
     push (@commands, "cat $inFile");
 
-    my $containsGreek = containsGreek($inFile);
-    my $containsCyrillic = containsCyrillic($inFile);
-    my $containsSerbian = containsTag($inFile, '<SR>');
+    if ($noTranscription == 0) {  
+        my $containsGreek = containsGreek($inFile);
+        my $containsCyrillic = containsCyrillic($inFile);
+        my $containsSerbian = containsTag($inFile, '<SR>');
 
-    if ($noPopups == 0 and needsTranscriptionPopups($inFile)) {
-        push (@commands, "perl $toolsdir/addTrans.pl -x");
-        $containsGreek      and push (@commands, "patc -p $patcdir/greek/grt2sgml.pat");
-        $containsCyrillic   and push (@commands, "patc -p $patcdir/cyrillic/cyt2sgml.pat");
-        $containsSerbian    and push (@commands, "patc -p $patcdir/cyrillic/srt2sgml.pat");
+        if ($noPopups == 0 and needsTranscriptionPopups($inFile)) {
+            push (@commands, "perl $toolsdir/addTrans.pl -x");
+            $containsGreek      and push (@commands, "patc -p $patcdir/greek/grt2sgml.pat");
+            $containsCyrillic   and push (@commands, "patc -p $patcdir/cyrillic/cyt2sgml.pat");
+            $containsSerbian    and push (@commands, "patc -p $patcdir/cyrillic/srt2sgml.pat");
+        }
+        
+        $containsGreek               and push (@commands, "patc -p $patcdir/greek/gr2sgml.pat");       # Greek; Classical Greek; Tosk (Southern Albanian)
+        $containsCyrillic            and push (@commands, "patc -p $patcdir/cyrillic/cy2sgml.pat");    # Russian; Ukrainian
+        $containsSerbian             and push (@commands, "patc -p $patcdir/cyrillic/sr2sgml.pat");    # Serbian
+        containsTag($inFile, '<HE>') and push (@commands, "patc -p $patcdir/hebrew/he2sgml.pat");      # Hebrew
+        containsTag($inFile, '<AR>') and push (@commands, "patc -p $patcdir/arabic/ar2sgml.pat");      # Arabic
+        containsTag($inFile, '<AS>') and push (@commands, "patc -p $patcdir/indic/as2ucs.pat");        # Assamese
+        containsTag($inFile, '<BN>') and push (@commands, "patc -p $patcdir/indic/bn2ucs.pat");        # Bengali
+        containsTag($inFile, '<TL>') and push (@commands, "patc -p $patcdir/tagalog/tagalog.pat");     # Tagalog (Baybayin)
+        containsTag($inFile, '<TA>') and push (@commands, "patc -p $patcdir/indic/ta2ucs.pat");        # Tamil
+        containsTag($inFile, '<SY>') and push (@commands, "patc -p $patcdir/syriac/sy2sgml.pat");      # Syriac
+        containsTag($inFile, '<CO>') and push (@commands, "patc -p $patcdir/coptic/co2sgml.pat");      # Coptic
+        containsTag($inFile, '<HG>') and push (@commands, "patc -p $patcdir/hieroglyphs/hg2sgml.pat"); # Hieroglyphs
+        containsDevanagari($inFile)  and push (@commands, "patc -p $patcdir/indic/dn2ucs.pat");        # Sanskrit (Devanagari); Hindi (Devanagari)
+        containsNastaliq($inFile)    and push (@commands, "patc -p $patcdir/arabic/ur2sgml.pat");      # Urdu; Farsi
+        containsTag($inFile, '<BO>') and push (@commands, "perl $toolsdir/convertWylie.pl");           # Tibetan
     }
-    
-    $containsGreek               and push (@commands, "patc -p $patcdir/greek/gr2sgml.pat");       # Greek; Classical Greek; Tosk (Southern Albanian)
-    $containsCyrillic            and push (@commands, "patc -p $patcdir/cyrillic/cy2sgml.pat");    # Russian; Ukrainian
-    $containsSerbian             and push (@commands, "patc -p $patcdir/cyrillic/sr2sgml.pat");    # Serbian
-    containsTag($inFile, '<HE>') and push (@commands, "patc -p $patcdir/hebrew/he2sgml.pat");      # Hebrew
-    containsTag($inFile, '<AR>') and push (@commands, "patc -p $patcdir/arabic/ar2sgml.pat");      # Arabic
-    containsTag($inFile, '<AS>') and push (@commands, "patc -p $patcdir/indic/as2ucs.pat");        # Assamese
-    containsTag($inFile, '<BN>') and push (@commands, "patc -p $patcdir/indic/bn2ucs.pat");        # Bengali
-    containsTag($inFile, '<TL>') and push (@commands, "patc -p $patcdir/tagalog/tagalog.pat");     # Tagalog (Baybayin)
-    containsTag($inFile, '<TA>') and push (@commands, "patc -p $patcdir/indic/ta2ucs.pat");        # Tamil
-    containsTag($inFile, '<SY>') and push (@commands, "patc -p $patcdir/syriac/sy2sgml.pat");      # Syriac
-    containsTag($inFile, '<CO>') and push (@commands, "patc -p $patcdir/coptic/co2sgml.pat");      # Coptic
-    containsTag($inFile, '<HG>') and push (@commands, "patc -p $patcdir/hieroglyphs/hg2sgml.pat"); # Hieroglyphs
-    containsDevanagari($inFile)  and push (@commands, "patc -p $patcdir/indic/dn2ucs.pat");        # Sanskrit (Devanagari); Hindi (Devanagari)
-    containsNastaliq($inFile)    and push (@commands, "patc -p $patcdir/arabic/ur2sgml.pat");      # Urdu; Farsi
-    containsTag($inFile, '<BO>') and push (@commands, "perl $toolsdir/convertWylie.pl");           # Tibetan
 
     push (@commands, "cat >$outFile");
 
@@ -1570,32 +1550,44 @@ sub transcribe {
 }
 
 sub containsTag {
-    my $inputFile = shift;
-    my $tag = shift;
-    return system ('grep', '-q', $tag, $inputFile) == 0;
+    my ($file, $tag) = @_;
+    open my $fh, '<', $file or die "Cannot open '$file': $!";
+    while (<$fh>) {
+        return 1 if index($_, $tag) >= 0;
+    }
+    return 0;
 }
 
-sub containsGreek {
+sub containsPattern {
+    my ($file, $pattern) = @_;
+    open my $fh, '<', $file or die "Cannot open '$file': $!";
+    while (<$fh>) {
+        return 1 if /$pattern/;
+    }
+    return 0;
+}
+
+sub containsGreek {  
     my $file = shift;
-    return system ('grep', '-q', '-e', "<EL>\\|<GR>\\|<ALS>", $file) == 0;
+    return containsPattern($file, '<EL>|<GR>|<ALS>');
 }
 
 sub containsCyrillic {
     my $file = shift;
-    return system ('grep', '-q', '-e', "<CY>\\|<RU>\\|<UK>", $file) == 0;
+    return containsPattern($file, '<CY>|<RU>|<UK>|<RUX>');
 }
 
 sub containsDevanagari {
     my $file = shift;
-    return system ('grep', '-q', '-e', "<SA>\\|<HI>", $file) == 0;
+    return containsPattern($file, '<SA>|<HI>');
 }
 
 sub containsNastaliq {
     my $file = shift;
-    return system ('grep', '-q', '-e', "<UR>\\|<FA>", $file) == 0;
+    return containsPattern($file, '<UR>|<FA>');
 }
 
 sub needsTranscriptionPopups {
     my $file = shift;
-    return system ('grep', '-q', '-e', "<EL>\\|<GR>\\|<ALS>\\|<CY>\\|<RU>\\|<UK>\\|<RUX>\\|<SR>", $file) == 0;
+    return containsPattern($file, '<EL>|<GR>|<ALS>|<CY>|<RU>|<UK>|<RUX>|<SR>');
 }
