@@ -1349,17 +1349,6 @@ sub copyImages {
     } elsif (-d 'Processed/images') {
         system ('cp -r -u Processed/images ' . $destination);
     }
-
-    # Remove redundant icon images (not used in the ePub)
-    if (-f 'epub/images/book.png') {
-        system ('rm epub/images/book.png');
-    }
-    if (-f 'epub/images/card.png') {
-        system ('rm epub/images/card.png');
-    }
-    if (-f 'epub/images/external.png') {
-        system ('rm epub/images/external.png');
-    }
 }
 
 
@@ -1415,11 +1404,10 @@ sub copyFonts {
 
 
 #
-# tei2xml -- convert a file from SGML TEI to XML, also convert various notations if needed.
+# tei2xml -- convert a file from SGML TEI to XML, also convert various ad-hoc notations if needed.
 #
 sub tei2xml {
-    my $sgmlFile = shift;
-    my $xmlFile = shift;
+    my ($sgmlFile, $xmlFile) = @_;
 
     if ($force == 0 && isNewer($xmlFile, $sgmlFile)) {
         trace("Skip conversion to XML ('$xmlFile' newer than '$sgmlFile').");
@@ -1428,22 +1416,31 @@ sub tei2xml {
 
     trace("Convert SGML file '$sgmlFile' to XML file '$xmlFile'.");
 
-    # Convert Latin-1 characters to entities
-    my $entitiesFile = temporaryFile('entities', 'tei');
-    trace("Convert Latin-1 characters to entities...");
-    system ("patc -p $toolsdir/patc/win2sgml.pat $sgmlFile $entitiesFile");
-
     my $notationFile = temporaryFile('notation', 'tei');
-    convertNotations($entitiesFile, $notationFile);
+    convertNotations($sgmlFile, $notationFile);
 
     my $transcribedFile = temporaryFile('transcribe', 'tei');
     transcribe($notationFile, $transcribedFile, $noTranscriptionPopups);
+
+    checkSgml($transcribedFile, $sgmlFile);
+    convertSgmlToXml($transcribedFile, $xmlFile);     
+    
+    removeFile($notationFile);
+    removeFile($transcribedFile);
+}
+
+#
+# checkSgml -- validate the TEI SGML against the DTD and filter reported issues.
+#
+sub checkSgml {
+    my $inFile = shift;
+    my $sgmlFile = shift;
 
     my $nsgmlFile = temporaryFile('checkSgml', "nsgml");
     my $sgmlErrorFile = temporaryFile('checkSgml', "err");
 
     trace("Check SGML...");
-    my $nsgmlresult = system ("$nsgmls -c \"$catalog\" -wall -E100000 -g -f $sgmlErrorFile $transcribedFile > $nsgmlFile");
+    my $nsgmlresult = system ("$nsgmls -c \"$catalog\" -wall -E100000 -g -f $sgmlErrorFile $inFile > $nsgmlFile");
     if ($nsgmlresult != 0) {
         warning("NSGML found validation errors in $sgmlFile.");
     }
@@ -1451,53 +1448,56 @@ sub tei2xml {
     system ("perl $toolsdir/filter-nsgmls-errors.pl $sgmlErrorFile > $sgmlFile.err");
     system ("cat $sgmlFile.err");
     removeFile($sgmlErrorFile);
+}
 
-    my $tmpFile1 = temporaryFile('hide-entities', 'tei');
-    my $tmpFile2 = temporaryFile('sx', 'xml');
-    my $tmpFile3 = temporaryFile('restore-entities', 'xml');
-    my $tmpFile4 = temporaryFile('ucs', 'xml');
+#
+# convertSgmlToXml -- pipeline to convert TEI SGML to XML. This first hides any entities
+# present using an ad-hoc notation, then calls sx to do the actual convertion, then
+# applies a XSLT stylesheet to correct the case of elements, and finally restores
+# entities and converts the resulting file to Unicode.
+#
+sub convertSgmlToXml {
+    my ($inFile, $outFile) = @_;
 
     trace("Convert SGML to XML...");
 
-    # hide entities for parser
-    system ("sed \"s/\\&/|xxxx|/g\" < $transcribedFile > $tmpFile1");
-    system ("$sx -c \"$catalog\" -E100000 -xlower -xcomment -xempty -xndata -f $tmpFile1.sx.err $tmpFile1 > $tmpFile2");
-    removeFile("$tmpFile1.sx.err");
+    my @commands = ();
+    push (@commands, "sed \"s/\\&/|xxxx|/g\"");
+    push (@commands, "$sx -c \"$catalog\" -E100000 -xlower -xcomment -xempty -xndata -f tmp-sx.err");
+    push (@commands, "$saxon -versionmsg:off - $xsldir/tei2tei.xsl");
+    push (@commands, "sed \"s/|xxxx|/\\&/g\"");
+    push (@commands, "perl $toolsdir/ent2ucs.pl");
+   
+    executeCommandPipeline($inFile, $outFile, @commands);
 
-    # apply proper case to tags.
-    system ("$saxon -versionmsg:off $tmpFile2 $xsldir/tei2tei.xsl > $tmpFile3");
-
-    # restore entities
-    system ("sed \"s/|xxxx|/\\&/g\" < $tmpFile3 > $tmpFile4");
-    system ("perl $toolsdir/ent2ucs.pl $tmpFile4 > $xmlFile");
-
-    removeFile($tmpFile4);
-    removeFile($tmpFile3);
-    removeFile($tmpFile2);
-    removeFile($tmpFile1);
-    removeFile($entitiesFile);
-    removeFile($notationFile);
-    removeFile($transcribedFile);
+    removeFile("tmp-sx.err");
 }
 
 
 sub convertNotations {
-    my $inFile = shift;
-    my $outFile = shift;
+    my ($inFile, $outFile) = @_;
 
     my @commands = ();
-    push (@commands, "cat $inFile");
+
+    push (@commands, "patc -p $toolsdir/patc/win2sgml.pat");
 
     if ($noTranscription == 0) {
         containsTag($inFile, '<INTRA')      and push (@commands, "perl $toolsdir/intralinear.pl");
         containsTag($inFile, '[DRAUGHTS]')  and push (@commands, "perl $toolsdir/convertDraughtsDiagram.pl");
         containsTag($inFile, '[crossword]') and push (@commands, "perl $toolsdir/convertCrossWord.pl");
     }
+    executeCommandPipeline($inFile, $outFile, @commands);
+}
 
+
+sub executeCommandPipeline {
+    my ($inFile, $outFile, @commands) = @_;
+
+    unshift (@commands, "cat $inFile");
     push (@commands, "cat >$outFile");
 
     my $command = join (" | ", @commands);
-    trace("Executing notation pipeline:\n$command");
+    trace("Executing command pipeline:\n$command");
     system ($command);
 }
 
@@ -1506,12 +1506,9 @@ sub convertNotations {
 # transcribe -- transcribe foreign scripts in special notations to entities.
 #
 sub transcribe {
-    my $inFile = shift;
-    my $outFile = shift;
-    my $noPopups = shift;
+    my ($inFile, $outFile, $noPopups) = @_;
 
     my @commands = ();
-    push (@commands, "cat $inFile");
 
     if ($noTranscription == 0) {  
         my $containsGreek = containsGreek($inFile);
@@ -1542,11 +1539,7 @@ sub transcribe {
         containsTag($inFile, '<BO>') and push (@commands, "perl $toolsdir/convertWylie.pl");           # Tibetan
     }
 
-    push (@commands, "cat >$outFile");
-
-    my $command = join (" | ", @commands);
-    trace("Executing transcription pipeline:\n$command");
-    system ($command);
+    executeCommandPipeline($inFile, $outFile, @commands);
 }
 
 sub containsTag {
