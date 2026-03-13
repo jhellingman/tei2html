@@ -12,7 +12,7 @@ my $max_edge   = 720;
 my $resolution = 144;
 my $quality    = 82;
 my $format     = 'jpg';
-my $levels     = 8;
+my $levels     = 16;
 my $colorize   = 0;
 my $tint       = '#613700'; # #c26519 orange-brown // #613700 = dark brown (nice)  // #1f2952 blueish-gray (nice) // #944300 brown (nice)
 my $target     = 'images@1';
@@ -103,15 +103,14 @@ sub standard_other {
     system(
         'magick', $input,
         '-units', 'PixelsPerInch',
-        '-filter', 'Mitchell',
+        '-filter', 'Lanczos',
         '-define', 'filter:blur=0.9',
         '-resize', $resize_formula,
         '-density', $resolution,
-        '-unsharp', '1.0x1.0+0.33+0',
+        '-unsharp', $unsharp_formula,
         '-strip',
-        '-filter', 'Lanczos',
         $output
-    );
+    ) or die "magick failed: $?";
 }
 
 sub colorized_other {
@@ -120,7 +119,7 @@ sub colorized_other {
     system(
         'magick', $input,
         '-units', 'PixelsPerInch',
-        '-filter', 'Mitchell',
+        '-filter', 'Lanczos',
         '-define', 'filter:blur=0.9',
         '-resize', $resize_formula,
         '-density', $resolution,
@@ -134,39 +133,35 @@ sub colorized_other {
 
         '-unsharp', $unsharp_formula,
         '-strip',
-        '-filter', 'Lanczos',
         $output
-    );
+    ) or die "magick failed: $?";
 }
 
 sub standard_jpg {
     my ($input, $output) = @_;
     standard_other($input, $output . ".ppm");
-
-    system(
-        'cjpegli',
-        '-q', '82',
-        '--chroma_subsampling=420',
-        '--progressive_level=2',
-        $output . '.ppm',
-        $output
-    );
-    unlink $output . '.ppm';
+    compress_jpg($output . ".ppm", $output);
+    unlink $output . '.ppm' or warn "Failed to delete PPM: $!";
 }
 
 sub colorized_jpg {
     my ($input, $output) = @_;
     colorized_other($input, $output . ".ppm");
+    compress_jpg($output . ".ppm", $output);
+    unlink $output . '.ppm' or warn "Failed to delete PPM: $!";
+}
 
+sub compress_jpg {
+    my ($input, $output) = @_;
     system(
         'cjpegli',
-        '-q', '82',
+        '-q', $quality,
         '--chroma_subsampling=420',
         '--progressive_level=2',
-        $output . '.ppm',
+        '--optimize_huffman_codes',
+        $input,
         $output
-    );
-    unlink $output . '.ppm';
+    ) or die "cjpegli failed: $?";
 }
 
 sub standard_jpg_direct {
@@ -175,20 +170,19 @@ sub standard_jpg_direct {
     system(
         'magick', $input,
         '-units', 'PixelsPerInch',
-        '-filter', 'Mitchell',
+        '-filter', 'Lanczos',
         '-define', 'filter:blur=0.9',
         '-resize', $resize_formula,
         '-density', $resolution,
         '-unsharp', $unsharp_formula,
         '-strip',
-        '-filter', 'Lanczos',
         '-colorspace', 'sRGB',
         '-define', 'jpeg:optimize-coding=true',
         '-sampling-factor', '4:2:0',
         '-interlace', 'Plane',
         '-quality', $quality,
         $output
-    );
+    ) or die "magick failed: $?";
 }
 
 sub colorized_jpg_direct {
@@ -197,7 +191,7 @@ sub colorized_jpg_direct {
     system(
         'magick', $input,
         '-units', 'PixelsPerInch',
-        '-filter', 'Mitchell',
+        '-filter', 'Lanczos',
         '-define', 'filter:blur=0.9',
         '-resize', $resize_formula,
         '-density', $resolution,
@@ -211,14 +205,13 @@ sub colorized_jpg_direct {
 
         '-unsharp', $unsharp_formula,
         '-strip',
-        '-filter', 'Lanczos',
         '-colorspace', 'sRGB',
         '-define', 'jpeg:optimize-coding=true',
         '-sampling-factor', '4:2:0',
         '-interlace', 'Plane',
         '-quality', $quality,
         $output
-    );
+    ) or die "magick failed: $?";
 }
 
 sub standard_png {
@@ -234,16 +227,13 @@ sub standard_png {
         '-unsharp', $unsharp_formula,
 
         '-colorspace', 'Gray',
-        '-gamma', '0.45455',
-        '-blur', '0x0.3',
         '-posterize', $levels,
-        '-dither', 'FloydSteinberg',
-        '-gamma', '2.2',
+        '-dither', 'None',
         '-type', 'Grayscale',
 
         '-define', "png:compression-level=7",
         $output
-    );
+    ) or die "magick failed: $?";
 }
 
 sub colorized_png {
@@ -265,13 +255,10 @@ sub colorized_png {
 
         '-unsharp', $unsharp_formula,
 
-        '-gamma', '0.45455',
-        '-blur', '0x0.3',
         '-posterize', $levels,
-        '-dither', 'FloydSteinberg',
-        '-gamma', '2.2',
+        '-dither', 'None',
 
         '-define', "png:compression-level=7",
         $output
-    );
+    ) or die "magick failed: $?";
 }
