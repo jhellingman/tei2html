@@ -601,8 +601,8 @@ sub makeReadme {
 
 
 sub makeKwic {
-    my $basename = shift;
-    my $xmlFilename = shift;
+    my ($basename, $xmlFilename) = @_;
+
     my $kwicFilename = determineKwicFilename($basename);
 
     if ($force == 0 && isNewer($kwicFilename, $xmlFilename)) {

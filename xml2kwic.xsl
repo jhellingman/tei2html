@@ -16,7 +16,7 @@
     xmlns:s="http://gutenberg.ph/segments"
     xmlns:k="http://gutenberg.ph/kwic"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    exclude-result-prefixes="f fn xd xs s k">
+    exclude-result-prefixes="f fn xd xs s k map">
 
     <xd:doc type="stylesheet">
         <xd:short>Stylesheet to produce a KWIC from a TEI document</xd:short>
@@ -24,14 +24,10 @@
         in the document in their context in alphabetical order. The output can become rather big, as a rule-of-thumb,
         30 to 40 times the size of the original. Furthermore, the processing time can be considerable.</xd:detail>
         <xd:author>Jeroen Hellingman</xd:author>
-        <xd:copyright>2011-2019, Jeroen Hellingman</xd:copyright>
+        <xd:copyright>2011-2026, Jeroen Hellingman</xd:copyright>
     </xd:doc>
 
-    <xsl:output
-        doctype-public="-//W3C//DTD XHTML 1.1//EN"
-        doctype-system="http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"
-        method="xml"
-        encoding="utf-8"/>
+    <xsl:output method="html" version="5.0" encoding="utf-8"/>
 
     <xsl:include href="modules/segmentize.xsl"/>
 
@@ -696,18 +692,22 @@
     <!-- Not all Unicode regular expressions are supported in XSLT (https://www.regular-expressions.info/unicode.html), also,
          for this tool, we use a simplified approximation of handling bidirectional script. -->
 
+    <xsl:variable name="rtl-character" select="'[&#x0590;-&#x07BF;]'"/>
+
     <xsl:function name="f:is-right-to-left" as="xs:boolean">
         <xsl:param name="word" as="xs:string"/>
+        
         <!-- <xsl:sequence select="matches($word, '\p{Bidi_Class:Right_to_Left}|\p{Bidi_Class:Arabic_Letter}')"/> -->
         <!-- <xsl:sequence select="matches($word, '\p{Letter}') and matches($word, '\p{Arabic}|\p{Hebrew}|\p{Syriac}|\p{Thaana}')"/> -->
-        <xsl:sequence select="matches($word, '\p{L}') and matches($word, '[&#x0590;-&#x07BF;]')"/>
+      
+        <xsl:sequence select="matches($word, '\p{L}') and matches($word, $rtl-character)"/>
     </xsl:function>
 
     <xsl:function name="f:is-left-to-right" as="xs:boolean">
         <xsl:param name="word" as="xs:string"/>
         <!-- <xsl:sequence select="matches($word, '\p{Bidi_Class:Left_To_Right}')"/> -->
         <!-- <xsl:sequence select="matches($word, '\p{Letter}') and not(matches($word, '\p{Arabic}|\p{Hebrew}|\p{Syriac}|\p{Thaana}'))"/> -->
-        <xsl:sequence select="matches($word, '\p{L}') and not(matches($word, '[&#x0590;-&#x07BF;]'))"/>
+        <xsl:sequence select="matches($word, '\p{L}') and not(matches($word, $rtl-character))"/>
     </xsl:function>
 
 
