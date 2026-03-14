@@ -4,6 +4,8 @@ use strict;
 use warnings;
 use Getopt::Long;
 use File::Basename;
+use File::Temp qw(tempfile);
+use File::Copy;
 use File::Spec;
 use File::Path qw(make_path);
 use IPC::System::Simple qw(system);
@@ -14,8 +16,8 @@ my $quality    = 82;
 my $format     = 'jpg';
 my $levels     = 16;
 my $colorize   = 0;
-my $tint       = '#613700'; # #c26519 orange-brown // #613700 = dark brown (nice)  // #1f2952 blueish-gray (nice) // #944300 brown (nice)
-my $target     = 'images@1';
+my $tint       = '#613700'; # #c26519 orange-brown // #613700 = dark brown (nice) -> #240d00  // #1f2952 blueish-gray (nice) -> #001330 // #944300 brown (nice)  //
+my $target     = 'out';
 
 GetOptions(
     'max-edge=i'   => \$max_edge,
@@ -27,6 +29,28 @@ GetOptions(
     'colorize!'    => \$colorize,
     'target=s'     => \$target,
 );
+
+
+# My defaults for Project Gutenberg submissions
+
+if ($target eq 'images@1') {
+    $max_edge   = 720;
+    $resolution = 144;
+} elsif ($target eq 'images@2') {
+    $max_edge   = 1440;
+    $resolution = 288;
+}
+
+# Idea: profiles
+#
+#               photo             artwork           line-art 
+#
+# filter        Lanczos/Mitchell  Lanczos           Lanczos
+# blur          0.8               0.7               None
+# unsharp       1.2x0.8+0.8+0.05  1.5x1.0+1.0+0.1   1.5x1.0+1.0+0
+# chroma        4:2:0             4:4:4             N/A
+# format        jpg               jpg               png
+
 
 my $input = shift or die "Usage: $0 [options] <image-or-directory>\n";
 
@@ -103,14 +127,14 @@ sub standard_other {
     system(
         'magick', $input,
         '-units', 'PixelsPerInch',
-        '-filter', 'Lanczos',
+        '-filter', 'Mitchell',
         '-define', 'filter:blur=0.9',
         '-resize', $resize_formula,
         '-density', $resolution,
         '-unsharp', $unsharp_formula,
         '-strip',
         $output
-    ) or die "magick failed: $?";
+    ) == 0 or die "magick failed: $?";
 }
 
 sub colorized_other {
@@ -119,7 +143,7 @@ sub colorized_other {
     system(
         'magick', $input,
         '-units', 'PixelsPerInch',
-        '-filter', 'Lanczos',
+        '-filter', 'Mitchell',
         '-define', 'filter:blur=0.9',
         '-resize', $resize_formula,
         '-density', $resolution,
@@ -134,21 +158,27 @@ sub colorized_other {
         '-unsharp', $unsharp_formula,
         '-strip',
         $output
-    ) or die "magick failed: $?";
+    ) == 0 or die "magick failed: $?";
 }
 
 sub standard_jpg {
     my ($input, $output) = @_;
-    standard_other($input, $output . ".ppm");
-    compress_jpg($output . ".ppm", $output);
-    unlink $output . '.ppm' or warn "Failed to delete PPM: $!";
+
+    my ($fh, $tmp) = tempfile(SUFFIX => '.ppm');
+    close $fh;
+
+    standard_other($input, $tmp);
+    compress_jpg($tmp, $output);
 }
 
 sub colorized_jpg {
     my ($input, $output) = @_;
-    colorized_other($input, $output . ".ppm");
-    compress_jpg($output . ".ppm", $output);
-    unlink $output . '.ppm' or warn "Failed to delete PPM: $!";
+
+    my ($fh, $tmp) = tempfile(SUFFIX => '.ppm');
+    close $fh;
+
+    colorized_other($input, $tmp);
+    compress_jpg($tmp, $output);
 }
 
 sub compress_jpg {
@@ -158,10 +188,19 @@ sub compress_jpg {
         '-q', $quality,
         '--chroma_subsampling=420',
         '--progressive_level=2',
-        '--optimize_huffman_codes',
         $input,
         $output
-    ) or die "cjpegli failed: $?";
+    ) == 0 or die "cjpegli failed: $?";
+}
+
+sub compress_png {
+    my ($input, $output) = @_;
+
+    system('zopflipng', '-m', $input, $output) == 0 or die "zopflipng failed: $?";;
+
+    if (-s $input < -s $output) {
+        copy($input, $output);
+    }
 }
 
 sub standard_jpg_direct {
@@ -182,7 +221,7 @@ sub standard_jpg_direct {
         '-interlace', 'Plane',
         '-quality', $quality,
         $output
-    ) or die "magick failed: $?";
+    ) == 0 or die "magick failed: $?";
 }
 
 sub colorized_jpg_direct {
@@ -211,11 +250,14 @@ sub colorized_jpg_direct {
         '-interlace', 'Plane',
         '-quality', $quality,
         $output
-    ) or die "magick failed: $?";
+    ) == 0 or die "magick failed: $?";
 }
 
 sub standard_png {
     my ($input, $output) = @_;
+
+    my ($fh, $tmp) = tempfile(SUFFIX => '.png');
+    close $fh;
 
     system(
         'magick', $input,
@@ -232,12 +274,17 @@ sub standard_png {
         '-type', 'Grayscale',
 
         '-define', "png:compression-level=7",
-        $output
-    ) or die "magick failed: $?";
+        $tmp
+    ) == 0 or die "magick failed: $?";
+
+    compress_png($tmp, $output);
 }
 
 sub colorized_png {
     my ($input, $output) = @_;
+
+    my ($fh, $tmp) = tempfile(SUFFIX => '.png');
+    close $fh;
 
     system(
         'magick', $input,
@@ -259,6 +306,8 @@ sub colorized_png {
         '-dither', 'None',
 
         '-define', "png:compression-level=7",
-        $output
-    ) or die "magick failed: $?";
+        $tmp
+    ) == 0 or die "magick failed: $?";
+
+    compress_png($tmp, $output);
 }
