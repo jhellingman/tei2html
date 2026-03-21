@@ -9,6 +9,7 @@ use File::Copy;
 use File::Spec;
 use File::Path qw(make_path);
 use IPC::System::Simple qw(system);
+use Pod::Usage;
 
 my $max_edge   = 720;
 my $resolution = 144;
@@ -18,6 +19,10 @@ my $levels     = 16;
 my $colorize   = 0;
 my $tint       = '#613700'; # #c26519 orange-brown // #613700 = dark brown (nice) -> #240d00  // #1f2952 blueish-gray (nice) -> #001330 // #944300 brown (nice)  //
 my $target     = 'out';
+my $profile    = 'photo';
+
+my $help = 0;
+my $man  = 0;
 
 GetOptions(
     'max-edge=i'   => \$max_edge,
@@ -28,8 +33,13 @@ GetOptions(
     'tint=s'       => \$tint,
     'colorize!'    => \$colorize,
     'target=s'     => \$target,
-);
+    'profile=s'    => \$profile,
+    'help!'        => \$help,
+    'man!'         => \$man,
+) or pod2usage(2);
 
+pod2usage(1) if $help;
+pod2usage(-verbose => 2) if $man;
 
 # My defaults for Project Gutenberg submissions
 
@@ -311,3 +321,114 @@ sub colorized_png {
 
     compress_png($tmp, $output);
 }
+
+
+__END__
+
+=head1 NAME
+
+prepare-images.pl - Resize and convert images for use in ebooks.
+
+=head1 SYNOPSIS
+
+prepare-images.pl [options] <file | directory>
+
+Options:
+    --max-edge <pixels>     Maximum length of the longest edge
+    --resolution <dpi>      Target resolution
+    --quality <n>           JPEG quality setting
+    --format <ext>          Output format (jpg, png)
+    --levels <n>            Number of grayscale/color levels
+    --tint <color>          Tint color used for colorization
+    --colorize              Enable colorization
+    --target <dir>          Output directory
+    --help                  Show brief help
+    --man                   Show full documentation
+
+=head1 DESCRIPTION
+
+prepare-images.pl processes images using ImageMagick. Images may be
+resampled to a target resolution, resized to limit their maximum
+dimension, optionally colorized, and converted to another format.
+
+If a directory is given, all supported image files inside that
+directory are processed.
+
+=head1 OPTIONS
+
+=head2 --max-edge
+
+Maximum allowed length of the longest image edge in pixels. Images
+larger than this value are scaled down while preserving aspect ratio.
+
+Default: 720
+
+=head2 --resolution
+
+Target image resolution in dots per inch (DPI). Images are resampled
+so that their relative physical sizes remain consistent, unless they
+exceed the maximum size specified.
+
+Default: 144
+
+=head2 --quality
+
+Compression quality for JPEG output.
+
+Default: 82
+
+=head2 --format
+
+Output image format, typically C<jpg> or C<png>.
+
+Default: jpg
+
+=head2 --levels
+
+Number of grayscale or color levels for PNG output.
+
+Default: 16
+
+=head2 --tint
+
+Base color used when colorizing images. Any color understood by 
+ImageMagick can be used.
+
+Example:
+
+--tint "#c26519"
+
+=head2 --colorize / --nocolorize
+
+Enable or disable colorization of images.
+
+=head2 --target
+
+Directory where output images will be written. If omitted, an
+C<out/> directory will be created inside the input directory.
+
+=head1 EXAMPLES
+
+Resize all images in a directory:
+
+prepare-images.pl photos/
+
+Convert an image to PNG with 16 grayscale levels:
+
+prepare-images.pl --format png --levels 16 image.tif
+
+Apply colorization:
+
+prepare-images.pl --colorize --tint "#5a3fa0" image.png
+
+Write output to another directory:
+
+prepare-images.pl --target output scans/
+
+=head1 AUTHOR
+
+Jeroen Hellingman
+
+=head1 LICENSE
+
+GPL
