@@ -1,4 +1,8 @@
-<!DOCTYPE xsl:stylesheet>
+<!DOCTYPE xsl:stylesheet [
+
+    <!ENTITY nbsp       "&#160;">
+
+]>
 <xsl:stylesheet version="3.0"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:f="urn:stylesheet-functions"
@@ -479,6 +483,10 @@
         </xsl:variable>
         <xsl:copy-of select="f:set-class-attribute-with(., $class)"/>
 
+        <!-- If the head is empty, provide something to put in the head anyway -->
+        <xsl:if test=". = ''">
+            <xsl:text>&nbsp;</xsl:text>
+        </xsl:if>
         <xsl:apply-templates/>
     </xsl:template>
 
