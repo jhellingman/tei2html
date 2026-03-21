@@ -4,11 +4,11 @@ use strict;
 use warnings;
 use SgmlSupport qw/getAttrVal/;
 
-my $inputFile = shift @ARGV;
+my $file = shift @ARGV;
 
 my $fileHandle;
 if (defined $file) {
-    open($fileHandle, '<', $inputFile) or die "Could not open '$inputFile': $!";
+    open($fileHandle, '<', $file) or die "Could not open '$file': $!";
 } else {
     $fileHandle = *STDIN;
 }
