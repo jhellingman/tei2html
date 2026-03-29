@@ -11,15 +11,24 @@ use File::Path qw(make_path);
 use IPC::System::Simple qw(system);
 use Pod::Usage;
 
+
+# Parameters that can be set via command-line options:
+
+my $profile    = 'photo';
+
+my $colorize   = 0;
+my $tint       = '#613700';     # #c26519 orange-brown // #613700 = dark brown (nice) -> #240d00  // #1f2952 blueish-gray (nice) -> #001330 // #944300 brown (nice)
+                                # Use pure gray to make line-art lighter, e.g. #252525
+
 my $max_edge   = 720;
 my $resolution = 144;
-my $quality    = 82;
-my $format     = 'jpg';
-my $levels     = 16;
-my $colorize   = 0;
-my $tint       = '#613700'; # #c26519 orange-brown // #613700 = dark brown (nice) -> #240d00  // #1f2952 blueish-gray (nice) -> #001330 // #944300 brown (nice)  //
 my $target     = 'out';
-my $profile    = 'photo';
+
+my $quality;
+my $format;
+my $posterize;
+my $colorspace;
+my $blur;
 
 my $help = 0;
 my $man  = 0;
@@ -29,9 +38,11 @@ GetOptions(
     'resolution=i' => \$resolution,
     'quality=i'    => \$quality,
     'format=s'     => \$format,
-    'levels=i'     => \$levels,
+    'posterize=i'  => \$posterize,
     'tint=s'       => \$tint,
     'colorize!'    => \$colorize,
+    'blur=s'       => \$blur,
+    'colorspace=s' => \$colorspace,
     'target=s'     => \$target,
     'profile=s'    => \$profile,
     'help!'        => \$help,
@@ -51,18 +62,12 @@ if ($target eq 'images@1') {
     $resolution = 288;
 }
 
-# Idea: profiles
-#
-#               photo             artwork           line-art 
-#
-# filter        Lanczos/Mitchell  Lanczos           Lanczos
-# blur          0.8               0.7               None
-# unsharp       1.2x0.8+0.8+0.05  1.5x1.0+1.0+0.1   1.5x1.0+1.0+0
-# chroma        4:2:0             4:4:4             N/A
-# format        jpg               jpg               png
-
 
 my $input = shift or die "Usage: $0 [options] <image-or-directory>\n";
+
+# Parameters only set via profiles
+my $filter     = 'Mitchell';    # Mitchell // Lanczos
+my $chroma     = '4:2:0';
 
 # We want to reduce the resolution to the given value, but limit the size to the max_edge length given,
 # and only resample once, hence this complex formula:
@@ -76,6 +81,89 @@ my $amount     = 0.33;
 my $threshold  = 0;
 my $unsharp_formula = "${radius}x${sigma}+${amount}+${threshold}";
 
+my %profiles = (
+    'photo' => {
+        'filter'     => 'Lanczos',
+        'blur'       => 0.8,       
+        'radius'     => 1.2,
+        'sigma'      => 0.8,
+        'amount'     => 0.8,
+        'threshold'  => 0.05,
+        'colorspace' => 'sRGB',
+        'chroma'     => '4:2:0',
+        'quality'    => 82,
+        'format'     => 'jpg',
+        'posterize'  => undef,          # N/A for JPG
+    },
+    'artwork' => {
+        'filter'     => 'Lanczos',
+        'blur'       => 0.7,
+        'radius'     => 1.5,
+        'sigma'      => 1.0,
+        'amount'     => 1.0,
+        'threshold'  => 0.1,
+        'colorspace' => 'sRGB',
+        'chroma'     => '4:4:4',
+        'quality'    => 82,
+        'format'     => 'jpg',
+        'posterize'  => undef,          # N/A for JPG
+    },
+    'line-art' => {
+        'filter'     => 'Lanczos',
+        'blur'       => 0,
+        'radius'     => 1.0, # 1.5,
+        'sigma'      => 1.0,
+        'amount'     => 0.33, # 1.0,
+        'threshold'  => 0,
+        'colorspace' => 'gray',
+        'chroma'     => '4:2:0',    # N/A for PNG, but set for overrides
+        'quality'    => 82,         # idem
+        'format'     => 'png',
+        'posterize'  => 16,
+    },
+    'color-line-art' => {
+        'filter'     => 'Lanczos',
+        'blur'       => 0,
+        'radius'     => 1.5,
+        'sigma'      => 1.0,
+        'amount'     => 1.0,
+        'threshold'  => 0,
+        'colorspace' => 'sRGB',
+        'chroma'     => '4:2:0',    # N/A for PNG, but set for overrides
+        'quality'    => 82,         # idem
+        'format'     => 'png',
+        'posterize'  => 32,
+    },
+);
+
+apply_profile($profile) if $profile;
+
+
+sub apply_profile {
+    my ($profile_name) = @_;
+    
+    if (!exists $profiles{$profile_name}) {
+        die "Unknown profile: $profile_name. Valid profiles: " . join(', ', keys %profiles) . "\n";
+    }
+    
+    my $profile = $profiles{$profile_name};
+
+    $filter             = $profile->{'filter'};
+
+    $radius             = $profile->{'radius'};
+    $sigma              = $profile->{'sigma'};
+    $amount             = $profile->{'amount'};
+    $threshold          = $profile->{'threshold'};   
+    $unsharp_formula    = "${radius}x${sigma}+${amount}+${threshold}";
+
+    $chroma             = $profile->{'chroma'};
+
+    defined $blur       or $blur        = $profile->{'blur'};
+    defined $quality    or $quality     = $profile->{'quality'};
+    defined $colorspace or $colorspace  = $profile->{'colorspace'};
+    defined $format     or $format      = $profile->{'format'};
+    defined $posterize  or $posterize   = $profile->{'posterize'};
+}
 
 if (-d $input) {
     process_directory($input);
@@ -137,7 +225,7 @@ sub standard_other {
     system(
         'magick', $input,
         '-units', 'PixelsPerInch',
-        '-filter', 'Mitchell',
+        '-filter', $filter,
         '-define', 'filter:blur=0.9',
         '-resize', $resize_formula,
         '-density', $resolution,
@@ -153,7 +241,7 @@ sub colorized_other {
     system(
         'magick', $input,
         '-units', 'PixelsPerInch',
-        '-filter', 'Mitchell',
+        '-filter', $filter,
         '-define', 'filter:blur=0.9',
         '-resize', $resize_formula,
         '-density', $resolution,
@@ -175,20 +263,20 @@ sub standard_jpg {
     my ($input, $output) = @_;
 
     my ($fh, $tmp) = tempfile(SUFFIX => '.ppm');
-    close $fh;
-
+    
     standard_other($input, $tmp);
     compress_jpg($tmp, $output);
+    close $fh;
 }
 
 sub colorized_jpg {
     my ($input, $output) = @_;
 
     my ($fh, $tmp) = tempfile(SUFFIX => '.ppm');
-    close $fh;
 
     colorized_other($input, $tmp);
     compress_jpg($tmp, $output);
+    close $fh;
 }
 
 sub compress_jpg {
@@ -219,7 +307,7 @@ sub standard_jpg_direct {
     system(
         'magick', $input,
         '-units', 'PixelsPerInch',
-        '-filter', 'Lanczos',
+        '-filter', $filter,
         '-define', 'filter:blur=0.9',
         '-resize', $resize_formula,
         '-density', $resolution,
@@ -240,7 +328,7 @@ sub colorized_jpg_direct {
     system(
         'magick', $input,
         '-units', 'PixelsPerInch',
-        '-filter', 'Lanczos',
+        '-filter', $filter,
         '-define', 'filter:blur=0.9',
         '-resize', $resize_formula,
         '-density', $resolution,
@@ -267,19 +355,18 @@ sub standard_png {
     my ($input, $output) = @_;
 
     my ($fh, $tmp) = tempfile(SUFFIX => '.png');
-    close $fh;
 
     system(
         'magick', $input,
         '-units', 'PixelsPerInch',
-        '-filter', 'Mitchell',
+        '-filter', $filter,
         '-resize', $resize_formula,
         '-density', $resolution,
 
         '-unsharp', $unsharp_formula,
 
-        '-colorspace', 'Gray',
-        '-posterize', $levels,
+        '-colorspace', 'gray',
+        '-posterize', $posterize,
         '-dither', 'None',
         '-type', 'Grayscale',
 
@@ -288,18 +375,18 @@ sub standard_png {
     ) == 0 or die "magick failed: $?";
 
     compress_png($tmp, $output);
+    close $fh;
 }
 
 sub colorized_png {
     my ($input, $output) = @_;
 
     my ($fh, $tmp) = tempfile(SUFFIX => '.png');
-    close $fh;
 
     system(
         'magick', $input,
         '-units', 'PixelsPerInch',
-        '-filter', 'Mitchell',
+        '-filter', $filter,
         '-resize', $resize_formula,
         '-density', $resolution,
 
@@ -312,7 +399,7 @@ sub colorized_png {
 
         '-unsharp', $unsharp_formula,
 
-        '-posterize', $levels,
+        '-posterize', $posterize,
         '-dither', 'None',
 
         '-define', "png:compression-level=7",
@@ -320,6 +407,7 @@ sub colorized_png {
     ) == 0 or die "magick failed: $?";
 
     compress_png($tmp, $output);
+    close $fh;
 }
 
 
@@ -338,7 +426,7 @@ Options:
     --resolution <dpi>      Target resolution
     --quality <n>           JPEG quality setting
     --format <ext>          Output format (jpg, png)
-    --levels <n>            Number of grayscale/color levels
+    --posterize <n>         Number of grayscale/color levels
     --tint <color>          Tint color used for colorization
     --colorize              Enable colorization
     --target <dir>          Output directory
@@ -383,9 +471,9 @@ Output image format, typically C<jpg> or C<png>.
 
 Default: jpg
 
-=head2 --levels
+=head2 --posterize
 
-Number of grayscale or color levels for PNG output.
+Number of grayscale levels or colors; used for PNG output.
 
 Default: 16
 
@@ -415,7 +503,7 @@ prepare-images.pl photos/
 
 Convert an image to PNG with 16 grayscale levels:
 
-prepare-images.pl --format png --levels 16 image.tif
+prepare-images.pl --format png --posterize 16 image.tif
 
 Apply colorization:
 

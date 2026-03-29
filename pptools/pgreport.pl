@@ -16,6 +16,7 @@ use File::chdir;
 use File::Compare;
 use Getopt::Long;
 use XML::XPath;
+use Digest::SHA qw(sha256_hex);
 
 binmode(STDOUT, ":utf8");
 use open ':utf8';
@@ -222,6 +223,10 @@ sub handleTeiFile {
     my $fileDate = time2str("%Y-%m-%d", stat($fullName)->mtime);
     my $fileDateTime = time2str("%Y-%m-%d %H:%M:%S", stat($fullName)->mtime);
 
+    my $sha = Digest::SHA->new(256);
+    $sha->addfile($fullName);
+    my $digest = $sha->hexdigest;
+
     my ($fileName, $filePath, $suffix) = fileparse($fullName, '.tei');
 
     $fileName =~ /^([A-Za-z0-9-]*?)(-([0-9]+\.[0-9]+))?$/;
@@ -247,6 +252,8 @@ sub handleTeiFile {
     }
     logMessage("File Size:  " . formatBytes($fileSize));
     print XMLFILE "      <size>$fileSize</size>\n";
+    logMessage("SHA256:     " . $digest);
+    print XMLFILE "      <digest>$digest</digest>\n";
     logMessage("Date:       $fileDate");
     print XMLFILE "      <date>$fileDate</date>\n";
     logMessage("Path:       $filePath");
