@@ -18,7 +18,7 @@ my $profile    = 'photo';
 
 my $colorize   = 0;
 my $tint       = '#613700';     # #c26519 orange-brown // #613700 = dark brown (nice) -> #240d00  // #1f2952 blueish-gray (nice) -> #001330 // #944300 brown (nice)
-                                # Use pure gray to make line-art lighter, e.g. #252525
+                                # Use pure gray to make line-art lighter, e.g. #252525 =~ 90% gray.
 
 my $max_edge   = 720;
 my $resolution = 144;
@@ -263,20 +263,22 @@ sub standard_jpg {
     my ($input, $output) = @_;
 
     my ($fh, $tmp) = tempfile(SUFFIX => '.ppm');
+    close $fh;
     
     standard_other($input, $tmp);
     compress_jpg($tmp, $output);
-    close $fh;
+    unlink $tmp;
 }
 
 sub colorized_jpg {
     my ($input, $output) = @_;
 
     my ($fh, $tmp) = tempfile(SUFFIX => '.ppm');
+    close $fh;
 
     colorized_other($input, $tmp);
     compress_jpg($tmp, $output);
-    close $fh;
+    unlink $tmp;
 }
 
 sub compress_jpg {
@@ -355,6 +357,7 @@ sub standard_png {
     my ($input, $output) = @_;
 
     my ($fh, $tmp) = tempfile(SUFFIX => '.png');
+    close $fh;
 
     system(
         'magick', $input,
@@ -375,13 +378,14 @@ sub standard_png {
     ) == 0 or die "magick failed: $?";
 
     compress_png($tmp, $output);
-    close $fh;
+    unlink $tmp;
 }
 
 sub colorized_png {
     my ($input, $output) = @_;
 
     my ($fh, $tmp) = tempfile(SUFFIX => '.png');
+    close $fh;
 
     system(
         'magick', $input,
@@ -407,7 +411,7 @@ sub colorized_png {
     ) == 0 or die "magick failed: $?";
 
     compress_png($tmp, $output);
-    close $fh;
+    unlink $tmp;
 }
 
 

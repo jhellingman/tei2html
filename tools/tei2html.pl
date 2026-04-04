@@ -1146,16 +1146,12 @@ sub runChecks {
     }
     trace("Run checks on $filename.");
 
-    my $notationFile = temporaryFile('notation', 'tei');
-    convertNotations($filename, $notationFile);
-
-    my $transcribedFile = temporaryFile("checks", $format);
-    transcribe($notationFile, $transcribedFile, 1);
+    my @commands = convertNotationsCommands($filename);
+    push (@commands, transcribeCommands($filename, 1));
+    push (@commands, "perl $toolsdir/addPositionInfo.pl");
     
     my $positionInfoFilename = temporaryFile("checks", $format);
-
-    trace("Adding pos attributes to $inputFile");
-    system ("perl $toolsdir/addPositionInfo.pl \"$transcribedFile\" > \"$positionInfoFilename\"");
+    executeCommandPipeline($filename, $positionInfoFilename, @commands);
 
     if ($format eq 'tei') {
         my $tmpFile = temporaryFile('checks', 'tei');
@@ -1182,8 +1178,6 @@ sub runChecks {
 
     $makeKwic && makeKwic($basename, $xmlFilename);
 
-    removeFile($notationFile);
-    removeFile($transcribedFile);
     removeFile($positionInfoFilename);
     removeFile($xmlFilename);
 }
@@ -1476,6 +1470,13 @@ sub convertSgmlToXml {
 
 sub convertNotations {
     my ($inFile, $outFile) = @_;
+    my @commands = convertNotationsCommands($inFile);
+    executeCommandPipeline($inFile, $outFile, @commands);
+}
+
+
+sub convertNotationsCommands {
+    my ($inFile) = @_;
 
     my @commands = ();
 
@@ -1486,7 +1487,7 @@ sub convertNotations {
         containsTag($inFile, '[DRAUGHTS]')  and push (@commands, "perl $toolsdir/convertDraughtsDiagram.pl");
         containsTag($inFile, '[crossword]') and push (@commands, "perl $toolsdir/convertCrossWord.pl");
     }
-    executeCommandPipeline($inFile, $outFile, @commands);
+    return @commands;
 }
 
 
@@ -1507,6 +1508,13 @@ sub executeCommandPipeline {
 #
 sub transcribe {
     my ($inFile, $outFile, $noPopups) = @_;
+    my @commands = transcribeCommands($inFile, $noPopups);
+    executeCommandPipeline($inFile, $outFile, @commands);
+}
+
+
+sub transcribeCommands {
+    my ($inFile, $noPopups) = @_;
 
     my @commands = ();
 
@@ -1538,9 +1546,9 @@ sub transcribe {
         containsNastaliq($inFile)    and push (@commands, "patc -p $patcdir/arabic/ur2sgml.pat");      # Urdu; Farsi
         containsTag($inFile, '<BO>') and push (@commands, "perl $toolsdir/convertWylie.pl");           # Tibetan
     }
-
-    executeCommandPipeline($inFile, $outFile, @commands);
+    return @commands;
 }
+
 
 sub containsTag {
     my ($file, $tag) = @_;
