@@ -1146,7 +1146,7 @@ sub runChecks {
     }
     trace("Run checks on $filename.");
 
-    my @commands = convertNotationsCommands($filename);
+    my @commands = convertNotationsCommands($filename, $format);
     push (@commands, transcribeCommands($filename, 1));
     push (@commands, "perl $toolsdir/addPositionInfo.pl");
     
@@ -1411,7 +1411,7 @@ sub tei2xml {
     trace("Convert SGML file '$sgmlFile' to XML file '$xmlFile'.");
 
     my $notationFile = temporaryFile('notation', 'tei');
-    convertNotations($sgmlFile, $notationFile);
+    convertNotations($sgmlFile, $notationFile, 'tei');
 
     my $transcribedFile = temporaryFile('transcribe', 'tei');
     transcribe($notationFile, $transcribedFile, $noTranscriptionPopups);
@@ -1469,18 +1469,18 @@ sub convertSgmlToXml {
 
 
 sub convertNotations {
-    my ($inFile, $outFile) = @_;
-    my @commands = convertNotationsCommands($inFile);
+    my ($inFile, $outFile, $format) = @_;
+    my @commands = convertNotationsCommands($inFile, $format);
     executeCommandPipeline($inFile, $outFile, @commands);
 }
 
 
 sub convertNotationsCommands {
-    my ($inFile) = @_;
+    my ($inFile, $format) = @_;
 
     my @commands = ();
 
-    push (@commands, "patc -p $toolsdir/patc/win2sgml.pat");
+    $format eq 'tei' && push (@commands, "patc -p $toolsdir/patc/win2sgml.pat");
 
     if ($noTranscription == 0) {
         containsTag($inFile, '<INTRA')      and push (@commands, "perl $toolsdir/intralinear.pl");
