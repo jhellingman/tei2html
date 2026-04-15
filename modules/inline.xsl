@@ -1014,6 +1014,16 @@
                         <xsl:apply-templates/>                        
                     </bdo>
                 </xsl:when>
+                <xsl:when test="@type='block'">
+                    <div>
+                        <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+                        <xsl:variable name="class">
+                            <xsl:value-of select="@type"/>
+                        </xsl:variable>
+                        <xsl:copy-of select="f:set-class-attribute-with(., $class)"/>
+                        <xsl:apply-templates/>
+                    </div>
+                </xsl:when>
                 <xsl:otherwise>
                     <span>
                         <xsl:copy-of select="f:set-lang-id-attributes(.)"/>

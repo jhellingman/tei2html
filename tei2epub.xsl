@@ -81,7 +81,7 @@
     <!--====================================================================-->
 
     <xsl:param name="basename" select="'book'"/>
-    <xsl:param name="path" select="'ePub'"/>
+    <xsl:param name="path" select="'epub'"/>
     <xsl:param name="epubversion" select="'3.0.1'"/>        <!-- Values: '3.1' or '3.0.1' -->
 
     <xsl:param name="optionPrinceMarkup" select="'No'"/>    <!-- Should always be 'No' for ePub -->

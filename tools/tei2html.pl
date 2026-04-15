@@ -22,7 +22,9 @@ use SgmlSupport qw/utf2numericEntities translateEntity/;
 my $home = $ENV{'TEI2HTML_HOME'};
 my $saxonHome = $ENV{'SAXON_HOME'};
 my $princeHome = $ENV{'PRINCE_HOME'};
-my $mariadbHome = $ENV{'MARIADB_HOME'};
+my $mariaDBHome = $ENV{'MARIADB_HOME'};
+
+my $dotExe = ($^O eq 'MSWin32') ? '.exe' : '';
 
 if (!defined $home) {
     die "Environment variable 'TEI2HTML_HOME' not set.";
@@ -42,7 +44,7 @@ my $patcdir   = $toolsdir . "/patc/transcriptions";                         # lo
 my $catalog   = $home . "/dtd/CATALOG";                                     # location of SGML catalog (required for nsgmls and sx)
 
 my $java      = "java $javaOptions";
-my $prince    = $princeHome . "/Engine/bin/prince.exe";                     # see https://www.princexml.com/
+my $prince    = $princeHome . "/Engine/bin/prince" . $dotExe;               # see https://www.princexml.com/
 my $saxon     = "$java -jar " . $saxonHome . "/saxon9he.jar ";              # see http://saxon.sourceforge.net/
 my $epubcheck = "$java -jar " . $toolsdir . "/lib/epubcheck-4.0.2.jar ";    # see https://github.com/IDPF/epubcheck
 my $schxslt   = "$java -jar " . $toolsdir . "/lib/schxslt-cli.jar";         # Schematron processor, see https://github.com/schxslt/schxslt
@@ -51,17 +53,17 @@ my $schematronFile = $home . "/schematron/tei-validation.sch";              # Sc
 my $schematronXslt = $home . "/schematron/validation-report.xsl";           # XSLT to convert the schematron report to HTML
 my $namespaceXslt = $home . "/schematron/tei-namespace.xsl";                # XSLT to add TEI namespace to document
 
-my $jeebies   = "C:\\Bin\\jeebies";                                         # see http://gutcheck.sourceforge.net/
+my $jeebies   = "jeebies";                                                  # see http://gutcheck.sourceforge.net/
 my $gutcheck  = "gutcheck";
 my $nsgmls    = "nsgmls";                                                   # see http://www.jclark.com/sp/ or http://openjade.sourceforge.net/doc/index.htm
 my $sx        = "sx";                                                       # in the latter case, use onsgmls and osx instead of nsgmls and sx.
-my $mariadb   = "\"C:\\Program Files\\MariaDB 10.10\\bin\\mariadb.exe\"";
+my $mariadb   = $mariaDBHome . "/bin/mariadb" . $dotExe;                    # on Windows: C:\Program Files\MariaDB 10.10
+my $zopflipng = "zopflipng" . $dotExe;
 
-
-my $LOG_LEVEL_ERROR = 1;
-my $LOG_LEVEL_WARNING = 2;
-my $LOG_LEVEL_INFO = 3;
-my $LOG_LEVEL_TRACE = 4;
+my $LOG_LEVEL_ERROR     = 1;
+my $LOG_LEVEL_WARNING   = 2;
+my $LOG_LEVEL_INFO      = 3;
+my $LOG_LEVEL_TRACE     = 4;
 
 #==============================================================================
 # Arguments and default values
@@ -158,6 +160,7 @@ GetOptions(
     'notranscriptionpopups' => \$noTranscriptionPopups,
     'pagewidth=i' => \$pageWidth,
     'profile' => \$profile,
+    'pgtei' => \$makePGTEI,
     'sql' => \$makeSQL,
     'tidy'=> \$useTidy,
     'trace' => \$trace
@@ -365,7 +368,7 @@ sub processFile {
     makeMetadata($preprocessedXmlFilename);
     makeReadme($preprocessedXmlFilename);
 
-    $makePGTEI && system ("$saxon $preprocessedXmlFilename $xsldir/tei2pgtei.xsl > $basename-pgtei.xml");
+    $makePGTEI && system ("$saxon $preprocessedXmlFilename \"$xsldir/sandbox/tei2pgtei.xsl\" > $basename-pgtei.xml");
 
     $makeZip == 1 && $pgNumber > 0 && makeZip($basename);
 
@@ -694,7 +697,7 @@ sub makeQrCodeAtSize {
 
         # Optimize the generated QR code.
         my $newFile = "$imageDir/qrcode-optimized.png";
-        system ("zopflipng.exe -m \"$file\" \"$newFile\"");
+        system ($zopflipng, '-m', $file, $newFile);
         if (-s "$file" > -s "$newFile") {
             move($newFile, $file);
         } else {
@@ -791,7 +794,7 @@ sub makeEpub {
     my $tmpFile = temporaryFile('epub', 'html');
     my $saxonParameters = determineSaxonParameters();
     trace("Create ePub version from $xmlFile...");
-    system ('mkdir epub');
+    mkdir('epub');
     copyImages('epub/images');
     # copyFormulas('epub/formulas'); # Not including formulas in ePub, as they are embedded as MathML (TODO: this is default, handle non-default situations)
     copyAudio('epub/audio');

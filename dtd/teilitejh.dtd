@@ -2845,6 +2845,7 @@ title | ptr | ref | xptr | xref | anchor | s | seg | gi | formula))*)
      n CDATA #IMPLIED
      lang IDREF #IMPLIED
      rend CDATA #IMPLIED
+     type CDATA #IMPLIED
      rows NUMBER #IMPLIED
      cols NUMBER #IMPLIED
      TEIform CDATA "table" >

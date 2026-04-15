@@ -134,6 +134,10 @@
                 </xsl:attribute>
             </xsl:if>
 
+            <xsl:if test="@type = 'presentation'">
+                <xsl:attribute name="role">presentation</xsl:attribute>
+            </xsl:if>
+
             <xsl:choose>
                 <!-- If a table starts with label or unit roles, use the thead and tbody elements in HTML. -->
                 <xsl:when test="row[1][f:is-header-row(.)]">
@@ -506,6 +510,10 @@
                 <xsl:attribute name="summary">
                     <xsl:value-of select="f:rend-value(@rend, 'summary')"/>
                 </xsl:attribute>
+            </xsl:if>
+
+            <xsl:if test="@type = 'presentation'">
+                <xsl:attribute name="role">presentation</xsl:attribute>
             </xsl:if>
 
             <xsl:if test="$headers">
