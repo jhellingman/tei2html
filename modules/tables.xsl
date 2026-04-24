@@ -59,7 +59,9 @@
             <xsl:when test="f:is-inline(.) or f:rend-value(@rend, 'class') = 'intralinear'">
                 <span class="table">
                     <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
-                    <xsl:apply-templates mode="table-caption" select="head"/>
+                    <xsl:if test="not(f:is-set('table.useCaption'))">
+                        <xsl:apply-templates mode="fix-table-caption" select="head"/>
+                    </xsl:if>
                     <xsl:call-template name="inner-table"/>
                 </span>
             </xsl:when>
@@ -67,7 +69,9 @@
                 <xsl:call-template name="closepar"/>
                     <div class="table">
                         <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
-                        <xsl:apply-templates mode="table-caption" select="head"/>
+                        <xsl:if test="not(f:is-set('table.useCaption'))">
+                            <xsl:apply-templates mode="fix-table-caption" select="head"/>
+                        </xsl:if>
                         <xsl:call-template name="inner-table"/>
                     </div>
                 <xsl:call-template name="reopenpar"/>
@@ -138,6 +142,10 @@
                 <xsl:attribute name="role">presentation</xsl:attribute>
             </xsl:if>
 
+            <xsl:if test="head and f:is-set('table.useCaption')">
+                <xsl:apply-templates select="head" mode="table-caption"/>
+            </xsl:if>
+
             <xsl:choose>
                 <!-- If a table starts with label or unit roles, use the thead and tbody elements in HTML. -->
                 <xsl:when test="row[1][f:is-header-row(.)]">
@@ -171,7 +179,7 @@
         </xd:detail>
     </xd:doc>
 
-    <xsl:template mode="table-caption" match="head">
+    <xsl:template mode="fix-table-caption" match="head">
         <h4>
             <xsl:variable name="class" select="if (f:rend-value(../@rend, 'align') = 'center') then 'aligncenter' else '' || 'tableCaption'"/>
             <xsl:copy-of select="f:set-class-attribute-with(., $class)"/>
@@ -180,16 +188,24 @@
         </h4>
     </xsl:template>
 
+    <xsl:template mode="table-caption" match="head">
+        <caption>
+            <xsl:variable name="class" select="if (f:rend-value(../@rend, 'align') = 'center') then 'aligncenter' else ''"/>
+            <xsl:copy-of select="f:set-class-attribute-with(., $class)"/>
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:apply-templates/>
+        </caption>
+    </xsl:template>
+
 
     <xd:doc>
-        <xd:short>Eliminate table headers.</xd:short>
+        <xd:short>Handle a table caption.</xd:short>
         <xd:detail>
-            <p>The table header is already handled in the mode <code>table-caption</code>, so can be omitted.</p>
+            <p>The table header is already handled in the mode <code>fix-table-caption</code> or <code>normal-table</code>, so can be omitted.</p>
         </xd:detail>
     </xd:doc>
 
     <xsl:template match="table/head"/>
-
 
     <xd:doc>
         <xd:short>Handle a table row.</xd:short>
@@ -514,6 +530,10 @@
 
             <xsl:if test="@type = 'presentation'">
                 <xsl:attribute name="role">presentation</xsl:attribute>
+            </xsl:if>
+
+            <xsl:if test="head and f:is-set('table.useCaption')">
+                <xsl:apply-templates select="head" mode="table-caption"/>
             </xsl:if>
 
             <xsl:if test="$headers">

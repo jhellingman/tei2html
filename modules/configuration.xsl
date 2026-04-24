@@ -144,6 +144,7 @@
             <text.showSuggestedCorrectionPopups>false</text.showSuggestedCorrectionPopups> <!-- Show pop-ups with a suggested correction (sic-tag). -->
 
             <table.classifyContent>false</table.classifyContent>            <!-- Attempt to determine the content-type of cells in a table; add relevant classes in the HTML output. -->
+            <table.useCaption>true</table.useCaption>                       <!-- Use the HTML caption element for the title of a table; use h4 element otherwise. -->
 
             <q.insertQuotes>false</q.insertQuotes>                          <!-- Insert quotation marks around <q> markup based on first two pairs in setting <text.quotes>. -->
             <q.asDiv>true</q.asDiv>                                         <!-- Render the <q> element with a div if true, as a span otherwise. -->

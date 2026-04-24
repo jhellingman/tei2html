@@ -182,17 +182,17 @@
    </x:scenario>
 
 
-   <x:scenario label="When rendering a simple table element with a head">
+   <x:scenario label="When rendering a simple table element with a caption">
       <x:context>
-        <table id="simple_table_with_head"
-               rend="summary(A table with a head)"
+        <table id="simple_table_with_caption"
+               rend="summary(A table with a caption)"
                rows="3"
                headrows="0"
                cols="3">
            <column/>
            <column/>
            <column/>
-           <head>Table with head.</head>
+           <head>Table with caption.</head>
            <row>
               <cell row="1" col="1">2</cell>
               <cell row="1" col="2">7</cell>
@@ -213,9 +213,9 @@
       <x:expect label="will result in an HTML table">
         <div xmlns="http://www.w3.org/1999/xhtml"
              class="table"
-             id="simple_table_with_head">
-           <h4 class="tableCaption" id="...">Table with head.</h4>
-           <table summary="A table with a head">
+             id="simple_table_with_caption">           
+           <table summary="A table with a caption">
+              <caption id="...">Table with caption.</caption>
               <tr id="...">
                  <td id="..." class="cell-left cell-top">2</td>
                  <td id="..." class="cell-top">7</td>
@@ -270,6 +270,67 @@
              id="simple_table_2">
            <table class="verticalBorderInside"
                   summary="A straightforward table to demonstrate tables in TEI">
+              <tbody>
+                 <tr>
+                    <td id="..." class="cell-left cell-top">2</td>
+                    <td id="..." class="cell-top">7</td>
+                    <td id="..." class="cell-right cell-top">6</td>
+                    <td class="cellDoubleUp">&nbsp;</td>
+                    <td id="..." class="cell-left cell-top cell-bottom">4</td>
+                    <td id="..." class="cell-top cell-bottom">3</td>
+                    <td id="..." class="cell-right cell-top cell-bottom">8</td>
+                 </tr>
+                 <tr>
+                    <td id="..." class="cell-left cell-bottom">9</td>
+                    <td id="..." class="cell-bottom">5</td>
+                    <td id="..." class="cell-right cell-bottom">1</td>
+                    <td class="cellDoubleUp">&nbsp;</td>
+                    <td class="cellDummy"/>
+                    <td class="cellDummy"/>
+                    <td class="cellDummy"/>
+                 </tr>
+              </tbody>
+           </table>
+        </div>
+      </x:expect>
+   </x:scenario>
+
+
+   <x:scenario label="When rendering a simple table element in two columns (row-major) and a caption">
+      <x:context>
+        <table id="simple_table_2"
+               rend="summary(A straightforward table to demonstrate tables in TEI) class(verticalBorderInside) columns(2)"
+               rows="3"
+               headrows="0"
+               cols="3">
+           <column/>
+           <column/>
+           <column/>
+           <head>Table with caption.</head>
+           <row>
+              <cell row="1" col="1">2</cell>
+              <cell row="1" col="2">7</cell>
+              <cell row="1" col="3">6</cell>
+           </row>
+           <row>
+              <cell row="2" col="1">9</cell>
+              <cell row="2" col="2">5</cell>
+              <cell row="2" col="3">1</cell>
+           </row>
+           <row>
+              <cell row="3" col="1">4</cell>
+              <cell row="3" col="2">3</cell>
+              <cell row="3" col="3">8</cell>
+           </row>
+        </table>
+      </x:context>
+      <x:expect label="will result in an HTML table with the table re-arranged in two columns and a single caption">
+        <div xmlns="http://www.w3.org/1999/xhtml"
+             class="table"
+             id="simple_table_2">
+           <table class="verticalBorderInside"
+                  summary="A straightforward table to demonstrate tables in TEI">
+              <caption id="...">Table with caption.</caption>
               <tbody>
                  <tr>
                     <td id="..." class="cell-left cell-top">2</td>
