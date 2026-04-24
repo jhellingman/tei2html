@@ -4,7 +4,7 @@
     Copyright 2006-2026, Jeroen Hellingman (available under GPL 3.0 or later).
 */
 
-caption {
+caption, .tableCaption {
     clear: both;
     font-style: normal;
     text-transform: none;
