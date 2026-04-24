@@ -75,20 +75,20 @@
               <thead>
                  <tr class="label"
                      id="r1">
-                    <td id="c1.1"
+                    <th id="c1.1"
                         rowspan="2"
-                        class="rowspan cell-head-left cell-head-top cell-head-bottom">No.</td>
-                    <td id="c1.2"
-                        class="cell-head-top">Type.</td>
-                    <td id="c1.3"
-                        class="c3 cell-head-right cell-head-top">Quantity.</td>
+                        class="rowspan cell-head-left cell-head-top cell-head-bottom">No.</th>
+                    <th id="c1.2"
+                        class="cell-head-top">Type.</th>
+                    <th id="c1.3"
+                        class="c3 cell-head-right cell-head-top">Quantity.</th>
                  </tr>
                  <tr class="unit"
                      id="r2">
-                    <td id="c2.2"
+                    <th id="c2.2"
                         class="cell-head-bottom" />
-                    <td id="c2.3"
-                        class="c3 cell-head-right cell-head-bottom">kg</td>
+                    <th id="c2.3"
+                        class="c3 cell-head-right cell-head-bottom">kg</th>
                  </tr>
               </thead>
               <tbody>
@@ -328,11 +328,11 @@
                   summary="A straightforward table to demonstrate tables in TEI">
               <thead>
                  <tr class="label">
-                    <td id="..." class="cell-head-left cell-head-top cell-head-bottom">First</td>
-                    <td id="..." class="cell-head-top cell-head-bottom">Second</td>
-                    <td class="cellDoubleUp">&nbsp;</td>
-                    <td class="cell-head-left cell-head-top cell-head-bottom">First</td>
-                    <td class="cell-head-top cell-head-bottom">Second</td>
+                    <th id="..." class="cell-head-left cell-head-top cell-head-bottom">First</th>
+                    <th id="..." class="cell-head-top cell-head-bottom">Second</th>
+                    <th class="cellDoubleUp">&nbsp;</th>
+                    <th class="cell-head-left cell-head-top cell-head-bottom">First</th>
+                    <th class="cell-head-top cell-head-bottom">Second</th>
                  </tr>
               </thead>
               <tbody>

@@ -220,7 +220,7 @@
     </xd:doc>
 
     <xsl:template match="cell">
-        <td>
+        <xsl:element name="{if (f:is-header-row(..)) then 'th' else 'td'}">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:call-template name="cell-span"/>
             <xsl:call-template name="cell-rend"/>
@@ -246,7 +246,7 @@
                 </xsl:otherwise>
             </xsl:choose>
             <!-- <xsl:copy-of select="f:handle-last-cell-in-footnote(.)"/> -->
-        </td>
+        </xsl:element>
     </xsl:template>
 
 
@@ -531,7 +531,7 @@
                                 <xsl:for-each select="$headers[$headerRow]/cell">
                                     <!-- Insert a dummy cell between doubled-up columns -->
                                     <xsl:if test="$i &gt; 1 and position() = 1">
-                                        <td class="cellDoubleUp">&nbsp;</td>
+                                        <th class="cellDoubleUp">&nbsp;</th>
                                     </xsl:if>
                                     <!-- Prevent duplication of ids by stripping them from all but the first repeated instance. -->
                                     <xsl:variable name="cellHtml">
@@ -578,7 +578,7 @@
                             </tr>
                         </xsl:for-each-group>
                     </xsl:when>
-                    <xsl:otherwise> <!-- row-maj   or -->
+                    <xsl:otherwise> <!-- row-major -->
 
                         <!-- Warn for cases where an entire column will be empty -->
                         <xsl:if test="$new-row-count * ($n - 1) &gt;= $original-row-count">

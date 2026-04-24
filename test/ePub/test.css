@@ -399,7 +399,7 @@ span.accent span.base {
 
  
 .fnarrow {
- color: #AAAAAA;
+ color: #666666;
  font-weight: bold;
  text-decoration: none;
 }
@@ -410,7 +410,7 @@ span.accent span.base {
 
  
 .fnreturn {
- color: #AAAAAA;
+ color: #666666;
  font-size: 80%;
  font-weight: bold;
  text-decoration: none;
@@ -1304,7 +1304,7 @@ p.byline {
 }
 
 .rightnote, .pageNum, .lineNum, .pageNum a {
- color: #AAAAAA;
+ color: #666666;
 }
 
 a.hidden:hover, a.noteRef:hover, a.pseudoNoteRef:hover {

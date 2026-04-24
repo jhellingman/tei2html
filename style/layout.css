@@ -334,7 +334,7 @@ span.accent span.base {
 
 /* up-arrow at end of footnote */
 .fnarrow {
-    color: #AAAAAA;
+    color: #660000;
     font-weight: bold;
     text-decoration: none;
 }
@@ -345,7 +345,7 @@ span.accent span.base {
 
 /* small superscript letter to refer back to multiple references to same footnote at end of footnote */
 .fnreturn {
-    color: #AAAAAA;
+    color: #660000;
     font-size: 80%;
     font-weight: bold;
     text-decoration: none;

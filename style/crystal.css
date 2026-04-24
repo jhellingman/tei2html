@@ -78,7 +78,7 @@ h1, h2 {
 }
 
 .rightnote, .pageNum, .lineNum, .pageNum a {
-    color: #AAAAAA;
+    color: #666666;
 }
 
 a.hidden:hover, a.noteRef:hover, a.pseudoNoteRef:hover {

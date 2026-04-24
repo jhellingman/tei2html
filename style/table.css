@@ -12,15 +12,15 @@ tr.bottom, td.bottom, th.bottom {
     vertical-align: bottom;
 }
 
-td.label, tr.label td {
+td.label, tr.label td, tr.label th {
     font-weight: bold;
 }
 
-td.unit, tr.unit td {
+td.unit, tr.unit td, tr.unit th {
     font-style: italic;
 }
 
-td.leftbrace, td.rightbrace {
+td.leftbrace, td.rightbrace, th.leftbrace, th.rightbrace {
     vertical-align: middle;
 }
 
@@ -41,7 +41,7 @@ table.borderOutside {
     border-collapse: collapse;
 }
 
-table.borderOutside td {
+table.borderOutside td, table.borderOutside th {
     padding-left: 4px;
     padding-right: 4px;
 }
@@ -72,7 +72,7 @@ table.verticalBorderInside {
     border-collapse: collapse;
 }
 
-table.verticalBorderInside td {
+table.verticalBorderInside td, table.verticalBorderInside th {
     padding-left: 4px;
     padding-right: 4px;
     border-left: 1px solid black;
@@ -101,8 +101,8 @@ table.rtlBorderAll {
     border-collapse: collapse;
 }
 
-table.borderAll td,
-table.rtlBorderAll td {
+table.borderAll td, table.borderAll th,
+table.rtlBorderAll td, table.rtlBorderAll th {
     padding-left: 4px;
     padding-right: 4px;
     border: 1px solid black;
