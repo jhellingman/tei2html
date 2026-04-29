@@ -379,6 +379,8 @@ gi | formula))*)>
      rend CDATA #IMPLIED
      TEIform CDATA "seriesStmt" >
 
+<!--
+
 <!ELEMENT biblScope - - (#PCDATA)>
 
 <!ATTLIST biblScope
@@ -388,6 +390,7 @@ gi | formula))*)>
      lang IDREF #IMPLIED
      rend CDATA #IMPLIED
      TEIform CDATA "biblScope" >
+-->
 
 <!--  5.2.6:  The notes statement                              -->
 
@@ -2974,7 +2977,6 @@ note | figure | stage | table | text)*)>
 
 <!ENTITY % ISOpub  PUBLIC "ISO 8879-1986//ENTITIES Publishing//EN">
 %ISOpub;
-
 
 <!ENTITY % usrmods
   PUBLIC   "-//TEI U5-1995//DTD TEI Lite 1.0 Extensions//EN">
