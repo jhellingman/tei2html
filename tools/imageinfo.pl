@@ -51,7 +51,9 @@ sub listRecursively {
     @files = grep (!/^\.\.?$/, readdir(DIR));
     closedir(DIR);
 
-    foreach my $file (@files) {
+    my @sorted_files = sort { lc($a) cmp lc($b) } @files;
+
+    foreach my $file (@sorted_files) {
         if (-f "$directory/$file") {
             if ($file =~ /\.jpe?g$|\.png|\.gif/i) {
                 handleImage("$directory/$file");
