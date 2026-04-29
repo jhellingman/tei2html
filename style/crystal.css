@@ -58,7 +58,7 @@ table {
     margin-right: auto;
 }
 
-.tableCaption {
+caption, .tableCaption {
     text-align: center;
 }
 

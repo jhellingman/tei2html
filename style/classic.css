@@ -52,7 +52,7 @@ td.tocText {
     line-height: 1.5;
 }
 
-.tableCaption {
+caption, .tableCaption {
     text-align: center;
 }
 

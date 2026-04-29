@@ -340,7 +340,7 @@
             else ancestor::text[last()]"/>
         <xsl:variable name="maxLevel" select="min((f:find-toc-max-depth($start), $maxLevel))"/>
 
-        <table>
+        <table role="presentation">
             <xsl:if test="f:is-html() and not(f:is-html5())">
                 <xsl:attribute name="summary" select="f:message('msgTableOfContents')"/>
             </xsl:if>
@@ -721,7 +721,7 @@
         <div class="div1">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <h2 class="main"><xsl:value-of select="f:message('msgListOfIllustrations')"/></h2>
-            <table>
+            <table role="presentation">
                 <xsl:call-template name="splitrows">
                     <xsl:with-param name="figures" select="//figure[@id]" />
                     <xsl:with-param name="columns" select="3" />
@@ -811,7 +811,7 @@
             <!-- Outer list -->
             <xsl:when test="not(ancestor::list[@type='tocList'])">
                 <xsl:call-template name="closepar"/>
-                <table>
+                <table role="presentation">
                     <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                     <xsl:copy-of select="f:set-class-attribute-with(., 'tocList')"/>
                     <xsl:apply-templates mode="tocList">
@@ -895,7 +895,7 @@
         <xsl:choose>
             <!-- Outer list -->
             <xsl:when test="not(ancestor::list[@type='determinationTable'])">
-                <table class="tocList">
+                <table role="presentation" class="tocList">
                     <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                     <xsl:apply-templates mode="determinationTable"/>
                 </table>
@@ -933,7 +933,7 @@
                 </xsl:when>
                 <xsl:otherwise>
                     <td colspan="{7 - $depth}" class="innerContainer">
-                        <table class="inner">
+                        <table role="presentation" class="inner">
                             <tr>
                                 <td><xsl:apply-templates select="text()|*[not(@type='itemNum' or @type='determination' or @type='determinationTable')]"/></td>
                                 <td class="alignright"><xsl:apply-templates mode="tocList" select="ab[@type='determination']"/></td>

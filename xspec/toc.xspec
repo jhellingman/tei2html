@@ -15,6 +15,9 @@
 
     <!-- Redefine global variables used in localization.xsl -->
     <x:param name="language" as="xs:string" select="'en'"/>
+    <x:param name="root" select="self::document-node()">
+        <TEI/>
+    </x:param>
 
     <x:param name="sample1" as="document-node(element(TEI.2))" select="self::document-node()">
         <TEI.2 lang="en">
@@ -107,7 +110,7 @@
         <x:expect label="will result a generated table of contents">
             <div xmlns="http://www.w3.org/1999/xhtml" class="div1" id="toc">
                 <h2 class="main">Table of Contents</h2>
-                <table summary="Table of Contents">
+                <table role="presentation" summary="Table of Contents">
                     <tr id="preface.toc" class="tocLevel0">
                         <td class="tocDivNum"/>
                         <td class="tocDivTitle"><a href="#preface">Preface</a></td>
@@ -180,7 +183,7 @@
         <x:expect label="will result a generated table of contents">
             <div xmlns="http://www.w3.org/1999/xhtml" class="div1" id="toc">
                 <h2 class="main">Table of Contents</h2>
-                <table summary="Table of Contents">
+                <table role="presentation" summary="Table of Contents">
                     <tr id="preface.toc" class="tocLevel0">
                         <td class="tocDivNum"/>
                         <td class="tocDivTitle"><a href="#preface">Preface</a></td>
@@ -254,7 +257,7 @@
         <x:expect label="will result a generated table of contents">
             <div xmlns="http://www.w3.org/1999/xhtml" class="div1" id="toc">
                 <h2 class="main">Table of Contents</h2>
-                <table summary="Table of Contents">
+                <table role="presentation" summary="Table of Contents">
                     <tr id="preface.toc" class="tocLevel0">
                         <td class="tocDivNum"/>
                         <td class="tocDivTitle"><a href="#preface">Preface</a></td>
@@ -319,7 +322,7 @@
         <x:expect label="will result a generated table of contents">
             <div xmlns="http://www.w3.org/1999/xhtml" class="div1" id="toc">
                 <h2 class="main">Table of Contents</h2>
-                <table summary="Table of Contents">
+                <table role="presentation" summary="Table of Contents">
                     <tr id="ch1.toc" class="tocLevel0">
                         <td class="tocDivNum">I. </td>
                         <td class="tocDivTitle" colspan="2"><a href="#ch1">Chapter I.</a></td>
@@ -374,7 +377,7 @@
         <x:expect label="will result a generated table of contents">
             <div xmlns="http://www.w3.org/1999/xhtml" class="div1" id="toc">
                 <h2 class="main">Table of Contents</h2>
-                <table summary="Table of Contents">
+                <table role="presentation" summary="Table of Contents">
                     <tr id="ch1.toc" class="tocLevel0">
                         <td class="tocDivNum">I. </td>
                         <td class="tocDivTitle" colspan="3"><a href="#ch1">Chapter I.</a></td>
@@ -452,7 +455,7 @@
         <x:expect label="will result a generated table of contents">
             <div xmlns="http://www.w3.org/1999/xhtml" class="div1" id="toc">
                 <h2 class="main">Table of Contents</h2>
-                <table summary="Table of Contents">
+                <table role="presentation" summary="Table of Contents">
                     <tr id="ch1.toc" class="tocLevel0">
                         <td class="tocDivNum">I. </td>
                         <td class="tocDivTitle" colspan="6"><a href="#ch1">Chapter I.</a></td>
@@ -546,7 +549,7 @@
         <x:expect label="will result a generated table of contents">
             <div xmlns="http://www.w3.org/1999/xhtml" class="div1" id="toc">
                 <h2 class="main">Table of Contents</h2>
-                <table summary="Table of Contents">
+                <table role="presentation" summary="Table of Contents">
                     <tr id="ch1.toc" class="tocLevel0">
                         <td class="tocDivNum">I. </td>
                         <td class="tocDivTitle" colspan="6"><a href="#ch1">Chapter I.</a></td>
@@ -640,7 +643,7 @@
         <x:expect label="will result a generated table of contents">
             <div xmlns="http://www.w3.org/1999/xhtml" class="div1" id="toc">
                 <h2 class="main">Table of Contents</h2>
-                <table summary="Table of Contents">
+                <table role="presentation" summary="Table of Contents">
                     <tr id="ch1.toc" class="tocLevel0">
                         <td class="tocDivNum">I. </td>
                         <td class="tocDivTitle" colspan="3"><a href="#ch1">Chapter I.</a></td>
@@ -716,7 +719,7 @@
         <x:expect label="will result a generated table of contents">
             <div xmlns="http://www.w3.org/1999/xhtml" class="div1" id="toc">
                 <h2 class="main">Table of Contents</h2>
-                <table summary="Table of Contents">
+                <table role="presentation" summary="Table of Contents">
                     <tr id="ch1.toc" class="tocLevel0">
                         <td class="tocDivNum">I. </td>
                         <td class="tocDivTitle" colspan="3"><a href="#ch1">Chapter I.</a></td>
@@ -792,7 +795,7 @@
         <x:expect label="will result a generated table of contents">
             <div xmlns="http://www.w3.org/1999/xhtml" class="div1" id="toc">
                 <h2 class="main">Table of Contents</h2>
-                   <table summary="Table of Contents">
+                   <table role="presentation" summary="Table of Contents">
                       <tr id="ch1.toc" class="tocLevel0">
                          <td class="tocDivNum">I. </td>
                          <td class="tocDivTitle"><a href="#ch1">Chapter I.</a></td>
