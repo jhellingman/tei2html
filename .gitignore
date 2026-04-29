@@ -207,3 +207,8 @@ schematron/validation-report.xml
 *.o
 tools/patc/src/out.txt
 tools/patc/src/tmp.txt
+tools/patc/src/patc
+samples/Cole - Philippine Folk Tales/PhilippineFolkTales-checks.html
+samples/Cole - Philippine Folk Tales/PhilippineFolkTales-schematron-report.html
+samples/Cole - Philippine Folk Tales/usage.xml
+
