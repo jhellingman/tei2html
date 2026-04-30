@@ -6,6 +6,7 @@ The version maintained in this repository may be slightly out-of-sync with the v
 
 == About This Ebook
 
+[cols="1,3"]
 |===
 |Field |Value
 
@@ -14,7 +15,9 @@ The version maintained in this repository may be slightly out-of-sync with the v
 |Publisher |Project Gutenberg, Urbana, Illinois, USA., 2004-07-04
 |Publication date |2004-07-04
 |Availability |This eBook is for the use of anyone anywhere at no cost and with almost no restrictions whatsoever. You may copy it, give it away or re-use it under the terms of the Project Gutenberg License included with this eBook or online at https://www.gutenberg.org/[www.gutenberg.org]. This eBook is produced by Jeroen Hellingman and the Online Distributed Proofreading Team at https://www.pgdp.net/[www.pgdp.net]. gbn0406211926: Mabel Cook Cole, Philippine Folk Tales. Jeroen Hellingman <jeroen@bohol.ph>. 1916c. 6/24/2004. ok. A copy of this work is available at the https://www.archive.org/details/philippinefolkta00colerich[Internet Archive].
+|Number of Words |48933 (approximately 144 pages) 
 |Keyword |Folklore - Philippines
 |Keyword |Tales - Philippines
 |PG Ebook Number |https://www.gutenberg.org/ebooks/12814[12814]
+|QR Code for download a|image::Processed/images/qr12814.png[QR code,148,148]
 |===
