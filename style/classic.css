@@ -58,13 +58,13 @@ caption, .tableCaption {
 
 /* Script codes, see ISO-15924 */
 
-.arab { font-family: Scheherazade, serif; }
+.Arab { font-family: Scheherazade, serif; }
 
-.aran { font-family: 'Awami Nastaliq', serif; }
+.Aran { font-family: 'Awami Nastaliq', serif; }
 
-.grek { font-family: 'Charis SIL', serif; }
+.Grek { font-family: 'Charis SIL', serif; }
 
-.hebr { font-family: 'SBL Hebrew', Shlomo, 'Ezra SIL', serif; }
+.Hebr { font-family: 'SBL Hebrew', Shlomo, 'Ezra SIL', serif; }
 
-.syrc { font-family: 'Serto Jerusalem', serif; }
+.Syrc { font-family: 'Serto Jerusalem', serif; }
 

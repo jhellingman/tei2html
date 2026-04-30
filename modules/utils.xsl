@@ -11,6 +11,7 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
     xmlns:f="urn:stylesheet-functions"
+    xmlns:map="http://www.w3.org/2005/xpath-functions/map"
     exclude-result-prefixes="f xs xd">
 
 
@@ -326,6 +327,81 @@
         </xsl:choose>
     </xsl:function>
 
+    <!-- Default scripts for languages -->
+    <xsl:variable name="default-script" as="map(xs:string, xs:string)" static="yes" select="map {
+        'am':'Ethi',
+        'ar':'Arab',
+        'as':'Beng',
+        'be':'Cyrl',
+        'bg':'Cyrl',
+        'bn':'Beng',
+        'el':'Grek',
+        'fa':'Aran',
+        'grc':'Grek',
+        'gu':'Gujr',
+        'he':'Hebr',
+        'hi':'Deva',
+        'hy':'Armn',
+        'ja':'Jpan',
+        'ka':'Geor',
+        'kk':'Cyrl',
+        'km':'Khmr',
+        'kn':'Knda',
+        'ko':'Kore',
+        'ky':'Cyrl',
+        'lo':'Laoo',
+        'mk':'Cyrl',
+        'ml':'Mlym',
+        'mn':'Cyrl',
+        'mr':'Deva',
+        'my':'Mymr',
+        'ne':'Deva',
+        'or':'Orya',
+        'pa':'Guru',
+        'ps':'Arab',
+        'ru':'Cyrl',
+        'rue':'Cyrl',
+        'sa':'Deva',
+        'sd':'Arab',
+        'sr':'Cyrl',
+        'ta':'Taml',
+        'te':'Telu',
+        'th':'Thai',
+        'tt':'Cyrl',
+        'ug':'Arab',
+        'uk':'Cyrl',
+        'ur':'Aran',
+        'yi':'Hebr',
+        'zh':'Hani'
+    }"/>
+
+    <!-- Region overrides -->
+    <xsl:variable name="region-override-script" as="map(xs:string, xs:string)" static="yes" select="map {
+        'zh-CN':'Hans',
+        'zh-SG':'Hant',
+        'zh-TW':'Hant',
+        'zh-HK':'Hant',
+        'az-IR':'Aran'
+    }"/>
+
+    <xsl:function name="f:map-language-to-script" as="xs:string?">
+        <xsl:param name="tag" as="xs:string?"/>
+
+        <xsl:variable name="tag" select="f:fix-lang(lower-case(normalize-space($tag)))"/>
+        <xsl:variable name="parts" select="tokenize($tag, '-')"/>
+        <xsl:variable name="lang" select="$parts[1]"/>
+        <xsl:variable name="script-subtag" select="head($parts[matches(., '^[A-Z][a-z]{3}$')])"/>
+
+        <xsl:sequence select="
+            if ($script-subtag)
+               then $script-subtag
+               else if ($region-override-script($tag))
+                    then $region-override-script($tag)
+                    else if ($lang and $default-script($lang))
+                         then $default-script($lang)
+                         else 'Latn'
+        "/>
+    </xsl:function>
 
     <!--====================================================================-->
     <!-- Shortcut for both id and language tagging -->

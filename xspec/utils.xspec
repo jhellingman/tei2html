@@ -51,7 +51,110 @@
       <x:expect label="will return the language code 'la'" select="'la'"/>
    </x:scenario>
 
-    <!-- f:generate-stable-id -->
+
+  <!-- f:map-language-to-script -->
+
+  <x:scenario label="Explicit script subtag wins (Cyrillic)">
+    <x:call function="f:map-language-to-script">
+      <x:param select="'sr-Cyrl'"/>
+    </x:call>
+    <x:expect label="returns Cyrl" select="'Cyrl'"/>
+  </x:scenario>
+
+  <x:scenario label="Explicit script subtag wins (Latin)">
+    <x:call function="f:map-language-to-script">
+      <x:param select="'sr-Latn'"/>
+    </x:call>
+    <x:expect select="'Latn'"/>
+  </x:scenario>
+
+  <x:scenario label="Explicit script (Perso-Arabic)">
+    <x:call function="f:map-language-to-script">
+      <x:param select="'az-Aran'"/>
+    </x:call>
+    <x:expect select="'Aran'"/>
+  </x:scenario>
+
+  <!-- f:map-language-to-script Region overrides -->
+
+  <x:scenario label="Region override zh-TW">
+    <x:call function="f:map-language-to-script">
+      <x:param select="'zh-TW'"/>
+    </x:call>
+    <x:expect select="'Hant'"/>
+  </x:scenario>
+
+  <x:scenario label="Region override zh-CN">
+    <x:call function="f:map-language-to-script">
+      <x:param select="'zh-CN'"/>
+    </x:call>
+    <x:expect select="'Hans'"/>
+  </x:scenario>
+
+  <x:scenario label="Region override az-IR">
+    <x:call function="f:map-language-to-script">
+      <x:param select="'az-IR'"/>
+    </x:call>
+    <x:expect select="'Aran'"/>
+  </x:scenario>
+
+  <!-- Language defaults -->
+
+  <x:scenario label="Default Cyrillic language">
+    <x:call function="f:map-language-to-script">
+      <x:param select="'ru'"/>
+    </x:call>
+    <x:expect select="'Cyrl'"/>
+  </x:scenario>
+
+  <x:scenario label="Default Latin language">
+    <x:call function="f:map-language-to-script">
+      <x:param select="'en-US'"/>
+    </x:call>
+    <x:expect select="'Latn'"/>
+  </x:scenario>
+
+  <x:scenario label="Default Devanagari language">
+    <x:call function="f:map-language-to-script">
+      <x:param select="'hi'"/>
+    </x:call>
+    <x:expect select="'Deva'"/>
+  </x:scenario>
+
+  <!-- Normalization -->
+
+  <x:scenario label="Case normalization">
+    <x:call function="f:map-language-to-script">
+      <x:param select="'SR-cYRL'"/>
+    </x:call>
+    <x:expect select="'Cyrl'"/>
+  </x:scenario>
+
+  <x:scenario label="Whitespace normalization">
+    <x:call function="f:map-language-to-script">
+      <x:param select="'  en  '"/>
+    </x:call>
+    <x:expect select="'Latn'"/>
+  </x:scenario>
+
+  <!-- Edge cases -->
+
+  <x:scenario label="Unknown language returns Latin">
+    <x:call function="f:map-language-to-script">
+      <x:param select="'xx'"/>
+    </x:call>
+    <x:expect select="'Latn'"/>
+  </x:scenario>
+
+  <x:scenario label="Empty input returns Latin">
+    <x:call function="f:map-language-to-script">
+      <x:param select="()"/>
+    </x:call>
+    <x:expect select="'Latn'"/>
+  </x:scenario>
+
+
+  <!-- f:generate-stable-id -->
 
    <x:scenario label="When determining a stable id for a nested element">
       <x:call function="f:generate-stable-id">

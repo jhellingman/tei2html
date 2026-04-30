@@ -522,30 +522,12 @@
         <span>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:variable name="script" select="f:map-language-to-script(@lang)"/>
-            <xsl:copy-of select="if ($script)
+            <xsl:copy-of select="if ($script and $script != 'Latn')
                                  then f:set-class-attribute-with(., $script)
                                  else f:set-class-attribute(.)"/>
             <xsl:apply-templates mode="#current"/>
         </span>
     </xsl:template>
-
-
-    <xsl:function name="f:map-language-to-script" as="xs:string?">
-        <xsl:param name="lang" as="xs:string?"/>
-        <xsl:choose>
-            <xsl:when test="$lang=('ar')">arab</xsl:when>
-            <xsl:when test="$lang=('fa', 'ps', 'ur')">aran</xsl:when>
-            <xsl:when test="$lang=('as', 'bn')">beng</xsl:when>
-            <xsl:when test="$lang=('be', 'bg', 'mk', 'ru', 'rue', 'sr', 'uk')">cyrl</xsl:when>
-            <xsl:when test="$lang=('hi', 'ma', 'sa')">deva</xsl:when>
-            <xsl:when test="$lang=('el', 'grc')">grek</xsl:when>
-            <xsl:when test="$lang=('he', 'yi')">hebr</xsl:when>
-            <xsl:when test="$lang=('syc')">syrc</xsl:when>
-            <xsl:when test="$lang=('tm')">taml</xsl:when>
-            <xsl:otherwise></xsl:otherwise>
-        </xsl:choose>
-    </xsl:function>
-
 
     <!--====================================================================-->
     <!-- Anchors -->
