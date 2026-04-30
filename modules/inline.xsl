@@ -905,8 +905,12 @@
     </xd:doc>
 
     <xsl:template match="choice[reg/@type='trans']">
-        <span class="trans">
+        <span>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:variable name="script" select="f:map-language-to-script(orig/@lang)"/>
+            <xsl:copy-of select="if ($script)
+                                 then f:set-class-attribute-with(., 'trans ' || $script)
+                                 else f:set-class-attribute-with(., 'trans')"/>
             <xsl:if test="f:is-set('useMouseOverPopups')">
                 <xsl:attribute name="title">
                     <xsl:apply-templates select="reg" mode="remove-nested-choice"/>
@@ -915,8 +919,7 @@
             <xsl:apply-templates select="orig"/>
         </span>
     </xsl:template>
-
-
+    
     <xd:doc>
         <xd:short>Remove nested choice elements from regularized text.</xd:short>
     </xd:doc>

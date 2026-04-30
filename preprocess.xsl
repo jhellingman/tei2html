@@ -1,5 +1,4 @@
 <!DOCTYPE xsl:stylesheet>
-
 <xsl:stylesheet version="3.0"
                 xmlns:h="http://www.w3.org/1999/xhtml"
                 xmlns:f="urn:stylesheet-functions"
@@ -24,6 +23,7 @@
                 <h:li>1. Strip the TEI namespace if present (see stripns.xsl).</h:li>
                 <h:li>2. Normalize tables (see normalize-table.xsl).</h:li>
                 <h:li>3. Remove superfluous attributes.</h:li>
+                <h:li>4. Remove foreign elements if they are the only content of another element.</h:li>
             </h:ul>
         </xd:detail>
     </xd:doc>
@@ -38,8 +38,21 @@
 
     <!-- Remove TEIform attributes as they are TEI-specific metadata not needed in output -->
     <xsl:template match="@TEIform" mode="#all"/>
+    
+    
+    <!-- Remove <foreign> elements if they are the only child of an <orig> or <reg> element -->
+    <xsl:template match="orig | reg[count(node()) = 1 and node() instance of element(foreign)]">
+        <xsl:variable name="foreign" select="node()"/>
+        
+        <xsl:copy>
+            <xsl:apply-templates select="@*"/>
+            <xsl:copy-of select="$foreign/@lang[not(@lang)], $foreign/@xml:lang[not(@xml:lang)]"/>
+            <xsl:apply-templates select="$foreign/node()"/>
+        </xsl:copy>
+    </xsl:template>
+    
 
-
+    <!-- Preprocess tables -->
     <xsl:template match="table[f:has-rend-value(@rend, 'transpose')]">
         <xsl:variable name="transposed-table">
             <xsl:apply-templates select="." mode="transpose"/>
