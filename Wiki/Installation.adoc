@@ -24,6 +24,8 @@ For Windows, my advice is to download http://strawberryperl.com/[Strawberry Perl
 
 _Note_ Upgrading Strawberry Perl does not work properly: please save-guard local installations in your site directory before upgrading, as the uninstaller will throw those files away.
 
+For Linux, you probably already have Perl installed. For installing additional modules, I advise to use `cpanminus`, which can be installed with `sudo apt install cpanminus` and then invoked with `cpanm -S <package name>`.
+
 === Packages used
 
 * Image::Size
