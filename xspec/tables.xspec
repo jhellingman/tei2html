@@ -391,7 +391,7 @@
                  <tr class="label">
                     <th id="..." class="cell-head-left cell-head-top cell-head-bottom">First</th>
                     <th id="..." class="cell-head-top cell-head-bottom">Second</th>
-                    <th class="cellDoubleUp">&nbsp;</th>
+                    <td class="cellDoubleUp">&nbsp;</td>
                     <th class="cell-head-left cell-head-top cell-head-bottom">First</th>
                     <th class="cell-head-top cell-head-bottom">Second</th>
                  </tr>

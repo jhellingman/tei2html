@@ -549,9 +549,9 @@
                             <xsl:for-each select="1 to $n">
                                 <xsl:variable name="i" select="."/>
                                 <xsl:for-each select="$headers[$headerRow]/cell">
-                                    <!-- Insert a dummy cell between doubled-up columns -->
+                                    <!-- Insert a dummy cell between doubled-up columns (dummy cell should be td!) -->
                                     <xsl:if test="$i &gt; 1 and position() = 1">
-                                        <th class="cellDoubleUp">&nbsp;</th>
+                                        <td class="cellDoubleUp">&nbsp;</td>
                                     </xsl:if>
                                     <!-- Prevent duplication of ids by stripping them from all but the first repeated instance. -->
                                     <xsl:variable name="cellHtml">

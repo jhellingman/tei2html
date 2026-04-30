@@ -888,9 +888,10 @@
 
     <xsl:template match="choice[reg/@type='trans']">
         <span>
-            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            <xsl:attribute name="id" select="f:generate-id(.)"/>
+            <xsl:copy-of select="f:generate-lang-attribute(orig/@lang)"/>
             <xsl:variable name="script" select="f:map-language-to-script(orig/@lang)"/>
-            <xsl:copy-of select="if ($script)
+            <xsl:copy-of select="if ($script and $script != 'Latn')
                                  then f:set-class-attribute-with(., 'trans ' || $script)
                                  else f:set-class-attribute-with(., 'trans')"/>
             <xsl:if test="f:is-set('useMouseOverPopups')">
