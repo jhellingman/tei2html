@@ -109,6 +109,19 @@ For schematron, I use the schxslt implementation available from https://codeberg
 
 Just put the file `schxslt-cli.jar` in `tei2html/tools/lib`, and the main script will use it to generate a validation report of your TEI file (work-in-progress).
 
+== Zopflipng and QRencode
+
+_Optional, you will probably not need those tools, unless you produce texts for Project Gutenberg._
+
+For generating a QR code (that contains an URL pointing at the book at Project Gutenberg), I use QRencode
+
+On Linux, say `sudo apt install qrencode` to obtain it.
+
+For compressing PNG images, I use `zopflipng`, which offers some of the best possible compression. This can be obtained
+via https://github.com/google/zopfli[GitHub].
+
+On Linux, just clone the git repository, and run `make`.
+
 == Configuration
 
 === Environment variables
@@ -118,3 +131,12 @@ To run `tei2html` from the command line, it will be practical to configure sever
 * set `TEI2HTML_HOME` to the location of the checked-out `tei2html` directory.
 * set `SAXON_HOME` to the location where Saxon is installed.
 * (_optional_) set `PRINCE_HOME` to the location where Prince is installed.
+
+On Linux, you can add them to your `.bashrc` file, for example:
+
+```
+PATH="/home/jeroen/Documents/Repositories/tei2html/tools${PATH:+:${PATH}}"; export PATH;
+TEI2HTML_HOME="/home/jeroen/Documents/Repositories/tei2html/"; export TEI2HTML_HOME;
+SAXON_HOME="/home/jeroen/Documents/Repositories/tei2html/bin"; export SAXON_HOME;
+```
+

@@ -693,7 +693,11 @@ sub makeQrCodeAtSize {
 
     if (not -e $file) {
         # Generate a QR code with a transparent background.
-        system("qrcode -l '#0000' -s $scale -o $file https://www.gutenberg.org/ebooks/$number");
+        if ($^O eq 'MSWin32') {
+            system("qrcode -l '#0000' -s $scale -o $file https://www.gutenberg.org/ebooks/$number");
+        } else {
+            system("qrencode -s $scale -m 1 -o $file --background=ffffff00 --foreground=000000 https://www.gutenberg.org/ebooks/$number")
+        }
 
         # Optimize the generated QR code.
         my $newFile = "$imageDir/qrcode-optimized.png";
