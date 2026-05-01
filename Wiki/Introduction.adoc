@@ -37,7 +37,7 @@ Although XML is simpler, and far more tools can deal with it, SGML is somewhat e
 
 Of course, you can work directly in XML instead of SGML, and the stylesheets are supposed to work with the P4 and P5 incarnations of TEI as well (although not all elements, even those of P3, are supported). Working in XML directly has a number of benefits as well:
 
-. Directly viewable in most modern browsers (which can apply an XSLT transform on the fly; however, in practice, the `tei2html` stylesheets used here are too complex for a browser, and no current browser supports XSLT 3.0 directly. Javascript implementations do exist, but I have no experience with them).
+. Directly viewable in most modern browsers (which can apply an XSLT transform on the fly; however, in practice, the `tei2html` stylesheets used here are too complex for a browser, and no current browser supports XSLT 3.0 directly. JavaScript implementations do exist, but I have no experience with them).
 . No initial conversion tool required.
 . Can use embedded namespaces for other XML schemas.
 . Can use one or more of the various XML authoring tools available.

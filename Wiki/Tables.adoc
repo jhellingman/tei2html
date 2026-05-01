@@ -27,10 +27,10 @@ Sometimes, rows are preceded by a tall brace. `tei2html` will automatically gene
 
 Using `@rend` values, the rendering of the table can be adjusted.
 
-* `transpose(ccw)` will swap rows and colums.
+* `transpose(ccw)` will swap rows and columns.
 * `columns(n)` will set the table in _n_ columns, repeating the headers above each column (in the original table).
-* when using multiple columns, `item-order(column-major)` will put the consequetive rows next to each other, before going to the next row; `item-order(column-major)` (the default), will put the rows below each other before going to the next column.
-* Columns will not have equal length if the number of rows cannot be divided by the number of colums.
+* when using multiple columns, `item-order(column-major)` will put the consecutive rows next to each other, before going to the next row; `item-order(column-major)` (the default), will put the rows below each other before going to the next column.
+* Columns will not have equal length if the number of rows cannot be divided by the number of columns.
 
 == Table processing
 

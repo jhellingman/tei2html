@@ -22,7 +22,7 @@ They will be rendered as a superscript number with the actual number replacing t
 When this is rendered on page media, the content will be replaced with the actual page number of the page the reference appears on.
 
 
-== External Cross References
+== External Cross-References
 
 External cross-references are to be encoded using the `&lt;xref&gt;` element, with the `@url` attribute carrying the url of the resource referenced.
 

@@ -44,7 +44,7 @@ Also add check to the checking tool to verify this, and adjust all code to deal 
 
 == Metadata
 
-Adding metadata about the series a book belongs to in ePub is not yet standardized. Follow the calibre convention for now:
+Adding metadata about the series a book belongs to in ePub is not yet standardized. Follow the Calibre convention for now:
 
 ----
 <meta name="calibre:series" content="CAC"/>

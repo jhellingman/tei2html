@@ -32,7 +32,7 @@ Table handling in TEI and HTML is complicated. To deal with them correctly, we h
 
 === Step 2.2: Transform to HTML
 
-After the tables have been normalised, we're ready to transform to HTML. This is done by the main XSLT stylesheet `tei2html.xsl`, which pulls in the various partial stylesheets.
+After the tables have been normalized, we're ready to transform to HTML. This is done by the main XSLT stylesheet `tei2html.xsl`, which pulls in the various partial stylesheets.
 
 === Step 2.3: Transform to ePub
 

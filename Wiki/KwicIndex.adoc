@@ -15,7 +15,7 @@ The KWIC generator should:
 * Handle text in footnotes correctly.
 * Present the resulting KWIC in HTML.
 * Work with all Unicode supported scripts.
-* Ignore case and accent variants (but they should be preserved and signalled).
+* Ignore case and accent variants (but they should be preserved and signaled).
 * Ignore differences between common ligatures and loose characters (such as _æ_ and _ae_)
 * Properly handle a mixture of left-to-right and right-to-left scripts (as Hebrew and Arabic).
 * Optionally ignore differences between look-alike characters or sequences (such as _b_ and _h_, or _rn_ and _m_)
@@ -46,7 +46,7 @@ The XSLT script currently accepts the following parameters:
 
 Calling the script has been integrated into `tei2html.pl`.
 
-A particularly useful way of generating a kwic is with:
+A particularly useful way of generating a KWIC is with:
 
 `tei2html -k --kwicvariants=2 --kwiccasesensitive=true`
 

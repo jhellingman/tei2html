@@ -11,7 +11,7 @@ The current implementation is in `css2xml.xsl`, which is incomplete. The CSS is 
 . group properties, based on semicolons.
 . determine key-value pairs, based on the semicolon.
 . determine selectors.
-. clean-up parsing artifacts.
+. cleanup parsing artifacts.
 
 Items remaining to do are:
 

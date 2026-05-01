@@ -10,7 +10,7 @@
                 exclude-result-prefixes="f xd">
 
     <xd:doc type="stylesheet">
-        <xd:short>Generate metadata from a TEI file in ASCIIdoc format.</xd:short>
+        <xd:short>Generate metadata from a TEI file in AsciiDoc format.</xd:short>
         <xd:author>Jeroen Hellingman</xd:author>
         <xd:copyright>2024, Jeroen Hellingman</xd:copyright>
     </xd:doc>

@@ -2,7 +2,7 @@
 
 The TEI header (`&lt;teiHeader&gt;`) contains information about the text and the sources it is derived from. This metadata is grouped in various sections, in which it is often possible to distinguish information related to the electronic file from that related to the original source.
 
-`tei2html` uses the metadata in the TEI header to construct the meta-data in the target formats, as well as the optional colophon. It is important to correctly specify the metadata in the TEI header.
+`tei2html` uses the metadata in the TEI header to construct the metadata in the target formats, as well as the optional colophon. It is important to correctly specify the metadata in the TEI header.
 
 Preparing a TEI header is less work than it might seem, as you can normally work from a template, prepared with the most common elements already in place.
 
@@ -20,7 +20,7 @@ The TEI header contains four main sections:
 
 == The File Description
 
-The first element of the TEI header is the file description, `&lt;fileDesc&gt;`. This contains the most important meta-data in three main elements, the `&lt;titleStmt&gt;`, `&lt;publicationStmt&gt;`, and `&lt;sourceDesc&gt;`. Our template looks like this.
+The first element of the TEI header is the file description, `&lt;fileDesc&gt;`. This contains the most important metadata in three main elements, the `&lt;titleStmt&gt;`, `&lt;publicationStmt&gt;`, and `&lt;sourceDesc&gt;`. Our template looks like this.
 
 [source,xml]
 ----

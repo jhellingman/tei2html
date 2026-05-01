@@ -29,7 +29,7 @@ The following steps need to be taken to define custom layout.
 
 The custom layout CSS file can simply be added by creating a file `custom.css` If this file is present, the Perl script will pick it up and signal it to the XSLT processor for inclusion in the output.
 
-If you give it any other name, you can tell the perl script about it, using the `-c &lt;filename&gt;` option.
+If you give it any other name, you can tell the Perl script about it, using the `-c &lt;filename&gt;` option.
 
 === CCS Selectors
 
@@ -83,20 +83,20 @@ Rendering on the whole table is handled the normal way.
 
 Rendering on the column level is attached to (non-TEI) `&lt;column&gt;` elements, and is applied before rows or individual cells are considered.
 
-Since HTML support for several CSS attributes on the row level is limited, those rendering attributes will instead be applied to each cell in the row. Rendering specified in an `@rend` attribute at the row level overrides those set at the column level.
+Since HTML-support for several CSS attributes on the row level is limited, those rendering attributes will instead be applied to each cell in the row. Rendering specified in an `@rend` attribute at the row level overrides those set at the column level.
 
 Finally, rendering set at the cell level will override both column and row rendering.
 
 [cols="<,<,<"]
 |===
-|*TEI Element* |*HTML Output* |*Notes* 
+|*TEI Element* |*HTML Output* |*Notes*
 
-|`table` |`&lt;div class=&quot;table&quot;&gt;` |Wrapper div, which will contain the caption and the table proper. 
-| |`&lt;table&gt;` |Actual table, `@rend` applied on this. 
-|`table/head` |`&lt;h4 class=&quot;tablecaption&quot;&gt;` |Header, inside wrapper div, outside table 
-|`row` |`&lt;tr&gt;` | 
-|`cell[@role=&#39;label&#39;]` |`&lt;td&gt;` |Even though this is a header, still a `&lt;td&gt;`. 
-|`cell` |`&lt;td&gt;` | 
+|`table` |`&lt;div class=&quot;table&quot;&gt;` |Wrapper div, which will contain the caption and the table proper.
+| |`&lt;table&gt;` |Actual table, `@rend` applied on this.
+|`table/head` |`&lt;p class=&quot;tableCaption&quot;&gt;` |Header, inside wrapper div, outside table
+|`row` |`&lt;tr&gt;` |
+|`cell[@role=&#39;label&#39;]` |`&lt;td&gt;` |Even though this is a header, still a `&lt;td&gt;`.
+|`cell` |`&lt;td&gt;` |
 |===
 
 Furthermore, cells get attributes to indicate whether they are the topmost, rightmost, bottommost or leftmost cell in a table. These can be used to set borders. (Note that those attributes do take into account spans).

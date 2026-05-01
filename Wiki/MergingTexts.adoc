@@ -6,7 +6,7 @@ Larger works were often issued in multi-volume sets, and as a result often also 
 
 === 1. Create an XSLT 'galley' file
 
-The idea is to create an XSLT stylesheet that will merge the individual volumes, and provide them with a new TEI-header (which in turn can also be put together from elements pulled from the TEI-header of one or more of the source TEI files. Some things to consider:
+The idea is to create an XSLT stylesheet that will merge the individual volumes, and provide them with a new TEI-header (which in turn can also be put together from elements pulled from the TEI-header of one or more of the source TEI-files. Some things to consider:
 
 * Combined TEI-header. Often using the contents of the first TEI-header, with some minor changes will be enough.
 * Combined tables-of-contents. Here, we may need to have some smart xpath queries to extract the various fragments of the table-of-contents from the various volumes (or simply generate the entire thing anew).
