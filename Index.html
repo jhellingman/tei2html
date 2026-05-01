@@ -804,7 +804,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Directly viewable in most modern browsers (which can apply an XSLT transform on the fly; however, in practice, the <code>tei2html</code> stylesheets used here are too complex for a browser, and no current browser supports XSLT 3.0 directly. Javascript implementations do exist, but I have no experience with them).</p>
+<p>Directly viewable in most modern browsers (which can apply an XSLT transform on the fly; however, in practice, the <code>tei2html</code> stylesheets used here are too complex for a browser, and no current browser supports XSLT 3.0 directly. JavaScript implementations do exist, but I have no experience with them).</p>
 </li>
 <li>
 <p>No initial conversion tool required.</p>
@@ -959,7 +959,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <p>Before you can run the Perl scripts, you will need to make sure the paths to the various executables are configured correctly. Perl should be able to find the place where you’ve located your scripts (when running perl with the -S option.)</p>
 </div>
 <div class="paragraph">
-<p>The various <code>.jar</code> files (for Saxon and epubcheck), and the SGML catalog files need to be located in a specific subdirectory of the directory where the perl scripts reside.</p>
+<p>The various <code>.jar</code> files (for Saxon and epubcheck), and the SGML catalog files need to be located in a specific subdirectory of the directory where the Perl scripts reside.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1073,7 +1073,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <p><em>Optional, only needed you want to use SGML as source format.</em></p>
 </div>
 <div class="paragraph">
-<p>SX is an SGML to XML translator, and NSGML is an SGML validator, part of the SP package. Since XSLT only supports XML, you will need both those two tools to be able to work with SGML. They can be downloaded from <a href="http://www.jclark.com/">James Clark website</a>. For windows, get <a href="ftp://ftp.jclark.com/pub/sp/win32/sp1_3_4.zip">sp 1.3.4</a>. On Linux, the easiest approach is to instal <code>opensp</code> (<code>sudo apt install opensp</code>) and then create symbolic links from <code>onsgmls</code> and <code>osx</code> (see below)</p>
+<p>SX is an SGML to XML translator, and NSGML is an SGML validator, part of the SP package. Since XSLT only supports XML, you will need both those two tools to be able to work with SGML. They can be downloaded from <a href="http://www.jclark.com/">James Clark website</a>. For windows, get <a href="ftp://ftp.jclark.com/pub/sp/win32/sp1_3_4.zip">sp 1.3.4</a>. On Linux, the easiest approach is to install <code>opensp</code> (<code>sudo apt install opensp</code>) and then create symbolic links from <code>onsgmls</code> and <code>osx</code> (see below)</p>
 </div>
 <div class="paragraph">
 <p>To enable SX and NSGML to understand your document types, you need to configure a catalog of DTDs (Which maps public DTDs to local resources containing their definitions). The scripts assume this is located in a file named <code>dtd/CATALOG</code>.</p>
@@ -1125,7 +1125,7 @@ sudo ln -s /usr/bin/osx /usr/bin/sx</code></pre>
 <p><em>Optional, only needed when you use the transcription schemes for non-Latin scripts I use in SGML.</em></p>
 </div>
 <div class="paragraph">
-<p>Patc (pattern changer) is a small utility written in C to do multiple find-and-replace actions at once. You will need a C compiler to get it to work. It enables you to execute multiple find-replace actions in an efficient way. Mostly used to change the transliteration of non-Roman scripts I&#8217;ve used. If you don&#8217;t use that, you’ll not need it. (I’ve successfully compiled this on a variety of platforms, including MacOS, Linux, and Windows; a make file is included, so simply say <code>make</code> in the source folder; then move the resulting executable to a location on your working path and make it executable.)</p>
+<p>Patc (pattern changer) is a small utility written in C to do multiple find-and-replace actions at once. You will need a C compiler to get it to work. It enables you to execute multiple find-replace actions in an efficient way. Mostly used to change the transliteration of non-Roman scripts I&#8217;ve used. If you don&#8217;t use that, you’ll not need it. (I’ve successfully compiled this on a variety of platforms, including macOS, Linux, and Windows; a make file is included, so simply say <code>make</code> in the source folder; then move the resulting executable to a location on your working path and make it executable.)</p>
 </div>
 </div>
 <div class="sect2">
@@ -1273,7 +1273,7 @@ SAXON_HOME=&quot;/home/jeroen/Documents/Repositories/tei2html/bin&quot;; export 
 <div class="sect3">
 <h4 id="_step_2_2_transform_to_html">Step 2.2: Transform to HTML</h4>
 <div class="paragraph">
-<p>After the tables have been normalised, we&#8217;re ready to transform to HTML. This is done by the main XSLT stylesheet <code>tei2html.xsl</code>, which pulls in the various partial stylesheets.</p>
+<p>After the tables have been normalized, we&#8217;re ready to transform to HTML. This is done by the main XSLT stylesheet <code>tei2html.xsl</code>, which pulls in the various partial stylesheets.</p>
 </div>
 </div>
 <div class="sect3">
@@ -1432,7 +1432,7 @@ SAXON_HOME=&quot;/home/jeroen/Documents/Repositories/tei2html/bin&quot;; export 
 
     <span class="comment">&lt;!-- Output-format specific settings: these override the general settings defined above for a specific output format. Supported formats: &quot;html&quot;, &quot;html5&quot; and &quot;epub&quot;. --&gt;</span>
     <span class="tag">&lt;output</span> <span class="attribute-name">format</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">html</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
-        <span class="tag">&lt;useMouseOverPopups&gt;</span>true<span class="tag">&lt;/useMouseOverPopups&gt;</span>           <span class="comment">&lt;!-- Use mouse-over pop-ups on various items (links, etc). --&gt;</span>
+        <span class="tag">&lt;useMouseOverPopups&gt;</span>true<span class="tag">&lt;/useMouseOverPopups&gt;</span>           <span class="comment">&lt;!-- Use mouse-over pop-ups on various items (links, etc.). --&gt;</span>
     <span class="tag">&lt;/output&gt;</span>
     <span class="tag">&lt;output</span> <span class="attribute-name">format</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">html5</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
         <span class="tag">&lt;useMouseOverPopups&gt;</span>true<span class="tag">&lt;/useMouseOverPopups&gt;</span>
@@ -1510,7 +1510,7 @@ SAXON_HOME=&quot;/home/jeroen/Documents/Repositories/tei2html/bin&quot;; export 
 <p>The TEI header (<code>&lt;teiHeader&gt;</code>) contains information about the text and the sources it is derived from. This metadata is grouped in various sections, in which it is often possible to distinguish information related to the electronic file from that related to the original source.</p>
 </div>
 <div class="paragraph">
-<p><code>tei2html</code> uses the metadata in the TEI header to construct the meta-data in the target formats, as well as the optional colophon. It is important to correctly specify the metadata in the TEI header.</p>
+<p><code>tei2html</code> uses the metadata in the TEI header to construct the metadata in the target formats, as well as the optional colophon. It is important to correctly specify the metadata in the TEI header.</p>
 </div>
 <div class="paragraph">
 <p>Preparing a TEI header is less work than it might seem, as you can normally work from a template, prepared with the most common elements already in place.</p>
@@ -1531,7 +1531,7 @@ SAXON_HOME=&quot;/home/jeroen/Documents/Repositories/tei2html/bin&quot;; export 
 <div class="sect2">
 <h3 id="_the_file_description">The File Description</h3>
 <div class="paragraph">
-<p>The first element of the TEI header is the file description, <code>&lt;fileDesc&gt;</code>. This contains the most important meta-data in three main elements, the <code>&lt;titleStmt&gt;</code>, <code>&lt;publicationStmt&gt;</code>, and <code>&lt;sourceDesc&gt;</code>. Our template looks like this.</p>
+<p>The first element of the TEI header is the file description, <code>&lt;fileDesc&gt;</code>. This contains the most important metadata in three main elements, the <code>&lt;titleStmt&gt;</code>, <code>&lt;publicationStmt&gt;</code>, and <code>&lt;sourceDesc&gt;</code>. Our template looks like this.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1918,16 +1918,16 @@ SAXON_HOME=&quot;/home/jeroen/Documents/Repositories/tei2html/bin&quot;; export 
 <div class="ulist">
 <ul>
 <li>
-<p><code>transpose(ccw)</code> will swap rows and colums.</p>
+<p><code>transpose(ccw)</code> will swap rows and columns.</p>
 </li>
 <li>
 <p><code>columns(n)</code> will set the table in <em>n</em> columns, repeating the headers above each column (in the original table).</p>
 </li>
 <li>
-<p>when using multiple columns, <code>item-order(column-major)</code> will put the consequetive rows next to each other, before going to the next row; <code>item-order(column-major)</code> (the default), will put the rows below each other before going to the next column.</p>
+<p>when using multiple columns, <code>item-order(column-major)</code> will put the consecutive rows next to each other, before going to the next row; <code>item-order(column-major)</code> (the default), will put the rows below each other before going to the next column.</p>
 </li>
 <li>
-<p>Columns will not have equal length if the number of rows cannot be divided by the number of colums.</p>
+<p>Columns will not have equal length if the number of rows cannot be divided by the number of columns.</p>
 </li>
 </ul>
 </div>
@@ -1983,7 +1983,7 @@ SAXON_HOME=&quot;/home/jeroen/Documents/Repositories/tei2html/bin&quot;; export 
 <p>If this is undesired, you can also explicitly call for the footnotes to be rendered, by inserting a <code>&lt;divGen type=&quot;footnotes&quot;&gt;</code>, which will generate the footnotes in a generate section. If only the body of that section is desired, use <code>&lt;divGen type=&quot;footnotebody&quot;&gt;</code>.</p>
 </div>
 <div class="paragraph">
-<p>Footnotes will be automatically numbered per division. In the text, a small superscript number will link to the actual footnote. This same number is rendered in front of the footnote, and will link back to the location in the text. A small up-arrow at the end of the footnote will also link back to the text. This up-arrow can be surpressed by setting the configuration item <code>notes.foot.returnArrow</code> to <code>false</code>.</p>
+<p>Footnotes will be automatically numbered per division. In the text, a small superscript number will link to the actual footnote. This same number is rendered in front of the footnote, and will link back to the location in the text. A small up-arrow at the end of the footnote will also link back to the text. This up-arrow can be suppressed by setting the configuration item <code>notes.foot.returnArrow</code> to <code>false</code>.</p>
 </div>
 <div class="paragraph">
 <p>Sometimes, multiple footnote references on a page refer to the same footnote. This can be encoded using the <code>@sameAs</code> attribute, linking it to the <code>@id</code> of the referenced footnote. This way, multiple references can be made to the same footnote (using the same number). The up-arrow after such a duplicated note will be followed lower-case letters, each linking back to an instance of the note reference in the text.</p>
@@ -1992,7 +1992,7 @@ SAXON_HOME=&quot;/home/jeroen/Documents/Repositories/tei2html/bin&quot;; export 
 <p>If you want to override the automatically assigned note number, you can provide an alternative marker with <code>@rend=&quot;note-marker(*)&quot;</code>. Note that this will <em>not</em> change the generated number of other notes, that is, the note will still be counted in the sequence of notes.</p>
 </div>
 <div class="paragraph">
-<p>You can change the scope by with notes are numberd by setting the configuration item <code>notes.foot.counter</code>. Possible values: <code>chapter</code> (default) or <code>text</code>.</p>
+<p>You can change the scope by with notes are numbered by setting the configuration item <code>notes.foot.counter</code>. Possible values: <code>chapter</code> (default) or <code>text</code>.</p>
 </div>
 </div>
 <div class="sect2">
@@ -2066,7 +2066,7 @@ SAXON_HOME=&quot;/home/jeroen/Documents/Repositories/tei2html/bin&quot;; export 
 <div class="ulist">
 <ul>
 <li>
-<p>Meet Project Gutenberg rules, that is convert to HTML and ePub without any dynamic content (that is, no javascript, no external fonts or dependencies on non-standard software, etc.)</p>
+<p>Meet Project Gutenberg rules, that is convert to HTML and ePub without any dynamic content (that is, no JavaScript, no external fonts or dependencies on non-standard software, etc.)</p>
 </li>
 <li>
 <p>Look as good as normal (dynamic) MathJax output.</p>
@@ -2117,7 +2117,7 @@ SAXON_HOME=&quot;/home/jeroen/Documents/Repositories/tei2html/bin&quot;; export 
 <div class="ulist">
 <ul>
 <li>
-<p><code>MathJax</code>: use MathJax dynamically (loading javascript libraries)</p>
+<p><code>MathJax</code>: use MathJax dynamically (loading JavaScript libraries)</p>
 </li>
 <li>
 <p><code>MML</code>: use inline MathML notation (generated by mathjax-node-cli)</p>
@@ -2537,7 +2537,7 @@ SAXON_HOME=&quot;/home/jeroen/Documents/Repositories/tei2html/bin&quot;; export 
 </ol>
 </div>
 <div class="paragraph">
-<p>When running <code>tei2html</code>, it will generate a table, with the text of the first division on the left, and the text of the second division on the right. Table cells will be used to make sure matching elements are aligned. The code understands sub-divisions and will recurse into them, still using a single table.</p>
+<p>When running <code>tei2html</code>, it will generate a table, with the text of the first division on the left, and the text of the second division on the right. Table cells will be used to make sure matching elements are aligned. The code understands subdivisions and will recurse into them, still using a single table.</p>
 </div>
 <div class="sect2">
 <h3 id="_excluding_content_from_alignment">Excluding content from alignment</h3>
@@ -2564,7 +2564,7 @@ SAXON_HOME=&quot;/home/jeroen/Documents/Repositories/tei2html/bin&quot;; export 
 </div>
 </div>
 <div class="paragraph">
-<p>When using the perl scripts that come with <code>tei2html</code>, the to-be-aligned sections will be included in an intermediate document in a pre-processing step (in <code>include.xsl</code>), which replaces <code>align-with-document</code> with <code>align-with</code> and places the to-be aligned section directly after the section it will be aligned with. By doing so, generated tables of contents, lists of issues in the colophon, and footnotes will be processed correctly. The <code>tei2html</code> xslt stylesheeets can also do this directly, but with limited support for those additional items.</p>
+<p>When using the Perl scripts that come with <code>tei2html</code>, the to-be-aligned sections will be included in an intermediate document in a pre-processing step (in <code>include.xsl</code>), which replaces <code>align-with-document</code> with <code>align-with</code> and places the to-be aligned section directly after the section it will be aligned with. By doing so, generated tables of contents, lists of issues in the colophon, and footnotes will be processed correctly. The <code>tei2html</code> xslt stylesheets can also do this directly, but with limited support for those additional items.</p>
 </div>
 </div>
 <div class="sect2">
@@ -3759,7 +3759,7 @@ brackets.</p>
 <div class="sect3">
 <h4 id="_1_create_an_xslt_galley_file">1. Create an XSLT 'galley' file</h4>
 <div class="paragraph">
-<p>The idea is to create an XSLT stylesheet that will merge the individual volumes, and provide them with a new TEI-header (which in turn can also be put together from elements pulled from the TEI-header of one or more of the source TEI files. Some things to consider:</p>
+<p>The idea is to create an XSLT stylesheet that will merge the individual volumes, and provide them with a new TEI-header (which in turn can also be put together from elements pulled from the TEI-header of one or more of the source TEI-files. Some things to consider:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -3955,7 +3955,7 @@ opening mark, there should be a corresponding closing mark.</p>
 <p>Work with all Unicode supported scripts.</p>
 </li>
 <li>
-<p>Ignore case and accent variants (but they should be preserved and signalled).</p>
+<p>Ignore case and accent variants (but they should be preserved and signaled).</p>
 </li>
 <li>
 <p>Ignore differences between common ligatures and loose characters (such as <em>æ</em> and <em>ae</em>)</p>
@@ -4021,7 +4021,7 @@ opening mark, there should be a corresponding closing mark.</p>
 <p>Calling the script has been integrated into <code>tei2html.pl</code>.</p>
 </div>
 <div class="paragraph">
-<p>A particularly useful way of generating a kwic is with:</p>
+<p>A particularly useful way of generating a KWIC is with:</p>
 </div>
 <div class="paragraph">
 <p><code>tei2html -k --kwicvariants=2 --kwiccasesensitive=true</code></p>
@@ -4166,7 +4166,7 @@ opening mark, there should be a corresponding closing mark.</p>
 <p>determine selectors.</p>
 </li>
 <li>
-<p>clean-up parsing artifacts.</p>
+<p>cleanup parsing artifacts.</p>
 </li>
 </ol>
 </div>
@@ -4227,7 +4227,7 @@ opening mark, there should be a corresponding closing mark.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-04-30 20:07:07 UTC
+Last updated 2026-05-01 06:47:35 UTC
 </div>
 </div>
 </body>
