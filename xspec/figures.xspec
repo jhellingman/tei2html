@@ -65,6 +65,61 @@
         </x:expect>
     </x:scenario>
 
+
+    <x:scenario label="When rendering a figure element with a head and paragraph of text">
+        <x:context>
+            <figure id="fig_03" rend="image(images/fig_03.png)">
+                <head>Heading of picture.</head>
+
+                <p>Paragraph of text.</p>
+            </figure>
+        </x:context>
+        <x:expect label="will result in an HTML div with img inside, and the heading as alt text.">
+            <div xmlns="http://www.w3.org/1999/xhtml" class="figure fig_03width" id="fig_03">
+               <img src="images/fig_03.png" alt="Heading of picture." width="30" height="40"/>
+               <p class="figureHead">Heading of picture.</p>
+               <p id="..." class="first">Paragraph of text.</p>
+            </div>
+        </x:expect>
+    </x:scenario>
+
+
+    <x:scenario label="When rendering a figure element with a head and paragraph of text and explicitly positioned texts">
+        <x:context>
+            <figure id="fig_03" rend="image(images/fig_03.png)">
+                <head>Heading of picture.</head>
+
+                <p rend="position(figTopLeft)">Top left.</p>
+                <p rend="position(figTop)">Top.</p>
+                <p rend="position(figTopRight)">Top right.</p>
+
+                <p rend="position(figBottomLeft)">Bottom left.</p>
+                <p rend="position(figBottom)">Bottom.</p>
+                <p rend="position(figBottomRight)">Bottom right.</p>
+
+                <p>Paragraph of text.</p>
+            </figure>
+        </x:context>
+        <x:expect label="will result in an HTML div with img inside, and the heading as alt text.">
+            <div xmlns="http://www.w3.org/1999/xhtml" class="figure fig_03width" id="fig_03">
+               <div class="figAnnotation fig_03width">
+                  <span class="figTopLeft">Top left.</span>
+                  <span class="figTop">Top.</span>
+                  <span class="figTopRight">Top right.</span>
+               </div>
+               <img src="images/fig_03.png" alt="Heading of picture." width="30" height="40"/>
+               <div class="figAnnotation fig_03width">
+                  <span class="figBottomLeft">Bottom left.</span>
+                  <span class="figBottom">Bottom.</span>
+                  <span class="figBottomRight">Bottom right.</span>
+               </div>
+               <p class="figureHead">Heading of picture.</p>
+               <p id="...">Paragraph of text.</p>
+            </div>
+        </x:expect>
+    </x:scenario>
+
+
     <x:scenario label="When rendering a figure element with rend='inline'">
         <x:context>
             <figure id="fig_04" rend="inline">
@@ -151,6 +206,9 @@ width:12px;
         </x:expect>
     </x:scenario>
 
+
+
+<!-- graphic -->
 
     <x:scenario label="When rendering a graphic element">
         <x:context>

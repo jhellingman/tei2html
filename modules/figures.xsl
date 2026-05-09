@@ -57,7 +57,7 @@
                  then $node/@url
                  else if ($node/@target)
                       then $node/@target
-                      else if ($node/@id)
+                      else if ($node/@id and f:is-set('images.fileFromId'))
                            then 'images/' || $node/@id || $format
                            else ''"/>
     </xsl:function>
@@ -244,43 +244,45 @@
         <xsl:param name="rend" as="xs:string?"/>
         <xsl:param name="class" as="xs:string?"/>
 
-        <xsl:variable name="width" select="f:rend-value($rend, 'width')"/>
-        <xsl:variable name="height" select="f:rend-value($rend, 'height')"/>
+        <xsl:if test="$file != ''">
+            <xsl:variable name="width" select="f:rend-value($rend, 'width')"/>
+            <xsl:variable name="height" select="f:rend-value($rend, 'height')"/>
 
-        <xsl:variable name="width" select="if ($width) then $width else f:image-width($file)"/>
-        <xsl:variable name="height" select="if ($height) then $height else f:image-height($file)"/>
+            <xsl:variable name="width" select="if ($width) then $width else f:image-width($file)"/>
+            <xsl:variable name="height" select="if ($height) then $height else f:image-height($file)"/>
 
-        <xsl:variable name="width" select="substring-before($width, 'px')"/>
-        <xsl:variable name="height" select="substring-before($height, 'px')"/>
-        <xsl:variable name="fileSize" select="f:image-file-size($file)"/>
+            <xsl:variable name="width" select="substring-before($width, 'px')"/>
+            <xsl:variable name="height" select="substring-before($height, 'px')"/>
+            <xsl:variable name="fileSize" select="f:image-file-size($file)"/>
 
-        <xsl:variable name="maxWidth" select="f:get-setting('images.maxWidth')"/>
-        <xsl:variable name="maxHeight" select="f:get-setting('images.maxHeight')"/>
-        <xsl:variable name="maxFileSize" select="f:get-setting('images.maxSize')"/>
+            <xsl:variable name="maxWidth" select="f:get-setting('images.maxWidth')"/>
+            <xsl:variable name="maxHeight" select="f:get-setting('images.maxHeight')"/>
+            <xsl:variable name="maxFileSize" select="f:get-setting('images.maxSize')"/>
 
-        <xsl:if test="$width = ''">
-            <xsl:copy-of select="f:log-warning('Image {1} not in image-info file {2}.', ($file, normalize-space($imageInfoFile)))"/>
+            <xsl:if test="$width = ''">
+                <xsl:copy-of select="f:log-warning('Image {1} not in image-info file {2}.', ($file, normalize-space($imageInfoFile)))"/>
+            </xsl:if>
+            <xsl:if test="$width != '' and number($width) > xs:double($maxWidth)">
+                <xsl:copy-of select="f:log-warning('Image {1} width more than {3} pixels ({2} px).', ($file, $width, $maxWidth))"/>
+            </xsl:if>
+            <xsl:if test="$height != '' and number($height) > xs:double($maxHeight)">
+                <xsl:copy-of select="f:log-warning('Image {1} height more than {3} pixels ({2} px).', ($file, $height, $maxHeight))"/>
+            </xsl:if>
+            <xsl:if test="$fileSize != '' and number($fileSize) > xs:double($maxFileSize) * 1024">
+                <xsl:copy-of select="f:log-warning('Image {1} file-size larger than {3} kB ({2} kB).', ($file, xs:string(ceiling(number($fileSize) div 1024)), $maxFileSize))"/>
+            </xsl:if>
+            <xsl:if test="$alt = ''">
+                <xsl:copy-of select="f:log-warning('Image {1} has no alt-text defined (okay if it is an ornament).', ($file))"/>
+            </xsl:if>
+           
+            <img src="{$file}">
+                <xsl:attribute name="alt"><xsl:value-of select="$alt"/></xsl:attribute>
+                <xsl:if test="$alt = '' and f:is-set('pg.compliant')"><xsl:attribute name="data-role">presentation</xsl:attribute></xsl:if>
+                <xsl:if test="$class != ''"><xsl:attribute name="class"><xsl:value-of select="$class"/></xsl:attribute></xsl:if>
+                <xsl:if test="$width != ''"><xsl:attribute name="width"><xsl:value-of select="$width"/></xsl:attribute></xsl:if>
+                <xsl:if test="$height != ''"><xsl:attribute name="height"><xsl:value-of select="$height"/></xsl:attribute></xsl:if>
+            </img>
         </xsl:if>
-        <xsl:if test="$width != '' and number($width) > xs:double($maxWidth)">
-            <xsl:copy-of select="f:log-warning('Image {1} width more than {3} pixels ({2} px).', ($file, $width, $maxWidth))"/>
-        </xsl:if>
-        <xsl:if test="$height != '' and number($height) > xs:double($maxHeight)">
-            <xsl:copy-of select="f:log-warning('Image {1} height more than {3} pixels ({2} px).', ($file, $height, $maxHeight))"/>
-        </xsl:if>
-        <xsl:if test="$fileSize != '' and number($fileSize) > xs:double($maxFileSize) * 1024">
-            <xsl:copy-of select="f:log-warning('Image {1} file-size larger than {3} kB ({2} kB).', ($file, xs:string(ceiling(number($fileSize) div 1024)), $maxFileSize))"/>
-        </xsl:if>
-        <xsl:if test="$alt = ''">
-            <xsl:copy-of select="f:log-warning('Image {1} has no alt-text defined (okay if it is an ornament).', ($file))"/>
-        </xsl:if>
-
-        <img src="{$file}">
-            <xsl:attribute name="alt"><xsl:value-of select="$alt"/></xsl:attribute>
-            <xsl:if test="$alt = '' and f:is-set('pg.compliant')"><xsl:attribute name="data-role">presentation</xsl:attribute></xsl:if>
-            <xsl:if test="$class != ''"><xsl:attribute name="class"><xsl:value-of select="$class"/></xsl:attribute></xsl:if>
-            <xsl:if test="$width != ''"><xsl:attribute name="width"><xsl:value-of select="$width"/></xsl:attribute></xsl:if>
-            <xsl:if test="$height != ''"><xsl:attribute name="height"><xsl:value-of select="$height"/></xsl:attribute></xsl:if>
-        </img>
     </xsl:function>
 
 
@@ -541,6 +543,7 @@ width:{$width};
 
                 <xsl:call-template name="figure-annotations-bottom"/>
                 <xsl:apply-templates/>
+                <xsl:call-template name="figure-head-bottom"/>
             </div>
             <xsl:if test="not(f:rend-value(@rend, 'position') = ('abovehead', 'belowtrailer'))">
                 <xsl:call-template name="reopenpar"/>
@@ -575,9 +578,32 @@ width:{$width};
     <xsl:template name="figure-head-top">
         <xsl:context-item as="element()" use="required"/>
 
-        <xsl:if test="head[f:position-annotation(@rend) = 'figTop']">
-            <xsl:apply-templates select="head[f:position-annotation(@rend) = 'figTop']" mode="figAnnotation"/>
-        </xsl:if>
+        <xsl:choose>
+            <xsl:when test="head[f:position-annotation(@rend) = 'figTop']">
+                <xsl:apply-templates select="head[f:position-annotation(@rend) = 'figTop']" mode="figAnnotation"/>
+            </xsl:when>
+            <xsl:when test="f:get-setting('images.defaultHeadPosition') = 'top'">
+                <xsl:apply-templates select="head" mode="figAnnotation"/>
+            </xsl:when>
+        </xsl:choose>
+    </xsl:template>
+
+
+    <xd:doc>
+        <xd:short>Handle a figure head that should be placed below the figure (and it's annotations).</xd:short>
+    </xd:doc>
+
+    <xsl:template name="figure-head-bottom">
+        <xsl:context-item as="element()" use="required"/>
+
+        <xsl:choose>
+            <xsl:when test="head[f:position-annotation(@rend) = 'figBottom']">
+                <xsl:apply-templates select="head[f:position-annotation(@rend) = 'figBottom']" mode="figAnnotation"/>
+            </xsl:when>
+            <xsl:when test="f:get-setting('images.defaultHeadPosition') = 'bottom'">
+                <xsl:apply-templates select="head" mode="figAnnotation"/>
+            </xsl:when>
+        </xsl:choose>
     </xsl:template>
 
 
@@ -702,16 +728,35 @@ width:{$width};
         <xsl:value-of select="if ($position = ('figBottomLeft', 'figBottom', 'figBottomRight')) then $position else ''"/>
     </xsl:function>
 
-    <xsl:template match="figure/head[not(f:has-position-annotation(@rend))]">
+    <xsl:template match="figure/head[f:is-fig-default-head(.)]">
         <p class="figureHead"><xsl:apply-templates/></p>
     </xsl:template>
 
 
+    <xsl:function name="f:is-fig-bottom-head" as="xs:boolean">
+        <xsl:param name="head" as="node()"/>
+
+        <xsl:sequence select="f:has-bottom-position-annotation($head) or f:get-setting('images.defaultHeadPosition') = 'bottom'"/>
+    </xsl:function>
+
+    <xsl:function name="f:is-fig-top-head" as="xs:boolean">
+        <xsl:param name="head" as="node()"/>
+
+        <xsl:sequence select="f:has-top-position-annotation($head) or f:get-setting('images.defaultHeadPosition') = 'top'"/>
+    </xsl:function>
+
+    <xsl:function name="f:is-fig-default-head" as="xs:boolean">
+        <xsl:param name="head" as="node()"/>
+
+        <xsl:sequence select="not(f:has-position-annotation($head/@rend)) and not(f:get-setting('images.defaultHeadPosition') = ('top', 'bottom'))"/>
+    </xsl:function>
+
+
     <xd:doc>
-        <xd:short>Figure heads that should go above are handled elsewhere.</xd:short>
+        <xd:short>Figure heads that should go above or below the image are handled elsewhere.</xd:short>
     </xd:doc>
 
-    <xsl:template match="figure/head[f:has-position-annotation(@rend)]"/>
+    <xsl:template match="figure/head[not(f:is-fig-default-head(.))]"/>
 
 
     <xd:doc>
@@ -721,7 +766,7 @@ width:{$width};
     <xsl:template match="p[f:has-position-annotation(@rend)]"/>
 
 
-    <xsl:template match="figure/head[f:has-position-annotation(@rend)]" mode="figAnnotation">
+    <xsl:template match="figure/head[not(f:is-fig-default-head(.))]" mode="figAnnotation">
         <p class="figureHead"><xsl:apply-templates/></p>
     </xsl:template>
 

@@ -120,11 +120,13 @@
 
             <images.path></images.path>                                     <!-- Prefix of path to images, relative to the HTML file -->
             <images.include>true</images.include>                           <!-- Include images in the generated output. -->
-            <images.requireInfo>true</images.requireInfo>                   <!-- Require image-info to be present for an image (otherwise they won't be included in output) [TODO]. -->
+            <images.requireInfo>true</images.requireInfo>                   <!-- Require image-info to be present for an image (otherwise they won't be included in output). -->
+            <images.fileFromId>true</images.fileFromId>                     <!-- Derive the image file name from the id given (i.e. ./<path>/<id>.jpg is assumed). -->
             <images.scale>1.0</images.scale>                                <!-- Image scale factor: 1.0 is normal size; 0.5 is half size; 2.0 is double size. -->
             <images.maxSize>100</images.maxSize>                            <!-- Warn if image is larger than this number of kilobytes. -->
             <images.maxWidth>720</images.maxWidth>                          <!-- Warn if image is wider than this number of pixels (after applying images.scale). -->
             <images.maxHeight>720</images.maxHeight>                        <!-- Warn if image is taller than this number of pixels (after applying images.scale). -->
+            <images.defaultHeadPosition></images.defaultHeadPosition>       <!-- Place to position the head: (leave empty for default; top, bottom) -->
 
             <aria.enable>false</aria.enable>                                <!-- Enable the generation of ARIA attributes on certain elements. -->
 
