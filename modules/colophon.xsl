@@ -586,10 +586,16 @@
                     <td class="width20">
                         <xsl:call-template name="correctionTablePageReferences"/>
                     </td>
-                    <td class="width40 bottom" lang="{f:fix-lang(@lang)}">
+                    <td class="width40 bottom">                        
+                        <xsl:if test="f:fix-lang(@lang) != f:fix-lang(f:get-document-lang())">
+                            <xsl:attribute name="lang" select="f:fix-lang(@lang)"/>
+                        </xsl:if>
                         <xsl:call-template name="correctionTableSourceText"/>
                     </td>
-                    <td class="width40 bottom" lang="{f:fix-lang(@lang)}">
+                    <td class="width40 bottom">
+                        <xsl:if test="f:fix-lang(@lang) != f:fix-lang(f:get-document-lang())">
+                            <xsl:attribute name="lang" select="f:fix-lang(@lang)"/>
+                        </xsl:if>
                         <xsl:call-template name="correctionTableCorrectedText"/>
                     </td>
                     <xsl:if test="f:is-set('colophon.showEditDistance')">
@@ -740,8 +746,8 @@
 
     <xsl:template match="choice[not(f:in-transliteration(.))]" mode="collect-corrections">
         <tmp:choice>
-            <xsl:attribute name="page" select="f:find-page-number(.)"/>
             <xsl:attribute name="lang" select="f:get-current-lang(.)"/>
+            <xsl:attribute name="page" select="f:find-page-number(.)"/>
             <xsl:call-template name="corr-href-attribute"/>
             <tmp:corr>
                 <xsl:copy-of select="corr/* | corr/text() | corr/@*"/>
