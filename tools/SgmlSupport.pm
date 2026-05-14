@@ -2,7 +2,7 @@
 
 package SgmlSupport;
 
-use strict;         
+use strict;
 use warnings;
 
 use base 'Exporter';
@@ -21,7 +21,7 @@ SgmlSupport - Convert between SGML entities and Unicode characters
 =head1 SYNOPSIS
 
   use SgmlSupport;
-  
+
   my $utf8 = sgml2utf('&aacute;');  # Returns: á
   my $html = sgml2utf_html('&lt;');  # Returns: &lt;
 
@@ -1921,7 +1921,7 @@ BEGIN {
     $ent{'mlrexcl'}     = chr(0xA71D);          # Modifier letter raised exclamation mark
     $ent{'mlplus'}      = chr(0x02D6);          # Modifier letter plus sign
     $ent{'scplus'}      = chr(0x207A);          # Superscript plus sign
-    
+
     $ent{'Kexcl'}       = 'K' . chr(0xA71D);    # K followed by exclamation mark (represented by modifier letter raised exclamation mark)
     $ent{'kexcl'}       = 'k' . chr(0xA71D);    # k followed by exclamation mark
     $ent{'Qexcl'}       = 'Q' . chr(0xA71D);    # Q followed by exclamation mark
@@ -1936,7 +1936,7 @@ BEGIN {
     $ent{'Lscexcl'}     = chr(0x029F) . chr(0xA71D); # small caps L followed by exclamation mark
 
     $ent{'gstop'}       = 'g' . chr(0x0323);    # g followed by a full-stop (represented by combining dot above)
-    $ent{'Gstop'}       = 'G' . chr(0x0323);    # G followed by a full-stop 
+    $ent{'Gstop'}       = 'G' . chr(0x0323);    # G followed by a full-stop
     $ent{'xstop'}       = 'x' . chr(0x0323);    # x followed by a full-stop (represented by combining dot below)
     $ent{'Xstop'}       = 'X' . chr(0x0323);    # X followed by a full-stop
     $ent{'lstop'}       = 'l' . chr(0x0323);    # l followed by a full-stop (represented by combining dot below)
@@ -2474,6 +2474,88 @@ BEGIN {
     $ent{'cpGuard'}     = chr(0x1D5A6);                 # Guards (Mathematical sans-serif capital G)
     $ent{'cpKin'}       = chr(0x1D5AA);                 # Kin (or gold general) (Mathematical sans-serif capital K)
     $ent{'cpYari'}      = chr(0x1D5B8);                 # Yari (or spear) (Mathematical sans-serif capital Y)
+
+    # Circled digits and numbers
+    $ent{'cn0'}         = chr(0x24EA);                  # Circled digit zero
+    $ent{'cn1'}         = chr(0x2460);                  # Circled digit one
+    $ent{'cn2'}         = chr(0x2461);                  # Circled digit two
+    $ent{'cn3'}         = chr(0x2462);                  # Circled digit three
+    $ent{'cn4'}         = chr(0x2463);                  # Circled digit four
+    $ent{'cn5'}         = chr(0x2464);                  # Circled digit five
+    $ent{'cn6'}         = chr(0x2465);                  # Circled digit six
+    $ent{'cn7'}         = chr(0x2466);                  # Circled digit seven
+    $ent{'cn8'}         = chr(0x2467);                  # Circled digit eight
+    $ent{'cn9'}         = chr(0x2468);                  # Circled digit nine
+
+    $ent{'cn10'}        = chr(0x2469);                  # Circled number ten
+    $ent{'cn11'}        = chr(0x246A);                  # Circled number eleven
+    $ent{'cn12'}        = chr(0x246B);                  # Circled number twelve
+    $ent{'cn13'}        = chr(0x246C);                  # Circled number thirteen
+    $ent{'cn14'}        = chr(0x246D);                  # Circled number fourteen
+    $ent{'cn15'}        = chr(0x246E);                  # Circled number fifteen
+    $ent{'cn16'}        = chr(0x246F);                  # Circled number sixteen
+    $ent{'cn17'}        = chr(0x2470);                  # Circled number seventeen
+    $ent{'cn18'}        = chr(0x2471);                  # Circled number eighteen
+    $ent{'cn19'}        = chr(0x2472);                  # Circled number nineteen
+    $ent{'cn20'}        = chr(0x2473);                  # Circled number twenty
+
+    $ent{'cn21'}        = chr(0x3251);
+    $ent{'cn22'}        = chr(0x3252);
+    $ent{'cn23'}        = chr(0x3253);
+    $ent{'cn24'}        = chr(0x3254);
+    $ent{'cn25'}        = chr(0x3255);
+    $ent{'cn26'}        = chr(0x3256);
+    $ent{'cn27'}        = chr(0x3257);
+    $ent{'cn28'}        = chr(0x3258);
+    $ent{'cn29'}        = chr(0x3259);
+    $ent{'cn30'}        = chr(0x325A);
+
+    $ent{'cn31'}        = chr(0x325B);
+    $ent{'cn32'}        = chr(0x325C);
+    $ent{'cn33'}        = chr(0x325D);
+    $ent{'cn34'}        = chr(0x325E);
+    $ent{'cn35'}        = chr(0x325F);
+    $ent{'cn36'}        = chr(0x32B1);
+    $ent{'cn37'}        = chr(0x32B2);
+    $ent{'cn38'}        = chr(0x32B3);
+    $ent{'cn39'}        = chr(0x32B4);
+    $ent{'cn40'}        = chr(0x32B5);
+
+    $ent{'cn41'}        = chr(0x32B6);
+    $ent{'cn42'}        = chr(0x32B7);
+    $ent{'cn43'}        = chr(0x32B8);
+    $ent{'cn44'}        = chr(0x32B9);
+    $ent{'cn45'}        = chr(0x32BA);
+    $ent{'cn46'}        = chr(0x32BB);
+    $ent{'cn47'}        = chr(0x32BC);
+    $ent{'cn48'}        = chr(0x32BD);
+    $ent{'cn49'}        = chr(0x32BE);
+    $ent{'cn50'}        = chr(0x32BF);
+
+    $ent{'cn51'}        = '(51)';
+    $ent{'cn52'}        = '(52)';
+    $ent{'cn53'}        = '(53)';
+    $ent{'cn54'}        = '(54)';
+    $ent{'cn55'}        = '(55)';
+    $ent{'cn56'}        = '(56)';
+    $ent{'cn57'}        = '(57)';
+    $ent{'cn58'}        = '(58)';
+    $ent{'cn59'}        = '(59)';
+    $ent{'cn60'}        = '(60)';
+
+    $ent{'cn61'}        = '(61)';
+    $ent{'cn62'}        = '(62)';
+    $ent{'cn63'}        = '(63)';
+    $ent{'cn64'}        = '(64)';
+    $ent{'cn65'}        = '(65)';
+    $ent{'cn66'}        = '(66)';
+    $ent{'cn67'}        = '(67)';
+    $ent{'cn68'}        = '(68)';
+    $ent{'cn69'}        = '(69)';
+    $ent{'cn70'}        = '(70)';
+
+    ###############################################################################
+
 
     # Greek additions
     $ent{'amacgr'}      =  chr(0x1FB1);     # Greek alpha with macron
