@@ -7,10 +7,10 @@
 
     <xs:complexType name="Images">
         <xs:sequence>
-            <xs:element minOccurs="0" maxOccurs="unbounded" name="image" type="Image"/>
-        </xs:sequence>
-        <xs:sequence>
-            <xs:element minOccurs="0" maxOccurs="unbounded" name="music" type="Music"/>
+            <xs:choice>
+                <xs:element minOccurs="0" maxOccurs="unbounded" name="image" type="Image"/>
+                <xs:element minOccurs="0" maxOccurs="unbounded" name="music" type="Music"/>
+            </xs:choice>
         </xs:sequence>
         <xs:attribute name="version" type="xs:decimal"/>
     </xs:complexType>
