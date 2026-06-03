@@ -1,4 +1,4 @@
-# addPositionInfo.pl -- add linenumber and column info to SGML/XML files
+# addPositionInfo.pl -- add line-number and column info to SGML/XML files
 
 use strict;
 use warnings;
