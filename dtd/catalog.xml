@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+    
+    <!-- TEI DTDs -->
+    <system systemId="-//TEI//DTD TEI Lite 1.6//EN" uri="teilitejh.dtd"/>
+    <system systemId="-//TEI//DTD TEI Lite 1.0//EN" uri="teilitejh.dtd"/>
+    
+    <!-- HTML DTDs -->
+    <system systemId="-//W3C//DTD HTML 3.2 Final//EN" uri="HTML32.dtd"/>
+    <system systemId="-//W3C//DTD HTML 4.0 Transitional//EN" uri="HTML4.dtd"/>
+    <system systemId="-//W3C//DTD HTML 4.01 Transitional//EN" uri="loose.dtd"/>
+    
+    <!-- TEI user modifications -->
+    <system systemId="-//TEI U5-1995//DTD TEI Lite 1.0 Extensions//EN" uri="usrmods.dtd"/>
+    
+    <!-- ISO standard entities -->
+    <system systemId="ISO 8879:1986//ENTITIES Added Latin 1//EN" uri="ISOlat1.ent"/>
+    <system systemId="ISO 8879:1986//ENTITIES Added Latin 2//EN" uri="ISOlat2.ent"/>
+    <system systemId="ISO 8879:1986//ENTITIES Numeric and Special Graphic//EN" uri="ISOnum.ent"/>
+    <system systemId="ISO 8879:1986//ENTITIES Publishing//EN" uri="ISOpub.ent"/>
+    <system systemId="ISO 8879:1986//ENTITIES Russian Cyrillic/EN" uri="ISOcyr1.ent"/>
+    <system systemId="ISO 8879:1986//ENTITIES Non-Russian Cyrillic//EN" uri="ISOcyr2.ent"/>
+    <system systemId="ISO 8879:1986//ENTITIES Diacritical Marks//EN" uri="ISOdia.ent"/>
+    <system systemId="ISO 8879:1986/ENTITIES Greek Letters//EN" uri="ISOgrk1.ent"/>
+    <system systemId="ISO 8879:1986//ENTITIES Monotoniko Greek//EN" uri="ISOgrk2.ent"/>
+    <system systemId="ISO 8879:1986//ENTITIES Greek Symbols//EN" uri="ISOgrk3.ent"/>
+    <system systemId="ISO 8879:1986//ENTITIES Alternative Greek Symbols//EN" uri="ISOgrk4.ent"/>
+    <system systemId="ISO 8879:1986//ENTITIES General Technical//EN" uri="ISOtech.ent"/>
+    
+    <!-- TEI custom entities -->
+    <system systemId="-//TEI TR1 W4:1992//ENTITIES Basic Arabic Letters//EN" uri="teiarb.ent"/>
+    <system systemId="-//TEI TR1 W4:1992//ENTITIES Coptic Letters//EN" uri="teicop.ent"/>
+    <system systemId="-//TEI TR1 W4:1992//ENTITIES Extra Classial Greek Letters//EN" uri="teigrk.ent"/>
+    <system systemId="-//TEI TR1 W4:1992//ENTITIES IPA symbols for interchange//EN" uri="teiipa.ent"/>
+    
+    <!-- Alternative ISO notations -->
+    <system systemId="ISO 8879-1986//ENTITIES Added Latin 1//EN" uri="ISOlat1.ent"/>
+    <system systemId="ISO 8879-1986//ENTITIES Added Latin 2//EN" uri="ISOlat2.ent"/>
+    <system systemId="ISO 8879-1986//ENTITIES Numeric and Special Graphic//EN" uri="ISOnum.ent"/>
+    <system systemId="ISO 8879-1986//ENTITIES Publishing//EN" uri="ISOpub.ent"/>
+    <system systemId="ISO 8879-1986//ENTITIES Russian Cyrillic/EN" uri="ISOcyr1.ent"/>
+    <system systemId="ISO 8879-1986//ENTITIES Non-Russian Cyrillic//EN" uri="ISOcyr2.ent"/>
+    <system systemId="ISO 8879-1986//ENTITIES Diacritical Marks//EN" uri="ISOdia.ent"/>
+    <system systemId="ISO 8879-1986/ENTITIES Greek Letters//EN" uri="ISOgrk1.ent"/>
+    <system systemId="ISO 8879-1986//ENTITIES Monotoniko Greek//EN" uri="ISOgrk2.ent"/>
+    <system systemId="ISO 8879-1986//ENTITIES Greek Symbols//EN" uri="ISOgrk3.ent"/>
+    <system systemId="ISO 8879-1986//ENTITIES Alternative Greek Symbols//EN" uri="ISOgrk4.ent"/>
+    <system systemId="ISO 8879-1986//ENTITIES General Technical//EN" uri="ISOtech.ent"/>
+        
+</catalog>
