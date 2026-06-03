@@ -20,7 +20,7 @@ jobs:
           java-version: '17'
 
       - name: Build Documentation
-        run: mvn prepare-package
+        run: mvn prepare-package -DskipTests
 
       - name: Create .nojekyll file
         run: touch target/Wiki/html/.nojekyll
