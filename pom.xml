@@ -55,7 +55,9 @@
                     <coverage>true</coverage>
                     <catalogFile>file://${project.basedir}/dtd/catalog.xml</catalogFile>
                     <testDir>${project.basedir}/xspec</testDir>
-
+                    <skipTests>false</skipTests>
+                    <baseDir>${project.basedir}</baseDir>
+                        
                     <!-- See https://github.com/xspec/xspec-maven-plugin-1/wiki -->
                     <!-- which points to https://www.saxonica.com/documentation/index.html#!using-xsl/commandline -->
 
