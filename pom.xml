@@ -48,7 +48,7 @@
                 </dependencies>
                 <configuration>
                     <coverage>true</coverage>
-                    <catalogFile>catalog.xml</catalogFile>
+                    <catalogFile>${project.basedir}/dtd/catalog.xml</catalogFile>
                     <testDir>xspec</testDir>
 
                     <!-- See https://github.com/xspec/xspec-maven-plugin-1/wiki -->
