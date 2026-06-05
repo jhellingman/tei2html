@@ -88,7 +88,12 @@
                       then $node/head[1]
                       else $default)"/>
 
-        <xsl:sequence select="if (f:strip-punctuation(lower-case(normalize-space($alt-text))) = $decorative-alt-text) then '' else $alt-text"/>
+        <xsl:sequence select="if (f:is-decorative($alt-text)) then '' else $alt-text"/>
+    </xsl:function>
+
+    <xsl:function name="f:is-decorative" as="xs:boolean">
+      <xsl:param name="alt-text" as="xs:string"/>
+      <xsl:sequence select="f:strip-punctuation(lower-case(normalize-space($alt-text))) = $decorative-alt-text"/>
     </xsl:function>
 
     <xsl:variable name="decorative-alt-text"
@@ -277,7 +282,7 @@
            
             <img src="{$file}">
                 <xsl:attribute name="alt"><xsl:value-of select="$alt"/></xsl:attribute>
-                <xsl:if test="$alt = '' and f:is-set('pg.compliant')"><xsl:attribute name="data-role">presentation</xsl:attribute></xsl:if>
+                <xsl:if test="$alt = ''"><xsl:attribute name="role">presentation</xsl:attribute></xsl:if>
                 <xsl:if test="$class != ''"><xsl:attribute name="class"><xsl:value-of select="$class"/></xsl:attribute></xsl:if>
                 <xsl:if test="$width != ''"><xsl:attribute name="width"><xsl:value-of select="$width"/></xsl:attribute></xsl:if>
                 <xsl:if test="$height != ''"><xsl:attribute name="height"><xsl:value-of select="$height"/></xsl:attribute></xsl:if>
@@ -310,7 +315,7 @@
                 <body>
                     <div class="figure">
                         <img src="{$imagefile}" alt="{$alt}"/>
-                        <xsl:if test="$alt = '' and f:is-set('pg.compliant')"><xsl:attribute name="data-role">presentation</xsl:attribute></xsl:if>
+                        <xsl:if test="$alt = ''"><xsl:attribute name="role">presentation</xsl:attribute></xsl:if>
                         <xsl:apply-templates/>
                     </div>
                 </body>
@@ -572,7 +577,7 @@ width:{$width};
 
 
     <xd:doc>
-        <xd:short>Handle a figure head that should be placed above the figure.</xd:short>
+        <xd:short>Handle a head within a figure that should be placed above the figure.</xd:short>
     </xd:doc>
 
     <xsl:template name="figure-head-top">
@@ -590,7 +595,7 @@ width:{$width};
 
 
     <xd:doc>
-        <xd:short>Handle a figure head that should be placed below the figure (and it's annotations).</xd:short>
+        <xd:short>Handle a head within a figure that should be placed below the figure (and it's annotations).</xd:short>
     </xd:doc>
 
     <xsl:template name="figure-head-bottom">

@@ -16,6 +16,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <saxon.version>9.9.1-8</saxon.version>  <!-- 13.0 -->
+        <xml.maven.plugin.version>1.2.1</xml.maven.plugin.version>
         <xspec.version>1.6.0</xspec.version> <!-- 4.0.2 -->
         <xspec.maven.plugin.version>2.0.0</xspec.maven.plugin.version> <!-- 3.1.3 -->
             
@@ -44,11 +45,10 @@
                     </dependency>
                 </dependencies>
                 <configuration>
-                    <coverage>true</coverage>
+                    <coverage>false</coverage>
                     <catalogFile>file://${project.basedir}/dtd/catalog.xml</catalogFile>
                     <testDir>${project.basedir}/xspec</testDir>
                     <skipTests>false</skipTests>
-                    <baseDir>${project.basedir}</baseDir>
                         
                     <!-- See https://github.com/xspec/xspec-maven-plugin-1/wiki -->
                     <!-- which points to https://www.saxonica.com/documentation/index.html#!using-xsl/commandline -->
@@ -164,7 +164,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>xml-maven-plugin</artifactId>
-                <version>1.2.1</version>
+                <version>${xml.maven.plugin.version}</version>
                 <executions>
                     <execution>
                         <id>transform-examples</id>
