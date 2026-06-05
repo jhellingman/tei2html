@@ -3,7 +3,7 @@ use strict;
 use warnings;
 
 
-# Segementize a TEI file
+# Segmentize a TEI file
 
 # See: http://www.tei-c.org/release/doc/tei-p5-doc/en/html/ref-s.html
 # And: http://www.tei-c.org/release/doc/tei-p5-doc/en/html/ref-seg.html
