@@ -346,12 +346,14 @@ sub processFile {
         tei2xml($filename, $xmlFilename);
     }
 
-    my $includedXmlFilename = temporaryFile("inclusions", "xml");
-    includeXml($xmlFilename, $includedXmlFilename);
+    my $preprocessedXmlFilename = $basename . "-preprocessed.xml";
+    if (isNewer($xmlFilename, $preprocessedXmlFilename) && isNewer('tei2html.config', $preprocessedXmlFilename)) {
+        my $includedXmlFilename = temporaryFile("inclusions", "xml");
+        includeXml($xmlFilename, $includedXmlFilename);
 
-    my $preprocessedXmlFilename = $basename . "-preprocessed.xml"; # temporaryFile("preprocess", "xml");
-    preprocessXml($includedXmlFilename, $preprocessedXmlFilename);
-    removeFile($includedXmlFilename);
+        preprocessXml($includedXmlFilename, $preprocessedXmlFilename);
+        removeFile($includedXmlFilename);
+    }
 
     $runChecks    && runChecks($basename,    $filename);
     $makeWordlist && makeWordlist($basename, $preprocessedXmlFilename);
@@ -1234,19 +1236,11 @@ sub makeAsciiDoc {
 # isNewer -- determine whether the derived file exists, is not empty, and is newer than the source file
 #
 sub isNewer {
-    my $derivedFile = shift;
-    my $sourceFile = shift;
-
-    # Don't care if source file does not exist (e.g. for a tei2html.config file).
-    if (!-e $sourceFile || -s $sourceFile == 0) {
-        return 1;
-    }
-
-    if (!-e $derivedFile || -s $derivedFile == 0) {
-        return 0;
-    }
-
-    return (-e $derivedFile && -s $derivedFile != 0 && -e $sourceFile && stat($derivedFile)->mtime > stat($sourceFile)->mtime);
+    my ($sourceFile, $derivedFile) = @_;
+    my $sourceTimestamp = -e $sourceFile ? (stat($sourceFile)->mtime) : 0;
+    my $derivedTimestamp = -e $derivedFile ? (stat($derivedFile)->mtime) : 0;
+    my $isNewer = $sourceTimestamp > $derivedTimestamp ? 1 : 0;
+    return $isNewer;
 }
 
 
