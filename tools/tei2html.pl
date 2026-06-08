@@ -347,13 +347,7 @@ sub processFile {
     }
 
     my $preprocessedXmlFilename = $basename . "-preprocessed.xml";
-    if (isNewer($xmlFilename, $preprocessedXmlFilename) && isNewer('tei2html.config', $preprocessedXmlFilename)) {
-        my $includedXmlFilename = temporaryFile("inclusions", "xml");
-        includeXml($xmlFilename, $includedXmlFilename);
-
-        preprocessXml($includedXmlFilename, $preprocessedXmlFilename);
-        removeFile($includedXmlFilename);
-    }
+    preprocessXml($xmlFilename, $preprocessedXmlFilename);
 
     $runChecks    && runChecks($basename,    $filename);
     $makeWordlist && makeWordlist($basename, $preprocessedXmlFilename);
@@ -373,8 +367,6 @@ sub processFile {
     $makePGTEI && system ("$saxon $preprocessedXmlFilename \"$xsldir/sandbox/tei2pgtei.xsl\" > $basename-pgtei.xml");
 
     $makeZip == 1 && $pgNumber > 0 && makeZip($basename);
-
-    # removeFile($preprocessedXmlFilename);
 
     $clean && clean($basename, $version);
 
@@ -507,31 +499,20 @@ sub removeFile {
 }
 
 
-sub includeXml {
-    my $xmlFilename = shift;
-    my $includedXmlFilename = shift;
-
-    if ($force == 0 && isNewer($includedXmlFilename, $xmlFilename) && isNewer($includedXmlFilename, 'tei2html.config')) {
-        trace("Skip conversion to included XML ($includedXmlFilename newer than $xmlFilename).");
-        return;
-    }
-
-    trace("Include inclusions in TEI file...");
-    system ("$saxon $xmlFilename $xsldir/include.xsl > $includedXmlFilename");
-}
-
-
 sub preprocessXml {
     my $xmlFilename = shift;
     my $preprocessedXmlFilename = shift;
 
-    if ($force == 0 && isNewer($preprocessedXmlFilename, $xmlFilename)) {
+    if ($force == 0 && isNewer($preprocessedXmlFilename, $xmlFilename) && isNewer($preprocessedXmlFilename, 'tei2html.config')) {
         trace("Skip conversion to preprocessed XML ($preprocessedXmlFilename newer than $xmlFilename).");
         return;
     }
 
     trace("Preprocess TEI file...");
-    system ("$saxon $xmlFilename $xsldir/preprocess.xsl > $preprocessedXmlFilename");
+    my @commands = ();
+    push (@commands, "$saxon -versionmsg:off - $xsldir/include.xsl");
+    push (@commands, "$saxon -versionmsg:off - $xsldir/preprocess.xsl");
+    executeCommandPipeline($xmlFilename, $preprocessedXmlFilename, @commands);
 }
 
 
