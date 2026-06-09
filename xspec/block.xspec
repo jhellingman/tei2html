@@ -283,7 +283,7 @@ height: 95px;
 background: url(images/initial-A.png) no-repeat;
 background-position: 0 -45px;
 text-align: right;
-color: white;
+visibility: hidden;
 font-size: 1px;
 }
 </x:expect>

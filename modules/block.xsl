@@ -714,8 +714,8 @@
                 paragraph is too small to contain the entire initial, the float will. We
                 need to take care to adjust the background position to match the
                 padding-top, such that the two background images will align exactly.</li>
-                <li>Remove the initial letter from the paragraph, and render it in
-                the float in white, such that it re-appears when no CSS is available.</li>
+                <li>Remove the initial letter from the paragraph, and make it invisible,
+                such that it re-appears when no CSS is available.</li>
                 <li>Remove opening quotation marks when they appear before
                 the initial letter.</li>
             </ol>
@@ -888,7 +888,7 @@
                     <xsl:text>background-size: </xsl:text><xsl:value-of select="f:rend-value(@rend, 'initial-width')"/><xsl:text>;&lf;</xsl:text>
                 </xsl:if>
                 <xsl:text>text-align: right;&lf;</xsl:text>
-                <xsl:text>color: white;&lf;</xsl:text>
+                <xsl:text>visibility: hidden;&lf;</xsl:text>
                 <xsl:text>font-size: 1px;&lf;</xsl:text>
                 <xsl:text>}&lf;</xsl:text>
             </xsl:if>
