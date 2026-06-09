@@ -282,7 +282,6 @@
            
             <img src="{$file}">
                 <xsl:attribute name="alt"><xsl:value-of select="$alt"/></xsl:attribute>
-                <xsl:if test="$alt = ''"><xsl:attribute name="role">presentation</xsl:attribute></xsl:if>
                 <xsl:if test="$class != ''"><xsl:attribute name="class"><xsl:value-of select="$class"/></xsl:attribute></xsl:if>
                 <xsl:if test="$width != ''"><xsl:attribute name="width"><xsl:value-of select="$width"/></xsl:attribute></xsl:if>
                 <xsl:if test="$height != ''"><xsl:attribute name="height"><xsl:value-of select="$height"/></xsl:attribute></xsl:if>
@@ -314,8 +313,8 @@
                 <xsl:call-template name="generate-html-header"/>
                 <body>
                     <div class="figure">
-                        <img src="{$imagefile}" alt="{$alt}"/>
-                        <xsl:if test="$alt = ''"><xsl:attribute name="role">presentation</xsl:attribute></xsl:if>
+                        <img src="{$imagefile}"/>
+                        <xsl:attribute name="alt"><xsl:value-of select="$alt"/></xsl:attribute>
                         <xsl:apply-templates/>
                     </div>
                 </body>

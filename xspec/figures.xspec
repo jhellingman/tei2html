@@ -33,7 +33,7 @@
         </x:context>
         <x:expect label="will result in an HTML div with img inside">
             <div xmlns="http://www.w3.org/1999/xhtml" class="figure fig_01width" id="fig_01">
-               <img src="images/fig_01.jpg" alt="" role="presentation" width="12" height="40"/>
+               <img src="images/fig_01.jpg" alt="" width="12" height="40"/>
             </div>
         </x:expect>
     </x:scenario>
@@ -152,7 +152,7 @@
         </x:context>
         <x:expect label="will result in an HTML div with img inside">
             <div xmlns="http://www.w3.org/1999/xhtml" class="figure fig_06width fig_06" id="fig_06">
-               <img src="images/fig_06.jpg" alt="" role="presentation" width="24" height="80"/>
+               <img src="images/fig_06.jpg" alt="" width="24" height="80"/>
             </div>
         </x:expect>
     </x:scenario>
@@ -165,8 +165,8 @@
         <x:expect label="will result in an HTML div with two img inside">
             <div xmlns="http://www.w3.org/1999/xhtml" class="figure fig_01width" id="fig_01">
                <div class="fig_01-overlay">
-                  <img src="images/fig_01.jpg" class="img-front" alt="" role="presentation" width="12" height="40"/>
-                  <img src="images/fig_02.jpg" class="img-back" alt="" role="presentation" width="20" height="30"/>
+                  <img src="images/fig_01.jpg" class="img-front" alt="" width="12" height="40"/>
+                  <img src="images/fig_02.jpg" class="img-back" alt="" width="20" height="30"/>
                </div>
             </div>
         </x:expect>
@@ -218,7 +218,6 @@ width:12px;
             <img xmlns="http://www.w3.org/1999/xhtml"
                 src="images/fig_01.jpg"
                 alt=""
-                role="presentation"
                 width="12"
                 height="40"/>
         </x:expect>
