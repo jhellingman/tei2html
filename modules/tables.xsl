@@ -199,9 +199,9 @@
 
 
     <xd:doc>
-        <xd:short>Handle a table caption.</xd:short>
+        <xd:short>Handle a table head.</xd:short>
         <xd:detail>
-            <p>The table header is already handled in the mode <code>fix-table-caption</code> or <code>normal-table</code>, so can be omitted.</p>
+            <p>The table head (aka caption) is already handled in the mode <code>fix-table-caption</code> or <code>normal-table</code>, so can be omitted.</p>
         </xd:detail>
     </xd:doc>
 
@@ -387,7 +387,7 @@
             <xsl:copy-of select="f:log-warning('Malformed table inside element {1} with id {2}: cell not in row.', (name(ancestor::*[@id][1]), (ancestor::*[@id][1])/@id))"/>
         </xsl:if>
 
-        <!-- A cell is considered part of the table head if it has a @role of label or unit. -->
+        <!-- A cell is considered part of the table header if it has a @role of label or unit. -->
         <xsl:variable name="prefix" select="if (f:is-header-row(..)) then 'cell-head-' else 'cell-'"/>
 
         <!-- Some stuff to determine this cell is at the bottom of a column in an N-up table. -->

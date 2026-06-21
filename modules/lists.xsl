@@ -272,7 +272,7 @@
     <xsl:function name="f:is-numbered-item" as="xs:boolean">
         <xsl:param name="item" as="element(item)"/>
 
-        <xsl:sequence select="$item/@n or $item/ab[@type='itemNum'] or ($item/preceding-sibling::*[1][self::label])"/>
+        <xsl:sequence select="$item/@n or $item/ab[@type='itemNum'] or $item/p/ab[@type='itemNum'] or ($item/preceding-sibling::*[1][self::label])"/>
     </xsl:function>
 
 
@@ -350,6 +350,10 @@
             <xsl:when test="./ab[@type='itemNum'][position() = 1]">
                 <span class="itemNumber"><xsl:apply-templates select="./ab[@type='itemNum'][position() = 1]/node()"/></span>
             </xsl:when>
+            <!-- If an item contains paragraphs, the p-element has to go first, the item number will be the first in the firt paragraph -->
+            <xsl:when test="./p[position() = 1]/ab[@type='itemNum'][position() = 1]">
+                <span class="itemNumber"><xsl:apply-templates select="./p[position() = 1]/ab[@type='itemNum'][position() = 1]/node()"/></span>
+            </xsl:when>
             <!-- Labels directly before the item are picked up here -->
             <xsl:when test="./preceding-sibling::*[1][name() = 'label']">
                 <span class="itemNumber"><xsl:apply-templates select="./preceding-sibling::*[1]/node()"/></span>
@@ -360,7 +364,15 @@
                 <span class="itemNumber"><xsl:copy-of select="f:convert-markdown(@n)"/></span><xsl:text> </xsl:text>
             </xsl:when>
         </xsl:choose>
-        <xsl:apply-templates/>
+        <xsl:choose>            
+            <xsl:when test="./p[position() = 1]/ab[@type='itemNum'][position() = 1]">
+                <xsl:apply-templates select="./p[position() = 1]/node()"/>
+                <xsl:apply-templates select="./*[position() &gt; 1]"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates/>
+            </xsl:otherwise>
+        </xsl:choose>        
     </xsl:template>
 
 
