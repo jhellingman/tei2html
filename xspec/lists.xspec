@@ -134,7 +134,7 @@
         </list>
       </x:context>
       <x:expect label="will result in an HTML table containing two unordered lists">
-        <table xmlns="http://www.w3.org/1999/xhtml" class="splitListTable" id="...">
+        <table xmlns="http://www.w3.org/1999/xhtml" class="splitListTable" role="presentation" id="...">
            <tr>
               <td>
                  <ul>
@@ -163,7 +163,7 @@
         </list>
       </x:context>
       <x:expect label="will result in an HTML table containing two unordered lists, with the first two items in the left column, and the last two in the right column">
-        <table xmlns="http://www.w3.org/1999/xhtml" class="splitListTable" id="...">
+        <table xmlns="http://www.w3.org/1999/xhtml" class="splitListTable" role="presentation" id="...">
            <tr>
               <td>
                  <ul>

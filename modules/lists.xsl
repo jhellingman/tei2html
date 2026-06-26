@@ -89,7 +89,7 @@
     <xsl:template name="split-list-rows-table">
         <xsl:param name="columns" select="2" as="xs:integer"/>
 
-        <table>
+        <table role="presentation">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:for-each-group select="*" group-by="(position() - 1) idiv $columns">
                 <tr>
@@ -110,7 +110,7 @@
 
         <xsl:variable name="rows" select="ceiling(count(*) div $columns)"/>
 
-        <table>
+        <table role="presentation">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:for-each-group select="*" group-by="(position() - 1) mod $rows">
                 <tr>
@@ -133,7 +133,7 @@
         <xsl:variable name="rows" select="ceiling(count(*) div $columns)"/>
         <xsl:variable name="node" select="."/>
 
-        <table class="splitListTable">
+        <table class="splitListTable" role="presentation">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <tr>
                 <xsl:for-each-group select="*" group-by="(position() - 1) idiv $rows">
@@ -160,7 +160,7 @@
         <xsl:variable name="listType" select="f:determine-list-type(@type)"/>
         <xsl:variable name="node" select="."/>
 
-        <table class="splitListTable">
+        <table class="splitListTable" role="presentation">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <tr>
                 <xsl:for-each-group select="*" group-by="(position() - 1) mod $columns">
