@@ -157,7 +157,7 @@
         <xsl:param name="node" as="node()"/>
         <xsl:variable name="target" select="f:get-setting('facsimile.target')"/>
 
-        <a href="{f:facsimile-wrapper-full-filename($node)}" class="facslink" title="{f:message('msgPageImage')}">
+        <a href="{f:facsimile-wrapper-full-filename($node)}" class="facsimileLink" title="{f:message('msgPageImage')}">
             <xsl:if test="$target">
                 <xsl:attribute name="target" select="$target"/>
             </xsl:if>
@@ -176,7 +176,7 @@
         <xsl:variable name="url" select="f:translate-xref-url($url, substring(f:get-document-lang(), 1, 2))"/>
         <xsl:variable name="target" select="f:get-setting('facsimile.target')"/>
 
-        <a href="{$url}" class="facslink" title="{f:message('msgPageImage')}">
+        <a href="{$url}" class="facsimileLink" title="{f:message('msgPageImage')}">
             <xsl:if test="$target">
                 <xsl:attribute name="target" select="$target"/>
             </xsl:if>
@@ -490,21 +490,21 @@
     </xd:doc>
 
     <xsl:template match="note[f:is-footnote(.)]//q/text">
-        <div class="nestedtext">
+        <div class="nestedText">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
 
     <xsl:template match="note[f:is-footnote(.)]//q/text/body">
-        <div class="nestedbody">
+        <div class="nestedBody">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
         </div>
     </xsl:template>
 
     <xsl:template match="note[f:is-footnote(.)]//q/text/body/div1">
-        <div class="nesteddiv1">
+        <div class="nestedDiv1">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates/>
         </div>

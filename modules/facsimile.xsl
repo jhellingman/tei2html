@@ -76,7 +76,7 @@
 
 
 <xsl:template name="main-facsimile-css">
-.facslink::after {
+.facsimileLink::after {
     content: "\01F5CF";
     font-style: normal;
     font-weight: normal;
