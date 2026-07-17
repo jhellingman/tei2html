@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE x:description [
+
+    <!ENTITY nbsp       "&#160;">
+    <!ENTITY mdash      "&#x2014;">
+    <!ENTITY zwsp       "&#x200B;">
+    <!ENTITY ldquo      "&#x201C;">
+    <!ENTITY asterism   "&#x2042;">
+
+    ]>
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+               xmlns:xs="http://www.w3.org/2001/XMLSchema"
+               stylesheet="test-tei2html.xsl"
+               version="3.0">
+
+  <!-- Redefine global variables used in localization.xsl -->
+  <x:param name="language" as="xs:string" select="'en'"/>
+  <x:param name="root" select="self::document-node()">
+    <TEI/>
+  </x:param>
+
+  <x:scenario label="When rendering a TEI paragraph with a decorative initial">
+        <x:context>
+            <p id="test_p_initial" rend="initial-offset(45px) initial-width(90px) initial-height(95px) initial-image(images/initial-A.png)">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </x:context>
+        <x:expect label="will result in an HTML paragraph with an additional class and the first letter enclosed in a span">
+            <p xmlns="http://www.w3.org/1999/xhtml"
+               id="test_p_initial"
+               class="test_p_initial">
+               <span class="test_p_initialinit">L</span>orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering a TEI paragraph starting with italics with a decorative initial">
+        <x:context>
+            <p id="test_p_initial" rend="initial-offset(45px) initial-width(90px) initial-height(95px) initial-image(images/initial-A.png)"><hi>Lorem</hi> ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </x:context>
+        <x:expect label="will result in an HTML paragraph with an additional class and the first letter enclosed in a span">
+            <p xmlns="http://www.w3.org/1999/xhtml"
+               id="test_p_initial"
+               class="test_p_initial">
+               <span class="test_p_initialinit">L</span><i id="...">orem</i> ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </x:expect>
+    </x:scenario>
+
+    <x:scenario label="When rendering a TEI paragraph with a decorative initial and a marginal note at the start (and somewhere in the middle)">
+        <x:context>
+            <p id="test_p_initial" rend="initial-offset(45px) initial-width(90px) initial-height(95px) initial-image(images/initial-A.png)"><note place="margin">Test 1</note> Lorem ipsum dolor sit amet, <note place="margin">Test 2</note>consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </x:context>
+        <x:expect label="will result in an HTML paragraph with an additional class and the first letter enclosed in a span">
+            <p xmlns="http://www.w3.org/1999/xhtml"
+               id="test_p_initial"
+               class="test_p_initial">
+               <span class="test_p_initialinit">L</span><span class="marginnote" id="...">Test 1</span>orem ipsum dolor sit amet, <span class="marginnote" id="...">Test 2</span>consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </x:expect>
+    </x:scenario>
+
+  <x:scenario label="When rendering a TEI paragraph with a decorative initial preceded by an open quotation mark">
+    <x:context>
+      <p id="test_p_initial" rend="initial-offset(45px) initial-width(90px) initial-height(95px) initial-image(images/initial-A.png)">&ldquo;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    </x:context>
+    <x:expect label="will result in an HTML paragraph with an additional class and the first letter enclosed in a span">
+      <p xmlns="http://www.w3.org/1999/xhtml"
+         id="test_p_initial"
+         class="test_p_initial">
+        <span class="test_p_initialinit">&ldquo;L</span>orem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    </x:expect>
+  </x:scenario>
+
+    <x:scenario label="When rendering a TEI paragraph with a decorative initial (CSS mode)">
+        <x:context mode="css">
+            <p id="test_p_initial_css" rend="initial-offset(45px) initial-width(90px) initial-height(95px) initial-image(images/initial-A.png)">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </x:context>
+        <x:expect label="will result in an HTML paragraph with an additional class and the first letter enclosed in a span">
+.test_p_initial_css {
+background: url(images/initial-A.png) no-repeat top left;
+padding-top: 45px;
+}
+
+.test_p_initial_cssinit {
+float: left;
+width: 90px;
+height: 95px;
+background: url(images/initial-A.png) no-repeat;
+background-position: 0 -45px;
+text-align: right;
+visibility: hidden;
+font-size: 1px;
+}
+</x:expect>
+    </x:scenario>
+
+
+</x:description>

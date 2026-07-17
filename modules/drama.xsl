@@ -389,7 +389,7 @@
     <xd:doc>
         <xd:short>Align two verses.</xd:short>
         <xd:detail>Align two verses in a table. Here the assumption is that both verses / line-groups have
-        the same number of elements. We simply iterate through thie first, and place the matching elements from the second side-by-side.
+        the same number of elements. We simply iterate through the first, and place the matching elements from the second side-by-side.
         Note that the <code>@rend</code> attribute on the <code>lg</code> elements will be ignored. Line numbers will be inserted
         from either of both verses to be aligned, in a separate column. When we encounter a nested <code>lg</code> element, we
         recurse into that element, but without creating a new table.</xd:detail>

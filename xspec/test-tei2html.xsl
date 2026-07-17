@@ -21,6 +21,7 @@
     <xsl:include href="../modules/references.xsl"/>
     <xsl:include href="../modules/titlepage.xsl"/>
     <xsl:include href="../modules/block.xsl"/>
+    <xsl:include href="../modules/initials.xsl"/>
     <xsl:include href="../modules/notes.xsl"/>
     <xsl:include href="../modules/numbers.xsl"/>
     <xsl:include href="../modules/drama.xsl"/>

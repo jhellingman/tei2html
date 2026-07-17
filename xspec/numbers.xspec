@@ -5,8 +5,7 @@
                stylesheet="test-tei2html.xsl"
                version="3.0">
 
-
-    <!-- f:from-roman -->
+   <!-- f:from-roman -->
 
    <x:scenario label="When determining the Roman numerical value of an empty string">
       <x:call function="f:from-roman">
