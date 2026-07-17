@@ -6,7 +6,7 @@
 
 /***** Verse *****/
 
-.lgouter {
+.lgOuter {
     margin-left: auto;
     margin-right: auto;
     display: table; /* used to make the block shrink to the actual size */
@@ -17,11 +17,11 @@
     padding: .5em 0;
 }
 
-.lg h4, .lgouter h4 {
+.lg h4, .lgOuter h4 {
     font-weight: normal;
 }
 
-.lg .lineNum, .sp .lineNum, .lgouter .lineNum {
+.lg .lineNum, .sp .lineNum, .lgOuter .lineNum {
     color: #777;
     font-size: 90%;
     left: 16%;

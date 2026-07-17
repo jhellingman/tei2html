@@ -223,7 +223,7 @@ hr {
 }
 
 /* add margins to various text elements */
-.lg, .lgouter, .epigraph, .argument, .table, .figure, .sp {
+.lg, .lgOuter, .epigraph, .argument, .table, .figure, .sp {
     padding: 0;
     margin-top: 1.58em;
     margin-bottom: 1.58em;
