@@ -25,7 +25,7 @@ GetOptions (
 
 if ($useUnicode == 1) {
     binmode(STDOUT, ":encoding(UTF-8)");
-    use open ':encoding(UTF-8)'
+    use open ':encoding(UTF-8)';
 }
 
 my $italicStart = '_';

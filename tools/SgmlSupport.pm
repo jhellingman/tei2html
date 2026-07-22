@@ -291,6 +291,7 @@ BEGIN {
     $ent{'block'}       = chr(0x2588);  #  FULL BLOCK
     $ent{'bottom'}      = chr(0x22A5);  #  UP TACK
     $ent{'bowtie'}      = chr(0x22C8);  #  BOWTIE
+
     $ent{'boxdl'}       = chr(0x2510);  #  BOX DRAWINGS LIGHT DOWN AND LEFT
     $ent{'boxdL'}       = chr(0x2555);  #  BOX DRAWINGS DOWN SINGLE AND LEFT DOUBLE
     $ent{'boxDl'}       = chr(0x2556);  #  BOX DRAWINGS DOWN DOUBLE AND LEFT SINGLE
@@ -331,6 +332,11 @@ BEGIN {
     $ent{'boxvR'}       = chr(0x255E);  #  BOX DRAWINGS VERTICAL SINGLE AND RIGHT DOUBLE
     $ent{'boxVr'}       = chr(0x255F);  #  BOX DRAWINGS VERTICAL DOUBLE AND RIGHT SINGLE
     $ent{'boxVR'}       = chr(0x2560);  #  BOX DRAWINGS DOUBLE VERTICAL AND RIGHT
+
+    $ent{'boxFS'}       = chr(0x2571);  #  BOX DRAWINGS LIGHT DIAGONAL UPPER RIGHT TO LOWER LEFT
+    $ent{'boxRS'}       = chr(0x2572);  #  BOX DRAWINGS LIGHT DIAGONAL UPPER LEFT TO LOWER RIGHT
+    $ent{'boxDC'}       = chr(0x2573);  #  BOX DRAWINGS LIGHT DIAGONAL CROSS
+
     $ent{'bprime'}      = chr(0x2035);  #  REVERSED PRIME
     $ent{'breve'}       = chr(0x02D8);  #  BREVE
     $ent{'brvbar'}      = chr(0x00A6);  #  BROKEN BAR
@@ -1039,6 +1045,7 @@ BEGIN {
     $ent{'veebar'}      = chr(0x22BB);  #  XOR
     $ent{'vellip'}      = chr(0x22EE);  #  VERTICAL ELLIPSIS
     $ent{'verbar'}      = chr(0x007C);  #  VERTICAL LINE
+    $ent{'vert'}        = chr(0x007C);  #  VERTICAL LINE
     $ent{'Verbar'}      = chr(0x2016);  #  DOUBLE VERTICAL LINE
     $ent{'vltri'}       = chr(0x22B2);  #  NORMAL SUBGROUP OF
     $ent{'vprop'}       = chr(0x221D);  #  PROPORTIONAL TO
