@@ -273,7 +273,7 @@
 
 <xsl:template match="fb2:poem">
     <xsl:text>&lf;</xsl:text>
-    <lg type="lgouter">
+    <lg type="lgOuter">
         <xsl:apply-templates/>
     </lg>
 </xsl:template>

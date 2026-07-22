@@ -71,7 +71,7 @@
         <div>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:variable name="class">
-                <xsl:text>lgouter </xsl:text>
+                <xsl:text>lgOuter </xsl:text>
                 <xsl:if test="ancestor::note[f:is-footnote(.)]">footnote<xsl:text> </xsl:text></xsl:if>
             </xsl:variable>
             <xsl:copy-of select="f:set-class-attribute-with(., $class)"/>
@@ -136,7 +136,7 @@
 
     <xd:doc>
         <xd:short>Format a normal <code>lg</code> element.</xd:short>
-        <xd:detail>Format a <code>lg</code> element. Top-level <code>lg</code> elements get <code>class=lgouter</code>,
+        <xd:detail>Format a <code>lg</code> element. Top-level <code>lg</code> elements get <code>class="lgOuter"</code>,
             nested <code>lg</code> elements get <code>class=lg</code>. This we use (using CSS) to center the entire poem
             on the screen, and still keep the left side of all stanzas aligned.</xd:detail>
     </xd:doc>
@@ -148,7 +148,7 @@
         <div>
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:variable name="class">
-                <xsl:if test="not(parent::lg) and not(parent::sp)">lgouter<xsl:text> </xsl:text></xsl:if>
+                <xsl:if test="not(parent::lg) and not(parent::sp)">lgOuter<xsl:text> </xsl:text></xsl:if>
                 <xsl:if test="parent::lg or parent::sp">lg<xsl:text> </xsl:text></xsl:if>
                 <xsl:if test="ancestor::note[f:is-footnote(.)]">footnote<xsl:text> </xsl:text></xsl:if>
             </xsl:variable>
@@ -389,7 +389,7 @@
     <xd:doc>
         <xd:short>Align two verses.</xd:short>
         <xd:detail>Align two verses in a table. Here the assumption is that both verses / line-groups have
-        the same number of elements. We simply iterate through thie first, and place the matching elements from the second side-by-side.
+        the same number of elements. We simply iterate through the first, and place the matching elements from the second side-by-side.
         Note that the <code>@rend</code> attribute on the <code>lg</code> elements will be ignored. Line numbers will be inserted
         from either of both verses to be aligned, in a separate column. When we encounter a nested <code>lg</code> element, we
         recurse into that element, but without creating a new table.</xd:detail>

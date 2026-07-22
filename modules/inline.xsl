@@ -655,10 +655,10 @@
 
 
     <!--====================================================================-->
-    <!-- Regularization -->
+    <!-- Regularisation -->
 
     <xd:doc>
-        <xd:short>Handle Regularisations.</xd:short>
+        <xd:short>Handle Regularisation.</xd:short>
         <xd:detail>Regularisation of spelling which are not corrections, but editorial interventions, that
         might help to make a text more readable or searchable. With the <code>reg</code> element,we retain
         the regular spelling and ignore the <code>@orig</code> attribute.</xd:detail>
@@ -669,7 +669,7 @@
     </xsl:template>
 
     <xd:doc>
-        <xd:short>Handle Regularisations.</xd:short>
+        <xd:short>Handle Regularisation.</xd:short>
         <xd:detail>Regularisation of spelling which are not corrections, but editorial interventions, that
         might help to make a text more readable or searchable. With the <code>orig</code> element,we retain
         the original spelling and ignore the <code>@reg</code> attribute.</xd:detail>
@@ -984,7 +984,7 @@
 
     <xsl:template match="ab">
         <xsl:if test="not(@rend='hide')">
-            <!-- If the item is to go flush right, add some (non-breaking) space to avoid a colission in HTML. -->
+            <!-- If the item is to go flush right, add some (non-breaking) space to avoid a collision in HTML. -->
             <xsl:if test="@type='tocPageNum' or @type='flushright' or @type='adPrice'">
                 <xsl:text>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </xsl:text>
             </xsl:if>
@@ -1205,7 +1205,7 @@
                                 </xsl:choose>
                             </span>
                         </span>
-                        <!-- No ditto marks for parts that are superscripted or subscripted -->
+                        <!-- No ditto marks for parts that are superscript or subscript -->
                         <xsl:if test="not($node/parent::hi[@rend='sub' or @rend='sup'])">
                             <!-- Nest two levels of span to enable CSS to get alignment right -->
                             <span class="r">

@@ -94,14 +94,14 @@ span.corr, span.num, span.abbr, span.trans, span.measure, abbr {
 }
 
 /* add margins to various text elements */
-.lg, .lgouter, .epigraph, .argument, .table, .figure, .sp {
+.lg, .lgOuter, .epigraph, .argument, .table, .figure, .sp {
     padding: 0;
     margin-top: 1.58em;
     margin-bottom: 1.58em;
 }
 
 /* suppress margin: auto usage */
-.lgouter {
+.lgOuter {
     margin-left: 4%;
     margin-right: 0;
 }

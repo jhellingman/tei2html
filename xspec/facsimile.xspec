@@ -41,7 +41,7 @@
         </x:context>
         <x:expect label="will result an HTML span of class pageNum, embedded in a paragraph">
             <p xmlns="http://www.w3.org/1999/xhtml">
-                <span class="pageNum" id="pb4">[<a href="#pb4">4</a>]&nbsp;<a href="page-images/page-pb4.html" class="facslink" title="Page Image"/></span>
+                <span class="pageNum" id="pb4">[<a href="#pb4">4</a>]&nbsp;<a href="page-images/page-pb4.html" class="facsimileLink" title="Page Image"/></span>
             </p>
         </x:expect>
     </x:scenario>
@@ -51,7 +51,7 @@
             <pb n="4" id="pb4" facs="image/p004.jpg"/>
         </x:context>
         <x:expect label="will result in CSS with a generated class selector and relevant rendering attributes (i.e. icon)"
-                  test="contains(normalize-space(/text()), '.facslink::after { content: &quot;\01F5CF&quot;; font-style: normal; font-weight: normal; color: #06c; }')"/>
+                  test="contains(normalize-space(/text()), '.facsimileLink::after { content: &quot;\01F5CF&quot;; font-style: normal; font-weight: normal; color: #06c; }')"/>
     </x:scenario>
 
     <!-- facsimile -->

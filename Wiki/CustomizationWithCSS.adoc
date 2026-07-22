@@ -59,7 +59,7 @@ Second, `tei2html` generates class attributes on its output that correspondent t
 |`//p` |`p` |Paragraph 
 |`//p[position() = 1]` |`p.first` |First paragraph (actual XPath more complex) 
 |`//figure` |`.figure` |The actual `img` tag is nested in various `div`s 
-|`//lg[not(ancestor::lg)]` |`.lgouter` |Top level `lg` elements 
+|`//lg[not(ancestor::lg)]` |`.lgOuter` |Top level `lg` elements
 |`//lg[ancestor::lg]` |`.lg` |Nested `lg` elements 
 |`//l` |`.line` |Lines of verse 
 |`//hi` |`i` |Default without `@rend` 

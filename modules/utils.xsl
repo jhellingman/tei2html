@@ -11,7 +11,6 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
     xmlns:f="urn:stylesheet-functions"
-    xmlns:map="http://www.w3.org/2005/xpath-functions/map"
     exclude-result-prefixes="f xs xd">
 
 

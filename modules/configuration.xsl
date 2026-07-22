@@ -190,7 +190,7 @@
 
             <!-- Output-format specific settings: these override the general settings defined above for a specific output format. Supported formats: "html", "html5" and "epub". -->
             <output format="html">
-                <useMouseOverPopups>true</useMouseOverPopups>           <!-- Use mouse-over pop-ups on various items (links, etc). -->
+                <useMouseOverPopups>true</useMouseOverPopups>           <!-- Use mouse-over pop-ups on various items (links, etc.). -->
             </output>
             <output format="html5">
                 <useMouseOverPopups>true</useMouseOverPopups>

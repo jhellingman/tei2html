@@ -350,7 +350,7 @@
             <xsl:when test="./ab[@type='itemNum'][position() = 1]">
                 <span class="itemNumber"><xsl:apply-templates select="./ab[@type='itemNum'][position() = 1]/node()"/></span>
             </xsl:when>
-            <!-- If an item contains paragraphs, the p-element has to go first, the item number will be the first in the firt paragraph -->
+            <!-- If an item contains paragraphs, the p-element has to go first, the item number will be the first in the first paragraph -->
             <xsl:when test="./p[position() = 1]/ab[@type='itemNum'][position() = 1]">
                 <span class="itemNumber"><xsl:apply-templates select="./p[position() = 1]/ab[@type='itemNum'][position() = 1]/node()"/></span>
             </xsl:when>

@@ -207,7 +207,7 @@ text-indent:2em;
             </lg>
         </x:context>
         <x:expect label="will result in an HTML div with two paragraphs">
-            <div xmlns="http://www.w3.org/1999/xhtml" id="lg" class="lgouter">
+            <div xmlns="http://www.w3.org/1999/xhtml" id="lg" class="lgOuter">
                <p id="l1" class="line">First,</p>
                <p id="l2" class="line">Second.</p>
             </div>
@@ -223,7 +223,7 @@ text-indent:2em;
             </lg>
         </x:context>
         <x:expect label="will result in an HTML div with two paragraphs">
-            <div xmlns="http://www.w3.org/1999/xhtml" id="lg" class="lgouter">
+            <div xmlns="http://www.w3.org/1999/xhtml" id="lg" class="lgOuter">
                <h4>The Title.</h4>
                <p id="l1" class="line">First,</p>
                <p id="l2" class="line">Second.</p>
@@ -245,7 +245,7 @@ text-indent:2em;
             </lg>
         </x:context>
         <x:expect label="will result in nested HTML divs with two paragraphs each">
-            <div xmlns="http://www.w3.org/1999/xhtml" id="lg0" class="lgouter">
+            <div xmlns="http://www.w3.org/1999/xhtml" id="lg0" class="lgOuter">
                <div id="lg1" class="lg">
                   <p id="l1.1" class="line">First,</p>
                   <p id="l1.2" class="line">Second.</p>
