@@ -33,8 +33,8 @@
     <xsl:variable name="default-ex-libris">
         <exlibris xmlns="http://www.gutenberg.ph/2024/schemas/exlibris">
             <owner>
-                <name>Jeroen Hellingman</name>
-                <contact type="email">jeroen@gutenberg.ph</contact>
+                <name>John Doe</name>
+                <contact type="email">john.doe@example.com</contact>
                 <address>
                     <houseNumber>24</houseNumber>
                     <street>Some Street</street>
@@ -48,6 +48,7 @@
                     <longitude>4.00000</longitude>
                 </location>
             </owner>
+            <graphic url="exlibris/pg-viking-full-color.png"/>
             <accession>
                 <date>2021-10-24</date>
                 <payment>

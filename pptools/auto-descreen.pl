@@ -1,8 +1,11 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
+
 use File::Spec;
 use File::Path qw(make_path);
+use Getopt::Long qw(GetOptions);
+use Scalar::Util qw(looks_like_number);
 
 # --- NOTE ---
 # The CLI tool does not embed the gmic-community filters by default.
@@ -13,15 +16,60 @@ use File::Path qw(make_path);
 #
 # to get this command in the CLI tool.
 
-# --- CONFIGURATION ---
+# --- Default configuration (can be overridden via CLI) ---
 my $input_dir  = './scanned_photos';        # Folder containing 8-bit, 16-bit, or mixed scans
 my $output_dir = './descreened_photos';     # Target folder for uniform 8-bit outputs
 
-# --- TUNING PARAMETERS ---
+# tuning parameters
 my $smoothness      = 10;   # 0 to 100: Higher = stronger pattern removal
 my $recover_details = 4;    # 0 to 100: Re-introduces edge sharpness/contrast
 my $lock_aspect     = 0;    # 0 = No, 1 = Yes
 my $background      = 0;    # 0 = Neutral gray background fill
+
+# runtime/behavior flags
+my $dry_run = 0;    # if true, print commands but don't run
+my $verbose = 0;    # higher = more verbose
+my $help    = 0;
+
+GetOptions(
+    'input|i=s'        => \$input_dir,
+    'output|o=s'       => \$output_dir,
+    'smooth|s=i'       => \$smoothness,
+    'recover|r=i'      => \$recover_details,
+    'lock!'            => \$lock_aspect,     # --lock or --no-lock
+    'background=i'     => \$background,
+    'dry-run|n'        => \$dry_run,
+    'verbose|v+'       => \$verbose,         # -v, -vv, ...
+    'help|h'           => \$help,
+) or usage(1);
+
+if ($help) {
+    usage(0);
+}
+
+sub clamp {
+    my ($value, $min, $max) = @_;
+    return $min if $value < $min;
+    return $max if $value > $max;
+    return $value;
+}
+
+if (defined $smoothness && looks_like_number($smoothness)) {
+    $smoothness = clamp($smoothness, 0, 100);
+} else {
+    warn "Invalid --smooth value; using default $smoothness\n";
+}
+
+if (defined $recover_details && looks_like_number($recover_details)) {
+    $recover_details = clamp($recover_details, 0, 100);
+} else {
+    warn "Invalid --recover value; using default $recover_details\n";
+}
+
+$lock_aspect = $lock_aspect ? 1 : 0;
+$background  = $background ? 1 : 0;
+
+print_configuration() if $verbose;
 
 # Ensure output directory exists
 make_path($output_dir) unless -d $output_dir;
@@ -31,7 +79,7 @@ opendir(my $dh, $input_dir) or die "Cannot open directory $input_dir: $!";
 my @images = grep { /\.(png|tiff|tif|bmp)$/i } readdir($dh);
 closedir($dh);
 
-print "Found " . scalar(@images) . " images to process.\n";
+print "Found " . scalar(@images) . " images to process.\n" if $verbose;
 
 my $count = 0;
 foreach my $file (@images) {
@@ -39,7 +87,7 @@ foreach my $file (@images) {
     my $input_path  = File::Spec->catfile($input_dir, $file);
     my $output_path = File::Spec->catfile($output_dir, $file);
 
-    print "[$count/" . scalar(@images) . "] Automatically detecting & processing: $file... \n";
+    print "[$count/" . scalar(@images) . "] Automatically detecting & processing: $file... \n" if $verbose;
 
     # --- STEP 1: IMAGEMAGICK DATA EXTRACTION ---
     # We retrieve both the bit-depth and horizontal resolution in one command.
@@ -59,16 +107,22 @@ foreach my $file (@images) {
         print "  -> Warning: Could not parse metadata cleanly. Defaulting to 8-bit, 600 DPI.\n";
     }
 
-    print "  -> Detected Bit Depth: $bit_depth-bit\n";
-    print "  -> Detected Resolution: $resolution DPI\n";
+    print "  -> Detected Bit Depth: $bit_depth-bit\n" if $verbose;
+    print "  -> Detected Resolution: $resolution DPI\n" if $verbose;
 
     # --- STEP 2: BUILD THE G'MIC COMMAND TO DESCREEN ---
     # We construct our processing array cleanly. No shell conditional parsing required!
     my @gmic_cmd = (
-        'gmic',
-        '-verbose', '+',   
+        'gmic', 
         '-input', $input_path
     );
+
+    if ($verbose) {
+        push(@gmic_cmd, '-verbose', '+');
+    } else {
+        push(@gmic_cmd, '-verbose', '-');
+    }
+
 
     # If the file is 16-bit, inject a division flag into the instruction stack
     if ($bit_depth > 8) {
@@ -85,16 +139,58 @@ foreach my $file (@images) {
     # Execute the G'MIC process
     system(@gmic_cmd);
 
+    if ($? != 0) {
+        print "-> ERROR g'mic processing $file (Exit code: $?)\n";
+        next;
+    }
+
     # STEP 3: RESTORE RESOLUTION WITH EXIFTOOL
 
     my @cmd_exiftool = ('exiftool', '-overwrite_original', "-XResolution=$resolution", "-YResolution=$resolution", '-ResolutionUnit=in',  $output_path);
     system(@cmd_exiftool);
 
     if ($? == 0) {
-        print "-> Done.\n";
+        print "-> Done.\n" if $verbose;
     } else {
-        print "-> ERROR processing $file (Exit code: $?)\n";
+        print "-> ERROR exiftool processing $file (Exit code: $?)\n";
     }
 }
 
-print "\nBatch processing complete! All processed files archived as uniform 8-bit in: $output_dir\n";
+print "\nBatch processing complete! All processed files archived as uniform 8-bit in: $output_dir\n" if $verbose;
+
+
+sub print_configuration {
+    print "Configuration:\n";
+    print "  input:           $input_dir\n";
+    print "  output:          $output_dir\n";
+    print "  smoothness:      $smoothness\n";
+    print "  recover_details: $recover_details\n";
+    print "  lock_aspect:     $lock_aspect\n";
+    print "  background:      $background\n";
+    print "  dry-run:         $dry_run\n";
+}
+
+sub usage {
+    my ($exit_code) = @_;
+    $exit_code //= 0;
+    print <<"USAGE";
+Usage: $0 [options]
+
+Options:
+  -i, --input DIR        Input directory containing images (default: $input_dir)
+  -o, --output DIR       Output directory for processed images (default: $output_dir)
+  --smooth N, -s N       Smoothness 0..100 (default: $smoothness)
+  --recover N, -r N      Recover details 0..100 (default: $recover_details)
+  --lock / --no-lock     Lock aspect ratio flag (default: @{[ $lock_aspect ? 'on' : 'off' ]})
+  --background N         Background mode (0 = neutral gray, default: $background)
+  --dry-run, -n          Print the actions but do not execute commands
+  -v, --verbose          Increase verbosity (can be repeated)
+  -h, --help             Show this help and exit
+
+Examples:
+  $0 --input scans --output out --smooth 12 --recover 5
+  $0 -i scans -o out --dry-run -vv
+
+USAGE
+    exit $exit_code;
+}
