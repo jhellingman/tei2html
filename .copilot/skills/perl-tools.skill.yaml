@@ -1,0 +1,44 @@
+name: perl-tools
+description: Guidance and commands for working with Perl scripts in tools/
+triggers:
+  - "perl"
+  - "tools/"
+  - "run perl script"
+permissions:
+  read: true
+  run: true
+commands:
+  - id: lint_perl
+    description: Run static checks and style guidelines on Perl files in tools/.
+    inputs:
+      path: string (default: "tools/")
+      perlcritic_profile: string (optional)
+    outputs:
+      - summary: string
+      - findings: list
+    run_command: "perl -c {file} && perlcritic --profile {perlcritic_profile:-default} {path}"
+  - id: run_script
+    description: Safely run a named Perl script and capture output and exit code.
+    inputs:
+      script_path: string
+      args: list (optional)
+      env: map (optional)
+    outputs:
+      - status: enum [success, failed, errored]
+      - stdout: string
+      - stderr: string
+    run_command: "perl {script_path} {args...}"
+  - id: test_perl
+    description: Run Perl test files (t/ or tests/) under tools/.
+    inputs:
+      test_path: string (default: "tools/t")
+    outputs:
+      - status: enum [passed, failed, errored]
+      - failing_tests: list
+    run_command: "prove -l {test_path}"
+notes: |
+  - Use 'perl -c' to check syntax before running scripts.
+  - Prefer running tests with 'prove -l' (with TAP output) for consistent parsing.
+  - Suggest and enforce safe defaults: do not run untrusted scripts with network access.
+  - Recommend using perlcritic for style + an agreed profile; if none present, use default.
+  - When suggesting code changes, include exact file path and small focused diffs.

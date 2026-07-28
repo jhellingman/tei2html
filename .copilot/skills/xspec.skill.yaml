@@ -1,0 +1,38 @@
+name: xspec
+description: Commands and guidance for working with XSpec tests in xspec/
+triggers:
+  - "xspec"
+  - "xspec tests"
+  - "run xspec"
+permissions:
+  read: true
+  run: true
+commands:
+  - id: run_xspec
+    description: Run XSpec test suite for files in xspec/ and return summarized results.
+    inputs:
+      path: string (default: "xspec/")
+      runner: string (optional) # e.g., 'xspec' gem, mvn plugin, or xsltproc + script
+    outputs:
+      - status: enum [passed, failed, errored]
+      - summary: string
+      - failing_specs: list
+    run_command: |
+      # examples (assistant should pick based on repo tooling)
+      # Ruby xspec gem: xspec {path}
+      # via mvn: mvn -f pom.xml test -Dtest=xspec
+      # fallback: run xspec-runner.sh {path}
+  - id: show_spec_detail
+    description: Show the expected input/output pairs and relevant XSLT templates for a failing spec.
+    inputs:
+      spec_file: string
+    outputs:
+      - spec_snippet: string
+      - related_templates: list
+notes: |
+  - Prefer the project's configured runner. If unknown, detect common runners:
+    - presence of pom.xml with xspec plugin → use mvn
+    - gemfile / xspec gem → use xspec command
+    - custom shell scripts in scripts/ → use those
+  - When a spec fails, include the XSLT template(s) and the input XML snippet that triggered the failure.
+  - Suggest minimal test-driven fixes (small XSLT changes + updated spec).

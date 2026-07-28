@@ -1,0 +1,40 @@
+# Repository Model & Skill Profile for tei2html
+name: tei2html-mcp
+version: 0.1.0
+repository: jhellingman/tei2html
+description: >
+  Assistant profile for the TEI→HTML conversion project. Defines default model,
+  repository-scoped permissions, and the set of skills available to the assistant.
+default_model: gpt-4o-mini
+model_overrides:
+  gpt-4o:
+    max_tokens: 8192
+    temperature: 0.0
+skills:
+  - code-navigation
+  - test-runner
+  - pr-assistant
+  - perl-tools
+  - pptools
+  - xspec
+permissions:
+  read:
+    - "**/*.xml"
+    - "**/*.xsl"
+    - "src/**"
+    - "README.md"
+    - "package.json"
+    - "tools/**"
+    - "pptools/**"
+    - "xspec/**"
+  write:
+    - ".copilot/**"
+    - "docs/**"
+    - "scripts/**"
+  run:
+    - "scripts/test"
+    - "scripts/xspec"
+prompts:
+  repo_summary: |
+    You are an assistant specialized in the tei2html repo. When asked, summarize repository layout,
+    describe key files (XSLT, scripts), and point to exact file paths/line ranges when explaining code.
