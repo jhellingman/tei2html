@@ -11,7 +11,6 @@ use File::Path qw(make_path);
 use IPC::System::Simple qw(system);
 use Pod::Usage;
 
-
 # Parameters that can be set via command-line options:
 
 my $profile    = 'photo';
