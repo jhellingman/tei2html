@@ -207,6 +207,7 @@ sub print_configuration {
     print "  lock_aspect:     $lock_aspect\n";
     print "  background:      $background\n";
     print "  dry-run:         $dry_run\n";
+    print "  overwrite:       $overwrite\n";
 }
 
 sub usage {
