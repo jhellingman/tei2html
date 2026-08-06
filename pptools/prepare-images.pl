@@ -11,7 +11,6 @@ use File::Path qw(make_path);
 use IPC::System::Simple qw(system);
 use Pod::Usage;
 
-
 # Parameters that can be set via command-line options:
 
 my $profile    = 'photo';
@@ -30,14 +29,17 @@ my $posterize;
 my $colorspace;
 my $blur;
 
+my $verbose   = 0;    # higher = more verbose
+my $overwrite = 0;    # if true, overwrite original file
+
 my $help = 0;
 my $man  = 0;
 
 GetOptions(
+    'format=s'     => \$format,
     'max-edge=i'   => \$max_edge,
     'resolution=i' => \$resolution,
     'quality=i'    => \$quality,
-    'format=s'     => \$format,
     'posterize=i'  => \$posterize,
     'tint=s'       => \$tint,
     'colorize!'    => \$colorize,
@@ -47,6 +49,8 @@ GetOptions(
     'profile=s'    => \$profile,
     'help!'        => \$help,
     'man!'         => \$man,
+    'verbose|v+'   => \$verbose,         # -v, -vv, ...
+    'overwrite!'   => \$overwrite
 ) or pod2usage(2);
 
 pod2usage(1) if $help;
@@ -138,6 +142,32 @@ my %profiles = (
 
 apply_profile($profile) if $profile;
 
+print_configuration() if $verbose;
+
+sub print_configuration {
+    print "Configuration:\n";
+    print "  input:           $input\n";
+    print "  target:          $target\n";
+    print "  overwrite:       $overwrite\n\n";
+
+    print "  profile:         $profile\n";
+    print "  format:          $format\n";
+    print "  max-edge:        $max_edge\n";
+    print "  resolution:      $resolution\n";
+    print "  quality:         $quality\n";
+    print "  posterize:       " . (defined $posterize ? $posterize : "undef") . "\n";
+    print "  tint:            $tint\n";
+    print "  colorize:        $colorize\n";
+    print "  blur:            $blur\n";
+    print "  colorspace:      $colorspace\n\n";
+
+    print "  filter:          $filter\n";
+    print "  chroma:          $chroma\n";
+    print "  radius:          $radius\n";
+    print "  sigma:           $sigma\n";
+    print "  amount:          $amount\n";
+    print "  threshold:       $threshold\n";
+}
 
 sub apply_profile {
     my ($profile_name) = @_;
@@ -177,6 +207,8 @@ if (-d $input) {
 sub process_directory {
     my $dir = shift;
 
+    print "Processing directory $dir.\n" if $verbose;
+
     my $outdir = File::Spec->catdir($dir, $target);
     make_path($outdir) unless -d $outdir;
 
@@ -199,6 +231,13 @@ sub process_file {
 
     my ($name, $path) = fileparse($input, qr/\.[^.]+/);
     my $output = File::Spec->catfile($outdir, "$name.$format");
+
+    if (!$overwrite && -e $output) {
+        print "Skipping $input: target file exists.\n" if $verbose;
+        return;
+    }
+
+    print "Processing file $input.\n" if $verbose;
 
     if ($colorize) {
         if ($format eq 'png') {
