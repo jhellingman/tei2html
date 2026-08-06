@@ -1,18 +1,18 @@
 # SKILL: Operational runbook for tei2html
 
-This SKILL.md captures the essential maintenance/run instructions and quick commands (from repository analysis). Keep it short and actionable.
+This SKILL.md captures the essential maintenance/run instructions and quick commands (from repository analysis).
 
 Quick commands
 - Run the test suite (XSpec tests via Maven):
-  mvn test
+  `mvn test`
 
 - Build examples and documentation (runs prepare-package phase, which does sample transforms and docs):
-  mvn package
+  `mvn package`
 
 Prerequisites
 - Java (JDK) and Maven installed and on PATH.
 - Perl for pptools scripts if you use them.
-- Recommended XSLT processor: Saxon (the project uses Saxon-HE in CI via Maven). The pom.xml declares saxon.version = 9.9.1-8 (comment mentions 13.0) — confirm the Saxon version you intend to run locally.
+- Recommended XSLT processor: Saxon (the project uses Saxon-HE in CI via Maven). The pom.xml declares saxon.version = 13.0 — confirm the Saxon version you intend to run locally.
 - External binaries that some pptools scripts may expect: ImageMagick, 7zip, and other common image/archive utilities.
 
 Where to start when something breaks
@@ -32,5 +32,3 @@ Risk reminders
 - Saxon version mismatch or Saxon-HE vs. EE features may break transforms.
 - pom.xml sets saxonOptions warnings=silent and outval=recover — errors may be hidden during transforms; consider enabling warnings for debugging.
 - Many pptools Perl scripts assume external tools and specific encodings — document & verify prerequisites when using them.
-
-Maintainers: add this file to the repo root as a short operational runbook.
