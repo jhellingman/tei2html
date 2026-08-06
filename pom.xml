@@ -66,7 +66,7 @@
                         <outval>recover</outval>
                         <strip>none</strip>
                         <TJ>off</TJ>
-                        <warnings>silent</warnings>
+                        <warnings>recover</warnings>
                         <xi>on</xi>
                     </saxonOptions>
                     <folding>true</folding>

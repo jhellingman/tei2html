@@ -590,7 +590,7 @@
                     <xsl:apply-templates select="$corr"/>
                 </span>
             </xsl:when>
-            
+
             <xsl:when test="not($sic) or $sic = ''">
                 <span class="corr">
                     <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
@@ -699,7 +699,7 @@
             <xsl:if test="f:is-set('useMouseOverPopups')">
                 <xsl:attribute name="title" select="if (@extent)
                                                     then f:format-message('msgMissingTextWithExtentReason', $params)
-                                                        else if (@quantity) 
+                                                        else if (@quantity)
                                                         then f:format-message('msgMissingTextWithQuantityReason', $params)
                                                         else f:format-message('msgMissingTextWithReason', $params)"/>
             </xsl:if>
@@ -902,7 +902,25 @@
             <xsl:apply-templates select="orig"/>
         </span>
     </xsl:template>
-    
+
+
+    <xsl:template match="choice[reg]">
+        <span>
+            <xsl:attribute name="id" select="f:generate-id(.)"/>
+            <xsl:copy-of select="f:generate-lang-attribute(orig/@lang)"/>
+            <xsl:variable name="script" select="f:map-language-to-script(orig/@lang)"/>
+            <xsl:copy-of select="if ($script and $script != 'Latn')
+                                 then f:set-class-attribute-with(., $script)
+                                 else f:set-class-attribute(.)"/>
+            <xsl:if test="f:is-set('useMouseOverPopups')">
+                <xsl:attribute name="title">
+                    <xsl:apply-templates select="reg" mode="remove-nested-choice"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:apply-templates select="orig"/>
+        </span>
+    </xsl:template>
+
     <xd:doc>
         <xd:short>Remove nested choice elements from regularized text.</xd:short>
     </xd:doc>
@@ -997,7 +1015,7 @@
                             <xsl:value-of select="@type"/>
                         </xsl:variable>
                         <xsl:copy-of select="f:set-class-attribute-with(., $class)"/>
-                        <xsl:apply-templates/>                        
+                        <xsl:apply-templates/>
                     </bdo>
                 </xsl:when>
                 <xsl:when test="@type='block'">

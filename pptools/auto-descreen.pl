@@ -156,7 +156,7 @@ sub auto_descreen {
 
     # If the file is 16-bit, add a division flag into the instruction stack
     if ($bit_depth == 16) {
-        print "  -> Scaling 16-bit depth down to 8-bit...\n";
+        print "  -> Scaling 16-bit depth down to 8-bit...\n" if $verbose;
         push(@gmic_cmd, '-div', '257');
     }
 
