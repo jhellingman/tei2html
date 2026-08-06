@@ -15,11 +15,12 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <saxon.version>9.9.1-8</saxon.version>  <!-- 13.0 -->
+        <saxon.version>13.0</saxon.version>
         <xml.maven.plugin.version>1.2.1</xml.maven.plugin.version>
-        <xspec.version>1.6.0</xspec.version> <!-- 4.0.2 -->
-        <xspec.maven.plugin.version>2.0.0</xspec.maven.plugin.version> <!-- 3.1.3 -->
-            
+        <xspec.version>4.0.3</xspec.version>
+        <xspec.maven.plugin.version>3.1.3</xspec.maven.plugin.version>
+        <nkutsche.xspec.maven.plugin.version>2.1.1</nkutsche.xspec.maven.plugin.version>
+
         <asciidoctor.maven.plugin.version>3.2.0</asciidoctor.maven.plugin.version>
         <asciidoctorj.epub.version>2.2.0</asciidoctorj.epub.version>
         <asciidoctorj.pdf.version>2.3.23</asciidoctorj.pdf.version>
@@ -29,9 +30,9 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>io.xspec.maven</groupId>
+                <groupId>com.nkutsche</groupId>
                 <artifactId>xspec-maven-plugin</artifactId>
-                <version>${xspec.maven.plugin.version}</version>
+                <version>${nkutsche.xspec.maven.plugin.version}</version>
                 <dependencies>
                     <dependency>
                         <groupId>net.sf.saxon</groupId>
@@ -42,12 +43,17 @@
                         <groupId>io.xspec</groupId>
                         <artifactId>xspec</artifactId>
                         <version>${xspec.version}</version>
+                        <classifier>enduser-files</classifier>
+                        <type>zip</type>
                     </dependency>
                 </dependencies>
                 <configuration>
                     <coverage>false</coverage>
-                    <catalogFile>file://${project.basedir}/dtd/catalog.xml</catalogFile>
-                    <testDir>${project.basedir}/xspec</testDir>
+                    <catalogFile>dtd/catalog.xml</catalogFile>
+                    <testDir>xspec</testDir>
+                    <includes>
+                      <include>**/*.xspec</include>
+                    </includes>
                     <skipTests>false</skipTests>
                         
                     <!-- See https://github.com/xspec/xspec-maven-plugin-1/wiki -->
