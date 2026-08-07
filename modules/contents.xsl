@@ -452,7 +452,7 @@
             </td>
         </xsl:if>
         <td class="tocDivNum">
-            <xsl:if test="f:showTocDivNum(., $curLevel, $show-div-numbers)">
+            <xsl:if test="f:show-toc-div-num(., $curLevel, $show-div-numbers)">
                 <xsl:copy-of select="f:convert-markdown(@n)"/><xsl:text>. </xsl:text>
             </xsl:if>
         </td>
@@ -472,7 +472,7 @@
     </xsl:template>
 
 
-    <xsl:function name="f:showTocDivNum" as="xs:boolean">
+    <xsl:function name="f:show-toc-div-num" as="xs:boolean">
         <xsl:param name="div"/>
         <xsl:param name="curLevel" as="xs:integer"/>
         <xsl:param name="show-div-numbers" as="xs:boolean"/>

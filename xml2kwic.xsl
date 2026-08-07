@@ -9,7 +9,6 @@
 ]>
 <xsl:stylesheet version="3.0"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:map="http://www.w3.org/2005/xpath-functions/map"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:fn="http://www.w3.org/2005/xpath-functions"
     xmlns:f="urn:stylesheet-functions"
@@ -439,7 +438,7 @@
     <xd:doc>
         <xd:short>Find and report matches.</xd:short>
         <xd:detail>Find and report matches. The matches are first collected in a variable, using the mode <code>kwic</code>, and then reported, using the mode <code>output</code>.</xd:detail>
-        <xd:param name="segments">The document being processed, split in to segments.</xd:param>
+        <xd:param name="segments">The document being processed, split into segments.</xd:param>
         <xd:param name="keyword">The keyword for which the KWIC is generated.</xd:param>
     </xd:doc>
 
@@ -993,14 +992,14 @@
     <xsl:function name="f:normalize-mixup-characters" as="xs:string">
         <xsl:param name="string" as="xs:string"/>
 
-        <!-- replace all potentially mixed-up characters in the list whith the first in the sequence -->
+        <!-- replace all potentially mixed-up characters in the list with the first in the sequence -->
         <xsl:sequence select="if ($mixup-sequence[2])
             then f:multi-replace($string, $mixup-sequence[position() > 1], $mixup-sequence[1])
             else $string"/>
     </xsl:function>
 
     <xd:doc>
-        <xd:short>Replace the occurences of multiple patterns in a string with a single replacement.</xd:short>
+        <xd:short>Replace the occurrences of multiple patterns in a string with a single replacement.</xd:short>
     </xd:doc>
 
     <xsl:function name="f:multi-replace" as="xs:string">

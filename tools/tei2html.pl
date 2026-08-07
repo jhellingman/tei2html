@@ -251,9 +251,7 @@ if ($debug == 1) {
 
 
 my $TMP_FILE_PREFIX = "tmp-";
-my $TMP_FILE_TEMPLATE = "tmp-XXXXX";
 
-my $tmpBase = 'tmp';
 my $tmpCount = 0;
 
 # Metadata

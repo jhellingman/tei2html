@@ -6,7 +6,7 @@
 
 == Interesting Links
 
-* http://code.google.com/p/hyphenator/ Javascript hyphenator.
+* http://code.google.com/p/hyphenator/ JavaScript hyphenator.
 
 == Packaging in .zip for PG
 

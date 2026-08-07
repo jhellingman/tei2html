@@ -4,7 +4,7 @@ use warnings;
 
 use Getopt::Long;
 use utf8;
-binmode(STDOUT, ":utf8");
+binmode(STDOUT, ":encoding(utf8)");
 use open ':utf8';
 use feature 'unicode_strings';
 

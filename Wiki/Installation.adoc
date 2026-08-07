@@ -59,10 +59,11 @@ A short explanation of Catalog files can be found in the SP documentation on Jam
 
 As an alternative to SX and NSGML, you can use `osx` and `onsgml` from the OpenJade Project. These are slightly more up-to-date. You will either have to update the names in the main `tei2html.pl` script in that case, or create a symbolic link, using:
 
-```
+[source,bash]
+----
 sudo ln -s /usr/bin/onsgmls /usr/bin/nsgmls
 sudo ln -s /usr/bin/osx /usr/bin/sx
-```
+----
 
 == ZIP
 
@@ -136,9 +137,10 @@ To run `tei2html` from the command line, it will be practical to configure sever
 
 On Linux, you can add them to your `.bashrc` file, for example:
 
-```
+[source,bash]
+----
 PATH="/home/jeroen/Documents/Repositories/tei2html/tools${PATH:+:${PATH}}"; export PATH;
 TEI2HTML_HOME="/home/jeroen/Documents/Repositories/tei2html/"; export TEI2HTML_HOME;
 SAXON_HOME="/home/jeroen/Documents/Repositories/tei2html/bin"; export SAXON_HOME;
-```
+----
 

@@ -105,14 +105,14 @@
                         <xsl:otherwise>; </xsl:otherwise>
                     </xsl:choose>
                     <xsl:value-of select="@level2"/>
-                    <xsl:call-template name="indexPageReferences"/>
+                    <xsl:call-template name="index-page-references"/>
                 </xsl:for-each-group>
             </p>
         </xsl:for-each-group>
     </xsl:template>
 
 
-    <xsl:template name="indexPageReferences">
+    <xsl:template name="index-page-references">
         <!-- Group to suppress duplicate page numbers -->
         <xsl:variable name="pages">
             <tmp:pages>

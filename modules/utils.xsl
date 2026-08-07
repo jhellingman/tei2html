@@ -511,7 +511,7 @@
         </xd:detail>
     </xd:doc>
 
-    <xsl:variable name="contributorRoleMap" as="map(xs:string, map(xs:string, xs:string))"
+    <xsl:variable name="contributor-role-map" as="map(xs:string, map(xs:string, xs:string))"
         select="map{
                 'Adaptor':                  map{ 'code':'adp', 'message':'msgAdaptor' },
                 'Author of afterword':      map{ 'code':'aft', 'message':'msgAuthorOfAfterword' },
@@ -558,7 +558,7 @@
     <xsl:function name="f:translate-resp" as="xs:string">
         <xsl:param name="resp" as="xs:string"/>
 
-        <xsl:variable name="message" select="$contributorRoleMap($resp)?message"/>
+        <xsl:variable name="message" select="$contributor-role-map($resp)?message"/>
         <xsl:copy-of select="f:log-debug('Translating contributor role: {1} to {2}', ($resp, $message))"/>
         <xsl:value-of select="if ($message) then f:message($message) else f:message('msgUnknown')"/>
     </xsl:function>
@@ -566,7 +566,7 @@
     <xsl:function name="f:translate-resp-code" as="xs:string">
         <xsl:param name="resp" as="xs:string"/>
 
-        <xsl:variable name="code" select="$contributorRoleMap($resp)?code"/>
+        <xsl:variable name="code" select="$contributor-role-map($resp)?code"/>
         <xsl:copy-of select="f:log-debug('Translating contributor role: {1} to {2}', ($resp, $code))"/>
         <xsl:value-of select="if ($code) then $code else 'oth'"/>
     </xsl:function>

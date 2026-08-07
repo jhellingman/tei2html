@@ -87,8 +87,15 @@ Issues:
 
 === pgpp.pl
 
-The Perl script `pgpp.pl` should be run initially on the output from PG Distributed Proofreaders, when converting that to TEI (the actual conversion is a manual process, as the resulting output is still very far removed from a syntactically correct TEI file).
+The Perl script `pgpp.pl` should be run initially on the results of five rounds of proofreading at PG Distributed Proofreaders. After that, converting the results to TEI is a manual process, because the output `pgpp.pl` is not a syntactically correct TEI file.
 
+=== prepare-images.pl
+
+The Perl script `prepare-images.pl` processes images to be included in ebooks for Project Gutenberg. See the tool's help for supported options.
+
+=== auto-descreen.pl
+
+The Perl script `auto-descreen.pl` uses `ImageMagick`, the `g'mic` graphics processing tool and `exiftool` to remove screens from high-resolution  photographs scanned from print. See the tool's help for supported options.
 
 == Tools for preparing texts for PGDP
 

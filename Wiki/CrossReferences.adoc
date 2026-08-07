@@ -68,7 +68,7 @@ Currently, a shorthand link `pg:40429` will be translated to a link to the Proje
 When an HTML version is available, it should also be possible to directly link into that book, _e.g._, `pg:40429#ch6` should be automatically translated to:
 
 ----
-http://www.gutenberg.org/files/40429/40429-h/40429-h.htm#ch6
+https://www.gutenberg.org/files/40429/40429-h/40429-h.htm#ch6
 ----
 
 So the reader can consult the referred text with a single action (except that Project Gutenberg redirects such deep links on the first attempt).
