@@ -31,7 +31,7 @@ It is also possible to align texts kept in separate files. To do so, use the fol
 
     rend="align-with-document(filename.xml#id-of-div-to-align)"
 
-When using the Perl scripts that come with `tei2html`, the to-be-aligned sections will be included in an intermediate document in a pre-processing step (in `include.xsl`), which replaces `align-with-document` with `align-with` and places the to-be aligned section directly after the section it will be aligned with. By doing so, generated tables of contents, lists of issues in the colophon, and footnotes will be processed correctly. The `tei2html` xslt stylesheets can also do this directly, but with limited support for those additional items.
+When using the Perl scripts that come with `tei2html`, the to-be-aligned sections will be included in an intermediate document in a pre-processing step (in `include.xsl`). This replaces `align-with-document` with `align-with` and places the to-be aligned section directly after the section it will be aligned with. By doing so, generated tables of contents, lists of issues in the colophon, and footnotes will be processed correctly. The `tei2html` xslt stylesheets can also do this directly, but with limited support for those additional items.
 
 
 == Footnotes in aligned texts

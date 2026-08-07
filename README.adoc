@@ -42,8 +42,8 @@ If you need modifications, extensions of these scripts, or need to have other TE
 * `schematron`: a schematron file to validate several aspects of TEI files.
 * `style`: CSS stylesheets, used by the generated HTML and ePub results.
 * `test`: a test TEI file, complete with the generated output in XML, HTML and ePub format. This is used to verify the correct transformation. It contains various examples, and serves as a regression test when refactoring the XSLT transforms.
-* `tools`: perl scripts used to apply the transforms; also includes perl scripts that can be used while preparing TEI files.
-* `Wiki`: wiki-pages that give some instructions and background documentation. Also available as a http://jhellingman.github.io/tei2html/Index.html[single HTML file].
+* `tools`: Perl scripts used to apply the transforms; also includes Perl scripts that can be used while preparing TEI files.
+* `Wiki`: wiki-pages that give some instructions and background documentation. These pages are also available as a single generated http://jhellingman.github.io/tei2html/Index.html[HTML file].
 * `xspec`: xspec tests that cover various (but not yet all) aspects of the XSLT transforms.
 
 == External Links

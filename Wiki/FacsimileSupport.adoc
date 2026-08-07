@@ -96,7 +96,7 @@ By convention, the facsimile images and wrapper pages will go into a directory `
          <!-- Buttons to go to previous and next page, and back to text -->
       </div>
       <div class="facsimile-page">
-         <img src="\images\pages\p123.gif"/>
+         <img src="\images\pages\p123.png"/>
       </div>
     </body>
   </html>

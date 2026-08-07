@@ -2,7 +2,7 @@
 
 == XSLT Domain
 
-In the XSLT domain, the main naming convention uses dashes, so we use dashes for names of templates, modes, etc., except where such names directly reflect elements from the TEI domain that use _camelCase_.
+In the XSLT domain, the main naming convention uses dashes (so-called `kebab-case`), so we use dashes for names of templates, modes, etc., except where such names directly reflect elements from the TEI domain that use _camelCase_.
 
 == TEI Domain
 
