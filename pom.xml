@@ -48,34 +48,18 @@
                     </dependency>
                 </dependencies>
                 <configuration>
-                    <coverage>false</coverage>
                     <catalogFile>dtd/catalog.xml</catalogFile>
                     <testDir>xspec</testDir>
                     <includes>
                       <include>**/*.xspec</include>
                     </includes>
                     <skipTests>false</skipTests>
-                        
-                    <!-- See https://github.com/xspec/xspec-maven-plugin-1/wiki -->
-                    <!-- which points to https://www.saxonica.com/documentation/index.html#!using-xsl/commandline -->
-
-                    <saxonOptions>
-                        <!-- <collectionFinderClass>top.marchand.xml.saxon.CollectionFinder</collectionFinderClass> -->
-                        <dtd>off</dtd>
-                        <ea>off</ea>
-                        <expand>off</expand>
-                        <ext>on</ext>
-                        <l>off</l>
-                        <!-- <m>top.marchand.xml.saxon.MessageReceiver</m> -->
-                        <opt>9</opt>
-                        <!-- <or>top.marchand.xml.saxon.OutputUriResolver</or> -->
-                        <outval>recover</outval>
-                        <strip>none</strip>
-                        <TJ>off</TJ>
-                        <warnings>silent</warnings>
-                        <xi>on</xi>
-                    </saxonOptions>
-                    <folding>true</folding>
+                    <xspecProperties>
+                      <property>
+                        <name>xspec.coverage.enabled</name>
+                        <value>false</value>
+                      </property>
+                    </xspecProperties>
                 </configuration>
                 <executions>
                     <execution>
