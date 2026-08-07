@@ -886,7 +886,7 @@
         adding transcriptions to Greek or Cyrillic fragments.</xd:detail>
     </xd:doc>
 
-    <xsl:template match="choice[reg/@type='trans']">
+    <xsl:template match="choice[reg/@type='trans']" priority="20">
         <span>
             <xsl:attribute name="id" select="f:generate-id(.)"/>
             <xsl:copy-of select="f:generate-lang-attribute(orig/@lang)"/>
@@ -904,7 +904,7 @@
     </xsl:template>
 
 
-    <xsl:template match="choice[reg]">
+    <xsl:template match="choice[reg]" priority="10">
         <span>
             <xsl:attribute name="id" select="f:generate-id(.)"/>
             <xsl:copy-of select="f:generate-lang-attribute(orig/@lang)"/>
