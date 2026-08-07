@@ -1,7 +1,6 @@
 package LanguageNames;
 
-use strict;
-use warnings;
+use v5.36;
 
 require Exporter;
 our @ISA = qw(Exporter);
@@ -247,7 +246,7 @@ BEGIN {
     $langNameHash{"uz"}        = "Uzbek";
     $langNameHash{"vi"}        = "Vietnamese";
     $langNameHash{"vo"}        = "Volap&uuml;k";
-    $langNameHash{"wa"}        = "Wallon";
+    $langNameHash{"wa"}        = "Walloon";
     $langNameHash{"wo"}        = "Wolof";
     $langNameHash{"xh"}        = "Xhosa";
     $langNameHash{"yi"}        = "Yiddish";
@@ -333,9 +332,7 @@ BEGIN {
     $langNameHash{"sit-sema"}       = "Sema Naga"; # -> nsm
 }
 
-
-sub getLanguage($) {
-    my $code = shift;
+sub getLanguage($code) {
     my $language = $langNameHash{$code};
     if (!defined $language || $language eq '') {
         $language = "Language with code $code";

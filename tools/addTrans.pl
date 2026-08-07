@@ -7,8 +7,8 @@
 # Alternative output to build HTML:     <span class=trans title="<GRTA>...</GRTA>"><GR>...</GR></span>
 #
 
-use strict;
-use warnings;
+use v5.36;
+
 use Getopt::Long;
 
 my $useXml = 0;     # Output as XML (TEI); default is HTML.
@@ -24,12 +24,12 @@ sub main {
 
     my $fileHandle;
     if (defined $file) {
-        open($fileHandle, '<', $file) or die "Could not open '$file': $!";
+        open $fileHandle, '<', $file or die "Could not open '$file': $!";
     } else {
         $fileHandle = *STDIN;
     }
 
-    if ($utf8) {
+    if ($utf8 != 0) {
         binmode($fileHandle, ':encoding(UTF-8)');
         binmode(STDOUT, ':encoding(UTF-8)');
     }
@@ -62,8 +62,7 @@ sub main {
     }
 }
 
-sub handleParagraph {
-    my $paragraph = shift;
+sub handleParagraph($paragraph) {
 
     if ($useXml == 0) {
         $paragraph =~ s/<GR>(.*?)<\/GR>/<span class=trans title=\"<GRTA>$1<\/GRTA>\"><GR>$1<\/GR><\/span>/g;
@@ -84,10 +83,8 @@ sub handleParagraph {
 }
 
 # Create a choice element of both the original script and a transcription. Filter the encoding, and put it between <xxT>...</xxT> tags, 
-# so that in a later face this will encoding be coverted to the proper Latin script transcription.
-sub rewriteTranscription {
-    my $code = shift;
-    my $trans = shift;
+# so that in a later face this will encoding be converted to the proper Latin script transcription.
+sub rewriteTranscription($code, $trans) {
     my $t = 'T';
 
     # Filter <pb> and <choice> tags from the transcription in $trans.
@@ -100,9 +97,7 @@ sub rewriteTranscription {
 
 # Create a choice element of both the original script and the encoding. Filter the encoding. Used when the encoding can directly
 # be used as the Latin transcription.
-sub keepTranscription {
-    my $code = shift;
-    my $trans = shift;
+sub keepTranscription($code, $trans) {
 
     # Filter <pb> and <choice> tags from the transcription in $trans.
     my $clean = $trans;

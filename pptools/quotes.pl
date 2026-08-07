@@ -1,7 +1,6 @@
 # quotes.pl -- Do smart quotes stuff.
 
-use strict;
-use warnings;
+use v5.36;
 
 my $accLetter = "(?:\\&[A-Za-z](?:acute|grave|circ|uml|cedil|tilde|slash|ring|dotb|macr|breve);)";
 my $ligLetter = "(?:\\&[A-Za-z]{2}lig;)";
@@ -34,8 +33,7 @@ sub curlyQuoteText {
     }
 }
 
-sub curlyQuoteFragment {
-    my $fragment = shift;
+sub curlyQuoteFragment($fragment) {
 
     # open quotes
     $fragment =~ s/\"($wordPattern)/\&ldquo;$1/g;
@@ -46,8 +44,7 @@ sub curlyQuoteFragment {
     return disambiguateSingleQuotes($fragment);
 }
 
-sub disambiguateSingleQuotes {
-    my $fragment = shift;
+sub disambiguateSingleQuotes($fragment) {
 
     # Around em-dash:
     $fragment =~ s/(&mdash;)'/$1\&lsquo;/gi;
@@ -89,9 +86,7 @@ sub disambiguateSingleQuotes {
     return $fragment;
 }
 
-
-sub disambiguateSingleQuotesWithTags {
-    my $fragment = shift;
+sub disambiguateSingleQuotesWithTags($fragment) {
 
     # Around <hi>...</hi> markup:
     $fragment =~ s/( <hi\b[^<>]*?>)'($letter)/$1\&lsquo;$2/gi;

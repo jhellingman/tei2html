@@ -1,13 +1,12 @@
 # addPositionInfo.pl -- add line-number and column info to SGML/XML files
 
-use strict;
-use warnings;
+use v5.36;
 
 my $file = shift @ARGV;
 
 my $fileHandle;
 if (defined $file) {
-    open($fileHandle, '<', $file) or die "Could not open '$file': $!";
+    open $fileHandle, '<', $file or die "Could not open '$file': $!";
 } else {
     $fileHandle = *STDIN;
 }

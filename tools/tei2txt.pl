@@ -702,7 +702,7 @@ sub sizeTableColumns {
     # TODO: optimize the table.
 
 
-    # Allow calculated widths to be overriden by widths specified in a processing instruction
+    # Allow calculated widths to be overridden by widths specified in a processing instruction
     if ($#predefinedColumnWidths > 0) {
         if ($#predefinedColumnWidths != $#finalColumnWidths) {
             print STDERR "WARNING: Number of predefinedColumnWidths ("
@@ -771,7 +771,7 @@ sub printTable {
         }
     }
 
-    # Allow calculated widths to be overriden by widths specified in a processing instruction
+    # Allow calculated widths to be overridden by widths specified in a processing instruction
     if ($#predefinedColumnWidths > 0) {
         if ($#predefinedColumnWidths != $#columnWidths) {
             print STDERR "WARNING: Number of predefinedColumnWidths ("
