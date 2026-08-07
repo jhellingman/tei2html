@@ -32,12 +32,12 @@
     <xsl:template match="TEI//ref[@target]">
         <xsl:choose>
             <xsl:when test="starts-with(@target, '#')">
-                <xsl:call-template name="handleInternalReference">
+                <xsl:call-template name="handle-internal-reference">
                     <xsl:with-param name="target" select="substring(@target, 2)"/>
                 </xsl:call-template>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:call-template name="handleExternalReference">
+                <xsl:call-template name="handle-external-reference">
                     <xsl:with-param name="url" select="@target"/>
                 </xsl:call-template>
             </xsl:otherwise>
@@ -56,13 +56,13 @@
     </xd:doc>
 
     <xsl:template match="TEI.2//ref[@target]">
-        <xsl:call-template name="handleInternalReference">
+        <xsl:call-template name="handle-internal-reference">
             <xsl:with-param name="target" select="replace(@target, '#', '')"/>
         </xsl:call-template>
     </xsl:template>
 
 
-    <xsl:template name="handleInternalReference">
+    <xsl:template name="handle-internal-reference">
         <xsl:param name="target" as="xs:string"/>
         <xsl:variable name="targetNode" select="key('id', $target)[1]"/>
 
@@ -160,7 +160,7 @@
     </xd:doc>
 
     <xsl:template match="xref[@url]">
-        <xsl:call-template name="handleExternalReference">
+        <xsl:call-template name="handle-external-reference">
             <xsl:with-param name="url" select="@url"/>
         </xsl:call-template>
     </xsl:template>
@@ -175,7 +175,7 @@
     </xsl:function>
 
 
-    <xsl:template name="handleExternalReference">
+    <xsl:template name="handle-external-reference">
         <xsl:param name="url" as="xs:string"/>
 
         <xsl:choose>

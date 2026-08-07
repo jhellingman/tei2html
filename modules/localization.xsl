@@ -38,9 +38,9 @@
         <xd:detail>The language without the locale, e.g., 'de'.</xd:detail>
     </xd:doc>
 
-    <xsl:variable name="baseLanguage" select="f:baseLanguage($language)" as="xs:string"/>
+    <xsl:variable name="baseLanguage" select="f:base-language($language)" as="xs:string"/>
 
-    <xsl:function name="f:baseLanguage" as="xs:string">
+    <xsl:function name="f:base-language" as="xs:string">
         <xsl:param name="language" as="xs:string"/>
 
         <xsl:sequence select="if (contains($language, '-')) then substring-before($language, '-') else $language"/>
@@ -53,7 +53,7 @@
     </xd:doc>
 
     <xsl:variable name="defaultLanguage" select="f:get-setting('defaultLanguage')" as="xs:string"/>
-    <xsl:variable name="defaultBaseLanguage" select="f:baseLanguage($defaultLanguage)" as="xs:string"/>
+    <xsl:variable name="defaultBaseLanguage" select="f:base-language($defaultLanguage)" as="xs:string"/>
 
 
     <xsl:function name="f:is-message-available" as="xs:boolean">

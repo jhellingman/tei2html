@@ -44,11 +44,11 @@
             <xsl:when test="@n and f:is-display-math(.)">
                 <!-- When we have a label, wrap in an extra span, so we can properly align the number with CSS. -->
                 <span class="labeledMath">
-                    <xsl:call-template name="handleFormula"/>
+                    <xsl:call-template name="handle-formula"/>
                 </span>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:call-template name="handleFormula"/>
+                <xsl:call-template name="handle-formula"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -58,7 +58,7 @@
         <xd:short>Handle a formula in TeX notation (2).</xd:short>
     </xd:doc>
 
-    <xsl:template name="handleFormula">
+    <xsl:template name="handle-formula">
         <xsl:context-item as="element(formula)" use="required"/>
 
         <xsl:variable name="firstInstance" select="key('formula', normalize-space(.))[1]"/>

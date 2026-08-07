@@ -107,7 +107,7 @@
 
         <xsl:if test="f:is-set('colophon.showAbbreviations') and //abbr">
             <h3 class="main"><xsl:value-of select="f:message('msgAbbreviations')"/></h3>
-            <xsl:call-template name="abbreviationTable"/>
+            <xsl:call-template name="abbreviation-table"/>
         </xsl:if>
     </xsl:template>
 
@@ -548,7 +548,7 @@
                 </xsl:if>
             </tr>
 
-            <xsl:copy-of select="f:correctionTableRows($corrections)"/>
+            <xsl:copy-of select="f:correction-table-rows($corrections)"/>
         </table>
 
         <xsl:if test="f:is-set('colophon.showSuggestedCorrections')">
@@ -571,13 +571,13 @@
                     </xsl:if>
                 </tr>
 
-                <xsl:copy-of select="f:correctionTableRows($sics)"/>
+                <xsl:copy-of select="f:correction-table-rows($sics)"/>
             </table>
         </xsl:if>
     </xsl:template>
 
 
-    <xsl:function name="f:correctionTableRows">
+    <xsl:function name="f:correction-table-rows">
         <xsl:param name="corrections"/>
 
         <xsl:for-each-group select="$corrections/tmp:choice" group-by="tmp:sic || '@@@' || tmp:corr">
@@ -798,7 +798,7 @@
         </xd:detail>
     </xd:doc>
 
-    <xsl:template name="abbreviationTable">
+    <xsl:template name="abbreviation-table">
         <p><xsl:value-of select="f:message('msgAbbreviationOverview')"/></p>
 
         <table class="abbreviationTable">
@@ -1093,7 +1093,7 @@
                 <th><xsl:value-of select="f:message('msgFragment')"/></th>
             </tr>
             <xsl:for-each-group select="$fragments" group-by=".">
-                <xsl:sort select="." lang="{f:baseLanguage($lang)}"/>
+                <xsl:sort select="." lang="{f:base-language($lang)}"/>
                 <tr>
                     <td>
                         <xsl:for-each select="current-group()">

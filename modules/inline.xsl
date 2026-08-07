@@ -573,7 +573,7 @@
         <xsl:variable name="msgSource" select="if (@resp = 'errata') then f:message('msgAuthorCorrection') else f:message('msgSource')"/>
         <xsl:variable name="msgNotInSource" select="if (@resp = 'errata') then f:message('msgAuthorAddition') else f:message('msgNotInSource')"/>
 
-        <xsl:variable name="showPopups" select="f:showCorrectionPopups($sic, $corr, @type)" as="xs:boolean"/>
+        <xsl:variable name="showPopups" select="f:show-correction-popups($sic, $corr, @type)" as="xs:boolean"/>
 
         <!-- Concatenate string values ourselves to prevent the XSLT processor from inserting spaces when concatenating nodes
              (Tennison, Beginning XSLT 2.0, p. 358). -->
@@ -619,7 +619,7 @@
     </xsl:template>
 
 
-    <xsl:function name="f:showCorrectionPopups" as="xs:boolean">
+    <xsl:function name="f:show-correction-popups" as="xs:boolean">
         <xsl:param name="sic" xs:as="node()*"/>
         <xsl:param name="corr" xs:as="node()*"/>
         <xsl:param name="type" xs:as="xs:string?"/>
