@@ -1,7 +1,7 @@
 #!/usr/bin/perl -w
 
-use strict;
-use warnings;
+use v5.36;
+
 use File::Basename;
 use Getopt::Long;
 
@@ -54,8 +54,8 @@ sub listRecursively {
     }
 }
 
-sub handleFile {
-    my ($file) = @_;
+sub handleFile($file) {
+
     if ($file =~ m/^(.*)\.tex$/) {
         my $base = basename($file, '.tex');
         my $dirname = dirname($file);

@@ -1,14 +1,14 @@
 # convertCrossWord.pl -- convert cross-word to TEI format.
 
-use strict;
-use warnings;
+use v5.36;
+
 use SgmlSupport qw/getAttrVal/;
 
 my $inputFile = $ARGV[0];
 my $fileHandle;
 
 if (defined $inputFile) {
-    open($fileHandle, '<', $inputFile) || die("Could not open $inputFile: $!");
+    open $fileHandle, '<', $inputFile or die "Could not open $inputFile: $!" ;
 } else {
     $fileHandle = \*STDIN;
 }

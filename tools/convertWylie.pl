@@ -1,7 +1,6 @@
 # convertWylie.pl -- convert Tibetan in Wylie notation to Unicode.
 
-use strict;
-use warnings;
+use v5.36;
 
 use Lingua::BO::Wylie;  # Download tool from https://www.thlib.org/reference/transliteration/wyconverter.php
 use HTML::Entities;
@@ -24,7 +23,7 @@ sub main {
     my $fileHandle;
 
     if (defined $inputFile) {
-        open($fileHandle, '<', $inputFile) || die("Could not open $inputFile: $!");
+        open $fileHandle, '<', $inputFile or die "Could not open $inputFile: $!";
     } else {
         $fileHandle = \*STDIN;
     }
@@ -44,14 +43,12 @@ sub main {
     }
 }
 
-sub handleLine {
-    my $line = shift;
+sub handleLine($line) {
     $line =~ s/<BO>(.*?)<\/BO>/convertWylie($1)/ge;
     return $line;
 }
 
-sub convertWylie {
-    my $wylie = shift;
+sub convertWylie($wylie) {
     $DEBUG && print STDERR "Converting Tibetan: $wylie\n";
     my $unicode = $wl->from_wylie($wylie);
     return "<foreign lang=\"bo\">" . encode_entities($unicode) . "</foreign>";
