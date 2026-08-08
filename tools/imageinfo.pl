@@ -1,7 +1,6 @@
 # imageinfo.pl -- Collect information about images into an XML file for processing by XSLT.
 
-use strict;
-use warnings;
+use v5.36;
 
 use Image::Size;
 use File::Basename;
@@ -72,9 +71,7 @@ sub listRecursively {
 #
 # handleImage -- find the dimensions of an image.
 #
-sub handleImage {
-    my $imageFile = shift;
-
+sub handleImage($imageFile) {
     my $imagePath = handlePath($imageFile, "images");
     if ($seenImageHash{$imagePath}) {
         print STDERR "Ignoring second instance of $imagePath\n";
@@ -93,9 +90,7 @@ sub handleImage {
 #
 # handleMP3 -- find some information of an MP3 file.
 #
-sub handleMP3 {
-    my $mp3File = shift;
-
+sub handleMP3($mp3File) {
     my $mp3Path = handlePath($mp3File, "music");
     if ($seenImageHash{$mp3Path}) {
         print STDERR "Ignoring second instance of $mp3Path\n";
@@ -109,10 +104,7 @@ sub handleMP3 {
     print "\n<music path=\"$mp3Path\" filesize=\"$fileSize\" filedate=\"$fileDate\"/>";
 }
 
-
-sub handlePath {
-    my $imageFile = shift;
-    my $defaultPath = shift;
+sub handlePath($imageFile, $defaultPath) {
     my $imagePath;
 
     if ($stripPath == 1) {
@@ -125,9 +117,7 @@ sub handlePath {
     return $imagePath;
 }
 
-
-sub getFileDate {
-    my $file = shift;
+sub getFileDate($file) {
 
     my ($dev, $ino, $mode, $nlink, $uid, $gid, $rdev, $statFileSize, $atime, $mtime, $ctime, $blksize, $blocks) = stat($file);
     my ($sec, $min, $hour, $mday, $mon, $year, $wday, $yday, $isdst) = gmtime($mtime);
@@ -136,13 +126,10 @@ sub getFileDate {
     return $fileDate;
 }
 
-
 #
 # dropPath -- drop the first $n levels from a directory path.
 #
-sub dropPath {
-    my $path = shift;
-    my $n = shift;
+sub dropPath($path, $n) {
 
     my @components = split(/\//, $path);
 

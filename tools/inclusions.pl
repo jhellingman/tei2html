@@ -15,4 +15,3 @@ my $basename    = $1;
 my $version     = $3;
 
 system ("$saxon $filename $xsldir/inclusions.xsl > $basename" . "-with-includes.xml");
-

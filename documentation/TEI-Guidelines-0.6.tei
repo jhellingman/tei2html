@@ -103,7 +103,7 @@
 <p>The guiding principles are:
 
 <list>
-<item>Tags supplement the plain text content of the transcribed work. They do not replace content. When all tags are  removed from the file, the remaining text should reflect the original source text as much as possible. As a corrolary to this principle, tei2html does not supply much content itself, unless specifically asked to do so, it will not insert tables of content, headers, labels, etc.
+<item>Tags supplement the plain text content of the transcribed work. They do not replace content. When all tags are  removed from the file, the remaining text should reflect the original source text as much as possible. As a corollary to this principle, tei2html does not supply much content itself, unless specifically asked to do so, it will not insert tables of content, headers, labels, etc.
 <item>Tags are semantic: they reflect as much as possible the function of a certain part of the text, not its appearance. This also means that tei2html needs to rely on a number of defaults and formatting hints to decide what things should ultimately look like in the output.
 <item>The @rend attribute in tags are intended as formatting hints only. Ignoring them fully or partially should not render a text incomprehensible.
 </list>

@@ -1,14 +1,13 @@
 # intralinear.pl -- convert intralinear text to ab-elements.
 
-use strict;
-use warnings;
+use v5.36;
 use SgmlSupport qw/getAttrVal/;
 
 my $file = shift @ARGV;
 
 my $fileHandle;
 if (defined $file) {
-    open($fileHandle, '<', $file) or die "Could not open '$file': $!";
+    open $fileHandle, '<', $file or die "Could not open '$file': $!";
 } else {
     $fileHandle = *STDIN;
 }

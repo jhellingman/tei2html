@@ -1,12 +1,11 @@
 # transcribe.pl -- Replace Greek and Cyrillic with Latin transcription.
 
-use strict;
-use warnings;
+use v5.36;
 
 use File::stat;
 use File::Temp qw(mktemp);
 
-my $home = $ENV{'TEI2HTML_HOME'};
+my $home      = $ENV{'TEI2HTML_HOME'};
 my $toolsdir  = $home . "/tools";                    	# location of tools
 my $patcdir   = $toolsdir . "/patc/transcriptions";  	# location of patc transcription files.
 
@@ -38,14 +37,12 @@ sub main {
     unlink($tmpFile3);
 }
 
-sub adjustNotationTags {
-    my $inputFileName = shift;
-    my $outputFileName = shift;
+sub adjustNotationTags($inputFileName, $outputFileName) {
 
-    open(INPUTFILE, $inputFileName) || die("Could not open input file '$inputFileName'");
-    open(OUTPUTFILE, '>', $outputFileName) || die "Could not open output file '$outputFileName'";
+    open my $inputFile, '<', $inputFileName or die "Could not open input file '$inputFileName': $!";
+    open my $outputFile, '>', $outputFileName or die "Could not open output file '$outputFileName': $!";
 
-    while (<INPUTFILE>) {
+    while (<$inputFile>) {
 
         $_ =~ s/<GR>/<GRT>/g;
         $_ =~ s/<\/GR>/<\/GRT>/g;
@@ -59,7 +56,7 @@ sub adjustNotationTags {
         $_ =~ s/<RUX>/<RUXT>/g;
         $_ =~ s/<\/RUX>/<\/RUXT>/g;
 
-        print OUTPUTFILE;
+        print $outputFile;
     }
-    close OUTPUTFILE;
+    close $outputFile;
 }

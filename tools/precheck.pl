@@ -7,8 +7,7 @@
 # Hide special characters intentionally 'hidden' by entities.
 # &num; -> #xFF03;
 
-use strict;
-use warnings;
+use v5.36;
 
 while (<>) {
 
