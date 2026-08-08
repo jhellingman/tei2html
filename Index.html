@@ -1089,7 +1089,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code>sudo ln -s /usr/bin/onsgmls /usr/bin/nsgmls
+<pre class="CodeRay highlight"><code data-lang="bash">sudo ln -s /usr/bin/onsgmls /usr/bin/nsgmls
 sudo ln -s /usr/bin/osx /usr/bin/sx</code></pre>
 </div>
 </div>
@@ -1214,7 +1214,7 @@ via <a href="https://github.com/google/zopfli">GitHub</a>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code>PATH=&quot;/home/jeroen/Documents/Repositories/tei2html/tools${PATH:+:${PATH}}&quot;; export PATH;
+<pre class="CodeRay highlight"><code data-lang="bash">PATH=&quot;/home/jeroen/Documents/Repositories/tei2html/tools${PATH:+:${PATH}}&quot;; export PATH;
 TEI2HTML_HOME=&quot;/home/jeroen/Documents/Repositories/tei2html/&quot;; export TEI2HTML_HOME;
 SAXON_HOME=&quot;/home/jeroen/Documents/Repositories/tei2html/bin&quot;; export SAXON_HOME;</code></pre>
 </div>
@@ -1635,7 +1635,7 @@ SAXON_HOME=&quot;/home/jeroen/Documents/Repositories/tei2html/bin&quot;; export 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="xml">    <span class="tag">&lt;author</span> <span class="attribute-name">key</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">Rijn, Rembrandt Harmenszoon van</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">ref</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://viaf.org/viaf/64013650</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>Rembrandt van Rijn (1606-1669)<span class="tag">&lt;/author&gt;</span>
+<pre class="CodeRay highlight"><code data-lang="xml">    <span class="tag">&lt;author</span> <span class="attribute-name">key</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">Rijn, Rembrandt Harmenszoon van</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">ref</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">https://viaf.org/viaf/64013650</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>Rembrandt van Rijn (1606-1669)<span class="tag">&lt;/author&gt;</span>
     <span class="tag">&lt;author</span> <span class="attribute-name">key</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">MacKenzee, John</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>John McKenzee<span class="tag">&lt;/author&gt;</span>
     <span class="tag">&lt;author</span> <span class="attribute-name">key</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">Hotel, Desire l'</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>Desiré l'Hôtel<span class="tag">&lt;/author&gt;</span></code></pre>
 </div>
@@ -2564,7 +2564,7 @@ SAXON_HOME=&quot;/home/jeroen/Documents/Repositories/tei2html/bin&quot;; export 
 </div>
 </div>
 <div class="paragraph">
-<p>When using the Perl scripts that come with <code>tei2html</code>, the to-be-aligned sections will be included in an intermediate document in a pre-processing step (in <code>include.xsl</code>), which replaces <code>align-with-document</code> with <code>align-with</code> and places the to-be aligned section directly after the section it will be aligned with. By doing so, generated tables of contents, lists of issues in the colophon, and footnotes will be processed correctly. The <code>tei2html</code> xslt stylesheets can also do this directly, but with limited support for those additional items.</p>
+<p>When using the Perl scripts that come with <code>tei2html</code>, the to-be-aligned sections will be included in an intermediate document in a pre-processing step (in <code>include.xsl</code>). This replaces <code>align-with-document</code> with <code>align-with</code> and places the to-be aligned section directly after the section it will be aligned with. By doing so, generated tables of contents, lists of issues in the colophon, and footnotes will be processed correctly. The <code>tei2html</code> xslt stylesheets can also do this directly, but with limited support for those additional items.</p>
 </div>
 </div>
 <div class="sect2">
@@ -2714,7 +2714,7 @@ SAXON_HOME=&quot;/home/jeroen/Documents/Repositories/tei2html/bin&quot;; export 
          <span class="comment">&lt;!-- Buttons to go to previous and next page, and back to text --&gt;</span>
       <span class="tag">&lt;/div&gt;</span>
       <span class="tag">&lt;div</span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">facsimile-page</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
-         <span class="tag">&lt;img</span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">\images\pages\p123.gif</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
+         <span class="tag">&lt;img</span> <span class="attribute-name">src</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">\images\pages\p123.png</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
       <span class="tag">&lt;/div&gt;</span>
     <span class="tag">&lt;/body&gt;</span>
   <span class="tag">&lt;/html&gt;</span></code></pre>
@@ -3203,7 +3203,7 @@ SAXON_HOME=&quot;/home/jeroen/Documents/Repositories/tei2html/bin&quot;; export 
 <div class="sect2">
 <h3 id="_xslt_domain">XSLT Domain</h3>
 <div class="paragraph">
-<p>In the XSLT domain, the main naming convention uses dashes, so we use dashes for names of templates, modes, etc., except where such names directly reflect elements from the TEI domain that use <em>camelCase</em>.</p>
+<p>In the XSLT domain, the main naming convention uses dashes (so-called <code>kebab-case</code>), so we use dashes for names of templates, modes, etc., except where such names directly reflect elements from the TEI domain that use <em>camelCase</em>.</p>
 </div>
 </div>
 <div class="sect2">
@@ -3733,7 +3733,19 @@ brackets.</p>
 <div class="sect3">
 <h4 id="_pgpp_pl">pgpp.pl</h4>
 <div class="paragraph">
-<p>The Perl script <code>pgpp.pl</code> should be run initially on the output from PG Distributed Proofreaders, when converting that to TEI (the actual conversion is a manual process, as the resulting output is still very far removed from a syntactically correct TEI file).</p>
+<p>The Perl script <code>pgpp.pl</code> should be run initially on the results of five rounds of proofreading at PG Distributed Proofreaders. After that, converting the results to TEI is a manual process, because the output <code>pgpp.pl</code> is not a syntactically correct TEI file.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_prepare_images_pl">prepare-images.pl</h4>
+<div class="paragraph">
+<p>The Perl script <code>prepare-images.pl</code> processes images to be included in ebooks for Project Gutenberg. See the tool&#8217;s help for supported options.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_auto_descreen_pl">auto-descreen.pl</h4>
+<div class="paragraph">
+<p>The Perl script <code>auto-descreen.pl</code> uses <code>ImageMagick</code>, the <code>g&#8217;mic</code> graphics processing tool and <code>exiftool</code> to remove screens from high-resolution  photographs scanned from print. See the tool&#8217;s help for supported options.</p>
 </div>
 </div>
 </div>
@@ -4227,7 +4239,7 @@ opening mark, there should be a corresponding closing mark.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-08-07 20:57:43 UTC
+Last updated 2026-08-08 08:27:51 UTC
 </div>
 </div>
 </body>
