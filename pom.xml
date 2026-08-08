@@ -53,6 +53,9 @@
                     <includes>
                       <include>**/*.xspec</include>
                     </includes>
+                    <excludes>
+                        <exclude>tei2html.xspec</exclude>
+                    </excludes>
                     <skipTests>false</skipTests>
                     <xspecProperties>
                       <property>

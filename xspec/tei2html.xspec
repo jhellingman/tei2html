@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+               stylesheet="test-tei2html.xsl"
+               version="3.0">
+
+    <!-- NOTE: due to duplicate imported x:param, this won't work, so is currently excluded. -->
+
+    <!-- Individual module tests -->
+    <x:import href="betacode.xspec"/>
+    <x:import href="block.xspec"/>
+    <x:import href="colophon.xspec"/>
+    <x:import href="copyright.xspec"/>
+    <x:import href="css.xspec"/>
+    <x:import href="ditto.xspec"/>
+
+    <x:import href="divisions.xspec"/>
+    <x:import href="drama.xspec"/>
+    <x:import href="facsimile.xspec"/>
+    <x:import href="figures.xspec"/>
+    <x:import href="header.xspec"/>
+    <x:import href="initials.xspec"/>
+
+    <x:import href="inline.xspec"/>
+    <x:import href="levenshtein.xspec"/>
+    <x:import href="lists.xspec"/>
+    <x:import href="localization.xspec"/>
+    <x:import href="notes.xspec"/>
+    <x:import href="numbers.xspec"/>
+
+    <x:import href="references.xspec"/>
+    <x:import href="rend.xspec"/>
+    <x:import href="spellout.xspec"/>
+    <x:import href="splitter.xspec"/>
+    <x:import href="tables.xspec"/>
+    <x:import href="toc.xspec"/>
+
+    <x:import href="utils.xspec"/>
+</x:description>
