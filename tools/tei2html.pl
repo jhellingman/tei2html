@@ -788,7 +788,7 @@ sub makeText($basename, $filename) {
     removeFile($transcribedFile);
 
     my $stripTagsFile = temporaryFile('striptags', 'txt');
-    system ("perl $toolsdir/tei2txt.pl " . ($useUnicode == 1 ? '-u ' : '') . " -w $pageWidth $concatNotesFile > $stripTagsFile");
+    system ("perl $toolsdir/tei2txt.pl " . ($useUnicode == 1 ? '-u ' : '') . ($logLevel > 3 ? '-v ' : '') . " -w $pageWidth $concatNotesFile > $stripTagsFile");
     removeFile($concatNotesFile);
 
     if ($useUnicode == 1) {
