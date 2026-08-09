@@ -1,5 +1,4 @@
-use strict;
-use warnings;
+use v5.36;
 while (<>) {
 
     my $line = $_;

@@ -4,8 +4,7 @@
 # to stdout, followed by the extracted notes. This code depends on valid TEI
 # following a few formatting conventions (i.e. tags are always on a single line).
 
-use strict;
-use warnings;
+use v5.36;
 
 use SgmlSupport qw/getAttrVal/;
 
@@ -13,7 +12,7 @@ my $inputFile = $ARGV[0];
 my $fileHandle;
 
 if (defined $inputFile) {
-    open($fileHandle, '<', $inputFile) || die("Could not open $inputFile: $!");
+    open $fileHandle, '<', $inputFile or die("Could not open $inputFile: $!");
 } else {
     $fileHandle = \*STDIN;
 }

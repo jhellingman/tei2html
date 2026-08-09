@@ -1,5 +1,4 @@
-use strict;
-use warnings;
+use v5.36;
 use open ':utf8';
 
 use utf8;

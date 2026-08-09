@@ -2,9 +2,7 @@
 
 package SgmlSupport;
 
-use strict;
-use warnings;
-
+use v5.36;
 use base 'Exporter';
 
 use Unicode::Normalize;
@@ -45,11 +43,9 @@ our %reverse;
 #   $attrs: string with SGML style attributes: A=abc B="test" C="aap"
 #           empty string when not present.
 
-sub getAttrVal {
-    my $attrName = shift;
-    my $attrs = shift;
-
+sub getAttrVal($attrName, $attrs) {
     my $escapedAttrName = quotemeta($attrName);
+
     if ($attrs =~ /$escapedAttrName\s*=\s*([\w.-]+)/i) {
         return $1;
     } elsif ($attrs =~ /$escapedAttrName\s*=\s*\"(.*?)\"/i) {
@@ -65,19 +61,15 @@ sub getAttrVal {
 # Parameter:
 #   $string: the string to be converted to UTF-8.
 
-sub sgml2utf {
-    my $string = shift;
+sub sgml2utf($string) {
     return sgml2utf_common($string, 0);
 }
 
-sub sgml2utf_html {
-    my $string = shift;
+sub sgml2utf_html($string) {
     return sgml2utf_common($string, 1);
 }
 
-sub sgml2utf_common {
-    my $remainder = shift;
-    my $forHtml = shift;
+sub sgml2utf_common($remainder, $forHtml) {
     my $result = '';
 
     while ($remainder =~ /\&(#?[a-z0-9._-]+);/i) {
@@ -116,11 +108,7 @@ sub sgml2utf_common {
     return $result;
 }
 
-sub handleFraction {
-    my $numerator = shift;
-    my $denominator = shift;
-    my $before = shift;
-    my $after = shift;
+sub handleFraction($numerator, $denominator, $before, $after) {
 
     # Insert a zero-width space before (after) the fraction if no whitespace is already present before (after).
     my $leftBoundary = ($before =~ /\s$/) ? '' : chr(0x200B);
@@ -129,9 +117,7 @@ sub handleFraction {
     return  $leftBoundary . $numerator . chr(0x2044) . $denominator . $rightBoundary;
 }
 
-sub handleMusicalTime {
-    my $top = shift;
-    my $bottom = shift;
+sub handleMusicalTime($top, $bottom) {
 
     return  '<ab type="musictime"><ab type="top">' . $top . '</ab><ab type="bottom">' .  $bottom . '</ab></ab>';
 }
@@ -144,9 +130,7 @@ sub handleMusicalTime {
 # Parameter:
 #   $string: the string to be converted to UTF-8.
 
-sub utf2sgml {
-    my $string = shift;
-
+sub utf2sgml($string) {
     my @chars = split(//, $string);
     foreach (@chars) {
         if (ord($_) > 127) {
@@ -157,8 +141,7 @@ sub utf2sgml {
 }
 
 
-sub translateEntity {
-    my $entity = shift;
+sub translateEntity($entity) {
     if (defined $ent{$entity}) {
         return $ent{$entity};
     } elsif ($entity =~ /^frac([0-9])([0-9]+)$/) {
@@ -178,9 +161,7 @@ sub translateEntity {
 # Parameter:
 #   $string: the string to be converted to entities.
 
-sub utf2entities {
-    my $string = shift;
-
+sub utf2entities($string) {
     my @chars = split(//, $string);
     foreach (@chars) {
         if (ord($_) > 127) {
@@ -194,9 +175,7 @@ sub utf2entities {
     return join('', @chars);
 }
 
-sub utf2numericEntities {
-    my $string = shift;
-
+sub utf2numericEntities($string) {
     my @chars = split(//, $string);
     foreach (@chars) {
         if (ord($_) > 127) {

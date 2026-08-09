@@ -1,6 +1,5 @@
 
-use strict;
-use warnings;
+use v5.36;
 
 use FindBin qw($Bin);
 

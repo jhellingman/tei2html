@@ -1,7 +1,6 @@
 # Perl script to run the tei2imageinfo.xsl stylesheet with Saxon.
 
-use strict;
-use warnings;
+use v5.36;
 
 use Cwd qw(abs_path);
 

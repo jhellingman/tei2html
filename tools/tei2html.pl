@@ -1,7 +1,6 @@
 # tei2html.pl -- process a TEI file.
 
-use strict;
-use warnings;
+use v5.36;
 
 use DateTime;
 use File::Copy qw(move copy);
@@ -289,8 +288,7 @@ sub processFiles {
 #
 # processFile -- process a TEI file.
 #
-sub processFile {
-    my $filename = shift;
+sub processFile($filename) {
 
     info("=== Start! =================================================================");
 
@@ -372,8 +370,7 @@ sub processFile {
 }
 
 
-sub analyzeFilename {
-    my $filename = shift;
+sub analyzeFilename($filename) {
 
     if ($filename eq "" || !($filename =~ /\.tei$/ || $filename =~ /\.xml$/)) {
         fatal("File: '$filename' doesn't look like a TEI file.");
@@ -399,9 +396,7 @@ sub analyzeFilename {
 }
 
 
-sub clean {
-    my $basename = shift;
-    my $version = shift;
+sub clean($basename, $version) {
 
     trace("Remove generated files");
 
@@ -421,42 +416,36 @@ sub clean {
 }
 
 
-sub trace {
-  my $message = shift;
+sub trace($message) {
   if ($logLevel >= $LOG_LEVEL_TRACE) {
       print $message . "\n";
   }
 }
 
-sub info {
-    my $message = shift;
+sub info($message) {
     if ($logLevel >= $LOG_LEVEL_INFO) {
         print $message . "\n";
     }
 }
 
-sub warning {
-  my $message = shift;
+sub warning($message) {
   if ($logLevel >= $LOG_LEVEL_WARNING) {
       print "WARNING: $message\n";
   }
 }
 
-sub error {
-  my $message = shift;
+sub error($message) {
   if ($logLevel >= $LOG_LEVEL_ERROR) {
       print STDERR "ERROR: $message\n";
   }
 }
 
-sub fatal {
-  my $message = shift;
+sub fatal($message) {
   die "FATAL: $message\n";
 }
 
 
-sub removeFile {
-    my $fileToRemove = shift;
+sub removeFile($fileToRemove) {
 
     if (!-e $fileToRemove) {
         print "WARNING: attempt to remove non-existing file: $fileToRemove.\n";
@@ -497,9 +486,7 @@ sub removeFile {
 }
 
 
-sub preprocessXml {
-    my $xmlFilename = shift;
-    my $preprocessedXmlFilename = shift;
+sub preprocessXml($xmlFilename, $preprocessedXmlFilename)  {
 
     if ($force == 0 && isNewer($preprocessedXmlFilename, $xmlFilename) && isNewer($preprocessedXmlFilename, 'tei2html.config')) {
         trace("Skip conversion to preprocessed XML ($preprocessedXmlFilename newer than $xmlFilename).");
@@ -514,9 +501,7 @@ sub preprocessXml {
 }
 
 
-sub makeP5 {
-    my $basename = shift;
-    my $xmlFilename = shift;
+sub makeP5($basename, $xmlFilename) {
     my $p5XmlFilename = $basename . '-p5.xml';
 
     if ($force == 0 && isNewer($p5XmlFilename, $xmlFilename)) {
@@ -529,8 +514,7 @@ sub makeP5 {
 }
 
 
-sub makeMetadata {
-    my $xmlFilename = shift;
+sub makeMetadata($xmlFilename) {
 
     if ($force == 0 && isNewer('metadata.xml', $xmlFilename)) {
         trace("Skip extract metadata because 'metadata.xml' is newer than '$xmlFilename'.");
@@ -542,8 +526,7 @@ sub makeMetadata {
 }
 
 
-sub makeSql {
-    my $xmlFilename = shift;
+sub makeSql($xmlFilename) {
 
     if ($force == 0 && isNewer('metadata.sql', $xmlFilename)) {
         trace("Skip create metadata in SQL because 'metadata.sql' is newer than '$xmlFilename'.");
@@ -560,8 +543,7 @@ sub makeSql {
 }
 
 
-sub makeReadme {
-    my $xmlFilename = shift;
+sub makeReadme($xmlFilename) {
 
     if ($force == 0 && isNewer('README.adoc', $xmlFilename)) {
         trace("Skip create readme because 'README.adoc' is newer than '$xmlFilename'.");
@@ -584,8 +566,7 @@ sub makeReadme {
 }
 
 
-sub makeKwic {
-    my ($basename, $xmlFilename) = @_;
+sub makeKwic($basename, $xmlFilename) {
 
     my $kwicFilename = determineKwicFilename($basename);
 
@@ -609,8 +590,7 @@ sub makeKwic {
 }
 
 
-sub determineKwicFilename {
-    my $basename = shift;
+sub determineKwicFilename($basename) {
 
     my $namePartLanguage = $kwicLanguages;
     $namePartLanguage =~ tr/ /-/;
@@ -639,8 +619,7 @@ sub determineKwicFilename {
 }
 
 
-sub makeQrCode {
-    my $number = shift;
+sub makeQrCode($number) {
 
     if ($number > 0) {
         my $imageDir = '.';
@@ -665,10 +644,7 @@ sub makeQrCode {
 }
 
 
-sub makeQrCodeAtSize {
-    my $number = shift;
-    my $imageDir = shift;
-    my $scale = shift;
+sub makeQrCodeAtSize($number, $imageDir, $scale) {
 
     my $file = $imageDir . '/qr' . $number . '.png';
 
@@ -692,17 +668,13 @@ sub makeQrCodeAtSize {
 }
 
 
-sub makeHtml {
-    my $basename = shift;
-    my $xmlFile = shift;
+sub makeHtml($basename, $xmlFile) {
     my $htmlFile = $basename . '.html';
     makeHtmlCommon($basename, $xmlFile, $htmlFile, "tei2html.xsl");
 }
 
 
-sub makeHtml5 {
-    my $basename = shift;
-    my $xmlFile = shift;
+sub makeHtml5($basename, $xmlFile) {
     my $htmlFile = $basename . '-h5.html';
     makeHtmlCommon($basename, $xmlFile, $htmlFile, "tei2html5.xsl");
 
@@ -712,11 +684,7 @@ sub makeHtml5 {
 }
 
 
-sub makeHtmlCommon {
-    my $basename = shift;
-    my $xmlFile = shift;
-    my $htmlFile = shift;
-    my $xsltFile = shift;
+sub makeHtmlCommon($basename, $xmlFile, $htmlFile, $xsltFile) {
 
     if ($force == 0 && isNewer($htmlFile, $xmlFile)) {
         trace("Skip conversion to HTML ($htmlFile newer than $xmlFile).");
@@ -740,9 +708,7 @@ sub makeHtmlCommon {
 }
 
 
-sub makePdf {
-    my $basename = shift;
-    my $xmlFile = shift;
+sub makePdf($basename, $xmlFile) {
     my $pdfFile =  $basename . '.pdf';
 
     if ($force == 0 && isNewer($pdfFile, $xmlFile)) {
@@ -766,9 +732,7 @@ sub makePdf {
 }
 
 
-sub makeEpub {
-    my $basename = shift;
-    my $xmlFile = shift;
+sub makeEpub($basename, $xmlFile) {
     my $epubFile = $basename . '.epub';
 
     if ($force == 0 && isNewer($epubFile, $xmlFile)) {
@@ -800,9 +764,7 @@ sub makeEpub {
 }
 
 
-sub makeText {
-    my $basename = shift;
-    my $filename = shift;
+sub makeText($basename, $filename) {
     my $textFile = $basename . ($useUnicode == 1 ? '-utf8' : '') . '.txt';
 
     if ($force == 0 && isNewer($textFile, $filename)) {
@@ -863,9 +825,7 @@ sub makeText {
 }
 
 
-sub makeWordlist {
-    my $basename = shift;
-    my $xmlFile = shift;
+sub makeWordlist($basename, $xmlFile) {
     my $wordlistFile = $basename . '-words.html';
 
     if ($force == 0 && isNewer($wordlistFile, $xmlFile)) {
@@ -949,8 +909,7 @@ sub determineSaxonParameters {
 #
 # makeZip -- Prepare a zip file for (re-)submission to Project Gutenberg.
 #
-sub makeZip {
-    my $basename = shift;
+sub makeZip($basename) {
 
     trace("Prepare a zip file for (re-)submission to Project Gutenberg");
 
@@ -994,11 +953,9 @@ sub makeZip {
 #
 # extractMetadata -- try to extract some metadata from an SGML TEI file.
 #
-sub extractMetadata {
-    my $file = shift;
+sub extractMetadata($file) {
 
-    my $fileHandle;
-    open($fileHandle, '<', $file) or fatal("Could not open '$file' to extract metadata: $!");
+    open my $fileHandle, '<', $file or fatal("Could not open '$file' to extract metadata: $!");
 
     # Skip upto start of actual text.
     while (<$fileHandle>) {
@@ -1062,13 +1019,11 @@ sub extractMetadata {
 #
 # extractEntities -- Extract a list of entities used.
 #
-sub extractEntities {
-    my $file = shift;
+sub extractEntities($file) {
     my %entityHash = ();
     my $entityPattern = "\&([a-z0-9._-]+);";
 
-    my $fileHandle;
-    open($fileHandle, '<', $file) or fatal("Could not open '$file': $!");
+    open my $fileHandle, '<', $file or fatal("Could not open '$file': $!");
 
     while (<$fileHandle>) {
         my $remainder = $_;
@@ -1120,10 +1075,7 @@ sub longestString {
 # runChecks -- run various checks on the file. To help error reporting, line/column information is
 # added to the TEI file first.
 #
-sub runChecks {
-    my $basename = shift;
-    my $filename = shift;
-
+sub runChecks($basename, $filename) {
     $filename =~ /^(.*)\.(xml|tei)$/;
     my $format = $2;
     my $checkFilename = $basename . '-checks.html';
@@ -1171,9 +1123,7 @@ sub runChecks {
 }
 
 
-sub runSchematron {
-    my $basename = shift;
-    my $xmlFilename = shift;
+sub runSchematron($basename, $xmlFilename) {
 
     ## The schematron wants the document to be in the TEI namespace: "http://www.tei-c.org/ns/1.0"
     my $namespacedXmlFile = temporaryFile("schematron", 'xml');
@@ -1195,9 +1145,7 @@ sub runSchematron {
 }
 
 
-sub makeAsciiDoc {
-    my $basename = shift;
-    my $xmlFilename = shift;
+sub makeAsciiDoc($basename, $xmlFilename) {
     my $xmlP5FileName = $basename . '-p5.xml';
 
     ## tei2asciidoc.xsl wants the document to be in the TEI namespace: "http://www.tei-c.org/ns/1.0"
@@ -1214,8 +1162,7 @@ sub makeAsciiDoc {
 #
 # isNewer -- determine whether the derived file exists, is not empty, and is newer than the source file
 #
-sub isNewer {
-    my ($sourceFile, $derivedFile) = @_;
+sub isNewer($sourceFile, $derivedFile) {
     my $sourceTimestamp = -e $sourceFile ? (stat($sourceFile)->mtime) : 0;
     my $derivedTimestamp = -e $derivedFile ? (stat($derivedFile)->mtime) : 0;
     my $isNewer = $sourceTimestamp > $derivedTimestamp ? 1 : 0;
@@ -1226,9 +1173,7 @@ sub isNewer {
 #
 # temporaryFile -- create a temporary file
 #
-sub temporaryFile {
-    my $phase = shift;
-    my $extension = shift;
+sub temporaryFile($phase, $extension) {
     $tmpCount++;
     return $TMP_FILE_PREFIX . $tmpCount . '-' . $phase . '.' . $extension;
 }
@@ -1309,8 +1254,7 @@ sub prepareImages {
 #
 # copyImages -- copy image files for use in ePub.
 #
-sub copyImages {
-    my $destination = shift;
+sub copyImages($destination) {
 
     if (-d $destination) {
         # Destination exists, prevent copying into it.
@@ -1329,8 +1273,7 @@ sub copyImages {
 #
 # copyFormulas -- copy formula svg-files for use in ePub.
 #
-sub copyFormulas {
-    my $destination = shift;
+sub copyFormulas($destination) {
 
     if (-d 'formulas') {
         system ('cp -r -u formulas ' . $destination);
@@ -1342,8 +1285,7 @@ sub copyFormulas {
 #
 # copyAudio -- copy audio files for use in ePub.
 #
-sub copyAudio {
-    my $destination = shift;
+sub copyAudio($destination) {
 
     if (-d 'audio') {
         system ('cp -r -u audio ' . $destination);
@@ -1352,8 +1294,7 @@ sub copyAudio {
     }
 }
 
-sub copyMusic {
-    my $destination = shift;
+sub copyMusic($destination) {
 
     if (-d 'music') {
         system ('cp -r -u music ' . $destination);
@@ -1366,8 +1307,7 @@ sub copyMusic {
 #
 # copyFonts -- copy fonts files for use in ePub.
 #
-sub copyFonts {
-    my $destination = shift;
+sub copyFonts($destination) {
 
     if (-d 'fonts') {
         system ('cp -r -u fonts ' . $destination);
@@ -1380,8 +1320,7 @@ sub copyFonts {
 #
 # tei2xml -- convert a file from SGML TEI to XML, also convert various ad-hoc notations if needed.
 #
-sub tei2xml {
-    my ($sgmlFile, $xmlFile) = @_;
+sub tei2xml($sgmlFile, $xmlFile) {
 
     if ($force == 0 && isNewer($xmlFile, $sgmlFile)) {
         trace("Skip conversion to XML ('$xmlFile' newer than '$sgmlFile').");
@@ -1406,9 +1345,7 @@ sub tei2xml {
 #
 # checkSgml -- validate the TEI SGML against the DTD and filter reported issues.
 #
-sub checkSgml {
-    my $inFile = shift;
-    my $sgmlFile = shift;
+sub checkSgml($inFile, $sgmlFile) {
 
     my $nsgmlFile = temporaryFile('checkSgml', "nsgml");
     my $sgmlErrorFile = temporaryFile('checkSgml', "err");
@@ -1430,8 +1367,7 @@ sub checkSgml {
 # applies a XSLT stylesheet to correct the case of elements, and finally restores
 # entities and converts the resulting file to Unicode.
 #
-sub convertSgmlToXml {
-    my ($inFile, $outFile) = @_;
+sub convertSgmlToXml($inFile, $outFile) {
 
     trace("Convert SGML to XML...");
 
@@ -1448,16 +1384,13 @@ sub convertSgmlToXml {
 }
 
 
-sub convertNotations {
-    my ($inFile, $outFile, $format) = @_;
+sub convertNotations($inFile, $outFile, $format) {
     my @commands = convertNotationsCommands($inFile, $format);
     executeCommandPipeline($inFile, $outFile, @commands);
 }
 
 
-sub convertNotationsCommands {
-    my ($inFile, $format) = @_;
-
+sub convertNotationsCommands($inFile, $format) {
     my @commands = ();
 
     $format eq 'tei' && push (@commands, "patc -p $toolsdir/patc/win2sgml.pat");
@@ -1471,8 +1404,7 @@ sub convertNotationsCommands {
 }
 
 
-sub executeCommandPipeline {
-    my ($inFile, $outFile, @commands) = @_;
+sub executeCommandPipeline($inFile, $outFile, @commands) {
 
     unshift (@commands, "cat $inFile");
     push (@commands, "cat >$outFile");
@@ -1486,16 +1418,13 @@ sub executeCommandPipeline {
 #
 # transcribe -- transcribe foreign scripts in special notations to entities.
 #
-sub transcribe {
-    my ($inFile, $outFile, $noPopups) = @_;
+sub transcribe($inFile, $outFile, $noPopups) {
     my @commands = transcribeCommands($inFile, $noPopups);
     executeCommandPipeline($inFile, $outFile, @commands);
 }
 
 
-sub transcribeCommands {
-    my ($inFile, $noPopups) = @_;
-
+sub transcribeCommands($inFile, $noPopups) {
     my @commands = ();
 
     if ($noTranscription == 0) {  
@@ -1530,8 +1459,7 @@ sub transcribeCommands {
 }
 
 
-sub containsTag {
-    my ($file, $tag) = @_;
+sub containsTag($file, $tag) {
     open my $fh, '<', $file or die "Cannot open '$file': $!";
     while (<$fh>) {
         return 1 if index($_, $tag) >= 0;
@@ -1539,8 +1467,7 @@ sub containsTag {
     return 0;
 }
 
-sub containsPattern {
-    my ($file, $pattern) = @_;
+sub containsPattern($file, $pattern) {
     open my $fh, '<', $file or die "Cannot open '$file': $!";
     while (<$fh>) {
         return 1 if /$pattern/;
@@ -1548,8 +1475,7 @@ sub containsPattern {
     return 0;
 }
 
-sub containsGreek {  
-    my $file = shift;
+sub containsGreek($file) {  
     return containsPattern($file, '<EL>|<GR>|<ALS>');
 }
 
@@ -1558,17 +1484,14 @@ sub containsCyrillic {
     return containsPattern($file, '<CY>|<RU>|<UK>|<RUX>');
 }
 
-sub containsDevanagari {
-    my $file = shift;
+sub containsDevanagari($file) {
     return containsPattern($file, '<SA>|<HI>');
 }
 
-sub containsNastaliq {
-    my $file = shift;
+sub containsNastaliq($file) {
     return containsPattern($file, '<UR>|<FA>');
 }
 
-sub needsTranscriptionPopups {
-    my $file = shift;
+sub needsTranscriptionPopups($file) {
     return containsPattern($file, '<EL>|<GR>|<ALS>|<CY>|<RU>|<UK>|<RUX>|<SR>');
 }

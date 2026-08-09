@@ -41,8 +41,7 @@ sub main {
 #
 # listRecursively -- list a directory tree to find all images in it.
 #
-sub listRecursively {
-    my $directory = shift;
+sub listRecursively($directory) {
     my @files = (  );
 
     # print STDERR "Scanning: $directory\n";
