@@ -4,8 +4,8 @@
 # Extract images from JPEG files in directories.
 #
 
-use strict;
-use warnings;
+use v5.36;
+
 use File::Basename;
 use Getopt::Long;
 
@@ -36,10 +36,7 @@ if ($showHelp == 1) {
 }
 
 
-sub list_recursively($);
-
-sub list_recursively($) {
-    my ($directory) = @_;
+sub list_recursively($directory) {
     my @files = (  );
 
     unless (opendir(DIRECTORY, $directory)) {
@@ -62,8 +59,7 @@ sub list_recursively($) {
 }
 
 
-sub handle_file($) {
-    my ($file) = @_;
+sub handle_file($file) {
     if ($file =~ m/^(.*)\.(pdf|PDF)$/) {
         my $extension = $2;
         print "Extracting images from PDF: $file\n";

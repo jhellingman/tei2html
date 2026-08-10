@@ -1,6 +1,5 @@
 
-use strict;
-use warnings;
+use v5.36;
 
 use Getopt::Long;
 use utf8;
@@ -54,9 +53,7 @@ sub wrapUnicode {
 }
 
 
-sub wrapLine {
-    my $prefix = shift;
-    my $line = shift;
+sub wrapLine($prefix, $line) {
 
     # Trim trailing spaces.
     $line =~ s/\s+$//;
@@ -106,9 +103,7 @@ sub wrapLine {
     }
 }
 
-sub spacingCharacterLength {
-    my $string = shift;
-
+sub spacingCharacterLength($string) {
     for ($string) {
         $_ = NFD($_);       ## decompose (Unicode Normalization Form D)
         s/\pM//g;           ## strip combining characters

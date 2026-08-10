@@ -1,18 +1,18 @@
 # idNotes.pl -- give footnotes ids based on de page and number they have
 
-use strict;
-use warnings;
+use v5.36;
+
 use SgmlSupport qw/getAttrVal/;
 
 my $inputFile = $ARGV[0];
 my $pageNumber = 0;
 my $appNoteNumber = 0;
 
-open(INPUTFILE, $inputFile) || die("Could not open $inputFile");
+open my $fh, '<', $inputFile or die "Could not open $inputFile: $!";
 
 print STDERR "Adding ids to footnotes in $inputFile\n";
 
-while (<INPUTFILE>) {
+while (<$fh>) {
     my $remainder = $_;
     while ($remainder =~ m/(<pb\b(.*?)>)/) {
         my $before = $`;
@@ -28,9 +28,10 @@ while (<INPUTFILE>) {
     idNotes($remainder, $pageNumber);
 }
 
-sub idNotes($$) {
-    my $remainder = shift;
-    my $pageNumber = shift;
+close $fh;
+
+
+sub idNotes($remainder, $pageNumber) {
 
     while ($remainder =~ m/(<note\b(.*?)>)/) {
         my $before = $`;

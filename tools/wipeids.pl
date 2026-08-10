@@ -1,16 +1,16 @@
 # wipeIds.pl -- wipe superfluous ids from an HTML document.
 
-use strict;
-use warnings;
+use v5.36;
+
 use SgmlSupport qw/getAttrVal/;
 
 my $inputFile = $ARGV[0];
-open (INPUTFILE, $inputFile) || die("Could not open $inputFile");
+open my $fh, '<', $inputFile or die "Could not open $inputFile: $!";
 
 my %refHash = ();
 
 # Collect IDs being referenced in the file.
-while (<INPUTFILE>) {
+while (<$fh>) {
     my $line = $_;
     my $remainder = $line;
     while ($remainder =~ m/<(.*?)>/) {
@@ -28,7 +28,7 @@ while (<INPUTFILE>) {
             my $css = '';
 
             # parse CSS rules for ID selectors until </style>
-            while (<INPUTFILE>) {
+            while (<$fh>) {
                 if ($_ =~ m/<\/style>/si) {
                     $css .= $`;
                     $remainder = $';
@@ -46,12 +46,12 @@ while (<INPUTFILE>) {
     }
 }
 
-close INPUTFILE;
+close $fh;
 
-open (INPUTFILE, $inputFile) || die("Could not open $inputFile");
+open my $fh2, '<', $inputFile or die "Could not open $inputFile: $!";
 
 # Remove all unused IDs.
-while (<INPUTFILE>) {
+while (<$fh2>) {
     my $remainder = $_;
     my $output = '';
     while ($remainder =~ m/<(.*?)>/) {
@@ -95,4 +95,4 @@ while (<INPUTFILE>) {
     }
 }
 
-close INPUTFILE;
+close $fh2;

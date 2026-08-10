@@ -1,7 +1,6 @@
 # idFormula.pl -- give formula-elements ids based on de page they are on and a sequence number.
 
-use strict;
-use warnings;
+use v5.36;
 
 use Getopt::Long;
 use SgmlSupport qw/getAttrVal/;
@@ -17,11 +16,11 @@ my $inputFile = $ARGV[0];
 my $pageNumber = 0;
 my $formulaNumber = 0;
 
-open(INPUTFILE, $inputFile) || die("Could not open $inputFile");
+open my $fh, '<', $inputFile or die "Could not open $inputFile: $!";
 
 print STDERR "Adding ids to formula-elements in $inputFile\n";
 
-while (<INPUTFILE>) {
+while (<$fh>) {
     my $remainder = $_;
     while ($remainder =~ m/(<pb\b(.*?)>)/) {
         my $before = $`;
@@ -37,9 +36,10 @@ while (<INPUTFILE>) {
     idElement($remainder, $pageNumber);
 }
 
-sub idElement {
-    my $remainder = shift;
-    my $pageNumber = shift;
+close $fh;
+
+
+sub idElement($remainder, $pageNumber) {
 
     while ($remainder =~ m/(<formula\b(.*?)>)/) {
         my $before = $`;
@@ -66,10 +66,7 @@ sub idElement {
     print $remainder;
 }
 
-sub stripAttribute {
-    my $attrName = shift;
-    my $attrs = shift;
-
+sub stripAttribute($attrName, $attrs) {
     if ($attrs =~ /$attrName\s*=\s*([\w.-]+)/i) {
         $attrs =~ s/$attrName\s*=\s*([\w.-]+)//i;
     } elsif ($attrs =~ /$attrName\s*=\s*\"(.*?)\"/i) {

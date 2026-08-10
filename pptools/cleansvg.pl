@@ -1,6 +1,7 @@
 #!/usr/bin/perl
-use strict;
-use warnings;
+
+use v5.36;
+
 use File::Copy;
 
 my $saxonHome = $ENV{'SAXON_HOME'};

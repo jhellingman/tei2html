@@ -1,6 +1,7 @@
 #!/usr/bin/perl
-use strict;
-use warnings;
+
+use v5.36;
+
 use Getopt::Long;
 use File::Find;
 use File::Copy;
@@ -111,8 +112,7 @@ sub wanted {
     }
 }
 
-sub extract_pgsrc_id {
-    my ($dir) = @_;
+sub extract_pgsrc_id($dir) {
     opendir my $dh, $dir or do {
         warn "Cannot open directory '$dir': $!";
         return undef;

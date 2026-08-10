@@ -4,28 +4,23 @@
 # Check the consistency of archive files.
 #
 
-use strict;
-use warnings;
+use v5.36;
+
 use File::Basename;
 use File::Temp;
 
-my $zip = "zip";
 my $sevenZip = "\"C:\\Program Files\\7-Zip\\7z\"";
-# $sevenZip = "7z";
 
 my $logFile = "checkArchives.log";
 
 main();
 
-sub main {
+sub main() {
     ## initial call ... $ARGV[0] is the first command line argument
     list_recursively($ARGV[0]);
 }
 
-sub list_recursively($);
-
-sub list_recursively($) {
-    my ($directory) = @_;
+sub list_recursively($directory) {
     my @files = (  );
 
     unless (opendir(DIRECTORY, $directory)) {
@@ -48,14 +43,8 @@ sub list_recursively($) {
 }
 
 
-sub handle_file($) {
-    my ($file) = @_;
-
-    if ($file =~ m/^(.*)\.(7z)$/) {
-        system ("$sevenZip t \"$file\" 1>>$logFile");
-    }
-
-    if ($file =~ m/^(.*)\.(zip)$/) {
-        system ("$zip -T \"$file\" 1>>$logFile");
+sub handle_file($file) {
+    if ($file =~ m/^(.*)\.(7z|zip)$/) {
+        system ("$sevenZip t -bb0 \"$file\" 1>>$logFile");
     }
 }

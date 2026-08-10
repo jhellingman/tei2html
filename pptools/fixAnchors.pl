@@ -2,8 +2,7 @@
 # fixAnchors.pl -- provide anchors with sequential numbers per page in TEI tagged files
 #
 
-use strict;
-use warnings;
+use v5.36;
 
 use Roman;                          # Roman.pm version 1.1 by OZAWA Sakuro <ozawa@aisoft.co.jp>
 use SgmlSupport qw/getAttrVal/;
@@ -14,11 +13,11 @@ my $currentAnchor = 1;
 my $prefix = "a";
 
 
-open(INPUTFILE, $inputFile) || die("Could not open $inputFile");
+open my $fh, '<', $inputFile or die "Could not open $inputFile: $!";
 
 print STDERR "Fixing anchors in $inputFile\n";
 
-while (<INPUTFILE>) {
+while (<$fh>) {
     my $line = $_;
     my $remainder = $line;
     while ($remainder =~ m/<pb(.*?)>/) {
@@ -34,9 +33,10 @@ while (<INPUTFILE>) {
     handleAnchors($remainder);
 }
 
+close $fh;
 
-sub handleAnchors($) {
-    my $remainder = shift;
+
+sub handleAnchors($remainder) {
     while ($remainder =~ m/<anchor(.*?)>/) {
         my $before = $`;
         my $attrs = $1;

@@ -1,7 +1,6 @@
 # idelement.pl -- give elements ids based on de page they are on and a sequence number
 
-use strict;
-use warnings;
+use v5.36;
 
 use Getopt::Long;
 use SgmlSupport qw/getAttrVal/;
@@ -39,11 +38,11 @@ my $inputFile = $ARGV[0];
 my $pageNumber = 0;
 my $elementNumber = 0;
 
-open(INPUTFILE, $inputFile) || die("Could not open $inputFile");
+open my $fh, '<', $inputFile or die "Could not open $inputFile: $!";
 
 print STDERR "Adding ids to $elementName-elements in $inputFile\n";
 
-while (<INPUTFILE>) {
+while (<$fh>) {
     my $remainder = $_;
     while ($remainder =~ m/(<pb\b(.*?)>)/) {
         my $before = $`;
@@ -59,10 +58,10 @@ while (<INPUTFILE>) {
     idElement($remainder, $pageNumber);
 }
 
+close $fh;
 
-sub idElement {
-    my $remainder = shift;
-    my $pageNumber = shift;
+
+sub idElement($remainder, $pageNumber) {
 
     while ($remainder =~ m/(<$elementName\b(.*?)>)/) {
         my $before = $`;
@@ -88,10 +87,7 @@ sub idElement {
 }
 
 
-sub stripAttrVal {
-    my $attrName = shift;
-    my $attrs = shift;
-
+sub stripAttrVal($attrName, $attrs) {
     $attrs =~ s/$attrName\s*=\s*([\w.-]+)\s*//gi;
     $attrs =~ s/$attrName\s*=\s*\"(.*?)\"\s*//gi;
     $attrs =~ s/\s*\z//gi;

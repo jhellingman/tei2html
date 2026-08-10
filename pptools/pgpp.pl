@@ -1,7 +1,9 @@
+#!/usr/bin/perl
+#
 # pgpp.pl -- Project Gutenberg Post-Processing: first steps of post-processing a text from PGDP for PG.
 
-use strict;
-use warnings;
+use v5.36;
+
 use HTML::Entities;
 use Getopt::Long;
 use PgdpSupport qw/pgdp2sgml/;
@@ -29,9 +31,9 @@ if ($showHelp == 1) {
 
 my $file = $ARGV[0];
 
-open(INPUTFILE, '<:encoding(UTF-8)', $file) || die("Could not open input file $file");
+open my $fh, '<:encoding(UTF-8)', $file or die "Could not open input file $file: $!";
 
-while (<INPUTFILE>) {
+while (<$fh>) {
 
     # Replace ampersands (if they are not likely to start entities):
     $_ =~ s/\& /\&amp; /g;
@@ -85,3 +87,5 @@ while (<INPUTFILE>) {
     # Replace unicode characters beyond U+00FF with entities
     print encode_entities($_, '^\n\x20-\xff');
 }
+
+close $fh;

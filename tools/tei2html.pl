@@ -242,8 +242,8 @@ if ($makeAsciiDoc == 1) {
     $makeP5 = 1;
 }
 
-if ($debug == 1) {
-    print "Called with params: $ARGV\n";
+if ($debug == 1 && defined $ARGV) {
+    say "Called with params: $ARGV";
 }
 
 #==============================================================================
