@@ -8,7 +8,13 @@ description: Write XSLT code according to the coding guidelines and conventions 
 * **XSLT 3.0.** Use XSLT 3.0 constructs and features that are available in the Saxon-HE (Home Edition) XSLT processor only. Do NOT use features limited to Saxon-PE or Saxon-EE. We want to ensure `tei2html` works with the free version.
 * **Comments and Documentation.** Don't write comments unless the code cannot be explained sufficiently from the names of templates and functions.
 * **Small is beautiful.** Write templates and functions that are short and deal with a single concern.
-* **Use map.** When appropriate, use the XSLT map feature when this improves readability.
+* **Use map.** When appropriate, use the XSLT `map` feature when this improves readability.
+* **Template driven.** Prefer `xsl:apply-templates` over `xsl:for-each` where structure allows
 * **Data-driven.** Avoid mixing code and data. When reasonable, use look-up tables in preference to long switch statements.
 * **Readability.** Prefer easy to read code above clever but tricky constructs.
 * **Test coverage.** Write `xspec` tests for each template and function.
+* **Completeness.** Declare every namespace used in XPath at the stylesheet root.
+* **Completeness.** Use `exclude-result-prefixes` for all non-output namespaces.
+* **Robustness.** Never use `disable-output-escaping`. It is fragile and engine-dependent.
+
+
