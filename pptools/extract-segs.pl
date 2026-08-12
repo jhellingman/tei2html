@@ -1,7 +1,7 @@
 # Perl run the extract-segs.xsl stylesheet on a directory with Saxon.
 
-use strict;
-use warnings;
+use v5.36;
+
 use FindBin qw($Bin);
 use File::Basename;
 
@@ -11,11 +11,7 @@ my $xsldir          = $Bin . "/..";                    # location of xsl stylesh
 my $filename = $ARGV[0];
 
 
-sub list_recursively($);
-
-sub list_recursively($)
-{
-    my ($directory) = @_;
+sub list_recursively($directory) {
     my @files = (  );
 
     print STDERR "Extracting directory $directory\n";
@@ -39,10 +35,7 @@ sub list_recursively($)
     }
 }
 
-
-sub handle_file($) {
-    my ($file) = @_;
-
+sub handle_file($file) {
     if ($file =~ m/^(.*)\.(xhtml)$/) {
         print STDERR "Extracting file $file\n";
 

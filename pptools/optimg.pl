@@ -4,8 +4,7 @@
 # Optimize various types of images.
 #
 
-use strict;
-use warnings;
+use v5.36;
 
 use File::Basename;
 use File::Copy;
@@ -48,7 +47,7 @@ if ($help == 1) {
 }
 
 
-sub main {
+sub main() {
     my $directory = $ARGV[0];
     if (not defined $directory) {
         $directory = ".";
@@ -62,8 +61,7 @@ sub main {
 }
 
 
-sub list_recursively {
-    my ($directory) = @_;
+sub list_recursively($directory) {
     my @files = (  );
 
     opendir(my $dirHandle, $directory) or die "Cannot open directory $directory: $!";
@@ -84,8 +82,7 @@ sub list_recursively {
 }
 
 
-sub handle_file {
-    my ($file) = @_;
+sub handle_file($file) {
 
     if ($file =~ m/^(.*)\.(png|jpg|jpeg)$/) {
 
@@ -142,7 +139,7 @@ sub handle_file {
 }
 
 
-sub report {
+sub report() {
     print "Number of images:            $imagesConverted\n";
     print "Number of images compressed: $imagesReduced\n"; 
     if ($errorCount > 0) {

@@ -1,13 +1,12 @@
 # fixDitto.pl -- convert non-standard <ditto> notation to <seg> notation, finding a source seg to copy, where possible.
 
-use strict;
-use warnings;
+use v5.36;
 
 my $inputFile = $ARGV[0];
 
-open(INPUTFILE, $inputFile) || die("Could not open $inputFile");
-chomp(my @lines = <INPUTFILE>);
-close INPUTFILE;
+open my $fh, '<', $inputFile or die "Could not open $inputFile: $!";
+chomp(my @lines = <$fh>);
+close $fh;
 
 print STDERR "Verifying $inputFile\n";
 
@@ -70,21 +69,17 @@ foreach my $line (@lines) {
     print "$line\n";
 }
 
-sub countWords {
-    my $text = shift;
+sub countWords($text) {
     my $count;
     $count++ while $text =~ /\S+/g;
     return $count;
 }
 
-sub repeat {
-    my $symbol = shift;
-    my $count = shift;
+sub repeat($symbol, $count) {
     return trim("$symbol " x $count);
 }
 
-sub trim {
-    my $string = shift; 
+sub trim($string) {
     $string =~ s/^\s+|\s+$//g; 
     return $string 
 };

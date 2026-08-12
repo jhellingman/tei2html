@@ -3,8 +3,8 @@
 # 1. numbers get the form n=<chapter number|first letter of id>.<sequence number>
 # 2. chapter number derived from n attribute of <div1>
 
-use strict;
-use warnings;
+use v5.36;
+
 use Roman;                      # Roman.pm version 1.1 by OZAWA Sakuro <ozawa@aisoft.co.jp>
 use SgmlSupport qw/getAttrVal/;
 
@@ -13,9 +13,9 @@ my $inputFile   = $ARGV[0];
 my $div1Number = 0;
 my $div2Number = 0;
 
-open(INPUTFILE, $inputFile) || die("Could not open $inputFile");
+open my $fh, '<', $inputFile or die "Could not open $inputFile: $!";
 
-while (<INPUTFILE>) {
+while (<$fh>) {
     my $line = $_;
 
     if ($line =~ /<div1(.*?)>/) {
@@ -51,3 +51,5 @@ while (<INPUTFILE>) {
     }
     print $remainder;
 }
+
+close $fh;

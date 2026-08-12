@@ -1,6 +1,6 @@
 #!/usr/bin/env perl
-use strict;
-use warnings;
+
+use v5.36;
 
 use File::Spec;
 use File::Path qw(make_path);
@@ -49,14 +49,13 @@ if ($help) {
     usage(0);
 }
 
-sub clamp {
-    my ($value, $min, $max) = @_;
+sub clamp($value, $min, $max) {
     return $min if $value < $min;
     return $max if $value > $max;
     return $value;
 }
 
-sub validate_parameters {
+sub validate_parameters() {
   if (defined $smoothness && looks_like_number($smoothness)) {
       $smoothness = clamp($smoothness, 0, 100);
   } else {
@@ -75,7 +74,7 @@ sub validate_parameters {
   print_configuration() if $verbose;
 }
 
-sub main {
+sub main() {
     validate_parameters();
 
     # Ensure output directory exists
@@ -114,8 +113,7 @@ sub main {
     print "\nBatch processing complete! All processed files archived as uniform 8-bit in: $output_dir\n" if $verbose;
 }
 
-sub determine_bit_depth_and_resolution {
-    my $input_path = shift;
+sub determine_bit_depth_and_resolution($input_path) {
 
     # We retrieve both the bit-depth and horizontal resolution in one command.
     # %x outputs horizontal resolution (e.g. 600) and %[bit-depth] outputs bit-depth (e.g. 16).
@@ -140,8 +138,7 @@ sub determine_bit_depth_and_resolution {
     return ($bit_depth, $resolution);
 }
 
-sub auto_descreen {
-    my ($input_path, $output_path, $file, $bit_depth) = @_;
+sub auto_descreen($input_path, $output_path, $file, $bit_depth) {
 
     my @gmic_cmd = (
         'gmic',
@@ -176,8 +173,7 @@ sub auto_descreen {
     return 1;
 }
 
-sub restore_resolution {
-    my ($output_path, $file, $resolution) = @_;
+sub restore_resolution($output_path, $file, $resolution) {
 
     my @cmd_exiftool = ('exiftool', '-overwrite_original', "-XResolution=$resolution", "-YResolution=$resolution", '-ResolutionUnit=in',  $output_path);
     system_or_dry_run(@cmd_exiftool);
@@ -198,7 +194,7 @@ sub system_or_dry_run {
   }
 }
 
-sub print_configuration {
+sub print_configuration() {
     print "Configuration:\n";
     print "  input:           $input_dir\n";
     print "  output:          $output_dir\n";
@@ -210,8 +206,7 @@ sub print_configuration {
     print "  overwrite:       $overwrite\n";
 }
 
-sub usage {
-    my ($exit_code) = @_;
+sub usage($exit_code) {
     $exit_code //= 0;
     print <<"USAGE";
 Usage: $0 [options]

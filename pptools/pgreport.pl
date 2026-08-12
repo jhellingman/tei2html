@@ -4,8 +4,7 @@
 # Report on a directory of .TEI files (old-fashioned SGML format)
 #
 
-use strict;
-use warnings;
+use v5.36;
 
 use Cwd;
 use Date::Format;
@@ -107,7 +106,7 @@ my %excluded = (
 
 my $preGetRepoCode = <<'EOF';
 
-use strict;
+use v5.36;
 use Cwd;
 use File::chdir;
 
@@ -115,9 +114,7 @@ EOF
 
 my $postGetRepoCode = <<'EOF';
 
-sub getRepo($) {
-    my $repo = shift;
-
+sub getRepo($repo) {
     if (!-e $repo) {
         system ("git clone https://github.com/GutenbergSource/$repo.git\n");
     } elsif (-d $repo) {
@@ -137,7 +134,7 @@ EOF
 main();
 
 
-sub main {
+sub main() {
     my $reportFile = 'pgreport.txt';
     my $xmlFile = 'pgreport.xml';
     my $gitFile = 'getRepos.pl';
@@ -169,7 +166,7 @@ sub main {
 }
 
 
-sub logTotals {
+sub logTotals() {
     logMessage("---------------------");
     logMessage("Files:      $totalFiles");
     logMessage("Words:      $totalWords");
@@ -183,8 +180,7 @@ sub logTotals {
 }
 
 
-sub listRecursively {
-    my ($directory) = @_;
+sub listRecursively($directory) {
     my @files = (  );
 
     unless (opendir(DIRECTORY, $directory)) {
@@ -208,16 +204,14 @@ sub listRecursively {
 }
 
 
-sub handleFile {
-    my ($file) = @_;
+sub handleFile($file) {
     if ($file =~ m/^(.*)\.(tei)$/) {
         handleTeiFile($file);
     }
 }
 
 
-sub handleTeiFile {
-    my $fullName = shift;
+sub handleTeiFile($fullName) {
 
     my $fileSize = -s $fullName;
     my $fileDate = time2str("%Y-%m-%d", stat($fullName)->mtime);
@@ -629,9 +623,7 @@ sub handleTeiFile {
 }
 
 
-sub downloadFromPG {
-    my $pgNum = shift;
-    my $path = shift;
+sub downloadFromPG($pgNum, $path) {
 
     # Construct destination path:
     my $destinationPath = $path . '/Processed';
@@ -664,9 +656,7 @@ sub downloadFromPG {
 }
 
 
-sub getAttr {
-    my $attr = shift;
-    my $node = shift;
+sub getAttr($attr, $node) {
     my $value = $node->find('@' . $attr);
     my $valueAttr = '';
     if ($value->size() > 0) {
@@ -677,9 +667,7 @@ sub getAttr {
 }
 
 
-sub escapeXml {
-    my $data = shift;
-
+sub escapeXml($data) {
     $data =~ s/&/&amp;/sg;
     $data =~ s/</&lt;/sg;
     $data =~ s/>/&gt;/sg;
@@ -689,26 +677,22 @@ sub escapeXml {
 }
 
 
-sub logError {
-    my $message = shift;
+sub logError($message) {
     print STDERR "ERROR: $message\n";
 }
 
 
-sub logMessage {
-    my $message = shift;
+sub logMessage($message) {
     print REPORTFILE "$message\n";
 }
 
 
-sub isValid {
-    my $value = shift;
+sub isValid($value) {
     return defined $value && $value ne '' && $value ne '#####';
 }
 
 
-sub formatBytes {
-    my $num = shift;
+sub formatBytes($num) {
     my $kb = 1024;
     my $mb = (1024 * 1024);
     my $gb = (1024 * 1024 * 1024);
@@ -723,9 +707,7 @@ sub formatBytes {
 #
 # isNewer -- determine whether the first file exists and is newer than the second file
 #
-sub isNewer {
-    my $file1 = shift;
-    my $file2 = shift;
+sub isNewer($file1, $file2) {
 
     if (!-e $file2) {
         return 1;

@@ -1,18 +1,18 @@
 # fixNotes.pl -- fix (renumber) notes in text files
 
-use strict;
-use warnings;
+use v5.36;
+
 my $inputFile          = $ARGV[0];
 my $firstNoteNumber    = $ARGV[1];
 
-open(INPUTFILE, $inputFile) || die("Could not open $inputFile");
+open my $fh, '<', $inputFile or die "Could not open $inputFile: $!";
 
 print STDERR "Verifying and renumbering notes in $inputFile\n";
 
 my $nPreviousNoteNumber = 0;
 my $nNewNoteNumber = $firstNoteNumber;
 
-while (<INPUTFILE>) {
+while (<$fh>) {
     my $line = $_;
     my $remainder = $line;
     while ($remainder =~ m/\[([0-9]*)\]/) {
@@ -38,3 +38,5 @@ while (<INPUTFILE>) {
     }
     print $remainder;
 }
+
+close $fh;

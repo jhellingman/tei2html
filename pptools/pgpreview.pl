@@ -1,7 +1,6 @@
 # pgpreview.pl -- Create simple HTML preview of proofed pages.
 
-use strict;
-use warnings;
+use v5.36;
 
 use Getopt::Long;
 use PgdpSupport qw/pgdp2sgml/;
@@ -26,16 +25,17 @@ sub main {
         $projectName = $1;
     }
 
-    open(INPUTFILE, $file) || die("Could not open input file $file");
+    open my $fh, '<', $file or die "Could not open input $file: $!";
+
     if ($ascii == 0) {
-        binmode(INPUTFILE, ":utf8");
+        binmode($fh, ":utf8");
     }
 
     printHtmlHead();
 
     my $paragraph = "";
 
-    while (<INPUTFILE>) {
+    while (<$fh>) {
         my $line = trim($_);
 
         if ($line =~ /-*File: ([0-9]+)\.png-*\\([^\\]*)(\\([^\\]+))?(\\([^\\]+))?(\\([^\\]+))?\\.*$/ or $_ =~ /-*File: ([0-9]+)\.png-*$/) {
@@ -51,7 +51,7 @@ sub main {
                 print "\n\n<p>" . handleParagraph($paragraph, $useExtensions);
                 $paragraph = '';
             }
-            handleCrossWord();
+            handleCrossWord($fh);
         } elsif ($line ne '') {
             $paragraph .= ' ' . $line;
         } else {
@@ -68,12 +68,12 @@ sub main {
 
     printHtmlTail();
 
-    close INPUTFILE;
+    close $fh;
 }
 
-sub handleCrossWord() {
+sub handleCrossWord($fh) {
     print "<table class=crossword>\n";
-    while (<INPUTFILE>) {
+    while (<$fh>) {
         my $line = $_;
         if ($line =~ m/\[\/crossword]/) {
             print "</table>\n";
@@ -90,9 +90,7 @@ sub handleCrossWord() {
     }
 }
 
-sub handleParagraph($$) {
-    my $paragraph = shift;
-    my $useExtensions = shift;
+sub handleParagraph($paragraph, $useExtensions) {
 
     # Remove over-zealous numeric entities
     $paragraph =~ s/\&\#39;/'/g;
@@ -214,8 +212,7 @@ sub printHtmlTail() {
 }
 
 
-sub trim($) {
-    my $s = shift; 
+sub trim($s) {
     $s =~ s/^\s+|\s+$//g;
     return $s;
 }

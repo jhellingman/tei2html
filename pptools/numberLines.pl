@@ -7,9 +7,8 @@
 # <!-- START VERSE NUMBERS -->
 # <!-- END VERSE NUMBERS -->
 
+use v5.36;
 
-use strict;
-use warnings;
 use SgmlSupport qw/getAttrVal/;
 
 my $inputFile   = $ARGV[0];
@@ -18,9 +17,9 @@ my $idPrefix = 'v';
 my $lineNumber = 0;
 my $addLineNumbers = 0;
 
-open(INPUTFILE, $inputFile) || die("Could not open $inputFile");
+open my $fh, '<', $inputFile or die "Could not open $inputFile: $!";
 
-while (<INPUTFILE>) {
+while (<$fh>) {
     my $line = $_;
 
     if ($line =~ /<!-- START VERSE NUMBERS -->/) {
@@ -50,3 +49,5 @@ while (<INPUTFILE>) {
         print $line;
     }
 }
+
+close $fh;

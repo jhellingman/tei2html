@@ -3,8 +3,7 @@
 # 1. sequence of numbers
 # 2. average size of pages with large deviations
 
-use strict;
-use warnings;
+use v5.36;
 
 use Roman;              # Roman.pm version 1.1 by OZAWA Sakuro <ozawa@aisoft.co.jp>
 use Getopt::Long;
@@ -77,11 +76,11 @@ my $seenFirst = 0;
 my $seenLast = 0;
 my $secondColumn = 0;
 
-open(INPUTFILE, $inputFile) || die("Could not open $inputFile");
+open my $fh, '<', $inputFile or die "Could not open $inputFile: $!";
 
 print STDERR "Verifying $inputFile\n";
 
-while (<INPUTFILE>) {
+while (<$fh>) {
     my $line = $_;
     my $remainder = $line;
     while ($remainder =~ m/<pb(.*?)>/) {
@@ -117,11 +116,9 @@ while (<INPUTFILE>) {
     print $remainder;
 }
 
+close $fh;
 
-sub nextPageBreak {
-    my $currentPage = shift;
-    my $facs = shift;
-
+sub nextPageBreak($currentPage, $facs) {
     my $dot = '';
 
     if ($splitColumns and $secondColumn) {
@@ -154,8 +151,7 @@ sub nextPageBreak {
 }
 
 
-sub makeId {
-    my $n = shift;
+sub makeId($n) {
     my $letter = '';
     if (defined $idsUsed{$n}) {
         $letter = $letters[$idsUsed{$n}];
@@ -167,8 +163,7 @@ sub makeId {
 }
 
 
-sub isNumber {
-    my $str = shift;
+sub isNumber($str) {
     return $str =~ /^[0-9]+$/;
 }
 

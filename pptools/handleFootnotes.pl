@@ -1,7 +1,7 @@
 # handleFootnotes.pl
 
-use strict;
-use warnings;
+use v5.36;
+
 use Data::Dumper;
 use SgmlSupport qw/getAttrVal/;
 
@@ -26,8 +26,7 @@ sub main {
 }
 
 
-sub handlePage {
-    my $page = shift;
+sub handlePage($page) {
     my @matches = $page =~ /\[Footnote ([0-9]+|[A-Z]): (.*?)\]\n/smg;
 
     my $iterator = natatime(2, @matches);
@@ -45,10 +44,7 @@ sub handlePage {
 }
 
 
-sub moveNoteInline {
-    my $page = shift;
-    my $number = shift;
-    my $note = shift;
+sub moveNoteInline($page, $number, $note) {
 
     if ($page =~ /<note n=$number><\/note>/) {
         $page =~ s/<note n=$number><\/note>/<note n=$number>$note<\/note>/;
@@ -63,10 +59,7 @@ sub moveNoteInline {
 }
 
 
-sub natatime {
-    my $n = shift;
-    my @list = @_;
-
+sub natatime($n, @list) {
     return sub {
         return splice @list, 0, $n;
     }

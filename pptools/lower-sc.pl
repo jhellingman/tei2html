@@ -1,15 +1,16 @@
 # lower-sc.pl -- make words between <sc>...</sc> lowercase;
 
-use warnings;
-use strict;
+use v5.36;
+
 use Encode qw(encode decode);
 
 my $encoding = 'latin-1';
 
 my $infile = $ARGV[0]; 
-open(INPUTFILE, $infile) || die("Could not open input file $infile");
 
-while (<INPUTFILE>) {
+open my $fh, '<', $infile or die "Could not open $infile: $!";
+
+while (<$fh>) {
     my $remainder = $_;
     while ($remainder =~ /<sc>(.*?)<\/sc>/) {
         print $`;
@@ -19,3 +20,5 @@ while (<INPUTFILE>) {
     }
     print $remainder;
 }
+
+close $fh;

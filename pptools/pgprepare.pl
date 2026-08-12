@@ -1,7 +1,6 @@
 # pgprepare.pl -- prepare a set of text files for upload to PGDP.
 
-use strict;
-use warnings;
+use v5.36;
 
 use Getopt::Long;
 use File::Copy;
@@ -38,8 +37,7 @@ listRecursively($directory);
 #
 # listRecursively -- list a directory tree to find all text files in it.
 #
-sub listRecursively {
-    my $directory = shift;
+sub listRecursively($directory) {
     my @files = (  );
 
     # print STDERR "Scanning: $directory\n";
@@ -63,8 +61,7 @@ sub listRecursively {
 #
 # cleanText -- cleanup a text file for PGDP.
 #
-sub cleanText($) {
-    my $textFile = shift;
+sub cleanText($textFile) {
 
     # open(INPUTFILE, $textFile) || die("Could not open file $textFile for reading.");
     if ($readUnicode == 1) {
@@ -105,11 +102,11 @@ sub cleanText($) {
         $line =~ s/ ?-- ?/--/g;
 
         # Handle unwanted characters:
-        $line =~ s/[•]/./g;
+        $line =~ s/[ï¿½]/./g;
         $line =~ s/[\x{201C}\x{201D}\x{201E}\x{201F}]/"/g;  # double quotation marks
         $line =~ s/[\x{2018}\x{2019}\x{201A}\x{201B}]/'/g;  # single quotation marks
         $line =~ s/[\x{20AC}]/E/g;                          # euro-sign
-        $line =~ s/[™]/"/g;
+        $line =~ s/[ï¿½]/"/g;
 
         $line =~ s/[\x{2E17}\x{2E40}]/-/g;                  # German double hyphen
         $line =~ s/[\x{2014}]/--/g;                         # em-dash
