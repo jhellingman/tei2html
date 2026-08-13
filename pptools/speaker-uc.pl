@@ -1,23 +1,21 @@
 # speaker-uc.pl -- script to make heads and speakers in drama uppercase.
 
-use strict;
-use warnings;
+use v5.36;
 
 my $inputFile = $ARGV[0];
 
-open(INPUTFILE, $inputFile) || die("Could not open $inputFile");
+open my $fh, '<', $inputFile or die "Could not open $inputFile: $!";
 
 print STDERR "Handling $inputFile\n";
 
-while (<INPUTFILE>) {
+while (<$fh>) {
     my $line = $_;
     $line = speakerUpperCase($line);
     $line = headUpperCase($line);
     print $line;
 }
 
-sub speakerUpperCase($) {
-    my $remainder = shift;
+sub speakerUpperCase($remainder) {
     my $result = "";
     while ($remainder =~ /(<speaker>.*?<\/speaker>)/) {
         $result .= $`;
@@ -28,8 +26,7 @@ sub speakerUpperCase($) {
     return $result;
 }
 
-sub headUpperCase($) {
-    my $remainder = shift;
+sub headUpperCase($remainder) {
     my $result = "";
     while ($remainder =~ /(<head>.*?<\/head>)/) {
         $result .= $`;
@@ -40,8 +37,7 @@ sub headUpperCase($) {
     return $result;
 }
 
-sub upperCaseTextContent() {
-    my $remainder = shift;
+sub upperCaseTextContent($remainder) {
     my $result = "";
     while ($remainder =~ /(<.*?>)/) {
         $result .= uc($`);

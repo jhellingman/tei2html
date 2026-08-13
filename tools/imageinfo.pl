@@ -45,9 +45,9 @@ sub listRecursively($directory) {
     my @files = (  );
 
     # print STDERR "Scanning: $directory\n";
-    opendir(DIR, $directory) or die "Cannot open directory $directory!\n";
-    @files = grep (!/^\.\.?$/, readdir(DIR));
-    closedir(DIR);
+    opendir(my $dh, $directory) or die "Cannot open directory $directory: $!";
+    @files = grep (!/^\.\.?$/, readdir($dh));
+    closedir($dh);
 
     my @sorted_files = sort { lc($a) cmp lc($b) } @files;
 

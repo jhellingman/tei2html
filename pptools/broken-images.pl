@@ -4,26 +4,17 @@
 # Test JPEG files in directories.
 #
 
-use strict;
-use warnings;
+use v5.36;
+
 use File::Basename;
 use Image::Magick;
 
-sub list_recursively($);
-
-sub list_recursively($) {
-    my ($directory) = @_;
+sub list_recursively($directory) {
     my @files = (  );
 
-    unless (opendir(DIRECTORY, $directory)) {
-        print "Cannot open directory $directory!\n";
-        exit;
-    }
-
-    # Read the directory, ignoring special entries "." and ".."
-    @files = grep (!/^\.\.?$/, readdir(DIRECTORY));
-
-    closedir(DIRECTORY);
+    opendir(my $dh, $directory) or die "Cannot open directory $directory: $!";
+    @files = grep (!/^\.\.?$/, readdir($dh));
+    closedir($dh);
 
     foreach my $file (@files) {
         if (-f "$directory\\$file") {
@@ -35,8 +26,7 @@ sub list_recursively($) {
 }
 
 
-sub handle_file($) {
-    my ($file) = @_;
+sub handle_file($file) {
     if ($file =~ m/^(.*)\.(jpg|png|gif)$/) {
         my $image = new Image::Magick;
         my $error = $image->Read($file);
@@ -50,7 +40,6 @@ sub handle_file($) {
 
 
 sub main() {
-    ## initial call ... $ARGV[0] is the first command line argument
     my $file = $ARGV[0];
 
     if (!defined $file) {

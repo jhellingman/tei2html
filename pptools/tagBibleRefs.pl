@@ -1,7 +1,8 @@
+#!/usr/bin/env perl
 # tagBibleRefs.pl -- Tag Bible references appearing in documents.
 
-use strict;
-use warnings;
+use v5.36;
+
 use Roman;      # Roman.pm version 1.1 by OZAWA Sakuro <ozawa@aisoft.co.jp>
 
 my $tagPattern = "<(.*?)>";
@@ -509,14 +510,12 @@ my %chapterCounts = (
 );
 
 
-
 buildRegularExpression();
 
 main();
 
 
-
-sub buildRegularExpression {
+sub buildRegularExpression() {
     my @listBooks = ();
     foreach my $book (keys %books) {
         push (@listBooks, $book);
@@ -525,13 +524,16 @@ sub buildRegularExpression {
     my @sortedBooks = uniq(sort(@listBooks));
 
     my $booksPattern = "";
-    for (my $i = 0; $i < $#sortedBooks; $i++) {
-        my $book = $sortedBooks[$i];
-        if ($i > 0) {
+    foreach my $book (@sortedBooks) {
+        if (length $booksPattern == 0) {
             $booksPattern .= "|";
         }
         $booksPattern .= "(?:$book)";
     }
+
+    # my @escaped = map { my $b = quotemeta($_); $b =~ s/\\\s+/\\s+/g; $b } @sortedBooks;
+    # my $booksPattern = join('|', map { "(?:$_)" } @escaped);
+    # $refPattern = "\\b(?:$booksPattern),?\\s+($romanNumberPattern|$numberPattern)\\s*[,.:]?\\s*(?:($numberPattern)?(?:\\s*(?:&ndash;|-)\\s*($numberPattern))?)\\b";
 
     $booksPattern =~ s/\./\\./g;
     # $booksPattern =~ s/ /\\s+/g;
@@ -542,8 +544,7 @@ sub buildRegularExpression {
 }
 
 
-sub uniq {
-    my @list = @_;
+sub uniq(@list) {
     my %seen = ();
     my @result = ();
     foreach my $item (@list) {
@@ -564,11 +565,11 @@ sub test {
 }
 
 
-sub main {
+sub main() {
     my $file = $ARGV[0];
-    open(INPUTFILE, $file) || die("Could not open input file $file");
+    open my $fh, '<', $file or die "Could not open input file $file: $!";
 
-    while (<INPUTFILE>) {
+    while (<$fh>) {
         my $remainder = $_;
         while ($remainder =~ m/$tagPattern/) {
             my $fragment = $`;
@@ -580,12 +581,11 @@ sub main {
         print tagRefs($remainder);
     }
 
-    close INPUTFILE;
+    close $fh;
 }
 
 
-sub tagRefs($) {
-    my $remainder = shift;
+sub tagRefs($remainder) {
 
     my $result = "";
     while ($remainder =~ m/$refPattern/) {
@@ -606,12 +606,7 @@ sub tagRefs($) {
 }
 
 
-sub tagRef($$$$$) {
-    my $match = shift;
-    my $book = shift;
-    my $chapter = shift;
-    my $verse = shift;
-    my $range = shift;
+sub tagRef($match, $book, $chapter, $verse, $range) {
 
     if (isroman($chapter)) {
         $chapter = arabic($chapter);

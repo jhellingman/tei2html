@@ -156,12 +156,9 @@ sub listRecursively($directory) {
         return;
     }
 
-    unless (opendir(DIRECTORY, $directory)) {
-        logError("Cannot open directory $directory!");
-        exit;
-    }
-    @files = grep (!/^\.\.?$/, readdir(DIRECTORY));
-    closedir(DIRECTORY);
+    opendir(my $dh, $directory) or die "Cannot open directory $directory: $!";
+    @files = grep (!/^\.\.?$/, readdir($dh));
+    closedir($dh);
 
     foreach my $file (@files) {
         my $path = $directory . '/' . $file;

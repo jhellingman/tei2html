@@ -16,15 +16,12 @@ sub list_recursively($directory) {
 
     print STDERR "Extracting directory $directory\n";
 
-    unless (opendir(DIRECTORY, $directory)) {
-        print "Cannot open directory $directory!\n";
-        exit;
-    }
+    opendir(my $dh, $directory) or die "Cannot open directory $directory: $!";
 
     # Read the directory, ignoring special entries "." and ".."
-    @files = grep (!/^\.\.?$/, readdir(DIRECTORY));
+    @files = grep (!/^\.\.?$/, readdir($dh));
 
-    closedir(DIRECTORY);
+    closedir($dh);
 
     foreach my $file (@files) {
         if (-f "$directory\\$file") {

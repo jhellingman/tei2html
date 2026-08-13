@@ -1071,7 +1071,7 @@
         <msg:message name="msgEncoding">Kodierung</msg:message>
         <msg:message name="msgExternalLink">Externe Link</msg:message>
         <msg:message name="msgExternalReferences">Externe Referenzen</msg:message>
-        <msg:message name="msgExternalReferencesDisclaimer">Dieses Buch enthält externe Referenzen. Diese Links können möglicherweise für Sie nicht funktionieren.</msg:message>
+        <msg:message name="msgExternalReferencesDisclaimer">Dieses Buch enthält externe Referenzen. Diese Links können für Sie nicht funktionieren.</msg:message>
         <msg:message name="msgFigure">Figur</msg:message>
         <msg:message name="msgFigures">Figuren</msg:message>
         <msg:message name="msgFragment">Fragment</msg:message>
@@ -1285,7 +1285,7 @@
         <msg:message name="pt-BR">Portugiesisch (Brasilien)</msg:message>
         <msg:message name="pt-PT">Portugiesisch (Portugal)</msg:message>
         <msg:message name="ru">Russisch</msg:message>
-        <msg:message name="ru-1900">Russisch (Orthographie vor 1918)</msg:message>
+        <msg:message name="ru-1900">Russisch (Orthografie vor 1918)</msg:message>
         <msg:message name="ru-Latn">Russisch (lateinische Transkription)</msg:message>
         <msg:message name="sa">Sanskrit</msg:message>
         <msg:message name="sa-Latn">Sanskrit (lateinische Transkription)</msg:message>

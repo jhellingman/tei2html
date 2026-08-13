@@ -1,4 +1,5 @@
-# pgprepare.pl -- prepare a set of text files for upload to PGDP.
+#!/usr/bin/env perl
+# # pgprepare.pl -- prepare a set of text files for upload to PGDP.
 
 use v5.36;
 
@@ -31,7 +32,6 @@ if (defined $ARGV[0]) {
     $directory = $ARGV[0];
 }
 
-
 listRecursively($directory);
 
 #
@@ -40,10 +40,9 @@ listRecursively($directory);
 sub listRecursively($directory) {
     my @files = (  );
 
-    # print STDERR "Scanning: $directory\n";
-    opendir(DIR, $directory) or die "Cannot open directory $directory!\n";
-    @files = grep (!/^\.\.?$/, readdir(DIR));
-    closedir(DIR);
+    opendir(my $dh, $directory) or die "Cannot open directory $directory: $!";
+    @files = grep (!/^\.\.?$/, readdir($dh));
+    closedir($dh);
 
     foreach my $file (@files) {
         if (-f "$directory/$file") {
@@ -64,17 +63,18 @@ sub listRecursively($directory) {
 sub cleanText($textFile) {
 
     # open(INPUTFILE, $textFile) || die("Could not open file $textFile for reading.");
+    my $input;
     if ($readUnicode == 1) {
-        open(INPUTFILE, '<:encoding(UTF-8)', $textFile) || die("Could not open UTF-8 file $textFile for reading");
+        open $input, '<:encoding(UTF-8)', $textFile or die "Could not open UTF-8 file $textFile for reading: $!";
         $verbose and print STDERR "Reading UTF-8 text file: $textFile\n";
     } else {
-        open(INPUTFILE, '<:encoding(cp1252)', $textFile) || die("Could not open file $textFile for reading");
+        open $input, '<:encoding(cp1252)', $textFile or die "Could not open file $textFile for reading: $!";
         $verbose and print STDERR "Reading text file: $textFile\n";
     }
-    open(OUTPUTFILE, "> $textFile.tmp") || die("Could not open $textFile.tmp for writing.");
-    binmode(OUTPUTFILE, ":utf8");
+    open my $output, '>', "$textFile.tmp" or die "Could not open $textFile.tmp for writing: $!";
+    binmode($output, ":encoding(utf8)");
 
-    while (<INPUTFILE>) {
+    while (<$input>) {
         my $line = $_;
 
         # Normalize spaces (including non-breaking spaces):
@@ -111,11 +111,10 @@ sub cleanText($textFile) {
         $line =~ s/[\x{2E17}\x{2E40}]/-/g;                  # German double hyphen
         $line =~ s/[\x{2014}]/--/g;                         # em-dash
 
-
-        print OUTPUTFILE $line . "\n";
+        print $output $line . "\n";
     }
-    close(INPUTFILE);
-    close(OUTPUTFILE);
-    move($textFile, "$textFile.bak") || die "Copy failed: $!";
-    move("$textFile.tmp", $textFile) || die "Copy failed: $!";
+    close $input;
+    close $output;
+    move($textFile, "$textFile.bak") or die "Copy failed: $!";
+    move("$textFile.tmp", $textFile) or die "Copy failed: $!";
 }

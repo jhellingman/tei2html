@@ -44,7 +44,8 @@ my $catalog   = $home . "/dtd/CATALOG";                                     # lo
 
 my $java      = "java $javaOptions";
 my $prince    = $princeHome . "/Engine/bin/prince" . $dotExe;               # see https://www.princexml.com/
-my $saxon     = "$java -jar " . $saxonHome . "/saxon9he.jar ";              # see http://saxon.sourceforge.net/
+# my $saxon     = "$java -jar " . $saxonHome . "/saxon9he.jar ";              # see http://saxon.sourceforge.net/
+my $saxon     = 'saxon';
 my $epubcheck = "$java -jar " . $toolsdir . "/lib/epubcheck-4.0.2.jar ";    # see https://github.com/IDPF/epubcheck
 my $schxslt   = "$java -jar " . $toolsdir . "/lib/schxslt-cli.jar";         # Schematron processor, see https://github.com/schxslt/schxslt
 
@@ -54,8 +55,8 @@ my $namespaceXslt = $home . "/schematron/tei-namespace.xsl";                # XS
 
 my $jeebies   = "jeebies";                                                  # see http://gutcheck.sourceforge.net/
 my $gutcheck  = "gutcheck";
-my $nsgmls    = "nsgmls";                                                   # see http://www.jclark.com/sp/ or http://openjade.sourceforge.net/doc/index.htm
-my $sx        = "sx";                                                       # in the latter case, use onsgmls and osx instead of nsgmls and sx.
+my $nsgmls    = "onsgmls";                                                  # see http://www.jclark.com/sp/ or http://openjade.sourceforge.net/doc/index.htm
+my $sx        = "osx";                                                      # in the latter case, use onsgmls and osx instead of nsgmls and sx.
 my $mariadb   = $mariaDBHome . "/bin/mariadb" . $dotExe;                    # on Windows: C:\Program Files\MariaDB 10.10
 my $zopflipng = "zopflipng" . $dotExe;
 
@@ -269,9 +270,9 @@ sub processFiles {
     if ($inputFile eq '') {
         my ($directory) = '.';
         my @files = ();
-        opendir(DIRECTORY, $directory) or fatal("Cannot open directory $directory!");
-        @files = readdir(DIRECTORY);
-        closedir(DIRECTORY);
+        opendir(my $dh, $directory) or die "Cannot open directory $directory: $!";
+        @files = grep (!/^\.\.?$/, readdir($dh));
+        closedir($dh);
 
         foreach my $file (@files) {
             if ($file =~ /^([A-Za-z0-9-]*?)(-([0-9]+\.[0-9]+))?\.tei$/) {

@@ -4,8 +4,8 @@
 # Convert various types of archives to 7zip archives.
 #
 
-use strict;
-use warnings;
+use v5.36;
+
 use File::Basename;
 use File::Temp;
 use File::stat;
@@ -26,7 +26,7 @@ my $logFile = "to7zip.log";
 main();
 
 
-sub main {
+sub main() {
     ## initial call ... $ARGV[0] is the first command line argument
     list_recursively($ARGV[0]);
 
@@ -43,21 +43,13 @@ sub main {
     }
 }
 
-sub list_recursively($);
 
-sub list_recursively($) {
-    my ($directory) = @_;
+sub list_recursively($directory) {
     my @files = (  );
 
-    unless (opendir(DIRECTORY, $directory)) {
-        logError("Cannot open directory $directory!");
-        exit;
-    }
-
-    # Read the directory, ignoring special entries "." and ".."
-    @files = grep (!/^\.\.?$/, readdir(DIRECTORY));
-
-    closedir(DIRECTORY);
+    opendir(my $dh, $directory) or die "Cannot open directory $directory: $!";
+    @files = grep (!/^\.\.?$/, readdir($dh));
+    closedir($dh);
 
     foreach my $file (@files) {
         if (-f "$directory/$file") {
@@ -69,8 +61,7 @@ sub list_recursively($) {
 }
 
 
-sub handle_file($) {
-    my ($file) = @_;
+sub handle_file($file) {
 
     if ($file =~ m/^(.*)\.(zip|rar|tar|tar\.gz)$/) {
         my $path = $1;
@@ -131,7 +122,7 @@ sub handle_file($) {
                 # method for text (and html) files.
 
                 # print "Creating output archive: $path.7z\n";
-                my $returnCode = system ("$sevenZip a -mx9 -r \"$outputArchive\" $packDir/* 1>>$logFile");
+                $returnCode = system ("$sevenZip a -mx9 -r \"$outputArchive\" $packDir/* 1>>$logFile");
                 if ($returnCode != 0) {
                     logError("7z returned $returnCode while creating $outputArchive.");
                 }
@@ -151,19 +142,16 @@ sub handle_file($) {
     }
 }
 
-sub logError($) {
-    my $logMessage = shift;
+sub logError($logMessage) {
     $errorCount++;
     print STDERR "ERROR: $logMessage\n";
 }
 
-sub logMessage($) {
-    my $logMessage = shift;
+sub logMessage($logMessage) {
     print "$logMessage\n";
 }
 
-sub formatBytes($) {
-    my $num = shift;
+sub formatBytes($num) {
     my $kb = 1024;
     my $mb = (1024 * 1024);
     my $gb = (1024 * 1024 * 1024);

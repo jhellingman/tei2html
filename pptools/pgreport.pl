@@ -1,8 +1,5 @@
 #!/usr/bin/perl -w
-
-#
 # Report on a directory of .TEI files (old-fashioned SGML format)
-#
 
 use v5.36;
 
@@ -17,7 +14,7 @@ use Getopt::Long;
 use XML::XPath;
 use Digest::SHA qw(sha256_hex);
 
-binmode(STDOUT, ":utf8");
+binmode(STDOUT, ":encoding(utf8)");
 use open ':utf8';
 
 my $force = 0;          # regenerate XML files.
@@ -129,40 +126,41 @@ sub getRepo($repo) {
 
 EOF
 
+# Global file-handles
+my $reportFile = 'pgreport.txt';
+my $xmlFile = 'pgreport.xml';
+my $gitFile = 'getRepos.pl';
 
+open my $reportFileHandle, '>', $reportFile or die "Could not open $reportFile: $!";
+open my $xmlFileHandle, '>', $xmlFile or die "Could not open $xmlFile: $!";
+open my $gitFileHandle, '>', $gitFile or die "Could not open $gitFile: $!";
 
 main();
 
 
 sub main() {
-    my $reportFile = 'pgreport.txt';
-    my $xmlFile = 'pgreport.xml';
-    my $gitFile = 'getRepos.pl';
-
-    open(REPORTFILE, "> $reportFile") || die("Could not open $reportFile");
-    open(XMLFILE, "> $xmlFile") || die("Could not open $xmlFile");
-    open(GITFILE, "> $gitFile") || die("Could not open $gitFile");
-    print GITFILE $preGetRepoCode;
+    
+    print $gitFileHandle $preGetRepoCode;
 
     my $directory = $ARGV[0];
     if (! defined $directory) {
         $directory = '.';
     }
 
-    print XMLFILE "<?xml version=\"1.0\"?>\n";
-    print XMLFILE "<?xml-stylesheet type=\"text/xsl\" href=\"pgreport.xsl\"?>\n";
-    print XMLFILE "<pgreport>\n";
+    print $xmlFileHandle "<?xml version=\"1.0\"?>\n";
+    print $xmlFileHandle "<?xml-stylesheet type=\"text/xsl\" href=\"pgreport.xsl\"?>\n";
+    print $xmlFileHandle "<pgreport>\n";
 
     listRecursively($directory);
 
-    print XMLFILE "</pgreport>\n";
-    close XMLFILE;
+    print $xmlFileHandle "</pgreport>\n";
+    close $xmlFileHandle;
 
-    logTotals();
+    logTotals($reportFileHandle);
 
-    close REPORTFILE;
-    print GITFILE $postGetRepoCode;
-    close GITFILE;
+    close $reportFileHandle;
+    print $gitFileHandle $postGetRepoCode;
+    close $gitFileHandle;
 }
 
 
@@ -183,15 +181,9 @@ sub logTotals() {
 sub listRecursively($directory) {
     my @files = (  );
 
-    unless (opendir(DIRECTORY, $directory)) {
-        logError("Cannot open directory $directory!");
-        exit;
-    }
-
-    # Read the directory, ignoring special entries "." and ".."
-    @files = grep (!/^\.\.?$/, readdir(DIRECTORY));
-
-    closedir(DIRECTORY);
+    opendir(my $dh, $directory) or die "Cannot open directory $directory: $!";
+    @files = grep (!/^\.\.?$/, readdir($dh));
+    closedir($dh);
 
     foreach my $file (@files) {
         my $path = $directory . '/' . $file;
@@ -230,37 +222,37 @@ sub handleTeiFile($fullName) {
         return;
     }
 
-    print STDERR "---------------------\n";
-    print STDERR "$fullName\n";
+    say STDERR "---------------------";
+    say STDERR "$fullName";
 
-    print XMLFILE "  <book>\n";
+    print $xmlFileHandle "  <book>\n";
 
     logMessage("---------------------");
     logMessage("File:       $fileName$suffix");
-    print XMLFILE "    <file>\n";
-    print XMLFILE "      <name>$fileName$suffix</name>\n";
-    print XMLFILE "      <baseName>$baseName</baseName>\n";
+    print $xmlFileHandle "    <file>\n";
+    print $xmlFileHandle "      <name>$fileName$suffix</name>\n";
+    print $xmlFileHandle "      <baseName>$baseName</baseName>\n";
     if (defined ($version)) {
         logMessage("Version:    $version");
-        print XMLFILE "      <version>$version</version>\n";
+        print $xmlFileHandle "      <version>$version</version>\n";
     }
     logMessage("File Size:  " . formatBytes($fileSize));
-    print XMLFILE "      <size>$fileSize</size>\n";
+    print $xmlFileHandle "      <size>$fileSize</size>\n";
     logMessage("SHA256:     " . $digest);
-    print XMLFILE "      <digest>$digest</digest>\n";
+    print $xmlFileHandle "      <digest>$digest</digest>\n";
     logMessage("Date:       $fileDate");
-    print XMLFILE "      <date>$fileDate</date>\n";
+    print $xmlFileHandle "      <date>$fileDate</date>\n";
     logMessage("Path:       $filePath");
-    print XMLFILE "      <dateTime>$fileDateTime</dateTime>\n";
-    print XMLFILE "      <path>$filePath</path>\n";
+    print $xmlFileHandle "      <dateTime>$fileDateTime</dateTime>\n";
+    print $xmlFileHandle "      <path>$filePath</path>\n";
 
     if (-e $filePath . 'Processed/' . $baseName . '-utf8.txt') {
-        print XMLFILE "      <encoding>UTF8</encoding>\n";
+        print $xmlFileHandle "      <encoding>UTF8</encoding>\n";
     } else {
-        print XMLFILE "      <encoding>Latin-1</encoding>\n";
+        print $xmlFileHandle "      <encoding>Latin-1</encoding>\n";
     }
 
-    print XMLFILE "    </file>\n";
+    print $xmlFileHandle "    </file>\n";
 
     $totalFiles++;
     $totalBytes += $fileSize;
@@ -343,38 +335,38 @@ sub handleTeiFile($fullName) {
                 if (defined $titleNfc) {
                     $nfcAttr = ' nfc="' . escapeXml($titleNfc) . '"';
                 }
-                print XMLFILE "    <title$nfcAttr>" . escapeXml($title) . "</title>\n";
+                print $xmlFileHandle "    <title$nfcAttr>" . escapeXml($title) . "</title>\n";
 
                 for my $author ($authors->get_nodelist()) {
                     logMessage("Author:     " . $author->string_value());
                     my $keyAttr = getAttr('key', $author);
                     my $refAttr = getAttr('ref', $author);
-                    print XMLFILE "    <author$keyAttr$refAttr>" . escapeXml($author->string_value()) . "</author>\n";
+                    print $xmlFileHandle "    <author$keyAttr$refAttr>" . escapeXml($author->string_value()) . "</author>\n";
                 }
                 for my $editor ($editors->get_nodelist()) {
                     logMessage("Editor:     " . $editor->string_value());
                     my $keyAttr = getAttr('key', $editor);
                     my $refAttr = getAttr('ref', $editor);
-                    print XMLFILE "    <editor$keyAttr$refAttr>" . escapeXml($editor->string_value()) . "</editor>\n";
+                    print $xmlFileHandle "    <editor$keyAttr$refAttr>" . escapeXml($editor->string_value()) . "</editor>\n";
                 }
                 for my $respName ($respNames->get_nodelist()) {
                     logMessage("Contributor:     " . $respName->string_value());
                     my $keyAttr = getAttr('key', $respName);
                     my $refAttr = getAttr('ref', $respName);
-                    print XMLFILE "    <contributor$keyAttr$refAttr>" . escapeXml($respName->string_value()) . "</contributor>\n";
+                    print $xmlFileHandle "    <contributor$keyAttr$refAttr>" . escapeXml($respName->string_value()) . "</contributor>\n";
                 }
 
                 logMessage("Orig. Date: $originalDate");
-                print XMLFILE "    <date>$originalDate</date>\n";
+                print $xmlFileHandle "    <date>$originalDate</date>\n";
                 logMessage("Pages:      $pageCount");
-                print XMLFILE "    <pageCount>$pageCount</pageCount>\n";
+                print $xmlFileHandle "    <pageCount>$pageCount</pageCount>\n";
                 logMessage("Language:   $language");
-                print XMLFILE "    <language>$language</language>\n";
+                print $xmlFileHandle "    <language>$language</language>\n";
                 logMessage("ePub ID:    $epubId");
-                print XMLFILE "    <epubid>$epubId</epubid>\n";
+                print $xmlFileHandle "    <epubid>$epubId</epubid>\n";
                 logMessage("PG Number:  $pgNum");
-                print XMLFILE "    <pgnumber>$pgNum</pgnumber>\n";
-                print XMLFILE "    <pgsource>$pgSrc</pgsource>\n";
+                print $xmlFileHandle "    <pgnumber>$pgNum</pgnumber>\n";
+                print $xmlFileHandle "    <pgsource>$pgSrc</pgsource>\n";
 
 
                 logMessage("Counts");
@@ -460,7 +452,7 @@ sub handleTeiFile($fullName) {
 
                 my $repo = $pgSrc->string_value();
                 if (isValid($repo)) {
-                    print GITFILE "getRepo('$pgSrc');\n";
+                    print $gitFileHandle "getRepo('$pgSrc');\n";
 
                     # Check: is git repo up-to-date? (TODO: fails for multi-volume repos)
                     my $localFile = "$fileName$suffix";
@@ -471,21 +463,21 @@ sub handleTeiFile($fullName) {
                         print "WARNING: Size locally: " . (-s $fullName) . " bytes\n";
                     }
                 }
-                print XMLFILE "    <pgphnumber>$pgphNum</pgphnumber>\n";
+                print $xmlFileHandle "    <pgphnumber>$pgphNum</pgphnumber>\n";
                 if (isValid($projectId->string_value())) {
-                    print XMLFILE "    <projectId>$projectId</projectId>\n";
+                    print $xmlFileHandle "    <projectId>$projectId</projectId>\n";
                 }
                 logMessage("Clearance:  $pgClearance");
-                print XMLFILE "    <clearance>" . escapeXml($pgClearance) . "</clearance>\n";
+                print $xmlFileHandle "    <clearance>" . escapeXml($pgClearance) . "</clearance>\n";
                 logMessage("Posted:     $postedDate");
-                print XMLFILE "    <postedDate>$postedDate</postedDate>\n";
+                print $xmlFileHandle "    <postedDate>$postedDate</postedDate>\n";
 
                 if (isValid($description->string_value())) {
-                    print XMLFILE "    <description>" . escapeXml($description) . "</description>\n";
+                    print $xmlFileHandle "    <description>" . escapeXml($description) . "</description>\n";
                 }
                 for my $keyword ($keywords->get_nodelist()) {
                     if (isValid($keyword->string_value())) {
-                        print XMLFILE "    <keyword>" . escapeXml($keyword->string_value()) . "</keyword>\n";
+                        print $xmlFileHandle "    <keyword>" . escapeXml($keyword->string_value()) . "</keyword>\n";
                     }
                 }
 
@@ -497,7 +489,7 @@ sub handleTeiFile($fullName) {
                         $coverImageFile = $1;
                     }
                     logMessage("Cover:      $coverImageFile");
-                    print XMLFILE "    <cover>$coverImageFile</cover>\n";
+                    print $xmlFileHandle "    <cover>$coverImageFile</cover>\n";
                 }
 
                 # Find out whether we have a title-page image:
@@ -508,7 +500,7 @@ sub handleTeiFile($fullName) {
                         $titlePageImageFile = $1;
                     }
                     logMessage("Title Page: $titlePageImageFile");
-                    print XMLFILE "    <titlePage>$titlePageImageFile</titlePage>\n";
+                    print $xmlFileHandle "    <titlePage>$titlePageImageFile</titlePage>\n";
                 }
 
                 $xpath->cleanup();
@@ -528,17 +520,17 @@ sub handleTeiFile($fullName) {
 
                 my $imageCount = $xpath->find('count(//image)');
                 logMessage("Images:     $imageCount");
-                print XMLFILE "    <imageCount>$imageCount</imageCount>\n";
+                print $xmlFileHandle "    <imageCount>$imageCount</imageCount>\n";
 
                 my $coverWidth = $xpath->find('//image[@path="' . $coverImageFile . '"]/@width');
                 my $coverHeight = $xpath->find('//image[@path="' . $coverImageFile . '"]/@height');
                 logMessage("Cover size: $coverWidth by $coverHeight");
-                print XMLFILE "    <coverSize><width>$coverWidth</width><height>$coverHeight</height></coverSize>\n";
+                print $xmlFileHandle "    <coverSize><width>$coverWidth</width><height>$coverHeight</height></coverSize>\n";
 
                 my $titlePageWidth = $xpath->find('//image[@path="' . $titlePageImageFile . '"]/@width');
                 my $titlePageHeight = $xpath->find('//image[@path="' . $titlePageImageFile . '"]/@height');
                 logMessage("Title page size: $titlePageWidth by $titlePageHeight");
-                print XMLFILE "    <titlePageSize><width>$titlePageWidth</width><height>$titlePageHeight</height></titlePageSize>\n";
+                print $xmlFileHandle "    <titlePageSize><width>$titlePageWidth</width><height>$titlePageHeight</height></titlePageSize>\n";
 
                 $xpath->cleanup();
 
@@ -560,7 +552,7 @@ sub handleTeiFile($fullName) {
                 $xpath->set_namespace('dc' => 'http://purl.org/dc/elements/1.1/');
 
                 my $rights = $xpath->find('/rdf:RDF/rdf:Description/dc:rights');
-                print XMLFILE "    <rights>" . escapeXml($rights->string_value()) . "</rights>\n";
+                print $xmlFileHandle "    <rights>" . escapeXml($rights->string_value()) . "</rights>\n";
 
                 $xpath->cleanup();
 
@@ -571,22 +563,20 @@ sub handleTeiFile($fullName) {
             };
         }
 
-
         # Words file
-        my $wordsFileName = $filePath . "$baseName-words.html";
         if (-e $wordsFileName) {
-            if (open(WORDSFILE, "<:encoding(iso-8859-1)", $wordsFileName)) {
-                while (<WORDSFILE>) {
+            if (open my $wordsFileHandle, '<:encoding(iso-8859-1)', $wordsFileName) {
+                while (<$wordsFileHandle>) {
                     my $line =  $_;
                     if ($line =~ /<td id=textWordCount>([0-9]+)/) {
                         my $wordCount = $1;
                         $totalWords += $wordCount;
                         logMessage("Words:      $wordCount");
-                        print XMLFILE "    <wordCount>$wordCount</wordCount>\n";
+                        print $xmlFileHandle "    <wordCount>$wordCount</wordCount>\n";
                         last;
                     }
                 }
-                close WORDSFILE;
+                close $wordsFileHandle;
             }
         }
 
@@ -605,9 +595,9 @@ sub handleTeiFile($fullName) {
                 logMessage("Warnings:   $warningCount");
                 logMessage("Trivials:   $trivialCount");
 
-                print XMLFILE "    <errors>" . $errorCount . "</errors>\n";
-                print XMLFILE "    <warnings>" . $warningCount . "</warnings>\n";
-                print XMLFILE "    <trivials>" . $trivialCount . "</trivials>\n";
+                print $xmlFileHandle "    <errors>" . $errorCount . "</errors>\n";
+                print $xmlFileHandle "    <warnings>" . $warningCount . "</warnings>\n";
+                print $xmlFileHandle "    <trivials>" . $trivialCount . "</trivials>\n";
 
                 $xpath->cleanup();
 
@@ -619,7 +609,7 @@ sub handleTeiFile($fullName) {
         }
     }
 
-    print XMLFILE "  </book>\n";
+    print $xmlFileHandle "  </book>\n";
 }
 
 
@@ -683,7 +673,7 @@ sub logError($message) {
 
 
 sub logMessage($message) {
-    print REPORTFILE "$message\n";
+    say $reportFileHandle $message;
 }
 
 
