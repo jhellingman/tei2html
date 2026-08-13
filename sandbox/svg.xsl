@@ -33,7 +33,26 @@
         <xsl:variable name="height" select="40 + 2 * $v"/>
 
         <svg viewBox="0 0 25 {$height}" preserveAspectRatio="xMidYMid meet" width="10px" height="{$height div 2.5}px">
-            <path d="M2 2h4q9 0 9 9v{$v}q0 8 8 8v2q-8 0 -8 8v{$v}q0 9 -9 9h-4 v-2q8 0 8 -8v-{$v}q0 -6 6 -8 -6 -2 -6 -8v-{$v}q0 -8 -8 -8z" style="fill: black;"/>
+            <path d="
+                M 2 2
+                h 4
+                q 9 0 9 9
+                v {$v}
+                q 0 8 8 8
+                v 2
+                q -8 0 -8 8
+                v {$v}
+                q 0 9 -9 9
+                h -4 
+                v -2
+                q 8 0 8 -8
+                v -{$v}
+                q 0 -6 6 -8 
+                q -6 -2 -6 -8
+                v -{$v}
+                q 0 -8 -8 -8
+                z" 
+                style="fill: black;"/>
         </svg>
     </xsl:function>
 
@@ -45,9 +64,88 @@
         <xsl:variable name="height" select="40 + 2 * $v"/>
 
         <svg viewBox="0 0 25 {$height}" preserveAspectRatio="xMidYMid meet" width="10px" height="{$height div 2.5}px">
-            <path d="M24 3h-4q-9 0 -9 9v{$v}q0 8 -8 8v2q8 0 8 8v{$v}q0 9 9 9h4 v-2q-8 0 -8 -8v-{$v}q0 -6 -6 -8 6 -2 6 -8v-{$v}q0 -8 8 -8z" style="fill: black;"/>
+            <path d="
+                M 24 3
+                h -4
+                q -9 0 -9 9
+                v {$v}
+                q 0 8 -8 8
+                v 2
+                q 8 0 8 8
+                v {$v}
+                q 0 9 9 9
+                h 4 
+                v -2
+                q -8 0 -8 -8
+                v -{$v}
+                q 0 -6 -6 -8 
+                q 6 -2 6 -8
+                v -{$v}
+                q 0 -8 8 -8
+                z" 
+                style="fill: black;"/>
         </svg>
     </xsl:function>
+
+
+    <xsl:function name="f:left-brace-parts">
+        <xsl:param name="rows" as="xs:integer"/>
+
+        <xsl:variable name="v" select="25 * ($rows - 1) + 5"/>
+        <xsl:variable name="height" select="40 + 2 * $v"/>
+        
+        <symbol id="left-brace">
+            <svg viewBox="0 0 25 {$height}" preserveAspectRatio="xMidYMid meet" width="10px" height="{$height div 2.5}px">
+                <path d="
+                    M 24 3
+                    h -4
+                    q -9 0 -9 9
+                    v {$v}
+                    q 0 8 -8 8
+                    v 2
+                    q 8 0 8 8
+                    v {$v}
+                    q 0 9 9 9
+                    h 4 
+                    v -2
+                    q -8 0 -8 -8
+                    v -{$v}
+                    q 0 -6 -6 -8 
+                    q 6 -2 6 -8
+                    v -{$v}
+                    q 0 -8 8 -8
+                    z" 
+                    style="fill: red; fill-opacity: 0.4"/>
+            </svg>
+
+            <svg viewBox="0 0 25 {$height}" preserveAspectRatio="xMidYMid meet" width="10px" height="{$height div 2.5}px">
+                <path d="
+                    M 24 3
+                    h -4
+                    q -9 0 -9 9
+                    v 1
+                    h 5
+                    q 0 -8 8 -8
+                    z" 
+                    style="fill: black;"/>
+            </svg>
+
+            <svg viewBox="0 0 25 {$height}" preserveAspectRatio="none" width="10px" height="{$height div 2.5}px">
+                <path d="
+                    M 12 12
+                    v {$v}
+                    h 5
+                    v -{$v}
+                    z" 
+                    style="fill: black;"/>
+            </svg>
+
+        </symbol>
+
+    </xsl:function>
+
+
+
 
 
     <xsl:template match="/">
@@ -56,7 +154,7 @@
                 <h1>Test of braces</h1>
                 <table>
                     <tr>
-                        <td rowspan="2"><xsl:copy-of select="f:left-brace(2)"/></td>
+                        <td rowspan="2"><xsl:copy-of select="f:left-brace-parts(2)"/></td>
                         <td>First Line</td>
                         <td rowspan="2"><xsl:copy-of select="f:right-brace(2)"/></td>
                     </tr>
