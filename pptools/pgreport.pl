@@ -126,6 +126,17 @@ sub getRepo($repo) {
 
 EOF
 
+# Tools
+my $home        = $ENV{'TEI2HTML_HOME'};
+my $saxonHome   = $ENV{'SAXON_HOME'};
+
+my $isWindows   = ($^O eq 'MSWin32');
+
+my $javaOptions = '-Xms2048m -Xmx4096m -Xss1024k ';
+my $java        = "java $javaOptions";
+my $saxon       = $isWindows ? "$java -jar " . $saxonHome . '/saxon9he.jar ' : 'saxon ';          
+
+
 # Global file-handles
 my $reportFile = 'pgreport.txt';
 my $xmlFile = 'pgreport.xml';
@@ -156,11 +167,13 @@ sub main() {
     print $xmlFileHandle "</pgreport>\n";
     close $xmlFileHandle;
 
-    logTotals($reportFileHandle);
+    logTotals();
 
     close $reportFileHandle;
     print $gitFileHandle $postGetRepoCode;
     close $gitFileHandle;
+
+    system ("$saxon pgreport.xml \"$home/pptools/pgreport.xsl\" > pgreport.html");
 }
 
 
@@ -457,10 +470,12 @@ sub handleTeiFile($fullName) {
                     # Check: is git repo up-to-date? (TODO: fails for multi-volume repos)
                     my $localFile = "$fileName$suffix";
                     my $gitRepoFile = $gitRepoLocation . $pgSrc . "/" . $localFile;
-                    if (defined ($gitRepoFile) && compare($gitRepoFile, $fullName) != 0) {
+                    if (defined ($gitRepoFile) && -f $gitRepoFile && compare($gitRepoFile, $fullName) != 0) {
                         print "WARNING: Git repo differs: $localFile <> $gitRepoFile\n";
                         print "WARNING: Size in Git:  " . (-s $gitRepoFile) . " bytes\n";
                         print "WARNING: Size locally: " . (-s $fullName) . " bytes\n";
+                    } else {
+                        print "WARNING: Unable to locate Git repo: $gitRepoLocation$pgSrc\n";
                     }
                 }
                 print $xmlFileHandle "    <pgphnumber>$pgphNum</pgphnumber>\n";
