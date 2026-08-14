@@ -1,7 +1,6 @@
 # poetry.pl -- add <l> tags on new-lines in poetry / drama, based on the presence of <lg> or <sp> tags.
 
-use strict;
-use warnings;
+use v5.36;
 
 my $initialSpaceCount = 0;
 my $initialSpaces = ' ' x $initialSpaceCount;

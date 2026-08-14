@@ -2,14 +2,15 @@
 
 use v5.36;
 
+use Cwd qw(abs_path getcwd);
 use DateTime;
 use File::Copy qw(move copy);
+use File::Copy::Recursive qw(dircopy);
+use File::Path qw(make_path remove_tree);
 use File::stat;
 use File::Temp qw(mktemp tempfile);
-use File::Path qw(make_path remove_tree);
 use FindBin qw($Bin);
 use Getopt::Long qw(:config no_ignore_case);
-use Cwd qw(abs_path getcwd);
 use Math::Round;
 use XML::XPath;
 
@@ -24,6 +25,7 @@ my $princeHome = $ENV{'PRINCE_HOME'};
 my $mariaDBHome = $ENV{'MARIADB_HOME'};
 
 my $isWindows = ($^O eq 'MSWin32');
+my $isLinux = ($^O eq 'linux');
 
 my $dotExe = $isWindows ? '.exe' : '';
 
@@ -44,7 +46,7 @@ my $catalog     = $home . "/dtd/CATALOG";                                     # 
 
 my $javaOptions = '-Xms2048m -Xmx4096m -Xss1024k ';
 my $java        = "java $javaOptions";
-my $saxon       = $isWindows 
+my $saxon       = $isWindows || $isLinux
                   ? "$java -jar " . $saxonHome . '/saxon9he.jar ' 
                   : 'saxon ';                                                 # see http://saxon.sourceforge.net/
 my $epubcheck   = "$java -jar " . $toolsdir . "/lib/epubcheck-4.0.2.jar ";    # see https://github.com/IDPF/epubcheck
@@ -172,55 +174,58 @@ GetOptions(
 my $inputFile = defined $ARGV[0] ? $ARGV[0] : '';
 
 
+my $helpText = <<'END_OF_HELP_TEXT';
+tei2html.pl -- process a TEI file to produce plain text, HTML, and ePub output
+
+Usage: tei2html.pl [-options] <inputfile.tei>
+
+Options:
+
+    5         Convert XML output to P5 format.
+    e         Produce ePub output.
+    f         Force generation of output file, even if it is newer than input.
+    h         Produce HTML output.
+    k         Produce KWIC index.
+    p         Produce PDF output.
+    q         Print this help and exit.
+    r         Produce word-usage report.
+    t         Produce text output.
+    u         Use Unicode output (in the text version).
+    v         Run a number of checks, and produce a report.
+    x         Produce XML output.
+    z         Produce ZIP file for Project Gutenberg submission (IN DEVELOPMENT).
+
+    C=<file>  Use the given file as configuration file (default: tei2html.config).
+    c=<file>  Set the custom CSS stylesheet (default: custom.css).
+    i=<int>   Select the image set in kept in a directory named 'images\@<int>' (default: 0)
+              (0 = not applicable; 1 = nominal 144dpi/max 720px; 2 = nominal 288dpi/max 1440px).
+    l=<int>   Set the log-level (1 = Error; 2 = Warning; 3 = Info (default); 4 = Trace)
+    s=<value> Set the custom option (handed to XSLT processor).
+    w=<int>   Set the page width (default: 72 characters).
+
+    adoc                            Create an AsciiDoc file.
+    clean                           Clean intermediate files normally preserved.
+    debug                           Debug mode.
+    heatmap                         Generate a heatmap version.
+
+    kwiclang=<languages>            Languages to be shown in KWIC, use ISO-639 codes, separated by spaces.
+    kwicword=<words>                Words to be shown in KWIC, separate words by spaces.
+    kwiccase=<yes/no>               Be case-sensitive in KWIC.
+    kwicsort=<preceding/following>  Sort by (reverse) preceding or following context in KWIC.
+    kwicmixup=<string>              Letters that can be mixed-up in KWIC, separate letters by spaces.
+    kwicvariants=<number>           Report only words with at least this many variant spellings.
+    kwicnocommonwords               Ignore the roughly 1000 most common words.
+
+    notranscription                 Don't use transcription schemes.
+    notranscriptionpopups           Don't use pop-ups to show Latin transcription of Greek and Cyrillic.
+    pagewidth=<int>                 Set the page width (default: 72 characters).
+    profile                         Profile mode.
+    sql                             Generate metadata and word-lists in SQL format and attempt to store them.
+    trace                           Use XSLT in trace mode.
+END_OF_HELP_TEXT
+
 if ($showHelp == 1) {
-    print "tei2html.pl -- process a TEI file to produce plain text, HTML, and ePub output\n\n";
-
-    print "Usage: tei2html.pl [-options] <inputfile.tei>\n\n";
-
-    print "Options:\n\n";
-
-    print "    5         Convert XML output to P5 format.\n";
-    print "    e         Produce ePub output.\n";
-    print "    f         Force generation of output file, even if it is newer than input.\n";
-    print "    h         Produce HTML output.\n";
-    print "    k         Produce KWIC index.\n";
-    print "    p         Produce PDF output.\n";
-    print "    q         Print this help and exit.\n";
-    print "    r         Produce word-usage report.\n";
-    print "    t         Produce text output.\n";
-    print "    u         Use Unicode output (in the text version).\n";
-    print "    v         Run a number of checks, and produce a report.\n";
-    print "    x         Produce XML output.\n";
-    print "    z         Produce ZIP file for Project Gutenberg submission (IN DEVELOPMENT).\n\n";
-
-    print "    C=<file>  Use the given file as configuration file (default: tei2html.config).\n";
-    print "    c=<file>  Set the custom CSS stylesheet (default: custom.css).\n";
-    print "    i=<int>   Select the image set in kept in a directory named 'images\@<int>' (default: 0)\n";
-    print "              (0 = not applicable; 1 = nominal 144dpi/max 720px; 2 = nominal 288dpi/max 1440px).\n";
-    print "    l=<int>   Set the log-level (1 = Error; 2 = Warning; 3 = Info (default); 4 = Trace)\n";
-    print "    s=<value> Set the custom option (handed to XSLT processor).\n";
-    print "    w=<int>   Set the page width (default: 72 characters).\n\n";
-
-    print "    adoc                            Create an AsciiDoc file.\n";
-    print "    clean                           Clean intermediate files normally preserved.\n";
-    print "    debug                           Debug mode.\n";
-    print "    heatmap                         Generate a heatmap version.\n\n";
-
-    print "    kwiclang=<languages>            Languages to be shown in KWIC, use ISO-639 codes, separated by spaces.\n";
-    print "    kwicword=<words>                Words to be shown in KWIC, separate words by spaces.\n";
-    print "    kwiccase=<yes/no>               Be case-sensitive in KWIC.\n";
-    print "    kwicsort=<preceding/following>  Sort by (reverse) preceding or following context in KWIC.\n";
-    print "    kwicmixup=<string>              Letters that can be mixed-up in KWIC, separate letters by spaces.\n";
-    print "    kwicvariants=<number>           Report only words with at least this many variant spellings.\n";
-    print "    kwicnocommonwords               Ignore the roughly 1000 most common words.\n\n";
-
-    print "    notranscription                 Don't use transcription schemes.\n";
-    print "    notranscriptionpopups           Don't use pop-ups to show Latin transcription of Greek and Cyrillic.\n";
-    print "    pagewidth=<int>                 Set the page width (default: 72 characters).\n";
-    print "    profile                         Profile mode.\n";
-    print "    sql                             Generate metadata and wordlists in SQL format and attempt to store them.\n";
-    print "    trace                           Use XSLT in trace mode.\n";
-
+    print $helpText;
     exit(0);
 }
 
@@ -653,10 +658,10 @@ sub makeQrCodeAtSize($number, $imageDir, $scale) {
 
     if (not -e $file) {
         # Generate a QR code with a transparent background.
-        if ($^O eq 'MSWin32') {
+        if ($isWindows) {
             system("qrcode -l '#0000' -s $scale -o $file https://www.gutenberg.org/ebooks/$number");
         } else {
-            system("qrencode -s $scale -m 1 -o $file --background=ffffff00 --foreground=000000 https://www.gutenberg.org/ebooks/$number")
+            system('qrencode', '-s', $scale, '-m', '1', '-o', $file, '--background=ffffff00', '--foreground=000000', "https://www.gutenberg.org/ebooks/$number");
         }
 
         # Optimize the generated QR code.
@@ -1250,7 +1255,7 @@ sub prepareImages {
         return;
     }
 
-    system ('cp -r -u ' . $source . ' ' . $destination);
+    dircopy($source, $destination) or die "dircopy failed: $!";
 }
 
 
@@ -1266,9 +1271,9 @@ sub copyImages($destination) {
     }
 
     if (-d 'images') {
-        system ('cp -r -u images ' . $destination);
+        dircopy('image', $destination) or die "dircopy failed: $!";
     } elsif (-d 'Processed/images') {
-        system ('cp -r -u Processed/images ' . $destination);
+        dircopy('Processed/images', $destination) or die "dircopy failed: $!";
     }
 }
 
@@ -1277,11 +1282,10 @@ sub copyImages($destination) {
 # copyFormulas -- copy formula svg-files for use in ePub.
 #
 sub copyFormulas($destination) {
-
     if (-d 'formulas') {
-        system ('cp -r -u formulas ' . $destination);
+        dircopy('formulas', $destination) or die "dircopy failed: $!";
     } elsif (-d 'Processed/formulas') {
-        system ('cp -r -u Processed/formulas ' . $destination);
+        dircopy('Processed/formulas', $destination) or die "dircopy failed: $!";
     }
 }
 
@@ -1289,20 +1293,18 @@ sub copyFormulas($destination) {
 # copyAudio -- copy audio files for use in ePub.
 #
 sub copyAudio($destination) {
-
     if (-d 'audio') {
-        system ('cp -r -u audio ' . $destination);
+        dircopy('audio', $destination) or die "dircopy failed: $!";
     } elsif (-d 'Processed/audio') {
-        system ('cp -r -u Processed/audio ' . $destination);
+        dircopy('Processed/audio', $destination) or die "dircopy failed: $!";
     }
 }
 
 sub copyMusic($destination) {
-
     if (-d 'music') {
-        system ('cp -r -u music ' . $destination);
+        dircopy('music', $destination) or die "dircopy failed: $!";
     } elsif (-d 'Processed/music') {
-        system ('cp -r -u Processed/music ' . $destination);
+        dircopy('Processed/music', $destination) or die "dircopy failed: $!";
     }
 }
 
@@ -1311,11 +1313,10 @@ sub copyMusic($destination) {
 # copyFonts -- copy fonts files for use in ePub.
 #
 sub copyFonts($destination) {
-
     if (-d 'fonts') {
-        system ('cp -r -u fonts ' . $destination);
+        dircopy('fonts', $destination) or die "dircopy failed: $!";
     } elsif (-d 'Processed/fonts') {
-        system ('cp -r -u Processed/fonts ' . $destination);
+        dircopy('Processed/fonts', $destination) or die "dircopy failed: $!";
     }
 }
 
@@ -1354,9 +1355,9 @@ sub checkSgml($inFile, $sgmlFile) {
     my $sgmlErrorFile = temporaryFile('checkSgml', "err");
 
     trace("Check SGML...");
-    my $nsgmlresult = system ("$nsgmls -c \"$catalog\" -wall -E100000 -g -f $sgmlErrorFile $inFile > $nsgmlFile");
-    if ($nsgmlresult != 0) {
-        warning("NSGML found validation errors in $sgmlFile.");
+    my $nsgmlResult = system ("$nsgmls -c \"$catalog\" -wall -E100000 -g -f $sgmlErrorFile $inFile > $nsgmlFile");
+    if ($nsgmlResult != 0) {
+        warning("$nsgmls found validation errors in $sgmlFile.");
     }
     removeFile($nsgmlFile);
     system ("perl $toolsdir/filter-nsgmls-errors.pl $sgmlErrorFile > $sgmlFile.err");
@@ -1366,7 +1367,7 @@ sub checkSgml($inFile, $sgmlFile) {
 
 #
 # convertSgmlToXml -- pipeline to convert TEI SGML to XML. This first hides any entities
-# present using an ad-hoc notation, then calls sx to do the actual convertion, then
+# present using an ad-hoc notation, then calls sx to do the actual conversion, then
 # applies a XSLT stylesheet to correct the case of elements, and finally restores
 # entities and converts the resulting file to Unicode.
 #

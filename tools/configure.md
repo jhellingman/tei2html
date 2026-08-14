@@ -23,6 +23,8 @@ cpanm Math::Round
 cpanm XML::XPath
 cpanm HTML::Entities
 cpanm Roman
+cpanm Image::Size
+cpanm File::chdir
 ```
 
 Find your local Perl library:
@@ -60,7 +62,7 @@ cp patc ../../../pptools/
 
 # Mostly optional utilities
 
-Zopflipng, either:
+For compressing .png images, install `Zopflipng`, either:
 
 ```bash
 brew install zopfli
@@ -74,8 +76,16 @@ cd zopfli
 make zopflipng
 ```
 
-qrencode
+For creating QR codes, use `qrencode`
 
 ```bash
 brew install qrencode
 ```
+
+For handling embedded mathematical formulas in TeX format, use `MathJax`, this can be installed using pnpm:
+
+```bash
+pnpm add -g mathjax
+pnpm add -g mathjax-node-cli
+```
+

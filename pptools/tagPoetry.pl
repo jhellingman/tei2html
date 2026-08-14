@@ -1,7 +1,6 @@
 # poetry.pl
 
-use strict;
-use warnings;
+use v5.36;
 
 my $poetryMode = 0;
 

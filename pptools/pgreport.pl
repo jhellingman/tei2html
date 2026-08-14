@@ -42,23 +42,28 @@ GetOptions(
     'sql' => \$makeSql,
     'help' => \$showHelp);
 
-if ($showHelp == 1) {
-    print "pgreport.pl -- create a report of all TEI files in a directory-structure.\n\n";
-    print "Usage: pgreport.pl [-fmvhdq] <directory>\n\n";
-    print "Options:\n";
-    print "    f         force: regenerate XML files used to extract information from.\n";
-    print "    m         force more: also force regeneration of indicated file types.\n";
-    print "    v         run checks on TEI files.\n";
-    print "    r         make word-usage report.\n";
-    print "    h         produce derived HTML file for each TEI file.\n";
-    print "    e         produce derived ePub file for each TEI file.\n";
-    print "    d         download related .zip files from Project Gutenberg (based on PGNum id in TEI file).\n";
-    print "    p         only report on posted files (version >= 1.0).\n";
-    print "    q         print this help and exit.\n";
-    print "\n";
-    print "    sql       generate SQL files.\n";
-    print "    help      print this help and exit.\n";
+my $helpText = <<'END_OF_HELP_TEXT';
+pgreport.pl -- create a report of all TEI files in a directory-structure.
 
+Usage: pgreport.pl [-fmvhdq] <directory>
+
+Options:
+    f         force: regenerate XML files used to extract information from.
+    m         force more: also force regeneration of indicated file types.
+    v         run checks on TEI files.
+    r         make word-usage report.
+    h         produce derived HTML file for each TEI file.
+    e         produce derived ePub file for each TEI file.
+    d         download related .zip files from Project Gutenberg (based on PGNum id in TEI file).
+    p         only report on posted files (version >= 1.0).
+    q         print this help and exit.
+
+    sql       generate SQL files.
+    help      print this help and exit.
+END_OF_HELP_TEXT
+
+if ($showHelp == 1) {
+    print $helpText;
     exit(0);
 }
 
@@ -113,13 +118,13 @@ my $postGetRepoCode = <<'EOF';
 
 sub getRepo($repo) {
     if (!-e $repo) {
-        system ("git clone https://github.com/GutenbergSource/$repo.git\n");
+        system ('git', 'clone', "https://github.com/GutenbergSource/$repo.git");
     } elsif (-d $repo) {
         my $cwd = getcwd;
-        chdir ($repo);
-        system ("git clean -f -d -x\n");
-        system ("git reset --hard\n");
-        system ("git pull\n");
+        chdir $repo;
+        system ("git clean -f -d -x");
+        system ("git reset --hard");
+        system ("git pull");
         chdir $cwd;
     }
 }
@@ -292,7 +297,7 @@ sub handleTeiFile($fullName) {
     my $needChecks  = $makeChecks != 0 && isNewer($fullName, $checksFileName);
     my $needEpub    = $makeEpub != 0 && isNewer($fullName, $epubFileName);
 
-    if (!$excluded{$baseName} == 1 && defined($version)) {
+    if ((!$excluded{$baseName}) == 1 && defined($version)) {
         if ($force != 0
                 || $needXml != 0
                 || $needHtml != 0

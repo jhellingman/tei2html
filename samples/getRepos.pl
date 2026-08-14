@@ -1,5 +1,5 @@
 
-use strict;
+use v5.36;
 use Cwd;
 use File::chdir;
 
@@ -402,15 +402,15 @@ getRepo('39010-39027-Zuniga-An-Historical-View-of-the-Philippine-Islands');
 getRepo('39010-39027-Zuniga-An-Historical-View-of-the-Philippine-Islands');
 getRepo('40579-Zwaardecroon-Memoir');
 
-sub getRepo($) {
-    my $repo = shift;
-
+sub getRepo($repo) {
     if (!-e $repo) {
-        system ("git clone https://github.com/GutenbergSource/$repo.git\n");
+        system ('git', 'clone', "https://github.com/GutenbergSource/$repo.git");
     } elsif (-d $repo) {
         my $cwd = getcwd;
-        chdir ($repo);
-        system ("git pull\n");
+        chdir $repo;
+        system ("git clean -f -d -x");
+        system ("git reset --hard");
+        system ("git pull");
         chdir $cwd;
     }
 }

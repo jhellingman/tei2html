@@ -1,7 +1,7 @@
 # tagMeasures.pl -- Tag measures appearing in documents.
 
-use strict;
-use warnings;
+use v5.36;
+
 use Getopt::Long;
 
 my $lang             = "en";
@@ -104,7 +104,7 @@ my %units = (
 main();
 
 
-sub test {
+sub test() {
     print "TESTING...\n\n";
     print tagMeasures("De lengte is 400 voet.\n");
     print tagMeasures("De rivier is 1724 mijlen lang en bij de monding 1600 voet breed.\n");
@@ -119,11 +119,11 @@ sub test {
 }
 
 
-sub main {
+sub main() {
     my $file = $ARGV[0];
-    open(INPUTFILE, $file) || die("Could not open input file $file");
+    open my $fh, '<', $file or die "Could not open input file $file: $!";
 
-    while (<INPUTFILE>) {
+    while (<$fh>) {
         my $remainder = $_;
         my $result = "";
         while ($remainder =~ /$tagPattern/) {
@@ -148,13 +148,11 @@ sub main {
         $result .= tagFahrenheits($remainder);
         print $result;
     }
-    close INPUTFILE;
+    close $fh;
 }
 
 
-sub tagMeasures($) {
-    my $remainder = shift;
-
+sub tagMeasures($remainder) {
     my $result = "";
     while ($remainder =~ /$measurePattern/) {
         my $before = $`;
@@ -178,10 +176,7 @@ sub tagMeasures($) {
 }
 
 
-sub tagMeasure($$$) {
-    my $number = shift;
-    my $unit = shift;
-    my $showUnit = shift;
+sub tagMeasure($number, $unit, $showUnit) {
 
     my $cleanNumber = cleanNumber($number);
 
@@ -199,9 +194,7 @@ sub tagMeasure($$$) {
 }
 
 
-sub tagFahrenheits($) {
-    my $remainder = shift;
-
+sub tagFahrenheits($remainder) {
     my $result = "";
     while ($remainder =~ /$fahrenheitPattern/) {
         my $before = $`;
@@ -225,10 +218,7 @@ sub tagFahrenheits($) {
 }
 
 
-sub tagFahrenheit($$$) {
-    my $number = shift;
-    my $unit = shift;
-    my $showUnit = shift;
+sub tagFahrenheit($number, $unit, $showUnit) {
 
     my $cleanNumber = cleanNumber($number);
 
@@ -246,9 +236,7 @@ sub tagFahrenheit($$$) {
 }
 
 
-sub cleanNumber($) {
-    my $number = shift;
-
+sub cleanNumber($number) {
     if ($lang eq "en") {
         $number =~ s/[, °]//g;
     } else {
@@ -258,8 +246,7 @@ sub cleanNumber($) {
 }
 
 
-sub round($) {
-    my $number = shift;
+sub round($number) {
     my $accuracy = 3;
 
     my $order = log10($number);
@@ -271,8 +258,7 @@ sub round($) {
 }
 
 
-sub log10($) {
-    my $n = shift;
+sub log10($n) {
     $n = abs($n);
     return log($n)/log(10);
 }
