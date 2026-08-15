@@ -12,7 +12,12 @@ my $wordPattern = "($letter)+(([-']|&apos;)($letter)+)*";
 my $tagPattern = "<[^<]*?>";
 my $transPattern = "<(AR|BO|CY|FA|GR|SA|UR|HE|HI|SY|DV)>.*?<\\/(AR|BO|CY|GR|FA|SA|UR|HE|HI|SY|DV)>";
 my $formulaPattern = "<formula.*?>.*?<\\/formula>";
-my $skipPattern = "(($transPattern)|($formulaPattern)|($tagPattern))";
+my $commentPattern = "<!--.*?-->";
+my $skipPattern = "(($transPattern)|($formulaPattern)|($commentPattern)|($tagPattern))";
+
+my $commentStartPattern = "(<!--)";
+my $commentEndPattern = "(-->)";
+
 
 curlyQuoteText();
 
@@ -21,7 +26,8 @@ sub curlyQuoteText {
         my $remainder = $_;
 
         $remainder = disambiguateSingleQuotesWithTags($remainder);
-
+       
+        # Skip single-line comments, Math-formulas, and encoded non-Latin scripts.
         while ($remainder =~ /$skipPattern/) {
             my $fragment = $`;
             my $skip = $1;
@@ -29,9 +35,36 @@ sub curlyQuoteText {
             print curlyQuoteFragment($fragment);
             print $skip;
         }
+
+        $remainder = skipMultiLineComment($remainder);
+
         print curlyQuoteFragment($remainder);
     }
 }
+
+
+sub skipMultiLineComment($remainder) {
+    if ($remainder =~ /$commentStartPattern/) {
+        my $fragment = $`;
+        my $skip = $1 . $';
+        print curlyQuoteFragment($fragment);
+        print $skip;
+
+        while (<>) {
+            my $commentLine = $_;
+            if ($commentLine =~ /$commentEndPattern/) {
+                my $skip = $` . $1;
+                $remainder = $';
+                print $skip;
+                last;
+            } else {
+                print $commentLine;
+            }
+        }
+    }
+    return $remainder;
+}
+
 
 sub curlyQuoteFragment($fragment) {
 
