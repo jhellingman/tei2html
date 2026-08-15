@@ -2,8 +2,7 @@
 
 package PgdpSupport;
 
-use strict;         
-use warnings;
+use v5.36;
 
 use base 'Exporter';
 
@@ -18,9 +17,7 @@ our @EXPORT = qw(pgdp2sgml handlePgdpAccents);
 #
 # Handle special letters in the coding system as used on PGDP.
 #
-sub pgdp2sgml {
-    my $string = shift;
-    my $useExtensions = shift;
+sub pgdp2sgml($string, $useExtensions) {
 
     # Extensions used for FRANCK
     if ($useExtensions == 1) {
@@ -217,14 +214,12 @@ sub pgdp2sgml {
 }
 
 
-sub handlePgdpAccents() {
-    my $line = shift;
+sub handlePgdpAccents($line) {
     return NFC(handlePgdpWideAccents(handlePgdpNormalAccents($line)));
 }
 
 
-sub handlePgdpWideAccents() {
-    my $line = shift;
+sub handlePgdpWideAccents($line) {
 
     $line = NFD($line);
 
@@ -242,11 +237,7 @@ sub handlePgdpWideAccents() {
 }
 
 
-sub convertWideAccent() {
-    my $above = shift;
-    my $base1 = shift;
-    my $base2 = shift;
-    my $below = shift;
+sub convertWideAccent($above, $base1, $base2, $below) {
 
     if ($base1 eq 'i') {
         $base1 = "\x{131}";
@@ -290,8 +281,7 @@ sub convertWideAccent() {
 }
 
 
-sub handlePgdpNormalAccents() {
-    my $line = shift;
+sub handlePgdpNormalAccents($line) {
 
     $line = NFD($line);
 
@@ -306,10 +296,7 @@ sub handlePgdpNormalAccents() {
 }
 
 
-sub convertAccent() {
-    my $above = shift;
-    my $base = shift;
-    my $below = shift;
+sub convertAccent($above, $base, $below) {
 
     my %aboveAccents = (
         "`"         => "\x{300}",   # acute

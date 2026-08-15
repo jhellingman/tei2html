@@ -2,16 +2,15 @@
 # sortAttributes.pl -- reorder attributes in SGML/XML files
 #
 
-use strict;
-use warnings;
+use v5.36;
 
 my $inputFile = $ARGV[0];
 
-open(INPUTFILE, $inputFile) || die("Could not open $inputFile");
+open my $fh, '<', $inputFile or die "Could not open $inputFile: $!$";
 
 print STDERR "Sorting attributes in $inputFile\n";
 
-while (<INPUTFILE>) {
+while (<$fh>) {
     my $remainder = $_;
     while ($remainder =~ m/<([a-z][a-z0-9._-]*)(.*?)>/i) {
         my $before = $`;
@@ -26,10 +25,10 @@ while (<INPUTFILE>) {
     print $remainder;
 }
 
+close $fh;
 
-sub reorderAttributes {
-    my $attrs = shift;
 
+sub reorderAttributes($attrs) {
     my $idValue = '';
     my $rendValue = '';
     my %attrHash = ();
@@ -81,17 +80,14 @@ sub reorderAttributes {
 }
 
 
-sub trim {
-    my $string = shift;
+sub trim($string) {
     $string =~ s/^\s+//;
     $string =~ s/\s+$//;
     return $string;
 }
 
 
-sub optionalQuotes {
-    my $value = shift;
-
+sub optionalQuotes($value) {
     if ($value =~ /^[a-z0-9._-]+$/i) {
         return $value
     }

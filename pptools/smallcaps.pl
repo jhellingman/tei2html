@@ -1,12 +1,11 @@
 # smallcaps.pl -- tag words in all uppercase with <sc>...</sc>
 
-use strict;
-use warnings;
+use v5.36;
 
 # Handle Arguments
 
 my $infile = $ARGV[0];
-open(INPUTFILE, $infile) || die("Could not open input file $infile");
+open my $fh, '<', $infile or die "Could not open $infile: $!$";
 
 # Set variables
 
@@ -24,7 +23,7 @@ my $UCletter = "([A-Z]|$UCaccLetter|$UCligLetter|$UCspecLetter)";
 my $UCwordPattern = "\\b($UCletter)+(([-']|&rsquo;|&apos;)($UCletter)+)*\\b";
 
 
-while (<INPUTFILE>) {
+while (<$fh>) {
     my $remainder = $_;
     while ($remainder =~ /($UCwordPattern)/) {
         print $`;
@@ -42,3 +41,5 @@ while (<INPUTFILE>) {
     }
     print $remainder;
 }
+
+close $fh;
