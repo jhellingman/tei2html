@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
-use strict;
-use warnings;
+use v5.36;
+
 use Getopt::Long;
 use File::Basename;
 use File::Temp qw(tempfile);
@@ -18,6 +18,7 @@ my $profile    = 'photo';
 my $colorize   = 0;
 my $tint       = '#613700';     # #c26519 orange-brown // #613700 = dark brown (nice) -> #240d00  // #1f2952 blueish-gray (nice) -> #001330 // #944300 brown (nice)
                                 # Use pure gray to make line-art lighter, e.g. #252525 =~ 90% gray.
+my $lighten;                    # 1..255: how much to lift the blackest black (1 == 1/256)
 
 my $max_edge   = 720;
 my $resolution = 144;
@@ -43,6 +44,7 @@ GetOptions(
     'posterize=i'  => \$posterize,
     'tint=s'       => \$tint,
     'colorize!'    => \$colorize,
+    'lighten=i'    => \$lighten,
     'blur=s'       => \$blur,
     'colorspace=s' => \$colorspace,
     'target=s'     => \$target,
@@ -144,7 +146,7 @@ apply_profile($profile) if $profile;
 
 print_configuration() if $verbose;
 
-sub print_configuration {
+sub print_configuration() {
     print "Configuration:\n";
     print "  input:           $input\n";
     print "  target:          $target\n";
@@ -158,6 +160,7 @@ sub print_configuration {
     print "  posterize:       " . (defined $posterize ? $posterize : "undef") . "\n";
     print "  tint:            $tint\n";
     print "  colorize:        $colorize\n";
+    print "  lighten:         " . (defined $lighten ? $lighten : "undef") . "\n";
     print "  blur:            $blur\n";
     print "  colorspace:      $colorspace\n\n";
 
@@ -169,8 +172,7 @@ sub print_configuration {
     print "  threshold:       $threshold\n";
 }
 
-sub apply_profile {
-    my ($profile_name) = @_;
+sub apply_profile($profile_name) {
     
     if (!exists $profiles{$profile_name}) {
         die "Unknown profile: $profile_name. Valid profiles: " . join(', ', keys %profiles) . "\n";
@@ -204,8 +206,7 @@ if (-d $input) {
     process_file($input, $outdir);
 }
 
-sub process_directory {
-    my $dir = shift;
+sub process_directory($dir) {
 
     print "Processing directory $dir.\n" if $verbose;
 
@@ -223,8 +224,7 @@ sub process_directory {
     closedir($dh);
 }
 
-sub process_file {
-    my ($input, $outdir) = @_;
+sub process_file($input, $outdir) {
 
     return unless -f $input;
     return unless $input =~ /\.(jpe?g|png|tiff?)$/i;
@@ -239,67 +239,59 @@ sub process_file {
 
     print "Processing file $input.\n" if $verbose;
 
-    if ($colorize) {
-        if ($format eq 'png') {
+    if ($format eq 'png') {
+        if ($colorize) {
             colorized_png($input, $output);
-        } elsif ($format eq 'jpg') {
-            colorized_jpg($input, $output);
         } else {
-            colorized_other($input, $output);
-        }
-    } else {
-        if ($format eq 'png') {
             standard_png($input, $output);
-        } elsif ($format eq 'jpg') {
-            standard_jpg($input, $output);
-        } else {
-            standard_other($input, $output);
         }
+    } elsif ($format eq 'jpg') {
+        standard_jpg($input, $output);
+    } else {
+        standard_other($input, $output);
     }
 }
 
-sub standard_other {
-    my ($input, $output) = @_;
+sub lighten_arguments() {
+    return () unless defined $lighten;
 
-    system(
-        'magick', $input,
-        '-units', 'PixelsPerInch',
-        '-filter', $filter,
-        '-define', 'filter:blur=0.9',
-        '-resize', $resize_formula,
-        '-density', $resolution,
-        '-unsharp', $unsharp_formula,
-        '-strip',
-        $output
-    ) == 0 or die "magick failed: $?";
+    my $percent = $lighten * 100.0 / 256.0;
+    my $output_levels = sprintf("%.6f", $percent) . ",100%";
+
+    return ('-level', '0,100%', '+level', $output_levels);
 }
 
-sub colorized_other {
-    my ($input, $output) = @_;
+sub colorize_arguments() {
+    return () unless $colorize;
 
-    system(
-        'magick', $input,
-        '-units', 'PixelsPerInch',
-        '-filter', $filter,
-        '-define', 'filter:blur=0.9',
-        '-resize', $resize_formula,
-        '-density', $resolution,
-
+    return (
         '-colorspace', 'gray',
         '(',
             '-size', '1x256',
             "gradient:$tint-white",
         ')',
-        '-clut',
+        '-clut'
+    );
+}
 
+sub standard_other($input, $output) {
+
+    system(
+        'magick', $input,
+        '-units', 'PixelsPerInch',
+        '-filter', $filter,
+        '-define', 'filter:blur=0.9',
+        '-resize', $resize_formula,
+        '-density', $resolution,
+        (colorize_arguments()),
+        (lighten_arguments()),
         '-unsharp', $unsharp_formula,
         '-strip',
         $output
     ) == 0 or die "magick failed: $?";
 }
 
-sub standard_jpg {
-    my ($input, $output) = @_;
+sub standard_jpg($input, $output) {
 
     my ($fh, $tmp) = tempfile(SUFFIX => '.ppm');
     close $fh;
@@ -309,8 +301,7 @@ sub standard_jpg {
     unlink $tmp;
 }
 
-sub colorized_jpg {
-    my ($input, $output) = @_;
+sub colorized_jpg($input, $output) {
 
     my ($fh, $tmp) = tempfile(SUFFIX => '.ppm');
     close $fh;
@@ -320,8 +311,8 @@ sub colorized_jpg {
     unlink $tmp;
 }
 
-sub compress_jpg {
-    my ($input, $output) = @_;
+sub compress_jpg($input, $output) {
+
     system(
         'cjpegli',
         '-q', $quality,
@@ -332,8 +323,7 @@ sub compress_jpg {
     ) == 0 or die "cjpegli failed: $?";
 }
 
-sub compress_png {
-    my ($input, $output) = @_;
+sub compress_png($input, $output) {
 
     system('zopflipng', '-m', $input, $output) == 0 or die "zopflipng failed: $?";;
 
@@ -342,8 +332,7 @@ sub compress_png {
     }
 }
 
-sub standard_jpg_direct {
-    my ($input, $output) = @_;
+sub standard_jpg_direct($input, $output) {
 
     system(
         'magick', $input,
@@ -352,6 +341,8 @@ sub standard_jpg_direct {
         '-define', 'filter:blur=0.9',
         '-resize', $resize_formula,
         '-density', $resolution,
+        (colorize_arguments()),
+        (lighten_arguments()),
         '-unsharp', $unsharp_formula,
         '-strip',
         '-colorspace', 'sRGB',
@@ -363,37 +354,7 @@ sub standard_jpg_direct {
     ) == 0 or die "magick failed: $?";
 }
 
-sub colorized_jpg_direct {
-    my ($input, $output) = @_;
-
-    system(
-        'magick', $input,
-        '-units', 'PixelsPerInch',
-        '-filter', $filter,
-        '-define', 'filter:blur=0.9',
-        '-resize', $resize_formula,
-        '-density', $resolution,
-
-        '-colorspace', 'gray',
-        '(',
-            '-size', '1x256',
-            "gradient:$tint-white",
-        ')',
-        '-clut',
-
-        '-unsharp', $unsharp_formula,
-        '-strip',
-        '-colorspace', 'sRGB',
-        '-define', 'jpeg:optimize-coding=true',
-        '-sampling-factor', '4:2:0',
-        '-interlace', 'Plane',
-        '-quality', $quality,
-        $output
-    ) == 0 or die "magick failed: $?";
-}
-
-sub standard_png {
-    my ($input, $output) = @_;
+sub standard_png($input, $output) {
 
     my ($fh, $tmp) = tempfile(SUFFIX => '.png');
     close $fh;
@@ -404,7 +365,7 @@ sub standard_png {
         '-filter', $filter,
         '-resize', $resize_formula,
         '-density', $resolution,
-
+        (lighten_arguments()),
         '-unsharp', $unsharp_formula,
 
         '-colorspace', 'gray',
@@ -420,8 +381,7 @@ sub standard_png {
     unlink $tmp;
 }
 
-sub colorized_png {
-    my ($input, $output) = @_;
+sub colorized_png($input, $output) {
 
     my ($fh, $tmp) = tempfile(SUFFIX => '.png');
     close $fh;
@@ -432,14 +392,8 @@ sub colorized_png {
         '-filter', $filter,
         '-resize', $resize_formula,
         '-density', $resolution,
-
-        '-colorspace', 'gray',
-        '(',
-            '-size', '1x256',
-            "gradient:$tint-white",
-        ')',
-        '-clut',
-
+        (colorize_arguments()),
+        (lighten_arguments()),
         '-unsharp', $unsharp_formula,
 
         '-posterize', $posterize,
