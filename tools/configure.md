@@ -89,3 +89,13 @@ pnpm add -g mathjax
 pnpm add -g mathjax-node-cli
 ```
 
+Note: On Windows, the version of mathjax-node-cli installed doesn't work. A fix has been proposed, but not
+applied. To obtain it, check out the fixed code from https://github.com/cabo/mathjax-node-cli/tree/master, and 
+manually copy it over the version in your pnpm store.
+
+This should be possible with:
+
+```bash
+pnpm add -g github:cabo/mathjax-node-cli
+```
+
