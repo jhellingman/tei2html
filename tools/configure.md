@@ -1,5 +1,5 @@
 
-# Installation instructions for MacOS
+# Installation instructions for macOS
 
 Install the latest Perl version, cpanminus and the open-sp SGML processing tools:
 
