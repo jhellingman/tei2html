@@ -36,7 +36,10 @@
         <msg:message name="t2aWordCount">Number of Words</msg:message>
         <msg:message name="t2aApproximatelyXPages">approximately <msg:param name="count" type="integer"/> pages</msg:message>
         <msg:message name="t2aApproximatelyXPages" plural="one">approximately <msg:param name="count" type="integer"/> page</msg:message>
-
+        <msg:message name="t2aExtent">Extent</msg:message>
+        <msg:message name="t2aCharacters">Characters</msg:message>
+        <msg:message name="t2aCharacters" plural="one">Character</msg:message>
+        
         <!-- /tei2adoc.xsl -->
 
         <msg:message name="msgDescription">Description</msg:message>
@@ -1332,6 +1335,9 @@
         <msg:message name="t2aWordCount">Aantal woorden</msg:message>
         <msg:message name="t2aApproximatelyXPages">ongeveer <msg:param name="count" type="integer"/> bladzijden</msg:message>
         <msg:message name="t2aApproximatelyXPages" plural="one">ongeveer <msg:param name="count" type="integer"/> bladzijde</msg:message>
+        <msg:message name="t2aExtent">Omvang</msg:message>
+        <msg:message name="t2aCharacters">Tekens</msg:message>
+        <msg:message name="t2aCharacters" plural="one">Teken</msg:message>
 
         <!-- /tei2adoc.xsl -->
 
