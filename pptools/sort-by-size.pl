@@ -1,4 +1,5 @@
-#!/usr/bin/env perl
+#!/usr/bin/perl -w
+
 use strict;
 use warnings;
 use File::Copy qw(move);

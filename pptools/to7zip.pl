@@ -1,8 +1,6 @@
 #!/usr/bin/perl -w
 
-#
 # Convert various types of archives to 7zip archives.
-#
 
 use v5.36;
 

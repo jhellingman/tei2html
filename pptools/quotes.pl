@@ -1,3 +1,5 @@
+#!/usr/bin/perl -w
+
 # quotes.pl -- Do smart quotes stuff.
 
 use v5.36;

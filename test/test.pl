@@ -1,3 +1,5 @@
+#!/usr/bin/perl -w
+
 # Perl script to test the the tei2html.xsl stylesheet with Saxon.
 
 use strict;

@@ -1,3 +1,5 @@
+#!/usr/bin/perl -w
+
 # imageinfo.pl -- Collect information about images into an XML file for processing by XSLT.
 
 use v5.36;

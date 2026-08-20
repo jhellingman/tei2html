@@ -1,3 +1,5 @@
+#!/usr/bin/perl -w
+
 # intralinear.pl -- convert intralinear text to ab-elements.
 
 use v5.36;

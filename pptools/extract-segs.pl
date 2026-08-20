@@ -1,3 +1,5 @@
+#!/usr/bin/perl -w
+
 # Perl run the extract-segs.xsl stylesheet on a directory with Saxon.
 
 use v5.36;

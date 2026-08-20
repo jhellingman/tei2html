@@ -1,3 +1,5 @@
+#!/usr/bin/perl -w
+
 # numberDiv2s.pl -- number the div2 elements in a document.
 #
 # 1. numbers get the form n=<chapter number|first letter of id>.<sequence number>

@@ -339,7 +339,7 @@
                 </xsl:variable>
 
                 <xsl:for-each-group select="$matches/k:match" group-by="@form">
-                    <xsl:sort select="(current-group()[1])/@form" order="ascending"/>
+                    <xsl:sort select="(current-group()[1])/@form"/>
                     <xsl:if test="fn:matches(current-group()[1]/@form, '^[\p{L}\p{M}&prime;-]+$')">
                         <xsl:call-template name="report-multiple-matches">
                             <xsl:with-param name="matches" select="current-group()"/>
@@ -382,7 +382,7 @@
                 <xsl:call-template name="table-headers"/>
                 <xsl:apply-templates mode="output" select="$matches">
                     <xsl:with-param name="variants" tunnel="yes" select="$variants/k:w"/>
-                    <xsl:sort select="f:context-sort-key(k:preceding, k:following)" order="ascending"/>
+                    <xsl:sort select="f:context-sort-key(k:preceding, k:following)"/>
                 </xsl:apply-templates>
             </table>
         </xsl:if>
@@ -480,7 +480,7 @@
 
         <xsl:apply-templates mode="output" select="$matchlist">
             <xsl:with-param name="variants" tunnel="yes" select="$variants/k:w"/>
-            <xsl:sort select="f:context-sort-key(k:preceding, k:following)" order="ascending"/>
+            <xsl:sort select="f:context-sort-key(k:preceding, k:following)"/>
         </xsl:apply-templates>
     </xsl:template>
 
@@ -521,7 +521,7 @@
         <table>
             <xsl:call-template name="table-headers"/>
             <xsl:apply-templates mode="#current">
-                <xsl:sort select="f:context-sort-key(k:preceding, k:following)" order="ascending"/>
+                <xsl:sort select="f:context-sort-key(k:preceding, k:following)"/>
             </xsl:apply-templates>
         </table>
     </xsl:template>

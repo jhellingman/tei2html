@@ -1,3 +1,5 @@
+#!/usr/bin/perl -w
+
 # catpars.pl -- remove line-breaks in paragraphs.
 
 use v5.36;

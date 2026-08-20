@@ -1,3 +1,5 @@
+#!/usr/bin/perl -w
+
 # wipeIds.pl -- wipe superfluous ids from an HTML document.
 
 use v5.36;

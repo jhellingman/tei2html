@@ -1,3 +1,5 @@
+#!/usr/bin/perl -w
+
 # convertCrossWordText.pl -- convert cross-word to text format.
 
 use v5.36;

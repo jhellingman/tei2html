@@ -1,6 +1,12 @@
 
 # Installation instructions for macOS
 
+Install the latest version of Saxon HE:
+
+```bash
+brew install saxon
+```
+
 Install the latest Perl version, cpanminus and the open-sp SGML processing tools:
 
 ```bash
@@ -25,6 +31,7 @@ cpanm HTML::Entities
 cpanm Roman
 cpanm Image::Size
 cpanm File::chdir
+cpanm File::Which
 ```
 
 Find your local Perl library:

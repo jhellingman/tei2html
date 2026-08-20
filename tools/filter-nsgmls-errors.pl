@@ -1,6 +1,6 @@
-#
+#!/usr/bin/perl -w
+
 # filter-nsgmls-errors.pl: filter the output of NSGMLS.
-#
 
 use v5.36;
 

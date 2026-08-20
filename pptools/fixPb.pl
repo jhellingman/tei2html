@@ -1,3 +1,5 @@
+#!/usr/bin/perl -w
+
 # fixPb.pl -- fix (renumber) page-breaks in a TEI file.
 #
 # 1. sequence of numbers

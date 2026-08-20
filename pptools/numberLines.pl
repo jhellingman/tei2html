@@ -1,3 +1,5 @@
+#!/usr/bin/perl -w
+
 # numberLines.pl -- number lines of verse in a document.
 #
 # Numbers get the form id=v<sequence number>

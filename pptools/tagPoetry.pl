@@ -1,3 +1,5 @@
+#!/usr/bin/perl -w
+
 # poetry.pl
 
 use v5.36;

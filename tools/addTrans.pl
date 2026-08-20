@@ -1,3 +1,5 @@
+#!/usr/bin/perl -w
+
 # addTrans.pl -- Add transcription to Greek and Cyrillic text
 #
 # Assumption: Greek sections are marked <GR>...</GR>; Cyrillic sections are marked <CY>/<RU>/<CYX>; another tool will actually convert to transcription.
@@ -19,7 +21,7 @@ GetOptions(
     'x' => \$useXml
     );
 
-sub main {
+sub main() {
     my $file = shift @ARGV;
 
     my $fileHandle;

@@ -1,16 +1,27 @@
+#!/usr/bin/perl -w
+
 # Perl script to test the checks.xsl stylesheet with Saxon.
 
-use strict;
-use warnings;
+use v5.36;
 
-my $xsldir = "C:\\Users\\Jeroen\\Documents\\eLibrary\\Tools\\tei2html";  # location of xsl stylesheets
-my $saxon = "\"C:\\Program Files\\Java\\jre6\\bin\\java.exe\" -jar C:\\bin\\saxonhe9\\saxon9he.jar ";
+my $home = $ENV{'TEI2HTML_HOME'};
+my $saxonHome = $ENV{'SAXON_HOME'};
 
-my $filename = $ARGV[0];
+my $isWindows = ($^O eq 'MSWin32');
+my $isLinux = ($^O eq 'linux');
 
-$filename =~ /^(.*)\.xml$/;
-my $basename = $1;
-my $newname = $basename . "-pos.xml";
+my $xsldir      = abs_path($home);
+my $javaOptions = '-Xms2048m -Xmx4096m -Xss1024k ';
+my $java        = "java $javaOptions";
+my $saxon       = $isWindows || $isLinux
+                  ? "$java -jar " . $saxonHome . '/saxon9he.jar '
+                  : 'saxon ';
 
-system ("perl -S addPositionInfo.pl \"$filename\" > \"$newname\"");
-system ("$saxon \"$newname\" $xsldir/checks.xsl");
+my $fileName = $ARGV[0];
+
+$fileName =~ /^(.*)\.xml$/;
+my $baseName = $1;
+my $newName = $baseName . "-pos.xml";
+
+system ("perl -S addPositionInfo.pl \"$fileName\" > \"$newName\"");
+system ("$saxon \"$newName\" $xsldir/checks.xsl");

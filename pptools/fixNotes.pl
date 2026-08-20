@@ -1,3 +1,5 @@
+#!/usr/bin/perl -w
+
 # fixNotes.pl -- fix (renumber) notes in text files
 
 use v5.36;

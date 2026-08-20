@@ -1,3 +1,5 @@
+#!/usr/bin/perl -w
+
 # extract-page.pl
 
 use v5.36;

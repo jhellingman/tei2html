@@ -1,3 +1,5 @@
+#!/usr/bin/perl -w
+
 # pgpreview.pl -- Create simple HTML preview of proofed pages.
 
 use v5.36;

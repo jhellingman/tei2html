@@ -1,4 +1,5 @@
-#!/usr/bin/env perl
+#!/usr/bin/perl -w
+
 use v5.36;
 use File::Spec;
 use Getopt::Long;

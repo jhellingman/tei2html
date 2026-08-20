@@ -1,3 +1,5 @@
+#!/usr/bin/perl -w
+
 # stripDocType.pl -- Remove the HTML legacy doctype as saxon will not accept it.
 
 use v5.36;

@@ -1,6 +1,6 @@
-#
+#!/usr/bin/perl -w
+
 # sortAttributes.pl -- reorder attributes in SGML/XML files
-#
 
 use v5.36;
 

@@ -1,3 +1,5 @@
+#!/usr/bin/perl -w
+
 # tagMeasures.pl -- Tag measures appearing in documents.
 
 use v5.36;

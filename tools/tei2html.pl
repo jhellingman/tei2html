@@ -1,3 +1,5 @@
+#!/usr/bin/perl -w
+
 # tei2html.pl -- process a TEI file.
 
 use v5.36;
@@ -9,6 +11,7 @@ use File::Copy::Recursive qw(dircopy);
 use File::Path qw(make_path remove_tree);
 use File::stat;
 use File::Temp qw(mktemp tempfile);
+use File::Which;
 use FindBin qw($Bin);
 use Getopt::Long qw(:config no_ignore_case);
 use Math::Round;
@@ -29,15 +32,12 @@ my $isLinux = ($^O eq 'linux');
 
 my $dotExe = $isWindows ? '.exe' : '';
 
-if (!defined $home) {
-    die "Environment variable 'TEI2HTML_HOME' not set.";
-}
-if (!-d $home) {
-    die "Directory $home does not exist.";
-}
-if (!defined $saxonHome) {
-    die "Environment variable 'SAXON_HOME' not set.";
-}
+my $LOG_LEVEL_ERROR     = 1;
+my $LOG_LEVEL_WARNING   = 2;
+my $LOG_LEVEL_INFO      = 3;
+my $LOG_LEVEL_TRACE     = 4;
+
+validate_environment();
 
 my $xsldir      = abs_path($home);                                            # location of xsl stylesheets
 my $toolsdir    = $home . "/tools";                                           # location of tools
@@ -64,10 +64,21 @@ my $sx        = $isWindows ? "sx" : "osx";                                  # in
 my $mariadb   = $mariaDBHome . "/bin/mariadb" . $dotExe;                    # on Windows: C:\Program Files\MariaDB 10.10
 my $zopflipng = "zopflipng" . $dotExe;
 
-my $LOG_LEVEL_ERROR     = 1;
-my $LOG_LEVEL_WARNING   = 2;
-my $LOG_LEVEL_INFO      = 3;
-my $LOG_LEVEL_TRACE     = 4;
+validate_executables();
+validate_files();
+
+sub validate_executables() {
+    my $path = which $zopflipng;
+    if (!-x $path) {
+        warning("Executable $zopflipng not found.")
+    }
+}
+
+sub validate_files() {
+    if (-e $schematronFile) {
+        warning("File $schematronFile not found.")
+    }
+}
 
 #==============================================================================
 # Arguments and default values
@@ -1498,4 +1509,37 @@ sub containsNastaliq($file) {
 
 sub needsTranscriptionPopups($file) {
     return containsPattern($file, '<EL>|<GR>|<ALS>|<CY>|<RU>|<UK>|<RUX>|<SR>');
+}
+
+
+sub validate_environment() {
+    if (!defined $home) {
+        die "Environment variable 'TEI2HTML_HOME' not set.";
+    }
+    if (!-d $home) {
+        die "Directory $home does not exist.";
+    }
+
+    if (!defined $saxonHome) {
+        die "Environment variable 'SAXON_HOME' not set.";
+    }
+    if (!-d $saxonHome) {
+        warning("Directory $saxonHome does not exist.");
+    }
+
+    if (!defined $princeHome) {
+        warning("Environment variable 'PRINCE_HOME' not set.");
+    } else {
+        if (!-d $princeHome) {
+            die "Directory $princeHome does not exist.";
+        }
+    }
+
+    if (!defined $mariaDBHome) {
+        warning("Environment variable 'PRINCE_HOME' not set.");
+    } else {
+        if (!-d $mariaDBHome) {
+            die "Directory $mariaDBHome does not exist.";
+        }
+    }
 }

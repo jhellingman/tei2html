@@ -1,4 +1,5 @@
 #!/usr/bin/perl -w
+
 # Report on a directory of .TEI files (old-fashioned SGML format)
 
 use v5.36;

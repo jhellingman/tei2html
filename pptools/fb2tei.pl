@@ -1,3 +1,5 @@
+#!/usr/bin/perl -w
+
 # fb2tei.pl -- covert fictionbook to TEI.
 
 use strict;

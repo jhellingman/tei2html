@@ -1,4 +1,5 @@
-#!/usr/bin/env perl
+#!/usr/bin/perl -w
+
 # tagBibleRefs.pl -- Tag Bible references appearing in documents.
 
 use v5.36;

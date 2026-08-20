@@ -1,3 +1,5 @@
+#!/usr/bin/perl -w
+
 # utf82ent.pl -- convert a UTF8-encoded file to HTML entities.
 
 use v5.36;

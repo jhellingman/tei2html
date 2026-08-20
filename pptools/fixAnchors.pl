@@ -1,6 +1,6 @@
-#
+#!/usr/bin/perl -w
+
 # fixAnchors.pl -- provide anchors with sequential numbers per page in TEI tagged files
-#
 
 use v5.36;
 

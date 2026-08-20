@@ -1,5 +1,6 @@
-#!/usr/bin/env perl
-# # pgprepare.pl -- prepare a set of text files for upload to PGDP.
+#!/usr/bin/perl -w
+
+# pgprepare.pl -- prepare a set of text files for upload to PGDP.
 
 use v5.36;
 

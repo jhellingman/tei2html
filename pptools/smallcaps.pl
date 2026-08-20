@@ -1,3 +1,5 @@
+#!/usr/bin/perl -w
+
 # smallcaps.pl -- tag words in all uppercase with <sc>...</sc>
 
 use v5.36;

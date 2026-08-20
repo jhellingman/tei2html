@@ -1,10 +1,12 @@
+#!/usr/bin/perl -w
+
 # divn2div.pl -- change from numbered to unnumbered TEI divs.
 
 use v5.36;
 
 my $inputFile = $ARGV[0];
 
-open(my $fh, '<', $inputFile or die "Could not open $inputFile";
+open my $fh, '<', $inputFile or die "Could not open $inputFile";
 
 print STDERR "Handling $inputFile\n";
 

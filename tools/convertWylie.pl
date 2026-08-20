@@ -1,3 +1,5 @@
+#!/usr/bin/perl -w
+
 # convertWylie.pl -- convert Tibetan in Wylie notation to Unicode.
 
 use v5.36;
@@ -18,7 +20,7 @@ my $wl = Lingua::BO::Wylie->new();
 
 my $pageNumber = 0;
 
-sub main {
+sub main() {
     my $inputFile = $ARGV[0];
     my $fileHandle;
 
@@ -54,7 +56,7 @@ sub convertWylie($wylie) {
     return "<foreign lang=\"bo\">" . encode_entities($unicode) . "</foreign>";
 }
 
-sub test {
+sub test() {
     my $unicode =  $wl->from_wylie(
         "sems can thams cad bde ba dang bde ba'i rgyu dang ldan par gyur cig\n" .
         "sdug bsngal dang sdug bsngal gyi rgyu dang bral bar gyur cig\n" .

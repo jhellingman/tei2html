@@ -1,3 +1,5 @@
+#!/usr/bin/perl -w
+
 # tei2txt.pl -- TEI to plain vanilla ASCII text
 
 use v5.36;

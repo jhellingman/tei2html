@@ -1,3 +1,5 @@
+#!/usr/bin/perl -w
+
 # idNotes.pl -- give footnotes ids based on de page and number they have
 
 use v5.36;

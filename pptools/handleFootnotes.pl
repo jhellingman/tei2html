@@ -1,3 +1,5 @@
+#!/usr/bin/perl -w
+
 # handleFootnotes.pl
 
 use v5.36;

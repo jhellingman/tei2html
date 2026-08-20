@@ -1,3 +1,5 @@
+#!/usr/bin/perl -w
+
 # idelement.pl -- give elements ids based on de page they are on and a sequence number
 
 use v5.36;

@@ -1,3 +1,5 @@
+#!/usr/bin/perl -w
+
 # extractNotes.pl -- extract notes from TEI tagged files
 #
 # Extract occurrences of footnotes in TEI tagged files and output the main text

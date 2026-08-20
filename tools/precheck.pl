@@ -1,3 +1,5 @@
+#!/usr/bin/perl -w
+
 # precheck.pl -- Small modifications to TEI file to make checks work better.
 
 # Turn &apos; into &mlapos; (modifier letter apostrophe) to distinguish them from &rsquo;

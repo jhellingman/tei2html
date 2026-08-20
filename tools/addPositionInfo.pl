@@ -1,3 +1,4 @@
+#!/usr/bin/perl -w
 # addPositionInfo.pl -- add line-number and column info to SGML/XML files
 
 use v5.36;

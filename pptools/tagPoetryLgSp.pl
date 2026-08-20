@@ -1,3 +1,5 @@
+#!/usr/bin/perl -w
+
 # poetry.pl -- add <l> tags on new-lines in poetry / drama, based on the presence of <lg> or <sp> tags.
 
 use v5.36;

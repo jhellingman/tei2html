@@ -1,3 +1,5 @@
+#!/usr/bin/perl -w
+
 # ucwords.pl -- Unicode based perl script for collecting words from an XML file.
 
 use v5.36;

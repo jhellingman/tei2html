@@ -1,3 +1,5 @@
+#!/usr/bin/perl -w
+
 # lower-sc.pl -- make words between <sc>...</sc> lowercase;
 
 use v5.36;

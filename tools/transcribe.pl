@@ -1,3 +1,5 @@
+#!/usr/bin/perl -w
+
 # transcribe.pl -- Replace Greek and Cyrillic with Latin transcription.
 
 use v5.36;

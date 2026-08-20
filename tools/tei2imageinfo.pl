@@ -1,3 +1,5 @@
+#!/usr/bin/perl -w
+
 # Perl script to run the tei2imageinfo.xsl stylesheet with Saxon.
 
 use v5.36;

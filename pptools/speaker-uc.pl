@@ -1,3 +1,5 @@
+#!/usr/bin/perl -w
+
 # speaker-uc.pl -- script to make heads and speakers in drama uppercase.
 
 use v5.36;
