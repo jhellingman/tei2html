@@ -1,16 +1,15 @@
 # SgmlSupport.pm -- package to support SGML entities.
 
-package SgmlSupport;
-
 use v5.36;
-use base 'Exporter';
+
+package SgmlSupport;
+use parent 'Exporter';
+our $VERSION = '1.00';
+our @EXPORT_OK = qw(getAttrVal sgml2utf sgml2utf_html utf2sgml utf2entities utf2numericEntities translateEntity);
 
 use Unicode::Normalize;
 use HTML::Entities;
 
-our $VERSION = '1.00';
-our @ISA = qw(Exporter);
-our @EXPORT = qw(getAttrVal sgml2utf sgml2utf_html utf2sgml utf2entities utf2numericEntities pgdp2sgml translateEntity handlePgdpAccents);
 
 =head1 NAME
 
@@ -34,25 +33,30 @@ Converts SGML entities to UTF-8 characters.
 our %ent;
 our %reverse;
 
-# Get an attribute value (if the attribute is present)
+# Get an attribute value
 #
 # Usage:
 #   getAttrVal($attrName, $attrs)
 # Parameters:
 #   $attrName: the name of which the attribute value is required.
-#   $attrs: string with SGML style attributes: A=abc B="test" C="aap"
-#           empty string when not present.
+#   $attrs: string with SGML style attributes: A=abc B='test' C="aap"
+# Returns:
+#   The attribute value (without quotes) if present.
+#   An empty string if not present.
 
 sub getAttrVal($attrName, $attrs) {
     my $escapedAttrName = quotemeta($attrName);
 
-    if ($attrs =~ /$escapedAttrName\s*=\s*([\w.-]+)/i) {
+    if ($attrs =~ /\b$escapedAttrName\s*=\s*'([^']*)'/i) {
         return $1;
-    } elsif ($attrs =~ /$escapedAttrName\s*=\s*\"(.*?)\"/i) {
+    } elsif ($attrs =~ /\b$escapedAttrName\s*=\s*"([^"]*)"/i) {
+        return $1;
+    } elsif ($attrs =~ /\b$escapedAttrName\s*=\s*([^\s'"]+)/i) {
         return $1;
     }
     return '';
 }
+
 
 # Map SGML entities to Unicode in UTF-8
 #
@@ -62,14 +66,14 @@ sub getAttrVal($attrName, $attrs) {
 #   $string: the string to be converted to UTF-8.
 
 sub sgml2utf($string) {
-    return sgml2utf_common($string, 0);
+    return _sgml2utf_common($string, 0);
 }
 
 sub sgml2utf_html($string) {
-    return sgml2utf_common($string, 1);
+    return _sgml2utf_common($string, 1);
 }
 
-sub sgml2utf_common($remainder, $forHtml) {
+sub _sgml2utf_common($remainder, $forHtml) {
     my $result = '';
 
     while ($remainder =~ /\&(#?[a-z0-9._-]+);/i) {
@@ -89,18 +93,18 @@ sub sgml2utf_common($remainder, $forHtml) {
         } elsif (defined $ent{$entity}) {
             $char = $ent{$entity};
         } elsif ($entity =~ /#x([a-f0-9]+)/i) {
-            $char = chr(hex($1));
+            $char = _handle_numeric_entity($entity, hex($1));
         } elsif ($entity =~ /#([0-9]+)/) {
-            $char = chr($1);
+            $char = _handle_numeric_entity($entity, $1);
         } elsif ($entity =~ /^frac([0-9])([0-9]+)$/) {
-            $char = handleFraction($1, $2, $result, $remainder);
+            $char = _handle_fraction($1, $2, $result, $remainder);
         } elsif ($entity =~ /^frac([0-9]+)-([0-9]+)$/) {
-            $char = handleFraction($1, $2, $result, $remainder);
+            $char = _handle_fraction($1, $2, $result, $remainder);
         } elsif ($entity =~ /^time([0-9])([0-9]+)$/) {
-            $char = handleMusicalTime($1, $2);
+            $char = _handle_musical_time($1, $2);
         } else {
             $char = '&' . $entity . ';';
-            print STDERR "ERROR:   unmapped SGML entity: $char\n";
+            warn "WARNING: unmapped SGML entity: $char";
         }
         $result .= $char;
     }
@@ -108,7 +112,18 @@ sub sgml2utf_common($remainder, $forHtml) {
     return $result;
 }
 
-sub handleFraction($numerator, $denominator, $before, $after) {
+
+sub _handle_numeric_entity($entity, $codepoint) {
+    if ($codepoint <= 0x10FFFF) {
+        return chr($codepoint);
+    } else {
+        warn "WARNING: numeric entity out of range: $entity";
+        return $entity;
+    }
+}
+
+
+sub _handle_fraction($numerator, $denominator, $before, $after) {
 
     # Insert a zero-width space before (after) the fraction if no whitespace is already present before (after).
     my $leftBoundary = ($before =~ /\s$/) ? '' : chr(0x200B);
@@ -117,7 +132,7 @@ sub handleFraction($numerator, $denominator, $before, $after) {
     return  $leftBoundary . $numerator . chr(0x2044) . $denominator . $rightBoundary;
 }
 
-sub handleMusicalTime($top, $bottom) {
+sub _handle_musical_time($top, $bottom) {
 
     return  '<ab type="musictime"><ab type="top">' . $top . '</ab><ab type="bottom">' .  $bottom . '</ab></ab>';
 }
@@ -149,8 +164,9 @@ sub translateEntity($entity) {
     } elsif ($entity =~ /^frac([0-9]+)-([0-9]+)$/) {
         return $1 . '/' . $2;
     }
-    # print STDERR "ERROR:   unmapped SGML entity: $entity\n";
-    return '';
+    my $result = '&' . $entity . ';';
+    warn "WARNING: unmapped SGML entity: $result";
+    return $result;
 }
 
 
