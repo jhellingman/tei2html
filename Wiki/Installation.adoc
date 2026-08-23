@@ -82,7 +82,9 @@ To convert mathematical formulas in TeX format to a format that can be included 
 
 _Optional, only needed when you use the transcription schemes for non-Latin scripts I use in SGML._
 
-Patc (pattern changer) is a small utility written in C to do multiple find-and-replace actions at once. You will need a C compiler to get it to work. It enables you to execute multiple find-replace actions in an efficient way. Mostly used to change the transliteration of non-Roman scripts I've used. If you don't use that, you’ll not need it. (I’ve successfully compiled this on a variety of platforms, including macOS, Linux, and Windows; a make file is included, so simply say `make` in the source folder; then move the resulting executable to a location on your working path and make it executable.)
+Patc (pattern changer) is a small utility written in C to do multiple find-and-replace actions at once. You will need a C compiler to get it to work. It enables you to execute multiple find-replace actions in an efficient way. Mostly used to change the transliteration of non-Roman scripts I've used. If you don't use that, you’ll not need it.
+
+I’ve successfully compiled this on a variety of platforms, including macOS, Linux, and Windows; a make file is included, so simply say `make` in the source folder `tools/patc/src`); then move the resulting executable to a location on your working path and make it executable.
 
 == epubcheck
 
@@ -116,9 +118,9 @@ Just put the file `schxslt-cli.jar` in `tei2html/tools/lib`, and the main script
 
 _Optional, you will probably not need those tools, unless you produce texts for Project Gutenberg._
 
-For generating a QR code (that contains an URL pointing at the book at Project Gutenberg), I use QRencode
+For generating a QR code (that contains an URL pointing at the book at Project Gutenberg), I use QRencode (Source at https://github.com/fukuchi/libqrencode[GitHub]).
 
-On Linux, say `sudo apt install qrencode` to obtain it.
+On Linux, say `sudo apt install qrencode` to obtain it; on Windows `winget install -e --id PedroAlbanese.QREncode` will install it.
 
 For compressing PNG images, I use `zopflipng`, which offers some of the best possible compression. This can be obtained
 via https://github.com/google/zopfli[GitHub].
