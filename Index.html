@@ -1125,7 +1125,10 @@ sudo ln -s /usr/bin/osx /usr/bin/sx</code></pre>
 <p><em>Optional, only needed when you use the transcription schemes for non-Latin scripts I use in SGML.</em></p>
 </div>
 <div class="paragraph">
-<p>Patc (pattern changer) is a small utility written in C to do multiple find-and-replace actions at once. You will need a C compiler to get it to work. It enables you to execute multiple find-replace actions in an efficient way. Mostly used to change the transliteration of non-Roman scripts I&#8217;ve used. If you don&#8217;t use that, you’ll not need it. (I’ve successfully compiled this on a variety of platforms, including macOS, Linux, and Windows; a make file is included, so simply say <code>make</code> in the source folder; then move the resulting executable to a location on your working path and make it executable.)</p>
+<p>Patc (pattern changer) is a small utility written in C to do multiple find-and-replace actions at once. You will need a C compiler to get it to work. It enables you to execute multiple find-replace actions in an efficient way. Mostly used to change the transliteration of non-Roman scripts I&#8217;ve used. If you don&#8217;t use that, you’ll not need it.</p>
+</div>
+<div class="paragraph">
+<p>I’ve successfully compiled this on a variety of platforms, including macOS, Linux, and Windows; a make file is included, so simply say <code>make</code> in the source folder <code>tools/patc/src</code>); then move the resulting executable to a location on your working path and make it executable.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1176,10 +1179,10 @@ sudo ln -s /usr/bin/osx /usr/bin/sx</code></pre>
 <p><em>Optional, you will probably not need those tools, unless you produce texts for Project Gutenberg.</em></p>
 </div>
 <div class="paragraph">
-<p>For generating a QR code (that contains an URL pointing at the book at Project Gutenberg), I use QRencode</p>
+<p>For generating a QR code (that contains an URL pointing at the book at Project Gutenberg), I use QRencode (Source at <a href="https://github.com/fukuchi/libqrencode">GitHub</a>).</p>
 </div>
 <div class="paragraph">
-<p>On Linux, say <code>sudo apt install qrencode</code> to obtain it.</p>
+<p>On Linux, say <code>sudo apt install qrencode</code> to obtain it; on Windows <code>winget install -e --id PedroAlbanese.QREncode</code> will install it.</p>
 </div>
 <div class="paragraph">
 <p>For compressing PNG images, I use <code>zopflipng</code>, which offers some of the best possible compression. This can be obtained
@@ -4239,7 +4242,7 @@ opening mark, there should be a corresponding closing mark.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-08-21 21:39:05 UTC
+Last updated 2026-08-23 08:30:37 UTC
 </div>
 </div>
 </body>
