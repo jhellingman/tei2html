@@ -11,4 +11,4 @@ my $keyword = $ARGV[1];
 
 my $keywordArgument = $keyword eq '' ? '' : "keyword=\"$keyword\"";
 
-system ("$saxon \"$filename\" $xsldir/xml2kwic.xsl $keywordArgument");
+system ("$saxon \"$filename\" \"$xsldir/xml2kwic.xsl\" $keywordArgument");

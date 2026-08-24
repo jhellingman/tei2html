@@ -14,12 +14,15 @@ my $makeSvg = 0;       # Generate SVG files.
 my $makeMml = 0;       # Generate MML files.
 my $makePng = 0;       # Generate PNG files.
 
+my $speech = 1;        # Output accessible speech in generated SVG (to avoid running into a bug printing "index radical" before the SVG code in the output). 
+
 GetOptions(
     'h' => \$makeHtml,
     's' => \$makeSvg,
     'm' => \$makeMml,
     'p' => \$makePng,
-    'f' => \$force
+    'f' => \$force,
+    'speech!' => \$speech
     );
 
 if ($makeHtml == 0 && $makeMml == 0 && $makePng == 0) {
@@ -110,10 +113,19 @@ sub writeMathFormula($tool, $inlineMode, $formula, $outputFile) {
 
     my @cmd = ($tool);
     push @cmd, '--inline' if $inlineMode;
+    push @cmd, '--speech=false' if $speech == 0;
     push @cmd, $formula;
     my ($output, $err, $exit) = runAndCapture(@cmd);
     if ($exit != 0) {
         warn "$tool failed (exit=$exit): $err";
+    }
+
+    # Noticed that some generated SVG is invalid, so adding an extra check.
+    if ($tool eq 'tex2svg' and rindex($output, '<svg', 0) != 0) {
+        warn "Generated output for $outputFile does not start with '<svg': discarding output.";
+        warn $err;
+        warn "(Try running with --no-speech if TeX-formula appears correct)";
+        return;
     }
     open my $fh, '>', $outputFile or die "Could not open $outputFile: $!";
     print $fh $output;

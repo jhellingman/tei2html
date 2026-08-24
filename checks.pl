@@ -24,4 +24,4 @@ my $baseName = $1;
 my $newName = $baseName . "-pos.xml";
 
 system ("perl -S addPositionInfo.pl \"$fileName\" > \"$newName\"");
-system ("$saxon \"$newName\" $xsldir/checks.xsl");
+system ("$saxon \"$newName\" \"$xsldir/checks.xsl\"");
