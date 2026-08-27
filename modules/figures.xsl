@@ -313,8 +313,9 @@
                 <xsl:call-template name="generate-html-header"/>
                 <body>
                     <div class="figure">
-                        <img src="{$imagefile}"/>
-                        <xsl:attribute name="alt"><xsl:value-of select="$alt"/></xsl:attribute>
+                        <img src="{$imagefile}">                        
+                            <xsl:attribute name="alt"><xsl:value-of select="$alt"/></xsl:attribute>
+                        </img>
                         <xsl:apply-templates/>
                     </div>
                 </body>
