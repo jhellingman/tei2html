@@ -1,10 +1,11 @@
-package LanguageNames;
+# LanguageNames.pm -- package to support ISO-639 language codes.
 
 use v5.36;
 
-require Exporter;
-our @ISA = qw(Exporter);
-our @EXPORT = qw(getLanguage);
+package LanguageNames;
+use parent 'Exporter';
+our $VERSION = '1.00';
+our @EXPORT_OK = qw(getLanguage);
 
 =head1 NAME
 
@@ -12,7 +13,7 @@ LanguageNames - Mapping of ISO 639 language codes to language names
 
 =head1 SYNOPSIS
 
-    use LanguageNames;
+    use LanguageNames qw/getLanguage/;;
     my $name = getLanguage('en');  # Returns "English"
 
 =head1 PUBLIC FUNCTIONS
@@ -35,7 +36,6 @@ our %langNameHash;
 
 BEGIN {
     %langNameHash = ();
-    
 
     # ISO 639-1 Language Codes (and variants)
 

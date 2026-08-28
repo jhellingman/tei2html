@@ -1,5 +1,4 @@
 #!/usr/bin/perl -w
-
 # convertDraughtsDiagram.pl -- convert draughts diagrams to TEI format.
 
 use v5.36;

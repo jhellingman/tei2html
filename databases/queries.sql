@@ -10,7 +10,7 @@
 select *
  from book
 where title like '%Tagalog%'
-order by title
+order by title;
 
 
 select * from book order by changeDate desc;

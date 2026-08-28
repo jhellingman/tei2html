@@ -1,5 +1,4 @@
 #!/usr/bin/perl -w
-
 # ucwords.pl -- Unicode based perl script for collecting words from an XML file.
 
 use v5.36;
@@ -25,7 +24,7 @@ use LanguageNames qw/getLanguage/;
 # Global settings
 my $verbose = 0;        # Set to 1 to verbosely report what is happening.
 my $makeHeatMap = 0;    # Set to 1 to generate a heat-map document.
-my $retrograd = 0;      # Set to 1 to generate a retrograd word list.
+my $retrograde = 0;     # Set to 1 to generate a retrograde word list.
 my $ignoreLanguage = 0; # Set to 1 to ignore language attributes.
 my $xmlReport = 0;      # Set to 1 to generate a report in xml.
 my $csvReport = 0;      # Set to 1 to generate a report in plain text (CSV).
@@ -38,7 +37,7 @@ my $showHelp = 0;
 GetOptions(
     'v' => \$verbose,
     'x' => \$xmlReport,
-    'r' => \$retrograd,
+    'r' => \$retrograde,
     'i' => \$ignoreLanguage,
     'c' => \$csvReport,
     's' => \$sqlReport,
@@ -46,23 +45,26 @@ GetOptions(
 
     'help' => \$showHelp);
 
+my $helpText = <<'END_OF_HELP_TEXT';
+ucwords.pl -- create a word-list from an XML file
+
+Usage: ucwords.pl [-options] <inputfile.xml>
+
+Options:
+
+    c         Report in CSV format.
+    i         Ignore language tags (all words will be in one list).
+    m         Create a heat-map version of the input file.
+    r         Create a retrograde word-list (sorted based on ending).
+    s         Report in SQL format (to be inserted into a database).
+    v         Verbose operation.
+    x         Report in XML format.
+
+    help      Show this help message.
+END_OF_HELP_TEXT
+
 if (!defined $ARGV[0] || $showHelp == 1) {
-    print "ucwords.pl -- create a word-list from an XML file\n\n";
-
-    print "Usage: ucwords.pl [-options] <inputfile.xml>\n\n";
-
-    print "Options:\n\n";
-
-    print "    c         Report in CSV format.\n";
-    print "    i         Ignore language tags (all words will be in one list).\n";
-    print "    m         Create a heat-map version of the input file.\n";
-    print "    r         Create a retrograd word-list (sorted based on ending).\n";
-    print "    s         Report in SQL format (to be inserted into a database).\n";
-    print "    v         Verbose operation.\n";
-    print "    x         Report in XML format.\n\n";
-
-    print "    help      Show this help message.\n";
-
+    print $helpText;
     exit(0);
 }
 
@@ -456,7 +458,7 @@ sub sortLanguageWords($language) {
 
     foreach my $word (@wordList) {
         my $key = NormalizeForLanguage($word, $language);
-        if ($retrograd == 1) {
+        if ($retrograde == 1) {
             $key = reverse($key);
         }
         $word = "$key!$word";
@@ -625,7 +627,6 @@ sub reportPairsAndSingleWords($language) {
     }
 }
 
-
 #
 # printReportHeader
 #
@@ -635,7 +636,7 @@ sub printReportHeader() {
     print "\n<title>Word Usage Report for $docTitle ($inputFile)</title>";
     print "\n<style>\n";
     print "body { margin-left: 30px; }\n";
-    if ($retrograd == 1) {
+    if ($retrograde == 1) {
         print "body { text-align: right; }\n";
     }
     print "p { margin: 0px; }\n";
@@ -809,7 +810,7 @@ sub reportWord($word, $language) {
     my $unShyWord = $word;
     $unShyWord =~ s/\xad/|/g;
 
-    if ($count > 1 && $retrograd == 1) {
+    if ($count > 1 && $retrograde == 1) {
         print "<span class=cnt>$count</span> ";
     }
 
@@ -831,7 +832,7 @@ sub reportWord($word, $language) {
     }
     print "<span" . composeClassAttribute($class) . ">$unShyWord</span> ";
 
-    if ($count > 1 && $retrograd == 0) {
+    if ($count > 1 && $retrograde == 0) {
         print "<span class=cnt>$count</span> ";
     }
 }
@@ -1171,8 +1172,6 @@ sub reportStatisticsXML($fileHandle) {
     my $textNonWordCount   = $nonWordCount - $headerNonWordCount;
     my $textNumberCount    = $numberCount  - $headerNumberCount;
     my $textCharCount      = $charCount    - $headerCharCount;
-
-    my $extend = $textWordCount + $textNumberCount;
 
     print $fileHandle "<summary>";
     print $fileHandle "<counter name=\"words\" text=\"$textWordCount\" header=\"$headerWordCount\"/>";

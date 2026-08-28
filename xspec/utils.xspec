@@ -480,7 +480,7 @@
    <x:scenario label="When determining the content type of a cell with only spaces">
       <x:call function="f:classify-content">
          <x:param>
-            <cell></cell>
+             <cell/>
          </x:param>
       </x:call>
       <x:expect label="will return the string 'ccEmpty' " select="'ccEmpty'"/>

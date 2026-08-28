@@ -449,7 +449,7 @@ text-indent:2em;
                 <l id="l2.2" n="2">Tweede.</l>
             </lg>
         </x:context>
-        <x:expect label="will result in an HTML div with two paragraphs and the line-numbes in a separate column">
+        <x:expect label="will result in an HTML div with two paragraphs and the line-numbers in a separate column">
             <table xmlns="http://www.w3.org/1999/xhtml"
                    class="alignedVerse">
                <tr>

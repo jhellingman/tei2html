@@ -1,18 +1,13 @@
 # PgdpSupport.pm -- package to support PGDP notation for special characters.
 
 package PgdpSupport;
-
 use v5.36;
-
-use base 'Exporter';
+use parent 'Exporter';
+our $VERSION = '1.00';
+our @EXPORT_OK = qw(pgdp2sgml handlePgdpAccents);
 
 use Unicode::Normalize;
 use HTML::Entities;
-
-our $VERSION = '1.00';
-our @ISA = qw(Exporter);
-our @EXPORT = qw(pgdp2sgml handlePgdpAccents);
-
 
 #
 # Handle special letters in the coding system as used on PGDP.
@@ -215,11 +210,11 @@ sub pgdp2sgml($string, $useExtensions) {
 
 
 sub handlePgdpAccents($line) {
-    return NFC(handlePgdpWideAccents(handlePgdpNormalAccents($line)));
+    return NFC(_handlePgdpWideAccents(_handlePgdpNormalAccents($line)));
 }
 
 
-sub handlePgdpWideAccents($line) {
+sub _handlePgdpWideAccents($line) {
 
     $line = NFD($line);
 
@@ -232,12 +227,12 @@ sub handlePgdpWideAccents($line) {
 
     my $pattern = "\\[" . $abovePattern . $basePattern . $belowPattern . "\\]";
 
-    $line =~ s/$pattern/convertWideAccent($1,$2,$3,$4)/ge;
+    $line =~ s/$pattern/_convertWideAccent($1,$2,$3,$4)/ge;
     return $line;
 }
 
 
-sub convertWideAccent($above, $base1, $base2, $below) {
+sub _convertWideAccent($above, $base1, $base2, $below) {
 
     if ($base1 eq 'i') {
         $base1 = "\x{131}";
@@ -281,7 +276,7 @@ sub convertWideAccent($above, $base1, $base2, $below) {
 }
 
 
-sub handlePgdpNormalAccents($line) {
+sub _handlePgdpNormalAccents($line) {
 
     $line = NFD($line);
 
@@ -291,12 +286,12 @@ sub handlePgdpNormalAccents($line) {
 
     my $pattern = "\\[" . $abovePattern . $basePattern . $belowPattern . "\\]";
 
-    $line =~ s/$pattern/convertAccent($1,$2,$3)/ge;
+    $line =~ s/$pattern/_convertAccent($1,$2,$3)/ge;
     return $line;
 }
 
 
-sub convertAccent($above, $base, $below) {
+sub _convertAccent($above, $base, $below) {
 
     my %aboveAccents = (
         "`"         => "\x{300}",   # acute

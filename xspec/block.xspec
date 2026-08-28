@@ -233,7 +233,7 @@ text-indent:2em;
                     </tr>
                 </table>
             </div>
-            <p></p>
+          <p/>
         </x:expect>
     </x:scenario>
 
