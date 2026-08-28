@@ -1,5 +1,4 @@
 #!/usr/bin/perl -w
-
 # convertCrossWord.pl -- convert cross-word to TEI format.
 
 use v5.36;

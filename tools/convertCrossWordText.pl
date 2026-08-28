@@ -1,12 +1,11 @@
 #!/usr/bin/perl -w
-
 # convertCrossWordText.pl -- convert cross-word to text format.
 
 use v5.36;
 
 use SgmlSupport qw/getAttrVal/;
 
-sub main {
+sub main() {
     my $inputFile = $ARGV[0];
     my $fileHandle;
 
@@ -59,20 +58,18 @@ sub main {
     }
 }
 
-sub formatLineOne {
-    my $line = shift;
+sub formatLineOne($line) {
     my $result = "";
 
     my @cells = split(/\|/, $line, -1);
-    foreach my $cell (@cells) {
+    foreach (@cells) {
         $result .= '+-----';
     }
     $result .= "+\n";
     return $result;
 }
 
-sub formatLineTwo {
-    my $line = shift;
+sub formatLineTwo($line) {
     my $result = "";
 
     my @cells = split(/\|/, $line, -1);
@@ -95,8 +92,7 @@ sub formatLineTwo {
 }
 
 
-sub formatLineThree {
-    my $line = shift;
+sub formatLineThree($line) {
     my $result = "";
 
     my @cells = split(/\|/, $line, -1);
@@ -117,8 +113,7 @@ sub formatLineThree {
 }
 
 
-sub trim() {
-    my $string = shift;
+sub trim($string) {
     $string =~ s/^\s+//;
     $string =~ s/\s+$//;
     return $string;
