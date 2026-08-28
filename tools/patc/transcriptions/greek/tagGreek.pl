@@ -12,17 +12,17 @@ my $outputFile = $ARGV[1];
 
 print STDOUT "Tagging Greek as foreign language in '$file', writing to '$outputFile'\n";
 
-open(INPUTFILE, '<:encoding(UTF-8)', $file) || die("Could not open input file $file");
-open(OUTPUTFILE, "> $outputFile") || die("Could not open $outputFile for writing.");
-binmode(OUTPUTFILE, ":utf8");
+open my $input, '<:encoding(UTF-8)', $file or die "Could not open input file $file: $!";
+open my $output, '>', $outputFile or die "Could not open $outputFile for writing: $!";
+binmode($output, ":utf8");
 
 my $regex = "[\p{Greek}]+([ ,.;?:]+[\p{Greek}]+)*";
 
-while (<INPUTFILE>) {
+while (<$input>) {
 
     $_ =~ s/([\p{Greek}]+([ ,.]+[\p{Greek}]+)*)/$before$1$after/g;
 
-    print OUTPUTFILE $_;
+    print $output $_;
 }
 
-close OUTPUTFILE;
+close $output;
