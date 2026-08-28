@@ -22,7 +22,7 @@
             <facsimile.enable>true</facsimile.enable>
             <facsimile.wrapper.enable>true</facsimile.wrapper.enable>
             <facsimile.path>page-images</facsimile.path>
-            <facsimile.target></facsimile.target>
+            <facsimile.target/>
         </tei2html.config>
     </x:param>
 

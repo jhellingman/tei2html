@@ -63,7 +63,7 @@ msgstr ""
     </xsl:template>
 
 
-    <!-- retain tags as-is in the strigns -->
+    <!-- retain tags as-is in the strings -->
     <xsl:template match="*" mode="cp">
         <xsl:text>&lt;</xsl:text>
         <xsl:value-of select="name()"/>

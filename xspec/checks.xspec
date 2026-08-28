@@ -248,7 +248,7 @@
     </x:scenario>
 
 
-    <!-- Cross references -->
+    <!-- Cross-references -->
 
     <x:scenario label="When verifying a target attribute points to a valid id">
         <x:context mode="check-ids">
