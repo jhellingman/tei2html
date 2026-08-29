@@ -1,5 +1,5 @@
 #TITLE=XML - TEI
-; Version 0.1., Jeroen Hellingman <jeroen@bohol.ph>
+; Version 0.2., 2026-08-29, Jeroen Hellingman <jeroen@bohol.ph>
 ; EditPlus syntax coloring for TEI files.
 ; If you have any suggestion or question, please, send me an e-mail
 #DELIMITER=<>/="'%,(){}+*~&|;
@@ -8,8 +8,8 @@
 #CONTINUE_QUOTE=y
 #LINECOMMENT=
 #LINECOMMENT2=
-#COMMENTON=
-#COMMENTOFF=
+#COMMENTON=<!--
+#COMMENTOFF=-->
 #COMMENTON2=
 #COMMENTOFF2=
 #ESCAPE=
@@ -29,6 +29,9 @@
 #SCRIPT_END=]]>
 #SPECIAL_STX=html
 
+#KEYWORD=Page-Break Tag
+pb
+
 #KEYWORD=TEI Tags
 CDATA
 !DOCTYPE
@@ -36,7 +39,6 @@ CDATA
 ?xml
 ?xml-stylesheet
 figure
-pb
 addName
 addrLine
 addSpan

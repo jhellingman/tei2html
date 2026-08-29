@@ -230,8 +230,7 @@
                 <xsl:if test="$scale-factor != 1.0">
                     <xsl:text>background-size: </xsl:text><xsl:value-of select="f:rend-value(@rend, 'initial-width')"/><xsl:text>;&lf;</xsl:text>
                 </xsl:if>
-                <xsl:text>text-align: right;&lf;</xsl:text>
-                <xsl:text>visibility: hidden;&lf;</xsl:text>
+                <xsl:text>text-align: right;&lf;</xsl:text>                
                 <xsl:text>font-size: 1px;&lf;</xsl:text>
                 <xsl:text>}&lf;</xsl:text>
             </xsl:if>
