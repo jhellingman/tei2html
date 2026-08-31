@@ -234,7 +234,8 @@
 
             <!-- Do we want to fully override the head for the toc using the toc-head() rendering? -->
             <xsl:when test="f:has-rend-value(@rend, 'toc-head')">
-                <xsl:value-of select="f:rend-value(@rend, 'toc-head')"/>
+                <xsl:variable name="toc-head" select="f:rend-value(@rend, 'toc-head')"/>
+                <xsl:copy-of select="f:convert-markdown($toc-head)"/>
             </xsl:when>
 
             <!-- Handle case where we only have a label as head -->
@@ -252,7 +253,8 @@
                         <xsl:when test="@type='label'"/>
                         <!-- Use alternative toc-head when present -->
                         <xsl:when test="f:has-rend-value(@rend, 'toc-head')">
-                            <xsl:value-of select="f:rend-value(@rend, 'toc-head')"/>
+                            <xsl:variable name="toc-head" select="f:rend-value(@rend, 'toc-head')"/>
+                            <xsl:copy-of select="f:convert-markdown($toc-head)"/>
                         </xsl:when>
                         <!-- Include the head given -->
                         <xsl:otherwise>
@@ -1079,7 +1081,6 @@
     <!-- Included material (alternative for xi:include); also take care relevant CSS styles are generated. -->
 
     <xsl:template match="divGen[@type='Inclusion']" mode="#default css style css-column css-row style-column style-row">
-
         <xsl:variable name="url" select="if (@url) then @url else f:rend-value(@rend, 'include')"/>
         <xsl:if test="$url">
             <xsl:copy-of select="f:log-info('Including {1}.', ($url))"/>

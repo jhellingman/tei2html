@@ -8,8 +8,10 @@
 
 ]>
 <x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+               xmlns:xhtml="http://www.w3.org/1999/xhtml"
                xmlns:xs="http://www.w3.org/2001/XMLSchema"
                xmlns:f="urn:stylesheet-functions"
+               xmlns:tmp="urn:temporary"
                stylesheet="test-tei2html.xsl"
                version="3.0">
 
@@ -18,6 +20,7 @@
     <x:param name="root" select="self::document-node()">
         <TEI/>
     </x:param>
+
 
     <x:param name="sample1" as="document-node(element(TEI.2))" select="self::document-node()">
         <TEI.2 lang="en">
@@ -54,6 +57,7 @@
     </x:param>
 
 
+
     <!-- f:find-toc-max-depth -->
 
     <x:scenario label="When finding the max level for a simple toc">
@@ -62,6 +66,8 @@
         </x:call>
         <x:expect label="will return 1" select="1"/>
     </x:scenario>
+
+
 
     <!-- f:find-toc-list-max-depth -->
 
@@ -102,6 +108,8 @@
         </x:call>
         <x:expect label="will return 3" select="3"/>
     </x:scenario>
+
+
 
     <!-- divGen -->
 
@@ -162,7 +170,7 @@
                         <head>Chapter II.</head>
                         <p>The second chapter <pb n="3"/>...</p>
                     </div1>
-                    <div1 id="ch3" n="III">
+                    <div1 id="ch3" n="III" rend="toc-head(Chapter _III_.)">
                         <head>Chapter III.</head>
                         <p>The third chapter ...</p>
                     </div1>
@@ -201,7 +209,7 @@
                     </tr>
                     <tr id="ch3.toc" class="tocLevel0">
                         <td class="tocDivNum">III. </td>
-                        <td class="tocDivTitle"><a href="#ch3">Chapter III.</a></td>
+                        <td class="tocDivTitle"><a href="#ch3">Chapter <i>III</i>.</a></td>
                         <td class="tocPageNum"><a class="pageref" href="#ch3">3</a></td>
                     </tr>
                     <tr id="index.toc" class="tocLevel0">
@@ -812,6 +820,409 @@
     </x:scenario>
 
 
+
+    <x:param name="text-with-divisions">
+        <TEI lang="en" xmlns="http://www.tei-c.org/ns/1.0">
+            <text>
+                <front>
+                    <div1 id="preface">
+                        <head>Preface</head>
+                        <p>Text of preface.</p>
+                       <pb n="1"/>
+                    </div1>
+                </front>
+                <body>
+                    <div1 n="I" id="ch1">
+                        <head type="label">Chapter I.</head>
+                        <head>First Chapter</head>
+                        <p>Text of first chapter.</p>
+                        <pb n="2"/>
+                    </div1>
+                    <div1 n="II" id="ch2">
+                        <head type="label">Chapter II.</head>
+                        <head>Second Chapter</head>
+                        <p>Text of second chapter.</p>
+                        <pb n="3"/>
+                    </div1>
+                </body>
+                <back>
+                    <div1 id="app">
+                        <head>Appendix</head>
+
+                        <p>Text of appendix.</p>
+                        <pb n="4"/>
+                    </div1>
+                    <divGen id="toc" type="toc"/>
+                </back>
+            </text>
+        </TEI>
+    </x:param>
+
+    <x:scenario label="When generating a table of contents of a text with numbered divisions">
+        <x:context select="$text-with-divisions"/>
+        <x:expect label="will result in an HTML table of contents"
+            test="//xhtml:div[@id='toc']">
+            <div xmlns="http://www.w3.org/1999/xhtml" class="div1" id="toc">
+               <h2 class="main">Table of Contents</h2>
+               <table role="presentation" summary="Table of Contents">
+                  <tr id="preface.toc" class="tocLevel0">
+                     <td class="tocDivNum" />
+                     <td class="tocDivTitle">
+                        <a href="#preface">Preface</a>
+                     </td>
+                     <td class="tocPageNum" />
+                  </tr>
+                  <tr id="ch1.toc" class="tocLevel0">
+                     <td class="tocDivNum">I. </td>
+                     <td class="tocDivTitle">
+                        <a href="#ch1">First Chapter</a>
+                     </td>
+                     <td class="tocPageNum">
+                        <a class="pageref" href="#ch1">1</a>
+                     </td>
+                  </tr>
+                  <tr id="ch2.toc" class="tocLevel0">
+                     <td class="tocDivNum">II. </td>
+                     <td class="tocDivTitle">
+                        <a href="#ch2">Second Chapter</a>
+                     </td>
+                     <td class="tocPageNum">
+                        <a class="pageref" href="#ch2">2</a>
+                     </td>
+                  </tr>
+                  <tr id="app.toc" class="tocLevel0">
+                     <td class="tocDivNum" />
+                     <td class="tocDivTitle">
+                        <a href="#app">Appendix</a>
+                     </td>
+                     <td class="tocPageNum">
+                        <a class="pageref" href="#app">3</a>
+                     </td>
+                  </tr>
+               </table>
+            </div>
+        </x:expect>
+    </x:scenario>
+
+    <x:param name="text-with-unnumbered-divisions">
+        <TEI lang="en" xmlns="http://www.tei-c.org/ns/1.0">
+            <text>
+                <front>
+                    <div id="preface">
+                        <head>Preface</head>
+                        <p>Text of preface.</p>
+                       <pb n="1"/>
+                    </div>
+                </front>
+                <body>
+                    <div n="I" id="ch1">
+                        <head type="label">Chapter I.</head>
+                        <head>First Chapter</head>
+                        <p>Text of first chapter.</p>
+                        <pb n="2"/>
+                    </div>
+                    <div n="II" id="ch2">
+                        <head type="label">Chapter II.</head>
+                        <head>Second Chapter</head>
+                        <p>Text of second chapter.</p>
+                        <pb n="3"/>
+                    </div>
+                </body>
+                <back>
+                    <div id="app">
+                        <head>Appendix</head>
+
+                        <p>Text of appendix.</p>
+                        <pb n="4"/>
+                    </div>
+                    <divGen id="toc" type="toc"/>
+                </back>
+            </text>
+        </TEI>
+    </x:param>
+
+    <x:scenario label="When generating a table of contents of a text with unnumbered divisions">
+        <x:context select="$text-with-unnumbered-divisions"/>
+        <x:expect label="will result in an HTML table of contents"
+            test="//xhtml:div[@id='toc']">
+            <div xmlns="http://www.w3.org/1999/xhtml" class="div1" id="toc">
+               <h2 class="main">Table of Contents</h2>
+               <table role="presentation" summary="Table of Contents">
+                  <tr id="preface.toc" class="tocLevel0">
+                     <td class="tocDivNum" />
+                     <td class="tocDivTitle">
+                        <a href="#preface">Preface</a>
+                     </td>
+                     <td class="tocPageNum" />
+                  </tr>
+                  <tr id="ch1.toc" class="tocLevel0">
+                     <td class="tocDivNum">I. </td>
+                     <td class="tocDivTitle">
+                        <a href="#ch1">First Chapter</a>
+                     </td>
+                     <td class="tocPageNum">
+                        <a class="pageref" href="#ch1">1</a>
+                     </td>
+                  </tr>
+                  <tr id="ch2.toc" class="tocLevel0">
+                     <td class="tocDivNum">II. </td>
+                     <td class="tocDivTitle">
+                        <a href="#ch2">Second Chapter</a>
+                     </td>
+                     <td class="tocPageNum">
+                        <a class="pageref" href="#ch2">2</a>
+                     </td>
+                  </tr>
+                  <tr id="app.toc" class="tocLevel0">
+                     <td class="tocDivNum" />
+                     <td class="tocDivTitle">
+                        <a href="#app">Appendix</a>
+                     </td>
+                     <td class="tocPageNum">
+                        <a class="pageref" href="#app">3</a>
+                     </td>
+                  </tr>
+               </table>
+            </div>
+        </x:expect>
+    </x:scenario>
+
+    <x:param name="text-with-deeply-nested-divisions">
+        <TEI lang="en" xmlns="http://www.tei-c.org/ns/1.0">
+            <text>
+                <body>
+                    <div1 n="I" id="ch1">
+                        <head type="label">Chapter I.</head>
+                        <head>First Chapter</head>
+                        <p>Text of first chapter.</p>
+                        <pb n="2"/>
+                        <div2 n="1" id="ch1.1">
+                            <head type="label">Section 1.</head>
+                            <head>First Section</head>
+                            <p>Text of first section.</p>
+                            <pb n="3"/>
+                            <div3 n="a" id="ch1.1.a">
+                                <head type="label">Subsection a.</head>
+                                <head>First Subsection</head>
+                                <p>Text of first subsection.</p>
+                                <pb n="4"/>
+                                <div4 n="A" id="ch1.1.a.A">
+                                    <head type="label">Subsubsection A.</head>
+                                    <head>First Subsubsection</head>
+                                    <p>Text of first subsubsection.</p>
+                                    <pb n="5"/>
+                                    <div5 n="x" id="ch1.1.a.A.x">
+                                        <head type="label">Subsubsubsection x.</head>
+                                        <head>First Subsubsubsection</head>
+                                        <p>Text of first subsubsubsection.</p>
+                                        <pb n="6"/>
+                                        <div6 n="y" id="ch1.1.a.A.x.y">
+                                            <head type="label">Subsubsubsubsection y.</head>
+                                            <head>First Subsubsubsubsection</head>
+                                            <p>Text of first subsubsubsubsection.</p>
+                                            <pb n="7"/>
+                                        </div6>
+                                    </div5>
+                                </div4>
+                            </div3>
+                        </div2>
+                    </div1>
+                </body>
+                <back>
+                    <divGen id="toc" type="toc"/>
+                </back>
+            </text>
+        </TEI>
+    </x:param>
+
+    <x:scenario label="When generating a table of contents of a text with deeply-nested divisions">
+        <x:context select="$text-with-deeply-nested-divisions"/>
+        <x:expect label="will result in an HTML table of contents"
+            test="//xhtml:div[@id='toc']">
+            <div xmlns="http://www.w3.org/1999/xhtml" class="div1" id="toc">
+               <h2 class="main">Table of Contents</h2>
+               <table role="presentation" summary="Table of Contents">
+                  <tr id="ch1.toc" class="tocLevel0">
+                     <td class="tocDivNum">I. </td>
+                     <td class="tocDivTitle" colspan="6">
+                        <a href="#ch1">First Chapter</a>
+                     </td>
+                     <td class="tocPageNum" />
+                  </tr>
+                  <tr id="ch1.1.toc" class="tocLevel1">
+                     <td />
+                     <td class="tocDivNum">1. </td>
+                     <td class="tocDivTitle" colspan="5">
+                        <a href="#ch1.1">First Section</a>
+                     </td>
+                     <td class="tocPageNum">
+                        <a class="pageref" href="#ch1.1">2</a>
+                     </td>
+                  </tr>
+                  <tr id="ch1.1.a.toc" class="tocLevel2">
+                     <td colspan="2" />
+                     <td class="tocDivNum">a. </td>
+                     <td class="tocDivTitle" colspan="4">
+                        <a href="#ch1.1.a">First Subsection</a>
+                     </td>
+                     <td class="tocPageNum">
+                        <a class="pageref" href="#ch1.1.a">3</a>
+                     </td>
+                  </tr>
+                  <tr id="ch1.1.a.A.toc" class="tocLevel3">
+                     <td colspan="3" />
+                     <td class="tocDivNum">A. </td>
+                     <td class="tocDivTitle" colspan="3">
+                        <a href="#ch1.1.a.A">First Subsubsection</a>
+                     </td>
+                     <td class="tocPageNum">
+                        <a class="pageref" href="#ch1.1.a.A">4</a>
+                     </td>
+                  </tr>
+                  <tr id="ch1.1.a.A.x.toc" class="tocLevel4">
+                     <td colspan="4" />
+                     <td class="tocDivNum">x. </td>
+                     <td class="tocDivTitle" colspan="2">
+                        <a href="#ch1.1.a.A.x">First Subsubsubsection</a>
+                     </td>
+                     <td class="tocPageNum">
+                        <a class="pageref" href="#ch1.1.a.A.x">5</a>
+                     </td>
+                  </tr>
+                  <tr id="ch1.1.a.A.x.y.toc" class="tocLevel5">
+                     <td colspan="5" />
+                     <td class="tocDivNum">y. </td>
+                     <td class="tocDivTitle">
+                        <a href="#ch1.1.a.A.x.y">First Subsubsubsubsection</a>
+                     </td>
+                     <td class="tocPageNum">
+                        <a class="pageref" href="#ch1.1.a.A.x.y">6</a>
+                     </td>
+                  </tr>
+               </table>
+            </div>
+        </x:expect>
+    </x:scenario>
+
+    <x:param name="text-with-deeply-nested-unnumbered-divisions">
+        <TEI lang="en" xmlns="http://www.tei-c.org/ns/1.0">
+            <text>
+                <body>
+                    <div n="I" id="ch1">
+                        <head type="label">Chapter I.</head>
+                        <head>First Chapter</head>
+                        <p>Text of first chapter.</p>
+                        <pb n="2"/>
+                        <div n="1" id="ch1.1">
+                            <head type="label">Section 1.</head>
+                            <head>First Section</head>
+                            <p>Text of first section.</p>
+                            <pb n="3"/>
+                            <div n="a" id="ch1.1.a">
+                                <head type="label">Subsection a.</head>
+                                <head>First Subsection</head>
+                                <p>Text of first subsection.</p>
+                                <pb n="4"/>
+                                <div n="A" id="ch1.1.a.A">
+                                    <head type="label">Subsubsection A.</head>
+                                    <head>First Subsubsection</head>
+                                    <p>Text of first subsubsection.</p>
+                                    <pb n="5"/>
+                                    <div n="x" id="ch1.1.a.A.x">
+                                        <head type="label">Subsubsubsection x.</head>
+                                        <head>First Subsubsubsection</head>
+                                        <p>Text of first subsubsubsection.</p>
+                                        <pb n="6"/>
+                                        <div n="y" id="ch1.1.a.A.x.y">
+                                            <head type="label">Subsubsubsubsection y.</head>
+                                            <head>First Subsubsubsubsection</head>
+                                            <p>Text of first subsubsubsubsection.</p>
+                                            <pb n="7"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </body>
+                <back>
+                    <divGen id="toc" type="toc"/>
+                </back>
+            </text>
+        </TEI>
+    </x:param>
+
+    <x:scenario label="When generating a table of contents of a text with deeply-nested unnumbered divisions">
+        <x:context select="$text-with-deeply-nested-unnumbered-divisions"/>
+        <x:expect label="will result in an HTML table of contents"
+            test="//xhtml:div[@id='toc']">
+            <div xmlns="http://www.w3.org/1999/xhtml" class="div1" id="toc">
+               <h2 class="main">Table of Contents</h2>
+               <table role="presentation" summary="Table of Contents">
+                  <tr id="ch1.toc" class="tocLevel0">
+                     <td class="tocDivNum">I. </td>
+                     <td class="tocDivTitle" colspan="6">
+                        <a href="#ch1">First Chapter</a>
+                     </td>
+                     <td class="tocPageNum" />
+                  </tr>
+                  <tr id="ch1.1.toc" class="tocLevel1">
+                     <td />
+                     <td class="tocDivNum">1. </td>
+                     <td class="tocDivTitle" colspan="5">
+                        <a href="#ch1.1">First Section</a>
+                     </td>
+                     <td class="tocPageNum">
+                        <a class="pageref" href="#ch1.1">2</a>
+                     </td>
+                  </tr>
+                  <tr id="ch1.1.a.toc" class="tocLevel2">
+                     <td colspan="2" />
+                     <td class="tocDivNum">a. </td>
+                     <td class="tocDivTitle" colspan="4">
+                        <a href="#ch1.1.a">First Subsection</a>
+                     </td>
+                     <td class="tocPageNum">
+                        <a class="pageref" href="#ch1.1.a">3</a>
+                     </td>
+                  </tr>
+                  <tr id="ch1.1.a.A.toc" class="tocLevel3">
+                     <td colspan="3" />
+                     <td class="tocDivNum">A. </td>
+                     <td class="tocDivTitle" colspan="3">
+                        <a href="#ch1.1.a.A">First Subsubsection</a>
+                     </td>
+                     <td class="tocPageNum">
+                        <a class="pageref" href="#ch1.1.a.A">4</a>
+                     </td>
+                  </tr>
+                  <tr id="ch1.1.a.A.x.toc" class="tocLevel4">
+                     <td colspan="4" />
+                     <td class="tocDivNum">x. </td>
+                     <td class="tocDivTitle" colspan="2">
+                        <a href="#ch1.1.a.A.x">First Subsubsubsection</a>
+                     </td>
+                     <td class="tocPageNum">
+                        <a class="pageref" href="#ch1.1.a.A.x">5</a>
+                     </td>
+                  </tr>
+                  <tr id="ch1.1.a.A.x.y.toc" class="tocLevel5">
+                     <td colspan="5" />
+                     <td class="tocDivNum">y. </td>
+                     <td class="tocDivTitle">
+                        <a href="#ch1.1.a.A.x.y">First Subsubsubsubsection</a>
+                     </td>
+                     <td class="tocPageNum">
+                        <a class="pageref" href="#ch1.1.a.A.x.y">6</a>
+                     </td>
+                  </tr>
+               </table>
+            </div>
+        </x:expect>
+    </x:scenario>
+
+
+
     <!-- Divisions -->
 
     <x:scenario label="When rendering a body element with numbered divs">
@@ -870,7 +1281,6 @@
         </x:expect>
     </x:scenario>
 
-
     <x:scenario label="When rendering a body element with unnumbered divs">
         <x:context select="$sample7//body/div[1]"/>
         <x:expect label="will result an HTML document with those divisions, and links back to the toc (exactly the same as above)">
@@ -926,6 +1336,5 @@
             </div>
         </x:expect>
     </x:scenario>
-
 
 </x:description>
