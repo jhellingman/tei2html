@@ -105,11 +105,14 @@
         <xsl:context-item as="element()" use="required"/>
         <xsl:element name="{$p.element}">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
-            <xsl:attribute name="class">
+            <xsl:variable name="class">
                 <xsl:if test="$p.element != 'p'"><xsl:text>par </xsl:text></xsl:if>
                 <xsl:if test="self::l"><xsl:text>line </xsl:text></xsl:if>
+                <!-- propagate the @type attribute to the class -->
+                <xsl:if test="@type"><xsl:value-of select="@type"/><xsl:text> </xsl:text></xsl:if>
                 <xsl:value-of select="f:generate-class-name(.)"/>
-            </xsl:attribute>
+            </xsl:variable>
+            <xsl:copy-of select="f:set-class-attribute-with(., $class)"/>
             <span>
                 <xsl:attribute name="class"><xsl:value-of select="f:generate-class-name(.)"/>init</xsl:attribute>
                 <xsl:value-of select="f:replaced-initial(f:text-without-notes(.))"/>
@@ -176,11 +179,14 @@
             <xsl:copy-of select="f:output-image(f:rend-value(@rend, 'initial-image'), f:replaced-initial(f:text-without-notes(.)))"/>
         </div>
         <xsl:element name="{$p.element}">
-            <xsl:attribute name="class">
+            <xsl:variable name="class">
                 <xsl:if test="$p.element != 'p'"><xsl:text>par </xsl:text></xsl:if>
                 <xsl:if test="self::l"><xsl:text>line </xsl:text></xsl:if>
-                <xsl:text>first</xsl:text>
-            </xsl:attribute>
+                <!-- propagate the @type attribute to the class -->
+                <xsl:if test="@type"><xsl:value-of select="@type"/><xsl:text> </xsl:text></xsl:if>
+                <xsl:value-of select="f:generate-class-name(.)"/>
+            </xsl:variable>
+            <xsl:copy-of select="f:set-class-attribute-with(., $class)"/>
             <xsl:call-template name="initial-image-paragraph-remainder"/>
         </xsl:element>
     </xsl:template>
@@ -232,6 +238,7 @@
                 </xsl:if>
                 <xsl:text>text-align: right;&lf;</xsl:text>                
                 <xsl:text>font-size: 1px;&lf;</xsl:text>
+                <xsl:text>color: transparent;&lf;</xsl:text>
                 <xsl:text>}&lf;</xsl:text>
             </xsl:if>
         </xsl:if>

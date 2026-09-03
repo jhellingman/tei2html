@@ -28,16 +28,20 @@ my $showHelp = 0;
 my $onlyPosted = 0;     # Only report on posted files (version >= 1.0)
 my $makeReports = 0;
 my $makeSql = 0;
+my $forceDownload = 0;
 
 
 GetOptions(
     'f' => \$force,
+    'force' => \$force,
     'm' => \$forceMore,
+    'forcemore' => \$forceMore,
     'v' => \$makeChecks,
     'h' => \$makeHtml,
     'r' => \$makeReports,
     'e' => \$makeEpub,
     'd' => \$download,
+    'forcedownload' => \$forceDownload,
     'q' => \$showHelp,
     'p' => \$onlyPosted,
     'sql' => \$makeSql,
@@ -59,8 +63,11 @@ Options:
     p         only report on posted files (version >= 1.0).
     q         print this help and exit.
 
-    sql       generate SQL files.
-    help      print this help and exit.
+    force           regenerate XML files
+    forcemore       force regeration of all indicated file types
+    forcedownload   force download of PG files, even if already present.
+    sql             generate SQL files.
+    help            print this help and exit.
 END_OF_HELP_TEXT
 
 if ($showHelp == 1) {
@@ -72,6 +79,10 @@ my $gitRepoLocation = 'D:/Users/Jeroen/Documents/eLibrary/Git/GutenbergSource/';
 
 if ($forceMore != 0) {
     $force = 1;
+}
+
+if ($forceDownload != 0) {
+    $download = 1;
 }
 
 # Counters
@@ -651,16 +662,28 @@ sub downloadFromPG($pgNum, $path) {
 
     {
         local $CWD = $destinationPath;
-        if (!-e $textFile) {
+        if (!-e $textFile || $forceDownload == 1) {
+            if (-e $textFile) {
+                unlink $textFile;
+            }
             system ("wget $textUrl");
         }
-        if (!-e $text8File) {
+        if (!-e $text8File || $forceDownload == 1) {
+            if (-e $text8File) {
+                unlink $text8File;
+            }
             system ("wget $text8Url");
         }
-        if (!-e $text0File) {
+        if (!-e $text0File || $forceDownload == 1) {
+            if (-e $text0File) {
+                unlink $text0File;
+            }
             system ("wget $text0Url");
         }
-        if (!-e $htmlFile) {
+        if (!-e $htmlFile || $forceDownload == 1) {
+            if (-e $htmlFile) {
+                unlink $htmlFile;
+            }
             system ("wget $htmlUrl");
         }
     }

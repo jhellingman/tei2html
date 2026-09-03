@@ -85,6 +85,7 @@ background: url(images/initial-A.png) no-repeat;
 background-position: 0 -45px;
 text-align: right;
 font-size: 1px;
+color: transparent;
 }
 </x:expect>
     </x:scenario>

@@ -580,7 +580,7 @@
                     <!-- When not using the p element to represent paragraphs, set an appropriate class. -->
                     <xsl:if test="$p.element != 'p'"><xsl:text>par </xsl:text></xsl:if>
                     <!-- in a few cases, we have paragraphs in quoted material in footnotes, which need to be set in a smaller font: apply the proper class for that. -->
-                    <xsl:if test="ancestor::note[@place='foot' or @place='undefined' or not(@place)]"><xsl:text>footnote </xsl:text></xsl:if>
+                    <xsl:if test="ancestor::note[@place = ('foot', 'undefined') or not(@place)]"><xsl:text>footnote </xsl:text></xsl:if>
                     <!-- propagate the @type attribute to the class -->
                     <xsl:if test="@type"><xsl:value-of select="@type"/><xsl:text> </xsl:text></xsl:if>
                     <xsl:if test="f:is-first-paragraph(.)">first </xsl:if>
