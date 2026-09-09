@@ -200,29 +200,29 @@ my $LOG_LEVEL_TRACE     = 4;
 
 validate_environment();
 
-my $xsldir      = abs_path($home);                                            # location of xsl stylesheets
-my $toolsdir    = $home . "/tools";                                           # location of tools
-my $patcdir     = $toolsdir . "/patc/transcriptions";                         # location of patc transcription files.
-my $catalog     = $home . "/dtd/CATALOG";                                     # location of SGML catalog (required for nsgmls and sx)
+my $xsldir      = abs_path($home);                                           # location of xsl stylesheets
+my $toolsdir    = $home . "/tools";                                          # location of tools
+my $patcdir     = $toolsdir . "/patc/transcriptions";                        # location of patc transcription files.
+my $catalog     = $home . "/dtd/CATALOG";                                    # location of SGML catalog (required for nsgmls and sx)
 
 my $javaOptions = '-Xms2048m -Xmx4096m -Xss1024k ';
 my $java        = "java $javaOptions";
 my $saxon       = $isWindows || $isLinux
                   ? "$java -jar " . $saxonHome . '/saxon9he.jar ' 
-                  : 'saxon ';                                                 # see http://saxon.sourceforge.net/
-my $epubcheck   = "$java -jar " . $toolsdir . "/lib/epubcheck-4.0.2.jar ";    # see https://github.com/IDPF/epubcheck
-my $schxslt     = "$java -jar " . $toolsdir . "/lib/schxslt-cli.jar";         # Schematron processor, see https://github.com/schxslt/schxslt
-my $prince      = $princeHome . "/Engine/bin/prince" . $dotExe;               # see https://www.princexml.com/
+                  : 'saxon ';                                                # see http://saxon.sourceforge.net/
+my $epubcheck   = "$java -jar " . $toolsdir . "/lib/epubcheck-4.0.2.jar ";   # see https://github.com/IDPF/epubcheck
+my $schxslt     = "$java -jar " . $toolsdir . "/lib/schxslt-cli.jar";        # Schematron processor, see https://github.com/schxslt/schxslt
+my $prince      = $princeHome . "/Engine/bin/prince" . $dotExe;              # see https://www.princexml.com/
 
-my $schematronFile = $home . "/schematron/tei-validation.sch";              # Schematron rules
-my $schematronXslt = $home . "/schematron/validation-report.xsl";           # XSLT to convert the schematron report to HTML
+my $schematronFile = $home . "/schematron/tei-validation.sch";               # Schematron rules
+my $schematronXslt = $home . "/schematron/validation-report.xsl";            # XSLT to convert the schematron report to HTML
 my $namespaceXslt  = $home . "/schematron/tei-namespace.xsl";                # XSLT to add TEI namespace to document
 
-my $jeebies   = "jeebies";                                                  # see http://gutcheck.sourceforge.net/
+my $jeebies   = "jeebies";                                                   # see http://gutcheck.sourceforge.net/
 my $gutcheck  = "gutcheck";
-my $nsgmls    = $isWindows ? "nsgmls" : "onsgmls";                          # see http://www.jclark.com/sp/ or http://openjade.sourceforge.net/doc/index.htm
-my $sx        = $isWindows ? "sx" : "osx";                                  # in the latter case, use onsgmls and osx instead of nsgmls and sx.
-my $mariadb   = $mariaDBHome . "/bin/mariadb" . $dotExe;                    # on Windows: C:\Program Files\MariaDB 10.10
+my $nsgmls    = $isWindows ? "nsgmls" : "onsgmls";                           # see http://www.jclark.com/sp/ or http://openjade.sourceforge.net/doc/index.htm
+my $sx        = $isWindows ? "sx" : "osx";                                   # in the latter case, use onsgmls and osx instead of nsgmls and sx.
+my $mariadb   = $mariaDBHome . "/bin/mariadb" . $dotExe;                     # on Windows: C:\Program Files\MariaDB 10.10
 my $zopflipng = "zopflipng" . $dotExe;
 
 validate_executables();
@@ -236,7 +236,7 @@ sub validate_executables() {
 }
 
 sub validate_files() {
-    if (-e $schematronFile) {
+    if (!-e $schematronFile) {
         warning("File $schematronFile not found.")
     }
 }

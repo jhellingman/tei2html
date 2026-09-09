@@ -475,7 +475,15 @@
     <xsl:template name="headText">
         <xsl:context-item as="element(head)" use="required"/>
 
-        <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+        <!-- If the head has an image placed above it, the id is already placed on that image -->
+        <xsl:choose>
+            <xsl:when test="f:has-rend-value(@rend, 'image')">
+                <xsl:copy-of select="f:generate-lang-attribute(@lang)"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
+            </xsl:otherwise>
+        </xsl:choose>
 
         <xsl:variable name="class">
             <xsl:if test="@type"><xsl:value-of select="@type"/><xsl:text> </xsl:text></xsl:if>
@@ -510,7 +518,7 @@
         <xsl:if test="f:has-rend-value(@rend, 'image')">
             <xsl:variable name="class" select="if (f:rend-value(@rend, 'display') = 'image-only') then (f:generate-class(.) || ' figure') else 'figure'"/>
             <div class="{$class}">
-                <xsl:copy-of select="f:generate-lang-attribute(@lang)"/>
+                <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
                 <xsl:variable name="alt">
                     <xsl:choose>
                         <xsl:when test="f:has-rend-value(@rend, 'image-alt')"><xsl:value-of select="f:rend-value(@rend, 'image-alt')"/></xsl:when>
