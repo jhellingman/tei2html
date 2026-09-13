@@ -387,6 +387,7 @@
 
     <xsl:template match="hi[@rend='antiqua'] | f" mode="#default remove-initial titlePage toc-head">
         <span class="antiqua">
+            <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:apply-templates mode="#current"/>
         </span>
     </xsl:template>
