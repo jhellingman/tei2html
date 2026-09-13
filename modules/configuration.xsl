@@ -134,6 +134,7 @@
 
             <text.parentheses>()[]{}</text.parentheses>                     <!-- Pairs of parentheses, first opening, then closing. -->
             <text.quotes>&ldquo;&rdquo;&lsquo;&rsquo;&laquo;&raquo;&bdquo;&rdquo;</text.quotes> <!-- Pairs of quotation marks, first opening, then closing. -->
+            <text.reopenQuotes>true</text.reopenQuotes>                     <!-- Require repeated open quotation marks at the beginning of a new paragraph. -->
             <text.curlyApos>true</text.curlyApos>                           <!-- Replace a plain apostrophe (') with a right single quote. -->
             <text.convertLongEs>false</text.convertLongEs>                  <!-- Convert long-s to normal s. -->
             <text.spaceQuotes>true</text.spaceQuotes>                       <!-- Insert a hair space between consecutive quotation marks. -->

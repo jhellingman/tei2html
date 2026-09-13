@@ -380,6 +380,17 @@
         </sub>
     </xsl:template>
 
+    <xd:doc>
+        <xd:short>Antiqua text (in a fraktur context).</xd:short>
+        <xd:detail>Antiqua text, indicated with the <code>@rend</code> attribute value <code>antiqua</code>.</xd:detail>
+    </xd:doc>
+
+    <xsl:template match="hi[@rend='antiqua'] | f" mode="#default remove-initial titlePage toc-head">
+        <span class="antiqua">
+            <xsl:apply-templates mode="#current"/>
+        </span>
+    </xsl:template>
+
     <!-- Mapped to defined CSS classes: sc = small caps; asc = all small caps; uc = upper case; ex = letterspaced; rm = roman; tt = typewriter type -->
 
     <xd:doc>

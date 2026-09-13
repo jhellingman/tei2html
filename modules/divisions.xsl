@@ -184,11 +184,28 @@
         <xsl:call-template name="setRunningHeader"/>
         <xsl:call-template name="setLabelHeader"/>
         <xsl:if test="f:rend-value(@rend, 'display') != 'image-only'">
-            <h2>
-                <xsl:call-template name="headText"/>
-            </h2>
+            <xsl:choose>
+                <xsl:when test="f:is-first-super-head(.)">
+                    <!-- When we have no title-page, we make the first head with type='super' a h1, to meet PG requirements. -->
+                    <h1>
+                        <xsl:call-template name="headText"/>
+                    </h1>
+                </xsl:when>
+                <xsl:otherwise>
+                    <h2>
+                        <xsl:call-template name="headText"/>
+                    </h2>
+                </xsl:otherwise>
+            </xsl:choose>
         </xsl:if>
     </xsl:template>
+
+
+    <!-- This head is the first "super' head in the work, and no titlepage exists -->
+    <xsl:function name="f:is-first-super-head" as="xs:boolean">
+        <xsl:param name="head" as="element(head)"/>
+        <xsl:sequence select="not($root//titlePage) and $head/@type = 'super' and not($head/preceding::head[@type = 'super'])"/>
+    </xsl:function>
 
 
     <xd:doc>

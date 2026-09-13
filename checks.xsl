@@ -55,6 +55,8 @@
     <xsl:include href="modules/segmentize.xsl"/>
     <xsl:include href="modules/numbers.xsl"/>
 
+    <xsl:param name="output-segments" select="false()"/>
+
     <xsl:variable name="outputFormat" select="'html'"/>
 
     <xsl:variable name="root" select="/"/>
@@ -63,7 +65,7 @@
         <xsl:apply-templates mode="segmentize" select="/"/>
     </xsl:variable>
 
-    <!-- Do not report periods in abbreviations (replace them by &fwperiod; replace them back later) -->
+    <!-- Do not report periods in abbreviations (replace them by &fwperiod; restore them later) -->
     <xsl:template match="abbr" mode="segments">
         <xsl:value-of select="replace(., '\.', '&fwperiod;')"/>
     </xsl:template>
@@ -133,6 +135,13 @@
             <xsl:with-param name="issues" select="$unique-issues"/>
         </xsl:call-template>
         <xsl:apply-templates mode="report" select="$unique-issues"/>
+
+        <xsl:if test="$output-segments">
+            <xsl:call-template name="output-segments">
+                <xsl:with-param name="segments" select="$segments"/>
+            </xsl:call-template>
+        </xsl:if>
+
     </xsl:template>
 
 
@@ -1442,6 +1451,7 @@
 
     <!-- Support variables for matching-punctuation tests -->
     <xsl:variable name="pairs" select="f:get-setting('text.parentheses') || f:get-setting('text.quotes')"/>
+    <xsl:variable name="reopen-quotes" select="f:get-setting('text.reopenQuotes')"/>
     <xsl:variable name="pair-sequence" select="f:split-string($pairs)"/>
     <xsl:variable name="opener" select="$pair-sequence[position() mod 2 = 1]"/>
     <xsl:variable name="closer" select="$pair-sequence[position() mod 2 = 0]"/>
