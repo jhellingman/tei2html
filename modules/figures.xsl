@@ -79,17 +79,29 @@
         <xsl:param name="node" as="element()"/>
         <xsl:param name="default" as="xs:string"/>
 
-        <xsl:variable name="alt-text" select="
+        <xsl:variable name="alt-text" as="xs:string" select="
             normalize-space(if (f:has-rend-value($node/@rend, 'image-alt'))
             then f:rend-value($node/@rend, 'image-alt')
             else if ($node/figDesc)
                  then $node/figDesc[1]
                  else if ($node/head)
-                      then $node/head[1]
+                      then f:clean-figure-head($node/head[1])
                       else $default)"/>
 
         <xsl:sequence select="if (f:is-decorative($alt-text)) then '' else $alt-text"/>
     </xsl:function>
+
+    <xsl:function name="f:clean-figure-head" as="xs:string">
+        <xsl:param name="head"/>
+
+        <xsl:variable name="result">
+            <xsl:apply-templates select="$head" mode="clean-figure-head"/>
+        </xsl:variable>
+        <xsl:sequence select="string-join($result)"/>
+    </xsl:function>
+
+    <xsl:template match="ab[@type='figNum']" mode="clean-figure-head"/>
+
 
     <xsl:function name="f:is-decorative" as="xs:boolean">
       <xsl:param name="alt-text" as="xs:string"/>

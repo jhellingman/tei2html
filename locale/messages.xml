@@ -596,6 +596,7 @@
         <msg:message name="ilo">Ilokano</msg:message>
         <msg:message name="kha">Khasi</msg:message>
         <msg:message name="nbc">Chang</msg:message>
+        <msg:message name="nds">Low German</msg:message>
         <msg:message name="njh">Lhota</msg:message>
         <msg:message name="njm">Angami</msg:message>
         <msg:message name="njn">Liangmai</msg:message>
@@ -1298,6 +1299,7 @@
         <msg:message name="ta-Latn">Tamil (lateinische Transkription)</msg:message>
         <msg:message name="tl">Tagalog</msg:message>
         <msg:message name="zh">Chinesisch</msg:message>
+        <msg:message name="nds">Niederdeutsch</msg:message>
 
         <msg:message name="msgPGHeader">
             <p>Das Project Gutenberg E-Buch <i><msg:param name="title"/></i>, durch <b><msg:param name="authors"/></b>.</p>
@@ -1890,6 +1892,7 @@
         <msg:message name="war">Waray-Waray</msg:message>
         <msg:message name="egy">Oud-Egyptisch</msg:message>
         <msg:message name="war">Waray-Waray</msg:message>
+        <msg:message name="nds">Nederduits</msg:message>
 
         <msg:message name="zxx">Niet van toepassing</msg:message>
 

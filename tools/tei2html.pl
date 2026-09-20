@@ -694,34 +694,26 @@ sub makeHtml($basename, $xmlFile) {
 sub makeHtml5($basename, $xmlFile) {
     my $htmlFile = $basename . '-h5.html';
     makeHtmlCommon($basename, $xmlFile, $htmlFile, "tei2html5.xsl");
-
-    # Use tidy to convert the generated HTML to HTML5.
-    # my $html5File = $basename . '-h5.html';
-    # system("tidy --output-xml no --doctype html5 --wrap $pageWidth --quote-nbsp no --quiet yes \"$htmlFile\" > \"$html5File\"");
 }
 
 
 sub makeHtmlCommon($basename, $xmlFile, $htmlFile, $xsltFile) {
-
     if ($force == 0 && isNewer($htmlFile, $xmlFile)) {
         trace("Skip conversion to HTML ($htmlFile newer than $xmlFile).");
         return;
     }
-
-    my $tmpFile = temporaryFile('html', 'html');
+   
     my $saxonParameters = determineSaxonParameters();
     trace("Create HTML version...");
-    system ("$saxon $xmlFile $xsldir/$xsltFile $saxonParameters basename=\"$basename\" > $tmpFile");
-    system ("perl $toolsdir/wipeids.pl $tmpFile > $htmlFile");
+    my @commands = ();
+    push (@commands, "$saxon - $xsldir/$xsltFile $saxonParameters basename=\"$basename\"");
+    push (@commands, "perl $toolsdir/wipeids.pl");
     if ($useTidy != 0) {
-        system ("tidy -m -wrap $pageWidth -f $basename-tidy.err $htmlFile");
+        push (@commands, "tidy -wrap $pageWidth -f $basename-tidy.err ")
     } else {
-        my $tmpFile2 = temporaryFile('html', 'html');
-        system ("perl $toolsdir/cleanHtml.pl $htmlFile > $tmpFile2");
-        removeFile($htmlFile);
-        move($tmpFile2, $htmlFile) or error("move failes: $!");
-    }
-    removeFile($tmpFile);
+        push (@commands, "perl $toolsdir/cleanHtml.pl");
+    }    
+    executeCommandPipeline($xmlFile, $htmlFile, @commands);
 }
 
 

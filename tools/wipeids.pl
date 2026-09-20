@@ -3,17 +3,25 @@
 # wipeIds.pl -- wipe superfluous ids from an HTML document.
 
 use v5.36;
-
 use SgmlSupport qw/getAttrVal/;
+use open qw(:std :utf8); 
 
-my $inputFile = $ARGV[0];
-open my $fh, '<', $inputFile or die "Could not open $inputFile: $!";
+my $file = shift @ARGV;
+
+my $fileHandle;
+if (defined $file) {
+    open $fileHandle, '<', $file or die "Could not open '$file': $!";
+} else {
+    $fileHandle = *STDIN;
+}
 
 my %refHash = ();
+my @lines = ();
 
 # Collect IDs being referenced in the file.
-while (<$fh>) {
+while (<$fileHandle>) {
     my $line = $_;
+    push (@lines, $line);
     my $remainder = $line;
     while ($remainder =~ m/<(.*?)>/) {
         my $tag = $1;
@@ -30,13 +38,15 @@ while (<$fh>) {
             my $css = '';
 
             # parse CSS rules for ID selectors until </style>
-            while (<$fh>) {
-                if ($_ =~ m/<\/style>/si) {
+            while (<$fileHandle>) {
+                my $cssLine = $_;
+                push (@lines, $cssLine);                
+                if ($cssLine =~ m/<\/style>/si) {
                     $css .= $`;
                     $remainder = $';
                     last;
                 } else {
-                    $css .= $_;
+                    $css .= $cssLine;
                 }
             }
 
@@ -48,13 +58,13 @@ while (<$fh>) {
     }
 }
 
-close $fh;
+if (defined $file) { 
+    close $fileHandle;
+}
 
-open my $fh2, '<', $inputFile or die "Could not open $inputFile: $!";
 
 # Remove all unused IDs.
-while (<$fh2>) {
-    my $remainder = $_;
+foreach my $remainder (@lines) {
     my $output = '';
     while ($remainder =~ m/<(.*?)>/) {
         $output .= $`;
@@ -97,4 +107,3 @@ while (<$fh2>) {
     }
 }
 
-close $fh2;

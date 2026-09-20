@@ -295,6 +295,7 @@ BEGIN {
     $langNameHash{"mni"}            = "Meitei or Manipuri";
     $langNameHash{"nah"}            = "Nahuatl (Aztec)";
     $langNameHash{"nbc"}            = "Chang";
+    $langNameHash{"nds"}            = "Low German";
     $langNameHash{"njh"}            = "Lhota";
     $langNameHash{"njm"}            = "Angami";
     $langNameHash{"njn"}            = "Liangmai";

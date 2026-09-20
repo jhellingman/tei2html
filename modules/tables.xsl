@@ -236,7 +236,7 @@
     </xd:doc>
 
     <xsl:template match="cell">
-        <xsl:element name="{if (f:is-header-row(..)) then 'th' else 'td'}">
+        <xsl:element name="{if (f:is-header-row(..) and not(f:is-empty-cell(.))) then 'th' else 'td'}">
             <xsl:copy-of select="f:set-lang-id-attributes(.)"/>
             <xsl:call-template name="cell-span"/>
             <xsl:call-template name="cell-rend"/>
@@ -264,6 +264,12 @@
             <!-- <xsl:copy-of select="f:handle-last-cell-in-footnote(.)"/> -->
         </xsl:element>
     </xsl:template>
+
+    
+    <xsl:function name="f:is-empty-cell" as="xs:boolean">
+        <xsl:param name="cell" as="element(cell)"/>
+        <xsl:sequence select="not(normalize-space($cell))"/>
+    </xsl:function>
 
 
     <!-- TODO: this should also be inside the last paragraph in the cell, if the cell has paragraphs -->

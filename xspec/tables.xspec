@@ -40,26 +40,26 @@
                 <cell id="c1.2" row="1" cols="1" rows="1" role="data" col="2">Type.</cell>
                 <cell id="c1.3" row="1" cols="1" rows="1" role="data" col="3">Quantity.</cell>
             </row>
-            <row id="r2"  role="unit">
+            <row id="r2" role="unit">
                 <cell id="c2.2" row="2" cols="1" rows="1" role="data" col="2"/>
                 <cell id="c2.3" row="2" cols="1" rows="1" role="data" col="3">kg</cell>
             </row>
-            <row id="r3"  role="data">
+            <row id="r3" role="data">
                 <cell id="c1.1" row="3" cols="1" rows="1" role="data" col="1">1</cell>
                 <cell id="c2.2" row="3" cols="1" rows="1" role="data" col="2">Apples</cell>
                 <cell id="c3.3" row="3" cols="1" rows="1" role="data" col="3">12.4</cell>
             </row>
-            <row id="r4"  role="data">
+            <row id="r4" role="data">
                 <cell id="c4.1" row="4" cols="1" rows="1" role="data" col="1">2</cell>
                 <cell id="c4.2" row="4" cols="1" rows="1" role="data" col="2">Bananas</cell>
                 <cell id="c4.3" row="4" cols="1" rows="1" role="data" col="3">22.8</cell>
             </row>
-            <row id="r5"  role="data">
+            <row id="r5" role="data">
                 <cell id="c5.1" row="5" cols="1" rows="1" role="data" col="1">3</cell>
                 <cell id="c5.2" row="5" cols="1" rows="1" role="data" col="2">Melon</cell>
                 <cell id="c5.3" row="5" cols="1" rows="1" role="data" col="3">4.6</cell>
             </row>
-            <row id="r6"  role="data">
+            <row id="r6" role="data">
                 <cell id="c6.1" row="6" cols="1" rows="1" role="data" col="1">4</cell>
                 <cell id="c6.2" row="6" cols="1" rows="1" role="data" col="2">Grapes</cell>
                 <cell id="c6.3" row="6" cols="1" rows="1" role="data" col="3">9.2</cell>
@@ -85,7 +85,7 @@
                  </tr>
                  <tr class="unit"
                      id="r2">
-                    <th id="c2.2"
+                    <td id="c2.2"
                         class="cell-head-bottom" />
                     <th id="c2.3"
                         class="c3 cell-head-right cell-head-bottom">kg</th>

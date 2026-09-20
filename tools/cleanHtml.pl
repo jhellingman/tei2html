@@ -1,8 +1,18 @@
 #!/usr/bin/perl -w
 
 use v5.36;
+use open qw(:std :utf8); 
 
-while (<>) {
+my $file = shift @ARGV;
+
+my $fileHandle;
+if (defined $file) {
+    open $fileHandle, '<', $file or die "Could not open '$file': $!";
+} else {
+    $fileHandle = *STDIN;
+}
+
+while (<$fileHandle>) {
 
     my $line = $_;
 

@@ -389,6 +389,12 @@
                         <xsl:copy-of select="f:log-info('Removed rule ''{1}: {2};'', which is not CSS3', ($property, $value))"/>
                     </xsl:when>
 
+                    <!-- Poor-man's approach to fit-content -->
+                    <xsl:when test="f:is-set('pg.compliant') and $property='width' and $value='fit-content'">
+                        <xsl:copy-of select="f:log-info('Adjusted rule ''{1}: {2};'' to read ''width: 80%;''', ($property, $value))"/>
+                        <xsl:text>width:80%;</xsl:text>
+                    </xsl:when>
+
                     <xsl:otherwise>                       
                         <xsl:text> </xsl:text>
                         <xsl:value-of select="concat($property, ': ', $value, ';')"/>
@@ -600,6 +606,12 @@
                 <!-- CSS properties not acceptable to ePub, so handled otherwise. -->
                 <xsl:when test="$property='direction'"/>
                 <xsl:when test="$property='direction-override'"/>
+
+                <!-- Poor-man's approach to fit-content -->
+                <xsl:when test="f:is-set('pg.compliant') and $property='width' and $value='fit-content'">
+                    <xsl:copy-of select="f:log-info('Adjusted rule ''{1}: {2};'' to read ''width: 80%''', ($property, $value))"/>
+                    <xsl:text>width:80%;</xsl:text>
+                </xsl:when>
 
                 <!-- Filter out CSS3 stuff (for Project Gutenberg submissions). -->
                 <xsl:when test="(f:is-set('pg.compliant') or f:get-setting('css.support') = '2') and not($property = $css2properties)">
