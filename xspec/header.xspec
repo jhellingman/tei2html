@@ -82,7 +82,6 @@
             <html xmlns="http://www.w3.org/1999/xhtml" id="..." lang="en">
                 <head>
                     <title>Title - titleStmt</title>
-                    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
                     <meta name="generator" content="tei2html.xsl, see https://github.com/jhellingman/tei2html" />
                     <meta name="author" content="Author - 1 - titleStmt" />
                     <meta name="author" content="Author - 2 - titleStmt" />
@@ -134,7 +133,6 @@
             <html xmlns="http://www.w3.org/1999/xhtml" id="..." lang="en">
                 <head>
                     <title>Minimal TEI Document</title>
-                    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
                     <meta name="generator" content="tei2html.xsl, see https://github.com/jhellingman/tei2html"/>
                     <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"/>
                     <meta name="DC.Title" content="Minimal TEI Document"/>
