@@ -70,7 +70,7 @@
     <xsl:variable name="mimeType" select="'text/html'"/>   <!-- 'text/html' or 'application/xhtml+xml'. -->
     <xsl:variable name="encoding" select="document('')/xsl:stylesheet/xsl:output/@encoding"/>
     <xsl:variable name="outputMethod" select="document('')/xsl:stylesheet/xsl:output/@method"/>
-    <xsl:variable name="outputFormat" select="'html5'"/>
+    <xsl:variable name="outputFormat" select="'html'"/>
 
     <xsl:variable name="p.element" select="if (f:is-pdf()) then 'div' else 'p'"/>
 

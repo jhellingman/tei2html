@@ -127,7 +127,8 @@
 
     <xsl:template name="colophonMetadata">
         <h3 class="main"><xsl:value-of select="f:message('msgMetadata')"/></h3>
-        <table class="colophonMetadata" role="presentation">
+        <table class="colophonMetadata">
+            <xsl:call-template name="attribute-role-presentation"/>
             <xsl:if test="not(f:is-epub()) and not(f:is-html5())">
                 <xsl:attribute name="summary"><xsl:value-of select="f:message('msgMetadata')"/></xsl:attribute>
             </xsl:if>
@@ -334,7 +335,8 @@
     <xsl:template name="catalogEntries">
         <xsl:if test="//idno[f:is-valid(.)]">
             <h3><xsl:value-of select="if (count(//idno[f:is-valid(.)]) > 1) then f:message('msgCatalogEntries') else f:message('msgCatalogEntry')"/></h3>
-            <table class="catalogEntries" role="presentation">
+            <table class="catalogEntries">
+                <xsl:call-template name="attribute-role-presentation"/>
                 <xsl:if test="not(f:is-epub()) and not(f:is-html5())">
                     <xsl:attribute name="summary"><xsl:value-of select="f:message('msgCatalogEntries')"/></xsl:attribute>
                 </xsl:if>

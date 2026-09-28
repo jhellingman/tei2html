@@ -139,7 +139,7 @@
             </xsl:if>
 
             <xsl:if test="@type = 'presentation'">
-                <xsl:attribute name="role">presentation</xsl:attribute>
+                <xsl:call-template name="attribute-role-presentation"/>
             </xsl:if>
 
             <xsl:if test="head and f:is-set('table.useCaption')">
@@ -535,7 +535,7 @@
             </xsl:if>
 
             <xsl:if test="@type = 'presentation'">
-                <xsl:attribute name="role">presentation</xsl:attribute>
+                <xsl:call-template name="attribute-role-presentation"/>
             </xsl:if>
 
             <xsl:if test="head and f:is-set('table.useCaption')">

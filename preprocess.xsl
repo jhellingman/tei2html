@@ -35,6 +35,31 @@
         </xsl:copy>
     </xsl:template>
 
+    <!-- Handle short-cut notations b, g, sc, asc. -->
+    <xsl:template match="b">
+        <hi rend="bold">
+            <xsl:apply-templates select="@*|node()"/>
+        </hi>
+    </xsl:template>
+
+    <xsl:template match="g">
+        <hi rend="ex">
+            <xsl:apply-templates select="@*|node()"/>
+        </hi>
+    </xsl:template>
+
+    <xsl:template match="sc">
+        <hi rend="sc">
+            <xsl:apply-templates select="@*|node()"/>
+        </hi>
+    </xsl:template>
+
+    <xsl:template match="asc">
+        <hi rend="asc">
+            <xsl:apply-templates select="@*|node()"/>
+        </hi>
+    </xsl:template>
+
 
     <!-- Remove TEIform attributes as they are TEI-specific metadata not needed in output -->
     <xsl:template match="@TEIform" mode="#all"/>

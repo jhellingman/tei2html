@@ -659,6 +659,12 @@
         <xsl:sequence select="$outputFormat = ('html5', 'xhtml5')"/>
     </xsl:function>
 
+    <xsl:template name="attribute-role-presentation">
+        <xsl:if test="f:is-epub() or f:is-html5()">
+            <xsl:attribute name="role" select="'presentation'"/>
+        </xsl:if>
+    </xsl:template>
+
     <xd:doc>
         <xd:short>Classify the content of an element.</xd:short>
         <xd:detail>
