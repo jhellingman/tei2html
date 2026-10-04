@@ -93,7 +93,7 @@
                                                                                  - colophon: external links are active in the colophon (including in the external-links table, if generated).
                                                                               -->
             <xref.table>false</xref.table>                                  <!-- Collect all external links in a separate table in the colophon. -->
-            <xref.exceptions>https://www.pgdp.net/; https://www.gutenberg.org/; pg:; music/; images/</xref.exceptions>  <!-- Semicolon-separated list of external URLs than can be always be used. -->
+            <xref.exceptions>https://www.pgdp.net; https://www.gutenberg.org; pg:; music/; images/; v1; v2; v3; v4; v5; v6; v7; v8; v9</xref.exceptions>  <!-- Semicolon-separated list of external URLs than can be always be used. -->
 
             <punctuation.hanging>false</punctuation.hanging>                <!-- Use hanging punctuation (by generating the relevant CSS classes. This requires tweaking, depending on the font used). -->
 
@@ -176,6 +176,7 @@
             <colophon.showAvailability>true</colophon.showAvailability>     <!-- Show the availability section in the colophon (credits + copyright license). -->
             <colophon.showMetadata>true</colophon.showMetadata>             <!-- Show metadata in the colophon (details of author, etc.). -->
 
+            <math.writeTeX>true</math.writeTeX>                             <!-- Write TeX formulas to output folder -->
             <math.decimalSeparator>.</math.decimalSeparator>
             <math.thousandsSeparator>,</math.thousandsSeparator>
             <math.numberPattern>^[0-9]{1,3}(,[0-9]{3})*(\.[0-9]+)?$</math.numberPattern>

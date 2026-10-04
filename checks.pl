@@ -4,6 +4,8 @@
 
 use v5.36;
 
+use Cwd 'abs_path';
+
 my $home = $ENV{'TEI2HTML_HOME'};
 my $saxonHome = $ENV{'SAXON_HOME'};
 

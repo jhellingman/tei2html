@@ -79,7 +79,7 @@
         <xsl:variable name="description" select="if (@title) then @title else if ($svgTitle) then $svgTitle else $texString" as="xs:string"/>
 
         <!-- Export the TeX string for the first instance -->
-        <xsl:if test="generate-id(.) = generate-id($firstInstance) and not(f:is-trivial-math(.)) and not(f:get-setting('math.mathJax.format') = 'MathJax')">
+        <xsl:if test="f:is-set('math.writeTeX') and generate-id(.) = generate-id($firstInstance) and not(f:is-trivial-math(.)) and not(f:get-setting('math.mathJax.format') = 'MathJax')">
             <xsl:result-document
                     href="{$texFile}"
                     method="text"

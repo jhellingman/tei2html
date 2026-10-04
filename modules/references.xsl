@@ -171,6 +171,7 @@
 
     <xsl:function name="f:is-allowed-url" as="xs:boolean">
         <xsl:param name="url" as="xs:string?"/>
+        <xsl:copy-of select="f:log-debug('Checking external link: {1}', $url)"/>
         <xsl:sequence select="$url and exists($allowed-urls[starts-with($url, .)])"/>
     </xsl:function>
 
