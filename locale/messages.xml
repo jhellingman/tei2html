@@ -39,7 +39,7 @@
         <msg:message name="t2aExtent">Extent</msg:message>
         <msg:message name="t2aCharacters">Characters</msg:message>
         <msg:message name="t2aCharacters" plural="one">Character</msg:message>
-        
+        <msg:message name="t2aISBN">ISBN</msg:message>
         <!-- /tei2adoc.xsl -->
 
         <msg:message name="msgDescription">Description</msg:message>
@@ -790,7 +790,7 @@
         <msg:message name="t2aWordCount">Nombre de mots</msg:message>
         <msg:message name="t2aApproximatelyXPages">environ <msg:param name="count" type="integer"/> pages</msg:message>
         <msg:message name="t2aApproximatelyXPages" plural="one">environ <msg:param name="count" type="integer"/> page</msg:message>
-
+        <msg:message name="t2aISBN">ISBN</msg:message>
         <!-- /tei2adoc.xsl -->
 
         <msg:message name="msgAbbreviation">Abbréviation</msg:message>
@@ -963,7 +963,7 @@
         <msg:message name="t2aWordCount">Anzahl der Wörter</msg:message>
         <msg:message name="t2aApproximatelyXPages">ungefähr <msg:param name="count" type="integer"/> Seiten</msg:message>
         <msg:message name="t2aApproximatelyXPages" plural="one">ungefähr <msg:param name="count" type="integer"/> Seite</msg:message>
-
+        <msg:message name="t2aISBN">ISBN</msg:message>
         <!-- /tei2adoc.xsl -->
 
         <msg:message name="msgBodyMatter">Hauptteil</msg:message>
@@ -1340,7 +1340,7 @@
         <msg:message name="t2aExtent">Omvang</msg:message>
         <msg:message name="t2aCharacters">Tekens</msg:message>
         <msg:message name="t2aCharacters" plural="one">Teken</msg:message>
-
+        <msg:message name="t2aISBN">ISBN</msg:message>
         <!-- /tei2adoc.xsl -->
 
         <msg:message name="msgDescription">Beschrijving</msg:message>
@@ -1964,7 +1964,7 @@
         <msg:message name="t2aWordCount">Aantal woorde</msg:message>
         <msg:message name="t2aApproximatelyXPages">ongeveer <msg:param name="count" type="integer"/> bladsye</msg:message>
         <msg:message name="t2aApproximatelyXPages" plural="one">ongeveer <msg:param name="count" type="integer"/> bladsy</msg:message>
-
+        <msg:message name="t2aISBN">ISBN</msg:message>
         <!-- /tei2adoc.xsl -->
 
         <msg:message name="msgLinkToPg">Skakel na Project Gutenberg-eboek</msg:message>
@@ -2172,7 +2172,7 @@
         <msg:message name="t2aWordCount">Número de palabras</msg:message>
         <msg:message name="t2aApproximatelyXPages">aproximadamente <msg:param name="count" type="integer"/> páginas</msg:message>
         <msg:message name="t2aApproximatelyXPages" plural="one">aproximadamente <msg:param name="count" type="integer"/> página</msg:message>
-
+        <msg:message name="t2aISBN">ISBN</msg:message>
         <!-- /tei2adoc.xsl -->
 
         <msg:message name="msgNotCopyrightedUS">Este libro no tiene derechos de autor en los Estados Unidos. Si vive en otro lugar, verifique las leyes de su país antes de descargar este libro.</msg:message>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE x:description [
+
+    <!ENTITY frac12      "&#x00BD;">
+    <!ENTITY ndash       "&#x2013;">
+    <!ENTITY mdash       "&#x2014;">
+    <!ENTITY hellip      "&#x2026;">
+    <!ENTITY euro        "&#x20AC;">
+
+]>
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+               xmlns:xs="http://www.w3.org/2001/XMLSchema"
+               xmlns:f="urn:stylesheet-functions"
+               stylesheet="../modules/functions.xsl"
+               version="3.0">
+
+  <x:scenario label="Scenario for testing f:isbn13-checksum function">
+        
+        <!-- Standard Test Cases -->
+        <x:scenario label="with standard 12-digit strings">
+            <x:call function="f:isbn13-checksum">
+                <x:param select="'978013235088'"/>
+            </x:call>
+            <x:expect label="it should return '4' (Clean Code by Robert C. Martin)" select="'4'"/>
+        </x:scenario>
+
+        <x:scenario label="with a different standard ISBN-13 prefix">
+            <x:call function="f:isbn13-checksum">
+                <x:param select="'978059652106'"/>
+            </x:call>
+            <x:expect label="it should return '6' (XSLT 2.0 Programmer's Reference)" select="'6'"/>
+        </x:scenario>
+
+        <!-- Edge Case: Check Digit equals 0 -->
+        <x:scenario label="when the calculated sum ends perfectly in 0">
+            <x:call function="f:isbn13-checksum">
+                <x:param select="'978149205630'"/>
+            </x:call>
+            <x:expect label="it should return '0' instead of '10'" select="'0'"/>
+        </x:scenario>
+
+        <!-- Formatting Resilience Cases -->
+        <x:scenario label="with hyphens present in the input string">
+            <x:call function="f:isbn13-checksum">
+                <x:param select="'978-0-13-235088'"/>
+            </x:call>
+            <x:expect label="it should ignore hyphens and still return '4'" select="'4'"/>
+        </x:scenario>
+
+        <x:scenario label="with spaces present in the input string">
+            <x:call function="f:isbn13-checksum">
+                <x:param select="'978 0596 52106'"/>
+            </x:call>
+            <x:expect label="it should ignore spaces and still return '6'" select="'6'"/>
+        </x:scenario>
+
+    </x:scenario>
+
+  <x:scenario label="Scenario for testing f:gutenberg-isbn13 function">
+        
+        <x:scenario label="with 5-digit ebook number">
+            <x:call function="f:gutenberg-isbn13">
+                <x:param select="'79885'"/>
+            </x:call>
+            <x:expect label="it should return '979-8-238-79885-1' (Lord Lister No. 0354)" select="'979-8-238-79885-1'"/>
+        </x:scenario>
+
+        <x:scenario label="with 4-digit ebook number">
+            <x:call function="f:gutenberg-isbn13">
+                <x:param select="'1342'"/>
+            </x:call>
+            <x:expect label="it should return '979-8-238-01342-8' (Pride and Prejudice)" select="'979-8-238-01342-8'"/>
+        </x:scenario>
+
+        <x:scenario label="with 2-digit ebook number">
+            <x:call function="f:gutenberg-isbn13">
+                <x:param select="'10'"/>
+            </x:call>
+            <x:expect label="it should return '979-8-238-00010-7' (King James Bible)" select="'979-8-238-00010-7'"/>
+        </x:scenario>
+
+    </x:scenario>
+
+</x:description>

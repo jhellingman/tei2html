@@ -81,6 +81,7 @@
             <xsl:if test="f:is-valid($pgNum)">
                 <xsl:text>|{f:message('t2aPGEbookNumber')} |https://www.gutenberg.org/ebooks/{$pgNum}[{$pgNum}]&lf;</xsl:text>
                 <xsl:text>|{f:message('t2aQRCodeForDownload')} a|image::Processed/{$imageDir}/qr{$pgNum}.png[QR code,148,148]&lf;</xsl:text>
+                <xsl:text>|{f:message('t2aISBN')} |{f:gutenberg-isbn13($pgNum)}&lf;</xsl:text>
             </xsl:if>
     </xsl:template>
 

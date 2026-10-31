@@ -102,5 +102,23 @@
         <xsl:apply-templates select="abbr" mode="plain-text"/>
     </xsl:template>
 
+    <xsl:function name="f:gutenberg-isbn13" as="xs:string">
+        <xsl:param name="ebook-number" as="xs:string"/>
+        <xsl:variable name="prefix" select="'979-8-238-'"/>
+        <xsl:variable name="number" select="format-number(xs:integer($ebook-number), '00000')"/>
+        <xsl:sequence select="$prefix || $number || '-' || f:isbn13-checksum($prefix || $number)"/>
+    </xsl:function>
+
+    <xsl:function name="f:isbn13-checksum" as="xs:string">
+        <xsl:param name="isbn12" as="xs:string"/>
+
+        <xsl:variable name="clean" select="translate($isbn12, translate($isbn12, '0123456789', ''), '')"/>
+        <xsl:variable name="total" select="
+          sum(
+            for $i in 1 to 12 
+            return xs:integer(substring($clean, $i, 1)) * (if ($i mod 2 = 0) then 3 else 1)
+          )"/>
+        <xsl:value-of select="xs:string((10 - ($total mod 10)) mod 10)"/>
+    </xsl:function>
 
 </xsl:stylesheet>

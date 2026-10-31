@@ -295,11 +295,11 @@ sub handleFragment($fragment) {
     my $prevWord = '';
 
     # NOTE: we don't use \w and \W here, since it gives some unexpected results.
-    # Character codes: 2032 = prime; 2033 = double prime; 00AD = soft hyphen.
-    my @words = split(/([^\x{2032}\x{2033}\x{00AD}`\pL\pN\pM*-]+)/, $fragment);
+    # Character codes: 2032 = prime; 2033 = double prime; 00AD = soft hyphen; 02BB = turned comma.
+    my @words = split(/([^\x{2032}\x{2033}\x{02BB}\x{00AD}`\pL\pN\pM*-]+)/, $fragment);
     foreach my $word (@words) {
         if ($word ne '') {
-            if ($word =~ /^[^\x{2032}\x{2033}\x{00AD}`\pL\pN\pM*-]+$/) {
+            if ($word =~ /^[^\x{2032}\x{2033}\x{02BB}\x{00AD}`\pL\pN\pM*-]+$/) {
                 countNonWord($word);
                 # reset previous word if not separated by more than just some space.
                 if ($word !~ /^[\pZ]+$/) {
@@ -578,6 +578,49 @@ sub reportLanguagePairs($language) {
     if ($max > 0) {
         print $report;
     }
+
+    reportCapitalizedPairs($language);
+}
+
+
+#
+# reportCapitalizedPairs
+#
+sub reportCapitalizedPairs($language) {
+    my @pairList = keys %{$pairHash{$language}};
+    @pairList = sort @pairList;
+
+    my $report = "\n\n\n<h3>Capitalized word-pairs in " . getLanguage($language) . "</h3>\n";
+
+    foreach my $pair (sort { $pairHash{$language}{$b} <=> $pairHash{$language}{$a} } @pairList) {
+        my $count = $pairHash{$language}{$pair};
+
+        my ($first, $second) = split(/!/, $pair, 2);
+
+        if ($count > 1 && isFirstLetterCapital($first) && isFirstLetterCapital($second)) {
+            if (!(isOnlyUppercase($first) && isOnlyUppercase($second))) {
+                $report .= "\n<p>$first $second <span class=cnt>$count</span>";
+            }
+        }
+    }
+
+    print $report;
+}
+
+
+sub isFirstLetterCapital($string) {
+    if ($string =~ /^\p{Uppercase}/) {
+        return 1;
+    }
+    return 0;
+}
+
+
+sub isOnlyUppercase($string) {
+    if ($string =~ /\p{Uppercase}/ && $string !~ /\p{Lowercase}/) {
+        return 1;
+    }
+    return 0;
 }
 
 

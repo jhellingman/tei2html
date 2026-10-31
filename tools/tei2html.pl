@@ -684,6 +684,25 @@ sub makeQrCodeAtSize($number, $imageDir, $scale) {
     }
 }
 
+sub gutenberg_isbn13($ebook_number) {
+    my $prefix = '979-8-238-';    
+    my $number = sprintf("%05d", int($ebook_number));
+    my $isbn12 = $prefix . $number;
+    return $isbn12 . '-' . isbn13_checksum($isbn12);
+}
+
+sub isbn13_checksum($isbn12) {
+    my $clean = $isbn12;
+    $clean =~ s/[^0-9]//g;
+    
+    my $total = 0;
+    for my $i (0 .. 11) {
+        my $digit = substr($clean, $i, 1);       
+        my $weight = ($i % 2 == 1) ? 3 : 1;        
+        $total += $digit * $weight;
+    }
+    return scalar(($10 - ($total % 10)) % 10);
+}
 
 sub makeHtml($basename, $xmlFile) {
     my $htmlFile = $basename . '.html';
