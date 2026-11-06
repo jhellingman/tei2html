@@ -98,17 +98,22 @@
             </xsl:choose>
             <xsl:if test="teiHeader/fileDesc/publicationStmt/idno[@type ='ISBN']">
                 <dc:identifier id="isbn">
-                    <xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'ISBN']"/>
+                    <xsl:value-of select="'urn:isbn:' || translate(teiHeader/fileDesc/publicationStmt/idno[@type = 'ISBN'], '-', '')"/>
                 </dc:identifier>
             </xsl:if>
             <xsl:if test="f:is-valid(teiHeader/fileDesc/publicationStmt/idno[@type ='PGnum'])">
+                <xsl:variable name="pgNum" select="(//idno[@type='PGnum'])[1]"/>
                 <dc:identifier id="pgnum">
                     <xsl:text>https://www.gutenberg.org/ebooks/</xsl:text>
-                    <xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type = 'PGnum']"/>
+                    <xsl:value-of select="$pgNum"/>
                 </dc:identifier>
                 <xsl:if test="f:is-epub30()">
                     <meta refines="#pgnum" property="identifier-type">uri</meta>
                 </xsl:if>
+                <dc:identifier id="pub-id">
+                    <xsl:variable name="isbn" select="translate(f:gutenberg-isbn13($pgNum), '-', '')"/>
+                    <xsl:value-of select="'urn:isbn:' || $isbn"/>
+                </dc:identifier>
             </xsl:if>
 
             <!-- Metadata from the titleStmt and publicationStmt -->

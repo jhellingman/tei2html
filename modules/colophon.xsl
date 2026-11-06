@@ -496,6 +496,15 @@
                 </td>
             </tr>
         </xsl:if>
+        <xsl:if test="f:is-valid($pgNum)">
+            <tr>
+                <td><b><xsl:value-of select="f:message('msgISBN')"/>:</b></td>
+                <td>
+                    <xsl:value-of select="f:gutenberg-isbn13($pgNum)"/>
+                </td>
+                <td/>
+            </tr>
+        </xsl:if>
     </xsl:template>
 
 

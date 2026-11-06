@@ -42,6 +42,7 @@
         <msg:message name="t2aISBN">ISBN</msg:message>
         <!-- /tei2adoc.xsl -->
 
+        <msg:message name="msgISBN">ISBN</msg:message>
         <msg:message name="msgDescription">Description</msg:message>
 
         <msg:message name="msgCountChangesMadeToText" plural="zero">No changes have been made to the text.</msg:message>
@@ -793,6 +794,7 @@
         <msg:message name="t2aISBN">ISBN</msg:message>
         <!-- /tei2adoc.xsl -->
 
+        <msg:message name="msgISBN">ISBN</msg:message>
         <msg:message name="msgAbbreviation">Abbréviation</msg:message>
         <msg:message name="msgAbbreviations">Abbréviations</msg:message>
         <msg:message name="msgAppendices">Annexes</msg:message>
@@ -966,6 +968,7 @@
         <msg:message name="t2aISBN">ISBN</msg:message>
         <!-- /tei2adoc.xsl -->
 
+        <msg:message name="msgISBN">ISBN</msg:message>
         <msg:message name="msgBodyMatter">Hauptteil</msg:message>
         <msg:message name="msgGoToToc">Zum Inhaltsverzeichnis</msg:message>
         <msg:message name="msgCountCorrectionsAppliedToText" plural="zero">Es wurden keine Korrekturen am Text vorgenommen.</msg:message>
@@ -1343,6 +1346,7 @@
         <msg:message name="t2aISBN">ISBN</msg:message>
         <!-- /tei2adoc.xsl -->
 
+        <msg:message name="msgISBN">ISBN</msg:message>
         <msg:message name="msgDescription">Beschrijving</msg:message>
 
         <msg:message name="msgFtpLink">Link naar FTP-server</msg:message>
@@ -1967,6 +1971,7 @@
         <msg:message name="t2aISBN">ISBN</msg:message>
         <!-- /tei2adoc.xsl -->
 
+        <msg:message name="msgISBN">ISBN</msg:message>
         <msg:message name="msgLinkToPg">Skakel na Project Gutenberg-eboek</msg:message>
         <msg:message name="msgQrCode">QR-kode</msg:message>
         <msg:message name="msgQrCodePgUrl">QR-kode van Project Gutenberg-URL</msg:message>
@@ -2175,6 +2180,7 @@
         <msg:message name="t2aISBN">ISBN</msg:message>
         <!-- /tei2adoc.xsl -->
 
+        <msg:message name="msgISBN">ISBN</msg:message>
         <msg:message name="msgNotCopyrightedUS">Este libro no tiene derechos de autor en los Estados Unidos. Si vive en otro lugar, verifique las leyes de su país antes de descargar este libro.</msg:message>
         <msg:message name="msgPGComment">Este libro ha sido producido por Project Gutenberg y está disponible gratuitamente en https://www.gutenberg.org/.</msg:message>
         <msg:message name="msgTagUsageOverview">Resumen de los elementos TEI utilizados</msg:message>

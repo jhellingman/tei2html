@@ -142,7 +142,11 @@
         </xsl:if>
         <xsl:if test="f:is-valid((//idno[@type='PGnum'])[1])">
             <meta name="DC.Rights" content="{f:message('msgNotCopyrightedUS')}"/>
-            <meta name="DC.Identifier" content="https://www.gutenberg.org/ebooks/{(//idno[@type='PGnum'])[1]}"/>
+            <xsl:variable name="pgNum" select="(//idno[@type='PGnum'])[1]"/>
+            <meta name="DC.Identifier" id="pgnum" content="https://www.gutenberg.org/ebooks/{$pgNum}"/>
+            <xsl:variable name="isbn" select="translate(f:gutenberg-isbn13($pgNum), '-', '')"/>
+            <meta name="isbn" content="{$isbn}"/>
+            <meta name="DC.Identifier" id="pub-id" content="{'urn:isbn:' || $isbn}"/>
         </xsl:if>
 
         <xsl:for-each select="teiHeader/profileDesc/textClass/keywords/list/item">
