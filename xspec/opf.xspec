@@ -78,10 +78,11 @@
                <dc:identifier id="epub-id">urn:uuid:a5e4f789-657a-4fd7-b1f5-4c34122b695c</dc:identifier>
                <meta refines="#epub-id" property="identifier-type">uuid</meta>
                <meta property="dcterms:modified">...</meta>
-               <dc:identifier id="isbn">978-3-16-148410-0</dc:identifier>
+               <dc:identifier id="isbn">urn:isbn:9783161484100</dc:identifier>
                <dc:identifier id="pgnum">https://www.gutenberg.org/ebooks/12345</dc:identifier>
                <meta refines="#pgnum"
                      property="identifier-type">uri</meta>
+               <dc:identifier id="pub-id">urn:isbn:9798238123455</dc:identifier>
                <dc:title>The Title</dc:title>
                <dc:creator id="authormetadata">Author Name</dc:creator>
                <meta property="role"
