@@ -77,10 +77,15 @@
             <xsl:apply-templates select="/*[self::TEI.2 or self::TEI]/teiHeader/fileDesc/publicationStmt/availability"/>
         </xsl:if>
 
-        <xsl:if test="f:is-set('pg.compliant') and //figure[@id = 'cover-image'][f:rend-value(@rend, 'image') = 'images/new-cover.jpg']">
-            <p>
-                <xsl:value-of select="f:message('msgPGCoverArtDedication')"/>
-            </p>
+        <xsl:if test="f:is-set('pg.compliant')">
+            <xsl:choose>
+                <xsl:when test="/*[self::TEI.2 or self::TEI]/teiHeader/fileDesc/notesStmt/note[@type='CoverNote']">
+                    <p><xsl:value-of select="/*[self::TEI.2 or self::TEI]/teiHeader/fileDesc/notesStmt/note[@type='CoverNote']"/></p>
+                </xsl:when>
+                <xsl:when test="//figure[@id = 'cover-image'][f:rend-value(@rend, 'image') = 'images/new-cover.jpg']">
+                    <p><xsl:value-of select="f:message('msgPGCoverArtDedication')"/></p>
+                </xsl:when>
+            </xsl:choose>
         </xsl:if>
 
         <xsl:if test="not(f:is-set('pg.compliant')) and f:is-set('colophon.showMetadata')">
