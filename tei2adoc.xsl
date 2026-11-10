@@ -7,6 +7,7 @@
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:f="urn:stylesheet-functions"
                 xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+                xmlns:xs="http://www.w3.org/2001/XMLSchema"
                 exclude-result-prefixes="f xd">
 
     <xd:doc type="stylesheet">
@@ -43,11 +44,23 @@
     <xsl:variable name="charCount" select="document($usageFile, .)/usage/summary/counter[@name='characters']/@text"/>
     <xsl:variable name="pageCount" select="round($charCount div 1800)"/>
 
-    <xsl:variable name="cover" select="//*:figure[@id='cover-image']"/>
 
     <xsl:template match="/" expand-text="yes">
 
         <xsl:text>= {f:message('t2aAboutThisRepository')}&lf;&lf;</xsl:text>
+
+        <xsl:variable name="titlePage" select="(/*//*:figure[@id='titlepage-image'])[1]"/>
+        <xsl:if test="$titlePage and matches($titlePage/@rend, 'image\(images/[^)]+\)')">
+            <xsl:variable name="titlePageFile" select="replace(string($titlePage/@rend), '^.*image\(images/([^)]+)\).*$', '$1')"/>
+            <xsl:text>image::Processed/{if (f:dir-exists('Processed/images@1', /)) then 'images@1' else 'images'}/{$titlePageFile}[Title page, 200, float="right"]&lf;&lf;</xsl:text>
+        </xsl:if>
+
+        <xsl:variable name="cover" select="(/*//*:figure[@id='cover-image'])[1]"/>
+        <xsl:if test="$cover and matches($cover/@rend, 'image\(images/[^)]+\)')">
+            <xsl:variable name="coverFile"
+                          select="replace(string($cover/@rend), '^.*image\(images/([^)]+)\).*$', '$1')"/>
+            <xsl:text>image::Processed/{if (f:dir-exists('Processed/images@1', /)) then 'images@1' else 'images'}/{$coverFile}[Cover, 200, float="right"]&lf;&lf;</xsl:text>
+        </xsl:if>
 
         <xsl:if test="$pgnum">
             <xsl:text>{f:message('t2aAboutThisRepositoryParagraph1')}&lf;&lf;</xsl:text>
@@ -63,8 +76,20 @@
         <xsl:text>&lf;</xsl:text>
         <xsl:apply-templates/>
         <xsl:text>|===&lf;</xsl:text>
+
+
     </xsl:template>
 
+    <xsl:function name="f:dir-exists" as="xs:boolean">
+        <xsl:param name="directory" as="xs:string"/>
+        <xsl:param name="node"/>
+        <xsl:try>
+            <xsl:sequence select="exists(uri-collection(resolve-uri(replace($directory, '/+$', '') || '/?select=*', base-uri($node))))"/>
+            <xsl:catch>
+                <xsl:sequence select="false()"/>
+            </xsl:catch>
+        </xsl:try>
+    </xsl:function>
 
     <xsl:template match="TEI.2 | TEI" expand-text="yes">
             <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/title[not(@type='pgshort')]"/>
