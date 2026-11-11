@@ -146,6 +146,11 @@
                 <xsl:copy-of select="f:metadata-line(f:message('msgOriginalTitle'), $originalTitle)"/>
             </xsl:if>
 
+            <xsl:variable name="uniformTitle" select="$titleStatement/title[@type='uniform'][1]"/>
+            <xsl:if test="$uniformTitle">
+                <xsl:copy-of select="f:metadata-line(f:message('msgUniformTitle'), $uniformTitle)"/>
+            </xsl:if>
+
             <xsl:call-template name="contributors"/>
 
             <xsl:apply-templates select="//publicationStmt/date[f:is-valid(.)]" mode="publicationDate"/>

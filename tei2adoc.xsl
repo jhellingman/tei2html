@@ -122,6 +122,10 @@
         <xsl:text>|{f:message('msgOriginalTitle')} |{normalize-space(f:plain-text(.))}&lf;</xsl:text>
     </xsl:template>
 
+    <xsl:template match="title[@type='uniform']" expand-text="yes">
+        <xsl:text>|{f:message('msgUniformTitle')} |{normalize-space(f:plain-text(.))}&lf;</xsl:text>
+    </xsl:template>
+
     <xsl:template match="author" expand-text="yes">
         <xsl:text>|{f:message('msgAuthor')} |{normalize-space(.)}&lf;</xsl:text>
     </xsl:template>

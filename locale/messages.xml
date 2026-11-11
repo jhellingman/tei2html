@@ -352,6 +352,7 @@
         <msg:message name="msgOriginals">Originals</msg:message>
         <msg:message name="msgOriginalSpine">Original Spine</msg:message>
         <msg:message name="msgOriginalTitle">Original Title</msg:message>
+        <msg:message name="msgUniformTitle">Uniform Title</msg:message>
         <msg:message name="msgOrnament">Ornament</msg:message>
         <msg:message name="msgOrnaments">Ornaments</msg:message>
         <msg:message name="msgOverviewForeignFragments">Overview of fragments in foreign languages</msg:message>
@@ -1437,6 +1438,7 @@
         <msg:message name="msgOriginalFrontCover">Originele voorkant</msg:message>
         <msg:message name="msgOriginalSpine">Originele rug</msg:message>
         <msg:message name="msgOriginalTitle">Oorspronkelijke titel</msg:message>
+        <msg:message name="msgUniformTitle">Uniforme titel</msg:message>
 
         <msg:message name="msgAuthorOfAfterword">Auteur van nawoord</msg:message>
         <msg:message name="msgAuthorOfColophon">Auteur van colofon</msg:message>
