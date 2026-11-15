@@ -30,13 +30,16 @@ sub main() {
         $fileHandle = \*STDIN;
     }
 
+    my $lineNumber = 0;
     while (<$fileHandle>) {
-        print handleLine($_);
+        $lineNumber++;
+        print handleLine($_, $pageNumber, $lineNumber);
 
         if ($_ =~ m/(<pb\b(.*?)>)/) {
             my $pbAttrs = $2;
             $pageNumber = getAttrVal('n', $pbAttrs);
-            $DEBUG && print STDERR "Page $pageNumber\n";
+            $lineNumber = 0;
+            # $DEBUG && print STDERR "Page $pageNumber\n";
         }
     }
 
@@ -45,13 +48,13 @@ sub main() {
     }
 }
 
-sub handleLine($line) {
-    $line =~ s/<BO>(.*?)<\/BO>/convertWylie($1)/ge;
+sub handleLine($line, $pageNumber, $lineNumber) {
+    $line =~ s/<BO>(.*?)<\/BO>/convertWylie($1, $pageNumber, $lineNumber)/ge;
     return $line;
 }
 
-sub convertWylie($wylie) {
-    $DEBUG && print STDERR "Converting Tibetan: $wylie\n";
+sub convertWylie($wylie, $pageNumber, $lineNumber) {
+    $DEBUG && print STDERR "Converting Tibetan ($pageNumber:$lineNumber): $wylie\n";
     my $unicode = $wl->from_wylie($wylie);
     return "<foreign lang=\"bo\">" . encode_entities($unicode) . "</foreign>";
 }

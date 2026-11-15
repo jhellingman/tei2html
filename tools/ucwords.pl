@@ -295,11 +295,22 @@ sub handleFragment($fragment) {
     my $prevWord = '';
 
     # NOTE: we don't use \w and \W here, since it gives some unexpected results.
-    # Character codes: 2032 = prime; 2033 = double prime; 00AD = soft hyphen; 02BB = turned comma.
-    my @words = split(/([^\x{2032}\x{2033}\x{02BB}\x{00AD}`\pL\pN\pM*-]+)/, $fragment);
+    # Character codes: 
+    #   U+00AD = soft hyphen 
+    #   U+02BB = turned comma
+    #   U+02BC = modifier letter apostrophe
+    #   U+02BD = modifier letter reversed comma
+    #   U+02F1 = modifier letter low left arrowhead
+    #   U+02F3 = modifier letter low ring
+    #   U+2032 = prime
+    #   U+2033 = double prime
+
+    my $wordPattern = qr/([^\x{2032}\x{2033}\x{02BB}\x{02BD}\x{00AD}\x{02F3}\x{02F1}\x{02BC}`\pL\pN\pM*-]+)/;
+
+    my @words = split($wordPattern, $fragment);
     foreach my $word (@words) {
         if ($word ne '') {
-            if ($word =~ /^[^\x{2032}\x{2033}\x{02BB}\x{00AD}`\pL\pN\pM*-]+$/) {
+            if ($word =~ $wordPattern) {
                 countNonWord($word);
                 # reset previous word if not separated by more than just some space.
                 if ($word !~ /^[\pZ]+$/) {
@@ -1711,15 +1722,19 @@ sub StripDiacritics($string) {
         s/\x{1EFA}/LL/g;    ## ligature Ll (older Welsh)
         s/\x{1EFB}/ll/g;    ## Ligature ll (older Welsh)
 
-        s/\x{00AD}//g;      ## soft-hyphen
+        # Modifier letters and other things to ignore.
+        s/\x{00ad}//g;      ## soft-hyphen
+        s/\x{02b9}//g;      ## Modifier letter prime
+        s/\x{02bb}//g;      ## 'Okina (Hawaiian glottal stop) / turned comma
+        s/\x{02bc}//g;      ## Modifier letter apostrophe
+        s/\x{02bd}//g;      ## Modifier letter reversed comma
+        s/\x{02be}//g;      ## Modifier letter right half ring (Hamza)
+        s/\x{02bf}//g;      ## Modifier letter left half ring (Ayin)
+        s/\x{02f1}//g;      ## Modifier letter low left arrowhead
+        s/\x{02f3}//g;      ## Modifier letter low ring
         s/\x{2032}//g;      ## prime
         s/\x{2033}//g;      ## double prime
         s/`//g;             ## back-tick
-        s/\x{02b9}//g;      ## Modifier letter prime
-        s/\x{02bb}//g;      ## 'Okina (Hawaiian glottal stop)
-        s/\x{02bc}//g;      ## Modifier letter apostrophe
-        s/\x{02bf}//g;      ## Modifier letter left half ring (Ayin)
-        s/\x{02be}//g;      ## Modifier letter right half ring (Hamza)
 
         s/\x{0640}//g;      ## Arabic tatweel
 

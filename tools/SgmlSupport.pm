@@ -1748,17 +1748,17 @@ BEGIN {
 
     # Tibetan transcription as used in Jäschke's dictionary and grammar
 
-    $ent{'kspas'}       = 'k' . chr(0x02BD);                    # k with spiritus asper (dasia) -> mapped to spacing symbol!
-    $ent{'hspas'}       = 'h' . chr(0x02BD);                    # h with spiritus asper (dasia) -> mapped to spacing symbol!  (MISTAKE?)
-    $ent{'espas'}       = 'e' . chr(0x02BD);                    # e with spiritus asper (dasia) -> mapped to spacing symbol!  (Mistake for Greek e with dasia?)
-    $ent{'ospas'}       = 'o' . chr(0x02BD);                    # e with spiritus asper (dasia) -> mapped to spacing symbol!  (Mistake for Greek o with dasia?)
-    $ent{'tspas'}       = 't' . chr(0x02BD);                    # t with spiritus asper -> mapped to spacing symbol! (JASCHKE)
-    $ent{'pspas'}       = 'p' . chr(0x02BD);                    # p with spiritus asper -> mapped to spacing symbol! (JASCHKE)
-    $ent{'cspas'}       = 'c' . chr(0x02BD);                    # c with spiritus asper -> mapped to spacing symbol! (JASCHKE)
-    $ent{'jspas'}       = 'j' . chr(0x02BD);                    # j with spiritus asper -> mapped to spacing symbol! (JASCHKE, not actually occuring)
-    $ent{'gspas'}       = 'g' . chr(0x02BD);                    # g with spiritus asper -> mapped to spacing symbol! (JASCHKE)
-    $ent{'dspas'}       = 'd' . chr(0x02BD);                    # d with spiritus asper -> mapped to spacing symbol! (JASCHKE)
     $ent{'bspas'}       = 'b' . chr(0x02BD);                    # b with spiritus asper -> mapped to spacing symbol! (JASCHKE)
+    $ent{'cspas'}       = 'c' . chr(0x02BD);                    # c with spiritus asper -> mapped to spacing symbol! (JASCHKE)
+    $ent{'dspas'}       = 'd' . chr(0x02BD);                    # d with spiritus asper -> mapped to spacing symbol! (rare)
+    $ent{'espas'}       = 'e' . chr(0x02BD);                    # e with spiritus asper -> mapped to spacing symbol! (Mistake for Greek e with dasia?)
+    $ent{'gspas'}       = 'g' . chr(0x02BD);                    # g with spiritus asper -> mapped to spacing symbol! (JASCHKE)
+    $ent{'hspas'}       = 'h' . chr(0x02BD);                    # h with spiritus asper -> mapped to spacing symbol! (MISTAKE?)
+    $ent{'jspas'}       = 'j' . chr(0x02BD);                    # j with spiritus asper -> mapped to spacing symbol! (JASCHKE, not actually occuring)
+    $ent{'kspas'}       = 'k' . chr(0x02BD);                    # k with spiritus asper -> mapped to spacing symbol!
+    $ent{'ospas'}       = 'o' . chr(0x02BD);                    # e with spiritus asper -> mapped to spacing symbol! (Mistake for Greek o with dasia?)
+    $ent{'pspas'}       = 'p' . chr(0x02BD);                    # p with spiritus asper -> mapped to spacing symbol! (JASCHKE)
+    $ent{'tspas'}       = 't' . chr(0x02BD);                    # t with spiritus asper -> mapped to spacing symbol! (JASCHKE)
 
     $ent{'cgrave'}      = 'c' . chr(0x0300);                    # c with grave
     $ent{'jgrave'}      = 'j' . chr(0x0300);                    # j with grave

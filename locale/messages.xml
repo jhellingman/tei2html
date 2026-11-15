@@ -349,6 +349,7 @@
         <msg:message name="msgOriginal">Original</msg:message>
         <msg:message name="msgOriginalBackCover">Original Back Cover</msg:message>
         <msg:message name="msgOriginalFrontCover">Original Front Cover</msg:message>
+        <msg:message name="msgFrontCover">Front Cover</msg:message>
         <msg:message name="msgOriginals">Originals</msg:message>
         <msg:message name="msgOriginalSpine">Original Spine</msg:message>
         <msg:message name="msgOriginalTitle">Original Title</msg:message>
@@ -1436,6 +1437,7 @@
         <msg:message name="msgAuthorOfIntroduction">Auteur van introductie</msg:message>
         <msg:message name="msgOriginalBackCover">Originele achterkant</msg:message>
         <msg:message name="msgOriginalFrontCover">Originele voorkant</msg:message>
+        <msg:message name="msgFrontCover">Voorkant</msg:message>
         <msg:message name="msgOriginalSpine">Originele rug</msg:message>
         <msg:message name="msgOriginalTitle">Oorspronkelijke titel</msg:message>
         <msg:message name="msgUniformTitle">Uniforme titel</msg:message>

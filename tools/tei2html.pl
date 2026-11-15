@@ -1477,7 +1477,9 @@ sub transcribeCommands($inFile, $noPopups) {
         containsTag($inFile, '<HG>') and push (@commands, "patc -p $patcdir/hieroglyphs/hg2sgml.pat"); # Hieroglyphs
         containsDevanagari($inFile)  and push (@commands, "patc -p $patcdir/indic/dn2ucs.pat");        # Sanskrit (Devanagari); Hindi (Devanagari)
         containsNastaliq($inFile)    and push (@commands, "patc -p $patcdir/arabic/ur2sgml.pat");      # Urdu; Farsi
-        containsTag($inFile, '<BO>') and push (@commands, "perl $toolsdir/convertWylie.pl");           # Tibetan
+
+        my $debugOption = $debug ? ' -d ' : '';
+        containsTag($inFile, '<BO>') and push (@commands, "perl $toolsdir/convertWylie.pl $debugOption"); # Tibetan
     }
     return @commands;
 }

@@ -78,7 +78,7 @@ sub handleParagraph($paragraph) {
         $paragraph =~ s/<(RUX)>(.*?)<\/RUX>/rewriteTranscription($1, $2)/eg;
         $paragraph =~ s/<(SR)>(.*?)<\/SR>/rewriteTranscription($1, $2)/eg;
 
-        $paragraph =~ s/<(BO)>(.*?)<\/BO>/keepTranscription($1, $2)/eg;
+        $paragraph =~ s/<(BO)>(.*?)<\/BO>/keepTranscription($1, $2, "bo-Wylie")/eg;
     }
 
     return $paragraph;
@@ -99,14 +99,14 @@ sub rewriteTranscription($code, $trans) {
 
 # Create a choice element of both the original script and the encoding. Filter the encoding. Used when the encoding can directly
 # be used as the Latin transcription.
-sub keepTranscription($code, $trans) {
+sub keepTranscription($code, $trans, $lang) {
 
     # Filter <pb> and <choice> tags from the transcription in $trans.
     my $clean = $trans;
     $clean =~ s/<pb.*?>//g;
     $clean =~ s/<choice>\s*<sic>.*?<\/sic>\s*<corr>(.*?)<\/corr>\s*<\/choice>/$1/g;
     
-    return "<choice><orig><$code>$trans<\/$code><\/orig><reg type=\"trans\">$clean<\/reg><\/choice>";
+    return "<choice><orig><$code>$trans<\/$code><\/orig><reg type=\"trans\" lang=\"$lang\">$clean<\/reg><\/choice>";
 }
 
 main();

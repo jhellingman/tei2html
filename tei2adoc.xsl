@@ -49,19 +49,6 @@
 
         <xsl:text>= {f:message('t2aAboutThisRepository')}&lf;&lf;</xsl:text>
 
-        <xsl:variable name="titlePage" select="(/*//*:figure[@id='titlepage-image'])[1]"/>
-        <xsl:if test="$titlePage and matches($titlePage/@rend, 'image\(images/[^)]+\)')">
-            <xsl:variable name="titlePageFile" select="replace(string($titlePage/@rend), '^.*image\(images/([^)]+)\).*$', '$1')"/>
-            <xsl:text>image::Processed/{if (f:dir-exists('Processed/images@1', /)) then 'images@1' else 'images'}/{$titlePageFile}[Title page, 200, float="right"]&lf;&lf;</xsl:text>
-        </xsl:if>
-
-        <xsl:variable name="cover" select="(/*//*:figure[@id='cover-image'])[1]"/>
-        <xsl:if test="$cover and matches($cover/@rend, 'image\(images/[^)]+\)')">
-            <xsl:variable name="coverFile"
-                          select="replace(string($cover/@rend), '^.*image\(images/([^)]+)\).*$', '$1')"/>
-            <xsl:text>image::Processed/{if (f:dir-exists('Processed/images@1', /)) then 'images@1' else 'images'}/{$coverFile}[Cover, 200, float="right"]&lf;&lf;</xsl:text>
-        </xsl:if>
-
         <xsl:if test="$pgnum">
             <xsl:text>{f:message('t2aAboutThisRepositoryParagraph1')}&lf;&lf;</xsl:text>
 
@@ -77,19 +64,8 @@
         <xsl:apply-templates/>
         <xsl:text>|===&lf;</xsl:text>
 
-
     </xsl:template>
 
-    <xsl:function name="f:dir-exists" as="xs:boolean">
-        <xsl:param name="directory" as="xs:string"/>
-        <xsl:param name="node"/>
-        <xsl:try>
-            <xsl:sequence select="exists(uri-collection(resolve-uri(replace($directory, '/+$', '') || '/?select=*', base-uri($node))))"/>
-            <xsl:catch>
-                <xsl:sequence select="false()"/>
-            </xsl:catch>
-        </xsl:try>
-    </xsl:function>
 
     <xsl:template match="TEI.2 | TEI" expand-text="yes">
             <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/title[not(@type='pgshort')]"/>
@@ -108,6 +84,17 @@
                 <xsl:text>|{f:message('t2aQRCodeForDownload')} a|image::Processed/{$imageDir}/qr{$pgNum}.png[QR code,148,148]&lf;</xsl:text>
                 <xsl:text>|{f:message('t2aISBN')} |{f:gutenberg-isbn13($pgNum)}&lf;</xsl:text>
             </xsl:if>
+
+            <xsl:apply-templates select="//figure[@id=('cover-image', 'titlepage-image')]"/>
+    </xsl:template>
+
+
+    <xsl:template match="figure[@id='cover-image']" expand-text="yes">
+        <xsl:text>|{f:message('msgFrontCover')} a|{f:write-image-link(., f:message('msgFrontCover'))}&lf;</xsl:text>
+    </xsl:template>
+
+    <xsl:template match="figure[@id='titlepage-image']" expand-text="yes">
+        <xsl:text>|{f:message('msgTitlePage')} a|{f:write-image-link(., f:message('msgTitlePage'))}&lf;</xsl:text>
     </xsl:template>
 
     <xsl:template match="title" expand-text="yes">
@@ -184,5 +171,29 @@
     <xsl:template match="text()">
         <xsl:value-of select="."/>
     </xsl:template>
+
+
+    <xsl:function name="f:write-image-link">
+        <xsl:param name="figure" as="element(figure)"/>
+        <xsl:param name="alt-text" as="xs:string"/>
+
+        <xsl:if test="$figure and matches($figure/@rend, 'image\(images/[^)]+\)')">
+            <xsl:variable name="filename" select="replace(string($figure/@rend), '^.*image\(images/([^)]+)\).*$', '$1')"/>
+            <xsl:text expand-text="yes">image::Processed/{if (f:dir-exists('Processed/images@1', $figure)) then 'images@1' else 'images'}/{$filename}[{$alt-text}, 200]</xsl:text>
+        </xsl:if>
+    </xsl:function>
+
+
+    <xsl:function name="f:dir-exists" as="xs:boolean">
+        <xsl:param name="directory" as="xs:string"/>
+        <xsl:param name="node"/>
+        <xsl:try>
+            <xsl:sequence select="exists(uri-collection(resolve-uri(replace($directory, '/+$', '') || '/?select=*', base-uri($node))))"/>
+            <xsl:catch>
+                <xsl:sequence select="false()"/>
+            </xsl:catch>
+        </xsl:try>
+    </xsl:function>
+
 
 </xsl:stylesheet>
