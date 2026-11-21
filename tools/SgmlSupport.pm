@@ -2345,6 +2345,7 @@ BEGIN {
     $ent{'lowring'}     = chr(0x02F3);  # Modifier Letter Low Ring (JASCHKE)
 
     $ent{'mllla'}       = chr(0x02F1);  # Modifier Letter Low Left Arrowhead (JASCHKE)
+    $ent{'mllra'}       = chr(0x02F2);  # Modifier Letter Low Right Arrowhead (JASCHKE mistake)
     $ent{'mllr'}        = chr(0x02F3);  # Modifier Letter Low Ring (JASCHKE)
 
     $ent{'Voline'}      = 'V' . chr(0x0305); # V with overline

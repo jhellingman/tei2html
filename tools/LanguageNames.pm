@@ -59,6 +59,8 @@ BEGIN {
     $langNameHash{"bn-Latn"}   = "Bengali (Latin transcription)";
     $langNameHash{"bo"}        = "Tibetan";
     $langNameHash{"bo-Latn"}   = "Tibetan (Latin transcription)";
+    $langNameHash{"bo-Phon"}   = "Tibetan (Phonetic Latin transcription)";
+    $langNameHash{"bo-Wylie"}  = "Tibetan (Wylie encoding)";
     $langNameHash{"br"}        = "Breton";
     $langNameHash{"bs"}        = "Bosnian";
     $langNameHash{"ca"}        = "Catalan";
@@ -153,6 +155,7 @@ BEGIN {
     $langNameHash{"mk"}        = "Macedonian";
     $langNameHash{"ml"}        = "Malayalam";
     $langNameHash{"mn"}        = "Mongolian";
+    $langNameHash{"mn-Latn"}   = "Mongolian (Latin transcription)";
     $langNameHash{"mo"}        = "Moldavian";
     $langNameHash{"mr"}        = "Marathi";
     $langNameHash{"ms"}        = "Malay";
