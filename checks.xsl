@@ -55,9 +55,9 @@
     <xsl:include href="modules/segmentize.xsl"/>
     <xsl:include href="modules/numbers.xsl"/>
 
-    <xsl:param name="output-segments" select="false()"/>
+    <xsl:param name="output-segments" select="false()" as="xs:boolean"/>
 
-    <xsl:variable name="outputFormat" select="'html'"/>
+    <xsl:variable name="outputFormat" select="'html'" as="xs:string"/>
 
     <xsl:variable name="root" select="/"/>
 

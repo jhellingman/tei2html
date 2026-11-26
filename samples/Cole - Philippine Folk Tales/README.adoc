@@ -20,4 +20,7 @@ The version maintained in this repository may be slightly out-of-sync with the v
 |Keyword |Tales - Philippines
 |PG Ebook Number |https://www.gutenberg.org/ebooks/12814[12814]
 |QR Code for download a|image::Processed/images/qr12814.png[QR code,148,148]
+|ISBN |979-8-238-12814-6
+|Front Cover a|image::Processed/images/front.jpg[Front Cover, 200]
+|Title Page a|image::Processed/images/titlepage.png[Title Page, 200]
 |===

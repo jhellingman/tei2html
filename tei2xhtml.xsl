@@ -6,7 +6,8 @@
     xmlns:f="urn:stylesheet-functions"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xd="http://www.pnp-software.com/XSLTdoc"
-    exclude-result-prefixes="xd">
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    exclude-result-prefixes="xd xs">
 
     <xd:doc type="stylesheet">
         <xd:short>TEI stylesheet to convert a TEI document to HTML.</xd:short>
@@ -53,10 +54,10 @@
     <!--====================================================================-->
 
     <xd:doc type="string">Name used as prefix for generated file names.</xd:doc>
-    <xsl:param name="basename" select="'book'"/>
+    <xsl:param name="basename" select="'book'" as="xs:string"/>
 
     <xd:doc type="string">Path in which generated files will be placed.</xd:doc>
-    <xsl:param name="path" select="'.'"/>
+    <xsl:param name="path" select="'.'" as="xs:string"/>
 
     <xd:doc type="string">Generate special markup used by PrinceXML to generate PDF files (Yes or No).</xd:doc>
     <xsl:param name="optionPrinceMarkup" select="'No'"/>

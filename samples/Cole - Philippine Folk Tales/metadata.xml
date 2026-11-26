@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated on 2026-01-02T14:33:35Z. -->
+<!-- Generated on 2026-11-26T11:44:33Z. -->
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
          xmlns:dc="http://purl.org/dc/elements/1.1/">
-   <rdf:Description>
+   <rdf:Description rdf:about="PhilippineFolkTales-1.1.tei">
       <dc:title>Philippine Folk Tales</dc:title>
       <dc:creator>Mabel Cook Cole (1880–1978?)</dc:creator>
       <dc:publisher>Project Gutenberg, Urbana, Illinois, USA., 2004-07-04</dc:publisher>
@@ -15,5 +15,6 @@ A copy of this work is available at the Internet Archive.
       <dc:subject>Folklore - Philippines</dc:subject>
       <dc:subject>Tales - Philippines</dc:subject>
       <dc:identifier>pg:12814</dc:identifier>
+      <dc:identifier>urn:sha256:1d30598f12b1e9c9527929976cd2fc51c2a000182ce94cce8b1598dcdd4f3f73</dc:identifier>
    </rdf:Description>
 </rdf:RDF>

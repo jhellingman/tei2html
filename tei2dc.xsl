@@ -7,8 +7,9 @@
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:dc="http://purl.org/dc/elements/1.1/"
                 xmlns:xd="http://www.pnp-software.com/XSLTdoc"
+                xmlns:xs="http://www.w3.org/2001/XMLSchema"
                 xmlns:f="urn:stylesheet-functions"
-                exclude-result-prefixes="f xd">
+                exclude-result-prefixes="f xd xs">
 
     <xd:doc type="stylesheet">
         <xd:short>Generate RDF/Dublin Core metadata from a TEI file.</xd:short>
@@ -27,6 +28,9 @@
     <xsl:include href="modules/stripns.xsl"/>
     <xsl:include href="modules/copyright.xsl"/>
 
+    <xsl:param name="digest" as="xs:string"/>
+    <xsl:param name="originalName" as="xs:string"/>
+
     <xsl:template match="/">
         <xsl:apply-templates/>
     </xsl:template>
@@ -41,6 +45,9 @@
         </xsl:comment>
         <rdf:RDF>
             <rdf:Description>
+                <xsl:if test="$originalName">
+                    <xsl:attribute name="rdf:about"><xsl:value-of select="$originalName"/></xsl:attribute>
+                </xsl:if>
                 <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/title[not(@type='pgshort')]"/>
                 <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/author"/>
                 <xsl:apply-templates select="teiHeader/fileDesc/titleStmt/editor"/>
@@ -55,6 +62,9 @@
                 <xsl:apply-templates select="teiHeader/fileDesc/notesStmt/note[@type='Description']" mode="descriptions"/>
                 <xsl:if test="f:is-valid(teiHeader/fileDesc/publicationStmt/idno[@type='PGnum'])">
                     <dc:identifier>pg:<xsl:value-of select="teiHeader/fileDesc/publicationStmt/idno[@type='PGnum']"/></dc:identifier>
+                </xsl:if>
+                <xsl:if test="$digest">
+                    <dc:identifier>urn:sha256:<xsl:value-of select="$digest"/></dc:identifier>
                 </xsl:if>
             </rdf:Description>
         </rdf:RDF>

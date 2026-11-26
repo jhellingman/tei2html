@@ -41,7 +41,7 @@
         in the document.</xd:detail>
     </xd:doc>
 
-    <xsl:param name="keyword" select="''"/>
+    <xsl:param name="keyword" select="''" as="xs:string"/>
 
     <xd:doc>
         <xd:short>The language(s) to generate a KWIC for.</xd:short>
@@ -49,7 +49,7 @@
         in the document. Use ISO-639 codes separated by spaces.</xd:detail>
     </xd:doc>
 
-    <xsl:param name="select-language" select="''"/>
+    <xsl:param name="select-language" select="''" as="xs:string"/>
 
     <xsl:variable name="select-language-sequence" select="tokenize($select-language, ' ')"/>
 
@@ -67,7 +67,7 @@
         <xd:detail>Indicate the sort-order of a KWIC-list. Possible values: 'following' or 'preceding'.</xd:detail>
     </xd:doc>
 
-    <xsl:param name="sort-context" select="'following'"/>
+    <xsl:param name="sort-context" select="'following'" as="xs:string"/>
 
 
     <xd:doc>
@@ -77,7 +77,7 @@
         variants.</xd:detail>
     </xd:doc>
 
-    <xsl:param name="mixup" select="''"/>
+    <xsl:param name="mixup" select="''" as="xs:string"/>
 
     <xsl:variable name="mixup-sequence" select="tokenize($mixup, ' ')"/>
 
@@ -88,7 +88,7 @@
         The preceding and following contexts are counted separately.</xd:detail>
     </xd:doc>
 
-    <xsl:param name="context-size" select="16"/>
+    <xsl:param name="context-size" select="16" as="xs:integer"/>
 
 
     <xd:doc>

@@ -6,6 +6,7 @@ use v5.36;
 
 use Cwd qw(abs_path getcwd);
 use DateTime;
+use Digest::SHA qw(sha256_hex);
 use File::Copy qw(move copy);
 use File::Copy::Recursive qw(dircopy);
 use File::Path qw(make_path remove_tree);
@@ -378,7 +379,7 @@ sub processFile($filename) {
     $makeSQL      && makeSql($preprocessedXmlFilename);
     $makeAsciiDoc && makeAsciiDoc($basename, $preprocessedXmlFilename);
 
-    makeMetadata($preprocessedXmlFilename);
+    makeMetadata($preprocessedXmlFilename, $filename);
     makeReadme($preprocessedXmlFilename);
 
     $makePGTEI && system ("$saxon $preprocessedXmlFilename \"$xsldir/sandbox/tei2pgtei.xsl\" > $basename-pgtei.xml");
@@ -535,15 +536,20 @@ sub makeP5($basename, $xmlFilename) {
 }
 
 
-sub makeMetadata($xmlFilename) {
+sub makeMetadata($xmlFilename, $filename) {
 
     if ($force == 0 && isNewer('metadata.xml', $xmlFilename)) {
         trace("Skip extract metadata because 'metadata.xml' is newer than '$xmlFilename'.");
         return;
     }
 
+    my $sha = Digest::SHA->new(256);
+    $sha->addfile($filename);
+    my $digest = $sha->hexdigest;
+    my $digestParameter = " digest=$digest originalName=\"$filename\" ";
+
     trace("Extract metadata to metadata.xml...");
-    system ("$saxon $xmlFilename $xsldir/tei2dc.xsl > metadata.xml");
+    system ("$saxon $digestParameter $xmlFilename $xsldir/tei2dc.xsl > metadata.xml");
 }
 
 

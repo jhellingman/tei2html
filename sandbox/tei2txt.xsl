@@ -16,7 +16,7 @@
 
 <!-- tei2txt.xslt - stylesheet to convert TEI files to plain text format -->
 
-<xsl:param name="lineWidth" select="72"/>
+<xsl:param name="lineWidth" select="72" as="xs:integer"/>
 
 <!--
 Lift the lb elements to the paragraph level, closing and reopening all

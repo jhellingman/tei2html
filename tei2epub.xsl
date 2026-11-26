@@ -6,7 +6,8 @@
                 xmlns:f="urn:stylesheet-functions"
                 xmlns:xd="http://www.pnp-software.com/XSLTdoc"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                exclude-result-prefixes="f xd">
+                xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                exclude-result-prefixes="f xd xs">
 
     <xd:doc type="stylesheet">
         <xd:short>TEI stylesheet to convert a TEI document to ePub.</xd:short>
@@ -81,9 +82,9 @@
 
     <!--====================================================================-->
 
-    <xsl:param name="basename" select="'book'"/>
-    <xsl:param name="path" select="'epub'"/>
-    <xsl:param name="epubversion" select="'3.0.1'"/>        <!-- Values: '3.1' or '3.0.1' -->
+    <xsl:param name="basename" select="'book'" as="xs:string"/>
+    <xsl:param name="path" select="'epub'" as="xs:string"/>
+    <xsl:param name="epubversion" select="'3.0.1'" as="xs:string"/>        <!-- Values: '3.1' or '3.0.1' -->
 
     <xsl:param name="optionPrinceMarkup" select="'No'"/>    <!-- Should always be 'No' for ePub -->
 

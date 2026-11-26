@@ -128,7 +128,7 @@
 
     
     <xsl:template name="lookup-language-name">
-        <xsl:param name="lang" select="@xml:lang"/>
+        <xsl:param name="lang" select="@xml:lang" as="xs:string"/>
 
         <xsl:choose>
             <xsl:when test="$lang = 'de'">German</xsl:when>
